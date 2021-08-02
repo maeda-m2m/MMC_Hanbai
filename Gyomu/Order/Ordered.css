@@ -1,0 +1,178 @@
+﻿body {
+    font-family: 'Yu Gothic';
+    color: #5d5d5d;
+}
+
+.Nyuka {
+    background-color: #ffca18;
+}
+
+#TbxNyukasu{
+    width:20px;
+}
+
+.Btn {
+    text-align: center;
+    width: 100px;
+    display: inline-block;
+    padding: 0.3em 1em;
+    text-decoration: none;
+    color: #2e2e2e;
+    border: solid 2px #989ae1;
+    border-radius: 3px;
+    transition: .4s;
+    font-family: Meiryo;
+    background-color: #bbbcde;
+}
+
+    .Btn:hover {
+        background: #989ae1;
+        color: #2e2e2e;
+    }
+
+.RowNoTD {
+    background-color: #d9e2f3;
+}
+
+.MeisaiTD {
+    background-color: #e6e6e6;
+}
+
+.MeisaiTB{
+    border:1px solid Black;
+}
+
+.Btn2 {
+    text-align: center;
+    width: 70px;
+    display: inline-block;
+    padding: 0.3em 1em;
+    text-decoration: none;
+    color: white;
+    border: solid 2px #00ccff;
+    border-radius: 3px;
+    transition: .4s;
+    font-family: Meiryo;
+    background-color: #00ccff;
+}
+
+    .Btn2:hover {
+        background: white;
+        color: #00ccff;
+    }
+
+.TitleTD {
+    background-color: #c1c2ff;
+    width: 100px;
+    text-align: center;
+}
+.ShiiresakiClass {
+    width: 300px;
+    background-color: #d8d8d8;
+}
+.HeadTB{
+    width:1500px;
+    border: 1px solid black;
+}
+.nTD {
+    background-color: #d8d8d8;
+}
+
+.Btn3 {
+    text-align: center;
+    width: 70px;
+    display: inline-block;
+    padding: 0.3em 1em;
+    text-decoration: none;
+    color: white;
+    border: solid 2px #df0000;
+    border-radius: 3px;
+    transition: .4s;
+    font-family: Meiryo;
+    background-color: #df0000;
+}
+
+    .Btn3:hover {
+        background: white;
+        color: #df0000;
+    }
+
+.Btn4 {
+    text-align: center;
+    width: 70px;
+    display: inline-block;
+    padding: 0.3em 1em;
+    text-decoration: none;
+    color: white;
+    border: solid 2px #df7e00;
+    border-radius: 3px;
+    transition: .4s;
+    font-family: Meiryo;
+    background-color: #df7e00;
+}
+
+    .Btn4:hover {
+        background: white;
+        color: #df7e00;
+    }
+
+.Btn5 {
+    text-align: center;
+    width: 70px;
+    display: inline-block;
+    padding: 0.3em 1em;
+    text-decoration: none;
+    color: white;
+    border: solid 2px #82df00;
+    border-radius: 3px;
+    transition: .4s;
+    font-family: Meiryo;
+    background-color: #82df00;
+}
+
+    .Btn5:hover {
+        background: white;
+        color: #82df00;
+    }
+
+.Btn6 {
+    text-align: center;
+    width: 70px;
+    display: inline-block;
+    padding: 0.3em 1em;
+    text-decoration: none;
+    color: white;
+    border: solid 2px #00dfdf;
+    border-radius: 3px;
+    transition: .4s;
+    font-family: Meiryo;
+    background-color: #00dfdf;
+}
+
+    .Btn6:hover {
+        background: white;
+        color: #00dfdf;
+    }
+
+.Btn7 {
+    text-align: center;
+    width: 45px;
+    height:25px;
+    display: inline-block;
+    text-decoration: none;
+    color: black;
+    border: solid 2px white;
+    border-radius: 3px;
+    transition: .4s;
+    font-family: Meiryo;
+    background-color: white;
+}
+
+    .Btn7:hover {
+        background: black;
+        color: white;
+    }
+
+.tbx{
+    text-align:right;
+}

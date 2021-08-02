@@ -1,0 +1,927 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.4.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.4.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B98F2336-88F8-4165-A885-CE691B790748}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gyomu</RootNamespace>
+    <AssemblyName>Gyomu</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ABCpdf, Version=6.1.1.6, Culture=neutral, PublicKeyToken=a7a0b3f5184f2169">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Mansei_HK_20190128\Mansei_HK\Yodokou_HanbaiKanri\bin\ABCpdf.dll</HintPath>
+    </Reference>
+    <Reference Include="ClosedXML, Version=0.95.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.95.3\lib\net40\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="Core, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Mansei_HK_20190128\Mansei_HK\Yodokou_HanbaiKanri\bin\Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.7.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.7.2\lib\net40\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelCreator, Version=5.0.0.2530, Culture=neutral, PublicKeyToken=97d207c7dd0b8e91">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Mansei_HK_20190128\Mansei_HK\Yodokou_HanbaiKanri\bin\ExcelCreator.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelCreator.XlsCrt, Version=5.0.0.2530, Culture=neutral, PublicKeyToken=cf9444a2eda782e2">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Mansei_HK_20190128\Mansei_HK\Yodokou_HanbaiKanri\bin\ExcelCreator.XlsCrt.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelCreator.XlsPDF, Version=5.0.0.2530, Culture=neutral, PublicKeyToken=8ca261be8eaece38">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Mansei_HK_20190128\Mansei_HK\Yodokou_HanbaiKanri\bin\ExcelCreator.XlsPDF.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelCreator.XlsxCreator, Version=6.0.0.3419, Culture=neutral, PublicKeyToken=97d207c7dd0b8e91">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Mansei_HK_20190128\Mansei_HK\Yodokou_HanbaiKanri\bin\ExcelCreator.XlsxCreator.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelCreator.XlsxCrt, Version=6.0.0.3419, Culture=neutral, PublicKeyToken=cf9444a2eda782e2">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Mansei_HK_20190128\Mansei_HK\Yodokou_HanbaiKanri\bin\ExcelCreator.XlsxCrt.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelCreator.XlsxPDF, Version=6.0.0.3419, Culture=neutral, PublicKeyToken=8ca261be8eaece38">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Mansei_HK_20190128\Mansei_HK\Yodokou_HanbaiKanri\bin\ExcelCreator.XlsxPDF.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelNumberFormat, Version=1.0.10.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelNumberFormat.1.0.10\lib\net20\ExcelNumberFormat.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.6\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.6\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="AspNet.ScriptManager.bootstrap">
+      <HintPath>..\packages\AspNet.ScriptManager.bootstrap.3.0.0\lib\net45\AspNet.ScriptManager.bootstrap.dll</HintPath>
+    </Reference>
+    <Reference Include="AspNet.ScriptManager.jQuery">
+      <HintPath>..\packages\AspNet.ScriptManager.jQuery.1.10.2\lib\net45\AspNet.ScriptManager.jQuery.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ScriptManager.MSAjax">
+      <HintPath>..\packages\Microsoft.AspNet.ScriptManager.MSAjax.5.0.0\lib\net45\Microsoft.ScriptManager.MSAjax.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ScriptManager.WebForms">
+      <HintPath>..\packages\Microsoft.AspNet.ScriptManager.WebForms.5.0.0\lib\net45\Microsoft.ScriptManager.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Telerik.Web.Design, Version=2010.3.1317.40, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\Telerik.Web.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Web.Device.Detection">
+      <HintPath>dll\Telerik.Web.Device.Detection.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Web.UI">
+      <HintPath>dll\Telerik.Web.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Web.UI.Skins">
+      <HintPath>dll\Telerik.Web.UI.Skins.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Web.Optimization.WebForms">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.WebForms.1.1.3\lib\net45\Microsoft.AspNet.Web.Optimization.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.FriendlyUrls">
+      <HintPath>..\packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.2\lib\net45\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.2.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.2.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.2.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.2.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.2.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.2.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Appropriate\Appropriate.css" />
+    <Content Include="Appropriate\AppropriateInput.aspx" />
+    <Content Include="Appropriate\ApproptiateList.aspx" />
+    <Content Include="Appropriate\OrderedInput2.aspx" />
+    <Content Include="Closing\Ledger.aspx" />
+    <Content Include="Closing\Ledger.css" />
+    <Content Include="Closing\MonthClosing.aspx" />
+    <Content Include="Closing\MonthClosing.css" />
+    <Content Include="Closing\Reconciliation.aspx" />
+    <Content Include="Closing\YearClosing.aspx" />
+    <Content Include="Common\CtlNengappiForm.ascx" />
+    <Content Include="Common\CtlPager.ascx" />
+    <Content Include="Common\CtrlFilter.ascx" />
+    <Content Include="Common\DownloadDataForm.aspx" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Core.js" />
+    <Content Include="CtlMenu.ascx" />
+    <Content Include="CtrlMitsuSyousai.ascx" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Img\Arrow-Download-4-icon.png" />
+    <Content Include="Img\ロゴ.gif" />
+    <Content Include="Img\売上明細.png" />
+    <Content Include="Img\新規orderedヘッダ.png" />
+    <Content Include="Img\新規発注ヘッダ.png" />
+    <Content Include="Img\新規発注ヘッダ2.png" />
+    <Content Include="Img\明細ヘッダ.png" />
+    <Content Include="Img\明細ヘッダ受注.png" />
+    <Content Include="Img\明細ヘッダ見積.png" />
+    <Content Include="Inventory\Inventory.aspx" />
+    <Content Include="JavaScript.js" />
+    <Content Include="Jutyu\CtlJutyuSyosai.ascx" />
+    <Content Include="Jutyu\JutyuJoho.aspx" />
+    <Content Include="Jutyu\JutyuInput.aspx" />
+    <Content Include="Kaihatsu.aspx" />
+    <Content Include="Kaihatsu.css" />
+    <Content Include="Login.aspx" />
+    <Content Include="MainStyle.css" />
+    <Content Include="Master\CtlBumon.ascx" />
+    <Content Include="Master\CtlKakaku.ascx" />
+    <Content Include="Master\CtlShiire.ascx" />
+    <Content Include="Master\CtlSyohin.ascx" />
+    <Content Include="Master\CtlSyouhin2.ascx" />
+    <Content Include="Master\CtlTanto.ascx" />
+    <Content Include="Master\CtlTokuisaki.ascx" />
+    <Content Include="Master\CtlTyokuso.ascx" />
+    <Content Include="Master\DoukiTokuisaki.aspx" />
+    <Content Include="Master\MasterBumon.aspx" />
+    <Content Include="Master\MasterJoueiKakaku.aspx" />
+    <Content Include="Master\MasterKakaku.aspx" />
+    <Content Include="Master\MasterOshirase.aspx" />
+    <Content Include="Master\MasterOshirase.css" />
+    <Content Include="Master\MasterShiire.aspx" />
+    <Content Include="Master\MasterSyohin.aspx" />
+    <Content Include="Master\MasterSyohinAdd.aspx" />
+    <Content Include="Master\MasterTanto.aspx" />
+    <Content Include="Master\MasterTyokuso.aspx" />
+    <Content Include="Master\MsterTokuisaki.aspx" />
+    <Content Include="Master\TantoBumon.ascx" />
+    <Content Include="Mitumori\CtlMitumoriSyosai.ascx" />
+    <Content Include="Mitumori\MitumoriInput.aspx" />
+    <Content Include="Mitumori\MitumoriItiran.aspx" />
+    <Content Include="Mitumori\Print.aspx" />
+    <Content Include="Mitumori\Syosai\SeikyuSyosai.aspx" />
+    <Content Include="Mitumori\Syosai\SisetuSyosai.aspx" />
+    <Content Include="Mitumori\Syosai\SyouhinSyosai.aspx" />
+    <Content Include="Mitumori\Syosai\TokuisakiSyosai.aspx" />
+    <Content Include="Mitumori\Syosai\TyokusosakiSyosai.aspx" />
+    <Content Include="OrderInput.aspx" />
+    <Content Include="OrderJava.js" />
+    <Content Include="Order\CtlOrderedMeisai.ascx" />
+    <Content Include="Order\CtlOrderedMeisai2.ascx" />
+    <Content Include="Order\CtrlNewOrderedMeisai.ascx" />
+    <Content Include="Order\NewOrderedInput.aspx" />
+    <Content Include="Order\NewOrderedInput.css" />
+    <Content Include="Order\Ordered.css" />
+    <Content Include="Order\Ordered.js" />
+    <Content Include="Order\OrderedInput.aspx" />
+    <Content Include="Order\OrderedList.aspx" />
+    <Content Include="Return\Return.css" />
+    <Content Include="Return\ReturnInput.aspx" />
+    <Content Include="Return\ReturnList.aspx" />
+    <Content Include="Scripts\index.js" />
+    <Content Include="Format\MitumoriFormat.xlsx" />
+    <Content Include="Format\NouhinFormat.xlsx" />
+    <Content Include="Format\SekyuFormat.xlsx" />
+    <Content Include="Format\MitumoriForm4.xlsx" />
+    <Content Include="Format\NouhinForm2.xlsx" />
+    <Content Include="Format\SeikyuForm.xlsx" />
+    <Content Include="Format\UploadFormat3.xlsx" />
+    <Content Include="Format\OrderForm4.xlsx" />
+    <Content Include="Format\NouhinForm4.xlsx" />
+    <Content Include="Format\SeikyuForm2.xlsx" />
+    <Content Include="Format\OrderFormat.xlsx" />
+    <Content Include="Format\Test.xlsx" />
+    <Content Include="Format\税抜請求書.xlsx" />
+    <Content Include="Format\税込請求書.xlsx" />
+    <Content Include="Format\税抜内訳書.xlsx" />
+    <Content Include="Format\税込内訳書.xlsx" />
+    <Content Include="Format\月次出荷伝票.xlsx" />
+    <Content Include="Format\税抜出荷伝票.xlsx" />
+    <Content Include="Format\税込出荷伝票.xlsx" />
+    <Content Include="Format\税抜納品書.xlsx" />
+    <Content Include="Format\税込納品書.xlsx" />
+    <Content Include="Format\税抜見積書.xlsx" />
+    <Content Include="Format\税込見積書.xlsx" />
+    <Content Include="Format\月次見積書.xlsx" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="sheet\Core.js" />
+    <Content Include="sheet\MainStyles.css" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\WebForms\DetailsView.js" />
+    <Content Include="Scripts\WebForms\Focus.js" />
+    <Content Include="Scripts\WebForms\GridView.js" />
+    <Content Include="Scripts\WebForms\Menu.js" />
+    <Content Include="Scripts\WebForms\MenuStandards.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjax.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxApplicationServices.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxComponentModel.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxCore.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxGlobalization.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxHistory.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxNetwork.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxSerialization.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxTimer.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebForms.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebServices.js" />
+    <Content Include="Scripts\WebForms\SmartNav.js" />
+    <Content Include="Scripts\WebForms\TreeView.js" />
+    <Content Include="Scripts\WebForms\WebForms.js" />
+    <Content Include="Scripts\WebForms\WebParts.js" />
+    <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <Content Include="style.css" />
+    <Content Include="Style\ComboBox.ykuri.css" />
+    <Content Include="Style\ComboBox\rcbSprite.png" />
+    <Content Include="Style\ComboBox\rcbSpriteIE6.png" />
+    <Content Include="Style\ComboBox\ykuri.gif" />
+    <Content Include="Style\Grid.Default.css" />
+    <Content Include="Style\Grid.Yd.css" />
+    <Content Include="Style\Grid.ykuri.css" />
+    <Content Include="Style\Grid.ykuri2.css" />
+    <Content Include="Style\Grid.ykuri_keep.css" />
+    <Content Include="Style\Grid.ykuri_old.css" />
+    <Content Include="Style\Grid\ButtonSprites.gif" />
+    <Content Include="Style\Grid\export.gif" />
+    <Content Include="Style\Grid\loading_small.gif" />
+    <Content Include="Style\Grid\sprite%28オリジナル%29.gif" />
+    <Content Include="Style\Grid\sprite.gif" />
+    <Content Include="Style\Grid\Telerik RadGrid Common CSS.css" />
+    <Content Include="Style\Grid\Telerik RadGrid Outlook Skin.css" />
+    <Content Include="Style\Grid\ykuri.gif" />
+    <Content Include="Style\Schedule.css" />
+    <Content Include="Style\Telerik RadGrid Common CSS.css" />
+    <Content Include="Style\Telerik RadGrid Outlook Skin.css" />
+    <Content Include="Style\コピー ～ ComboBox.ykuri.css" />
+    <Content Include="Uriage\CtlUriageSyosai.ascx" />
+    <Content Include="Uriage\NyukinDenpyo.aspx" />
+    <Content Include="Uriage\NyukinRireki.aspx" />
+    <Content Include="Uriage\UriageIchiran.aspx" />
+    <Content Include="Uriage\UriageJoho.aspx" />
+    <Content Include="Uriage\UriageMeisai.aspx" />
+    <Content Include="Uriage\UriageMeisai.css" />
+    <Content Include="Uriage\UriageMeisaiRan.ascx" />
+    <Content Include="Uriage\UriageSyusei.aspx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Bundle.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppCommon.cs" />
+    <Compile Include="AppCommon2.cs" />
+    <Compile Include="Appropriate\AppropriateInput.aspx.cs">
+      <DependentUpon>AppropriateInput.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Appropriate\AppropriateInput.aspx.designer.cs">
+      <DependentUpon>AppropriateInput.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Appropriate\ApproptiateList.aspx.cs">
+      <DependentUpon>ApproptiateList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Appropriate\ApproptiateList.aspx.designer.cs">
+      <DependentUpon>ApproptiateList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Appropriate\OrderedInput2.aspx.cs">
+      <DependentUpon>OrderedInput2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Appropriate\OrderedInput2.aspx.designer.cs">
+      <DependentUpon>OrderedInput2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Closing\Ledger.aspx.cs">
+      <DependentUpon>Ledger.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Closing\Ledger.aspx.designer.cs">
+      <DependentUpon>Ledger.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Closing\MonthClosing.aspx.cs">
+      <DependentUpon>MonthClosing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Closing\MonthClosing.aspx.designer.cs">
+      <DependentUpon>MonthClosing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Closing\Reconciliation.aspx.cs">
+      <DependentUpon>Reconciliation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Closing\Reconciliation.aspx.designer.cs">
+      <DependentUpon>Reconciliation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Closing\YearClosing.aspx.cs">
+      <DependentUpon>YearClosing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Closing\YearClosing.aspx.designer.cs">
+      <DependentUpon>YearClosing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Common\CtlNengappiForm.ascx.cs">
+      <DependentUpon>CtlNengappiForm.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Common\CtlNengappiForm.ascx.designer.cs">
+      <DependentUpon>CtlNengappiForm.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Common\CtlPager.ascx.cs">
+      <DependentUpon>CtlPager.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Common\CtlPager.ascx.designer.cs">
+      <DependentUpon>CtlPager.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Common\CtrlFilter.ascx.cs">
+      <DependentUpon>CtrlFilter.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Common\CtrlFilter.ascx.designer.cs">
+      <DependentUpon>CtrlFilter.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Common\DownloadDataForm.aspx.cs">
+      <DependentUpon>DownloadDataForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Common\DownloadDataForm.aspx.designer.cs">
+      <DependentUpon>DownloadDataForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CtlMenu.ascx.cs">
+      <DependentUpon>CtlMenu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CtlMenu.ascx.designer.cs">
+      <DependentUpon>CtlMenu.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CtrlMitsuSyousai.ascx.cs">
+      <DependentUpon>CtrlMitsuSyousai.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CtrlMitsuSyousai.ascx.designer.cs">
+      <DependentUpon>CtrlMitsuSyousai.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory\Inventory.aspx.cs">
+      <DependentUpon>Inventory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Inventory\Inventory.aspx.designer.cs">
+      <DependentUpon>Inventory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Jutyu\CtlJutyuSyosai.ascx.cs">
+      <DependentUpon>CtlJutyuSyosai.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Jutyu\CtlJutyuSyosai.ascx.designer.cs">
+      <DependentUpon>CtlJutyuSyosai.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Jutyu\JutyuJoho.aspx.cs">
+      <DependentUpon>JutyuJoho.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Jutyu\JutyuJoho.aspx.designer.cs">
+      <DependentUpon>JutyuJoho.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Jutyu\JutyuInput.aspx.cs">
+      <DependentUpon>JutyuInput.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Jutyu\JutyuInput.aspx.designer.cs">
+      <DependentUpon>JutyuInput.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Kaihatsu.aspx.cs">
+      <DependentUpon>Kaihatsu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Kaihatsu.aspx.designer.cs">
+      <DependentUpon>Kaihatsu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ListSet.cs" />
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Master\CtlBumon.ascx.cs">
+      <DependentUpon>CtlBumon.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\CtlBumon.ascx.designer.cs">
+      <DependentUpon>CtlBumon.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Master\CtlKakaku.ascx.cs">
+      <DependentUpon>CtlKakaku.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\CtlKakaku.ascx.designer.cs">
+      <DependentUpon>CtlKakaku.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Master\CtlShiire.ascx.cs">
+      <DependentUpon>CtlShiire.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\CtlShiire.ascx.designer.cs">
+      <DependentUpon>CtlShiire.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Master\CtlSyohin.ascx.cs">
+      <DependentUpon>CtlSyohin.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\CtlSyohin.ascx.designer.cs">
+      <DependentUpon>CtlSyohin.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Master\CtlSyouhin2.ascx.cs">
+      <DependentUpon>CtlSyouhin2.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\CtlSyouhin2.ascx.designer.cs">
+      <DependentUpon>CtlSyouhin2.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Master\CtlTanto.ascx.cs">
+      <DependentUpon>CtlTanto.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\CtlTanto.ascx.designer.cs">
+      <DependentUpon>CtlTanto.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Master\CtlTokuisaki.ascx.cs">
+      <DependentUpon>CtlTokuisaki.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\CtlTokuisaki.ascx.designer.cs">
+      <DependentUpon>CtlTokuisaki.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Master\CtlTyokuso.ascx.cs">
+      <DependentUpon>CtlTyokuso.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\CtlTyokuso.ascx.designer.cs">
+      <DependentUpon>CtlTyokuso.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Master\DoukiTokuisaki.aspx.cs">
+      <DependentUpon>DoukiTokuisaki.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\DoukiTokuisaki.aspx.designer.cs">
+      <DependentUpon>DoukiTokuisaki.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Master\MasterBumon.aspx.cs">
+      <DependentUpon>MasterBumon.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\MasterBumon.aspx.designer.cs">
+      <DependentUpon>MasterBumon.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Master\MasterJoueiKakaku.aspx.cs">
+      <DependentUpon>MasterJoueiKakaku.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\MasterJoueiKakaku.aspx.designer.cs">
+      <DependentUpon>MasterJoueiKakaku.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Master\MasterKakaku.aspx.cs">
+      <DependentUpon>MasterKakaku.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\MasterKakaku.aspx.designer.cs">
+      <DependentUpon>MasterKakaku.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Master\MasterOshirase.aspx.cs">
+      <DependentUpon>MasterOshirase.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\MasterOshirase.aspx.designer.cs">
+      <DependentUpon>MasterOshirase.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Master\MasterShiire.aspx.cs">
+      <DependentUpon>MasterShiire.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\MasterShiire.aspx.designer.cs">
+      <DependentUpon>MasterShiire.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Master\MasterSyohin.aspx.cs">
+      <DependentUpon>MasterSyohin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\MasterSyohin.aspx.designer.cs">
+      <DependentUpon>MasterSyohin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Master\MasterSyohinAdd.aspx.cs">
+      <DependentUpon>MasterSyohinAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\MasterSyohinAdd.aspx.designer.cs">
+      <DependentUpon>MasterSyohinAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Master\MasterTanto.aspx.cs">
+      <DependentUpon>MasterTanto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\MasterTanto.aspx.designer.cs">
+      <DependentUpon>MasterTanto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Master\MasterTyokuso.aspx.cs">
+      <DependentUpon>MasterTyokuso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\MasterTyokuso.aspx.designer.cs">
+      <DependentUpon>MasterTyokuso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Master\MsterTokuisaki.aspx.cs">
+      <DependentUpon>MsterTokuisaki.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\MsterTokuisaki.aspx.designer.cs">
+      <DependentUpon>MsterTokuisaki.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Master\TantoBumon.ascx.cs">
+      <DependentUpon>TantoBumon.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\TantoBumon.ascx.designer.cs">
+      <DependentUpon>TantoBumon.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Mitumori\CtlMitumoriSyosai.ascx.cs">
+      <DependentUpon>CtlMitumoriSyosai.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mitumori\CtlMitumoriSyosai.ascx.designer.cs">
+      <DependentUpon>CtlMitumoriSyosai.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Mitumori\MitumoriInput.aspx.cs">
+      <DependentUpon>MitumoriInput.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mitumori\MitumoriInput.aspx.designer.cs">
+      <DependentUpon>MitumoriInput.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Mitumori\MitumoriItiran.aspx.cs">
+      <DependentUpon>MitumoriItiran.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mitumori\MitumoriItiran.aspx.designer.cs">
+      <DependentUpon>MitumoriItiran.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Mitumori\Print.aspx.cs">
+      <DependentUpon>Print.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mitumori\Print.aspx.designer.cs">
+      <DependentUpon>Print.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Mitumori\Syosai\SeikyuSyosai.aspx.cs">
+      <DependentUpon>SeikyuSyosai.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mitumori\Syosai\SeikyuSyosai.aspx.designer.cs">
+      <DependentUpon>SeikyuSyosai.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Mitumori\Syosai\SisetuSyosai.aspx.cs">
+      <DependentUpon>SisetuSyosai.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mitumori\Syosai\SisetuSyosai.aspx.designer.cs">
+      <DependentUpon>SisetuSyosai.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Mitumori\Syosai\SyouhinSyosai.aspx.cs">
+      <DependentUpon>SyouhinSyosai.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mitumori\Syosai\SyouhinSyosai.aspx.designer.cs">
+      <DependentUpon>SyouhinSyosai.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Mitumori\Syosai\TokuisakiSyosai.aspx.cs">
+      <DependentUpon>TokuisakiSyosai.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mitumori\Syosai\TokuisakiSyosai.aspx.designer.cs">
+      <DependentUpon>TokuisakiSyosai.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Mitumori\Syosai\TyokusosakiSyosai.aspx.cs">
+      <DependentUpon>TyokusosakiSyosai.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mitumori\Syosai\TyokusosakiSyosai.aspx.designer.cs">
+      <DependentUpon>TyokusosakiSyosai.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderInput.aspx.cs">
+      <DependentUpon>OrderInput.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderInput.aspx.designer.cs">
+      <DependentUpon>OrderInput.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Order\CtlOrderedMeisai.ascx.cs">
+      <DependentUpon>CtlOrderedMeisai.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Order\CtlOrderedMeisai.ascx.designer.cs">
+      <DependentUpon>CtlOrderedMeisai.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Order\CtlOrderedMeisai2.ascx.cs">
+      <DependentUpon>CtlOrderedMeisai2.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Order\CtlOrderedMeisai2.ascx.designer.cs">
+      <DependentUpon>CtlOrderedMeisai2.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Order\CtrlNewOrderedMeisai.ascx.cs">
+      <DependentUpon>CtrlNewOrderedMeisai.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Order\CtrlNewOrderedMeisai.ascx.designer.cs">
+      <DependentUpon>CtrlNewOrderedMeisai.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Order\NewOrderedInput.aspx.cs">
+      <DependentUpon>NewOrderedInput.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Order\NewOrderedInput.aspx.designer.cs">
+      <DependentUpon>NewOrderedInput.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Order\OrderedInput.aspx.cs">
+      <DependentUpon>OrderedInput.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Order\OrderedInput.aspx.designer.cs">
+      <DependentUpon>OrderedInput.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Order\OrderedList.aspx.cs">
+      <DependentUpon>OrderedList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Order\OrderedList.aspx.designer.cs">
+      <DependentUpon>OrderedList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Return\ReturnInput.aspx.cs">
+      <DependentUpon>ReturnInput.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Return\ReturnInput.aspx.designer.cs">
+      <DependentUpon>ReturnInput.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Return\ReturnList.aspx.cs">
+      <DependentUpon>ReturnList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Return\ReturnList.aspx.designer.cs">
+      <DependentUpon>ReturnList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SessionManager.cs" />
+    <Compile Include="Uriage\CtlUriageSyosai.ascx.cs">
+      <DependentUpon>CtlUriageSyosai.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Uriage\CtlUriageSyosai.ascx.designer.cs">
+      <DependentUpon>CtlUriageSyosai.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Uriage\NyukinDenpyo.aspx.cs">
+      <DependentUpon>NyukinDenpyo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Uriage\NyukinDenpyo.aspx.designer.cs">
+      <DependentUpon>NyukinDenpyo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Uriage\NyukinRireki.aspx.cs">
+      <DependentUpon>NyukinRireki.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Uriage\NyukinRireki.aspx.designer.cs">
+      <DependentUpon>NyukinRireki.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Uriage\UriageIchiran.aspx.cs">
+      <DependentUpon>UriageIchiran.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Uriage\UriageIchiran.aspx.designer.cs">
+      <DependentUpon>UriageIchiran.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Uriage\UriageJoho.aspx.cs">
+      <DependentUpon>UriageJoho.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Uriage\UriageJoho.aspx.designer.cs">
+      <DependentUpon>UriageJoho.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Uriage\UriageMeisai.aspx.cs">
+      <DependentUpon>UriageMeisai.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Uriage\UriageMeisai.aspx.designer.cs">
+      <DependentUpon>UriageMeisai.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Uriage\UriageMeisaiRan.ascx.cs">
+      <DependentUpon>UriageMeisaiRan.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Uriage\UriageMeisaiRan.ascx.designer.cs">
+      <DependentUpon>UriageMeisaiRan.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Uriage\UriageSyusei.aspx.cs">
+      <DependentUpon>UriageSyusei.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Uriage\UriageSyusei.aspx.designer.cs">
+      <DependentUpon>UriageSyusei.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserViewManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Gyomu\Common\" />
+    <Folder Include="sheet\Common\" />
+    <Folder Include="Style\GridReport\" />
+    <Folder Include="Style\GridYd\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DLL\DLL.csproj">
+      <Project>{99C8FA0B-85D6-407F-B471-0A9D9362724D}</Project>
+      <Name>DLL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>49228</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:49228/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>このプロジェクトは、このコンピューター上にない NuGet パッケージを参照しています。それらのパッケージをダウンロードするには、[NuGet パッケージの復元] を使用します。詳細については、http://go.microsoft.com/fwlink/?LinkID=322105 を参照してください。見つからないファイルは {0} です。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.4.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.4.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

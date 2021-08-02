@@ -1,0 +1,364 @@
+﻿body {
+    font-family: Meiryo;
+    color: #5d5d5d;
+}
+
+.InputTitle {
+    background-color: #53d153;
+    text-align: center;
+    font-size: 12px;
+    font: bold;
+    color: black;
+    width: 80px;
+    height: 30px;
+}
+
+.MiniTitle {
+    background-color: #8dea8d;
+    text-align: center;
+    font-size: 12px;
+    font: bold;
+    color: black;
+    width: 100px;
+    height: 20px;
+}
+
+#mInput {
+    margin: 0;
+    padding: 0;
+    width: 1300px;
+    border: 2px solid #47ab47;
+}
+
+.Btn10 {
+    text-align: center;
+    width: 95px;
+    display: inline-block;
+    padding: 0.3em 1em;
+    text-decoration: none;
+    color: #5d5d5d;
+    border: solid 2px #8dea8d;
+    border-radius: 3px;
+    transition: .4s;
+    font-family: Meiryo;
+    background-color: #bae5ba;
+}
+
+    .Btn10:hover {
+        background: #6dbd6d;
+        color: black;
+    }
+
+
+.Btn2 {
+    text-align: center;
+    width: 95px;
+    display: inline-block;
+    padding: 0.3em 1em;
+    text-decoration: none;
+    color: white;
+    border: solid 2px #d80000;
+    border-radius: 3px;
+    transition: .4s;
+    font-family: Meiryo;
+    background-color: #d80000;
+}
+
+    .Btn2:hover {
+        background: white;
+        color: #d80000;
+    }
+
+.Btn3 {
+    text-align: center;
+    width: 95px;
+    display: inline-block;
+    padding: 0.3em 1em;
+    text-decoration: none;
+    color: white;
+    border: solid 2px #dac100;
+    border-radius: 3px;
+    transition: .4s;
+    font-family: Meiryo;
+    background-color: #dac100;
+}
+
+    .Btn3:hover {
+        background: white;
+        color: #dac100;
+    }
+
+
+.Btn4 {
+    text-align: center;
+    width: 95px;
+    display: inline-block;
+    padding: 0.3em 1em;
+    text-decoration: none;
+    color: white;
+    border: solid 2px #00d70b;
+    border-radius: 3px;
+    transition: .4s;
+    font-family: Meiryo;
+    background-color: #00d70b;
+}
+
+    .Btn4:hover {
+        background-color: white;
+        color: #00d70b
+    }
+
+.Btn5 {
+    text-align: center;
+    width: 95px;
+    display: inline-block;
+    padding: 0.3em 1em;
+    text-decoration: none;
+    color: white;
+    border: solid 2px #00d7d7;
+    border-radius: 3px;
+    transition: .4s;
+    font-family: Meiryo;
+    background-color: #00d7d7;
+}
+
+    .Btn5:hover {
+        background: white;
+        color: #00d7d7;
+    }
+
+.Btn6 {
+    text-align: center;
+    width: 95px;
+    display: inline-block;
+    padding: 0.3em 1em;
+    text-decoration: none;
+    color: white;
+    border: solid 2px #0039d7;
+    border-radius: 3px;
+    transition: .4s;
+    font-family: Meiryo;
+    background-color: #0039d7;
+}
+
+    .Btn6:hover {
+        background: white;
+        color: #0039d7;
+    }
+
+.Btn7 {
+    text-align: center;
+    width: 95px;
+    width: 95px;
+    display: inline-block;
+    padding: 0.3em 1em;
+    text-decoration: none;
+    color: white;
+    border: solid 2px #d75d00;
+    border-radius: 3px;
+    transition: .4s;
+    font-family: Meiryo;
+    background-color: #d75d00;
+}
+
+    .Btn7:hover {
+        background: white;
+        color: #d75d00;
+    }
+
+
+.sisan {
+    background-color: #c8ffc8;
+}
+
+.waku {
+    background-color: #e6e6e6;
+}
+
+.otherTitle {
+    background-color: #dadada;
+}
+
+#RadDatePicker1 {
+    width: 50px;
+}
+
+#MeisaiInput {
+    margin: 0;
+    padding: 0;
+    width: 1600px;
+    border: 2px solid #00d0f0;
+    margin-top: 100px;
+}
+
+#Syousai {
+    margin: 0;
+    padding: 0;
+    border: 2px solid #00d0f0;
+    margin-top: 100px;
+}
+
+.Text {
+    width: 60px;
+    height: 20px;
+    font-size: 12px;
+    border-radius: 3px;
+    text-align: right;
+}
+
+#RadZeiKubun {
+    width: 60px;
+}
+
+#RowNo {
+    text-align: center;
+}
+
+
+
+.HeadTD {
+    text-align: center;
+    background-color: #e6e6e6;
+    border: 1px solid #e6e6e6;
+    font: bold;
+    height: 15px;
+    font-size: 15px;
+}
+
+.HeadTDm {
+    text-align: center;
+    background-color: #e6e6e6;
+    border: 1px solid #e6e6e6;
+    font: bold;
+    height: 15px;
+    font-size: 15px;
+    width: 100px;
+}
+
+.HeadTDl {
+    text-align: center;
+    background-color: #e6e6e6;
+    border: 1px solid #e6e6e6;
+    font: bold;
+    height: 15px;
+    font-size: 15px;
+    width: 200px;
+}
+
+
+
+.HeadTB {
+    background-color: white;
+    width: 1230px;
+    border: 1px solid black;
+}
+
+#HeadTB {
+    background-color: black;
+    width: 1300px;
+    color: black;
+    font: bold;
+    font-size: 12px;
+    height: 50px;
+}
+
+    #HeadTB p {
+        font-size: 12px;
+    }
+
+.MeisaiTD {
+    background-color: #e6e6e6;
+    border: 1px solid #e6e6e6;
+}
+
+.MeisaiProcd {
+    background-color: #e6e6e6;
+    width: 100px;
+    border: 1px solid #e6e6e6;
+}
+
+.MeisaiHanni {
+    background-color: #e6e6e6;
+    width: 100px;
+    border: 1px solid #e6e6e6;
+}
+
+.MeisaiProNm {
+    background-color: #e6e6e6;
+    width: 200px;
+    border: 1px solid #e6e6e6;
+}
+
+.MeisaiMTD {
+    background-color: #e6e6e6;
+    width: 100px;
+    border: 1px solid #e6e6e6;
+}
+
+.MeisaikTD {
+    background-color: #e6e6e6;
+    width: 100px;
+    border: 1px solid #e6e6e6;
+}
+
+.MeisaisTD {
+    background-color: #e6e6e6;
+    width: 100px;
+    border: 1px solid #e6e6e6;
+}
+
+.MeisaiBTD {
+    background-color: #e6e6e6;
+    width: 400px;
+    border: 1px solid #e6e6e6;
+}
+
+.RowTD {
+    width: 90px;
+    text-align: center;
+    background-color: #d8f2ff;
+    border: 1px solid #d8f2ff;
+    font: bold;
+    height: 30px;
+    font-size: 15px;
+}
+
+    .RowTD p {
+        font-size: 15px;
+    }
+
+
+
+.HeadSyouhiCD {
+    text-align: center;
+    background-color: #e6e6e6;
+    border: 1px solid #e6e6e6;
+    font: bold;
+    width: 100px;
+    height: 15px;
+    font-size: 12px;
+}
+
+.HeadSyouhiC {
+    text-align: center;
+    background-color: #e6e6e6;
+    border: 1px solid #e6e6e6;
+    font: bold;
+    width: 120px;
+    height: 15px;
+    font-size: 12px;
+}
+
+#head p {
+    font-size: 15px;
+}
+
+.MiniChange {
+    background-color: #8dea8d;
+    text-align: center;
+    font-size: 12px;
+    font: bold;
+    color: black;
+    width: 100px;
+    height: 20px;
+}

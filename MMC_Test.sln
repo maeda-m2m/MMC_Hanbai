@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMC_Test", "Gyomu\MMC_Test.csproj", "{B98F2336-88F8-4165-A885-CE691B790748}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DLL", "DLL\DLL.csproj", "{99C8FA0B-85D6-407F-B471-0A9D9362724D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B98F2336-88F8-4165-A885-CE691B790748}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B98F2336-88F8-4165-A885-CE691B790748}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B98F2336-88F8-4165-A885-CE691B790748}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B98F2336-88F8-4165-A885-CE691B790748}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99C8FA0B-85D6-407F-B471-0A9D9362724D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99C8FA0B-85D6-407F-B471-0A9D9362724D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99C8FA0B-85D6-407F-B471-0A9D9362724D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99C8FA0B-85D6-407F-B471-0A9D9362724D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A51D71ED-4D04-4EB2-AD63-EE61767203F4}
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
+	EndGlobalSection
+EndGlobal

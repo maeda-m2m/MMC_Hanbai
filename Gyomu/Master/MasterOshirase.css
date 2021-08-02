@@ -1,0 +1,25 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Yu Gothic UI';
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+.DivBase {
+    width: 100%;
+}
+
+#DivList {
+    width: 1000px;
+    margin: 0px auto;
+}
+
+#DivCreate {
+    width: 500px;
+    margin: 0px auto;
+    display: none;
+}

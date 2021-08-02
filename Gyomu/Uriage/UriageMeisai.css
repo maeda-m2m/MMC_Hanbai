@@ -1,0 +1,120 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+}
+
+.Btn {
+    text-align: center;
+    width: 95px;
+    display: inline-block;
+    padding: 0.3em 1em;
+    text-decoration: none;
+    color: white;
+    border: solid 2px #0070C0;
+    border-radius: 3px;
+    transition: .4s;
+    font-family: Meiryo;
+    background-color: #9DC3E6;
+}
+
+    .Btn:hover {
+        background: #2E75B6;
+        color: #D9D9D9;
+    }
+
+#uInput {
+    margin: 0;
+    padding: 0;
+    width: 1300px;
+    border: 2px solid #0070C0;
+}
+
+.uInputTitle {
+    background-color: #9BC2E6;
+    text-align: center;
+    font-size: 12px;
+    font: bold;
+    color: black;
+    width: 80px;
+    height: 30px;
+}
+
+.uMiniTitle {
+    background-color: #DDEBF7;
+    text-align: center;
+    font-size: 12px;
+    font: bold;
+    color: black;
+    width: 100px;
+    height: 20px;
+}
+
+.uwaku {
+    background-color: #e6e6e6;
+}
+
+.uMiniChange {
+    background-color: #DDEBF7;
+    text-align: center;
+    font-size: 12px;
+    font: bold;
+    color: black;
+    width: 100px;
+    height: 20px;
+}
+
+.uMeisaiTD {
+    background-color: #e6e6e6;
+    border: 1px solid #e6e6e6;
+}
+
+.uMeisaiProcd {
+    background-color: #e6e6e6;
+    width: 100px;
+    border: 1px solid #e6e6e6;
+}
+
+.uMeisaiHanni {
+    background-color: #e6e6e6;
+    width: 100px;
+    border: 1px solid #e6e6e6;
+}
+
+.uMeisaiProNm {
+    background-color: #e6e6e6;
+    width: 200px;
+    border: 1px solid #e6e6e6;
+}
+
+.uMeisaiMTD {
+    background-color: #e6e6e6;
+    width: 100px;
+    border: 1px solid #e6e6e6;
+}
+
+.uMeisaikTD {
+    background-color: #e6e6e6;
+    width: 100px;
+    border: 1px solid #e6e6e6;
+}
+
+.uMeisaisTD {
+    background-color: #e6e6e6;
+    width: 100px;
+    border: 1px solid #e6e6e6;
+}
+
+.uMeisaiBTD {
+    background-color: #e6e6e6;
+    width: 400px;
+    border: 1px solid #e6e6e6;
+}
+
+.usisan {
+    background-color: #ECF4FA;
+}
+
+#KariFaci {
+    display: none;
+}
+

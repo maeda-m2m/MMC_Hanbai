@@ -1,0 +1,46 @@
+﻿body {
+    font-family: Meiryo;
+    color: #5d5d5d;
+}
+
+.Btn {
+    text-align: center;
+    width: 100px;
+    display: inline-block;
+    padding: 0.3em 1em;
+    text-decoration: none;
+    color: #2e2e2e;
+    border: solid 2px #989ae1;
+    border-radius: 3px;
+    transition: .4s;
+    font-family: Meiryo;
+    background-color: #bbbcde;
+}
+
+    .Btn:hover {
+        background: #989ae1;
+        color: #2e2e2e;
+    }
+
+.TitleTD {
+    background-color: #c1c2ff;
+    width: 100px;
+    text-align: center;
+}
+
+.MeisaiTD {
+    background-color: #e5e5e5;
+}
+
+.RowNoTD {
+    background-color: #c1c2ff;
+}
+
+.ProductTD {
+    background-color: #e5e5e5;
+    width: 200px;
+}
+
+#TbxShiireTanka {
+    text-align: right;
+}

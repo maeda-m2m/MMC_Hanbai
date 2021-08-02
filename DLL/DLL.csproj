@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{99C8FA0B-85D6-407F-B471-0A9D9362724D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DLL</RootNamespace>
+    <AssemblyName>DLL</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Core">
+      <HintPath>..\..\..\..\Mansei_HK_20190128\Mansei_HK\Yodokou_HanbaiKanri\bin\Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class1.cs" />
+    <Compile Include="ClassAppropriate.cs" />
+    <Compile Include="ClassDrop.cs" />
+    <Compile Include="ClassJutyu.cs" />
+    <Compile Include="ClassKensaku.cs" />
+    <Compile Include="ClassLedger.cs" />
+    <Compile Include="ClassLogin.cs" />
+    <Compile Include="ClassMaster.cs" />
+    <Compile Include="ClassMitumori.cs" />
+    <Compile Include="ClassNyukin.cs" />
+    <Compile Include="ClassOrdered.cs" />
+    <Compile Include="ClassReturn.cs" />
+    <Compile Include="ClassSyohinInp.cs" />
+    <Compile Include="ClassUriage.cs" />
+    <Compile Include="CSVuploadClass.cs" />
+    <Compile Include="DataAppropriate.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataAppropriate.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataDrop.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataDrop.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataJutyu.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataJutyu.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataLedger.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataLedger.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataLogin.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataLogin.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataMaster.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataMaster.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataMitumori.cs">
+      <DependentUpon>DataMitumori.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataMitumori.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataMitumori.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataNyukin.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataNyukin.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataReturn.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataReturn.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Dataset.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Dataset.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSet1.cs">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataUriage.cs">
+      <DependentUpon>DataUriage.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataUriage.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataUriage.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Type.cs" />
+    <Compile Include="UserViewClass.cs" />
+    <Compile Include="Utility.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="DataAppropriate.xsc">
+      <DependentUpon>DataAppropriate.xsd</DependentUpon>
+    </None>
+    <None Include="DataAppropriate.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataAppropriate.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataAppropriate.xss">
+      <DependentUpon>DataAppropriate.xsd</DependentUpon>
+    </None>
+    <None Include="DataDrop.xsc">
+      <DependentUpon>DataDrop.xsd</DependentUpon>
+    </None>
+    <None Include="DataDrop.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataDrop.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataDrop.xss">
+      <DependentUpon>DataDrop.xsd</DependentUpon>
+    </None>
+    <None Include="DataJutyu.xsc">
+      <DependentUpon>DataJutyu.xsd</DependentUpon>
+    </None>
+    <None Include="DataJutyu.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataJutyu.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataJutyu.xss">
+      <DependentUpon>DataJutyu.xsd</DependentUpon>
+    </None>
+    <None Include="DataLedger.xsc">
+      <DependentUpon>DataLedger.xsd</DependentUpon>
+    </None>
+    <None Include="DataLedger.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataLedger.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataLedger.xss">
+      <DependentUpon>DataLedger.xsd</DependentUpon>
+    </None>
+    <None Include="DataLogin.xsc">
+      <DependentUpon>DataLogin.xsd</DependentUpon>
+    </None>
+    <None Include="DataLogin.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataLogin.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataLogin.xss">
+      <DependentUpon>DataLogin.xsd</DependentUpon>
+    </None>
+    <None Include="DataMaster.xsc">
+      <DependentUpon>DataMaster.xsd</DependentUpon>
+    </None>
+    <None Include="DataMaster.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataMaster.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataMaster.xss">
+      <DependentUpon>DataMaster.xsd</DependentUpon>
+    </None>
+    <None Include="DataMitumori.xsc">
+      <DependentUpon>DataMitumori.xsd</DependentUpon>
+    </None>
+    <None Include="DataMitumori.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataMitumori.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataMitumori.xss">
+      <DependentUpon>DataMitumori.xsd</DependentUpon>
+    </None>
+    <None Include="DataNyukin.xsc">
+      <DependentUpon>DataNyukin.xsd</DependentUpon>
+    </None>
+    <None Include="DataNyukin.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataNyukin.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataNyukin.xss">
+      <DependentUpon>DataNyukin.xsd</DependentUpon>
+    </None>
+    <None Include="DataReturn.xsc">
+      <DependentUpon>DataReturn.xsd</DependentUpon>
+    </None>
+    <None Include="DataReturn.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataReturn.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataReturn.xss">
+      <DependentUpon>DataReturn.xsd</DependentUpon>
+    </None>
+    <None Include="Dataset.xsc">
+      <DependentUpon>Dataset.xsd</DependentUpon>
+    </None>
+    <None Include="Dataset.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Dataset.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Dataset.xss">
+      <DependentUpon>Dataset.xsd</DependentUpon>
+    </None>
+    <None Include="DataSet1.xsc">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="DataSet1.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSet1.xss">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="DataUriage.xsc">
+      <DependentUpon>DataUriage.xsd</DependentUpon>
+    </None>
+    <None Include="DataUriage.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataUriage.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataUriage.xss">
+      <DependentUpon>DataUriage.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Core\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
