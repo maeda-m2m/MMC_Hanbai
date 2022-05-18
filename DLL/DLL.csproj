@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Core">
-      <HintPath>..\..\..\..\Mansei_HK_20190128\Mansei_HK\Yodokou_HanbaiKanri\bin\Core.dll</HintPath>
+      <HintPath>..\Gyomu\dll\Core.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />

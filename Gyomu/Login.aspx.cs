@@ -9,6 +9,9 @@ namespace Gyomu
         {
             if (!this.IsPostBack)
             {
+
+                //2022/05/18
+
                 Create();
                 SessionManager.Logout();
                 LblCopyright.Text = "Copyright(c) Movie Management Company CORPORATION,2019 Production Planning Dept. ";
