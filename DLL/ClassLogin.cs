@@ -40,7 +40,7 @@ namespace DLL
                 return null;
         }
 
-        public static void GetLoginlog(string Name ,string UserNo, SqlConnection sqlConnection)
+        public static void GetLoginlog(string Name, string UserNo, SqlConnection sqlConnection)
         {
             SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
             da.SelectCommand.CommandText = "SELECT * FROM T_Loginlog  ";
@@ -68,7 +68,7 @@ namespace DLL
 
                 sql.Commit();
             }
-            catch (Exception e)
+            catch
             {
                 if (null != sql)
                     sql.Rollback();
@@ -77,6 +77,15 @@ namespace DLL
             {
                 sqlConnection.Close();
             }
+        }
+
+        public static DataLogin.T_LoginlogRow GetLastLogin(SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select * from T_Loginlog order by LoginDate desc ";
+            DataLogin.T_LoginlogDataTable dt = new DataLogin.T_LoginlogDataTable();
+            da.Fill(dt);
+            return dt[0];
         }
     }
 }

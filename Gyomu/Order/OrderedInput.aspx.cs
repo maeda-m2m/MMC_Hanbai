@@ -1,19 +1,8 @@
-﻿using Core.Sql;
-using DLL;
-using Gyomu.Mitumori.Syosai;
+﻿using DLL;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
-using Telerik.Web.UI;
-using Yodokou_HanbaiKanri;
 
 
 
@@ -21,6 +10,7 @@ namespace Gyomu.Order
 {
     public partial class OrderedInput : System.Web.UI.Page
     {
+        public static string strOrderedDate;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -41,7 +31,7 @@ namespace Gyomu.Order
                         }
                     }
                 }
-                catch (Exception ex)
+                catch
                 {
                     Create();
                 }
@@ -53,10 +43,6 @@ namespace Gyomu.Order
             DataSet1.T_KariOrderedDataTable dt = new DataSet1.T_KariOrderedDataTable();
 
             string strOrderedNo = "";
-            string strShiire = "";
-            string strMakerNo = "";
-            string strHanni = "";
-            string strCategory = "";
             int CountRow = 0;
 
 
@@ -67,16 +53,10 @@ namespace Gyomu.Order
                 string[] SpKey = SpRow[i].Split(',');
                 strOrderedNo = SpKey[0];
                 CountRow += 1;
-                //strShiire = SpKey[1];
-                //strCategory = SpKey[2];
-                //DataSet1.T_OrderedDataTable dd = ClassOrdered.GetSyuseiOrdered
-                //    (strOrderedNo, strShiire, strCategory, Global.GetConnection());
                 DataSet1.T_OrderedDataTable dd = ClassOrdered.GetOrdered2(strOrderedNo, Global.GetConnection());
                 for (int u = 0; u < dd.Count; u++)
                 {
-
                     DataSet1.T_KariOrderedRow dl = dt.NewT_KariOrderedRow();
-
                     dl.OrderedNo = dd[u].OrderedNo;
                     if (!dd[u].IsTokuisakiCodeNull())
                     {
@@ -102,7 +82,6 @@ namespace Gyomu.Order
                     dl.MekerNo = dd[u].MekerNo;
                     dl.Media = dd[u].Media;
                     dl.HatyuDay = dd[u].HatyuDay;
-                    //dl.JutyuTanka = dr.JutyuTanka;
                     dl.JutyuSuryou = dd[u].JutyuSuryou;
                     dl.JutyuGokei = dd[u].JutyuGokei;
                     dl.ShiireTanka = dd[u].ShiireTanka;
@@ -112,17 +91,14 @@ namespace Gyomu.Order
                     dl.ShiiresakiCode = dd[u].ShiiresakiCode;
                     dl.Zeikubun = dd[u].Zeikubun;
                     dl.Kakeritsu = dd[u].Kakeritsu;
-                    //dl.Ryoukin = dr.Ryoukin;
                     dl.Zansu = dd[u].Zansu;
                     if (u >= 1)
                     {
                         CountRow += 1;
                     }
                     dl.RowNo = CountRow;
-
                     dt.AddT_KariOrderedRow(dl);
                 }
-
             }
             CtrlSyousai.DataSource = dt;
             CtrlSyousai.DataBind();
@@ -140,6 +116,7 @@ namespace Gyomu.Order
             }
             CtrlSyousai.DataSource = dt;
             CtrlSyousai.DataBind();
+            strOrderedDate = LblOrderedDate.Text;
         }
 
         internal static void Create2(string[] strOrderedNoAry, string[] strShiireAry, string[] strMakerNoAry, string[] strHanniAry, string[] strCategoryAry)
@@ -416,7 +393,6 @@ namespace Gyomu.Order
                     dl.HatyuFLG = "true";
                     dl.HatyuDay = DateTime.Now.ToShortDateString();
                     dt.AddT_AppropriateRow(dl);
-                    string a = "";
                 }
                 DataAppropriate.T_AppropriateRow dr = dt.NewT_AppropriateRow();
                 Class1.InsertAppropriate(dt, Global.GetConnection());

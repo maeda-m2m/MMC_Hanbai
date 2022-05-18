@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -23,8 +24,63 @@ namespace DLL
         public static DataMaster.T_OshiraseDataTable GetOshirase(SqlConnection sqlConnection)
         {
             SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
-            da.SelectCommand.CommandText = "select * from T_Oshirase where accept = '1' Order by OshiraseNo desc";
+            da.SelectCommand.CommandText = "select * from T_Oshirase where accept = '1' Order by CreateDate desc";
             DataMaster.T_OshiraseDataTable dt = new DataMaster.T_OshiraseDataTable();
+            da.Fill(dt);
+            return dt;
+        }
+
+        public static DataTable test(SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select * from V_ProductList";
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            return dt;
+        }
+
+        public static DataMaster.M_Shiire_NewRow GetShiireCode2(string text, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select * from M_Shiire_New where Abbreviation = @abb";
+            da.SelectCommand.Parameters.AddWithValue("@abb", text);
+            DataMaster.M_Shiire_NewDataTable dt = new DataMaster.M_Shiire_NewDataTable();
+            da.Fill(dt);
+            if (dt.Count > 0)
+            {
+                return dt[0];
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static DataSet1.M_Kakaku_2DataTable SerchSyouhinCode(string pc, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select * from M_Kakaku_2 where SyouhinCode = @sc";
+            da.SelectCommand.Parameters.AddWithValue("@sc", pc);
+            DataSet1.M_Kakaku_2DataTable dt = new DataSet1.M_Kakaku_2DataTable();
+            da.Fill(dt);
+            return dt;
+        }
+
+        public static DataSet1.M_Kakaku_2DataTable SerchSyouhinName(string pn, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select * from M_Kakaku_2 where SyouhinMei = @sm";
+            da.SelectCommand.Parameters.AddWithValue("@sm", pn);
+            DataSet1.M_Kakaku_2DataTable dt = new DataSet1.M_Kakaku_2DataTable();
+            da.Fill(dt);
+            return dt;
+        }
+
+        public static DataMaster.M_BumonDataTable GetBumonMaster(string cmm, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = cmm;
+            DataMaster.M_BumonDataTable dt = new DataMaster.M_BumonDataTable();
             da.Fill(dt);
             return dt;
         }
@@ -35,6 +91,24 @@ namespace DLL
             da.SelectCommand.CommandText =
                 "select * from M_JoueiKakaku order by ShiiresakiCode asc, Capacity asc";
             DataMaster.M_JoueiKakakuDataTable dt = new DataMaster.M_JoueiKakakuDataTable();
+            da.Fill(dt);
+            return dt;
+        }
+
+        public static DataMaster.M_Tanto1DataTable GetTantoMaster(string cmm, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = cmm;
+            DataMaster.M_Tanto1DataTable dt = new DataMaster.M_Tanto1DataTable();
+            da.Fill(dt);
+            return dt;
+        }
+
+        public static DataMaster.M_Shiire_NewDataTable GetShiireMaster(string cmm, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = cmm;
+            DataMaster.M_Shiire_NewDataTable dt = new DataMaster.M_Shiire_NewDataTable();
             da.Fill(dt);
             return dt;
         }
@@ -58,6 +132,36 @@ namespace DLL
             da.SelectCommand.Parameters.AddWithValue("@pn", pn);
 
             DataMaster.M_ProductDataTable dt = new DataMaster.M_ProductDataTable();
+            da.Fill(dt);
+            return dt;
+        }
+
+        public static DataSet1.M_Kakaku_2DataTable GetKakaku2(string sID, string sName, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select * from M_Kakaku_2 where SyouhinCode = @id and SyouhinMei = @nm ";
+            da.SelectCommand.Parameters.AddWithValue("@id", sID);
+            da.SelectCommand.Parameters.AddWithValue("@nm", sName);
+            DataSet1.M_Kakaku_2DataTable dt = new DataSet1.M_Kakaku_2DataTable();
+            da.Fill(dt);
+            return dt;
+        }
+
+        public static DataMaster.T_ColumnListDataTable GetColumn(int intFieldNo, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select * from T_ColumnList where FieldNo = @vcn order by ColumnNo";
+            da.SelectCommand.Parameters.AddWithValue("@vcn", intFieldNo);
+            DataMaster.T_ColumnListDataTable dt = new DataMaster.T_ColumnListDataTable();
+            da.Fill(dt);
+            return dt;
+        }
+
+        public static DataSet1.T_ProductListDataTable GetSyouhinData(string cmm, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = cmm;
+            DataSet1.T_ProductListDataTable dt = new DataSet1.T_ProductListDataTable();
             da.Fill(dt);
             return dt;
         }
@@ -103,6 +207,43 @@ namespace DLL
             }
         }
 
+        public static void InsertLog(string title, string userID, string userName, DateTime now, string logName, bool success, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select * from T_Log";
+            da.InsertCommand = (new SqlCommandBuilder(da)).GetInsertCommand();
+            DataMaster.T_LogDataTable dt = new DataMaster.T_LogDataTable();
+            DataMaster.T_LogRow dr = dt.NewT_LogRow();
+            SqlTransaction sql = null;
+            try
+            {
+                sqlConnection.Open();
+                sql = sqlConnection.BeginTransaction();
+                da.SelectCommand.Transaction = da.InsertCommand.Transaction = sql;
+
+                dr.UserID = userID;
+                dr.UserName = userName;
+                dr.LogDate = now.ToString();
+                dr.LogName = logName;
+                dr.Success = success.ToString();
+
+                dt.AddT_LogRow(dr);
+
+                da.Update(dt);
+
+                sql.Commit();
+            }
+            catch (Exception ex)
+            {
+                if (sql != null)
+                    sql.Rollback();
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
+
         public static void DeleteOshirase(string value, SqlConnection sqlConnection)
         {
             SqlCommand da = new SqlCommand("", sqlConnection);
@@ -119,6 +260,310 @@ namespace DLL
                 da.ExecuteNonQuery();
                 sql.Commit();
             }
+            catch
+            {
+                if (sql != null)
+                    sql.Rollback();
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
+
+        public static DataMaster.V_ProductListDataTable GetList(SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select * from V_ProductList";
+            DataMaster.V_ProductListDataTable dt = new DataMaster.V_ProductListDataTable();
+            da.Fill(dt);
+            return dt;
+        }
+
+        public static void CreateProductList(DataMaster.V_ProductListDataTable dtN, SqlConnection sqlConnection)
+        {
+            SqlCommand sc = new SqlCommand("", sqlConnection);
+            sc.CommandText = "insert T_ProductList select * from V_ProductList";
+            SqlTransaction sql = null;
+
+            try
+            {
+                sqlConnection.Open();
+                sql = sqlConnection.BeginTransaction();
+                sc.Transaction = sql;
+                sc.ExecuteNonQuery();
+                sql.Commit();
+            }
+            catch
+            {
+                if (sql != null)
+                {
+                    sql.Rollback();
+                }
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
+
+        public static void DeleteProductList(SqlConnection sqlConnection)
+        {
+            SqlCommand da = new SqlCommand("", sqlConnection);
+            da.CommandText =
+                "Delete  from T_ProductList";
+            SqlTransaction sql = null;
+
+            try
+            {
+                sqlConnection.Open();
+                sql = sqlConnection.BeginTransaction();
+                da.Transaction = sql;
+                da.ExecuteNonQuery();
+                sql.Commit();
+            }
+            catch
+            {
+                if (sql != null)
+                    sql.Rollback();
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
+
+        public static void UpdateCSVtanto(DataMaster.M_Tanto1DataTable dt, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select * from M_Tanto where UserID = @u";
+            da.SelectCommand.Parameters.AddWithValue("@u", dt[0].UserID);
+            DataMaster.M_Tanto1DataTable dtN = new DataMaster.M_Tanto1DataTable();
+            da.Fill(dtN);
+
+            SqlTransaction sqlTran = null;
+            da.UpdateCommand = new SqlCommandBuilder(da).GetUpdateCommand();
+            da.InsertCommand = new SqlCommandBuilder(da).GetInsertCommand();
+
+            try
+            {
+                if (dtN.Count > 0)
+                {
+                    sqlConnection.Open();
+                    sqlTran = sqlConnection.BeginTransaction();
+                    da.SelectCommand.Transaction = da.UpdateCommand.Transaction = sqlTran;
+                    dtN[0].ItemArray = dt[0].ItemArray;
+                    da.Update(dtN);
+                    sqlTran.Commit();
+                }
+                else
+                {
+                    sqlConnection.Open();
+                    sqlTran = sqlConnection.BeginTransaction();
+                    da.SelectCommand.Transaction = da.InsertCommand.Transaction = sqlTran;
+                    da.Update(dt);
+                    sqlTran.Commit();
+                }
+            }
+            catch (Exception ex)
+            {
+                if (sqlTran != null)
+                {
+                    sqlTran.Rollback();
+                }
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+
+        }
+
+        public static void UpdateCSVshiire(DataMaster.M_Shiire_NewDataTable dt, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText =
+                "select * from M_Shiire_New where ShiireCode = @sc";
+            da.SelectCommand.Parameters.AddWithValue("@sc", dt[0].ShiireCode);
+            DataMaster.M_Shiire_NewDataTable dtN = new DataMaster.M_Shiire_NewDataTable();
+            da.Fill(dtN);
+
+            SqlTransaction sqlTran = null;
+            da.UpdateCommand = new SqlCommandBuilder(da).GetUpdateCommand();
+            da.InsertCommand = new SqlCommandBuilder(da).GetInsertCommand();
+
+            try
+            {
+                if (dtN.Count > 0)
+                {
+                    sqlConnection.Open();
+                    sqlTran = sqlConnection.BeginTransaction();
+                    da.SelectCommand.Transaction = da.UpdateCommand.Transaction = sqlTran;
+                    dtN[0].ItemArray = dt[0].ItemArray;
+                    da.Update(dtN);
+                    sqlTran.Commit();
+                }
+                else
+                {
+                    sqlConnection.Open();
+                    sqlTran = sqlConnection.BeginTransaction();
+                    da.SelectCommand.Transaction = da.InsertCommand.Transaction = sqlTran;
+                    da.Update(dt);
+                    sqlTran.Commit();
+                }
+            }
+            catch (Exception ex)
+            {
+                if (sqlTran != null)
+                {
+                    sqlTran.Rollback();
+                }
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
+
+        public static void UpdateCSVbumon(DataMaster.M_BumonDataTable dt, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText =
+                "select * from M_Bumon where BumonKubun = @bk ";
+            da.SelectCommand.Parameters.AddWithValue("@bk", dt[0].BumonKubun);
+            DataMaster.M_BumonDataTable dtN = new DataMaster.M_BumonDataTable();
+            da.Fill(dtN);
+
+            SqlTransaction sqlTran = null;
+            da.UpdateCommand = new SqlCommandBuilder(da).GetUpdateCommand();
+            da.InsertCommand = new SqlCommandBuilder(da).GetInsertCommand();
+
+            try
+            {
+                if (dtN.Count > 0)
+                {
+                    sqlConnection.Open();
+                    sqlTran = sqlConnection.BeginTransaction();
+                    da.SelectCommand.Transaction = da.UpdateCommand.Transaction = sqlTran;
+                    dtN[0].ItemArray = dt[0].ItemArray;
+                    da.Update(dtN);
+                    sqlTran.Commit();
+                }
+                else
+                {
+                    sqlConnection.Open();
+                    sqlTran = sqlConnection.BeginTransaction();
+                    da.SelectCommand.Transaction = da.InsertCommand.Transaction = sqlTran;
+                    da.Update(dt);
+                    sqlTran.Commit();
+                }
+            }
+            catch (Exception ex)
+            {
+                if (sqlTran != null)
+                {
+                    sqlTran.Rollback();
+                }
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
+
+        public static void UpdateCSVfacility(DataSet1.M_Facility_NewDataTable dt, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText =
+                "select * from M_Facility_New where FacilityNo = @fn and Code = @c";
+            da.SelectCommand.Parameters.AddWithValue("@fn", dt[0].FacilityNo);
+            da.SelectCommand.Parameters.AddWithValue("@c", dt[0].Code);
+            DataSet1.M_Facility_NewDataTable dtN = new DataSet1.M_Facility_NewDataTable();
+            da.Fill(dtN);
+
+            SqlTransaction sqlTran = null;
+            da.UpdateCommand = new SqlCommandBuilder(da).GetUpdateCommand();
+            da.InsertCommand = new SqlCommandBuilder(da).GetInsertCommand();
+
+            try
+            {
+                if (dtN.Count > 0)
+                {
+                    sqlConnection.Open();
+                    sqlTran = sqlConnection.BeginTransaction();
+                    da.SelectCommand.Transaction = da.UpdateCommand.Transaction = sqlTran;
+                    dtN[0].ItemArray = dt[0].ItemArray;
+                    da.Update(dtN);
+                    sqlTran.Commit();
+                }
+                else
+                {
+                    sqlConnection.Open();
+                    sqlTran = sqlConnection.BeginTransaction();
+                    da.SelectCommand.Transaction = da.InsertCommand.Transaction = sqlTran;
+                    da.Update(dt);
+                    sqlTran.Commit();
+                }
+            }
+            catch (Exception ex)
+            {
+                if (sqlTran != null)
+                {
+                    sqlTran.Rollback();
+                }
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
+
+        public static void DeleteShiiresaki(string userId, SqlConnection sqlConnection)
+        {
+            SqlCommand sc = new SqlCommand("", sqlConnection);
+            sc.CommandText = "delete from M_Shiire_New where ShiireCode = @s";
+            sc.Parameters.AddWithValue("@s", userId);
+            SqlTransaction sql = null;
+
+            try
+            {
+                sqlConnection.Open();
+                sql = sqlConnection.BeginTransaction();
+                sc.Transaction = sql;
+                sc.ExecuteNonQuery();
+                sql.Commit();
+            }
+            catch (Exception ex)
+            {
+                if (sql != null)
+                {
+                    sql.Rollback();
+                }
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+
+        }
+
+        public static void DeleteTokuisaki(string userId, SqlConnection sqlConnection)
+        {
+            string[] strID = userId.Split('/');
+            SqlCommand sc = new SqlCommand("", sqlConnection);
+            sc.CommandText = "Delete from M_Tokuisaki2 where CustomerCode = @cc and TokuisakiCode = @tc";
+            sc.Parameters.AddWithValue("@cc", strID[1]);
+            sc.Parameters.AddWithValue("@tc", strID[0]);
+            SqlTransaction sql = null;
+
+            try
+            {
+                sqlConnection.Open();
+                sql = sqlConnection.BeginTransaction();
+                sc.Transaction = sql;
+                sc.ExecuteNonQuery();
+                sql.Commit();
+            }
             catch (Exception ex)
             {
                 if (sql != null)
@@ -128,6 +573,63 @@ namespace DLL
             {
                 sqlConnection.Close();
             }
+        }
+
+        public static void UpdateCSVtokuisaki(DataSet1.M_Tokuisaki2DataTable dt, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText =
+                "select * from M_Tokuisaki2 where CustomerCode = @cc and TokuisakiCode = @tc";
+            da.SelectCommand.Parameters.AddWithValue("@cc", dt[0].CustomerCode);
+            da.SelectCommand.Parameters.AddWithValue("@tc", dt[0].TokuisakiCode);
+            DataSet1.M_Tokuisaki2DataTable dtN = new DataSet1.M_Tokuisaki2DataTable();
+            da.Fill(dtN);
+
+            SqlTransaction sqlTran = null;
+            da.UpdateCommand = new SqlCommandBuilder(da).GetUpdateCommand();
+            da.InsertCommand = new SqlCommandBuilder(da).GetInsertCommand();
+
+            try
+            {
+                if (dtN.Count > 0)
+                {
+                    sqlConnection.Open();
+                    sqlTran = sqlConnection.BeginTransaction();
+                    da.SelectCommand.Transaction = da.UpdateCommand.Transaction = sqlTran;
+                    dtN[0].ItemArray = dt[0].ItemArray;
+                    da.Update(dtN);
+                    sqlTran.Commit();
+                }
+                else
+                {
+                    sqlConnection.Open();
+                    sqlTran = sqlConnection.BeginTransaction();
+                    da.SelectCommand.Transaction = da.InsertCommand.Transaction = sqlTran;
+                    da.Update(dt);
+                    sqlTran.Commit();
+                }
+            }
+            catch (Exception ex)
+            {
+                if (sqlTran != null)
+                {
+                    sqlTran.Rollback();
+                }
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
+
+        public static DataMaster.V_Jouei_KakakuDataTable GetJoueiKakakuView(string v, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select * from V_Jouei_Kakaku where SyouhinMei like @syouhinmei";
+            da.SelectCommand.Parameters.AddWithValue("@syouhinmei", "%" + v + "%");
+            DataMaster.V_Jouei_KakakuDataTable dt = new DataMaster.V_Jouei_KakakuDataTable();
+            da.Fill(dt);
+            return dt;
         }
 
         public static DataMaster.M_ProductRow GetProductRow(string userId, string name, string media, SqlConnection sqlConnection)
@@ -178,7 +680,7 @@ namespace DLL
                     sql.Commit();
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 if (sql != null)
                 {
@@ -189,6 +691,63 @@ namespace DLL
             {
                 sqlConnection.Close();
             }
+        }
+
+        public static void InsertProduct2(DataSet1.M_Kakaku_2DataTable dt, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select * from M_Kakaku_2";
+            da.InsertCommand = (new SqlCommandBuilder(da)).GetInsertCommand();
+            SqlTransaction sql = null;
+            try
+            {
+                sqlConnection.Open();
+                sql = sqlConnection.BeginTransaction();
+
+                da.SelectCommand.Transaction = da.InsertCommand.Transaction = sql;
+
+                da.Update(dt);
+
+                sql.Commit();
+            }
+            catch (Exception ex)
+            {
+                if (sql != null)
+                    sql.Rollback();
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+
+        }
+
+        public static void DelProduct(string strSyouhinCode, string strSyouhinMei, SqlConnection sqlConnection)
+        {
+            SqlCommand sc = new SqlCommand("", sqlConnection);
+            sc.CommandText = "Delete from M_Kakaku_2 where SyouhinCode = @c and SyouhinMei = @m";
+            sc.Parameters.AddWithValue("@c", strSyouhinCode);
+            sc.Parameters.AddWithValue("@m", strSyouhinMei);
+            SqlTransaction sql = null;
+
+            try
+            {
+                sqlConnection.Open();
+                sql = sqlConnection.BeginTransaction();
+                sc.Transaction = sql;
+                sc.ExecuteNonQuery();
+                sql.Commit();
+            }
+            catch (Exception ex)
+            {
+                if (sql != null)
+                    sql.Rollback();
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+
         }
 
         public static DataMaster.M_ProductDataTable GetProduct4(string cmm, SqlConnection sqlConnection)
@@ -245,6 +804,76 @@ namespace DLL
                 return dt[0] as DataMaster.M_Customer_NewRow;
             else
                 return null;
+        }
+
+        public static void UpdateProductList(DataMaster.V_ProductListDataTable dt, SqlConnection sqlConnection)
+        {
+            DataSet1.M_Kakaku_2DataTable dtN = new DataSet1.M_Kakaku_2DataTable();
+            for (int i = 0; i < dt.Count; i++)
+            {
+
+                if (dt[i]["公共図書館"].ToString() == "1")
+                {
+
+                }
+                if (dt[i]["公共図書館"].ToString() == "1")
+                {
+
+                }
+                if (dt[i]["公共図書館"].ToString() == "1")
+                {
+
+                }
+                if (dt[i]["公共図書館"].ToString() == "1")
+                {
+
+                }
+                if (dt[i]["公共図書館"].ToString() == "1")
+                {
+
+                }
+                if (dt[i]["公共図書館"].ToString() == "1")
+                {
+
+                }
+                if (dt[i]["公共図書館"].ToString() == "1")
+                {
+
+                }
+                if (dt[i]["公共図書館"].ToString() == "1")
+                {
+
+                }
+                if (dt[i]["公共図書館"].ToString() == "1")
+                {
+
+                }
+                if (dt[i]["公共図書館"].ToString() == "1")
+                {
+
+                }
+                if (dt[i]["公共図書館"].ToString() == "1")
+                {
+
+                }
+                if (dt[i]["公共図書館"].ToString() == "1")
+                {
+
+                }
+                if (dt[i]["公共図書館"].ToString() == "1")
+                {
+
+                }
+                if (dt[i]["公共図書館"].ToString() == "1")
+                {
+
+                }
+                if (dt[i]["公共図書館"].ToString() == "1")
+                {
+
+                }
+
+            }
         }
 
         public static DataMaster.M_CityRow GetCity(string no, SqlConnection sqlConnection)
@@ -313,6 +942,15 @@ namespace DLL
             {
                 return null;
             }
+        }
+
+        public static DataMaster.V_ProductListDataTable GetProduct5(SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select * from V_ProductList";
+            DataMaster.V_ProductListDataTable dt = new DataMaster.V_ProductListDataTable();
+            da.Fill(dt);
+            return dt;
         }
 
         public static DataMaster.M_ProductDataTable KensakuProduct(string p, SqlConnection sqlConnection)
@@ -404,7 +1042,7 @@ namespace DLL
 
                 sql.Commit();
             }
-            catch (Exception ex)
+            catch
             {
                 if (sql != null)
                     sql.Rollback();
@@ -446,7 +1084,7 @@ namespace DLL
                 da.ExecuteNonQuery();
                 sql.Commit();
             }
-            catch (Exception ex)
+            catch
             {
                 if (sql != null)
                     sql.Rollback();
@@ -476,7 +1114,7 @@ namespace DLL
                 da.Update(dt);
                 sqltra.Commit();
             }
-            catch (Exception ex)
+            catch
             {
                 if (sqltra != null)
                     sqltra.Rollback();
@@ -519,7 +1157,7 @@ namespace DLL
 
                 sql.Commit();
             }
-            catch (Exception ex)
+            catch
             {
                 if (sql != null)
                     sql.Rollback();
@@ -530,15 +1168,15 @@ namespace DLL
             }
         }
 
-        public static DataMaster.M_JoueiKakakuDataTable GetJouei(string shiireName, string media, string text, SqlConnection sqlConnection)
+        public static DataMaster.M_JoueiKakaku2DataTable GetJouei(string shiireName, string media, string text, SqlConnection sqlConnection)
         {
             SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
             da.SelectCommand.CommandText =
-                "select * from M_JoueiKakaku where ShiiresakiCode = @sm and Media = @me and Capacity = @ca group by Range, ShiiresakiCode, Media, Capacity, ShiiresakiName, HyoujunKakaku, ShiireKakaku";
+                "select * from M_JoueiKakaku2 where ShiiresakiCode = @sm and Media = @me and Capacity = @ca ";
             da.SelectCommand.Parameters.AddWithValue("@sm", shiireName);
             da.SelectCommand.Parameters.AddWithValue("@me", media);
             da.SelectCommand.Parameters.AddWithValue("@ca", text);
-            DataMaster.M_JoueiKakakuDataTable dt = new DataMaster.M_JoueiKakakuDataTable();
+            DataMaster.M_JoueiKakaku2DataTable dt = new DataMaster.M_JoueiKakaku2DataTable();
             da.Fill(dt);
             return dt;
         }
@@ -636,7 +1274,7 @@ namespace DLL
 
                 sql.Commit();
             }
-            catch (Exception ex)
+            catch
             {
                 if (sql != null)
                     sql.Rollback();
@@ -672,7 +1310,7 @@ namespace DLL
 
                 sql.Commit();
             }
-            catch (Exception ex)
+            catch
             {
                 if (sql != null)
                     sql.Rollback();
@@ -703,7 +1341,7 @@ namespace DLL
 
                 sql.Commit();
             }
-            catch (Exception ex)
+            catch
             {
                 if (sql != null)
                     sql.Rollback();
@@ -758,7 +1396,7 @@ namespace DLL
 
                 sql.Commit();
             }
-            catch (Exception ex)
+            catch
             {
                 if (sql != null)
                     sql.Rollback();
@@ -789,7 +1427,7 @@ namespace DLL
 
                 sql.Commit();
             }
-            catch (Exception ex)
+            catch
             {
                 if (sql != null)
                     sql.Rollback();
@@ -831,7 +1469,7 @@ namespace DLL
 
                 sql.Commit();
             }
-            catch (Exception ex)
+            catch
             {
                 if (sql != null)
                     sql.Rollback();
@@ -840,6 +1478,17 @@ namespace DLL
             {
                 sqlConnection.Close();
             }
+        }
+
+        public static DataMaster.M_JoueiKakaku2DataTable GetJouei4(string shiirecode, string media, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select * from M_JoueiKakaku2 where ShiiresakiCode = @shi and Media = @md";
+            da.SelectCommand.Parameters.AddWithValue("@shi", shiirecode);
+            da.SelectCommand.Parameters.AddWithValue("@md", media);
+            DataMaster.M_JoueiKakaku2DataTable dt = new DataMaster.M_JoueiKakaku2DataTable();
+            da.Fill(dt);
+            return dt;
         }
 
         public static DataMaster.M_ShiiresakiDataTable GetShiiresaki(string abb, SqlConnection sqlConnection)
@@ -873,7 +1522,7 @@ namespace DLL
 
                 sql.Commit();
             }
-            catch (Exception ex)
+            catch
             {
                 if (sql != null)
                     sql.Rollback();
@@ -924,7 +1573,7 @@ namespace DLL
 
                 sql.Commit();
             }
-            catch (Exception ex)
+            catch
             {
                 if (sql != null)
                     sql.Rollback();
@@ -971,7 +1620,7 @@ namespace DLL
 
                 sql.Commit();
             }
-            catch (Exception ex)
+            catch
             {
                 if (sql != null)
                     sql.Rollback();
@@ -1036,7 +1685,7 @@ namespace DLL
 
                 sql.Commit();
             }
-            catch (Exception ex)
+            catch
             {
                 if (sql != null)
                     sql.Rollback();
@@ -1104,7 +1753,7 @@ namespace DLL
 
                 sql.Commit();
             }
-            catch (Exception ex)
+            catch
             {
                 if (sql != null)
                     sql.Rollback();
@@ -1180,7 +1829,7 @@ namespace DLL
                 da.Update(Tdt);
                 sql.Commit();
             }
-            catch (Exception ex)
+            catch
             {
                 if (sql != null)
                     sql.Rollback();
@@ -1221,7 +1870,7 @@ namespace DLL
 
                 sql.Commit();
             }
-            catch (Exception ex)
+            catch
             {
                 if (sql != null)
                     sql.Rollback();
@@ -1276,7 +1925,7 @@ namespace DLL
 
                 sql.Commit();
             }
-            catch (Exception ex)
+            catch
             {
                 if (sql != null)
                     sql.Rollback();
@@ -1354,6 +2003,35 @@ namespace DLL
             da.SelectCommand.Parameters.AddWithValue("@ca", zasu);
             da.SelectCommand.Parameters.AddWithValue("@ra", range);
             DataMaster.M_JoueiKakakuDataTable dt = new DataMaster.M_JoueiKakakuDataTable();
+            da.Fill(dt);
+            return dt;
+        }
+
+        public static DataMaster.M_AccountPageRow GetDaihyo(string flg, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select * from M_AccountPage where RowNumber = '0'";
+            da.SelectCommand.Parameters.AddWithValue("@flg", flg);
+            DataMaster.M_AccountPageDataTable dt = new DataMaster.M_AccountPageDataTable();
+            da.Fill(dt);
+            if (dt.Count > 0)
+            {
+                return dt[0];
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static DataMaster.M_JoueiKakaku2DataTable GetJouei5(string shiirecode, string selectedValue, string media, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select * from M_JoueiKakaku2 where ShiiresakiCode = @sc and Range = @r and Media = @m";
+            da.SelectCommand.Parameters.AddWithValue("@sc", shiirecode);
+            da.SelectCommand.Parameters.AddWithValue("@r", selectedValue);
+            da.SelectCommand.Parameters.AddWithValue("@m", media);
+            DataMaster.M_JoueiKakaku2DataTable dt = new DataMaster.M_JoueiKakaku2DataTable();
             da.Fill(dt);
             return dt;
         }

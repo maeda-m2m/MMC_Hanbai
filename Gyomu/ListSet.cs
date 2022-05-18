@@ -330,29 +330,29 @@ namespace Gyomu
                 e.EndOfItems = endOffset == dt.Rows.Count;
                 for (int i = itemOffset; i < endOffset; i++)
                 {
-                    rcb.Items.Add(new RadComboBoxItem(dt[i].SyouhinMei + "/" + dt[i].Media, dt[i].Makernumber));
+                    rcb.Items.Add(new RadComboBoxItem(dt[i].SyouhinMei, dt[i].Makernumber));
                 }
             }
         }
 
-        internal static void SetProductname(object sender, RadComboBoxItemsRequestedEventArgs e, string cate)
-        {
-            RadComboBox rcb = (RadComboBox)sender;
-            rcb.Items.Clear();
-            rcb.Items.Add(new RadComboBoxItem(rcb.EmptyMessage, "-1"));
-            if (e.Text.Trim() != "")
-            {
-                DataSet1.M_Kakaku_2DataTable dt = ClassKensaku.GetProduct5(e.Text.Trim(), cate, Global.SqlConn);
+        //internal static void SetProductname(object sender, RadComboBoxItemsRequestedEventArgs e, string cate)
+        //{
+        //    RadComboBox rcb = (RadComboBox)sender;
+        //    rcb.Items.Clear();
+        //    rcb.Items.Add(new RadComboBoxItem(rcb.EmptyMessage, "-1"));
+        //    if (e.Text.Trim() != "")
+        //    {
+        //        DataSet1.M_Kakaku_2DataTable dt = ClassKensaku.GetProduct5(e.Text.Trim(), cate, Global.SqlConn);
 
-                int itemOffset = e.NumberOfItems;
-                int endOffset = dt.Rows.Count;
-                e.EndOfItems = endOffset == dt.Rows.Count;
-                for (int i = itemOffset; i < endOffset; i++)
-                {
-                    rcb.Items.Add(new RadComboBoxItem(dt[i].SyouhinMei + "/" + dt[i].Media + "/" + dt[i].Hanni, dt[i].SyouhinCode + "/" + dt[i].Media));
-                }
-            }
-        }
+        //        int itemOffset = e.NumberOfItems;
+        //        int endOffset = dt.Rows.Count;
+        //        e.EndOfItems = endOffset == dt.Rows.Count;
+        //        for (int i = itemOffset; i < endOffset; i++)
+        //        {
+        //            rcb.Items.Add(new RadComboBoxItem(dt[i].SyouhinMei + "/" + dt[i].Media + "/" + dt[i].Hanni, dt[i].SyouhinCode + "/" + dt[i].Media));
+        //        }
+        //    }
+        //}
 
         internal static void setproduct(RadComboBox productName, string a, string c)
         {
@@ -407,6 +407,18 @@ namespace Gyomu
             {
                 if (!dt[i].IsMediaNull())
                     rcb.Items.Add(new RadComboBoxItem(dt[i].SyouhinMei + "/" + dt[i].Media, dt[i].Makernumber));
+            }
+        }
+
+        internal static void SetShiire2(RadComboBox radMakerRyaku)
+        {
+            radMakerRyaku.Items.Clear();
+            radMakerRyaku.Items.Add(new RadComboBoxItem(""));
+
+            DataDrop.M_ShiiresakiDataTable dt = ClassDrop.SetShiire(Global.GetConnection());
+            for (int i = 0; i < dt.Count; i++)
+            {
+                radMakerRyaku.Items.Add(new RadComboBoxItem(dt[i].ShiiresakiRyakusyou, dt[i].ShiiresakiCode.ToString()));
             }
         }
 
@@ -492,7 +504,7 @@ namespace Gyomu
             rcb.Items.Add(new RadComboBoxItem(rcb.EmptyMessage, "-1"));
             if (e.Text.Trim() != "")
             {
-                DataSet1.M_Shiire_NewDataTable dt = ClassKensaku.GetMaker(e.Text.Trim(), Global.SqlConn);
+                DataMaster.M_Shiire_NewDataTable dt = ClassKensaku.GetMaker(e.Text.Trim(), Global.SqlConn);
 
                 int itemOffset = e.NumberOfItems;
                 int endOffset = dt.Rows.Count;
@@ -517,6 +529,50 @@ namespace Gyomu
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 rad.Items.Add(new RadComboBoxItem(dt[i].SyouhinMei + "/" + dt[i].Media, dt[i].SyouhinCode + "/" + dt[i].Media));
+            }
+        }
+
+        internal static void SettingProduct205(object sender, RadComboBoxItemsRequestedEventArgs e, string strSyokaiDate)
+        {
+            RadComboBox rcb = (RadComboBox)sender;
+            rcb.Items.Clear();
+            //rcb.Items.Add(new RadComboBoxItem(rcb.EmptyMessage, "-1"));
+            if (e.Text.Trim() != "")
+            {
+                //DataSet1.M_Kakaku_2DataTable dt = ClassKensaku.GetProduct5(e.Text.Trim(), cate, strSyokaiDate, Global.SqlConn);
+                DataMaster.V_Jouei_KakakuDataTable dt = ClassMaster.GetJoueiKakakuView(e.Text.Trim(), Global.GetConnection());
+
+                int itemOffset = e.NumberOfItems;
+                int endOffset = dt.Rows.Count;
+                e.EndOfItems = endOffset == dt.Rows.Count;
+                string arypro = "";
+
+                for (int i = itemOffset; i < endOffset; i++)
+                {
+
+                    DataMaster.V_Jouei_KakakuRow dr = dt[i];
+                    string productname = dr.SyouhinMei + "," + dr.Media;
+                    if (!arypro.Contains(productname))
+                    {
+
+                        arypro += productname + "/";
+
+                        object[] item = dr.ItemArray;
+                        string items = "";
+                        for (int v = 0; v < item.Length; v++)
+                        {
+                            if (!string.IsNullOrEmpty(items))
+                            {
+                                items += "^" + item[v].ToString();
+                            }
+                            else
+                            {
+                                items = item[v].ToString();
+                            }
+                        }
+                        rcb.Items.Add(new RadComboBoxItem(dt[i].Makernumber + "/" + dt[i].SyouhinMei + "(" + dt[i].Media + ")", items));
+                    }
+                }
             }
         }
 
@@ -694,7 +750,7 @@ namespace Gyomu
                 e.EndOfItems = endOffset == dt.Rows.Count;
                 for (int i = itemOffset; i < endOffset; i++)
                 {
-                    rcb.Items.Add(new RadComboBoxItem(dt[i].FacilityName1, dt[i].FacilityName1));
+                    rcb.Items.Add(new RadComboBoxItem(dt[i].Abbreviation, dt[i].FacilityName1));
                 }
             }
         }
@@ -849,21 +905,36 @@ namespace Gyomu
             }
         }
 
-        internal static void SettingProduct(object sender, RadComboBoxItemsRequestedEventArgs e, string cate)
+        internal static void SettingProduct(object sender, RadComboBoxItemsRequestedEventArgs e, string cate, string strSyokaiDate)
         {
             RadComboBox rcb = (RadComboBox)sender;
             rcb.Items.Clear();
             //rcb.Items.Add(new RadComboBoxItem(rcb.EmptyMessage, "-1"));
             if (e.Text.Trim() != "")
             {
-                DataSet1.M_Kakaku_2DataTable dt = ClassKensaku.GetProduct5(e.Text.Trim(), cate, Global.SqlConn);
+                DataSet1.M_Kakaku_2DataTable dt = ClassKensaku.GetProduct5(e.Text.Trim(), cate, strSyokaiDate, Global.SqlConn);
 
                 int itemOffset = e.NumberOfItems;
                 int endOffset = dt.Rows.Count;
                 e.EndOfItems = endOffset == dt.Rows.Count;
                 for (int i = itemOffset; i < endOffset; i++)
                 {
-                    rcb.Items.Add(new RadComboBoxItem(dt[i].Makernumber + "/" + dt[i].SyouhinMei + "(" + dt[i].Media + ")" + "/" + dt[i].Hanni, dt[i].SyouhinCode + "/" + dt[i].Media + "/" + dt[i].Hanni));
+                    DataSet1.M_Kakaku_2Row dr = dt[i];
+                    object[] item = dr.ItemArray;
+                    string items = "";
+                    for (int v = 0; v < item.Length; v++)
+                    {
+                        if (!string.IsNullOrEmpty(items))
+                        {
+                            items += "^" + item[v].ToString();
+                        }
+                        else
+                        {
+                            items = item[v].ToString();
+                        }
+                    }
+                    rcb.Items.Add(new RadComboBoxItem(dt[i].Makernumber + "/" + dt[i].SyouhinMei + "(" + dt[i].Media + ")" + "/" + dt[i].Hanni, items));
+
                 }
             }
         }
@@ -898,9 +969,23 @@ namespace Gyomu
                 int itemOffset = e.NumberOfItems;
                 int endOffset = dt.Rows.Count;
                 e.EndOfItems = endOffset == dt.Rows.Count;
+                object[] items;
                 for (int i = itemOffset; i < endOffset; i++)
                 {
-                    rcb.Items.Add(new RadComboBoxItem(dt[i].TokuisakiRyakusyo, dt[i].CustomerCode + "/" + dt[i].TokuisakiCode.ToString()));
+                    items = dt[i].ItemArray;
+                    string item = "";
+                    for (int a = 0; a < items.Length; a++)
+                    {
+                        if (!string.IsNullOrEmpty(item))
+                        {
+                            item += "," + items[a].ToString().Trim();
+                        }
+                        else
+                        {
+                            item = items[a].ToString().Trim();
+                        }
+                    }
+                    rcb.Items.Add(new RadComboBoxItem(dt[i].TokuisakiRyakusyo, item));
                 }
             }
         }
@@ -1014,7 +1099,7 @@ namespace Gyomu
             rcb.Items.Add(new RadComboBoxItem(rcb.EmptyMessage, "-1"));
             if (e.Text.Trim() != "")
             {
-                DataSet1.M_Shiire_NewDataTable dt = ClassKensaku.GetMaker(e.Text.Trim(), Global.SqlConn);
+                DataMaster.M_Shiire_NewDataTable dt = ClassKensaku.GetMaker(e.Text.Trim(), Global.SqlConn);
 
                 int itemOffset = e.NumberOfItems;
                 int endOffset = dt.Rows.Count;
@@ -1283,9 +1368,23 @@ namespace Gyomu
                 int itemOffset = e.NumberOfItems;
                 int endOffset = dt.Rows.Count;
                 e.EndOfItems = endOffset == dt.Rows.Count;
+                object[] items;
                 for (int i = itemOffset; i < endOffset; i++)
                 {
-                    rcb.Items.Add(new RadComboBoxItem(dt[i].Abbreviation, dt[i].FacilityNo.ToString() + "/" + dt[i].Code.ToString()));
+                    items = dt[i].ItemArray;
+                    string item = "";
+                    for (int a = 0; a < items.Length; a++)
+                    {
+                        if (!string.IsNullOrEmpty(item))
+                        {
+                            item += "/" + items[a].ToString().Trim();
+                        }
+                        else
+                        {
+                            item = items[a].ToString().Trim();
+                        }
+                    }
+                    rcb.Items.Add(new RadComboBoxItem(dt[i].Abbreviation, item));
                 }
             }
         }
@@ -1318,8 +1417,37 @@ namespace Gyomu
                 DataSet1.M_TantoDataTable dt = Class1.GetStaff2(e.Text.Trim(), Global.GetConnection());
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    rad.Items.Add(new RadComboBoxItem(dt[i].UserName, dt[i].UserID.ToString()));
+                    rad.Items.Add(new RadComboBoxItem(dt[i].UserName + "/" + dt[i].BumonName, dt[i].UserID.ToString()));
                 }
+            }
+        }
+
+        internal static void SetTyokusouSaki2(object sender, RadComboBoxItemsRequestedEventArgs e)
+        {
+            RadComboBox rad = (RadComboBox)sender;
+            rad.Items.Clear();
+            rad.Items.Add(new RadComboBoxItem(rad.EmptyMessage, ""));
+            if (e.Text.Trim() != "")
+            {
+                DataSet1.M_TyokusosakiDataTable dt = ClassKensaku.GetTyokuso(e.Text.Trim(), Global.SqlConn);
+                int itemOffset = e.NumberOfItems;
+                int endOffset = dt.Rows.Count;
+                e.EndOfItems = endOffset == dt.Rows.Count;
+                for (int i = itemOffset; i < endOffset; i++)
+                {
+                    rad.Items.Add(new RadComboBoxItem(dt[i].TyokusousakiMei1, dt[i].TyokusousakiCode.ToString() + "," + "," + dt[i].TyokusousakiMei2 + "," + dt[i].TyokusousakiRyakusyou + "," + dt[i].TyokusousakiTantou + "," + dt[i].Yubinbangou + "," + dt[i].Jusyo1 + "," + dt[i].Jusyo2 + "," + dt[i].Tell + "," + dt[i].CityCode));
+                }
+            }
+        }
+
+        internal static void SetHanni2(string shiirecode, string media, RadComboBox rcbHanni)
+        {
+            rcbHanni.Items.Clear();
+            rcbHanni.Items.Add(new RadComboBoxItem(rcbHanni.EmptyMessage, ""));
+            DataMaster.M_JoueiKakaku2DataTable dt = ClassMaster.GetJouei4(shiirecode, media, Global.GetConnection());
+            for (int i = 0; i < dt.Count; i++)
+            {
+                rcbHanni.Items.Add(new RadComboBoxItem(dt[i].Range, dt[i].HyoujunKakaku + "/" + dt[i].ShiireKakaku));
             }
         }
     }

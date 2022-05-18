@@ -4,6 +4,10 @@
 
     partial class DataSet1
     {
+        partial class M_Tokuisaki2DataTable
+        {
+        }
+
         partial class M_Kakaku_2DataTable
         {
         }

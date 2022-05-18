@@ -24,8 +24,13 @@ namespace Gyomu
         public const string SESSION_ORDERED = "SESSION_ORDERED";
         public const string SESSION_DATA = "SESSION_DATA";
         public DataTable newdt = new DataTable();
-        
-      
+        public static string TokuisakiCode;
+        public static DataSet1.M_Tokuisaki2Row drTokuisaki;
+        public static string NouhinsakiCode;
+
+        public static string strCp;
+        public static string strCpOver;
+        public static string strPermission;
 
 
 
@@ -191,12 +196,25 @@ namespace Gyomu
 
         internal static void KI()
         {
-            System.Web.HttpContext.Current.Session[SESSION_KI] = 2600000;
+            int KIno = 0;
+            int CompanyBorn = 1995;
+            string Today = DateTime.Now.ToShortDateString();
+            string[] Year = Today.Split('/');
+            if (9 <= int.Parse(Year[1]))
+            {
+                KIno = int.Parse(Year[0]) + 1 - CompanyBorn;
+            }
+            else
+            {
+                KIno = int.Parse(Year[0]) - CompanyBorn;
+            }
+
+            System.Web.HttpContext.Current.Session[SESSION_KI] = KIno;
         }
 
         internal static void SHIIRESAKI(string OrderedData)
         {
-            System.Web.HttpContext.Current.Session[SESSION_ORDERED] = OrderedData ;
+            System.Web.HttpContext.Current.Session[SESSION_ORDERED] = OrderedData;
         }
 
 

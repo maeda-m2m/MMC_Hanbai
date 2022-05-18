@@ -45,7 +45,7 @@ namespace DLL
                 da.Update(dt);
                 sqltra.Commit();
             }
-            catch (Exception ex)
+            catch 
             {
                 if (sqltra != null)
                 {
@@ -82,7 +82,7 @@ namespace DLL
                 da.Update(dt);
                 sqltra.Commit();
             }
-            catch (Exception ex)
+            catch 
             {
                 if (sqltra != null)
                 {
@@ -146,7 +146,7 @@ namespace DLL
                 da.Update(dt);
                 sqltra.Commit();
             }
-            catch (Exception ex)
+            catch 
             {
                 if (sqltra != null)
                 {
@@ -184,7 +184,7 @@ namespace DLL
                     da.Update(dt);
                     sqltra.Commit();
                 }
-                catch (Exception ex)
+                catch 
                 {
 
                 }
@@ -238,7 +238,7 @@ namespace DLL
                         da3.Update(dtH);
                         sqltra.Commit();
                     }
-                    catch (Exception ex)
+                    catch 
                     {
 
                     }

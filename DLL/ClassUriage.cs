@@ -47,7 +47,7 @@ namespace DLL
 
                 sql.Commit();
             }
-            catch (Exception e)
+            catch
             {
                 if (sql != null)
                     sql.Rollback();
@@ -156,7 +156,7 @@ namespace DLL
 
                 return false;
             }
-            catch (Exception e)
+            catch
             {
                 if (sql != null)
                     sql.Rollback();
@@ -187,7 +187,7 @@ namespace DLL
 
                 return true;
             }
-            catch (Exception ex)
+            catch 
             {
                 return false;
             }
@@ -344,7 +344,7 @@ namespace DLL
                 daU.Update(ddt);
                 sql.Commit();
             }
-            catch (Exception ex)
+            catch 
             {
                 sql.Rollback();
             }
@@ -451,7 +451,7 @@ namespace DLL
                 }
                 sql.Commit();
             }
-            catch (Exception ex)
+            catch 
             {
                 sql.Rollback();
             }
@@ -474,7 +474,7 @@ namespace DLL
                 sqlConnection.Open();
                 sql = sqlConnection.BeginTransaction();
                 da.SelectCommand.Transaction = da.UpdateCommand.Transaction = sql;
-                for(int i =0; i <dt.Count; i++)
+                for (int i = 0; i < dt.Count; i++)
                 {
                     dt[i].JutyuBi = DateTime.Now;
                     dt[i].UriageFlg = true;
@@ -482,7 +482,7 @@ namespace DLL
                 da.Update(dt);
                 sql.Commit();
             }
-            catch (Exception ex)
+            catch 
             {
                 sql.Rollback();
             }

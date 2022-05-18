@@ -1,9 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="TantoBumon.ascx.cs" Inherits="Gyomu.Master.TantoBumon" %>
 <style type="text/css">
-    p {
-        background: #00008B;
-        color: white;
-    }
 </style>
 
 <table>

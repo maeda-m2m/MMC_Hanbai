@@ -31,111 +31,102 @@ namespace Gyomu.Master {
         protected global::System.Web.UI.WebControls.TextBox TbxCode;
         
         /// <summary>
-        /// TbxFacilityName1 コントロール。
+        /// TbxTyokusousakiName1 コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TbxFacilityName1;
+        protected global::System.Web.UI.WebControls.TextBox TbxTyokusousakiName1;
         
         /// <summary>
-        /// TbxFacilityName2 コントロール。
+        /// TbxTyokusousakiName2 コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TbxFacilityName2;
+        protected global::System.Web.UI.WebControls.TextBox TbxTyokusousakiName2;
         
         /// <summary>
-        /// TbxAbbreviation コントロール。
+        /// TbxTyokusousakiRyakusyou コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TbxAbbreviation;
+        protected global::System.Web.UI.WebControls.TextBox TbxTyokusousakiRyakusyou;
         
         /// <summary>
-        /// TbxFacilityResponsible コントロール。
+        /// TbxTyokusousakiTantou コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TbxFacilityResponsible;
+        protected global::System.Web.UI.WebControls.TextBox TbxTyokusousakiTantou;
         
         /// <summary>
-        /// TbxPost コントロール。
+        /// TbxTyokusousakiYubin コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TbxPost;
+        protected global::System.Web.UI.WebControls.TextBox TbxTyokusousakiYubin;
         
         /// <summary>
-        /// TbxAddress1 コントロール。
+        /// TbxTyokusousakiAddress1 コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TbxAddress1;
+        protected global::System.Web.UI.WebControls.TextBox TbxTyokusousakiAddress1;
         
         /// <summary>
-        /// TbxAddress2 コントロール。
+        /// TbxTyokusousakiAddress2 コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TbxAddress2;
+        protected global::System.Web.UI.WebControls.TextBox TbxTyokusousakiAddress2;
         
         /// <summary>
-        /// RadCityCode コントロール。
+        /// RcbCityCode コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox RadCityCode;
+        protected global::Telerik.Web.UI.RadComboBox RcbCityCode;
         
         /// <summary>
-        /// TbxTEll コントロール。
+        /// TbxTyokusousakiTell コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TbxTEll;
+        protected global::System.Web.UI.WebControls.TextBox TbxTyokusousakiTell;
         
         /// <summary>
-        /// TbxTitles コントロール。
+        /// TbxKeisyo コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TbxTitles;
+        protected global::System.Web.UI.WebControls.TextBox TbxKeisyo;
         
         /// <summary>
-        /// ChkYuko コントロール。
+        /// RdoYuko コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox ChkYuko;
-        
-        /// <summary>
-        /// Ram コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadAjaxManager Ram;
+        protected global::Telerik.Web.UI.RadRadioButtonList RdoYuko;
     }
 }

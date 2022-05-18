@@ -1380,7 +1380,7 @@ namespace Gyomu.Uriage
                 string sJutyu = EnumSetType.Delete.ToString();
 
                 //受注のkeijoFlgを更新
-                ClassJutyu.UpDateJutyuKeijo(sJutyu, vsNo, Global.GetConnection());
+                //ClassJutyu.UpDateJutyuKeijo(sJutyu, vsNo, Global.GetConnection());
 
                 G.Visible = false;
                 MitumoriGamen.Visible = false;

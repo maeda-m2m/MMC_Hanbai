@@ -13,7 +13,6 @@
         vertical-align: middle;
     }
 </style>
-
 <table border="1">
     <tbody>
         <tr>
@@ -69,7 +68,7 @@
             </td>
             <th>市町村名<span style="color: red">*</span></th>
             <td>
-                <telerik:RadComboBox ID="RadCityCode" runat="server" ShowMoreResultsBox="true" EnableVirtualScrolling="true" AllowCustomText="true" ShowToggleImage="false" EnableLoadOnDemand="true" OnItemsRequested="RadCityCode_ItemsRequested">
+                <telerik:RadComboBox ID="RadCityCode" runat="server" ShowMoreResultsBox="true" EnableVirtualScrolling="true" AllowCustomText="true" ShowToggleImage="false" EnableLoadOnDemand="true" OnItemsRequested="RadCityCode_ItemsRequested" AutoPostBack="true">
                 </telerik:RadComboBox>
             </td>
 
@@ -87,8 +86,8 @@
             <td>
                 <asp:DropDownList ID="DrpKeisyo" runat="server">
                     <asp:ListItem Value=""></asp:ListItem>
-                    <asp:ListItem Value="1">様</asp:ListItem>
-                    <asp:ListItem Value="2">御中</asp:ListItem>
+                    <asp:ListItem Value="様">様</asp:ListItem>
+                    <asp:ListItem Value="御中">御中</asp:ListItem>
                 </asp:DropDownList>
             </td>
             <th>掛率(%)<span style="color: red">*</span></th>
@@ -97,30 +96,10 @@
             </td>
 
         </tr>
-        <%--        <tr>
-            <th>得意先担当Tell<span style="color: red">*</span></th>
-            <td>
-                <asp:TextBox ID="TbxTokuiTantoTell" runat="server"></asp:TextBox>
-            </td>
-            <th>得意先担当Mail</th>
-            <td>
-                <asp:TextBox ID="TbxTokuiTantoMail" runat="server"></asp:TextBox>
-            </td>
-        </tr>--%>
-        <%--        <tr>
-                        <th>官民区分</th>
-            <td>
-                <asp:DropDownList ID="DrpKanmin" runat="server">
-                    <asp:ListItem Value=""> </asp:ListItem>
-                    <asp:ListItem Value="0">その他</asp:ListItem>
-                </asp:DropDownList>
-            </td>
-        </tr>--%>
         <tr>
             <th>主担当名<span style="color: red">*</span></th>
             <td>
-                <telerik:RadComboBox ID="RadTanto" runat="server">
-                </telerik:RadComboBox>
+                <telerik:RadComboBox runat="server" ID="RcbTanto" EnableLoadOnDemand="true" ShowMoreResultsBox="true" ShowToggleImage="false" AutoPostBack="true" OnSelectedIndexChanged="RcbTanto_SelectedIndexChanged" OnItemsRequested="RcbTanto_ItemsRequested"></telerik:RadComboBox>
             </td>
             <th>締日区分<span style="color: red">*</span></th>
             <td>
@@ -152,48 +131,20 @@
             </td>
         </tr>
         <tr>
-            <%--            <th>請求先略称</th>
-            <td class="auto-style1">
-                <asp:TextBox ID="TbxRyakusyo" runat="server"></asp:TextBox>
-            </td>--%>
-        </tr>
-        <tr>
-            <%--            <th>売上端数方法<span style="color: red">*</span></th>
+            <th>税区分<span style="color: red">*</span>
+            </th>
             <td>
-                <asp:DropDownList ID="DrpUHasu" runat="server">
-                    <asp:ListItem Value=""></asp:ListItem>
-                    <asp:ListItem Value="1">四捨五入</asp:ListItem>
-                    <asp:ListItem Value="2">切上</asp:ListItem>
-                    <asp:ListItem Value="3">切捨て</asp:ListItem>
-                </asp:DropDownList>
+                <telerik:RadComboBox runat="server" ID="RcbZeikubun">
+                    <Items>
+                        <telerik:RadComboBoxItem Text="選択して下さい" Value="" />
+                        <telerik:RadComboBoxItem Text="税込" Value="税込" />
+                        <telerik:RadComboBoxItem Text="税抜" Value="税抜" />
+                    </Items>
+                </telerik:RadComboBox>
             </td>
-            <th>消費税端数方法</th>
-            <td>
-                <asp:DropDownList ID="DrpSZHasu" runat="server">
-                    <asp:ListItem Value=""></asp:ListItem>
-                    <asp:ListItem Value="1">四捨五入</asp:ListItem>
-                    <asp:ListItem Value="2">切上</asp:ListItem>
-                    <asp:ListItem Value="3">切捨て</asp:ListItem>
-                </asp:DropDownList>
-            </td>--%>
-            <%--            <th>与信額</th>
-            <td>
-                <asp:TextBox ID="TbxYosingaku" runat="server"></asp:TextBox>
-            </td>
-        </tr>--%>
-        <tr>
-            <%--            <th>会社銀行名</th>
-            <td>
-                <asp:DropDownList ID="drpGinko" runat="server">
-                    <asp:ListItem Value=""></asp:ListItem>
-                    <asp:ListItem Value="9">なでしこ</asp:ListItem>
-                </asp:DropDownList>
-            </td>--%>
-        </tr>
-        <tr>
             <th>利用状態<span style="color: red">*</span></th>
             <td>
-                <asp:CheckBox ID="ChkRiyo" runat="server" Text="有効" />
+                <asp:CheckBox ID="ChkRiyo" runat="server" Text="有効" AutoPostBack="true" />
             </td>
             <th>更新ユーザー</th>
             <td>

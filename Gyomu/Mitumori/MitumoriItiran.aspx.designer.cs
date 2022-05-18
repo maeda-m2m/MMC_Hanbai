@@ -67,15 +67,6 @@ namespace Gyomu.Mitumori {
         protected global::Telerik.Web.UI.RadTabStrip RT;
         
         /// <summary>
-        /// Literal14 コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal Literal14;
-        
-        /// <summary>
         /// DrpFlg コントロール。
         /// </summary>
         /// <remarks>
@@ -83,15 +74,6 @@ namespace Gyomu.Mitumori {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DrpFlg;
-        
-        /// <summary>
-        /// Literal1 コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal Literal1;
         
         /// <summary>
         /// TbxMitumoriNo コントロール。
@@ -103,112 +85,13 @@ namespace Gyomu.Mitumori {
         protected global::System.Web.UI.WebControls.TextBox TbxMitumoriNo;
         
         /// <summary>
-        /// Literal2 コントロール。
+        /// RadTanto コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal Literal2;
-        
-        /// <summary>
-        /// RadTokuiMeisyo コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox RadTokuiMeisyo;
-        
-        /// <summary>
-        /// Literal3 コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal Literal3;
-        
-        /// <summary>
-        /// RadSekyuMeisyo コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox RadSekyuMeisyo;
-        
-        /// <summary>
-        /// Literal4 コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal Literal4;
-        
-        /// <summary>
-        /// RadTyokusoMeisyo コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox RadTyokusoMeisyo;
-        
-        /// <summary>
-        /// BtnKensaku コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnKensaku;
-        
-        /// <summary>
-        /// Literal5 コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal Literal5;
-        
-        /// <summary>
-        /// RadSisetMeisyo コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox RadSisetMeisyo;
-        
-        /// <summary>
-        /// Literal6 コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal Literal6;
-        
-        /// <summary>
-        /// RadCate コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox RadCate;
-        
-        /// <summary>
-        /// Literal7 コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal Literal7;
+        protected global::Telerik.Web.UI.RadComboBox RadTanto;
         
         /// <summary>
         /// RadBumon コントロール。
@@ -220,13 +103,67 @@ namespace Gyomu.Mitumori {
         protected global::Telerik.Web.UI.RadComboBox RadBumon;
         
         /// <summary>
-        /// Literal8 コントロール。
+        /// CtlJucyuBi コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal Literal8;
+        protected global::Gyomu.Common.CtlNengappiForm CtlJucyuBi;
+        
+        /// <summary>
+        /// RadCate コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadComboBox RadCate;
+        
+        /// <summary>
+        /// BtnKensaku コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnKensaku;
+        
+        /// <summary>
+        /// RadTokuiMeisyo コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadComboBox RadTokuiMeisyo;
+        
+        /// <summary>
+        /// RadSekyuMeisyo コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadComboBox RadSekyuMeisyo;
+        
+        /// <summary>
+        /// RadTyokusoMeisyo コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadComboBox RadTyokusoMeisyo;
+        
+        /// <summary>
+        /// RadSisetMeisyo コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadComboBox RadSisetMeisyo;
         
         /// <summary>
         /// TbxHinban コントロール。
@@ -238,15 +175,6 @@ namespace Gyomu.Mitumori {
         protected global::System.Web.UI.WebControls.TextBox TbxHinban;
         
         /// <summary>
-        /// Literal9 コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal Literal9;
-        
-        /// <summary>
         /// RadSyohinmeisyou コントロール。
         /// </summary>
         /// <remarks>
@@ -254,42 +182,6 @@ namespace Gyomu.Mitumori {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::Telerik.Web.UI.RadComboBox RadSyohinmeisyou;
-        
-        /// <summary>
-        /// Literal10 コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal Literal10;
-        
-        /// <summary>
-        /// RadTanto コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox RadTanto;
-        
-        /// <summary>
-        /// Literal12 コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal Literal12;
-        
-        /// <summary>
-        /// CtlJucyuBi コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::Gyomu.Common.CtlNengappiForm CtlJucyuBi;
         
         /// <summary>
         /// lblMsg コントロール。
@@ -308,6 +200,15 @@ namespace Gyomu.Mitumori {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnDownlod;
+        
+        /// <summary>
+        /// BtnMeisaiDownload コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnMeisaiDownload;
         
         /// <summary>
         /// Literal13 コントロール。

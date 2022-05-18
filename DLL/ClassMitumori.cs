@@ -73,6 +73,28 @@ namespace DLL
             return dt;
         }
 
+        public static DataMitumori.T_MitumoriHeaderBackupDataTable GetMitumoriHinban2(string text, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText =
+                "select * from T_Mitumori where MekarHinban = @mh Order By MitumoriNo desc";
+            da.SelectCommand.Parameters.AddWithValue("@mh", text);
+            DataMitumori.T_MitumoriHeaderBackupDataTable dt = new DataMitumori.T_MitumoriHeaderBackupDataTable();
+            da.Fill(dt);
+            return dt;
+        }
+
+        public static DataMitumori.T_MitumoriBackupDataTable GetMitumoriHinban3(string selectedValue, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText =
+                "select * from T_Mitumori where MekarHinban = @mh Order By MitumoriNo desc";
+            da.SelectCommand.Parameters.AddWithValue("@mh", selectedValue);
+            DataMitumori.T_MitumoriBackupDataTable dt = new DataMitumori.T_MitumoriBackupDataTable();
+            da.Fill(dt);
+            return dt;
+        }
+
         public static DataMitumori.T_MitumoriHeaderDataTable GetMitsuHeadKensaku(ClassKensaku.KensakuParam k, SqlConnection sqlConnection)
         {
             SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
@@ -212,7 +234,7 @@ namespace DLL
 
                 return false;
             }
-            catch (Exception e)
+            catch
             {
                 if (null != sql)
                     sql.Rollback();
@@ -255,7 +277,7 @@ namespace DLL
 
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
                 return false;
             }
@@ -263,6 +285,30 @@ namespace DLL
             {
                 sqlConnection.Close();
             }
+        }
+
+        public static DataMitumori.T_MitumoriBackupDataTable GETMitsumori2(string mNo, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText =
+                "SELECT * FROM T_MitumoriBackup Where (MitumoriNo = @e)";
+            da.SelectCommand.Parameters.AddWithValue("@e", mNo);
+
+            DataMitumori.T_MitumoriBackupDataTable dt = new DataMitumori.T_MitumoriBackupDataTable();
+            da.Fill(dt);
+            return (dt);
+        }
+
+        public static DataMitumori.T_MitumoriHeaderBackupDataTable GETMitsumorihead2(string mNo, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText =
+                "SELECT * FROM T_MitumoriHeaderBackup Where (MitumoriNo = @e) Order By MitumoriNo desc";
+            da.SelectCommand.Parameters.AddWithValue("@e", mNo);
+
+            DataMitumori.T_MitumoriHeaderBackupDataTable dt = new DataMitumori.T_MitumoriHeaderBackupDataTable();
+            da.Fill(dt);
+            return (dt);
         }
 
         public static bool UpDateMitumori(string vsNo, DataMitumori.T_MitumoriDataTable dt, DataMitumori.T_MitumoriHeaderDataTable Hdt, SqlConnection sqlConnection)
@@ -309,7 +355,7 @@ namespace DLL
 
                 return false;
             }
-            catch (Exception e)
+            catch
             {
                 if (sql != null)
                     sql.Rollback();
@@ -319,6 +365,16 @@ namespace DLL
             {
                 sqlConnection.Close();
             }
+        }
+
+        public static DataMitumori.T_MitumoriDataTable GetFacility(int mitumoriNo, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select * from T_Mitumori where MitumoriNo = @no";
+            da.SelectCommand.Parameters.AddWithValue("@no", mitumoriNo);
+            DataMitumori.T_MitumoriDataTable dt = new DataMitumori.T_MitumoriDataTable();
+            da.Fill(dt);
+            return dt;
         }
 
         public static DataSet1.M_Kakaku_New1DataTable getProduct(string a, string c, SqlConnection sqlConnection)
@@ -375,15 +431,23 @@ namespace DLL
 
         public static void UpDateMitumorijutyu(string type, string mitumoriNo, SqlConnection sqlConnection)
         {
+            //見積テーブル
             SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
             da.SelectCommand.CommandText =
                 "Select * From T_Mitumori Where MitumoriNo = @mNo";
             da.SelectCommand.Parameters.AddWithValue("@mNo", mitumoriNo);
-
             da.UpdateCommand = (new SqlCommandBuilder(da)).GetUpdateCommand();
-
             DataMitumori.T_MitumoriDataTable dt = new DataMitumori.T_MitumoriDataTable();
+            da.Fill(dt);
 
+            //見積ヘッダーテーブル
+            SqlDataAdapter daH = new SqlDataAdapter("", sqlConnection);
+            daH.SelectCommand.CommandText =
+                "Select * From T_MitumoriHeader Where MitumoriNo = @mNo";
+            daH.SelectCommand.Parameters.AddWithValue("@mNo", mitumoriNo);
+            daH.UpdateCommand = (new SqlCommandBuilder(daH)).GetUpdateCommand();
+            DataMitumori.T_MitumoriHeaderDataTable dtH = new DataMitumori.T_MitumoriHeaderDataTable();
+            daH.Fill(dtH);
 
             SqlTransaction sql = null;
 
@@ -393,9 +457,12 @@ namespace DLL
                 sql = sqlConnection.BeginTransaction();
 
                 da.SelectCommand.Transaction = da.UpdateCommand.Transaction = sql;
-
-                da.Fill(dt);
-
+                daH.SelectCommand.Transaction = daH.UpdateCommand.Transaction = sql;
+                if (dtH.Count > 0)
+                {
+                    dtH[0].JutyuFlg = "True";
+                    daH.Update(dtH);
+                }
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     DataMitumori.T_MitumoriRow dr = dt[i];
@@ -408,16 +475,16 @@ namespace DLL
                     {
                         dr.JutyuFlg = false;
                     }
-
                     da.Update(dt);
                 }
-
                 sql.Commit();
             }
-            catch (Exception ex)
+            catch
             {
                 if (sql != null)
+                {
                     sql.Rollback();
+                }
             }
             finally
             {
@@ -560,7 +627,7 @@ namespace DLL
                 da.Update(dt);
                 sqltra.Commit();
             }
-            catch (Exception ex)
+            catch
             {
                 if (sqltra != null)
                     sqltra.Rollback();
@@ -572,7 +639,7 @@ namespace DLL
 
         }
 
-        public static DataMitumori.T_MitumoriHeaderDataTable DelMitumoriHeader(string mNo, SqlConnection sqlConnection)
+        public static void DelMitumoriHeader(string mNo, SqlConnection sqlConnection)
         {
             SqlCommand da = new SqlCommand("", sqlConnection);
             da.CommandText =
@@ -592,7 +659,7 @@ namespace DLL
                 sqltra.Commit();
 
             }
-            catch (Exception et)
+            catch
             {
                 if (sqltra != null)
                     sqltra.Rollback();
@@ -602,11 +669,10 @@ namespace DLL
             {
                 sqlConnection.Close();
             }
-            return null;
 
         }
 
-        public static DataMitumori.T_MitumoriDataTable DelMitumori3(string mNo, SqlConnection sqlConnection)
+        public static void DelMitumori3(string mNo, SqlConnection sqlConnection)
         {
             SqlCommand da = new SqlCommand("", sqlConnection);
             da.CommandText =
@@ -626,7 +692,7 @@ namespace DLL
                 sqltra.Commit();
 
             }
-            catch (Exception et)
+            catch
             {
                 if (sqltra != null)
                     sqltra.Rollback();
@@ -636,7 +702,6 @@ namespace DLL
             {
                 sqlConnection.Close();
             }
-            return null;
         }
 
         public static void UpdateKakaku(DataSet1.M_Kakaku_New1Row dr, string mei, string cate, string media, SqlConnection sql)
@@ -703,7 +768,7 @@ namespace DLL
                 sqlTran.Commit();
 
             }
-            catch (Exception ex)
+            catch
             {
                 if (null != sqlTran)
                     sqlTran.Rollback();
@@ -797,7 +862,7 @@ namespace DLL
                 sqltra.Commit();
 
             }
-            catch (Exception et)
+            catch
             {
                 if (sqltra != null)
                     sqltra.Rollback();
@@ -902,7 +967,16 @@ namespace DLL
             catch (Exception ex)
             {
                 if (sqltra != null)
+                {
                     sqltra.Rollback();
+                }
+                ClassMail.ErrorMail("maeda@m2m-asp.com", "エラーメール | 見積登録処理",
+                    ex.Message +
+                    dt[0].MitumoriNo + "\r\n"
+                    + dt[0].TokuisakiCode + "\r\n"
+                    + dt[0].TokuisakiMei + "\r\n"
+                    + dt[0].SisetuMei + "\r\n"
+                    + dt[0].SisetsuAbbreviration);
             }
             finally
             {
@@ -930,7 +1004,7 @@ namespace DLL
                 da.Update(dt);
                 sqltra.Commit();
             }
-            catch (Exception ex)
+            catch
             {
                 if (sqltra != null)
                     sqltra.Rollback();
@@ -952,11 +1026,12 @@ namespace DLL
             return (dt);
         }
 
-        public static DataMitumori.T_MitumoriHeaderRow GetMaxNo(SqlConnection sql)
+        public static DataMitumori.T_MitumoriHeaderRow GetMaxNo(int ki, SqlConnection sql)
         {
             SqlDataAdapter da = new SqlDataAdapter("", sql);
             da.SelectCommand.CommandText =
-                "SELECT Max(MitumoriNo) AS MitumoriNo  FROM T_MitumoriHeader";
+                "SELECT MitumoriNo AS MitumoriNo  FROM T_MitumoriHeader where MitumoriNo like @ki order by MitumoriNo desc";
+            da.SelectCommand.Parameters.AddWithValue("@ki", "%" + ki.ToString() + "%");
             DataMitumori.T_MitumoriHeaderDataTable dt = new DataMitumori.T_MitumoriHeaderDataTable();
             da.Fill(dt);
             if (dt.Rows.Count >= 1)
@@ -1113,7 +1188,7 @@ namespace DLL
                 da.Update(Tdt);
                 sql.Commit();
             }
-            catch (Exception ex)
+            catch
             {
                 if (sql != null)
                 {
@@ -1153,7 +1228,7 @@ namespace DLL
                 da.Update(Tdt);
                 sql.Commit();
             }
-            catch (Exception ex)
+            catch
             {
                 if (sql != null)
                     sql.Rollback();
@@ -1206,7 +1281,7 @@ namespace DLL
 
                 sqltra.Commit();
             }
-            catch (Exception et)
+            catch
             {
                 if (sqltra != null)
                     sqltra.Rollback();
@@ -1258,7 +1333,7 @@ namespace DLL
                     sqltra.Commit();
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 if (sqltra != null)
                 {

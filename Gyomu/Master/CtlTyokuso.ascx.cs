@@ -29,61 +29,65 @@ namespace Gyomu.Master
             if (!this.IsPostBack)
             {
                 //市町村
-                ListSet.SetCity(RadCityCode);
             }
         }
 
-        internal void Create(string Name1)
+        internal void Create(string code)
         {
-            DataSet1.M_Facility_NewRow dr =
-                Class1.FacilityRow2(Name1, Global.GetConnection());
-
-            vsID = Name1;
-
+            ListSet.SetCity(RcbCityCode);
+            string[] codeAry = code.Split('/');
+            DataSet1.M_Facility_NewRow dr = Class1.GetFacilitySyousai(codeAry, Global.GetConnection());
             TbxFacility.Text = dr.FacilityNo.ToString();
             if (!dr.IsCodeNull())
             {
-                TbxCode.Text = dr.Code;
+                TbxCode.Text = dr.Code.ToString();
             }
-            if (!dr.IsCityCodeNull())
-            {
-                RadCityCode.SelectedValue = dr.CityCode.ToString();
-            }
-
-            TbxFacilityName1.Text = dr.FacilityName1;
+            TbxTyokusousakiName1.Text = dr.FacilityName1;
             if (!dr.IsFacilityName2Null())
             {
-                TbxFacilityName2.Text = dr.FacilityName2;
-            }
-            if (!dr.IsFacilityResponsibleNull())
-            {
-                TbxFacilityResponsible.Text = dr.FacilityResponsible;
+                TbxTyokusousakiName2.Text = dr.FacilityName2;
             }
             if (!dr.IsAbbreviationNull())
             {
-                TbxAbbreviation.Text = dr.Abbreviation;
+                TbxTyokusousakiRyakusyou.Text = dr.Abbreviation;
+            }
+            if (!dr.IsFacilityResponsibleNull())
+            {
+                TbxTyokusousakiTantou.Text = dr.FacilityResponsible;
+            }
+            if (!dr.IsPostNoNull())
+            {
+                TbxTyokusousakiYubin.Text = dr.PostNo;
             }
             if (!dr.IsAddress1Null())
             {
-                TbxAddress1.Text = dr.Address1;
+                TbxTyokusousakiAddress1.Text = dr.Address1;
             }
             if (!dr.IsAddress2Null())
             {
-                TbxAddress2.Text = dr.Address2;
+                TbxTyokusousakiAddress2.Text = dr.Address2;
+            }
+            if (!dr.IsCityCodeNull())
+            {
+                RcbCityCode.SelectedValue = dr.CityCode.ToString();
             }
             if (!dr.IsTellNull())
             {
-                TbxTEll.Text = dr.Tell;
+                TbxTyokusousakiTell.Text = dr.Tell;
             }
             if (!dr.IsTitlesNull())
             {
-                TbxTitles.Text = dr.Titles;
+                TbxKeisyo.Text = dr.Titles;
             }
             if (!dr.IsStateNull())
             {
-                if (dr.State == false)
+                if (dr.State.Equals("1"))
                 {
-                    ChkYuko.Checked = true;
+                    RdoYuko.SelectedValue = "True";
+                }
+                else
+                {
+                    RdoYuko.SelectedValue = "False";
                 }
             }
         }
@@ -93,82 +97,71 @@ namespace Gyomu.Master
             //登録
             try
             {
-                DataMaster.M_Facility_NewDataTable dt = new DataMaster.M_Facility_NewDataTable();
-                DataMaster.M_Facility_NewRow dr = dt.NewM_Facility_NewRow();
+                DataSet1.M_Facility_NewDataTable dt = new DataSet1.M_Facility_NewDataTable();
+                DataSet1.M_Facility_NewRow dr = dt.NewM_Facility_NewRow();
 
-                if (TbxFacility.Text != "")
+                if (!string.IsNullOrEmpty(TbxFacility.Text))
                 {
-                    int nFa = int.Parse(TbxFacility.Text);
-                    dr.FacilityNo = nFa;
+                    dr.FacilityNo = int.Parse(TbxFacility.Text);
                 }
-                else
-                {
-                    Telerik.Web.UI.RadAjaxManager.GetCurrent(this.Page).Alert("施設Noを登録してください。");
-                    return false;
-                }
-
-                if (TbxCode.Text != "")
+                if (!string.IsNullOrEmpty(TbxCode.Text))
                 {
                     dr.Code = TbxCode.Text;
                 }
-                else
+                if (!string.IsNullOrEmpty(TbxTyokusousakiName1.Text))
                 {
-                    Telerik.Web.UI.RadAjaxManager.GetCurrent(this.Page).Alert("コードを登録してください。");
-                    return false;
+                    dr.FacilityName1 = TbxTyokusousakiName1.Text;
                 }
-
-                dr.FacilityName1 = TbxFacilityName1.Text;
-
-                dr.FacilityName2 = TbxFacilityName2.Text;
-
-                dr.Abbreviation = TbxAbbreviation.Text;
-
-                dr.FacilityResponsible = TbxFacilityResponsible.Text;
-
-                dr.PostNo = TbxPost.Text;
-
-                dr.Address1 = TbxAddress1.Text;
-
-                dr.Address2 = TbxAddress2.Text;
-
-                dr.Tell = TbxTEll.Text;
-
-                if (RadCityCode.SelectedValue != "")
+                if (!string.IsNullOrEmpty(TbxTyokusousakiName2.Text))
                 {
-                    int nCity = int.Parse(RadCityCode.SelectedValue);
-                    dr.CityCode = nCity;
+                    dr.FacilityName2 = TbxTyokusousakiName2.Text;
                 }
-
-                dr.Titles = TbxTitles.Text;
-
-                if (ChkYuko.Checked == false)
+                if (!string.IsNullOrEmpty(TbxTyokusousakiRyakusyou.Text))
                 {
-                    dr.State = true;
+                    dr.Abbreviation = TbxTyokusousakiRyakusyou.Text;
                 }
-                else
+                if (!string.IsNullOrEmpty(TbxTyokusousakiTantou.Text))
                 {
-                    dr.State = false;
-                    //dr.RiyouJotai = "無効";
+                    dr.FacilityResponsible = TbxTyokusousakiTantou.Text;
                 }
-
-                dr.UpDateDay = DateTime.Now;
-                dr.UpDateUser = SessionManager.User.UserID;
-
+                if (!string.IsNullOrEmpty(TbxTyokusousakiAddress1.Text))
+                {
+                    dr.Address1 = TbxTyokusousakiAddress1.Text;
+                }
+                if (!string.IsNullOrEmpty(TbxTyokusousakiAddress2.Text))
+                {
+                    dr.Address2 = TbxTyokusousakiAddress2.Text;
+                }
+                if (!string.IsNullOrEmpty(RcbCityCode.Text))
+                {
+                    dr.CityCode = int.Parse(RcbCityCode.SelectedValue);
+                }
+                if (!string.IsNullOrEmpty(TbxTyokusousakiTell.Text))
+                {
+                    dr.Tell = TbxTyokusousakiTell.Text;
+                }
+                if (!string.IsNullOrEmpty(TbxKeisyo.Text))
+                {
+                    dr.Titles = TbxKeisyo.Text;
+                }
+                if (!string.IsNullOrEmpty(RdoYuko.SelectedValue))
+                {
+                    if (RdoYuko.SelectedValue == "True")
+                    {
+                        dr.State = "1";
+                    }
+                    else
+                    {
+                        dr.State = "2";
+                    }
+                }
                 dt.AddM_Facility_NewRow(dr);
-
-                if (vsID != "")
-                {
-                    ClassMaster.EditTyokuso(vsID, dt, Global.GetConnection());
-                }
-                else
-                {
-                    ClassMaster.NewTyokuso(dt, Global.GetConnection());
-                }
-
+                //DataSet1.M_TyokusosakiDataTable dtC = Class1.GetNouhinsaki(TbxFacility.Text, Global.GetConnection());
+                Class1.UpdateFaci(dt, TbxCode.Text, TbxFacility.Text, Global.GetConnection());
 
                 return true;
             }
-            catch (Exception e)
+            catch
             {
                 return false;
             }
@@ -176,12 +169,17 @@ namespace Gyomu.Master
 
         internal void Clear()
         {
-            RadCityCode.SelectedValue = "";
-            TbxCode.Text = TbxFacility.Text = TbxFacilityName1.Text = TbxFacilityName2.Text
-           = TbxAbbreviation.Text = TbxFacilityResponsible.Text = TbxPost.Text =
-           TbxTEll.Text = TbxAddress1.Text = TbxAddress2.Text = TbxTitles.Text = "";
-
-            ChkYuko.Checked = true;
+            TbxFacility.Text = "";
+            TbxTyokusousakiName1.Text = "";
+            TbxTyokusousakiName2.Text = "";
+            TbxTyokusousakiRyakusyou.Text = "";
+            TbxTyokusousakiTantou.Text = "";
+            TbxTyokusousakiYubin.Text = "";
+            TbxTyokusousakiAddress1.Text = "";
+            TbxTyokusousakiAddress2.Text = "";
+            RcbCityCode.Text = "";
+            TbxTyokusousakiTell.Text = "";
+            TbxKeisyo.Text = "";
         }
 
         protected void Ram_AjaxRequest(object sender, Telerik.Web.UI.AjaxRequestEventArgs e)

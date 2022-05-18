@@ -67,22 +67,13 @@ namespace Gyomu.Master {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Master;
         
         /// <summary>
-        /// Serch コントロール。
+        /// Filter コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTable Serch;
-        
-        /// <summary>
-        /// F コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::Gyomu.Common.CtrlFilter F;
+        protected global::Gyomu.Common.CtrlFilter2 Filter;
         
         /// <summary>
         /// BtnSerch コントロール。
@@ -94,6 +85,15 @@ namespace Gyomu.Master {
         protected global::System.Web.UI.WebControls.Button BtnSerch;
         
         /// <summary>
+        /// lblMsg コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMsg;
+        
+        /// <summary>
         /// BtnSinki コントロール。
         /// </summary>
         /// <remarks>
@@ -103,13 +103,31 @@ namespace Gyomu.Master {
         protected global::System.Web.UI.WebControls.Button BtnSinki;
         
         /// <summary>
-        /// lblMsg コントロール。
+        /// BtnCSVdownload コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMsg;
+        protected global::System.Web.UI.WebControls.Button BtnCSVdownload;
+        
+        /// <summary>
+        /// BtnUpload コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnUpload;
+        
+        /// <summary>
+        /// FileUpload コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload FileUpload;
         
         /// <summary>
         /// L コントロール。
@@ -121,13 +139,13 @@ namespace Gyomu.Master {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl L;
         
         /// <summary>
-        /// D コントロール。
+        /// RGShiireList コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::Telerik.Web.UI.RadGrid D;
+        protected global::Telerik.Web.UI.RadGrid RGShiireList;
         
         /// <summary>
         /// count コントロール。
@@ -173,5 +191,14 @@ namespace Gyomu.Master {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::Gyomu.Master.CtlShiire Shiire;
+        
+        /// <summary>
+        /// Ram コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadAjaxManager Ram;
     }
 }

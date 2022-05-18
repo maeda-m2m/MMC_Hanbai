@@ -157,13 +157,13 @@ namespace Gyomu.Master {
         protected global::System.Web.UI.WebControls.TextBox TbxKakeritu;
         
         /// <summary>
-        /// RadTanto コントロール。
+        /// RcbTanto コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox RadTanto;
+        protected global::Telerik.Web.UI.RadComboBox RcbTanto;
         
         /// <summary>
         /// DrpSimebi コントロール。
@@ -191,6 +191,15 @@ namespace Gyomu.Master {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxKoza;
+        
+        /// <summary>
+        /// RcbZeikubun コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadComboBox RcbZeikubun;
         
         /// <summary>
         /// ChkRiyo コントロール。

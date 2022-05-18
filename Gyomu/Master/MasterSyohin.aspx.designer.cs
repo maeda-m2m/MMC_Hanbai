@@ -58,6 +58,33 @@ namespace Gyomu.Master {
         protected global::Telerik.Web.UI.RadTabStrip RT;
         
         /// <summary>
+        /// Touroku コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Touroku;
+        
+        /// <summary>
+        /// BtnBack コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnBack;
+        
+        /// <summary>
+        /// Syohin コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::Gyomu.Master.CtlSyohin Syohin;
+        
+        /// <summary>
         /// Master コントロール。
         /// </summary>
         /// <remarks>
@@ -67,31 +94,22 @@ namespace Gyomu.Master {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Master;
         
         /// <summary>
-        /// Serch コントロール。
+        /// F2 コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTable Serch;
+        protected global::Gyomu.Common.CtrlFilter2 F2;
         
         /// <summary>
-        /// F コントロール。
+        /// BtnSerch2 コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::Gyomu.Common.CtrlFilter F;
-        
-        /// <summary>
-        /// BtnSerch コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnSerch;
+        protected global::System.Web.UI.WebControls.Button BtnSerch2;
         
         /// <summary>
         /// BtnSinki コントロール。
@@ -139,6 +157,24 @@ namespace Gyomu.Master {
         protected global::System.Web.UI.WebControls.Label lblMsg;
         
         /// <summary>
+        /// HidMaxCount コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HidMaxCount;
+        
+        /// <summary>
+        /// HidNowCount コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HidNowCount;
+        
+        /// <summary>
         /// L コントロール。
         /// </summary>
         /// <remarks>
@@ -148,13 +184,13 @@ namespace Gyomu.Master {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl L;
         
         /// <summary>
-        /// D コントロール。
+        /// RGproductlist コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::Telerik.Web.UI.RadGrid D;
+        protected global::Telerik.Web.UI.RadGrid RGproductlist;
         
         /// <summary>
         /// count コントロール。
@@ -164,51 +200,6 @@ namespace Gyomu.Master {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputHidden count;
-        
-        /// <summary>
-        /// Touroku コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Touroku;
-        
-        /// <summary>
-        /// BtnBack コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnBack;
-        
-        /// <summary>
-        /// Syohin コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::Gyomu.Master.CtlSyohin Syohin;
-        
-        /// <summary>
-        /// Touroku2 コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Touroku2;
-        
-        /// <summary>
-        /// Syohin2 コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::Gyomu.Master.CtlSyouhin2 Syohin2;
         
         /// <summary>
         /// Ram コントロール。

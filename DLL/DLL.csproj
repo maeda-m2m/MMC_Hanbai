@@ -37,6 +37,7 @@
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,6 +53,7 @@
     <Compile Include="ClassKensaku.cs" />
     <Compile Include="ClassLedger.cs" />
     <Compile Include="ClassLogin.cs" />
+    <Compile Include="ClassMail.cs" />
     <Compile Include="ClassMaster.cs" />
     <Compile Include="ClassMitumori.cs" />
     <Compile Include="ClassNyukin.cs" />

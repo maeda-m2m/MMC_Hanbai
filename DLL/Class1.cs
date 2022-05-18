@@ -9,6 +9,8 @@ namespace DLL
 {
     public class Class1
     {
+        public static DataSet1.M_Kakaku_3DataTable dt3;
+
         public static DataSet1.V_EditSyousaiDataTable EditSyousaiDT(SqlConnection sqlConnection)
         {
             SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
@@ -32,6 +34,62 @@ namespace DLL
                 return null;
         }
 
+        public static DataSet1.M_Facility_NewRow GetFacilitySyousai(string[] codeAry, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "Select * from M_Facility_New where FacilityNo = @fn and Code = @c";
+            da.SelectCommand.Parameters.AddWithValue("@fn", codeAry[0]);
+            da.SelectCommand.Parameters.AddWithValue("@c", codeAry[1]);
+            DataSet1.M_Facility_NewDataTable dt = new DataSet1.M_Facility_NewDataTable();
+            da.Fill(dt);
+            if (dt.Count > 0)
+            {
+                return dt[0];
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static DataSet1.M_Kakaku_2DataTable GetCpOver(DateTime? syokai, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select * from M_Kakaku_2 where @syokai > RightEnd ";
+            da.SelectCommand.Parameters.AddWithValue("@syokai", syokai);
+            DataSet1.M_Kakaku_2DataTable dt = new DataSet1.M_Kakaku_2DataTable();
+            da.Fill(dt);
+            return dt;
+        }
+
+        public static DataSet1.M_TyokusosakiDataTable GetNouhinsaki(string code, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select * from M_Tyokusosaki where TyokusousakiCode = @c";
+            da.SelectCommand.Parameters.AddWithValue("@c", code);
+            DataSet1.M_TyokusosakiDataTable dt = new DataSet1.M_TyokusosakiDataTable();
+            da.Fill(dt);
+            return dt;
+        }
+
+        public static DataSet1.M_Facility_NewDataTable GetFacilityMaster(string cmm, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = cmm;
+            DataSet1.M_Facility_NewDataTable dt = new DataSet1.M_Facility_NewDataTable();
+            da.Fill(dt);
+            return dt;
+        }
+
+        public static DataSet1.M_Kakaku_2DataTable GetSyouhin(SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select * from M_Kakaku_2";
+            DataSet1.M_Kakaku_2DataTable dt = new DataSet1.M_Kakaku_2DataTable();
+            da.Fill(dt);
+            return dt;
+        }
+
         public static DataSet1.T_OrderedDataTable GetOrderedLedger(string selectedValue, SqlConnection sqlConnection)
         {
             SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
@@ -39,6 +97,15 @@ namespace DLL
                 "select * from T_Ordered where ShiiresakiCode = @cd";
             da.SelectCommand.Parameters.AddWithValue("@cd", selectedValue);
             DataSet1.T_OrderedDataTable dt = new DataSet1.T_OrderedDataTable();
+            da.Fill(dt);
+            return dt;
+        }
+
+        public static DataSet1.M_Tokuisaki2DataTable GetTokuisakiMaster(string cmm, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = cmm;
+            DataSet1.M_Tokuisaki2DataTable dt = new DataSet1.M_Tokuisaki2DataTable();
             da.Fill(dt);
             return dt;
         }
@@ -65,6 +132,16 @@ namespace DLL
             SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
             da.SelectCommand.CommandText = "select * from M_Tokuisaki2";
             DataSet1.M_Tokuisaki2DataTable dt = new DataSet1.M_Tokuisaki2DataTable();
+            da.Fill(dt);
+            return dt;
+        }
+
+        public static DataSet1.M_Kakaku_2DataTable GetPermission(DateTime? selectedDate, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select * from M_Kakaku_2 where @date > PermissionStart";
+            da.SelectCommand.Parameters.AddWithValue("@date", selectedDate);
+            DataSet1.M_Kakaku_2DataTable dt = new DataSet1.M_Kakaku_2DataTable();
             da.Fill(dt);
             return dt;
         }
@@ -102,6 +179,97 @@ namespace DLL
             return (dt);
         }
 
+        public static void UpdateCSVkakaku(DataSet1.M_Kakaku_2DataTable dt, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText =
+                "select * from M_Kakaku_2 where SyouhinCode = @sc and CategoryCode = @cc and Media = @m and ShiireCode = @shic and Makernumber = @mk ";
+            da.SelectCommand.Parameters.AddWithValue("@sc", dt[0].SyouhinCode);
+            da.SelectCommand.Parameters.AddWithValue("@cc", dt[0].CategoryCode);
+            da.SelectCommand.Parameters.AddWithValue("@m", dt[0].Media);
+            da.SelectCommand.Parameters.AddWithValue("@shic", dt[0].ShiireCode);
+            da.SelectCommand.Parameters.AddWithValue("@mk", dt[0].Makernumber);
+            //da.SelectCommand.Parameters.AddWithValue("@h", dt[0].Hanni);
+            //da.SelectCommand.Parameters.AddWithValue("@hk", dt[0].HyoujunKakaku);
+            //da.SelectCommand.Parameters.AddWithValue("@sk", dt[0].ShiireKakaku);
+            DataSet1.M_Kakaku_2DataTable dtN = new DataSet1.M_Kakaku_2DataTable();
+            da.Fill(dtN);
+
+            SqlTransaction sqlTran = null;
+
+            try
+            {
+                if (dtN.Count > 0)
+                {// Update
+                    da.UpdateCommand = (new SqlCommandBuilder(da)).GetUpdateCommand();
+                    sqlConnection.Open();
+                    sqlTran = sqlConnection.BeginTransaction();
+                    da.SelectCommand.Transaction = da.UpdateCommand.Transaction = sqlTran;
+                    dtN[0].ItemArray = dt[0].ItemArray;
+                    da.Update(dtN);
+                    sqlTran.Commit();
+                }
+                else
+                {// Insert
+                    da.InsertCommand = (new SqlCommandBuilder(da)).GetInsertCommand();
+                    sqlConnection.Open();
+                    sqlTran = sqlConnection.BeginTransaction();
+                    da.SelectCommand.Transaction = da.InsertCommand.Transaction = sqlTran;
+                    DataSet1.M_Kakaku_2Row drN = dtN.NewM_Kakaku_2Row();
+                    drN.ItemArray = dt[0].ItemArray;
+                    dtN.AddM_Kakaku_2Row(drN);
+                    da.Update(dtN);
+                    sqlTran.Commit();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                if (sqlTran != null)
+                {
+                    sqlTran.Rollback();
+                }
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
+
+        public static void setData(SqlConnection sqlConnection)
+        {
+            if (dt3.Count > 0)
+            {
+                SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+                da.SelectCommand.CommandText = "SELECT * FROM M_Kakaku_3";
+                da.InsertCommand = (new SqlCommandBuilder(da)).GetInsertCommand();
+
+                DataSet1.M_Kakaku_New1DataTable dd = new DataSet1.M_Kakaku_New1DataTable();
+                da.Fill(dd);
+
+                SqlTransaction sqlTran = null;
+                try
+                {
+                    sqlConnection.Open();
+                    sqlTran = sqlConnection.BeginTransaction();
+                    da.SelectCommand.Transaction = da.UpdateCommand.Transaction = sqlTran;
+                    da.Update(dt3);
+                    sqlTran.Commit();
+                }
+                catch (Exception ex)
+                {
+                    if (sqlTran != null)
+                    {
+                        sqlTran.Rollback();
+                    }
+                }
+                finally
+                {
+                    sqlConnection.Close();
+                }
+            }
+        }
+
         public static void UpdateSyousai(DataSet1.M_Kakaku_New1Row dl, int catecode, string productname, SqlConnection sql)
         {
             SqlDataAdapter da = new SqlDataAdapter("", sql);
@@ -136,12 +304,10 @@ namespace DLL
                     sqlTra.Commit();
 
                 }
-                catch (Exception e)
+                catch
                 {
                     if (sqlTra != null)
                         sqlTra.Rollback();
-
-
                 }
                 finally
                 {
@@ -237,7 +403,7 @@ namespace DLL
                     sqlTran.Commit();
 
                 }
-                catch (Exception ex)
+                catch
                 {
                     if (null != sqlTran)
                         sqlTran.Rollback();
@@ -333,7 +499,7 @@ namespace DLL
                     da.Update(dd);
                     sqlTran.Commit();
                 }
-                catch (Exception ex)
+                catch
                 {
                     if (sqlTran != null)
                         sqlTran.Rollback();
@@ -346,6 +512,114 @@ namespace DLL
 
 
         }
+
+        public static DataSet1.M_Kakaku_2DataTable GetCp(DateTime? syokai, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select * from M_Kakaku_2 where CpKaisi < @syokai and CpOwari > @syokai";
+            da.SelectCommand.Parameters.AddWithValue("@syokai", syokai);
+            DataSet1.M_Kakaku_2DataTable dt = new DataSet1.M_Kakaku_2DataTable();
+            da.Fill(dt);
+            return dt;
+        }
+
+        public static void InsertTyokusousaki(DataSet1.M_TyokusosakiDataTable dt, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select * from M_Tyokusosaki";
+            DataSet1.M_TyokusosakiDataTable dtN = new DataSet1.M_TyokusosakiDataTable();
+            da.Fill(dtN);
+
+            da.InsertCommand = (new SqlCommandBuilder(da)).GetInsertCommand();
+
+            SqlTransaction sqltra = null;
+
+            try
+            {
+                sqlConnection.Open();
+                sqltra = sqlConnection.BeginTransaction();
+                da.SelectCommand.Transaction = da.InsertCommand.Transaction = sqltra;
+                da.Update(dt);
+                sqltra.Commit();
+            }
+            catch
+            {
+                if (sqltra != null)
+                {
+                    sqltra.Rollback();
+                }
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
+
+        public static void UpdateTyokusousaki(DataSet1.M_TyokusosakiDataTable dt, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select * from M_Tyokusosaki where TyokusousakiCode = @c";
+            da.SelectCommand.Parameters.AddWithValue("@c", dt[0].TyokusousakiCode);
+            DataSet1.M_TyokusosakiDataTable dtN = new DataSet1.M_TyokusosakiDataTable();
+            da.Fill(dtN);
+
+            SqlTransaction sql = null;
+
+            da.UpdateCommand = (new SqlCommandBuilder(da)).GetUpdateCommand();
+            try
+            {
+                sqlConnection.Open();
+                sql = sqlConnection.BeginTransaction();
+                da.SelectCommand.Transaction = da.UpdateCommand.Transaction = sql;
+                dtN[0].ItemArray = dt[0].ItemArray;
+                da.Update(dtN);
+                sql.Commit();
+
+            }
+            catch (Exception ex)
+            {
+                if (sql != null)
+                {
+                    sql.Rollback();
+                }
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
+
+        public static DataSet1.M_Tokuisaki2Row GetTokuisaki4(string v1, string v2, string tokuisakiName, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText =
+                "Select * from M_Tokuisaki2 where CustomerCode = @cc and TokuisakiCode = @tc and TokuisakiName1 = @tn";
+            da.SelectCommand.Parameters.AddWithValue("@cc", v2);
+            da.SelectCommand.Parameters.AddWithValue("@tc", v1);
+            da.SelectCommand.Parameters.AddWithValue("@tn", tokuisakiName);
+            DataSet1.M_Tokuisaki2DataTable dt = new DataSet1.M_Tokuisaki2DataTable();
+            da.Fill(dt);
+            if (dt.Count == 1)
+            {
+                return dt[0];
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static DataSet1.M_TantoDataTable GetStaff3(string un, string bn, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select * from M_Tanto where UserName = @un and BumonName = @bn";
+            da.SelectCommand.Parameters.AddWithValue("@un", un);
+            da.SelectCommand.Parameters.AddWithValue("@bn", bn);
+            DataSet1.M_TantoDataTable dt = new DataSet1.M_TantoDataTable();
+            da.Fill(dt);
+            return dt;
+        }
+
 
         public static DataSet1.M_Kakaku_2DataTable GetProduct4(string v, SqlConnection sqlConnection)
         {
@@ -404,6 +678,15 @@ namespace DLL
             return (dt);
         }
 
+        public static DataSet1.M_Kakaku_2DataTable GetMasterCSV(string v, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = v;
+            DataSet1.M_Kakaku_2DataTable dt = new DataSet1.M_Kakaku_2DataTable();
+            da.Fill(dt);
+            return dt;
+        }
+
         public static DataAppropriate.T_AppropriateDataTable GetAppropriateData(string tokui, string cate, SqlConnection sqlConnection)
         {
             SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
@@ -417,15 +700,6 @@ namespace DLL
             return (dt);
         }
 
-        public static DataSet1.__図書館価格マスター200720ver3DataTable Tosyokan(string cmm, SqlConnection sqlConnection)
-        {
-            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
-            da.SelectCommand.CommandText =
-                "SELECT * FROM [★図書館価格マスター200720ver3]";
-            DataSet1.__図書館価格マスター200720ver3DataTable dt = new DataSet1.__図書館価格マスター200720ver3DataTable();
-            da.Fill(dt);
-            return (dt);
-        }
 
         public static void updateKariProduct(string v, string v1, string v2, string v3, bool @checked, DataSet1.T_productDataTable df, SqlConnection sqlConnection)
         {
@@ -468,6 +742,38 @@ namespace DLL
             }
         }
 
+        public static DataMitumori.T_MitumoriDataTable GetKakakuCSV(string strMitumoriNo, string strJustyuFlg, string strTokuisaki, string strSeikyusaki, string strTyokusousaki, string strFacility, string strCategory, string strBumon, string strMakerHinban, string strSyouhinMei, string strTanto, string strMitumoriBi, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText =
+                "select * from T_Mitumori where MitumoriNo = @mn and JutyuFLG = @JF and TokuisakiMei = @TN and SeikyusakiMei = @SM and TyokusousakiMei = @TM and SisetuMei = @Facility and CateGory = @cc and Busyo = @BK and MekarHinban = @MK and SyouhinMei = @Syouhin and TanTouName = @Tanto and MitumoriBi = @MB";
+            da.SelectCommand.Parameters.AddWithValue("@mn", strMitumoriNo);
+            da.SelectCommand.Parameters.AddWithValue("@JF", strJustyuFlg);
+            da.SelectCommand.Parameters.AddWithValue("@TN", strTokuisaki);
+            da.SelectCommand.Parameters.AddWithValue("@SM", strSeikyusaki);
+            da.SelectCommand.Parameters.AddWithValue("@TM", strTyokusousaki);
+            da.SelectCommand.Parameters.AddWithValue("@Facility", strFacility);
+            da.SelectCommand.Parameters.AddWithValue("@cc", strCategory);
+            da.SelectCommand.Parameters.AddWithValue("@BK", strBumon);
+            da.SelectCommand.Parameters.AddWithValue("@MK", strMakerHinban);
+            da.SelectCommand.Parameters.AddWithValue("@Syouhin", strSyouhinMei);
+            da.SelectCommand.Parameters.AddWithValue("@Tanto", strTanto);
+            da.SelectCommand.Parameters.AddWithValue("@MB", strMakerHinban);
+
+            DataMitumori.T_MitumoriDataTable dt = new DataMitumori.T_MitumoriDataTable();
+            da.Fill(dt);
+            return dt;
+        }
+
+        public static DataSet1.M_Kakaku_2DataTable GetKakaku3(SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select * from M_Kakaku_2";
+            DataSet1.M_Kakaku_2DataTable dt = new DataSet1.M_Kakaku_2DataTable();
+            da.Fill(dt);
+            return dt;
+        }
+
         public static void UpdateAppropriate(DataAppropriate.T_AppropriateRow dl, string no, string strMaker, string strProduct, string strHanni, string strMedia, int noko, SqlConnection sqlConnection)
         {
             SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
@@ -500,7 +806,7 @@ namespace DLL
                 sqlTran.Commit();
 
             }
-            catch (Exception ex)
+            catch
             {
                 if (null != sqlTran)
                     sqlTran.Rollback();
@@ -587,7 +893,7 @@ namespace DLL
                     sqlConnection.Close();
                 }
             }
-            catch (Exception ex)
+            catch
             {
 
             }
@@ -624,7 +930,7 @@ namespace DLL
                 sqlTran.Commit();
 
             }
-            catch (Exception ex)
+            catch
             {
                 if (null != sqlTran)
                     sqlTran.Rollback();
@@ -676,7 +982,7 @@ namespace DLL
                     sqltra.Commit();
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 if (sqltra != null)
                 {
@@ -717,7 +1023,7 @@ namespace DLL
                 da.ExecuteNonQuery();
                 sqltra.Commit();
             }
-            catch (Exception ex)
+            catch
             {
                 if (sqltra != null)
                     sqltra.Rollback();
@@ -744,7 +1050,7 @@ namespace DLL
                 sqltra.Commit();
 
             }
-            catch (Exception ex)
+            catch
             {
                 if (sqltra != null)
                     sqltra.Rollback();
@@ -782,7 +1088,7 @@ namespace DLL
                 sqltra.Commit();
 
             }
-            catch (Exception ex)
+            catch
             {
                 if (sqltra != null)
                     sqltra.Rollback();
@@ -849,7 +1155,7 @@ namespace DLL
                 sqlTra.Commit();
 
             }
-            catch (Exception et)
+            catch
             {
                 if (sqlTra != null)
                     sqlTra.Rollback();
@@ -883,7 +1189,7 @@ namespace DLL
                 sqlTra.Commit();
 
             }
-            catch (Exception et)
+            catch
             {
                 if (sqlTra != null)
                     sqlTra.Rollback();
@@ -949,7 +1255,7 @@ namespace DLL
                 da.Update(dtH);
                 sqltra.Commit();
             }
-            catch (Exception ex)
+            catch
             {
                 if (sqltra != null)
                     sqltra.Rollback();
@@ -1000,7 +1306,7 @@ namespace DLL
                 da.Update(dt);
                 sqltra.Commit();
             }
-            catch (Exception ex)
+            catch
             {
                 if (sqltra != null)
                     sqltra.Rollback();
@@ -1054,7 +1360,7 @@ namespace DLL
                 da.Update(dt);
                 sqltra.Commit();
             }
-            catch (Exception ex)
+            catch
             {
                 if (sqltra != null)
                     sqltra.Rollback();
@@ -1085,7 +1391,7 @@ namespace DLL
                 da.Update(dt);
                 sqltra.Commit();
             }
-            catch (Exception ex)
+            catch
             {
                 if (sqltra != null)
                     sqltra.Rollback();
@@ -1242,7 +1548,7 @@ namespace DLL
                 da.Update(newdt);
                 sqltra.Commit();
             }
-            catch (Exception ex)
+            catch
             {
                 if (sqltra != null)
                     sqltra.Rollback();
@@ -1258,7 +1564,7 @@ namespace DLL
             SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
             da.SelectCommand.CommandText =
                 "select * from M_Tanto where UserName like @un";
-            da.SelectCommand.Parameters.AddWithValue("@un","%" + v + "%");
+            da.SelectCommand.Parameters.AddWithValue("@un", "%" + v + "%");
             DataSet1.M_TantoDataTable dt = new DataSet1.M_TantoDataTable();
             da.Fill(dt);
             return dt;
@@ -1292,7 +1598,7 @@ namespace DLL
                 sql.Commit();
 
             }
-            catch (Exception ex)
+            catch
             {
                 if (sql != null)
                     sql.Rollback();
@@ -1303,59 +1609,43 @@ namespace DLL
             }
         }
 
-        public static void UpdateFaci(DataSet1.M_Facility_NewDataTable newdt, int no, string text, SqlConnection sqlConnection)
+        public static void UpdateFaci(DataSet1.M_Facility_NewDataTable newdt, string code, string faci, SqlConnection sqlConnection)
         {
             SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
             da.SelectCommand.CommandText =
-                "Select * From M_Facility_New Where FacilityNo = @ID and FacilityName1 = @n";
-            da.SelectCommand.Parameters.AddWithValue("@ID", no);
-            da.SelectCommand.Parameters.AddWithValue("@n", text);
+                "Select * From M_Facility_New Where FacilityNo = @ID and Code = @c";
+            da.SelectCommand.Parameters.AddWithValue("@ID", faci);
+            da.SelectCommand.Parameters.AddWithValue("@c", code);
+            DataSet1.M_Facility_NewDataTable Tdt = new DataSet1.M_Facility_NewDataTable();
+            da.Fill(Tdt);
 
             da.UpdateCommand = (new SqlCommandBuilder(da)).GetUpdateCommand();
+            da.InsertCommand = (new SqlCommandBuilder(da)).GetInsertCommand();
 
-            DataSet1.M_Facility_NewDataTable Tdt = new DataSet1.M_Facility_NewDataTable();
 
             SqlTransaction sql = null;
             try
             {
-                sqlConnection.Open();
-                sql = sqlConnection.BeginTransaction();
-                da.SelectCommand.Transaction = da.UpdateCommand.Transaction = sql;
-                da.Fill(Tdt);
-                DataSet1.M_Facility_NewRow dr = Tdt[0];
-
-                dr.FacilityNo = newdt[0].FacilityNo;
-
-                dr.FacilityName1 = newdt[0].FacilityName1;
-
-                if (!newdt[0].IsFacilityName2Null())
-                {
-                    dr.FacilityName2 = newdt[0].FacilityName2;
+                if (Tdt.Count > 0)
+                {//update
+                    sqlConnection.Open();
+                    sql = sqlConnection.BeginTransaction();
+                    da.SelectCommand.Transaction = da.UpdateCommand.Transaction = sql;
+                    Tdt[0].ItemArray = newdt[0].ItemArray;
+                    da.Update(Tdt);
+                    sql.Commit();
                 }
-                if (!newdt[0].IsAbbreviationNull())
-                { dr.Abbreviation = newdt[0].Abbreviation; }
-                if (!newdt[0].IsFacilityResponsibleNull())
-                { dr.FacilityResponsible = newdt[0].FacilityResponsible; }
-                if (!newdt[0].IsPostNoNull())
-                { dr.PostNo = newdt[0].PostNo; }
-                if (!newdt[0].IsAddress1Null())
-                { dr.Address1 = newdt[0].Address1; }
-                if (!newdt[0].IsAddress2Null())
-                { dr.Address2 = newdt[0].Address2; }
-                if (!newdt[0].IsTellNull())
-                { dr.Tell = newdt[0].Tell; }
-                if (!newdt[0].IsCityCodeNull())
-                { dr.CityCode = newdt[0].CityCode; }
-                if (!newdt[0].IsTitlesNull())
-                { dr.Titles = newdt[0].Titles; }
-                if (!newdt[0].IsStateNull())
-                { dr.State = newdt[0].State; }
-                if (!newdt[0].IsUpDateUserNull())
-                { dr.UpDateUser = newdt[0].UpDateUser; }
-                dr.UpDateDay = DateTime.Now;
-
-                da.Update(Tdt);
-                sql.Commit();
+                else
+                {//insert
+                    sqlConnection.Open();
+                    sql = sqlConnection.BeginTransaction();
+                    da.SelectCommand.Transaction = da.InsertCommand.Transaction = sql;
+                    DataSet1.M_Facility_NewRow dr = Tdt.NewM_Facility_NewRow();
+                    dr.ItemArray = newdt[0].ItemArray;
+                    Tdt.AddM_Facility_NewRow(dr);
+                    da.Update(Tdt);
+                    sql.Commit();
+                }
             }
             catch
             {

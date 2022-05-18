@@ -1,19 +1,12 @@
 ﻿using DLL;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using Telerik.Web.UI;
 using Yodokou_HanbaiKanri;
-using Yodokou_HanbaiKanri.Common;
-using System.Windows;
-using System.Windows.Forms;
-
+using System.IO;
 namespace Gyomu.Master
 {
     public partial class MasterTanto : System.Web.UI.Page
@@ -21,84 +14,82 @@ namespace Gyomu.Master
         HtmlInputFile[] files = null;
 
         const int LIST_ID = 19;
+        public static int intFieldNo = 140;
 
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            lblMsg.Text = "";
             if (!this.IsPostBack)
             {
-                this.F.Create(LIST_ID, 3);
-
-                Craete();
+                Craete("", 0);
                 Master.Style["display"] = "";
                 Touroku.Style["display"] = "none";
             }
         }
 
-        private void Craete()
+        private void Craete(string koumoku, int page)
         {
-            lblMsg.Text = "";
-            L.Visible = true;
-
-            UserViewManager.UserView v = SessionManager.User.GetUserView(LIST_ID);
-
-            SqlDataAdapter da = new SqlDataAdapter(v.SqlDataFactory.SelectCommand.CommandText, Global.GetConnection());
-
-            Core.Sql.RowNumberInfo info = new Core.Sql.RowNumberInfo();
-            info.nStartNumber = this.D.CurrentPageIndex * D.PageSize + 1;
-            info.nEndNumber = (this.D.CurrentPageIndex + 1) * D.PageSize;
-
-            string strWhere = "";
             try
             {
-                strWhere = this.F.GetFilter(da.SelectCommand);
-                if (!string.IsNullOrEmpty(strWhere))
-                    da.SelectCommand.CommandText += " where " + strWhere;
+                L.Visible = true;
+
+                SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM M_Tanto", Global.GetConnection());
+                string cmm = "";
+                if (!string.IsNullOrEmpty(koumoku))
+                {
+                    cmm = da.SelectCommand.CommandText + " where " + koumoku;
+                }
+                else
+                {
+                    cmm = da.SelectCommand.CommandText;
+                }
+                cmm += " ORDER BY UserID";
+                DataMaster.M_Tanto1DataTable dt = ClassMaster.GetTantoMaster(cmm, Global.GetConnection());
+                //commandtext = cmm;
+
+                int nRecCount = 0;
+                nRecCount = dt.Rows.Count;
+
+                if (0 == nRecCount)
+                {
+                    L.Visible = false;
+                    lblMsg.Text = "データがありません。";
+                    return;
+                }
+                if (0 == nRecCount)
+                {
+                    L.Visible = false;
+                    RGTanto.CurrentPageIndex = 0;
+                    lblMsg.Text = "このページのデータが取得できませんでした。再検索してください。";    // データはあるか取得ページがおかしい
+                    return;
+                }
+                RGTanto.CurrentPageIndex = page;
+                string strColumnAry = "";
+                //for (int c = 0; c < dt.Columns.Count; c++)
+                //{
+                //    if (strColumnAry == "")
+                //    {
+                //        strColumnAry = dt.Columns[c].ColumnName;
+                //    }
+                //    else
+                //    {
+                //        strColumnAry += "," + dt.Columns[c].ColumnName;
+                //    }
+                //}
+                //this.Filter.KoumokuBind(strColumnAry);
+                this.Filter.KoumokuBind2(intFieldNo);
+                RGTanto.VirtualItemCount = nRecCount;//nRecCountに取ってきたデータ全件の大きさがわかる
+                RGTanto.DataSource = dt;
+                RGTanto.DataBind();
+                this.ShowList(true);
             }
             catch (Exception ex)
             {
-                lblMsg.Text = ex.Message;
-                return;
+
             }
-
-            //DataTable dt = new DataTable();
-            DataSet1.M_TantoDataTable dt = Class1.GetStaff(Global.GetConnection());
-            //int nRecCount = 0;
-            //info.LoadData(da.SelectCommand, Global.GetConnection(), dt, ref nRecCount);
-
-
-            //if (0 == nRecCount)
-            //{
-            //    L.Visible = false;
-            //    lblMsg.Text = "データがありません。";
-            //    return;
-            //}
-            if (0 == dt.Rows.Count)
-            {
-                L.Visible = false;
-                this.D.CurrentPageIndex = 0;
-                lblMsg.Text = "このページのデータが取得できませんでした。再検索してください。";	// データはあるか取得ページがおかしい
-                return;
-            }
-
-            //this.D.VirtualItemCount = nRecCount;
-            this.D.VirtualItemCount = dt.Count;
-            int nPageSize = this.D.PageSize;
-            //int nPageCount = nRecCount / nPageSize;
-            int nPageCount = dt.Count / nPageSize;
-            //if (0 < nRecCount % nPageSize) nPageCount++;
-            if (0 < dt.Count % nPageSize) nPageCount++;
-            if (nPageCount <= this.D.CurrentPageIndex) this.D.MasterTableView.CurrentPageIndex = 0;
-
-            this.D.DataSource = dt;
-
-            //v.CreateRadGrid(this.D, 1, new UserViewManager.UserView.DataBoundEventHandler(UserView_DataBound));
-
-            this.D.DataBind();
-
-            this.ShowList(true);
-
         }
+
 
         private void ShowList(bool bShow)
         {
@@ -107,54 +98,6 @@ namespace Gyomu.Master
                 this.L.Controls[i].Visible = bShow;
         }
 
-        protected void D_ItemDataBound(object sender, Telerik.Web.UI.GridItemEventArgs e)
-        {
-            if (e.Item.ItemType == Telerik.Web.UI.GridItemType.Item || e.Item.ItemType == Telerik.Web.UI.GridItemType.AlternatingItem)
-            {
-
-                DataRowView drv = (DataRowView)e.Item.DataItem;
-
-                DataSet1.M_TantoRow dr = (DataSet1.M_TantoRow)drv.Row;
-
-                if (!(Telerik.Web.UI.GridItemType.Item == e.Item.ItemType ||
-                    Telerik.Web.UI.GridItemType.AlternatingItem == e.Item.ItemType))
-                    return;
-
-                System.Web.UI.WebControls.Button btnEdit = e.Item.FindControl("E") as System.Web.UI.WebControls.Button;
-                string strCode = Convert.ToString((e.Item.DataItem as DataRowView).Row["UserID"]) + "," +
-                    Convert.ToString((e.Item.DataItem as DataRowView).Row["UserName"]) + "," +
-                    Convert.ToString((e.Item.DataItem as DataRowView).Row["Busyo"]) +","+
-                    Convert.ToString((e.Item.DataItem as DataRowView).Row["Password"]);
-
-                System.Web.UI.WebControls.Button E = e.Item.FindControl("E") as System.Web.UI.WebControls.Button;
-                E.Attributes["onclick"] = string.Format("CntRow('{0}')", strCode);
-
-                System.Web.UI.WebControls.Button btnDel = e.Item.FindControl("Del") as System.Web.UI.WebControls.Button;
-                //string strcode = Convert.ToString((e.Item.DataItem as DataRowView).Row["UserID"]) + Convert.ToString((e.Item.DataItem as DataRowView).Row["ColBusyo"]);
-
-
-                System.Web.UI.WebControls.Button Del = e.Item.FindControl("Del") as System.Web.UI.WebControls.Button;
-                Del.Attributes["onclick"] = string.Format("CntRow('{0}')", strCode);
-
-
-                e.Item.Cells[D.Columns.FindByUniqueName("ColID").OrderIndex].Text = dr.UserID.ToString();
-                if (!dr.IsYomikataNull())
-                {
-                    e.Item.Cells[D.Columns.FindByUniqueName("ColYomi").OrderIndex].Text = dr.Yomikata.ToString();
-                }
-                if (!dr.IsUserNameNull())
-                {
-                    e.Item.Cells[D.Columns.FindByUniqueName("ColName").OrderIndex].Text = dr.UserName.ToString();
-                }
-
-                e.Item.Cells[D.Columns.FindByUniqueName("ColBusyo").OrderIndex].Text = dr.Busyo.ToString();
-
-                if (!dr.IsPasswordNull())
-                {
-                    e.Item.Cells[D.Columns.FindByUniqueName("ColPass").OrderIndex].Text = dr.Password.ToString();
-                }
-            }
-        }
 
         private void UserView_DataBound(UserViewManager.UserViewEventArgs e)
         {
@@ -202,35 +145,10 @@ namespace Gyomu.Master
                 Master.Style["display"] = "";
                 Touroku.Style["display"] = "none";
 
-                Craete();
+                Craete("", 0);
 
                 lblMsg.Text = "登録しました";
             }
-        }
-
-        protected void D_ItemCreated(object sender, Telerik.Web.UI.GridItemEventArgs e)
-        {
-            if (e.Item.ItemType == Telerik.Web.UI.GridItemType.Pager)
-            {
-                (e.Item.Cells[0].Controls[0] as Table).Rows[0].Visible = false;
-            }
-        }
-
-        protected void BtnSerch_Click(object sender, EventArgs e)
-        {
-            lblMsg.Text = "";
-            Craete();
-        }
-
-        protected void D_PageIndexChanged(object sender, GridPageChangedEventArgs e)
-        {
-            D.MasterTableView.CurrentPageIndex = e.NewPageIndex;
-            this.Craete();
-        }
-
-        protected void D_ItemCommand(object sender, GridCommandEventArgs e)
-        {
-
         }
 
         private void Delete_Click(object sender, EventArgs e)
@@ -239,32 +157,183 @@ namespace Gyomu.Master
             int id = int.Parse(UserId);
         }
 
-        protected void BtnHihyouji_Click(object sender, EventArgs e)
+        protected void BtnSerch_Click1(object sender, EventArgs e)
         {
-            DataSet1.M_TantoDataTable dt = Class1.GetNoStaff(Global.GetConnection());
-            D.DataSource = dt;
-            D.DataBind();
+            CreatePage();
         }
 
-        protected void Del_Click(object sender, EventArgs e)
+        private void CreatePage()
+        {
+            string Koumoku = "";
+            Koumoku = Filter.GetKoumoku();
+            Craete(Koumoku, RGTanto.MasterTableView.CurrentPageIndex);
+        }
+
+        protected void BtnCSVdownload_Click(object sender, EventArgs e)
+        {
+            string strWhere = "";
+            UserViewManager.UserView v = SessionManager.User.GetUserView(19);
+            SqlDataAdapter da = new SqlDataAdapter(v.SqlDataFactory.SelectCommand.CommandText, Global.GetConnection());
+            strWhere = CreateCommandText(da.SelectCommand.CommandText);
+            if (strWhere != "")
+            {
+                DataMaster.M_Tanto1DataTable dt = ClassMaster.GetTantoMaster(da.SelectCommand.CommandText + " where " + strWhere, Global.GetConnection());
+                if (dt.Count > 0)
+                {
+                    string strExt = "csv";
+                    string strFileName = ("担当者マスタcsv") + "_" + DateTime.Now.ToString("yyyyMMdd") + "." + strExt;
+                    Core.Data.DataTable2Text.EnumDataFormat fmt = Core.Data.DataTable2Text.EnumDataFormat.Csv;
+
+                    this.Ram.ResponseScripts.Add(string.Format("window.location.href='{0}';",
+            this.ResolveUrl("~/Common/DownloadDataForm.aspx?" +
+            Common.DownloadDataForm.GetQueryString4Text(strFileName, v.CreateTextData(dt, fmt, null)))));
+                }
+            }
+            else
+            {
+                DataMaster.M_Tanto1DataTable dt2 = ClassMaster.GetTantoMaster(da.SelectCommand.CommandText, Global.GetConnection());
+                if (dt2.Count > 0)
+                {
+                    string strExt = "csv";
+                    string strFileName = ("担当者マスタcsv") + "_" + DateTime.Now.ToString("yyyyMMdd") + "." + strExt;
+                    Core.Data.DataTable2Text.EnumDataFormat fmt = Core.Data.DataTable2Text.EnumDataFormat.Csv;
+
+                    this.Ram.ResponseScripts.Add(string.Format("window.location.href='{0}';",
+            this.ResolveUrl("~/Common/DownloadDataForm.aspx?" +
+            Common.DownloadDataForm.GetQueryString4Text(strFileName, v.CreateTextData(dt2, fmt, null)))));
+                }
+            }
+        }
+
+        private string CreateCommandText(string commandText)
+        {
+            string koumoku = "";
+            koumoku = Filter.GetKoumoku();
+            return koumoku;
+        }
+
+        protected void BtnUpload_Click(object sender, EventArgs e)
+        {
+            if (FileUpload.HasFile)
+            {
+                try
+                {
+                    Stream s = FileUpload.FileContent;
+                    System.Text.Encoding enc = System.Text.Encoding.GetEncoding(932);
+                    System.IO.StreamReader check = new StreamReader(s, enc);
+                    string strCheck = check.ReadLine();
+                    if (strCheck == null)
+                    {
+                        return;
+                    }
+                    bool bTab = (strCheck.Split('\t').Length > strCheck.Split(',').Length);
+                    int nLine = 0;
+                    int RowCount = 0;
+                    if (bTab)
+                    {
+                        while (check.EndOfStream == false)
+                        {
+                            string strLineData = check.ReadLine();
+                            string[] mData = strLineData.Split('\t');
+                            DataMaster.M_Tanto1DataTable dt = new DataMaster.M_Tanto1DataTable();
+                            DataMaster.M_Tanto1Row dr = dt.NewM_Tanto1Row();
+                            dr.ItemArray = mData;
+                            dt.AddM_Tanto1Row(dr);
+                            ClassMaster.UpdateCSVtanto(dt, Global.GetConnection());
+                        }
+                    }
+                    else
+                    {
+                        while (check.EndOfStream == false)
+                        {
+                            string strLineData = check.ReadLine();
+                            string[] mData = strLineData.Split(',');
+                            DataMaster.M_Tanto1DataTable dt = new DataMaster.M_Tanto1DataTable();
+                            DataMaster.M_Tanto1Row dr = dt.NewM_Tanto1Row();
+                            dr.ItemArray = mData;
+                            dt.AddM_Tanto1Row(dr);
+                            ClassMaster.UpdateCSVtanto(dt, Global.GetConnection());
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    lblMsg.Text = "CSVアップロードに失敗しました。" + "<br>" + ex.Message;
+                    lblMsg.ForeColor = System.Drawing.Color.Red;
+                }
+                finally
+                {
+                    lblMsg.Text = "CSVアップロードに成功しました。";
+                    lblMsg.ForeColor = System.Drawing.Color.Green;
+                    CreatePage();
+                }
+            }
+        }
+
+        protected void RGTanto_ItemDataBound(object sender, GridItemEventArgs e)
+        {
+            if (Telerik.Web.UI.GridItemType.Item == e.Item.ItemType || Telerik.Web.UI.GridItemType.AlternatingItem == e.Item.ItemType)
+            {
+                DataMaster.M_Tanto1Row dr = (e.Item.DataItem as DataRowView).Row as DataMaster.M_Tanto1Row;
+                Label LblUserID = e.Item.FindControl("LblUserID") as Label;
+                Label LblUserName = e.Item.FindControl("LblUserName") as Label;
+                Label LblYomikata = e.Item.FindControl("LblYomikata") as Label;
+                Label LblBusyo = e.Item.FindControl("LblBusyo") as Label;
+                Label LblBumon = e.Item.FindControl("LblBumon") as Label;
+                Label LblYuko = e.Item.FindControl("LblYuko") as Label;
+                HiddenField HidSyousai = e.Item.FindControl("HidSyousai") as HiddenField;
+
+                LblUserID.Text = dr.UserID.ToString();
+                if (!dr.IsUserNameNull())
+                {
+                    LblUserName.Text = dr.UserName;
+                }
+                if (!dr.IsYomikataNull())
+                {
+                    LblYomikata.Text = dr.Yomikata;
+                }
+                LblBusyo.Text = dr.Busyo;
+                if (!dr.IsBumonNameNull())
+                {
+                    LblBumon.Text = dr.BumonName;
+                }
+                LblYuko.Text = dr.Yuko.ToString();
+                HidSyousai.Value = dr.UserKey.ToString();
+
+
+            }
+        }
+
+        protected void RGTanto_ItemCommand(object sender, GridCommandEventArgs e)
+        {
+            if (e.CommandName.Equals("BtnSyousai"))
+            {
+                Label LblUserID = e.Item.FindControl("LblUserID") as Label;
+                string UserId = LblUserID.Text;
+                Master.Style["display"] = "none";
+                Touroku.Style["display"] = "";
+                Tanto.Create(UserId);
+            }
+        }
+
+        protected void RGTanto_ItemCreated(object sender, GridItemEventArgs e)
         {
 
-            string[] key = count.Value.Split(',');
-            
-            int id = int.Parse(key[0]);
-            string UserName = key[1];
-            string Busyo = key[2];
-            string PassWord = key[3];
+        }
 
-            Class1.DeleteStaff(id, UserName, Busyo, PassWord, Global.GetConnection());
+        protected void RGTanto_PageIndexChanged(object sender, GridPageChangedEventArgs e)
+        {
+            RGTanto.MasterTableView.CurrentPageIndex = e.NewPageIndex;
+            CreatePage();
+        }
 
-            DataSet1.M_TantoDataTable dt = Class1.GetStaff(Global.GetConnection());
-            D.DataSource = dt;
-            D.DataBind();
+        protected void RGTanto_PreRender(object sender, EventArgs e)
+        {
 
-            lblMsg.Text = "UserID(" + id + ")を削除しました。";
+        }
 
-
+        protected void Ram_AjaxRequest(object sender, AjaxRequestEventArgs e)
+        {
 
         }
     }

@@ -1,6 +1,5 @@
 ﻿using Core.Sql;
 using DLL;
-using Gyomu.Mitumori.Syosai;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -30,7 +29,7 @@ namespace Gyomu.Uriage
             string cate = category.Value;
             if (cate == "")
             { err.Text = "カテゴリーを選択して下さい。"; }
-            ListSet.SettingProduct(sender, e, cate);
+            ListSet.SettingProduct(sender, e, cate, UriageMeisai.strSyokaiDate);
             procd.Value = SerchProduct.SelectedValue;
 
         }
@@ -81,11 +80,6 @@ namespace Gyomu.Uriage
 
                     SerchProduct.Text = dr.SyouhinMei;
 
-                    if (!dr.IsTyokusouSakiNull())
-                    {
-                        ShiyouShisetsu.Text = dr.TyokusouSaki;
-                    }
-
                     string kakakuhyoujyun = ht.Value;
                     int h = int.Parse(ht.Value);
                     int k = int.Parse(Kakeri.Text);
@@ -94,7 +88,7 @@ namespace Gyomu.Uriage
                     CtlKeisan(kakakuhyoujyun, tt);
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 err.Text = "カテゴリーと得意先を選択してください。";
             }

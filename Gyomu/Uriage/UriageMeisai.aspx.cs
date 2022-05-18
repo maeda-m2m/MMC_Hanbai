@@ -17,6 +17,7 @@ namespace Gyomu.Uriage
 {
     public partial class UriageMeisai : System.Web.UI.Page
     {
+        public static string strSyokaiDate;
         protected void Page_Load(object sender, EventArgs e)
         {
             LblEnd.Text = "";
@@ -40,6 +41,7 @@ namespace Gyomu.Uriage
             {
                 return;
             }
+            strSyokaiDate = RadDatePicker1.SelectedDate.Value.ToShortDateString();
         }
         //ItemDataBound
         protected void CtrlSyousai_ItemDataBound(object sender, DataGridItemEventArgs e)
@@ -295,16 +297,6 @@ namespace Gyomu.Uriage
             {
                 if (CheckBox5.Checked == true)
                 {
-                    if (FacilityRad.Text != "")
-                    {
-                        string facility = FacilityRad.Text;
-                        string facilitycode = FacilityRad.SelectedValue;
-                        for (int i = 0; i < CtrlSyousai.Items.Count; i++)
-                        {
-                            CtrlMitsuSyousai CtlMitsuSyosai = CtrlSyousai.Items[i].FindControl("Syosai") as CtrlMitsuSyousai;
-                            CtlMitsuSyosai.FukusuCheckedTrue();
-                        }
-                    }
                 }
                 else
                 {
@@ -579,10 +571,6 @@ namespace Gyomu.Uriage
 
                             for (int i = 0; CtrlSyousai.Items.Count > i; i++)
                             {
-                                string syouhinCode = "";
-                                string media = "";
-                                string hanni = "";
-
                                 DataReturn.T_ReturnRow drr = dtR.NewT_ReturnRow();
                                 UriageMeisaiRan Ctl = CtrlSyousai.Items[i].FindControl("Syosai") as UriageMeisaiRan;
                                 Label LblProduct = (Label)Ctl.FindControl("LblProduct");

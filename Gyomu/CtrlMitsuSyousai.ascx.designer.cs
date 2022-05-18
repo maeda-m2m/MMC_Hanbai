@@ -67,6 +67,51 @@ namespace Gyomu {
         protected global::Telerik.Web.UI.RadComboBox SerchProduct;
         
         /// <summary>
+        /// SerchProductJouei コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadComboBox SerchProductJouei;
+        
+        /// <summary>
+        /// BtnTool1 コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnTool1;
+        
+        /// <summary>
+        /// HidColor コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HidColor;
+        
+        /// <summary>
+        /// HidCp コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HidCp;
+        
+        /// <summary>
+        /// HidCpOver コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HidCpOver;
+        
+        /// <summary>
         /// procd コントロール。
         /// </summary>
         /// <remarks>
@@ -94,6 +139,24 @@ namespace Gyomu {
         protected global::Telerik.Web.UI.RadComboBox RcbHanni;
         
         /// <summary>
+        /// HidHanni コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HidHanni;
+        
+        /// <summary>
+        /// HidJoueiHanni コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HidJoueiHanni;
+        
+        /// <summary>
         /// Baitai コントロール。
         /// </summary>
         /// <remarks>
@@ -101,6 +164,15 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Baitai;
+        
+        /// <summary>
+        /// HidMedia コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HidMedia;
         
         /// <summary>
         /// Suryo コントロール。
@@ -175,6 +247,15 @@ namespace Gyomu {
         protected global::Telerik.Web.UI.RadComboBox ShiyouShisetsu;
         
         /// <summary>
+        /// BtnFacilityMeisai コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnFacilityMeisai;
+        
+        /// <summary>
         /// FacilityCode コントロール。
         /// </summary>
         /// <remarks>
@@ -182,15 +263,6 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputHidden FacilityCode;
-        
-        /// <summary>
-        /// KariFaci コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox KariFaci;
         
         /// <summary>
         /// Facility コントロール。
@@ -202,15 +274,6 @@ namespace Gyomu {
         protected global::System.Web.UI.WebControls.Label Facility;
         
         /// <summary>
-        /// BtnFacilityMeisai コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnFacilityMeisai;
-        
-        /// <summary>
         /// FacilityAddress コントロール。
         /// </summary>
         /// <remarks>
@@ -220,13 +283,22 @@ namespace Gyomu {
         protected global::System.Web.UI.HtmlControls.HtmlInputHidden FacilityAddress;
         
         /// <summary>
-        /// Zasu コントロール。
+        /// TBZasu コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox Zasu;
+        protected global::System.Web.UI.HtmlControls.HtmlTable TBZasu;
+        
+        /// <summary>
+        /// TbxZasu コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TbxZasu;
         
         /// <summary>
         /// StartDate コントロール。
@@ -238,15 +310,6 @@ namespace Gyomu {
         protected global::Telerik.Web.UI.RadDatePicker StartDate;
         
         /// <summary>
-        /// Label11 コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label11;
-        
-        /// <summary>
         /// EndDate コントロール。
         /// </summary>
         /// <remarks>
@@ -254,15 +317,6 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::Telerik.Web.UI.RadDatePicker EndDate;
-        
-        /// <summary>
-        /// Label12 コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label12;
         
         /// <summary>
         /// Kakeri コントロール。
@@ -443,6 +497,15 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LblShiireCode;
+        
+        /// <summary>
+        /// HidShiireCode コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HidShiireCode;
         
         /// <summary>
         /// TbxProductName コントロール。
@@ -641,6 +704,15 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxFacilityCode;
+        
+        /// <summary>
+        /// TbxFacilityRowCode コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TbxFacilityRowCode;
         
         /// <summary>
         /// RcbCity コントロール。

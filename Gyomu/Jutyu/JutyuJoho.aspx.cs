@@ -243,9 +243,9 @@ namespace Gyomu.Jutyu
                     e.Item.Cells[RadG.Columns.FindByUniqueName("ColKingaku").OrderIndex].Text = dr.SoukeiGaku.ToString("0,0");
                 }
 
-                if (!dr.IsCareateDateNull())
+                if (!dr.IsCreateDateNull())
                 {
-                    e.Item.Cells[RadG.Columns.FindByUniqueName("ColMitumoriDay").OrderIndex].Text = dr.CareateDate.ToShortDateString() + "[" + dr.CareateDate.ToShortTimeString() + "]";
+                    e.Item.Cells[RadG.Columns.FindByUniqueName("ColMitumoriDay").OrderIndex].Text = dr.CreateDate.ToShortDateString() + "[" + dr.CreateDate.ToShortTimeString() + "]";
                 }
 
             }
@@ -408,11 +408,6 @@ namespace Gyomu.Jutyu
             {
                 string[] strAry = this.strkeys.Split('_');
                 string strJutyuNo = "";
-                string strShisetuCode = "";
-                string strRowNo = "";
-                string sNo = "";
-                string sShisetu = "";
-
                 for (int i = 0; i < strAry.Length; i++)
                 {
                     string[] str = strAry[i].Split(',');
@@ -571,11 +566,11 @@ namespace Gyomu.Jutyu
                     }
                     if (shiire == "")
                     {
-                        shiire += jdt[i].HattyuSakiMei;
+                        shiire += jdt[i].ShiireName;
                     }
                     else
                     {
-                        shiire += "," + jdt[i].HattyuSakiMei;
+                        shiire += "," + jdt[i].ShiireName;
                     }
 
                     dl.OrderedNo = drr.OrderedNo + 1;
@@ -630,7 +625,7 @@ namespace Gyomu.Jutyu
                     if (!jdt[i].IsSiyouOwariNull())
                     { dl.SiyouiOwari = jdt[i].SiyouOwari.ToShortDateString(); }
                     if (!jdt[i].IsHyojunKakakuNull())
-                    { dl.HyoujyunKakaku = jdt[i].HyojunKakaku; }
+                    { dl.HyoujyunKakaku = int.Parse(jdt[i].HyojunKakaku); }
                     if (!jdt[i].IsTanTouNameNull())
                     { dl.StaffName = jdt[i].TanTouName; }
                     if (!jdt[i].IsBusyoNull())
@@ -645,7 +640,7 @@ namespace Gyomu.Jutyu
                     { dl.MekerNo = jdt[i].MekarHinban; }
                     if (!jdt[i].IsKeitaiMeiNull())
                     { dl.Media = jdt[i].KeitaiMei; }
-                    dl.UriageFlg = jdt[i].UriageFlg;
+                    dl.UriageFlg = jdt[i].JutyuFlg;
                     dl.HatyuDay = DateTime.Now.ToShortDateString();
                     dlh.CreateDate = DateTime.Now;
                     dl.JutyuSuryou = jdt[i].JutyuSuryou;
@@ -655,8 +650,8 @@ namespace Gyomu.Jutyu
                     dlh.ShiireKingaku = jdt[i].ShiireKingaku;
                     dl.ShiireKingaku = jdt[i].ShiireKingaku;
                     dl.WareHouse = jdt[i].WareHouse;
-                    dl.ShiireSakiName = jdt[i].HattyuSakiMei;
-                    dlh.ShiiresakiName = jdt[i].HattyuSakiMei;
+                    dl.ShiireSakiName = jdt[i].ShiireName;
+                    dlh.ShiiresakiName = jdt[i].ShiireName;
                     string abb = dl.ShiireSakiName;
                     DataMaster.M_ShiiresakiDataTable dd = ClassMaster.GetShiiresaki(abb, Global.GetConnection());
                     for (int l = 0; l < dd.Count; l++)
@@ -664,7 +659,7 @@ namespace Gyomu.Jutyu
                         dl.ShiiresakiCode = dd[0].ShiiresakiCode.ToString();
                         dlh.ShiiresakiCode = dd[0].ShiiresakiCode.ToString();
                     }
-                    dl.Zeikubun = jdt[i].ZeiKubun;
+                    dl.Zeikubun = jdt[i].Zeikubun;
                     dl.Kakeritsu = jdt[i].Kakeritsu;
                     dl.Zansu = jdt[i].JutyuSuryou.ToString();
                     dlh.InsertFlg = false;

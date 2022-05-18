@@ -2,19 +2,18 @@
 
 <%@ Register Src="~/CtlMenu.ascx" TagName="Menu" TagPrefix="uc" %>
 <%@ Register Src="~/Master/CtlTokuisaki.ascx" TagName="M_Tokuisaki" TagPrefix="uc2" %>
-<%@ Register Src="~/Common/CtrlFilter.ascx" TagName="CtlFilter" TagPrefix="uc3" %>
+<%@ Register Src="~/Common/CtrlFilter2.ascx" TagName="Filter2" TagPrefix="uc4" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title></title>
-    <link href="../../MainStyle.css" type="text/css" rel="STYLESHEET" />
-    <link href="../../Style/Grid.ykuri.css" rel="STYLESHEET" />
-    <link href="../../Style/ComboBox.ykuri.css" type="text/css" rel="STYLESHEET" />
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+
+    <title>得意先マスタ</title>
     <telerik:RadScriptBlock ID="RSM" runat="server">
-        <script type="text/javascript" src="../../Core.js"></script>
-        <script src="../../Common/CommonJs.js" type="text/javascript"></script>
+        <%--        <script type="text/javascript" src="../../Core.js"></script>--%>
+        <%--        <script src="../../Common/CommonJs.js" type="text/javascript"></script>--%>
         <script type="text/jscript">
 
             function CntRow(cnt) {
@@ -36,6 +35,63 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <script type="text/javascript">
+            function A(btn) {
+                debugger;
+                var a1 = window.confirm('本当に削除しますか？');
+                if (a1 === true) {
+                    return true;
+                }
+                else if (a1 === false) {
+                    var b = document.getElementById(btn);
+                    b.addEventListener('click', function (e) {
+                        e.preventDefault();
+                    }, false);
+                    return false;
+                }
+            }
+        </script>
+        
+        <div id="overlay">
+            <div class="cv-spinner">
+                <span class="spinner"></span>
+                <script type="text/javascript">
+                    jQuery(function ($) {
+                        $(document).ajaxSend(function () {
+                            $("#overlay").fadeIn(300);
+                        });
+
+                        $('#BtnUpload').click(function () {
+                            $.ajax({
+                                type: 'GET',
+                                success: function (data) {
+                                    console.log(data);
+                                }
+                            }).done(function () {
+                                setTimeout(function () {
+                                    $("#overlay").fadeOut(300);
+                                }, 100000);
+                            });
+                        });
+
+                        $('#BtnCSVdownload').click(function () {
+                            debugger;
+                            $.ajax({
+                                type: 'GET',
+                                success: function (data) {
+                                    console.log(data);
+                                }
+                            }).done(function () {
+                                setTimeout(function () {
+                                    $("#overlay").fadeOut(300);
+                                }, 100000);
+                            });
+                        });
+                    });
+                </script>
+            </div>
+        </div>
+
         <div id="MainMenu" runat="server">
             <uc:Menu ID="Menu" runat="server" />
         </div>
@@ -46,86 +102,20 @@
                 </telerik:RadTab>
             </Tabs>
         </telerik:RadTabStrip>
-        <div id="Master" runat="server">
+        <div id="Masters" runat="server">
             <br />
-            <table border="0" id="Serch" runat="server">
-                <tbody>
-                    <tr>
-                        <td>
-                            <table border="1">
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <uc3:CtlFilter ID="F" runat="server" />
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                        <td>
-                            <asp:Button ID="BtnSerch" runat="server" Text="検索" OnClick="BtnSerch_Click" />
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            
+            <uc4:Filter2 ID="Filter" runat="server" />
             <br />
-            <asp:Button ID="BtnSinki" runat="server" Text="新規登録" OnClick="BtnSinki_Click" Width="100" />
-            <asp:Button runat="server" ID="CSVdownload" Text="CSVダウンロード" OnClick="CSVdownload_Click" />
-            <asp:FileUpload runat="server" ID="Fu" />
-            <asp:Button runat="server" ID="CSVupload" Text="CSVアップロード" OnClick="CSVupload_Click" />
-            <asp:Button runat="server" ID="CSVformat" Text="アップロードフォーマットをダウンロード" OnClick="CSVformat_Click" />
+            <asp:Button runat="server" ID="BtnSerch" OnClick="BtnSerch_Click1" Text="検索" />
             <br />
-            <asp:Label ID="lblMsg" runat="server" Text=""></asp:Label>
             <br />
-            <div id="L" runat="server">
-                <telerik:RadGrid ID="D" runat="server" CssClass="def" PageSize="15" AllowPaging="True" EnableAJAX="True" EnableAJAXLoadingTemplate="True" Skin="ykuri" AllowCustomPaging="True" EnableEmbeddedSkins="False" GridLines="None" CellPadding="0" EnableEmbeddedBaseStylesheet="False" OnItemDataBound="D_ItemDataBound" OnItemCreated="D_ItemCreated" OnPageIndexChanged="D_PageIndexChanged" Width="200">
-                    <HeaderContextMenu EnableAutoScroll="True">
-                    </HeaderContextMenu>
-                    <AlternatingItemStyle CssClass="alt"></AlternatingItemStyle>
-                    <HeaderStyle CssClass="hd" Font-Bold="False" Font-Italic="False" Font-Overline="False" Font-Strikeout="False" Font-Underline="False" Wrap="False"></HeaderStyle>
-                    <MasterTableView CellPadding="2" GridLines="Both" Border="0" CellSpacing="0" AutoGenerateColumns="False">
-                        <CommandItemSettings ExportToPdfText="Export to Pdf"></CommandItemSettings>
-                        <RowIndicatorColumn FilterControlAltText="Filter RowIndicator column">
-                        </RowIndicatorColumn>
-                        <ExpandCollapseColumn FilterControlAltText="Filter ExpandColumn column">
-                        </ExpandCollapseColumn>
-                        <Columns>
-
-
-                            <telerik:GridTemplateColumn AllowFiltering="False" UniqueName="SelectButton">
-                                <ItemTemplate>
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <asp:Button ID="E" runat="server" Text="修正" OnClick="E_Click" Width="55px"></asp:Button>
-                                            </td>
-                                            <%--                                            <td>
-                                                <asp:Button ID="K" runat="server" Text="同期" OnClick="K_Click"></asp:Button>
-                                            </td>--%>
-                                        </tr>
-                                    </table>
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
-                        </Columns>
-                        <EditFormSettings>
-                            <EditColumn InsertImageUrl="Update.gif" UpdateImageUrl="Update.gif" EditImageUrl="Edit.gif" CancelImageUrl="Cancel.gif">
-                            </EditColumn>
-                        </EditFormSettings>
-                        <ItemStyle Wrap="False"></ItemStyle>
-                        <HeaderStyle Wrap="False" Font-Bold="False" Font-Italic="False" Font-Overline="False" Font-Strikeout="False" Font-Underline="False" CssClass="radgrid_header_def"></HeaderStyle>
-                        <AlternatingItemStyle Wrap="False" CssClass="alt"></AlternatingItemStyle>
-                        <PagerStyle Position="Top" PagerTextFormat="ページ移動: {4} &amp;nbsp;ページ : &lt;strong&gt;{0:N0}&lt;/strong&gt; / &lt;strong&gt;{1:N0}&lt;/strong&gt; | 件数: &lt;strong&gt;{2:N0}&lt;/strong&gt; - &lt;strong&gt;{3:N0}件&lt;/strong&gt; / &lt;strong&gt;{5:N0}&lt;/strong&gt;件中" PageSizeLabelText="ページサイズ:" FirstPageToolTip="最初のページに移動" LastPageToolTip="最後のページに移動" NextPageToolTip="次のページに移動" PrevPageToolTip="前のページに移動" AlwaysVisible="True" />
-                    </MasterTableView>
-                    <ClientSettings>
-                        <ClientEvents OnGridCreated="Core.ResizeRadGrid" />
-                        <Scrolling AllowScroll="false" UseStaticHeaders="True" />
-                    </ClientSettings>
-                    <FilterMenu EnableEmbeddedSkins="False">
-                    </FilterMenu>
-                </telerik:RadGrid>
-            </div>
+            <asp:Button ID="Button1" runat="server" Text="新規登録" OnClick="Button1_Click" Width="100" />
+            <asp:Button runat="server" ID="BtnCSVdownload" OnClick="BtnCSVdownload_Click" Text="CSVダウンロード" />
+            <asp:Button runat="server" ID="BtnUpload" OnClick="BtnUpload_Click" Text="アップロード" />
+            <asp:FileUpload runat="server" ID="FileUpload" />
+            <br />
         </div>
-        <input type="hidden" id="count" runat="server" />
         <div id="Touroku" runat="server">
             <br />
             <asp:Button ID="BtnToroku" runat="server" Text="登録" OnClick="BtnToroku_Click" Width="75" />
@@ -133,6 +123,131 @@
             <br />
             <uc2:M_Tokuisaki ID="Tokuisaki" runat="server" />
         </div>
+
+
+        <asp:Label ID="lblMsg" runat="server" Text=""></asp:Label>
+        <br />
+        <div id="L" runat="server">
+            <telerik:RadGrid runat="server" ID="RGTokuisakiList" OnItemDataBound="RGTokuisakiList_ItemDataBound" OnItemCommand="RGTokuisakiList_ItemCommand" AutoGenerateColumns="false" PageSize="30" AllowPaging="true" OnItemCreated="RGTokuisakiList_ItemCreated" OnPageIndexChanged="RGTokuisakiList_PageIndexChanged" OnPreRender="RGTokuisakiList_PreRender" AllowCustomPaging="false">
+                <PagerStyle Position="Top" PageSizeControlType="None" />
+                <MasterTableView>
+                    <Columns>
+
+                        <telerik:GridTemplateColumn>
+                            <ItemTemplate>
+                                <asp:Button runat="server" ID="BtnDelete" CommandName="Delete" Text="削除" OnClientClick="A();" />
+                            </ItemTemplate>
+                        </telerik:GridTemplateColumn>
+
+                        <telerik:GridTemplateColumn>
+                            <HeaderTemplate>
+                                <p>得意先コード</p>
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <asp:Label runat="server" ID="LblTokuisakiCode"></asp:Label>
+                            </ItemTemplate>
+                        </telerik:GridTemplateColumn>
+
+                        <telerik:GridTemplateColumn>
+                            <HeaderTemplate>
+                                <p>得意先名1</p>
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <asp:Label runat="server" ID="LblTokuisakiName1"></asp:Label>
+                            </ItemTemplate>
+                        </telerik:GridTemplateColumn>
+
+                        <telerik:GridTemplateColumn>
+                            <HeaderTemplate>
+                                <p>得意先名２</p>
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <asp:Label runat="server" ID="LblTokuisakiName2"></asp:Label>
+                            </ItemTemplate>
+                        </telerik:GridTemplateColumn>
+
+                        <telerik:GridTemplateColumn>
+                            <HeaderTemplate>
+                                <p>略称</p>
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <asp:Label runat="server" ID="LblTokuisakiRyakusyou"></asp:Label>
+                            </ItemTemplate>
+                        </telerik:GridTemplateColumn>
+
+
+
+                        <telerik:GridTemplateColumn>
+                            <HeaderTemplate>
+                                <p>担当者名</p>
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <asp:Label runat="server" ID="LblTanto"></asp:Label>
+                            </ItemTemplate>
+                        </telerik:GridTemplateColumn>
+
+                        <telerik:GridTemplateColumn>
+                            <HeaderTemplate>
+                                <p>住所1</p>
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <asp:Label runat="server" ID="LblAddress1"></asp:Label>
+                            </ItemTemplate>
+                        </telerik:GridTemplateColumn>
+
+
+                        <telerik:GridTemplateColumn>
+                            <HeaderTemplate>
+                                <p>住所2</p>
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <asp:Label runat="server" ID="LblAddress2"></asp:Label>
+                            </ItemTemplate>
+                        </telerik:GridTemplateColumn>
+
+                        <telerik:GridTemplateColumn>
+                            <HeaderTemplate>
+                                <p>電話番号</p>
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <asp:Label runat="server" ID="LblTEL"></asp:Label>
+                            </ItemTemplate>
+                        </telerik:GridTemplateColumn>
+
+                        <telerik:GridTemplateColumn>
+                            <HeaderTemplate>
+                                <p>FAX</p>
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <asp:Label runat="server" ID="LblFAX"></asp:Label>
+                            </ItemTemplate>
+                        </telerik:GridTemplateColumn>
+
+                        <telerik:GridTemplateColumn>
+                            <HeaderTemplate>
+                                <p>締日</p>
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <asp:Label runat="server" ID="LblShimebi"></asp:Label>
+                            </ItemTemplate>
+                        </telerik:GridTemplateColumn>
+
+                        <telerik:GridTemplateColumn>
+                            <HeaderTemplate>
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <asp:Button runat="server" ID="BtnSyousai" CommandName="BtnSyousai" Text="詳細" />
+                                <asp:HiddenField runat="server" ID="HidSyousai" />
+                            </ItemTemplate>
+                        </telerik:GridTemplateColumn>
+
+
+                    </Columns>
+                </MasterTableView>
+            </telerik:RadGrid>
+        </div>
+        <input type="hidden" id="count" runat="server" />
+
         <div>
             <telerik:RadAjaxManager ID="Ram" runat="server" OnAjaxRequest="Ram_AjaxRequest">
                 <%--<ClientEvents OnResponseEnd="OnResponseEnd" OnRequestStart="OnRequestStart" /> --%>

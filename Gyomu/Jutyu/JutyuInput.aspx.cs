@@ -62,7 +62,7 @@ namespace Gyomu.Jutyu
             Copy = 2,
             Register = 3,
             Create = 4,
-            Jutyu=5
+            Jutyu = 5
         }
 
         protected void Page_PreRender(object sender, EventArgs e)
@@ -145,7 +145,7 @@ namespace Gyomu.Jutyu
                 {
                     //消費税
                     nZei = Kakaku / 10;
-                   
+
                     nZeiGokei = nZei * njSuryo;
                     lblSyohiZei.Value = nZeiGokei.ToString();
                 }
@@ -294,17 +294,17 @@ namespace Gyomu.Jutyu
                     BtnUriage.Visible = false;
 
                     //受注したデータは削除修正できないようにする
-                    if (Mdt[0].UriageFlg != false)
-                    {
-                        BtnSyusei.Visible = BtnDel.Visible = false;
-                    }
-                    else
-                    {
-                        BtnSyusei.Visible = BtnDel.Visible = true;
-                    }
+                    //if (Mdt[0].UriageFlg != false)
+                    //{
+                    //    BtnSyusei.Visible = BtnDel.Visible = false;
+                    //}
+                    //else
+                    //{
+                    //    BtnSyusei.Visible = BtnDel.Visible = true;
+                    //}
                 }
                 else
-                if(VsID=="Uriage")
+                if (VsID == "Uriage")
                 {
                     BtnToroku.Visible = false;
                     BtnSyusei.Visible = false;
@@ -342,10 +342,8 @@ namespace Gyomu.Jutyu
 
                 RadSisetMeisyo.SelectedValue = Mdt[0].SisetuMei.ToString();
 
-                RadInji.SelectedValue = Hdt[0].SasisasiInjiFlg.ToString();
-                RadDate.SelectedValue = Hdt[0].SasidasiHidukeFlg.ToString();
 
-                RadDayMitumori.SelectedDate = Mdt[0].JutyuBi;
+                //RadDayMitumori.SelectedDate = Mdt[0].JutyuBi;
                 RadDaySyoukai.SelectedDate = Mdt[0].Syokaibi;
                 RadSiyouCalendar.SelectedDate = Mdt[0].SiyouKaishi;
                 RadSyuryoCalendar.SelectedDate = Mdt[0].SiyouOwari;
@@ -432,7 +430,7 @@ namespace Gyomu.Jutyu
                 HidCsv_TbxJutyuGoukei.Value = HidCsv_TbxHattyuGoukei.Value = HidCsv_TbxSyouhiZei.Value = HidCsv_TbxArari.Value = HidCsv_Suryo.Value = "";
 
                 //修正のGrid
-                CreateEdit2( Mdt);
+                CreateEdit2(Mdt);
 
             }
         }
@@ -651,7 +649,7 @@ namespace Gyomu.Jutyu
                 }
                 //lblMeisyou.Text = dt[i].SisetuMei.ToString();
                 // RadMeisyo.SelectedValue = dt[i].HttyuSakiMei;
-                lblHattyusaki.Text = dt[i].HattyuSakiMei;
+                // lblHattyusaki.Text = dt[i].HattyuSakiMei;
 
                 lblHinmei.Text = dt[i].SyouhinCode;
 
@@ -1574,7 +1572,7 @@ namespace Gyomu.Jutyu
                 }
                 else
                 {
-                   // Hdr.JutyuNo = vsNo;
+                    // Hdr.JutyuNo = vsNo;
                 }
 
                 //ヘッダー情報
@@ -1627,23 +1625,6 @@ namespace Gyomu.Jutyu
                     return;
                 }
 
-                if (RadInji.SelectedItem.Value != "True")
-                {
-                    Hdr.SasisasiInjiFlg = false;
-                }
-                else
-                {
-                    Hdr.SasisasiInjiFlg = true;
-                }
-
-                if (RadDate.SelectedItem.Value != "True")
-                {
-                    Hdr.SasidasiHidukeFlg = false;
-                }
-                else
-                {
-                    Hdr.SasidasiHidukeFlg = true;
-                }
 
                 int nSougaku = int.Parse(lblTotal.Text);
                 Hdr.SoukeiGaku = nSougaku;
@@ -1720,7 +1701,7 @@ namespace Gyomu.Jutyu
                         }
                         else
                         {
-                           // dr.JutyuNo = vsNo;
+                            // dr.JutyuNo = vsNo;
                         }
 
                         dr.RowNo = i + 1;
@@ -1847,7 +1828,6 @@ namespace Gyomu.Jutyu
                             }
                         }
                         int nHyojunKakaku = int.Parse(TbxHyojunKakaku.Value);
-                        dr.HyojunKakaku = nHyojunKakaku;
 
                         int nJutyuSu = int.Parse(TbxjutyuSuryo.Value);
                         dr.JutyuSuryou = nJutyuSu;
@@ -1870,7 +1850,7 @@ namespace Gyomu.Jutyu
                         int nZei = int.Parse(lblSyohiZei.Value);
                         dr.Syohizei = nZei;
 
-                        dr.JutyuBi = RadDayMitumori.SelectedDate.Value;
+                        //dr.JutyuBi = RadDayMitumori.SelectedDate.Value;
                         //dr.MitumoriYukoKigen= 
                         dr.TanTouName = RadTanto.Text;
                         dr.TourokuName = lblUser.Text;
@@ -1902,13 +1882,13 @@ namespace Gyomu.Jutyu
                         dr.JutyuTekiyo = TbxJTekiyou.Text;
                         dr.HaccyuTekiyo = TbxHTekiyo.Text;
 
-                        dr.HattyuSakiMei = lblHattyusaki.Text;
+                        //dr.HattyuSakiMei = lblHattyusaki.Text;
                         dr.Tourokubi = DateTime.Now;
 
                         int nArari = int.Parse(lblArari.Value);
                         dr.ArariGaku = nArari;
 
-                        dr.UriageFlg = false;
+                        //dr.UriageFlg = false;
 
                         dt.AddT_JutyuRow(dr);
                     }
@@ -1974,7 +1954,7 @@ namespace Gyomu.Jutyu
                 return;
             }
         }
-        
+
         protected void BtnUriage_Click(object sender, EventArgs e)
         {
             //string JutyuNo = vsNo;
@@ -2042,7 +2022,7 @@ namespace Gyomu.Jutyu
             //    Udr.UriageNo = JutyuNo;
             //    Udr.KanriCode = sKanriCode;
             //    HUdt.Rows.Add(Udr);
-                
+
 
             //    ClassUriage.GetKeijo(JutyuNo, Udt, HUdt, Global.GetConnection());
 

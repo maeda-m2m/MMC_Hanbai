@@ -11,6 +11,8 @@ namespace Gyomu.Mitumori
         {
             if (!IsPostBack)
             {
+                LblEnd.Text = "";
+                err.Text = "";
                 string url = Request.RawUrl;
                 string[] strAry = url.Split('=');
                 string mNo = strAry[1];
@@ -48,18 +50,29 @@ namespace Gyomu.Mitumori
 
             Doc pdf = new Doc();
             string flg = "";
-            bool bDate = false;
+            string bDate = "";
             if (ChkName.Checked)
-            {
-                flg = "1";
-            }
-            else
             {
                 flg = "0";
             }
+            else
+            {
+                flg = "1";
+            }
             if (ChkDate.Checked)
             {
-                bDate = true;
+                bDate = "true";
+            }
+            else
+            {
+                if (RdpDate.SelectedDate.ToString() != "")
+                {
+                    bDate = RdpDate.SelectedDate.Value.ToLongDateString();
+                }
+                else
+                {
+                    bDate = "false";
+                }
             }
 
             string[] strMAry = PriFormat.Split(',');
@@ -73,19 +86,33 @@ namespace Gyomu.Mitumori
                 string sArg = "";
                 if (acApp.theData != null)
                 {
-                    sArg = Common.DownloadDataForm.GetQueryString4Binary("InsatsuFormat" + DateTime.Now + ".pdf", acApp.theData);
+                    sArg = Common.DownloadDataForm.GetQueryString4Binary(DateTime.Now + "書類印刷_" + str + "_" + PriFormat + ".pdf", acApp.theData);
                     Telerik.Web.UI.RadAjaxManager.GetCurrent(this.Page).ResponseScripts.Add(string.Format("window.location.href='{0}';", this.ResolveUrl("~/Common/DownloadDataForm.aspx?" + sArg)));
+                    LblEnd.Text = "印刷完了";
                 }
                 else
                 {
                     err.Text = "入力データに不備があり、書類を作成をすることができませんでした。";
                 }
             }
+            AppCommon.strShisetumei = "";
         }
 
         protected void Ram_AjaxRequest(object sender, AjaxRequestEventArgs e)
         {
 
+        }
+
+        protected void ChkDate_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ChkDate.Checked)
+            {
+                DivDate.Style["display"] = "none";
+            }
+            else
+            {
+                DivDate.Style["display"] = "";
+            }
         }
     }
 }

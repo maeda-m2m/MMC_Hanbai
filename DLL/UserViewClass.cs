@@ -1,11 +1,7 @@
 ﻿using Core;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DLL
 {
@@ -30,6 +26,15 @@ namespace DLL
             return dt;
         }
 
+        public static Dataset.T_UserListFieldDataTable GetField(int code, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select * from T_UserListField where ListID = @id";
+            da.SelectCommand.Parameters.AddWithValue("@id", code);
+            Dataset.T_UserListFieldDataTable dt = new Dataset.T_UserListFieldDataTable();
+            da.Fill(dt);
+            return dt;
+        }
 
         public static Dataset.T_UserViewRow
             getT_UserViewRow(int nListID, string strUserID, EnumType type, string strTypeMei, SqlConnection sqlConn)

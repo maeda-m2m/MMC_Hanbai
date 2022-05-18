@@ -1,6 +1,7 @@
 ﻿using DLL;
 using System;
 using System.Data;
+using System.Data.SqlClient;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using Telerik.Web.UI;
@@ -70,15 +71,16 @@ namespace Gyomu.Mitumori
                 string code = "";
                 ClassKensaku.KensakuParam k = SetKensakuParam();
                 DataMitumori.T_MitumoriHeaderDataTable dtH = new DataMitumori.T_MitumoriHeaderDataTable();
-
-                DataMitumori.T_MitumoriHeaderDataTable dt =
-                    ClassKensaku.GetMitumoriData(k, Global.GetConnection());
+                //DataMitumori.T_MitumoriHeaderBackupDataTable dtH = new DataMitumori.T_MitumoriHeaderBackupDataTable();
+                //DataMitumori.T_MitumoriHeaderBackupDataTable dt = ClassKensaku.GetMitumori2(k, Global.GetConnection());
+                DataMitumori.T_MitumoriHeaderDataTable dt = ClassKensaku.GetMitumoriData(k, Global.GetConnection());
 
                 if (TbxHinban.Text != "" || RadSyohinmeisyou.Text != "")
                 {
                     if (TbxHinban.Text != "")
                     {
-                        DataMitumori.T_MitumoriDataTable dtHIN = ClassMitumori.GetMitumoriHinban(TbxHinban.Text, Global.GetConnection());
+                        DataMitumori.T_MitumoriHeaderBackupDataTable dtHIN = ClassMitumori.GetMitumoriHinban2(TbxHinban.Text, Global.GetConnection());
+                        //DataMitumori.T_MitumoriDataTable dtHIN = ClassMitumori.GetMitumoriHinban(TbxHinban.Text, Global.GetConnection());
                         for (int h = 0; h < dtHIN.Count; h++)
                         {
                             if (code == "")
@@ -87,7 +89,7 @@ namespace Gyomu.Mitumori
                             }
                             else
                             {
-                                if (!code.Contains(dtHIN[h].MitumoriNo))
+                                if (!code.Contains(dtHIN[h].MitumoriNo.ToString()))
                                 {
                                     code += "," + dtHIN[h].MitumoriNo;
                                 }
@@ -96,7 +98,8 @@ namespace Gyomu.Mitumori
                     }
                     if (RadSyohinmeisyou.Text != "")
                     {
-                        DataMitumori.T_MitumoriDataTable dtSYO = ClassMitumori.GetMitumoriHinban(RadSyohinmeisyou.SelectedValue, Global.GetConnection());
+                        DataMitumori.T_MitumoriBackupDataTable dtSYO = ClassMitumori.GetMitumoriHinban3(RadSyohinmeisyou.SelectedValue, Global.GetConnection());
+                        //DataMitumori.T_MitumoriDataTable dtSYO = ClassMitumori.GetMitumoriHinban(RadSyohinmeisyou.SelectedValue, Global.GetConnection());
                         for (int s = 0; s < dtSYO.Count; s++)
                         {
                             if (code == "")
@@ -133,6 +136,7 @@ namespace Gyomu.Mitumori
                         for (int j = 0; j < codeAry.Length; j++)
                         {
                             DataMitumori.T_MitumoriHeaderRow dtR = dtH.NewT_MitumoriHeaderRow();
+                            //DataMitumori.T_MitumoriHeaderBackupRow dtR = dtH.NewT_MitumoriHeaderBackupRow();
                             DataMitumori.T_MitumoriHeaderDataTable dtK = ClassMitumori.GETMitsumorihead(codeAry[j], Global.GetConnection());
                             dtR.ItemArray = dtK[0].ItemArray;
                             dtH.AddT_MitumoriHeaderRow(dtR);
@@ -142,9 +146,11 @@ namespace Gyomu.Mitumori
                     {
                         for (int d = 0; d < dt.Count; d++)
                         {
-                            DataMitumori.T_MitumoriHeaderRow dtR = dtH.NewT_MitumoriHeaderRow();
-                            dtR.ItemArray = dt[d].ItemArray;
-                            dtH.AddT_MitumoriHeaderRow(dtR);
+                            lblMsg.Text = "該当する見積データはありません";
+                            return;
+                            //DataMitumori.T_MitumoriHeaderRow dtR = dtH.NewT_MitumoriHeaderRow();
+                            //dtR.ItemArray = dt[d].ItemArray;
+                            //dtH.AddT_MitumoriHeaderRow(dtR);
                         }
                     }
                 }
@@ -156,7 +162,6 @@ namespace Gyomu.Mitumori
                         dtR.ItemArray = dt[d].ItemArray;
                         dtH.AddT_MitumoriHeaderRow(dtR);
                     }
-
                 }
                 //DataMitumori.T_MitumoriHeaderDataTable dt = ClassMitumori.GetMitsuHeadKensaku(k,Global.GetConnection());
 
@@ -201,7 +206,6 @@ namespace Gyomu.Mitumori
             {
                 this.lblMsg.Text = ex.Message;
             }
-
         }
 
         private ClassKensaku.KensakuParam SetKensakuParam()
@@ -221,18 +225,16 @@ namespace Gyomu.Mitumori
             if (RadTokuiMeisyo.SelectedValue != "" && RadTokuiMeisyo.SelectedValue != "-1")
             {
                 string toku = RadTokuiMeisyo.Text;
-                string[] srr = toku.Split('/');
-                k.sTokuisaki = srr[1];
+                k.sTokuisaki = toku;
             }
             if (RadSekyuMeisyo.SelectedValue != "" && RadSekyuMeisyo.SelectedValue != "-1")
             {
                 string sei = RadSekyuMeisyo.Text;
-                string[] srr = sei.Split('/');
-                k.sSeikyu = RadSekyuMeisyo.SelectedValue.Trim();
+                k.sSeikyu = RadSekyuMeisyo.Text;
             }
             if (RadTyokusoMeisyo.SelectedValue != "" && RadTyokusoMeisyo.SelectedValue != "-1")
             {
-                k.sTyokuso = RadTyokusoMeisyo.SelectedValue;
+                k.sTyokuso = RadTyokusoMeisyo.Text;
             }
             if (RadSisetMeisyo.SelectedValue != "" && RadSisetMeisyo.SelectedValue != "-1")
             {
@@ -273,14 +275,29 @@ namespace Gyomu.Mitumori
             if (e.Item.ItemType == Telerik.Web.UI.GridItemType.Item || e.Item.ItemType == Telerik.Web.UI.GridItemType.AlternatingItem)
             {
                 DataRowView drv = (DataRowView)e.Item.DataItem;
+                string strFacility = "";
                 //DataMitumori.T_MitumoriRow dr = (DataMitumori.T_MitumoriRow)drv.Row;
                 DataMitumori.T_MitumoriHeaderRow dr = (DataMitumori.T_MitumoriHeaderRow)drv.Row;
-
+                //DataMitumori.T_MitumoriHeaderBackupRow dr = (DataMitumori.T_MitumoriHeaderBackupRow)drv.Row;
+                DataMitumori.T_MitumoriDataTable dtM = ClassMitumori.GetFacility(dr.MitumoriNo, Global.GetConnection());
+                for (int m = 0; m < dtM.Count; m++)
+                {
+                    if (strFacility == "")
+                    {
+                        strFacility = dtM[m].SisetsuAbbreviration;
+                    }
+                    else
+                    {
+                        if (!strFacility.Contains(dtM[m].SisetsuAbbreviration))
+                        {
+                            strFacility += "/" + dtM[m].SisetsuAbbreviration;
+                        }
+                    }
+                }
                 int rgItemIndex = e.Item.ItemIndex;
 
                 //string sKey = dr.MitumoriNo;
                 string sKey = dr.MitumoriNo.ToString();
-
 
                 HtmlInputCheckBox chk = e.Item.FindControl("ChkRow") as HtmlInputCheckBox;
 
@@ -300,13 +317,29 @@ namespace Gyomu.Mitumori
                 }
                 if (!dr.IsTokuisakiRyakusyoNull())
                 {
-                    e.Item.Cells[RadG.Columns.FindByUniqueName("ColTokuisakiName").OrderIndex].Text = dr.TokuisakiRyakusyo;
+                    if (dr.TokuisakiRyakusyo.Length < 20)
+                    {
+                        e.Item.Cells[RadG.Columns.FindByUniqueName("ColTokuisakiName").OrderIndex].Text = dr.TokuisakiRyakusyo;
+                    }
+                    else
+                    {
+                        string data = dr.TokuisakiRyakusyo.Substring(0, 20);
+                        e.Item.Cells[RadG.Columns.FindByUniqueName("ColTokuisakiName").OrderIndex].Text = data + "...";
+                    }
                 }
 
 
                 if (!dr.IsFacilityNameNull())
                 {
-                    e.Item.Cells[RadG.Columns.FindByUniqueName("ColSisetu").OrderIndex].Text = dr.FacilityName;
+                    if (strFacility.Length < 30)
+                    {
+                        e.Item.Cells[RadG.Columns.FindByUniqueName("ColSisetu").OrderIndex].Text = strFacility;
+                    }
+                    else
+                    {
+                        string data = strFacility.Substring(0, 30);
+                        e.Item.Cells[RadG.Columns.FindByUniqueName("ColSisetu").OrderIndex].Text = data + "...";
+                    }
                 }
                 if (!dr.IsTantoNameNull())
                 {
@@ -579,20 +612,21 @@ namespace Gyomu.Mitumori
                     mNo = str[0];
                 }
             }
-
-
-            SessionManager.MitumoriSyusei(mNo);
-            SessionManager.MitumoriSyuseiRow("");
-            //SessionManager.MitumoriType("Syusei");
-
-            this.Response.Redirect("../Kaihatsu.aspx");
-
+            if (mNo.Split('_').Length > 1)//複数チェックしてるかチェック
+            {
+                lblMsg.Text = "修正時はチェック１つのみ選択可能です。";
+            }
+            else
+            {
+                SessionManager.MitumoriSyusei(mNo);
+                SessionManager.MitumoriSyuseiRow("");
+                //SessionManager.MitumoriType("Syusei");
+                this.Response.Redirect("../Kaihatsu.aspx");
+            }
         }
 
         protected void BtnDelete_Click(object sender, EventArgs e)
         {
-
-
             string mNo = "";
             string strKeys = "";
             for (int i = 0; i < RadG.Items.Count; i++)
@@ -626,8 +660,8 @@ namespace Gyomu.Mitumori
                         {
                             mNo = str[0];
 
-                            DataMitumori.T_MitumoriHeaderDataTable dt = ClassMitumori.DelMitumoriHeader(mNo, Global.GetConnection());
-                            DataMitumori.T_MitumoriDataTable dd = ClassMitumori.DelMitumori3(mNo, Global.GetConnection());
+                            ClassMitumori.DelMitumoriHeader(mNo, Global.GetConnection());
+                            ClassMitumori.DelMitumori3(mNo, Global.GetConnection());
                         }
                     }
                 }
@@ -659,6 +693,264 @@ namespace Gyomu.Mitumori
         protected void RadSisetMeisyo_ItemsRequested(object sender, RadComboBoxItemsRequestedEventArgs e)
         {
             ListSet.GetFacility(sender, e);
+        }
+
+        protected void BtnMeisaiDownload_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                UserViewManager.UserView v = SessionManager.User.GetUserView(11);
+                v.SortExpression = "MitumoriNo ASC";
+
+                //ClassKensaku.KensakuParam k = SetKensakuParam();
+                string strMitumoriNo = "";
+                string strJustyuFlg = "";
+                string strTokuisaki = "";
+                string strSeikyusaki = "";
+                string strTyokusousaki = "";
+                string strFacility = "";
+                string strCategory = "";
+                string strBumon = "";
+                string strMakerHinban = "";
+                string strSyouhinMei = "";
+                string strTanto = "";
+                string strMitumoriBi = "";
+                bool boolWhere = false;
+
+                SqlDataAdapter da = new SqlDataAdapter("", Global.GetConnection());
+                da.SelectCommand.CommandText = "select * from T_Mitumori";
+
+
+                if (!string.IsNullOrEmpty(TbxMitumoriNo.Text))
+                {
+                    strMitumoriNo = TbxMitumoriNo.Text;
+                    if (!boolWhere)
+                    {
+                        da.SelectCommand.CommandText += " Where MitumoriNo = @MitumoriNo";
+                        boolWhere = true;
+                    }
+                    else
+                    {
+                        da.SelectCommand.CommandText += " and MitumoriNo = @MitumoriNo";
+                    }
+                    da.SelectCommand.Parameters.AddWithValue("@MitumoriNo", strMitumoriNo);
+                }
+                if (!string.IsNullOrEmpty(DrpFlg.SelectedValue))
+                {
+                    strJustyuFlg = DrpFlg.SelectedValue;
+                    if (!boolWhere)
+                    {
+                        da.SelectCommand.CommandText += " Where JutyuFlg = @JF";
+                        boolWhere = true;
+                    }
+                    else
+                    {
+                        da.SelectCommand.CommandText += " and JutyuFlg = @JF";
+                    }
+                    da.SelectCommand.Parameters.AddWithValue("@JF", strJustyuFlg);
+                }
+                if (!string.IsNullOrEmpty(RadTokuiMeisyo.Text))
+                {
+                    strTokuisaki = RadTokuiMeisyo.Text;
+                    if (!boolWhere)
+                    {
+                        da.SelectCommand.CommandText += " Where TokuisakiMei = @Tokuisaki";
+                        boolWhere = true;
+                    }
+                    else
+                    {
+                        da.SelectCommand.CommandText += " and TokuisakiMei = @Tokuisaki";
+                    }
+                    da.SelectCommand.Parameters.AddWithValue("@Tokuisaki", strTokuisaki);
+                }
+
+                if (!string.IsNullOrEmpty(RadSekyuMeisyo.Text))
+                {
+                    strSeikyusaki = RadSekyuMeisyo.Text;
+                    if (!boolWhere)
+                    {
+                        da.SelectCommand.CommandText += " Where SeikyusakiMei = @Seikyusaki";
+                        boolWhere = true;
+                    }
+                    else
+                    {
+                        da.SelectCommand.CommandText += " and SeikyusakiMei = @Seikyusaki";
+                    }
+                    da.SelectCommand.Parameters.AddWithValue("@Seikyusaki", strSeikyusaki);
+                }
+
+                if (!string.IsNullOrEmpty(RadTyokusoMeisyo.Text))
+                {
+                    strTyokusousaki = RadTyokusoMeisyo.Text;
+                    if (!boolWhere)
+                    {
+                        da.SelectCommand.CommandText += " Where TyokusousakiMei = @Tyokusosaki";
+                        boolWhere = true;
+                    }
+                    else
+                    {
+                        da.SelectCommand.CommandText += " and TyokusousakiMei = @Tyokusosaki";
+                    }
+                    da.SelectCommand.Parameters.AddWithValue("@Tyokusosaki", strSeikyusaki);
+                }
+
+                if (!string.IsNullOrEmpty(RadSisetMeisyo.Text))
+                {
+                    strFacility = RadSisetMeisyo.Text;
+                    if (!boolWhere)
+                    {
+                        da.SelectCommand.CommandText += " Where SisetuMei = @Sisetu";
+                        boolWhere = true;
+                    }
+                    else
+                    {
+                        da.SelectCommand.CommandText += " and SisetuMei = @Sisetu";
+                    }
+                    da.SelectCommand.Parameters.AddWithValue("@Sisetu", strFacility);
+                }
+
+                if (!string.IsNullOrEmpty(RadCate.Text))
+                {
+                    strCategory = RadCate.Text;
+                    if (!boolWhere)
+                    {
+                        da.SelectCommand.CommandText += " Where CategoryName = @Cate";
+                        boolWhere = true;
+                    }
+                    else
+                    {
+                        da.SelectCommand.CommandText += " and CategoryName = @Cate";
+                    }
+                    da.SelectCommand.Parameters.AddWithValue("@Cate", strCategory);
+                }
+                if (!string.IsNullOrEmpty(RadBumon.Text))
+                {
+                    strBumon = RadBumon.Text;
+                    if (!boolWhere)
+                    {
+                        da.SelectCommand.CommandText += " Where Busyo = @Busyo";
+                        boolWhere = true;
+                    }
+                    else
+                    {
+                        da.SelectCommand.CommandText += " and Busyo = @Busyo";
+                    }
+                    da.SelectCommand.Parameters.AddWithValue("@Busyo", strBumon);
+                }
+                if (!string.IsNullOrEmpty(TbxHinban.Text))
+                {
+                    strMakerHinban = TbxHinban.Text;
+                    if (!boolWhere)
+                    {
+                        da.SelectCommand.CommandText += " Where MekarHinban = @Maker";
+                        boolWhere = true;
+                    }
+                    else
+                    {
+                        da.SelectCommand.CommandText += " and MekarHinban = @Maker";
+                    }
+                    da.SelectCommand.Parameters.AddWithValue("@Maker", strMakerHinban);
+                }
+                if (!string.IsNullOrEmpty(RadSyohinmeisyou.Text))
+                {
+                    strSyouhinMei = RadSyohinmeisyou.Text;
+                    if (!boolWhere)
+                    {
+                        da.SelectCommand.CommandText += " Where MekarHinban = @Maker";
+                        boolWhere = true;
+                    }
+                    else
+                    {
+                        da.SelectCommand.CommandText += " and MekarHinban = @Maker";
+                    }
+                    da.SelectCommand.Parameters.AddWithValue("@Maker", strMakerHinban);
+                }
+                if (!string.IsNullOrEmpty(RadTanto.Text))
+                {
+                    strTanto = RadTanto.Text;
+                    if (!boolWhere)
+                    {
+                        da.SelectCommand.CommandText += " Where TanTouName = @Tanto";
+                        boolWhere = true;
+                    }
+                    else
+                    {
+                        da.SelectCommand.CommandText += " and TanTouName = @Tanto";
+                    }
+                    da.SelectCommand.Parameters.AddWithValue("@Tanto", strTanto);
+                }
+                Common.CtlNengappiForm CtlJucyuBi = FindControl("CtlJucyuBi") as Common.CtlNengappiForm;
+                if (CtlJucyuBi.KikanType != Core.Type.NengappiKikan.EnumKikanType.NONE)
+                {
+                    Core.Type.NengappiKikan d = CtlJucyuBi.GetNengappiKikan();
+                    if (d.KikanType.ToString() == "ONEDAY")
+                    {
+                        if (!boolWhere)
+                        {
+                            da.SelectCommand.CommandText += " Where MitumoriBi = @MitumoriBi";
+                            boolWhere = true;
+                        }
+                        else
+                        {
+                            da.SelectCommand.CommandText += " and MitumoriBi = @MitumoriBi";
+                        }
+                        da.SelectCommand.Parameters.AddWithValue("@MitumoriBi", d.From.ToDateTime());
+                    }
+                    if (d.KikanType.ToString() == "BEFORE")
+                    {
+                        if (!boolWhere)
+                        {
+                            da.SelectCommand.CommandText += " Where MitumoriBi <= @MitumoriBi";
+                            boolWhere = true;
+                        }
+                        else
+                        {
+                            da.SelectCommand.CommandText += " and MitumoriBi <= @MitumoriBi";
+                        }
+                        da.SelectCommand.Parameters.AddWithValue("@MitumoriBi", d.From.ToDateTime());
+                    }
+                    if (d.KikanType.ToString() == "AFTER")
+                    {
+                        if (!boolWhere)
+                        {
+                            da.SelectCommand.CommandText += " Where MitumoriBi >= @MitumoriBi";
+                            boolWhere = true;
+                        }
+                        else
+                        {
+                            da.SelectCommand.CommandText += " and MitumoriBi >= @MitumoriBi";
+                        }
+                        da.SelectCommand.Parameters.AddWithValue("@MitumoriBi", d.From.ToDateTime());
+                    }
+                }
+                DataMitumori.T_MitumoriDataTable dt = new DataMitumori.T_MitumoriDataTable();
+                da.Fill(dt);
+
+                //DataMitumori.T_MitumoriDataTable dt = Class1.GetKakakuCSV
+                //(strMitumoriNo, strJustyuFlg, strTokuisaki, strSeikyusaki, strTyokusousaki, strFacility,
+                //strCategory, strBumon, strMakerHinban, strSyouhinMei, strTanto, strMitumoriBi, Global.GetConnection());
+
+                if (0 == dt.Rows.Count)
+                {
+                    lblMsg.Text = "該当データがありません";
+                    return;
+                }
+
+                string strData = v.SqlDataFactory.GetTextData(dt, this.RadG.MasterTableView.SortExpressions.GetSortString(), Core.Data.DataTable2Text.EnumDataFormat.Csv);
+
+                string strExt = "csv";
+                string strFileName = ("見積DL") + "_" + DateTime.Now.ToString("yyyyMMdd") + "." + strExt;
+                Core.Data.DataTable2Text.EnumDataFormat fmt = Core.Data.DataTable2Text.EnumDataFormat.Csv;
+
+                this.Ram.ResponseScripts.Add(string.Format("window.location.href='{0}';",
+                     this.ResolveUrl("~/Common/DownloadDataForm.aspx?" +
+                     Common.DownloadDataForm.GetQueryString4Text(strFileName, v.CreateTextData(dt, fmt, null)))));
+            }
+            catch (Exception ex)
+            {
+                lblMsg.Text = ex.Message;
+            }
+
         }
     }
 

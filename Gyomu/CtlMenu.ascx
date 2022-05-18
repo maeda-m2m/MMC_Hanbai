@@ -7,6 +7,18 @@
         height: 65px;
     }
 
+    .account {
+        text-decoration: none;
+        color: black;
+        border-style: solid;
+        border-color: black;
+        border-width: 1px;
+        text-align: center;
+        width: 95px;
+        border-radius: 3px;
+        transition: .4s;
+        background-color: transparent;
+    }
 
     .auto-style1 {
         width: 130px;
@@ -119,7 +131,7 @@
                             </Items>
                         </telerik:RadMenuItem>
 
-                        <telerik:RadMenuItem runat="server" Text="マスタ管理">
+                        <telerik:RadMenuItem runat="server" Text="マスタ管理" Value="Master">
                             <Items>
                                 <telerik:RadMenuItem runat="server" NavigateUrl="~/Master/MasterTanto.aspx" Text="担当者マスタ">
                                 </telerik:RadMenuItem>
@@ -160,9 +172,11 @@
             <td>
                 <asp:Label ID="Lbldate" runat="server" ClientIDMode="Static" Text=" "></asp:Label>
                 <br />
-                <asp:Label ID="lblName" runat="server" Text=""></asp:Label>
+                <asp:Label ID="lblName" runat="server" Text=""></asp:Label><br />
+                <a href="~/Master/AccountPage.aspx" runat="server" class="account">会社情報管理</a>
             </td>
         </tr>
+        
     </tbody>
 </table>
 

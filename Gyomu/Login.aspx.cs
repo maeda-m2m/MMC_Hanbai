@@ -1,10 +1,5 @@
 ﻿using DLL;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace Gyomu
 {
@@ -29,7 +24,7 @@ namespace Gyomu
                 {
                     DataMaster.T_OshiraseRow dr = dt[i];
                     TbxInfomation.Text += dr.OshiraseNaiyou.Replace("<br>", "\r\n");
-                    TbxInfomation.Text += "\r\n" + "------------------------------------------------" + dr.CreateDate + "------------------------------------------------" + "\r\n";
+                    TbxInfomation.Text += "\r\n" + "----------------------------------------------" + dr.CreateDate + "----------------------------------------------" + "\r\n";
                 }
             }
             else
@@ -57,17 +52,25 @@ namespace Gyomu
                     {
                         DataSet1.M_TantoRow dr =
                             ClassLogin.GetLoginData(a.ToString(), TbxPass.Text, Global.GetConnection());
-
                         if (dr == null)
                         {
                             Telerik.Web.UI.RadAjaxManager.GetCurrent(this.Page).Alert("ログインID又は、パスワードが違います。");
                         }
                         else
                         {
+                            DataLogin.T_LoginlogRow drLog = ClassLogin.GetLastLogin(Global.GetConnection());
+                            if (drLog.LoginDate.ToShortDateString() != DateTime.Now.ToShortDateString())
+                            {
+                                ClassMaster.DeleteProductList(Global.GetConnection());
+                                DataMaster.V_ProductListDataTable dtN = ClassMaster.GetList(Global.GetConnection());
+                                ClassMaster.CreateProductList(dtN, Global.GetConnection());
+                            }
 
                             SessionManager.Login(dr);
                             if (TbxLogin.Text != "m2m")
+                            {
                                 ClassLogin.GetLoginlog(dr.UserName, TbxLogin.Text, Global.GetConnection());
+                            }
                             Response.Redirect("~/Mitumori/MitumoriItiran.aspx");
                         }
                     }

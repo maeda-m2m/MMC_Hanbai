@@ -42,7 +42,7 @@ namespace DLL
 
                 sql.Commit();
             }
-            catch (Exception e)
+            catch
             {
                 if (sql != null)
                     sql.Rollback();
@@ -81,7 +81,6 @@ namespace DLL
             da.SelectCommand.CommandText =
                 "Select * FROM T_JutyuHeader WHERE JutyuNo = @jNo";
             da.SelectCommand.Parameters.AddWithValue("@jNo", vsNo);
-
             DataJutyu.T_JutyuHeaderDataTable dt = new DataJutyu.T_JutyuHeaderDataTable();
             da.Fill(dt);
             return dt;
@@ -116,7 +115,7 @@ namespace DLL
 
                 return false;
             }
-            catch (Exception e)
+            catch
             {
                 if (null != sql)
                     sql.Rollback();
@@ -183,7 +182,7 @@ namespace DLL
 
                 return false;
             }
-            catch (Exception e)
+            catch
             {
                 if (sql != null)
                     sql.Rollback();
@@ -214,7 +213,7 @@ namespace DLL
 
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
                 return false;
             }
@@ -224,57 +223,57 @@ namespace DLL
             }
         }
 
-        public static void UpDateJutyuKeijo(string type, string jutyuNo, SqlConnection sqlConnection)
-        {
-            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
-            da.SelectCommand.CommandText =
-                "Select * From T_Jutyu Where JutyuNo = @jNo";
-            da.SelectCommand.Parameters.AddWithValue("@jNo", jutyuNo);
+        //public static void UpDateJutyuKeijo(string type, string jutyuNo, SqlConnection sqlConnection)
+        //{
+        //    SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+        //    da.SelectCommand.CommandText =
+        //        "Select * From T_Jutyu Where JutyuNo = @jNo";
+        //    da.SelectCommand.Parameters.AddWithValue("@jNo", jutyuNo);
 
-            da.UpdateCommand = (new SqlCommandBuilder(da)).GetUpdateCommand();
+        //    da.UpdateCommand = (new SqlCommandBuilder(da)).GetUpdateCommand();
 
-            DataJutyu.T_JutyuDataTable dt = new DataJutyu.T_JutyuDataTable();
+        //    DataJutyu.T_JutyuDataTable dt = new DataJutyu.T_JutyuDataTable();
 
 
-            SqlTransaction sql = null;
+        //    SqlTransaction sql = null;
 
-            try
-            {
-                sqlConnection.Open();
-                sql = sqlConnection.BeginTransaction();
+        //    try
+        //    {
+        //        sqlConnection.Open();
+        //        sql = sqlConnection.BeginTransaction();
 
-                da.SelectCommand.Transaction = da.UpdateCommand.Transaction = sql;
+        //        da.SelectCommand.Transaction = da.UpdateCommand.Transaction = sql;
 
-                da.Fill(dt);
+        //        da.Fill(dt);
 
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    DataJutyu.T_JutyuRow dr = dt[i];
+        //        for (int i = 0; i < dt.Rows.Count; i++)
+        //        {
+        //            DataJutyu.T_JutyuRow dr = dt[i];
 
-                    if (type == "Jutyu")
-                    {
-                        dr.UriageFlg = true;
-                    }
-                    else
-                    {
-                        dr.UriageFlg = false;
-                    }
+        //            if (type == "Jutyu")
+        //            {
+        //                dr.UriageFlg = true;
+        //            }
+        //            else
+        //            {
+        //                dr.UriageFlg = false;
+        //            }
 
-                    da.Update(dt);
-                }
+        //            da.Update(dt);
+        //        }
 
-                sql.Commit();
-            }
-            catch (Exception ex)
-            {
-                if (sql != null)
-                    sql.Rollback();
-            }
-            finally
-            {
-                sqlConnection.Close();
-            }
-        }
+        //        sql.Commit();
+        //    }
+        //    catch
+        //    {
+        //        if (sql != null)
+        //            sql.Rollback();
+        //    }
+        //    finally
+        //    {
+        //        sqlConnection.Close();
+        //    }
+        //}
 
         public static DataJutyu.T_JutyuHeaderRow GetMaxJutyu(SqlConnection sqlConnection)
         {
@@ -333,7 +332,7 @@ namespace DLL
                 sql.Commit();
 
             }
-            catch (Exception e)
+            catch
             {
                 if (null != sql)
                     sql.Rollback();
@@ -367,7 +366,7 @@ namespace DLL
                 sql.Commit();
 
             }
-            catch (Exception e)
+            catch
             {
                 if (null != sql)
                     sql.Rollback();
@@ -451,7 +450,7 @@ namespace DLL
                 sql.Commit();
 
             }
-            catch (Exception e)
+            catch
             {
                 if (null != sql)
                     sql.Rollback();
@@ -506,7 +505,7 @@ namespace DLL
                 sqltra.Commit();
 
             }
-            catch (Exception et)
+            catch
             {
                 if (sqltra != null)
                     sqltra.Rollback();
@@ -540,7 +539,7 @@ namespace DLL
                 sqltra.Commit();
 
             }
-            catch (Exception et)
+            catch
             {
                 if (sqltra != null)
                     sqltra.Rollback();
@@ -579,7 +578,7 @@ namespace DLL
                 da.Update(Tdt);
                 sql.Commit();
             }
-            catch (Exception ex)
+            catch
             {
                 if (sql != null)
                 {
@@ -610,152 +609,166 @@ namespace DLL
             return (dt);
         }
 
-        public static void UpDateJutyu2(string mNo, DataJutyu.T_JutyuDataTable dg, int rn, SqlConnection sqlConnection)
+        //public static void UpDateJutyu2(string mNo, DataJutyu.T_JutyuDataTable dg, int rn, SqlConnection sqlConnection)
+        //{
+        //    SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+        //    da.SelectCommand.CommandText =
+        //        "Select * From T_Jutyu Where JutyuNO = @ID AND RowNo  = @row";
+        //    da.SelectCommand.Parameters.AddWithValue("@ID", mNo);
+        //    da.SelectCommand.Parameters.AddWithValue("@row", rn);
+
+        //    da.UpdateCommand = (new SqlCommandBuilder(da)).GetUpdateCommand();
+
+        //    DataJutyu.T_JutyuDataTable Tdt = new DataJutyu.T_JutyuDataTable();
+
+        //    SqlTransaction sql = null;
+
+        //    try
+        //    {
+        //        sqlConnection.Open();
+        //        sql = sqlConnection.BeginTransaction();
+
+        //        da.SelectCommand.Transaction = da.UpdateCommand.Transaction = sql;
+
+        //        da.Fill(Tdt);
+
+        //        DataJutyu.T_JutyuRow dr = Tdt[0];
+        //        for (int i = 0; i < dg.Count; i++)
+        //        {
+        //            dr.JutyuNo = int.Parse(mNo);
+
+        //            dr.RowNo = dg[i].RowNo;
+        //            if (!dg[i].IsTokuisakiCodeNull())
+        //            {
+        //                dr.TokuisakiCode = dg[i].TokuisakiCode;
+        //            }
+        //            if (!dg[i].IsSeikyusakiMeiNull())
+        //            {
+        //                dr.SeikyusakiMei = dg[i].SeikyusakiMei;
+        //            }
+        //            if (!dg[i].IsCateGoryNull())
+        //            {
+        //                dr.CateGory = dg[i].CateGory;
+        //            }
+        //            if (!dg[i].IsCategoryNameNull())
+        //            {
+        //                dr.CategoryName = dg[i].CategoryName;
+        //            }
+        //            if (!dg[i].IsTyokusousakiCDNull())
+        //            {
+        //                dr.TyokusousakiCD = dg[i].TyokusousakiCD;
+        //            }
+        //            if (!dg[i].IsTyokusousakiMeiNull())
+        //            {
+        //                dr.TyokusousakiMei = dg[i].TyokusousakiMei;
+        //            }
+        //            if (!dg[i].IsSisetuCodeNull())
+        //            {
+        //                dr.SisetuCode = dg[i].SisetuCode;
+        //            }
+        //            if (!dg[i].IsSisetuJusyo1Null())
+        //            {
+        //                dr.SisetuJusyo1 = dg[i].SisetuJusyo1;
+        //            }
+        //            if (!dg[i].IsSyouhinCodeNull())
+        //            {
+        //                dr.SyouhinCode = dg[i].SyouhinCode;
+        //            }
+        //            if (!dg[i].IsSyouhinMeiNull())
+        //            {
+        //                dr.SyouhinMei = dg[i].SyouhinMei;
+        //            }
+        //            if (!dg[i].IsMekarHinbanNull())
+        //            {
+        //                dr.MekarHinban = dg[i].MekarHinban;
+        //            }
+        //            if (!dg[i].IsRangeNull())
+        //            {
+        //                dr.Range = dg[i].Range;
+        //            }
+        //            if (!dg[i].IsKeitaiMeiNull())
+        //            {
+        //                dr.KeitaiMei = dg[i].KeitaiMei;
+        //            }
+        //            if (!dg[i].IsHyojunKakakuNull())
+        //            {
+        //                dr.HyojunKakaku = dg[i].HyojunKakaku;
+        //            }
+        //            if (!dg[i].IsJutyuSuryouNull())
+        //            {
+        //                dr.JutyuSuryou = dg[i].JutyuSuryou;
+        //            }
+        //            if (!dg[i].IsJutyuTankaNull())
+        //            {
+        //                dr.JutyuTanka = dg[i].JutyuTanka;
+        //            }
+        //            if (!dg[i].IsShiireTankaNull())
+        //            {
+        //                dr.ShiireTanka = dg[i].ShiireTanka;
+        //            }
+        //            if (!dg[i].IsShiireKingakuNull())
+        //            {
+        //                dr.ShiireKingaku = dg[i].ShiireKingaku;
+        //            }
+        //            if (!dg[i].IsUriagekeijyouNull())
+        //            {
+        //                dr.Uriagekeijyou = dg[i].Uriagekeijyou;
+        //            }
+        //            if (!dg[i].IsJutyuBiNull())
+        //            {
+        //                dr.JutyuBi = dg[i].JutyuBi;
+        //            }
+        //            if (!dg[i].IsTourokuNameNull())
+        //            {
+        //                dr.TourokuName = dg[i].TourokuName;
+        //            }
+        //            if (!dg[i].IsTanTouNameNull())
+        //            {
+        //                dr.TanTouName = dg[i].TanTouName;
+        //            }
+        //            if (!dg[i].IsBasyoNull())
+        //            {
+        //                dr.Busyo = dg[i].Busyo;
+        //            }
+        //            if (!dg[i].IsZeiKubunNull())
+        //            {
+        //                dr.ZeiKubun = dg[i].ZeiKubun;
+        //            }
+        //            if (!dg[i].IsWareHouseNull())
+        //            {
+        //                dr.WareHouse = dg[i].WareHouse;
+        //            }
+        //            if (!dg[i].IsKeitaiMeiNull())
+        //            { dr.KeitaiMei = dg[i].KeitaiMei; }
+        //        }
+        //        da.Update(Tdt);
+        //        sql.Commit();
+        //    }
+        //    catch
+        //    {
+        //        if (sql != null)
+        //        {
+        //            sql.Rollback();
+        //        }
+        //    }
+        //    finally
+        //    {
+        //        sqlConnection.Close();
+        //    }
+        //}
+
+        public static DataJutyu.T_JutyuHeaderRow GetMaxNo(int ki, SqlConnection sqlConnection)
         {
             SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
             da.SelectCommand.CommandText =
-                "Select * From T_Jutyu Where JutyuNO = @ID AND RowNo  = @row";
-            da.SelectCommand.Parameters.AddWithValue("@ID", mNo);
-            da.SelectCommand.Parameters.AddWithValue("@row", rn);
-
-            da.UpdateCommand = (new SqlCommandBuilder(da)).GetUpdateCommand();
-
-            DataJutyu.T_JutyuDataTable Tdt = new DataJutyu.T_JutyuDataTable();
-
-            SqlTransaction sql = null;
-
-            try
-            {
-                sqlConnection.Open();
-                sql = sqlConnection.BeginTransaction();
-
-                da.SelectCommand.Transaction = da.UpdateCommand.Transaction = sql;
-
-                da.Fill(Tdt);
-
-                DataJutyu.T_JutyuRow dr = Tdt[0];
-                for (int i = 0; i < dg.Count; i++)
-                {
-                    dr.JutyuNo = int.Parse(mNo);
-
-                    dr.RowNo = dg[i].RowNo;
-                    if (!dg[i].IsTokuisakiCodeNull())
-                    {
-                        dr.TokuisakiCode = dg[i].TokuisakiCode;
-                    }
-                    if (!dg[i].IsSeikyusakiMeiNull())
-                    {
-                        dr.SeikyusakiMei = dg[i].SeikyusakiMei;
-                    }
-                    if (!dg[i].IsCateGoryNull())
-                    {
-                        dr.CateGory = dg[i].CateGory;
-                    }
-                    if (!dg[i].IsCategoryNameNull())
-                    {
-                        dr.CategoryName = dg[i].CategoryName;
-                    }
-                    if (!dg[i].IsTyokusousakiCDNull())
-                    {
-                        dr.TyokusousakiCD = dg[i].TyokusousakiCD;
-                    }
-                    if (!dg[i].IsTyokusousakiMeiNull())
-                    {
-                        dr.TyokusousakiMei = dg[i].TyokusousakiMei;
-                    }
-                    if (!dg[i].IsSisetuCodeNull())
-                    {
-                        dr.SisetuCode = dg[i].SisetuCode;
-                    }
-                    if (!dg[i].IsSisetuJusyo1Null())
-                    {
-                        dr.SisetuJusyo1 = dg[i].SisetuJusyo1;
-                    }
-                    if (!dg[i].IsSyouhinCodeNull())
-                    {
-                        dr.SyouhinCode = dg[i].SyouhinCode;
-                    }
-                    if (!dg[i].IsSyouhinMeiNull())
-                    {
-                        dr.SyouhinMei = dg[i].SyouhinMei;
-                    }
-                    if (!dg[i].IsMekarHinbanNull())
-                    {
-                        dr.MekarHinban = dg[i].MekarHinban;
-                    }
-                    if (!dg[i].IsRangeNull())
-                    {
-                        dr.Range = dg[i].Range;
-                    }
-                    if (!dg[i].IsKeitaiMeiNull())
-                    {
-                        dr.KeitaiMei = dg[i].KeitaiMei;
-                    }
-                    if (!dg[i].IsHyojunKakakuNull())
-                    {
-                        dr.HyojunKakaku = dg[i].HyojunKakaku;
-                    }
-                    if (!dg[i].IsJutyuSuryouNull())
-                    {
-                        dr.JutyuSuryou = dg[i].JutyuSuryou;
-                    }
-                    if (!dg[i].IsJutyuTankaNull())
-                    {
-                        dr.JutyuTanka = dg[i].JutyuTanka;
-                    }
-                    if (!dg[i].IsShiireTankaNull())
-                    {
-                        dr.ShiireTanka = dg[i].ShiireTanka;
-                    }
-                    if (!dg[i].IsShiireKingakuNull())
-                    {
-                        dr.ShiireKingaku = dg[i].ShiireKingaku;
-                    }
-                    if (!dg[i].IsUriagekeijyouNull())
-                    {
-                        dr.Uriagekeijyou = dg[i].Uriagekeijyou;
-                    }
-                    if (!dg[i].IsJutyuBiNull())
-                    {
-                        dr.JutyuBi = dg[i].JutyuBi;
-                    }
-                    if (!dg[i].IsTourokuNameNull())
-                    {
-                        dr.TourokuName = dg[i].TourokuName;
-                    }
-                    if (!dg[i].IsTanTouNameNull())
-                    {
-                        dr.TanTouName = dg[i].TanTouName;
-                    }
-                    if (!dg[i].IsBasyoNull())
-                    {
-                        dr.Busyo = dg[i].Busyo;
-                    }
-                    if (!dg[i].IsZeiKubunNull())
-                    {
-                        dr.ZeiKubun = dg[i].ZeiKubun;
-                    }
-                    if (!dg[i].IsWareHouseNull())
-                    {
-                        dr.WareHouse = dg[i].WareHouse;
-                    }
-                    if (!dg[i].IsKeitaiMeiNull())
-                    { dr.KeitaiMei = dg[i].KeitaiMei; }
-                }
-                da.Update(Tdt);
-                sql.Commit();
-            }
-            catch (Exception ex)
-            {
-                if (sql != null)
-                {
-                    sql.Rollback();
-                }
-            }
-            finally
-            {
-                sqlConnection.Close();
-            }
+                "SELECT JutyuNo AS JutyuNo  FROM T_JutyuHeader where JutyuNo like @ki order by JutyuNo desc";
+            da.SelectCommand.Parameters.AddWithValue("@ki", "%" + ki.ToString() + "%");
+            DataJutyu.T_JutyuHeaderDataTable dt = new DataJutyu.T_JutyuHeaderDataTable();
+            da.Fill(dt);
+            if (dt.Rows.Count >= 1)
+                return dt[0] as DataJutyu.T_JutyuHeaderRow;
+            else
+                return null;
         }
     }
 }

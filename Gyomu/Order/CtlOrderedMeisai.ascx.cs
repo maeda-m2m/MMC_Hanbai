@@ -1,6 +1,5 @@
 ﻿using Core.Sql;
 using DLL;
-using Gyomu.Mitumori.Syosai;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -34,11 +33,12 @@ namespace Gyomu.Order
         {
 
             string cate = HidCate.Value;
+            
             if (cate != "")
             {
                 if (e.Text.Trim() != "")
                 {
-                    ListSet.SetProductname(sender, e, cate);
+                    ListSet.SettingProduct(sender, e, cate, OrderedInput.strOrderedDate);
                 }
             }
             else
@@ -74,7 +74,7 @@ namespace Gyomu.Order
                     
                 }
             }
-            catch(Exception ex)
+            catch
             {
                 Err.Text = "商品名を選択してください";
             }

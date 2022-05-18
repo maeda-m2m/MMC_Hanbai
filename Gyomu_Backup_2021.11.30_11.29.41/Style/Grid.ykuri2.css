@@ -1,0 +1,1425 @@
+﻿/*Telerik RadGrid Common CSS*/
+
+/*global*/
+
+RadGrid td
+{
+    margin-top:0;
+    margin-bottom:0;
+}
+
+.RadGrid .rgMasterTable,
+.RadGrid .rgDetailTable
+{
+    border-collapse:separate;
+    font-size: 9pt;/*追加*/
+	font-family: Tahoma;/*追加*/    
+}
+
+.RadGrid .rgRow,
+.RadGrid .rgAltRow,
+.RadGrid .rgHeader,
+.RadGrid .rgResizeCol,
+.RadGrid .rgPager,
+.RadGrid .rgGroupPanel,
+.RadGrid .rgGroupHeader
+{
+	cursor:default;
+}
+
+.RadGrid input[type="image"]
+{
+	cursor:pointer;
+}
+
+.RadGrid .rgRow td,
+.RadGrid .rgAltRow td,
+.RadGrid .rgEditRow td,
+.RadGrid .rgFooter td,
+.RadGrid .rgFilterRow td,
+.RadGrid .rgHeader,
+.RadGrid .rgResizeCol,
+.RadGrid .rgGroupHeader td
+{
+/*
+	padding-left:7px;
+	padding-right:7px;
+*/
+    padding-top:0;
+    padding-bottom:0;
+}
+
+.RadGrid .rgClipCells .rgHeader,
+.RadGrid .rgClipCells .rgFilterRow>td,
+.RadGrid .rgClipCells .rgRow>td,
+.RadGrid .rgClipCells .rgAltRow>td,
+.RadGrid .rgClipCells .rgEditRow>td,
+.RadGrid .rgClipCells .rgFooter>td
+{
+	overflow:hidden;
+}
+
+.RadGrid .rgAdd,
+.RadGrid .rgRefresh,
+.RadGrid .rgEdit,
+.RadGrid .rgDel,
+.RadGrid .rgDrag,
+.RadGrid .rgFilter,
+.RadGrid .rgPagePrev,
+.RadGrid .rgPageNext,
+.RadGrid .rgPageFirst,
+.RadGrid .rgPageLast,
+.RadGrid .rgExpand,
+.RadGrid .rgCollapse,
+.RadGrid .rgSortAsc,
+.RadGrid .rgSortDesc,
+.RadGrid .rgUpdate,
+.RadGrid .rgCancel,
+.RadGrid .rgUngroup,
+.RadGrid .rgExpXLS,
+.RadGrid .rgExpDOC,
+.RadGrid .rgExpPDF,
+.RadGrid .rgExpCSV
+{
+	width:16px;
+	height:16px;
+	border:0;
+	margin:0;
+	padding:0;
+	background-color:transparent;
+	background-repeat:no-repeat;
+	vertical-align:middle;
+	font-size:1px;
+	cursor:pointer;
+}
+
+.RadGrid .rgGroupItem input,
+.RadGrid .rgCommandRow img,
+.RadGrid .rgHeader input,
+.RadGrid .rgFilterRow img,
+.RadGrid .rgFilterRow input,
+.RadGrid .rgPager img
+{
+	vertical-align:middle;
+}
+
+/*header*/
+
+.rgNoScrollImage div.rgHeaderDiv
+{
+	background-image:none;
+}
+
+.RadGrid .rgHeader,
+.RadGrid th.rgResizeCol
+{
+    /*
+	padding-top:5px;
+	padding-bottom:4px;
+    */
+	padding-top:0px;
+	padding-bottom:0px;    
+	text-align:left;
+	font-weight:normal;
+}
+
+.RadGrid .rgHeader a
+{
+    text-decoration:none;
+}
+
+.RadGrid .rgCheck input
+{
+	height:15px;
+	margin-top:0;
+	margin-bottom:0;
+	padding-top:0;
+	padding-bottom:0;
+	cursor:default;
+}
+
+.rfdCheckbox .RadGrid .rgCheck input /*Safari,Chrome fix*/
+{
+	height:20px;
+}
+
+/*rows*/
+
+.RadGrid .rgRow td,
+.RadGrid .rgAltRow td,
+.RadGrid .rgEditRow td,
+.RadGrid .rgFooter td
+{
+/*
+	padding-top:4px;
+	padding-bottom:3px;
+*/
+padding-top:0px;
+padding-bottom:0px;
+}
+
+.RadGrid table.rgMasterTable tr .rgDragCol
+{
+	padding-left:0;
+	padding-right:0;
+	text-align:center;
+}
+
+.RadGrid .rgDrag
+{
+	width:15px;
+	height:15px;
+	cursor:url('WebResource.axd?d=zFICsPU6V75Ag11j47qEUNfFIlB-Hy1P-IowpBj8QI49p0thWOr_bPhJQ3711xQ7i3xN_AD__0Omb2EJbwKQBTEqP0phkE9eJIK8heiHW3UODWDyeYg78qNS8C8TkerYW3urmg2&t=634307904980000000'), move;
+}
+
+/*status*/
+
+.RadGrid .rgPager .rgStatus
+{
+	width:35px;
+	/*padding:3px 0 2px;*/
+}
+
+.RadGrid .rgStatus div
+{
+	width:24px;
+	height:24px;
+	overflow:hidden;
+	border:0;
+	margin:0 auto;
+	padding:0;
+	background-color:transparent;
+	background-position:center center;
+	background-repeat:no-repeat;
+	text-indent:-2222px;
+}
+
+/*pager*/
+
+.RadGrid .rgPager td
+{
+	padding:0;
+	font-size: 9pt; /*追加*/
+	font-family: Tahoma;	/*追加*/
+}
+
+.RadGrid td.rgPagerCell
+{
+	border:0;
+	/*padding:5px 0 4px;*/
+}
+
+.RadGrid .rgWrap
+{
+	float:left;
+	/*padding:0 10px;*/
+	/*line-height:22px;*/
+	white-space:nowrap;
+}
+
+.RadGrid .rgArrPart1
+{
+	padding-right:0;
+}
+
+.RadGrid .rgArrPart2
+{
+	padding-left:0;
+}
+
+.RadGrid .rgInfoPart
+{
+	float:right;
+}
+
+.RadGrid .rgInfoPart strong
+{
+	font-weight:normal;
+}
+
+.RadGrid .rgArrPart1 img,
+.RadGrid .rgArrPart2 img
+{
+	border:0;
+	margin:-3px 8px 0;
+}
+
+.RadGrid .rgPageFirst,
+.RadGrid .rgPagePrev,
+.RadGrid .rgPageNext,
+.RadGrid .rgPageLast
+{
+	width:22px;
+	height:22px;
+	vertical-align:top;
+}
+
+.RadGrid .NextPrev .rgPageFirst,
+.RadGrid .NextPrev .rgPagePrev,
+.RadGrid .NextPrev .rgPageNext,
+.RadGrid .NextPrev .rgPageLast
+{
+	vertical-align:middle;
+}
+
+.RadGrid .rgPageFirst,
+.RadGrid .rgPagePrev
+{
+	margin-right:1px;
+}
+
+.RadGrid .rgPageNext,
+.RadGrid .rgPageLast
+{
+	margin-left:1px;
+}
+
+.RadGrid .rgPager .rgPagerButton
+{
+	/*height:22px;*/
+	border-style:solid;
+	border-width:1px;
+	margin:0 14px 0 0;
+	/*padding:0 4px 2px;*/
+	font-size:12px;
+	/*line-height:12px;*/
+	vertical-align:middle;
+	cursor:pointer;
+}
+
+.RadGrid .rgNumPart
+{
+	padding:0;
+}
+
+.RadGrid .NumericPages .rgNumPart
+{
+	/*padding:0 10px;*/
+}
+
+.RadGrid .rgNumPart a
+{
+	float:left;
+	/*line-height:22px;*/
+	margin:0;
+	/*padding:0 5px 0 0;*/
+	text-decoration:none;
+}
+
+.RadGrid .rgNumPart span
+{
+	float:left;
+	padding:0 0 0 5px;
+}
+
+.RadGrid .rgNumPart a:hover span
+{
+	cursor:pointer;
+}
+
+.RadGrid .rgNumPart a.rgCurrentPage,
+.RadGrid .rgNumPart a.rgCurrentPage:hover,
+.RadGrid .rgNumPart a.rgCurrentPage span,
+.RadGrid .rgNumPart a.rgCurrentPage:hover span
+{
+	cursor:default;
+}
+
+.RadGrid .NextPrevNumericAndAdvanced .rgAdvPart
+{
+	float:none;
+	text-align:center;
+}
+
+.RadGrid .rgPager .RadSlider
+{
+	float:left;
+	margin:0 10px 0 0;
+}
+
+.RadGrid .rgPagerLabel,
+.RadGrid .rgPager .RadComboBox,
+.RadGrid .rgPager .RadInput
+{
+	margin:0 4px 0 0;
+	vertical-align:middle;
+}
+
+*+html .RadGrid .rgPager .RadComboBox{margin-top:-1px;}
+* html .RadGrid .rgPager .RadComboBox{margin-top:-1px;padding:1px 0;}
+
+.RadGrid .rgPagerTextBox
+{
+	text-align:center;
+}
+
+/*reordering*/
+
+.GridReorderTop,
+.GridReorderBottom
+{
+	width:9px;
+	height:9px;
+	margin:0 0 0 -5px;
+	padding:0;
+}
+
+/*filtering*/
+
+.RadGrid .rgFilterRow td
+{
+    /*
+    padding-top:4px;
+    padding-bottom:7px;
+    */
+}
+
+.RadGrid .rgFilter
+{
+	width:22px;
+	height:22px;
+	margin:0 0 0 2px;
+}
+
+.RadGrid .rgFilterBox
+{
+	border-width:1px;
+	border-style:solid;
+	margin:0;
+	/*padding:2px 1px 3px;*/
+	font-size:12px;
+	vertical-align:middle;
+}
+
+.RadGrid .rgFilterRow .RadRating
+{
+	display:inline-block;
+	vertical-align:middle;
+}
+*+html .RadGrid .rgFilterRow .RadRating{display:inline;zoom:1;}
+* html .RadGrid .rgFilterRow .RadRating{display:inline;zoom:1;}
+
+/*context menu*/
+
+.GridContextMenu .rmLeftImage
+{
+	background-repeat:no-repeat;
+	background-color:transparent;
+}
+
+/*filter context menu*/
+
+.RadMenu .rmGroup .rgHCMItem .rmText
+{
+	width:161px;
+	padding:6px 5px 5px 30px;
+}
+
+.rgHCMItem .rgHCMClear,
+.rgHCMItem .rgHCMShow,
+.rgHCMItem .rgHCMAnd,
+.rgHCMItem .rgHCMFilter
+{
+	display:block;
+}
+
+.rgHCMItem .rgHCMShow,
+.rgHCMItem .rgHCMAnd
+{
+	padding-top:5px;
+	line-height:12px;
+}
+
+.rgHCMItem .rgHCMClear,
+.rgHCMItem .rgHCMShow,
+.rgHCMItem .RadComboBox,
+.rgHCMItem .rgHCMAnd
+{
+	margin:0 0 5px;
+}
+
+.rgHCMItem .rgHCMAnd
+{
+	margin-top:5px;
+}
+
+.rgHCMItem .rgHCMFilter
+{
+	margin-top:11px;
+}
+
+.rgHCMItem .rgHCMClear,
+.rgHCMItem .rgHCMFilter
+{
+	width:160px;
+	border-style:solid;
+	border-width:1px;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	border-radius:3px;
+	padding:1px 0;
+	font-size:12px;
+	cursor:pointer;
+}
+
+/*grouping*/
+
+.RadGrid .rgGroupPanel
+{
+	height:24px;
+}
+
+.RadGrid .rgGroupItem
+{
+	padding:0 2px 1px 3px;
+	line-height:20px;
+	font-weight:normal;
+	vertical-align:middle;
+}
+
+.RadGrid .rgGroupHeader td
+{
+	padding-top:0;
+	padding-bottom:0;
+}
+
+.RadGrid .rgGroupHeader td p
+{
+    display:inline;
+    margin:0;
+    padding:0 10px;
+}
+
+.RadGrid .rgGroupHeader td div div
+{
+	top:-0.8em;
+	padding:0 10px;
+}
+
+/*IE quirks mode*/
+* html .RadGrid .rgGroupHeader td div div
+{
+	top /**/:0;
+}
+
+.RadGrid .rgGroupHeader td div div div
+{
+	top:0;
+	padding:0;
+	border:0;
+}
+
+/*editing*/
+
+.RadGrid .rgUpdate,
+.RadGrid .rgCancel
+{
+	width:18px;
+	height:18px;
+}
+
+/*hierarchy*/
+
+.RadGrid .rgDetailTable
+{
+	border-style:solid;
+	border-width:1px;
+	border-right-width:0;
+}
+
+/*command row*/
+
+.RadGrid .rgAdd,
+.RadGrid .rgRefresh
+{
+	width:18px;
+	height:18px;
+	vertical-align:bottom;
+}
+
+*+html .RadGrid .rgAdd,
+*+html .RadGrid .rgRefresh
+{
+	vertical-align:middle;
+}
+* html .RadGrid .rgAdd,
+* html .RadGrid .rgRefresh
+{
+	vertical-align:middle;
+}
+
+.RadGrid .rgEdit,
+.RadGrid .rgDel
+{
+	width:15px;
+	height:15px;
+}
+
+/*rtl*/
+
+.RadGridRTL .rgHeader,
+.RadGridRTL .rgResizeCol
+{
+	text-align:right;
+}
+
+.RadGridRTL .rgPager .rgStatus
+{
+	border-right:0;
+	border-left-width:1px;
+}
+
+.RadGridRTL .rgWrap
+{
+	float:right;
+}
+
+.RadGridRTL .rgArrPart1
+{
+	padding-left:0;
+	padding-right:10px;
+}
+
+.RadGridRTL .rgPageFirst,
+.RadGridRTL .rgPagePrev
+{
+	margin-right:0;
+	margin-left:1px;
+}
+
+.RadGridRTL .rgPageNext,
+.RadGridRTL .rgPageLast
+{
+	margin-left:0;
+	margin-right:1px;
+}
+
+.RadGridRTL .rgInfoPart
+{
+	float:left;
+}
+
+.RadGridRTL .rgNumPart
+{
+	width:220px;
+}
+
+.RadGridRTL .rgNumPart a
+{
+	float:right;
+}
+
+.RadGridRTL .rgDetailTable
+{
+	border-right-width:1px;
+	border-left-width:0;
+}
+
+
+
+
+
+
+
+
+
+/******************************************************************************************************************************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Telerik RadGrid ykuri Skin*/
+
+/*global*/
+
+.RadGrid_ykuri2
+{
+/*
+    border:1px solid #002d96;
+    background:#fff;
+    color:#000;
+    */
+   	font-size: 9pt;
+	font-family: Tahoma; 
+}
+
+.RadGrid_ykuri2,
+.RadGrid_ykuri2 .rgMasterTable,
+.RadGrid_ykuri2 .rgDetailTable,
+.RadGrid_ykuri2 .rgGroupPanel table,
+.RadGrid_ykuri2 .rgCommandRow table,
+.RadGrid_ykuri2 .rgEditForm table,
+.RadGrid_ykuri2 .rgPager table,
+.GridToolTip_ykuri
+{
+    /*font:12px/16px "segoe ui",arial,sans-serif;*/
+}
+
+.RadGrid_ykuri2 .rgHeader:first-child,
+.RadGrid_ykuri2 th.rgResizeCol:first-child,
+.RadGrid_ykuri2 .rgFilterRow>td:first-child,
+.RadGrid_ykuri2 .rgRow>td:first-child,
+.RadGrid_ykuri2 .rgAltRow>td:first-child
+{
+/*
+	border-left-width:0;
+	padding-left:8px;
+*/
+
+}
+
+.RadGrid_ykuri2 .rgAdd,
+.RadGrid_ykuri2 .rgRefresh,
+.RadGrid_ykuri2 .rgEdit,
+.RadGrid_ykuri2 .rgDel,
+.RadGrid_ykuri2 .rgFilter,
+.RadGrid_ykuri2 .rgPagePrev,
+.RadGrid_ykuri2 .rgPageNext,
+.RadGrid_ykuri2 .rgPageFirst,
+.RadGrid_ykuri2 .rgPageLast,
+.RadGrid_ykuri2 .rgExpand,
+.RadGrid_ykuri2 .rgCollapse,
+.RadGrid_ykuri2 .rgSortAsc,
+.RadGrid_ykuri2 .rgSortDesc,
+.RadGrid_ykuri2 .rgUpdate,
+.RadGrid_ykuri2 .rgCancel,
+.RadGrid_ykuri2 .rgUngroup,
+.RadGrid_ykuri2 .rgExpXLS,
+.RadGrid_ykuri2 .rgExpDOC,
+.RadGrid_ykuri2 .rgExpPDF,
+.RadGrid_ykuri2 .rgExpCSV
+{
+    background-image:url('Grid/sprite.gif');
+    /* これなぜかえらーでひょうじされない
+	background-image:url('WebResource.axd?d=l1VzncX1lUJ73lb5NmXl25E-NramTORWUM4XX94aXM63t8m2rSe2ADGHGBNK_sn_JJmF74iDzQAjrSX06V_w-78a44LHwg3JMWZDwbEKggvktESbnN4-tc6gtsVR5BdlDQcqFf0KF3uoDu6InfyDQtbTSUM1&t=634307904980000000');
+*/
+}
+
+/*header*/
+
+.RadGrid_ykuri2 .rgHeaderDiv
+{
+/*
+	background:#d6e5f3 0 -7750px repeat-x url('WebResource.axd?d=l1VzncX1lUJ73lb5NmXl25E-NramTORWUM4XX94aXM63t8m2rSe2ADGHGBNK_sn_JJmF74iDzQAjrSX06V_w-78a44LHwg3JMWZDwbEKggvktESbnN4-tc6gtsVR5BdlDQcqFf0KF3uoDu6InfyDQtbTSUM1&t=634307904980000000');
+*/
+}
+.rgTwoLines .rgHeaderDiv
+{
+/*
+	background-position:0 -7250px;*/
+}
+
+.RadGrid_ykuri2 .rgHeader,
+.RadGrid_ykuri2 th.rgResizeCol
+{
+/*
+	border:0;
+	border-left:1px solid #89aee5;
+	border-bottom:1px solid #5d8cc9;
+	background:0 -2300px repeat-x #7da5e0 url('WebResource.axd?d=l1VzncX1lUJ73lb5NmXl25E-NramTORWUM4XX94aXM63t8m2rSe2ADGHGBNK_sn_JJmF74iDzQAjrSX06V_w-78a44LHwg3JMWZDwbEKggvktESbnN4-tc6gtsVR5BdlDQcqFf0KF3uoDu6InfyDQtbTSUM1&t=634307904980000000');
+*/
+
+}
+
+.RadGrid_ykuri2 th.rgSorted
+{
+/*
+	background-color:#ef9718;
+	background-position:0 -2600px;
+*/
+}
+
+.RadGrid_ykuri2 .rgHeader,
+.RadGrid_ykuri2 .rgHeader a
+{
+/*
+    color:#000;
+*/
+
+/*radgrid_header_defでやる*/
+}
+
+/*rows*/
+
+.RadGrid_ykuri2 .rgRow td,
+.RadGrid_ykuri2 .rgAltRow td,
+.RadGrid_ykuri2 .rgEditRow td,
+.RadGrid_ykuri2 .rgFooter td
+{
+/*
+	border-style:solid;
+	border-width:0 0 1px 1px;
+*/
+padding-top:0;
+padding-bottom:0;
+}
+
+.RadGrid_ykuri2 .rgRow td,
+.RadGrid_ykuri2 .rgAltRow td
+{
+/*
+	border-color:#d0d7e5;
+	
+	*/
+	padding-top:0;
+    padding-bottom:0;
+}
+
+.RadGrid_ykuri2 .rgRow .rgSorted,
+.RadGrid_ykuri2 .rgAltRow .rgSorted
+{
+	background-color:#f2f2f2;
+}
+
+.RadGrid_ykuri2 .rgSelectedRow .rgSorted,
+.RadGrid_ykuri2 .rgActiveRow .rgSorted,
+.RadGrid_ykuri2 .rgHoveredRow .rgSorted,
+.RadGrid_ykuri2 .rgEditRow .rgSorted
+{
+	background-color:transparent;
+}
+
+.RadGrid_ykuri2 .rgRow a,
+.RadGrid_ykuri2 .rgAltRow a,
+.RadGrid_ykuri2 .rgEditRow a,
+.RadGrid_ykuri2 .rgFooter a,
+.RadGrid_ykuri2 .rgEditForm a
+{
+/*
+	color:#000;
+*/
+
+}
+
+.RadGrid_ykuri2 .rgSelectedRow
+{
+    background-color: #FFD275;
+/*
+    background:#97b8e8 0 -3900px repeat-x url('WebResource.axd?d=l1VzncX1lUJ73lb5NmXl25E-NramTORWUM4XX94aXM63t8m2rSe2ADGHGBNK_sn_JJmF74iDzQAjrSX06V_w-78a44LHwg3JMWZDwbEKggvktESbnN4-tc6gtsVR5BdlDQcqFf0KF3uoDu6InfyDQtbTSUM1&t=634307904980000000');
+*/
+}
+*+html .RadGrid_ykuri2 .rgSelectedRow .rgSorted{background-color:#97b8e8}
+* html .RadGrid_ykuri2 .rgSelectedRow .rgSorted{background-color:#97b8e8}
+
+.RadGrid_ykuri2 .rgActiveRow,
+.RadGrid_ykuri2 .rgHoveredRow
+{
+    background:#ffd192 0 -2900px repeat-x url('WebResource.axd?d=l1VzncX1lUJ73lb5NmXl25E-NramTORWUM4XX94aXM63t8m2rSe2ADGHGBNK_sn_JJmF74iDzQAjrSX06V_w-78a44LHwg3JMWZDwbEKggvktESbnN4-tc6gtsVR5BdlDQcqFf0KF3uoDu6InfyDQtbTSUM1&t=634307904980000000');
+}
+*+html .RadGrid_ykuri2 .rgActiveRow .rgSorted,
+*+html .RadGrid_ykuri2 .rgHoveredRow .rgSorted{background-color:#ffd192}
+* html .RadGrid_ykuri2 .rgActiveRow .rgSorted,
+* html .RadGrid_ykuri2 .rgHoveredRow .rgSorted{background-color:#ffd192}
+
+.RadGrid_ykuri2 .rgEditRow
+{
+	background:#c8dbf6;
+}
+*+html .RadGrid_ykuri2 .rgEditRow .rgSorted{background-color:#c8dbf6}
+* html .RadGrid_ykuri2 .rgEditRow .rgSorted{background-color:#c8dbf6}
+
+.RadGrid_ykuri2 .rgSelectedRow td,
+.RadGrid_ykuri2 .rgActiveRow td,
+.RadGrid_ykuri2 .rgHoveredRow td,
+.RadGrid_ykuri2 .rgEditRow td
+{
+/*
+	border-left-width:0;
+	padding-left:8px;
+*/
+padding-top:0;
+padding-bottom:0;
+}
+
+.RadGrid_ykuri2 .rgSelectedRow td
+{
+/*
+	border-bottom-color:#002d96;
+*/
+}
+
+.RadGrid_ykuri2 .rgActiveRow td,
+.RadGrid_ykuri2 .rgHoveredRow td
+{
+	border-color:#d0d7e5;
+}
+
+.RadGrid_ykuri2 .rgDrag
+{
+	background-image:url('WebResource.axd?d=pTSQdiexyJr5eZ-g0cYcGAtPcrU28ltyCLyIKUXEblQwFmpBaGQI6d8xTC3bZ04oeV8fX4OMA7anKCj2BES1JbW3anGTgxxPFVcynjN-d22zD5PENiPIR7d49gLAFIX_Dr7F2TAFFIJzCfVt7nbZIleKAjA1&t=634307904980000000');
+}
+
+/*footer*/
+
+.RadGrid_ykuri2 .rgFooterDiv,
+.RadGrid_ykuri2 .rgFooter
+{
+/*
+	background:#d5e4f3 0 -6500px repeat-x url('WebResource.axd?d=l1VzncX1lUJ73lb5NmXl25E-NramTORWUM4XX94aXM63t8m2rSe2ADGHGBNK_sn_JJmF74iDzQAjrSX06V_w-78a44LHwg3JMWZDwbEKggvktESbnN4-tc6gtsVR5BdlDQcqFf0KF3uoDu6InfyDQtbTSUM1&t=634307904980000000');
+*/
+}
+
+.RadGrid_ykuri2 .rgFooter td
+{
+/*
+	border-width:1px 0;
+	border-color:#567db0 #fff #fff;
+	padding-left:8px;
+*/
+}
+
+/*status*/
+
+.RadGrid_ykuri2 .rgPager .rgStatus
+{
+	border:1px solid;
+	border-width:1px 1px 0 0;
+	border-color:#5d8cc9 #9cb9dc;
+}
+
+.RadGrid_ykuri2 .rgStatus div
+{
+	background-image:url('WebResource.axd?d=UEgletNagOKusmOgA-McmJG3Ts7eeduvSbleKPnbvWPN6KK1W7T_gygSr5qYM62cE6efw6jy_1mzsFSBoR2xjZ0zJA2fSjbyfMExWfBcGW64aHASbEOW5ay1F92c54_O1I2NwBA4PCR-UGV4FbxIbHMhRAw1&t=634307904980000000');
+}
+
+/*pager*/
+
+.RadGrid_ykuri2 .rgPager
+{
+	background:#d6e5f3;
+}
+
+.RadGrid_ykuri2 td.rgPagerCell
+{
+	border:0;
+	border-top:1px solid #5d8cc9;
+	border-left:1px solid #fff;
+}
+
+.RadGrid_ykuri2 .rgInfoPart
+{
+	color:#333;
+}
+
+.RadGrid_ykuri2 .rgInfoPart strong
+{
+	color:#000;
+}
+
+.RadGrid_ykuri2 .rgPageFirst
+{
+	margin:0 3px 0 0;
+	background-position:0 -550px;
+}
+.RadGrid_ykuri2 .rgPageFirst:hover
+{
+	background-position:0 -600px;
+}
+.RadGrid_ykuri2 .rgPagePrev
+{
+	margin:0 3px 0 0;
+	background-position:0 -700px;
+}
+.RadGrid_ykuri2 .rgPagePrev:hover
+{
+	background-position:0 -750px;
+}
+.RadGrid_ykuri2 .rgPageNext
+{
+	margin:0 0 0 3px;
+	background-position:0 -850px;
+}
+.RadGrid_ykuri2 .rgPageNext:hover
+{
+	background-position:0 -900px;
+}
+.RadGrid_ykuri2 .rgPageLast
+{
+	margin:0 0 0 3px;
+	background-position:0 -1000px;
+}
+.RadGrid_ykuri2 .rgPageLast:hover
+{
+	background-position:0 -1050px;
+}
+
+.RadGrid_ykuri2 .rgPager .rgPagerButton
+{
+/* WebResource.axd?でイメージが表示されない問題がある
+	border-color:#003c74;
+	background:#ebe8e3 repeat-x 0 -1550px url('WebResource.axd?d=l1VzncX1lUJ73lb5NmXl25E-NramTORWUM4XX94aXM63t8m2rSe2ADGHGBNK_sn_JJmF74iDzQAjrSX06V_w-78a44LHwg3JMWZDwbEKggvktESbnN4-tc6gtsVR5BdlDQcqFf0KF3uoDu6InfyDQtbTSUM1&t=634307904980000000');
+	color:#000;
+	font:12px/12px "segoe ui",arial,sans-serif;
+*/
+
+	border-color:#003c74;
+	background:#ebe8e3 repeat-x 0 -1550px url('Grid/sprite.gif');
+	color:#000;
+	font:12px/12px "segoe ui",arial,sans-serif;
+
+}
+
+.RadGrid_ykuri2 .rgNumPart a:hover,
+.RadGrid_ykuri2 .rgNumPart a:hover span,
+.RadGrid_ykuri2 .rgNumPart a.rgCurrentPage,
+.RadGrid_ykuri2 .rgNumPart a.rgCurrentPage span
+{
+	background:no-repeat url('Grid/sprite.gif');
+/*
+	background:no-repeat url('WebResource.axd?d=l1VzncX1lUJ73lb5NmXl25E-NramTORWUM4XX94aXM63t8m2rSe2ADGHGBNK_sn_JJmF74iDzQAjrSX06V_w-78a44LHwg3JMWZDwbEKggvktESbnN4-tc6gtsVR5BdlDQcqFf0KF3uoDu6InfyDQtbTSUM1&t=634307904980000000');
+*/
+}
+
+.RadGrid_ykuri2 .rgNumPart a
+{
+	color:#000;
+}
+
+.RadGrid_ykuri2 .rgNumPart a:hover
+{
+	background-position:100% -1250px;
+}
+
+.RadGrid_ykuri2 .rgNumPart a:hover span
+{
+	background-position:0 -1150px;
+}
+
+.RadGrid_ykuri2 .rgNumPart a.rgCurrentPage,
+.RadGrid_ykuri2 .rgNumPart a.rgCurrentPage:hover
+{
+	background-position:100% -1450px;
+}
+
+.RadGrid_ykuri2 .rgNumPart a.rgCurrentPage span,
+.RadGrid_ykuri2 .rgNumPart a.rgCurrentPage:hover span
+{
+	background-position:0 -1350px;
+}
+
+/*sorting, reordering*/
+
+.RadGrid_ykuri2 .rgHeader .rgSortAsc
+{
+	background-position:3px -146px;
+	height:10px;
+}
+
+.RadGrid_ykuri2 .rgHeader .rgSortDesc
+{
+	background-position:3px -96px;
+	height:10px;
+}
+
+.GridReorderTop_ykuri,
+.GridReorderBottom_ykuri
+{
+	height:12px;
+	background:0 0 no-repeat url('WebResource.axd?d=l1VzncX1lUJ73lb5NmXl25E-NramTORWUM4XX94aXM63t8m2rSe2ADGHGBNK_sn_JJmF74iDzQAjrSX06V_w-78a44LHwg3JMWZDwbEKggvktESbnN4-tc6gtsVR5BdlDQcqFf0KF3uoDu6InfyDQtbTSUM1&t=634307904980000000');
+}
+
+.GridReorderBottom_ykuri
+{
+	background-position:0 -50px;
+}
+
+/*filtering*/
+
+.RadGrid_ykuri2 .rgFilterRow
+{
+	background:#d6e5f3;
+}
+
+.RadGrid_ykuri2 .rgFilterRow td
+{
+    border:solid #89aee5;
+    border-width:0 0 1px 1px;
+}
+
+.RadGrid_ykuri2 .rgFilter
+{
+	background-position:0 -300px;
+}
+
+.RadGrid_ykuri2 .rgFilter:hover
+{
+	background-position:0 -350px;
+}
+
+.RadGrid_ykuri2 .rgFilterActive,
+.RadGrid_ykuri2 .rgFilterActive:hover
+{
+	background-position:0 -400px;
+}
+
+.RadGrid_ykuri2 .rgFilterBox
+{
+	border-color:#c3d9f9;
+	font:12px "segoe ui",arial,sans-serif;
+	color:#000;
+}
+
+/*filter context menu*/
+
+.RadMenu_ykuri .rgHCMClear,
+.RadMenu_ykuri .rgHCMFilter
+{
+	border-color:#003c74;
+	background:#ebe8e2 center -23px repeat-x url('WebResource.axd?d=M66hymqx0uQGkyd_f4KEWY1pYZ6sLweyyvL0XpcjLZ793gwjxw9oe9XQgr8GFwRDjywB2_TckiWRtFTGhV7wNqaLR-KbJgvrmTXEnSwfwi1umXNhWDBfFYmyvITwQ1TZnK-43Fulz0hsi5Bkg6GT6mirazztS0hBRuaXryw958hUy9Kd0&t=634307904980000000');
+	color:#000;
+	font-family:"segoe ui",arial,sans-serif;
+}
+
+/*context menu*/
+
+.GridContextMenu_ykuri .rmLeftImage
+{
+	background-image:url('WebResource.axd?d=a7jSaBFExczbOEm8P78mqCdKU4obK3CVNhcTYnL08yDFuUly0hjqXfDWRPjThhew6KbpqtXW3w9ae-kYwpJpT693eYmxLixkUJ7T5O1z1glbZdkCHHXHdTjlUsiWBiuZQoF4Z6ehZ7VI9dvJWWktnlDKb_w1&t=634307904980000000');
+}
+
+.GridContextMenu_ykuri .rgHCMSortAsc .rmLeftImage
+{
+	background-position:0 0;
+}
+
+.GridContextMenu_ykuri .rgHCMSortDesc .rmLeftImage
+{
+	background-position:0 -40px;
+}
+
+.GridContextMenu_ykuri .rgHCMUnsort .rmLeftImage
+{
+	background-position:0 -80px;
+}
+
+.GridContextMenu_ykuri .rgHCMGroup .rmLeftImage
+{
+	background-position:0 -120px;
+}
+
+.GridContextMenu_ykuri .rgHCMUngroup .rmLeftImage
+{
+	background-position:0 -160px;
+}
+
+.GridContextMenu_ykuri .rgHCMCols .rmLeftImage
+{
+	background-position:0 -200px;
+}
+
+.GridContextMenu_ykuri .rgHCMFilter .rmLeftImage
+{
+	background-position:0 -240px;
+}
+
+.GridContextMenu_ykuri .rgHCMUnfilter .rmLeftImage
+{
+	background-position:0 -280px;
+}
+
+/*grouping*/
+
+.RadGrid_ykuri2 .rgGroupPanel
+{
+	border:0;
+	border-bottom:1px solid #002d96;
+	background:#d5e4f3 -1900px repeat-x url('WebResource.axd?d=l1VzncX1lUJ73lb5NmXl25E-NramTORWUM4XX94aXM63t8m2rSe2ADGHGBNK_sn_JJmF74iDzQAjrSX06V_w-78a44LHwg3JMWZDwbEKggvktESbnN4-tc6gtsVR5BdlDQcqFf0KF3uoDu6InfyDQtbTSUM1&t=634307904980000000');
+}
+
+.RadGrid_ykuri2 .rgGroupPanel td
+{
+	border:0;
+	padding:3px 4px;
+	vertical-align:middle;
+}
+
+.RadGrid_ykuri2 .rgGroupPanel td td
+{
+	padding:0;
+}
+
+.RadGrid_ykuri2 .rgGroupPanel .rgSortAsc
+{
+	height:12px;
+	background-position:4px -146px;
+}
+
+.RadGrid_ykuri2 .rgGroupPanel .rgSortDesc
+{
+	height:12px;
+	background-position:4px -96px;
+}
+
+.RadGrid_ykuri2 .rgUngroup
+{
+	background-position:0 -7200px;
+}
+
+.RadGrid_ykuri2 .rgGroupItem
+{
+	border:1px solid #4b78ca;
+	background:#eae7e2 0 -7000px repeat-x url('WebResource.axd?d=l1VzncX1lUJ73lb5NmXl25E-NramTORWUM4XX94aXM63t8m2rSe2ADGHGBNK_sn_JJmF74iDzQAjrSX06V_w-78a44LHwg3JMWZDwbEKggvktESbnN4-tc6gtsVR5BdlDQcqFf0KF3uoDu6InfyDQtbTSUM1&t=634307904980000000');
+	color:#000;
+}
+
+.RadGrid_ykuri2 .rgGroupHeader
+{
+    background:#d7e6f7;
+    font-size:1.1em;
+    line-height:21px;
+	color:#0045d6;
+}
+
+.RadGrid_ykuri2 .rgGroupHeader td
+{
+	border-top:1px solid #fcfdfe;
+	border-bottom:1px solid #8fb2e6;
+    padding-left:8px;
+}
+
+.RadGrid_ykuri2 td.rgGroupCol,
+.RadGrid_ykuri2 td.rgExpandCol
+{
+	background:#d7e6f7 none;
+	border-color:#d7e6f7;
+}
+
+.RadGrid_ykuri2 .rgGroupHeader .rgExpand
+{
+	background-position:5px -495px;
+}
+
+.RadGrid_ykuri2 .rgGroupHeader .rgCollapse
+{
+	background-position:3px -93px;
+}
+
+/*editing*/
+
+.RadGrid_ykuri2 .rgEditForm
+{
+	border-bottom:1px solid #d0d7e5;
+}
+
+.RadGrid_ykuri2 .rgUpdate
+{
+	background-position:0 -1800px;
+}
+
+.RadGrid_ykuri2 .rgCancel
+{
+	background-position:0 -1850px;
+}
+
+/*hierarchy*/
+
+.RadGrid_ykuri2 .rgDetailTable
+{
+	border-color:#002d96;
+}
+
+.RadGrid_ykuri2 .rgExpand
+{
+	background-position:5px -496px;
+}
+
+.RadGrid_ykuri2 .rgCollapse
+{
+	background-position:3px -94px;
+}
+
+/*command row*/
+
+.RadGrid_ykuri2 .rgCommandRow
+{
+	background:#043199 0 -2100px repeat-x url('WebResource.axd?d=l1VzncX1lUJ73lb5NmXl25E-NramTORWUM4XX94aXM63t8m2rSe2ADGHGBNK_sn_JJmF74iDzQAjrSX06V_w-78a44LHwg3JMWZDwbEKggvktESbnN4-tc6gtsVR5BdlDQcqFf0KF3uoDu6InfyDQtbTSUM1&t=634307904980000000');
+	color:#fff;
+}
+
+.RadGrid_ykuri2 .rgCommandCell
+{
+	border:0;
+	padding:0;
+}
+
+.RadGrid_ykuri2 thead .rgCommandCell
+{
+	border-bottom:1px solid #002d96;
+}
+
+.RadGrid_ykuri2 tfoot .rgCommandCell,
+.RadGrid_ykuri2 .rgMasterTable>tbody>tr.rgCommandRow .rgCommandCell
+{
+	border-top:1px solid #002d96;
+}
+
+.RadGrid_ykuri2 .rgCommandTable
+{
+	border:0;
+	border-bottom:1px solid #6797d1;
+}
+
+.RadGrid_ykuri2 .rgCommandTable td
+{
+	border:0;
+	padding:2px 7px;
+}
+
+.RadGrid_ykuri2 .rgCommandTable td td
+{
+	padding:0;
+}
+
+.RadGrid_ykuri2 .rgCommandRow a
+{
+	color:#fff;
+	text-decoration:none;
+}
+
+.RadGrid_ykuri2 .rgAdd
+{
+	margin-right:3px;
+	background-position:0 -1650px;
+}
+
+.RadGrid_ykuri2 .rgRefresh
+{
+	margin-right:3px;
+	background-position:0 -1600px;
+}
+
+.RadGrid_ykuri2 .rgEdit
+{
+	background-position:0 -1700px;
+}
+
+.RadGrid_ykuri2 .rgDel
+{
+	background-position:0 -1750px;
+}
+
+.RadGrid_ykuri2 .rgExpXLS,
+.RadGrid_ykuri2 .rgExpDOC,
+.RadGrid_ykuri2 .rgExpPDF,
+.RadGrid_ykuri2 .rgExpCSV
+{
+	background-image:url('WebResource.axd?d=2zG5CgqRI3sjMPHsgTxEIy4K5SmNhJLLU3skhu4vAocMLAlcBwixSfYP9Lg8hX32i1tWlWRKs__7I8JCNVYjgoElN8Byn4xG1kEUm7R78sgcby2xcwzfbJpTWkSBLTbbLqTL4pdkPW6WZl80vhOxuxSv5Ks1&t=634307904980000000');
+}
+
+.RadGrid_ykuri2 .rgExpXLS
+{
+	background-position:0 0;
+}
+.RadGrid_ykuri2 .rgExpDOC
+{
+	background-position:0 -50px;
+}
+.RadGrid_ykuri2 .rgExpPDF
+{
+	background-position:0 -100px;
+}
+.RadGrid_ykuri2 .rgExpCSV
+{
+	background-position:0 -150px;
+}
+
+/*multirow select*/
+
+.GridRowSelector_ykuri
+{
+	background:#002d96;
+}
+
+/*row drag n drop*/
+
+.GridItemDropIndicator_ykuri
+{
+    border-top:1px dashed #002d96;
+}
+
+/*tooltip*/
+
+.GridToolTip_ykuri
+{
+	border:1px solid #6187b8;
+	padding:3px;
+	background:#ccddf5;
+	color:#000;
+}
+
+/*rtl*/
+
+.RadGridRTL_ykuri .rgHeader:first-child,
+.RadGridRTL_ykuri th.rgResizeCol:first-child,
+.RadGridRTL_ykuri .rgFilterRow>td:first-child,
+.RadGridRTL_ykuri .rgRow>td:first-child,
+.RadGridRTL_ykuri .rgAltRow>td:first-child
+{
+	border-left-width:1px;
+	padding-left:7px;
+}
+
+.RadGridRTL_ykuri .rgPageFirst
+{
+	background-position:0 -1000px;
+}
+.RadGridRTL_ykuri .rgPageFirst:hover
+{
+	background-position:0 -1050px;
+}
+.RadGridRTL_ykuri .rgPagePrev
+{
+	margin:0 0 0 3px;
+	background-position:0 -850px;
+}
+.RadGridRTL_ykuri .rgPagePrev:hover
+{
+	background-position:0 -900px;
+}
+.RadGridRTL_ykuri .rgPageNext
+{
+	margin:0 3px 0 0;
+	background-position:0 -700px;
+}
+.RadGridRTL_ykuri .rgPageNext:hover
+{
+	background-position:0 -750px;
+}
+.RadGridRTL_ykuri .rgPageLast
+{
+	background-position:0 -550px;
+}
+.RadGridRTL_ykuri .rgPageLast:hover
+{
+	background-position:0 -600px;
+}
+
+.RadGridRTL_ykuri .rgGroupHeader .rgExpand
+{
+	background-position:-20px -495px;
+}
+.RadGridRTL_ykuri .rgExpand
+{
+	background-position:-20px -496px;
+}
+
+
+/*ページャを表示しない*/
+.rgAdvPart
+{
+    display:none;    
+}

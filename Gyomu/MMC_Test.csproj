@@ -218,6 +218,7 @@
     <Content Include="Common\CtlNengappiForm.ascx" />
     <Content Include="Common\CtlPager.ascx" />
     <Content Include="Common\CtrlFilter.ascx" />
+    <Content Include="Common\CtrlFilter2.ascx" />
     <Content Include="Common\DownloadDataForm.aspx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -235,6 +236,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Img\Arrow-Download-4-icon.png" />
+    <Content Include="Img\MicrosoftTeams-image.png" />
+    <Content Include="Img\コピー.jpg" />
     <Content Include="Img\ロゴ.gif" />
     <Content Include="Img\売上明細.png" />
     <Content Include="Img\新規orderedヘッダ.png" />
@@ -252,6 +255,7 @@
     <Content Include="Kaihatsu.css" />
     <Content Include="Login.aspx" />
     <Content Include="MainStyle.css" />
+    <Content Include="Master\AccountPage.aspx" />
     <Content Include="Master\CtlBumon.ascx" />
     <Content Include="Master\CtlKakaku.ascx" />
     <Content Include="Master\CtlShiire.ascx" />
@@ -272,16 +276,11 @@
     <Content Include="Master\MasterTanto.aspx" />
     <Content Include="Master\MasterTyokuso.aspx" />
     <Content Include="Master\MsterTokuisaki.aspx" />
+    <Content Include="Master\Result.aspx" />
     <Content Include="Master\TantoBumon.ascx" />
-    <Content Include="Mitumori\CtlMitumoriSyosai.ascx" />
-    <Content Include="Mitumori\MitumoriInput.aspx" />
+    <Content Include="Master\Test.aspx" />
     <Content Include="Mitumori\MitumoriItiran.aspx" />
     <Content Include="Mitumori\Print.aspx" />
-    <Content Include="Mitumori\Syosai\SeikyuSyosai.aspx" />
-    <Content Include="Mitumori\Syosai\SisetuSyosai.aspx" />
-    <Content Include="Mitumori\Syosai\SyouhinSyosai.aspx" />
-    <Content Include="Mitumori\Syosai\TokuisakiSyosai.aspx" />
-    <Content Include="Mitumori\Syosai\TyokusosakiSyosai.aspx" />
     <Content Include="OrderInput.aspx" />
     <Content Include="OrderJava.js" />
     <Content Include="Order\CtlOrderedMeisai.ascx" />
@@ -316,11 +315,18 @@
     <Content Include="Format\月次出荷伝票.xlsx" />
     <Content Include="Format\税抜出荷伝票.xlsx" />
     <Content Include="Format\税込出荷伝票.xlsx" />
-    <Content Include="Format\税抜納品書.xlsx" />
-    <Content Include="Format\税込納品書.xlsx" />
+    <Content Include="Format\月次見積書.xlsx" />
     <Content Include="Format\税抜見積書.xlsx" />
     <Content Include="Format\税込見積書.xlsx" />
-    <Content Include="Format\月次見積書.xlsx" />
+    <Content Include="Format\税抜納品書.xlsx" />
+    <Content Include="Format\税込納品書.xlsx" />
+    <Content Include="Format\月次納品書2.xlsx" />
+    <Content Include="Format\見積書2022.xlsx" />
+    <Content Include="Format\見積書2022-1.xlsx" />
+    <Content Include="Format\見積書2022-2.xlsx" />
+    <Content Include="Format\見積書2022改.xlsx" />
+    <Content Include="Format\受注書.xlsx" />
+    <Content Include="Format\受注書-2.xlsx" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="sheet\Core.js" />
@@ -390,7 +396,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppCommon.cs" />
-    <Compile Include="AppCommon2.cs" />
     <Compile Include="Appropriate\AppropriateInput.aspx.cs">
       <DependentUpon>AppropriateInput.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -463,6 +468,13 @@
     <Compile Include="Common\CtrlFilter.ascx.designer.cs">
       <DependentUpon>CtrlFilter.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Common\CtrlFilter2.ascx.cs">
+      <DependentUpon>CtrlFilter2.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Common\CtrlFilter2.ascx.designer.cs">
+      <DependentUpon>CtrlFilter2.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Common\DownloadDataForm.aspx.cs">
       <DependentUpon>DownloadDataForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -529,6 +541,13 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Master\AccountPage.aspx.cs">
+      <DependentUpon>AccountPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\AccountPage.aspx.designer.cs">
+      <DependentUpon>AccountPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Master\CtlBumon.ascx.cs">
       <DependentUpon>CtlBumon.ascx</DependentUpon>
@@ -663,6 +682,13 @@
     <Compile Include="Master\MsterTokuisaki.aspx.designer.cs">
       <DependentUpon>MsterTokuisaki.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Master\Result.aspx.cs">
+      <DependentUpon>Result.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\Result.aspx.designer.cs">
+      <DependentUpon>Result.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Master\TantoBumon.ascx.cs">
       <DependentUpon>TantoBumon.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -670,19 +696,12 @@
     <Compile Include="Master\TantoBumon.ascx.designer.cs">
       <DependentUpon>TantoBumon.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Mitumori\CtlMitumoriSyosai.ascx.cs">
-      <DependentUpon>CtlMitumoriSyosai.ascx</DependentUpon>
+    <Compile Include="Master\Test.aspx.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Mitumori\CtlMitumoriSyosai.ascx.designer.cs">
-      <DependentUpon>CtlMitumoriSyosai.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Mitumori\MitumoriInput.aspx.cs">
-      <DependentUpon>MitumoriInput.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Mitumori\MitumoriInput.aspx.designer.cs">
-      <DependentUpon>MitumoriInput.aspx</DependentUpon>
+    <Compile Include="Master\Test.aspx.designer.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
     </Compile>
     <Compile Include="Mitumori\MitumoriItiran.aspx.cs">
       <DependentUpon>MitumoriItiran.aspx</DependentUpon>
@@ -697,41 +716,6 @@
     </Compile>
     <Compile Include="Mitumori\Print.aspx.designer.cs">
       <DependentUpon>Print.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Mitumori\Syosai\SeikyuSyosai.aspx.cs">
-      <DependentUpon>SeikyuSyosai.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Mitumori\Syosai\SeikyuSyosai.aspx.designer.cs">
-      <DependentUpon>SeikyuSyosai.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Mitumori\Syosai\SisetuSyosai.aspx.cs">
-      <DependentUpon>SisetuSyosai.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Mitumori\Syosai\SisetuSyosai.aspx.designer.cs">
-      <DependentUpon>SisetuSyosai.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Mitumori\Syosai\SyouhinSyosai.aspx.cs">
-      <DependentUpon>SyouhinSyosai.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Mitumori\Syosai\SyouhinSyosai.aspx.designer.cs">
-      <DependentUpon>SyouhinSyosai.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Mitumori\Syosai\TokuisakiSyosai.aspx.cs">
-      <DependentUpon>TokuisakiSyosai.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Mitumori\Syosai\TokuisakiSyosai.aspx.designer.cs">
-      <DependentUpon>TokuisakiSyosai.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Mitumori\Syosai\TyokusosakiSyosai.aspx.cs">
-      <DependentUpon>TyokusosakiSyosai.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Mitumori\Syosai\TyokusosakiSyosai.aspx.designer.cs">
-      <DependentUpon>TyokusosakiSyosai.aspx</DependentUpon>
     </Compile>
     <Compile Include="OrderInput.aspx.cs">
       <DependentUpon>OrderInput.aspx</DependentUpon>
@@ -858,6 +842,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ErrorIMG\" />
     <Folder Include="Gyomu\Common\" />
     <Folder Include="sheet\Common\" />
     <Folder Include="Style\GridReport\" />

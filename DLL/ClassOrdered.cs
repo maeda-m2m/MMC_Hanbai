@@ -215,7 +215,7 @@ namespace DLL
                 sqlTran.Commit();
 
             }
-            catch (Exception ex)
+            catch 
             {
                 if (null != sqlTran)
                     sqlTran.Rollback();
@@ -306,7 +306,7 @@ namespace DLL
                 sql.Commit();
 
             }
-            catch (Exception e)
+            catch 
             {
                 if (null != sql)
                     sql.Rollback();
@@ -339,7 +339,7 @@ namespace DLL
                 sql.Commit();
 
             }
-            catch (Exception e)
+            catch 
             {
                 if (null != sql)
                     sql.Rollback();
@@ -391,7 +391,7 @@ namespace DLL
                     sql.Commit();
 
                 }
-                catch (Exception e)
+                catch 
                 {
                     if (null != sql)
                         sql.Rollback();
@@ -424,7 +424,7 @@ namespace DLL
                 sql.Commit();
 
             }
-            catch (Exception e)
+            catch 
             {
                 if (null != sql)
                     sql.Rollback();
@@ -463,7 +463,7 @@ namespace DLL
                 da.Update(dt);
                 sql.Commit();
             }
-            catch (Exception e)
+            catch 
             {
                 if (null != sql)
                     sql.Rollback();
@@ -559,7 +559,7 @@ namespace DLL
 
                 }
             }
-            catch (Exception ex)
+            catch 
             {
                 if (null != sqlTran)
                 { sqlTran.Rollback(); }

@@ -118,7 +118,7 @@ namespace DLL
         {
             SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
             da.SelectCommand.CommandText =
-                "Select * From M_Bumon Where Busyo = @Code and RiyoCode = 'True' ";
+                "Select * From M_Bumon Where Busyo = @Code and RiyoCode = '1' ";
             da.SelectCommand.Parameters.AddWithValue("@Code", busyo);
 
             DataDrop.M_BumonDataTable dt = new DataDrop.M_BumonDataTable();
@@ -207,7 +207,7 @@ namespace DLL
         {
             SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
             da.SelectCommand.CommandText =
-                "SELECT * FROM M_Bumon where RiyoCode = 'True' ";
+                "SELECT * FROM M_Bumon where RiyoCode = '1' ";
 
             DataDrop.M_BumonDataTable dt = new DataDrop.M_BumonDataTable();
             da.Fill(dt);
@@ -242,7 +242,7 @@ namespace DLL
         {
             SqlDataAdapter da = new SqlDataAdapter("", sqlConn);
             //da.SelectCommand.CommandText = @"SELECT TyokusousakiCD, TyokusousakiMei FROM M_Tyokusosaki WHERE (TyokusousakiMei LIKE @Name)";
-            da.SelectCommand.CommandText = @"SELECT TOP 10 * FROM M_Facility_New WHERE (FacilityName1 Like @Name)";
+            da.SelectCommand.CommandText = @"SELECT TOP 10 * FROM M_Facility_New WHERE (FacilityName1 Like @Name) or FacilityNo like @Name";
             da.SelectCommand.Parameters.AddWithValue("@Name", v + "%");
             DataDrop.M_Facility_NewDataTable dt = new DataDrop.M_Facility_NewDataTable();
             da.Fill(dt);
@@ -253,7 +253,7 @@ namespace DLL
         {
             SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
             da.SelectCommand.CommandText =
-                "select distinct(SyouhinMei), Media, SyouhinCode, Makernumber, Hanni, CategoryCode, ShiireCode, HyoujunKakaku, ShiireKakaku     from M_Kakaku_2 where SyouhinMei like @sm ";
+                "select distinct(SyouhinMei), Media, SyouhinCode, Makernumber, Hanni, CategoryCode, ShiireCode, HyoujunKakaku, ShiireKakaku     from M_Kakaku_2 where SyouhinMei like @sm or SyouhinCode like @sm";
             da.SelectCommand.Parameters.AddWithValue("@sm", "%" + v + "%");
             DataSet1.M_Kakaku_2DataTable dt = new DataSet1.M_Kakaku_2DataTable();
             da.Fill(dt);
@@ -333,6 +333,15 @@ namespace DLL
             da.SelectCommand.CommandText = @"SELECT SyouhinCode, SyouhinMei,ShiiresakiMei FROM M_Syohin_New WHERE (SyouhinMei LIKE @Name)  ";
             da.SelectCommand.Parameters.AddWithValue("@Name", Text + "%");
             DataDrop.M_Syohin_NewDataTable dt = new DataDrop.M_Syohin_NewDataTable();
+            da.Fill(dt);
+            return dt;
+        }
+
+        public static DataDrop.M_ShiiresakiDataTable SetShiire(SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select ShiiresakiCode, ShiiresakiRyakusyou from M_Shiiresaki";
+            DataDrop.M_ShiiresakiDataTable dt = new DataDrop.M_ShiiresakiDataTable();
             da.Fill(dt);
             return dt;
         }

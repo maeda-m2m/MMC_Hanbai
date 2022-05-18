@@ -5,7 +5,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title></title>
+        <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <title>MMC 販売管理システム</title>
     <style type="text/css">
         .logo {
             width: 110px;
@@ -65,10 +66,72 @@
                 background: #000000;
                 color: #FFF;
             }
+
+        #overlay {
+            position: fixed;
+            top: 0;
+            z-index: 100;
+            width: 100%;
+            height: 100%;
+            display: none;
+            background: rgba(0,0,0,0.6);
+        }
+
+        .cv-spinner {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px #ddd solid;
+            border-top: 4px #2e93e6 solid;
+            border-radius: 50%;
+            animation: sp-anime 0.8s infinite linear;
+        }
+
+        @keyframes sp-anime {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .is-hide {
+            display: none;
+        }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
+        <div id="overlay">
+            <div class="cv-spinner">
+                <span class="spinner"></span>
+                <script type="text/javascript">
+                    jQuery(function ($) {
+                        $(document).ajaxSend(function () {
+                            $("#overlay").fadeIn(300);
+                        });
+
+                        $('#BtnRogin').click(function () {
+                            $.ajax({
+                                type: 'GET',
+                                success: function (data) {
+                                    console.log(data);
+                                }
+                            }).done(function () {
+                                setTimeout(function () {
+                                    $("#overlay").fadeOut(300);
+                                }, 100000);
+                            });
+                        });
+                    });
+                </script>
+            </div>
+        </div>
+
         <div>
 
             <table id="T001" cellspacing="0" border="0">

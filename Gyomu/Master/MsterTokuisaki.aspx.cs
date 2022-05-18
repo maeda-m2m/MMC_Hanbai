@@ -1,17 +1,11 @@
 ﻿using System;
 using DLL;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using Telerik.Web.UI;
 using Yodokou_HanbaiKanri;
-using Yodokou_HanbaiKanri.Common;
 using System.IO;
 using System.Text;
 
@@ -20,78 +14,98 @@ namespace Gyomu.Master
 {
     public partial class MsterTokuisaki : System.Web.UI.Page
     {
-        HtmlInputFile[] files = null;
 
         const int LIST_ID = 50;
+        public static int intFieldNo = 100;
+        public static string mail_to = "maeda@m2m-asp.com";
+        public static string mail_title = "エラーメール | 得意先マスタ";
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            lblMsg.Text = "";
+
             if (!this.IsPostBack)
             {
-                this.F.Create(LIST_ID, 3);
-
-                Craete();
-                Master.Style["display"] = "";
-                Touroku.Style["display"] = "none";
+                Create("", 0);
+                if (!string.IsNullOrEmpty(SessionManager.TokuisakiCode))
+                {
+                    Touroku.Style["display"] = "";
+                    L.Style["display"] = "none";
+                    Masters.Style["display"] = "none";
+                    Tokuisaki.Create(SessionManager.TokuisakiCode);
+                    SessionManager.TokuisakiCode = "";
+                    SessionManager.drTokuisaki = null;
+                }
+                else
+                {
+                    Touroku.Style["display"] = "none";
+                    L.Style["display"] = "";
+                    Masters.Style["display"] = "";
+                }
             }
         }
 
-        private void Craete()
+        private void Create(string koumoku, int page)
         {
-            lblMsg.Text = "";
-            L.Visible = true;
-
-            UserViewManager.UserView v = SessionManager.User.GetUserView(LIST_ID);
-
-            SqlDataAdapter da = new SqlDataAdapter(v.SqlDataFactory.SelectCommand.CommandText, Global.GetConnection());
-
-            string strWhere = "";
             try
             {
-                strWhere = this.F.GetFilter(da.SelectCommand);
-                if (!string.IsNullOrEmpty(strWhere))
-                    da.SelectCommand.CommandText += " where " + strWhere;
+                L.Visible = true;
+
+                SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM M_Tokuisaki2", Global.GetConnection());
+                string cmm = "";
+                if (!string.IsNullOrEmpty(koumoku))
+                {
+                    cmm = da.SelectCommand.CommandText + " where " + koumoku;
+                }
+                else
+                {
+                    cmm = da.SelectCommand.CommandText;
+                }
+                cmm += " ORDER BY CustomerCode";
+                DataSet1.M_Tokuisaki2DataTable dt = Class1.GetTokuisakiMaster(cmm, Global.GetConnection());
+                //commandtext = cmm;
+
+                int nRecCount = 0;
+                nRecCount = dt.Rows.Count;
+
+                if (0 == nRecCount)
+                {
+                    L.Visible = false;
+                    lblMsg.Text = "データがありません。";
+                    return;
+                }
+                if (0 == nRecCount)
+                {
+                    L.Visible = false;
+                    RGTokuisakiList.CurrentPageIndex = 0;
+                    lblMsg.Text = "このページのデータが取得できませんでした。再検索してください。";    // データはあるか取得ページがおかしい
+                    return;
+                }
+                RGTokuisakiList.CurrentPageIndex = page;
+                string strColumnAry = "";
+                //for (int c = 0; c < dt.Columns.Count; c++)
+                //{
+                //    if (strColumnAry == "")
+                //    {
+                //        strColumnAry = dt.Columns[c].ColumnName;
+                //    }
+                //    else
+                //    {
+                //        strColumnAry += "," + dt.Columns[c].ColumnName;
+                //    }
+                //}
+                //this.Filter.KoumokuBind(strColumnAry);
+                this.Filter.KoumokuBind2(intFieldNo);
+                RGTokuisakiList.VirtualItemCount = nRecCount;//nRecCountに取ってきたデータ全件の大きさがわかる
+                RGTokuisakiList.DataSource = dt;
+                RGTokuisakiList.DataBind();
+                this.ShowList(true);
             }
             catch (Exception ex)
             {
-                lblMsg.Text = ex.Message;
-                return;
+
             }
-
-            Core.Sql.RowNumberInfo info = new Core.Sql.RowNumberInfo();
-            info.nStartNumber = this.D.CurrentPageIndex * D.PageSize + 1;
-            info.nEndNumber = (this.D.CurrentPageIndex + 1) * D.PageSize;
-
-            DataTable dt = new DataTable();
-            int nRecCount = 0;
-            info.LoadData(da.SelectCommand, Global.GetConnection(), dt, ref nRecCount);
-            //DataSet1.M_Tokuisaki2DataTable dt = Class1.GetTokuisakiAll(Global.GetConnection());
-            //nRecCount = dt.Count;
-            //string d = info.ToString();
-            if (0 == nRecCount)
-            {
-                L.Visible = false;
-                lblMsg.Text = "データがありません。";
-                return;
-            }
-            if (0 == dt.Rows.Count)
-            {
-                L.Visible = false;
-                this.D.CurrentPageIndex = 0;
-                lblMsg.Text = "このページのデータが取得できませんでした。再検索してください。";	// データはあるか取得ページがおかしい
-                return;
-            }
-
-            this.D.VirtualItemCount = nRecCount;
-
-            this.D.DataSource = dt;
-
-            v.CreateRadGrid(this.D, 1, new UserViewManager.UserView.DataBoundEventHandler(UserView_DataBound));
-
-            this.D.DataBind();
-
-            this.ShowList(true);
-
         }
 
         private void ShowMsg(string strMsg, bool bErrorMsg)
@@ -107,53 +121,6 @@ namespace Gyomu.Master
                 this.L.Controls[i].Visible = bShow;
         }
 
-        protected void D_ItemDataBound(object sender, Telerik.Web.UI.GridItemEventArgs e)
-        {
-            if (!(Telerik.Web.UI.GridItemType.Item == e.Item.ItemType ||
-                Telerik.Web.UI.GridItemType.AlternatingItem == e.Item.ItemType))
-                return;
-
-            //DataRowView drv = (DataRowView)e.Item.DataItem;
-            //DataSet1.M_Tokuisaki2Row dr = (DataSet1.M_Tokuisaki2Row)drv.Row;
-
-            Button btnEdit = e.Item.FindControl("E") as Button;
-            string strCode = Convert.ToString((e.Item.DataItem as DataRowView).Row["TokuisakiCode"]);
-            string strCust = Convert.ToString((e.Item.DataItem as DataRowView).Row["CustomerCode"]);
-            Button E = e.Item.FindControl("E") as Button;
-            E.Attributes["onclick"] = string.Format("CntRow('{0}/{1}')", strCode, strCust);
-
-            //Button BtnDoki = e.Item.FindControl("K") as Button;
-
-            Label CustomerCode = e.Item.FindControl("CustomerCode") as Label;
-            Label TokuisakiCode = e.Item.FindControl("TokuisakiCode") as Label;
-            Label TokuisakiName1 = e.Item.FindControl("TokuisakiName1") as Label;
-            Label TokuisakiFurifana = e.Item.FindControl("TokuisakiFurifana") as Label;
-            Label TantoStaff = e.Item.FindControl("TantoStaff") as Label;
-            Label CityName = e.Item.FindControl("CityName") as Label;
-
-            //CustomerCode.Text = dr.CustomerCode;
-            //TokuisakiCode.Text = dr.TokuisakiCode.ToString();
-            //TokuisakiName1.Text = dr.TokuisakiName1;
-            //if (!dr.IsTokuisakiFurifanaNull())
-            //{
-            //    TokuisakiFurifana.Text = dr.TokuisakiFurifana;
-            //}
-            //if (!dr.IsTantoStaffCodeNull())
-            //{
-            //    string no = dr.TantoStaffCode;
-            //    DataMaster.M_Tanto1Row drT = ClassMaster.GetTantoRow2(no, Global.GetConnection());
-            //    TantoStaff.Text = drT.UserName;
-            //}
-
-            //if (!dr.IsCityCodeNull())
-            //{
-            //    string no = dr.CityCode;
-            //    DataMaster.M_CityRow drC = ClassMaster.GetCity(no, Global.GetConnection());
-            //    CityName.Text = drC.CityName;
-            //}
-
-
-        }
 
         private void UserView_DataBound(UserViewManager.UserViewEventArgs e)
         {
@@ -165,11 +132,12 @@ namespace Gyomu.Master
 
         protected void E_Click(object sender, EventArgs e)
         {
+            Touroku.Style["display"] = "";
+            L.Style["display"] = "none";
+            Masters.Style["display"] = "none";
+
             //修正ボタンクリック動作
             string UserId = count.Value;
-            Master.Style["display"] = "none";
-            Touroku.Style["display"] = "";
-
             Tokuisaki.Create(UserId);
         }
 
@@ -188,9 +156,6 @@ namespace Gyomu.Master
         protected void BtnSinki_Click(object sender, EventArgs e)
         {
             Tokuisaki.Claer();
-            Master.Style["display"] = "none";
-            Touroku.Style["display"] = "";
-
         }
 
         protected void BtnToroku_Click(object sender, EventArgs e)
@@ -199,79 +164,25 @@ namespace Gyomu.Master
 
             if (bo)
             {
-                Master.Style["display"] = "";
-                Touroku.Style["display"] = "none";
-
-                Craete();
-
+                Create("", 0);
                 lblMsg.Text = "登録しました";
+                ClassMaster.InsertLog(Page.Title, SessionManager.User.UserID, SessionManager.User.UserName, DateTime.Now, "得意先マスタ | 新規登録", true, Global.GetConnection());
+
+            }
+            else
+            {
+                lblMsg.Text = "登録に失敗しました";
+                string body = "得意先マスタ | CSVダウンロード" + "\r\n" + "" + "\r\n" + "" + "\r\n" + "";
+                ClassMail.ErrorMail(mail_to, mail_title, body);
+                ClassMaster.InsertLog(Page.Title, SessionManager.User.UserID, SessionManager.User.UserName, DateTime.Now, "得意先マスタ | 新規登録", false, Global.GetConnection());
             }
         }
 
-        protected void D_ItemCreated(object sender, Telerik.Web.UI.GridItemEventArgs e)
+        private void CreatePage()
         {
-            if (e.Item.ItemType == GridItemType.Pager)
-            {
-                (e.Item.Cells[0].Controls[0] as Table).Rows[0].Visible = false;
-            }
-        }
-
-        protected void D_PageIndexChanged(object sender, GridPageChangedEventArgs e)
-        {
-            D.MasterTableView.CurrentPageIndex = e.NewPageIndex;
-            this.Craete();
-        }
-
-        protected void BtnSerch_Click(object sender, EventArgs e)
-        {
-            lblMsg.Text = "";
-            Craete();
-        }
-
-        protected void CSVdownload_Click(object sender, EventArgs e)
-        {
-            UserViewManager.UserView v = SessionManager.User.GetUserView(51);
-            SqlDataAdapter da = new SqlDataAdapter(v.SqlDataFactory.SelectCommand.CommandText, Global.GetConnection());
-
-            string strWhere = "";
-            try
-            {
-                strWhere = this.F.GetFilter(da.SelectCommand);
-                if (!string.IsNullOrEmpty(strWhere))
-                    da.SelectCommand.CommandText += " where " + strWhere;
-            }
-            catch (Exception ex)
-            {
-                lblMsg.Text = ex.Message;
-                return;
-            }
-            D.PageSize = 2000;
-            Core.Sql.RowNumberInfo info = new Core.Sql.RowNumberInfo();
-            info.nStartNumber = this.D.CurrentPageIndex * D.PageSize + 1;
-            info.nEndNumber = (this.D.CurrentPageIndex + 1) * D.PageSize;
-
-            string cmm = da.SelectCommand.CommandText;
-            DataTable dt = new DataTable();
-            int nRecCount = 0;
-            info.LoadData(da.SelectCommand, Global.GetConnection(), dt, ref nRecCount);
-
-            if (0 == dt.Rows.Count)
-            {
-                lblMsg.Text = "該当データがありません";
-                return;
-            }
-
-            string strData = v.SqlDataFactory.GetTextData(dt, this.D.MasterTableView.SortExpressions.GetSortString(), Core.Data.DataTable2Text.EnumDataFormat.Csv);
-
-            string strExt = "csv";
-            string strFileName = ("得意先マスタ") + "_" + DateTime.Now.ToString("yyyyMMdd") + "." + strExt;
-            Core.Data.DataTable2Text.EnumDataFormat fmt = Core.Data.DataTable2Text.EnumDataFormat.Csv;
-
-
-            this.Ram.ResponseScripts.Add(string.Format("window.location.href='{0}';",
-                 this.ResolveUrl("~/Common/DownloadDataForm.aspx?" +
-                 Common.DownloadDataForm.GetQueryString4Text(strFileName, v.CreateTextData(dt, fmt, null)))));
-
+            string Koumoku = "";
+            Koumoku = Filter.GetKoumoku();
+            Create(Koumoku, RGTokuisakiList.MasterTableView.CurrentPageIndex);
         }
 
         protected void Ram_AjaxRequest(object sender, AjaxRequestEventArgs e)
@@ -279,167 +190,340 @@ namespace Gyomu.Master
 
         }
 
-        protected void CSVformat_Click(object sender, EventArgs e)
+        protected void test_ItemsRequested(object sender, RadComboBoxItemsRequestedEventArgs e)
         {
-            UserViewManager.UserView v = SessionManager.User.GetUserView(51);
-            SqlDataAdapter da = new SqlDataAdapter(v.SqlDataFactory.SelectCommand.CommandText, Global.GetConnection());
-
-            string strWhere = "";
-            try
+            if (e.Text != "")
             {
-                strWhere = this.F.GetFilter(da.SelectCommand);
-                if (!string.IsNullOrEmpty(strWhere))
-                    da.SelectCommand.CommandText += " where " + strWhere;
+                ListSet.SetTanto4(sender, e);
             }
-            catch (Exception ex)
-            {
-                lblMsg.Text = ex.Message;
-                return;
-            }
-            D.PageSize = 1;
-            Core.Sql.RowNumberInfo info = new Core.Sql.RowNumberInfo();
-            info.nStartNumber = this.D.CurrentPageIndex * D.PageSize + 1;
-            info.nEndNumber = (this.D.CurrentPageIndex + 1) * D.PageSize;
-
-            string cmm = da.SelectCommand.CommandText;
-            DataTable dt = new DataTable();
-            int nRecCount = 0;
-            info.LoadData(da.SelectCommand, Global.GetConnection(), dt, ref nRecCount);
-
-            if (0 == dt.Rows.Count)
-            {
-                lblMsg.Text = "該当データがありません";
-                return;
-            }
-
-            string strData = v.SqlDataFactory.GetTextData(dt, this.D.MasterTableView.SortExpressions.GetSortString(), Core.Data.DataTable2Text.EnumDataFormat.Csv);
-
-            string strExt = "csv";
-            string strFileName = ("UploadCSVFormat") + "." + strExt;
-            Core.Data.DataTable2Text.EnumDataFormat fmt = Core.Data.DataTable2Text.EnumDataFormat.Csv;
-
-
-            this.Ram.ResponseScripts.Add(string.Format("window.location.href='{0}';",
-                 this.ResolveUrl("~/Common/DownloadDataForm.aspx?" +
-                 Common.DownloadDataForm.GetQueryString4Text(strFileName, v.CreateTextData(dt, fmt, null)))));
         }
 
-        protected void CSVupload_Click(object sender, EventArgs e)
+        protected void RadCityCode2_ItemsRequested(object sender, RadComboBoxItemsRequestedEventArgs e)
+        {
+            if (e.Text != "")
+            {
+                ListSet.SetTanto4(sender, e);
+            }
+        }
+
+        protected void RcbTanto2_ItemsRequested(object sender, RadComboBoxItemsRequestedEventArgs e)
+        {
+            if (e.Text != "")
+            {
+                ListSet.SetTanto4(sender, e);
+            }
+        }
+
+        protected void BtnSerch_Click1(object sender, EventArgs e)
         {
             lblMsg.Text = "";
-            if (Fu.HasFile)
+            CreatePage();
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Touroku.Style["display"] = "";
+            L.Style["display"] = "none";
+            Masters.Style["display"] = "none";
+        }
+
+        protected void BtnCSVdownload_Click(object sender, EventArgs e)
+        {
+            string strWhere = "";
+            UserViewManager.UserView v = SessionManager.User.GetUserView(50);
+            SqlDataAdapter da = new SqlDataAdapter(v.SqlDataFactory.SelectCommand.CommandText, Global.GetConnection());
+            strWhere = CreateCommandText(da.SelectCommand.CommandText);
+            if (strWhere != "")
             {
-                string filename = Fu.PostedFile.FileName;
-                byte[] v = Fu.FileBytes;
-                System.IO.Stream c = Fu.FileContent;
-
-                System.IO.StreamReader tabreader = null;
-                Core.IO.CSVReader csvreader = null;
-                Stream stream = Fu.PostedFile.InputStream;
-                Encoding enc = System.Text.Encoding.GetEncoding(932);
-                System.IO.StreamReader check = new System.IO.StreamReader(stream, enc);
-                string strCheck = check.ReadLine();
-                if (strCheck == null)
+                DataSet1.M_Tokuisaki2DataTable dt = Class1.GetTokuisakiMaster(da.SelectCommand.CommandText + " where " + strWhere, Global.GetConnection());
+                if (dt.Count > 0)
                 {
-                    return;
-                }
-                bool bTab = (strCheck.Split('\t').Length > strCheck.Split(',').Length);
-                if (bTab)
-                {
-                    tabreader = new System.IO.StreamReader(stream, enc);
-                }
-                else
-                {
-                    csvreader = new Core.IO.CSVReader(stream, enc);
-                }
-                int[] nData = new int[]
-                {
-                    1, //顧客コード
-                    6, //得意先コード
-                    50, //得意先名1
-                    50, //得意先名2
-                    6, //市町村コード
-                    4, //担当営業
-                    100, //フリガナ
-                    100, //略称
-                    10, //〒
-                    50, //住所1
-                    50, //住所2
-                    20, //TEL
-                    20, //FAX
-                    10, //担当者
-                    10, //担当部署名
-                    1, //敬称
-                    3, //掛率
-                    10, //締日
-                    10, //税通知
-                    10, //税区分
-                    2, //銀行
-                    8, //口座番号
-                    20, //
-                };
-
-                string[] strFieldName = new string[]
-                {
-                    "顧客コード",
-                    "得意先コード",
-                    "得意先名1",
-                    "得意先名2",
-                    "市町村コード",
-                    "担当営業",
-                    "フリガナ",
-                    "略称",
-                    "〒",
-                    "住所1",
-                    "住所2",
-                    "TEL",
-                    "FAX",
-                    "担当者",
-                    "担当部署名",
-                    "敬称",
-                    "掛率",
-                    "締日",
-                    "税通知",
-                    "税区分",
-                    "銀行",
-                    "口座番号",
-                   "",
-                };
-
-                int nLine = 0;
-                int RowCount = 0;
-                //string[] str = null;
-                //string[] strPrevData = null;
-
-                //string tokuCode = "";
-
-                while (true)
-                {
-                    RowCount++;
                     try
                     {
-                        nLine++;
-                        DataSet1.M_Tokuisaki2DataTable dtN = new DataSet1.M_Tokuisaki2DataTable();
-                        DataSet1.M_Tokuisaki2Row drN = dtN.NewM_Tokuisaki2Row();
-                        string strArray2 = check.ReadLine();
-                        if (strArray2 == null)
-                        {
-                            break;
-                        }
-                        string[] str2 = strArray2.Split(',');
+                        string strExt = "csv";
+                        string strFileName = ("得意先マスタcsv") + "_" + DateTime.Now.ToString("yyyyMMdd") + "." + strExt;
+                        Core.Data.DataTable2Text.EnumDataFormat fmt = Core.Data.DataTable2Text.EnumDataFormat.Csv;
 
-                        drN.ItemArray = str2;
-
-                        dtN.AddM_Tokuisaki2Row(drN);
-                        Class1.UploadTokuisaki(dtN, Global.GetConnection());
-                        lblMsg.Text = "データを取り込みました。";
+                        this.Ram.ResponseScripts.Add(string.Format("window.location.href='{0}';",
+                this.ResolveUrl("~/Common/DownloadDataForm.aspx?" +
+                Common.DownloadDataForm.GetQueryString4Text(strFileName, v.CreateTextData(dt, fmt, null)))));
+                        ClassMaster.InsertLog(Page.Title, SessionManager.User.UserID, SessionManager.User.UserName, DateTime.Now, "得意先マスタ | CSVダウンロード", true, Global.GetConnection());
                     }
                     catch (Exception ex)
                     {
-                        lblMsg.Text = "データ取込時にエラーが発生しました。";
+                        string body = "得意先マスタ | CSVダウンロード" + "\r\n" + ex.Message + "\r\n" + ex.StackTrace + "\r\n" + ex.Source;
+                        ClassMail.ErrorMail(mail_to, mail_title, body);
+                        ClassMaster.InsertLog(Page.Title, SessionManager.User.UserID, SessionManager.User.UserName, DateTime.Now, "得意先マスタ | CSVダウンロード", false, Global.GetConnection());
                     }
                 }
             }
+            else
+            {
+                DataSet1.M_Tokuisaki2DataTable dt2 = Class1.GetTokuisakiMaster(da.SelectCommand.CommandText, Global.GetConnection());
+                if (dt2.Count > 0)
+                {
+                    try
+                    {
+                        string strExt = "csv";
+                        string strFileName = ("仕入先マスタcsv") + "_" + DateTime.Now.ToString("yyyyMMdd") + "." + strExt;
+                        Core.Data.DataTable2Text.EnumDataFormat fmt = Core.Data.DataTable2Text.EnumDataFormat.Csv;
+
+                        this.Ram.ResponseScripts.Add(string.Format("window.location.href='{0}';",
+                this.ResolveUrl("~/Common/DownloadDataForm.aspx?" +
+                Common.DownloadDataForm.GetQueryString4Text(strFileName, v.CreateTextData(dt2, fmt, null)))));
+                        ClassMaster.InsertLog(Page.Title, SessionManager.User.UserID, SessionManager.User.UserName, DateTime.Now, "得意先マスタ | CSVダウンロード", true, Global.GetConnection());
+                    }
+                    catch (Exception ex)
+                    {
+                        string body = "得意先マスタ | CSVダウンロード" + "\r\n" + ex.Message + "\r\n" + ex.StackTrace + "\r\n" + ex.Source;
+                        ClassMail.ErrorMail(mail_to, mail_title, body);
+                        ClassMaster.InsertLog(Page.Title, SessionManager.User.UserID, SessionManager.User.UserName, DateTime.Now, "得意先マスタ | CSVダウンロード", false, Global.GetConnection());
+                    }
+                }
+            }
+        }
+
+        private string CreateCommandText(string commandText)
+        {
+            string koumoku = "";
+            koumoku = Filter.GetKoumoku();
+            return koumoku;
+        }
+
+        protected void BtnUpload_Click(object sender, EventArgs e)
+        {
+            if (FileUpload.HasFile)
+            {
+                try
+                {
+                    Stream s = FileUpload.FileContent;
+                    System.Text.Encoding enc = System.Text.Encoding.GetEncoding(932);
+                    System.IO.StreamReader check = new StreamReader(s, enc);
+                    string strCheck = check.ReadLine();
+                    if (strCheck == null)
+                    {
+                        return;
+                    }
+                    bool bTab = (strCheck.Split('\t').Length > strCheck.Split(',').Length);
+                    int nLine = 0;
+                    int RowCount = 0;
+                    if (bTab)
+                    {
+                        while (check.EndOfStream == false)
+                        {
+                            string strLineData = check.ReadLine();
+                            string[] mData = strLineData.Split('\t');
+                            DataSet1.M_Tokuisaki2DataTable dt = new DataSet1.M_Tokuisaki2DataTable();
+                            DataSet1.M_Tokuisaki2Row dr = dt.NewM_Tokuisaki2Row();
+                            dr.ItemArray = mData;
+                            dt.AddM_Tokuisaki2Row(dr);
+                            ClassMaster.UpdateCSVtokuisaki(dt, Global.GetConnection());
+                        }
+                    }
+                    else
+                    {
+                        while (check.EndOfStream == false)
+                        {
+                            string strLineData = check.ReadLine();
+                            string[] mData = strLineData.Split(',');
+                            DataSet1.M_Tokuisaki2DataTable dt = new DataSet1.M_Tokuisaki2DataTable();
+                            DataSet1.M_Tokuisaki2Row dr = dt.NewM_Tokuisaki2Row();
+                            dr.ItemArray = mData;
+                            dt.AddM_Tokuisaki2Row(dr);
+                            ClassMaster.UpdateCSVtokuisaki(dt, Global.GetConnection());
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    lblMsg.Text = "CSVアップロードに失敗しました。" + "<br>" + ex.Message;
+                    lblMsg.ForeColor = System.Drawing.Color.Red;
+                    string body = "得意先マスタ | CSVアップロード" + "\r\n" + ex.Message + "\r\n" + ex.StackTrace + "\r\n" + ex.Source;
+                    ClassMail.ErrorMail(mail_to, mail_title, body);
+                    ClassMaster.InsertLog(Page.Title, SessionManager.User.UserID, SessionManager.User.UserName, DateTime.Now, "得意先マスタ | CSVダウンロード", false, Global.GetConnection());
+                }
+                finally
+                {
+                    lblMsg.Text = "CSVアップロードに成功しました。";
+                    lblMsg.ForeColor = System.Drawing.Color.Green;
+                    ClassMaster.InsertLog(Page.Title, SessionManager.User.UserID, SessionManager.User.UserName, DateTime.Now, "得意先マスタ | CSVアップロード", true, Global.GetConnection());
+                    CreatePage();
+                }
+            }
+
+        }
+
+        protected void RGTokuisakiList_ItemDataBound(object sender, GridItemEventArgs e)
+        {
+            if (Telerik.Web.UI.GridItemType.Item == e.Item.ItemType || Telerik.Web.UI.GridItemType.AlternatingItem == e.Item.ItemType)
+            {
+                DataSet1.M_Tokuisaki2Row dr = (e.Item.DataItem as DataRowView).Row as DataSet1.M_Tokuisaki2Row;
+                Label LblTokuisakiCode = e.Item.FindControl("LblTokuisakiCode") as Label;
+                Label LblTokuisakiName1 = e.Item.FindControl("LblTokuisakiName1") as Label;
+                Label LblTokuisakiName2 = e.Item.FindControl("LblTokuisakiName2") as Label;
+                Label LblTokuisakiRyakusyou = e.Item.FindControl("LblTokuisakiRyakusyou") as Label;
+                Label LblTanto = e.Item.FindControl("LblTanto") as Label;
+                Label LblAddress1 = e.Item.FindControl("LblAddress1") as Label;
+                Label LblAddress2 = e.Item.FindControl("LblAddress2") as Label;
+                Label LblTEL = e.Item.FindControl("LblTEL") as Label;
+                Label LblFAX = e.Item.FindControl("LblFAX") as Label;
+                Label LblShimebi = e.Item.FindControl("LblShimebi") as Label;
+                HiddenField HidSyousai = e.Item.FindControl("HidSyousai") as HiddenField;
+                LblTokuisakiCode.Text = dr.CustomerCode + dr.TokuisakiCode;
+
+                if (dr.TokuisakiName1.Length > 15)
+                {
+                    LblTokuisakiName1.Text = dr.TokuisakiName1.Substring(0, 14) + "...";
+                }
+                else
+                {
+                    LblTokuisakiName1.Text = dr.TokuisakiName1;
+                }
+                if (!dr.IsTokuisakiName2Null())
+                {
+                    if (dr.TokuisakiName2.Length > 15)
+                    {
+                        LblTokuisakiName2.Text = dr.TokuisakiName2.Substring(0, 14) + "...";
+                    }
+                    else
+                    {
+                        LblTokuisakiName2.Text = dr.TokuisakiName2;
+                    }
+                }
+                if (!dr.IsTokuisakiRyakusyoNull())
+                {
+                    if (dr.TokuisakiRyakusyo.Length > 15)
+                    {
+                        LblTokuisakiRyakusyou.Text = dr.TokuisakiRyakusyo.Substring(0, 14);
+                    }
+                    else
+                    {
+                        LblTokuisakiRyakusyou.Text = dr.TokuisakiRyakusyo;
+                    }
+                }
+                if (!dr.IsTantoStaffCodeNull())
+                {
+                    DataMaster.M_Tanto1DataTable dt = ClassMaster.GetTanto1(dr.TantoStaffCode, Global.GetConnection());
+                    LblTanto.Text = dt[0].UserName;
+                }
+                if (!dr.IsTokuisakiAddress1Null())
+                {
+                    if (dr.TokuisakiAddress1.Length > 15)
+                    {
+                        LblAddress1.Text = dr.TokuisakiAddress1.Substring(0, 14) + "...";
+                    }
+                    else
+                    {
+                        LblAddress1.Text = dr.TokuisakiAddress1;
+                    }
+                }
+                if (!dr.IsTokuisakiAddress2Null())
+                {
+                    if (dr.TokuisakiAddress2.Length > 15)
+                    {
+                        LblAddress2.Text = dr.TokuisakiAddress2.Substring(0, 14) + "...";
+                    }
+                    else
+                    {
+                        LblAddress2.Text = dr.TokuisakiAddress2;
+                    }
+                }
+                if (!dr.IsTokuisakiTELNull())
+                {
+                    LblTEL.Text = dr.TokuisakiTEL;
+                }
+                if (!dr.IsTokuisakiFAXNull())
+                {
+                    LblFAX.Text = dr.TokuisakiFAX;
+                }
+                if (!dr.IsShimebiNull())
+                {
+                    string cod = "";
+                    switch (dr.Shimebi)
+                    {
+                        case "05":
+                            cod = "5日締め";
+                            break;
+                        case "10":
+                            cod = "10日締め";
+                            break;
+                        case "15":
+                            cod = "15日締め";
+                            break;
+                        case "20":
+                            cod = "20日締め";
+                            break;
+                        case "25":
+                            cod = "25日締め";
+                            break;
+                        case "99":
+                            cod = "月末締め";
+                            break;
+                        case "00":
+                            cod = "随時締め";
+                            break;
+                        case "月末":
+                            cod = "月末";
+                            break;
+                        case "都度":
+                            cod = "都度";
+                            break;
+                    }
+                    if (cod != "")
+                    {
+                        LblShimebi.Text = cod;
+                    }
+                }
+                HidSyousai.Value = dr.TokuisakiCode + "/" + dr.CustomerCode;
+
+            }
+        }
+
+        protected void RGTokuisakiList_ItemCommand(object sender, GridCommandEventArgs e)
+        {
+            HiddenField HidSyousai = e.Item.FindControl("HidSyousai") as HiddenField;
+            if (HidSyousai != null)
+            {
+                string UserId = HidSyousai.Value;
+                if (e.CommandName.Equals("BtnSyousai"))
+                {
+                    Masters.Style["display"] = "none";
+                    RGTokuisakiList.Style["display"] = "none";
+                    Touroku.Style["display"] = "";
+                    Tokuisaki.Create(UserId);
+                }
+                if (e.CommandName.Equals("Delete"))
+                {
+                    try
+                    {
+                        ClassMaster.DeleteTokuisaki(UserId, Global.GetConnection());
+                    }
+                    catch (Exception ex)
+                    {
+                        lblMsg.Text = ex.Message;
+                    }
+                    finally
+                    {
+                        CreatePage();
+                    }
+                }
+            }
+        }
+
+        protected void RGTokuisakiList_ItemCreated(object sender, GridItemEventArgs e)
+        {
+
+        }
+
+        protected void RGTokuisakiList_PageIndexChanged(object sender, GridPageChangedEventArgs e)
+        {
+            RGTokuisakiList.MasterTableView.CurrentPageIndex = e.NewPageIndex;
+            CreatePage();
+        }
+
+        protected void RGTokuisakiList_PreRender(object sender, EventArgs e)
+        {
+
         }
     }
 }

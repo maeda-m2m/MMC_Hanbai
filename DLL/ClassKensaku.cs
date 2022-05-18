@@ -80,6 +80,26 @@ namespace DLL
             return dt;
         }
 
+        public static DataMitumori.T_MitumoriHeaderBackupDataTable GetMitumori2(KensakuParam k, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText =
+                "Select * FROM T_MitumoriHeaderBackup";
+            if (k != null)
+            {
+                WhereGenerator w = new WhereGenerator();
+                k.SetWhere(da, w);
+
+                if (!string.IsNullOrEmpty(w.WhereText))
+                    da.SelectCommand.CommandText += " Where " + w.WhereText;
+            }
+            da.SelectCommand.CommandText += " Order By MitumoriNo desc";
+
+            DataMitumori.T_MitumoriHeaderBackupDataTable dt = new DataMitumori.T_MitumoriHeaderBackupDataTable();
+            da.Fill(dt);
+            return dt;
+        }
+
         public static DataReturn.T_ReturnDataTable GetReturnMeisaiSerch(KensakuParam k, SqlConnection sqlConnection)
         {
             SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
@@ -215,10 +235,19 @@ namespace DLL
             public string CreateUser = null;
             public string OshiraseNaiyou = null;
             public string CreateOshiraseDate = null;
+            public string CreateDate_Oshirase = null;
 
             //見積検索
             internal void SetWhere(SqlDataAdapter da, WhereGenerator w)
             {
+                if (CreateDate_Oshirase != null)
+                {
+                    w.Add("CreateDate between @cd and @cd2 ");
+                    da.SelectCommand.Parameters.AddWithValue("@cd", CreateDate_Oshirase);
+                    da.SelectCommand.Parameters.AddWithValue("@cd2", CreateDate_Oshirase += " 23:59:59.998");
+                }
+
+
                 if (CreateOshiraseDate != null)
                 {
                     w.Add("CreateDate like @c");
@@ -322,7 +351,7 @@ namespace DLL
                 }
                 if (sTokuisaki != null)
                 {
-                    w.Add("TokuisakiName=@TCode");
+                    w.Add("TokuisakiRyakusyo = @TCode");
                     da.SelectCommand.Parameters.AddWithValue("@TCode", sTokuisaki);
                 }
                 if (sSeikyu != null)
@@ -332,7 +361,7 @@ namespace DLL
                 }
                 if (sTyokuso != null)
                 {
-                    w.Add("TyokusousakiCD = @TCD");
+                    w.Add("TyokusosakiName = @TCD");
                     da.SelectCommand.Parameters.AddWithValue("@TCD", sTyokuso);
                 }
                 if (sSisetu != null)
@@ -575,13 +604,12 @@ namespace DLL
             return dt;
         }
 
-        public static DataSet1.M_Kakaku_2DataTable GetProduct5(string v, string cate, SqlConnection sqlConn)
+        public static DataSet1.M_Kakaku_2DataTable GetProduct5(string v, string cate, string strSyokaiDate, SqlConnection sqlConn)
         {
-
             SqlDataAdapter da = new SqlDataAdapter("", sqlConn);
-            da.SelectCommand.CommandText = "SELECT TOP 200 * FROM M_Kakaku_2 WHERE (CategoryCode = @c) and (Makernumber like @e) OR (CategoryCode = @c) AND (SyouhinMei like @e)";
+            da.SelectCommand.CommandText = "SELECT TOP 20 * FROM M_Kakaku_2 WHERE (CategoryCode = @c) and (Makernumber like @e) OR (CategoryCode = @c) AND (SyouhinMei like @e)";
             da.SelectCommand.Parameters.AddWithValue("@c", cate);
-            da.SelectCommand.Parameters.AddWithValue("@e", v + "%");
+            da.SelectCommand.Parameters.AddWithValue("@e", "%" + v + "%");
             DataSet1.M_Kakaku_2DataTable dt = new DataSet1.M_Kakaku_2DataTable();
             da.Fill(dt);
 
@@ -806,7 +834,7 @@ namespace DLL
                 if (!string.IsNullOrEmpty(w.WhereText))
                     da.SelectCommand.CommandText += " Where " + w.WhereText;
 
-                da.SelectCommand.CommandText += "Order By CareateDate desc";
+                da.SelectCommand.CommandText += "Order By CreateDate desc";
             }
 
             DataJutyu.T_JutyuHeaderDataTable dt = new DataJutyu.T_JutyuHeaderDataTable();
@@ -922,13 +950,13 @@ namespace DLL
 
         }
 
-        public static DataSet1.M_Shiire_NewDataTable GetMaker(string e, SqlConnection sqlConnection)
+        public static DataMaster.M_Shiire_NewDataTable GetMaker(string e, SqlConnection sqlConnection)
         {
             SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
             da.SelectCommand.CommandText = "SELECT TOP 20 * FROM M_Shiire_New WHERE (Abbreviation LIKE @e)";
 
             da.SelectCommand.Parameters.AddWithValue("@e", e + "%");
-            DataSet1.M_Shiire_NewDataTable dt = new DataSet1.M_Shiire_NewDataTable();
+            DataMaster.M_Shiire_NewDataTable dt = new DataMaster.M_Shiire_NewDataTable();
             da.Fill(dt);
             return dt;
 
@@ -996,7 +1024,7 @@ namespace DLL
         public static DataSet1.M_Tokuisaki2DataTable GetTokui(string e, SqlConnection sqlConnection)
         {
             SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
-            da.SelectCommand.CommandText = "SELECT TOP 30 * FROM M_Tokuisaki2 WHERE (TokuisakiRyakusyo LIKE @e)";
+            da.SelectCommand.CommandText = "SELECT TOP 30 * FROM M_Tokuisaki2 WHERE (TokuisakiRyakusyo LIKE @e) or TokuisakiCode like @e";
 
             da.SelectCommand.Parameters.AddWithValue("@e", "%" + e + "%");
             DataSet1.M_Tokuisaki2DataTable dt = new DataSet1.M_Tokuisaki2DataTable();
@@ -1075,7 +1103,7 @@ namespace DLL
         public static DataSet1.M_Facility_NewDataTable GetFacility(string e, SqlConnection sqlConn)
         {
             SqlDataAdapter da = new SqlDataAdapter("", sqlConn);
-            da.SelectCommand.CommandText = "SELECT TOP 10 * FROM M_Facility_New WHERE (Abbreviation LIKE @e)";
+            da.SelectCommand.CommandText = "SELECT TOP 10 * FROM M_Facility_New WHERE (Abbreviation LIKE @e) and State = '1' ";
 
             da.SelectCommand.Parameters.AddWithValue("@e", "%" + e + "%");
             DataSet1.M_Facility_NewDataTable dt = new DataSet1.M_Facility_NewDataTable();
