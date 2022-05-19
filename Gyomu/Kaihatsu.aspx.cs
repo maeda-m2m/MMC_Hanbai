@@ -921,7 +921,7 @@ namespace Gyomu
                             {
                                 if (!string.IsNullOrEmpty(RdpRightEnd.SelectedDate.Value.ToShortDateString()))
                                 {
-                                    if (RadDatePicker1.SelectedDate > RdpCpStart.SelectedDate && RadDatePicker1.SelectedDate < RdpCpEnd.SelectedDate)
+                                    if (RadDatePicker1.SelectedDate >= RdpCpStart.SelectedDate && RadDatePicker1.SelectedDate <= RdpCpEnd.SelectedDate)
                                     {
                                         SerchProduct.ForeColor = System.Drawing.Color.Orange;
                                         HyoujyunTanka.Text = int.Parse(df.CpKakaku).ToString("0,0");
@@ -976,7 +976,7 @@ namespace Gyomu
                             {
                                 if (!string.IsNullOrEmpty(RdpRightEnd.SelectedDate.Value.ToShortDateString()))
                                 {
-                                    if (RadDatePicker1.SelectedDate > RdpCpStart.SelectedDate && RadDatePicker1.SelectedDate < RdpCpEnd.SelectedDate)
+                                    if (RadDatePicker1.SelectedDate >= RdpCpStart.SelectedDate && RadDatePicker1.SelectedDate <= RdpCpEnd.SelectedDate)
                                     {
                                         SerchProduct.ForeColor = System.Drawing.Color.Orange;
                                         HyoujyunTanka.Text = int.Parse(dr.CpKakaku).ToString("0,0");
