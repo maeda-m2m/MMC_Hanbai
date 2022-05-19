@@ -1857,6 +1857,7 @@ namespace Gyomu
                     strCategoryCode = RadComboCategory.SelectedValue;
                     strCategoryName = RadComboCategory.Text;
                     DataMitumori.T_RowDataTable dtN = new DataMitumori.T_RowDataTable();
+
                     for (int i = 0; i < CtrlSyousai.Items.Count; i++)
                     {
                         DataMitumori.T_RowRow drN = dtN.NewT_RowRow();
@@ -1864,6 +1865,7 @@ namespace Gyomu
                         DataMitumori.T_RowRow drG = CtlMitsuSyosai.ItemGet();
                         drN.ItemArray = drG.ItemArray;
                         dtN.AddT_RowRow(drN);
+
                         if (focusRow == i)
                         {
                             for (int r = 0; r < int.Parse(TbxAddRow.Text); r++)
@@ -1887,6 +1889,7 @@ namespace Gyomu
                 ClassMail.ErrorMail(mail_to, mail_title, body);
             }
         }
+
 
         private DataMitumori.T_RowRow AddNewRow2(DataMitumori.T_RowRow dr)
         {
