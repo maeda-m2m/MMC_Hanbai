@@ -149,6 +149,14 @@
                                 </telerik:RadMenuItem>
                                 <telerik:RadMenuItem runat="server" NavigateUrl="~/Master/MasterOshirase.aspx" Text="お知らせマスタ">
                                 </telerik:RadMenuItem>
+                                <telerik:RadMenuItem runat="server" Text="得意先ポータルマスタ">
+                                    <Items>
+                                        <telerik:RadMenuItem runat="server" Text="ページ１" NavigateUrl=""></telerik:RadMenuItem>
+                                        <telerik:RadMenuItem runat="server" Text="ページ２" NavigateUrl=""></telerik:RadMenuItem>
+                                        <telerik:RadMenuItem runat="server" Text="ページ３" NavigateUrl=""></telerik:RadMenuItem>
+                                        <telerik:RadMenuItem runat="server" Text="ページ４" NavigateUrl=""></telerik:RadMenuItem>
+                                    </Items>
+                                </telerik:RadMenuItem>
                             </Items>
                         </telerik:RadMenuItem>
 
@@ -176,7 +184,7 @@
                 <a href="~/Master/AccountPage.aspx" runat="server" class="account">会社情報管理</a>
             </td>
         </tr>
-        
+
     </tbody>
 </table>
 

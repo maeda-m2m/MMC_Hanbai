@@ -22,6 +22,11 @@
         }
 
         .column {
+            text-align: center;
+            color: black;
+            padding: 0.5em;
+            font-size: 12px;
+            width: 60px;
             background-color: #ffd900;
         }
 
@@ -226,90 +231,110 @@
                 </Tabs>
             </telerik:RadTabStrip>
             <br />
-            <table border="1">
-                <tbody>
-                    <tr>
-                        <td class="column">
-                            <asp:Literal ID="Literal12" runat="server">計上</asp:Literal></td>
-                        <td class="row">
-                            <asp:DropDownList ID="DrpKeijoFlg" runat="server" Width="100">
-                                <asp:ListItem Value="受注">未発注</asp:ListItem>
-                                <asp:ListItem Value="発注済">発注済</asp:ListItem>
-                            </asp:DropDownList>
-                        </td>
-                        <td class="column">
-                            <asp:Literal ID="Literal1" runat="server">受注No</asp:Literal></td>
-                        <td class="row">
-                            <asp:TextBox ID="TbxJutyuNo" runat="server"></asp:TextBox>
-                        </td>
-                        <td class="column">
-                            <asp:Literal ID="Literal3" runat="server">得意先名</asp:Literal></td>
-                        <td class="row">
-                            <telerik:RadComboBox ID="RadTokuiMeisyo" runat="server" Width="200" Height="180px" AutoPostBack="true" AllowCustomText="True" EnableLoadOnDemand="True" OnItemsRequested="RadTokuiMeisyo_ItemsRequested"></telerik:RadComboBox>
-                        </td>
-                        <td class="column">
-                            <asp:Literal ID="Literal4" runat="server">請求先</asp:Literal></td>
-                        <td class="row">
-                            <telerik:RadComboBox ID="RadSekyuMeisyo" runat="server" Width="200" Height="180px" AllowCustomText="True" AutoPostBack="true" EnableLoadOnDemand="True" OnItemsRequested="RadTokuiMeisyo_ItemsRequested"></telerik:RadComboBox>
-                        </td>
-                        <td class="column">
-                            <asp:Literal ID="Literal14" runat="server">直送先</asp:Literal></td>
-                        <td>
-                            <telerik:RadComboBox ID="RadTyokusoMeisyo" runat="server" Width="350" Height="180px" AutoPostBack="true" EnableLoadOnDemand="True" OnItemsRequested="RadTyokusoMeisyo_ItemsRequested"></telerik:RadComboBox>
-                        </td>
-                        <td rowspan="3">
-                            <asp:Button ID="BtnKensaku" runat="server" Text="検索" Width="100px" Style="height: 50px" OnClick="BtnKensaku_Click" CssClass="Btn10" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="column">
-                            <asp:Literal ID="Literal5" runat="server">施設</asp:Literal></td>
-                        <td class="row" colspan="3">
-                            <telerik:RadComboBox ID="RadSisetMeisyo" runat="server" Width="350" Height="180px" AutoPostBack="true" EnableLoadOnDemand="True" OnItemsRequested="RadTyokusoMeisyo_ItemsRequested"></telerik:RadComboBox>
-                        </td>
-                        <td class="column">
-                            <asp:Literal ID="Literal6" runat="server">カテゴリ</asp:Literal></td>
-                        <td class="row">
-                            <telerik:RadComboBox ID="RadCate" runat="server" Width="120" AutoPostBack="true"></telerik:RadComboBox>
-                        </td>
-                        <td class="column">
-                            <asp:Literal ID="Literal7" runat="server">部門</asp:Literal></td>
-                        <td class="row">
-                            <telerik:RadComboBox ID="RadBumon" runat="server" Width="100" Height="180px"></telerik:RadComboBox>
-                        </td>
-                        <td class="column">
-                            <asp:Literal ID="Literal8" runat="server">品番</asp:Literal></td>
-                        <td class="row">
-                            <asp:TextBox ID="TextBox8" runat="server"></asp:TextBox>
-                        </td>
+            <table style="width: 100%; border-collapse: collapse; border: 1px solid #9d9d9d">
+                <tr>
+                    <td>
+                        <table style="width: 100%; border-collapse: collapse">
+                            <tr>
+                                <td class="column">
+                                    <p>発注</p>
+                                </td>
+                                <td class="row">
+                                    <asp:DropDownList ID="DrpFlg" runat="server" Width="100">
+                                        <asp:ListItem Selected="True" Value="False">未発注</asp:ListItem>
+                                        <asp:ListItem Value="True">発注済み</asp:ListItem>
+                                    </asp:DropDownList>
+                                </td>
+                                <td class="column">
+                                    <p>受注No</p>
+                                </td>
+                                <td class="row">
+                                    <asp:TextBox ID="TbxJutyuNo" runat="server" Width="100px"></asp:TextBox>
+                                </td>
+                                <td class="column">
+                                    <p>担当者</p>
+                                </td>
+                                <td class="row">
+                                    <telerik:RadComboBox ID="RadTanto" runat="server" Width="110" EmptyMessage="-------" Height="180px"></telerik:RadComboBox>
+                                </td>
+                                <td class="column">
+                                    <p>部門</p>
+                                </td>
+                                <td class="row">
+                                    <telerik:RadComboBox ID="RadBumon" runat="server" Width="100" Height="180px"></telerik:RadComboBox>
+                                </td>
+                                <td class="column">
+                                    <p>見積日</p>
+                                </td>
+                                <td class="row">
+                                    <uc2:CtlNengappiFromTo ID="CtlJucyuBi" runat="server" />
+                                </td>
+                                <td class="column">
+                                    <p>カテゴリ</p>
+                                </td>
+                                <td class="row">
+                                    <telerik:RadComboBox ID="RadCate" runat="server" Width="120" AutoPostBack="true"></telerik:RadComboBox>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td rowspan="3" class="row">
+                        <asp:Button ID="BtnKensaku" runat="server" Text="検索" Width="100px" OnClick="BtnKensaku_Click" CssClass="Btn10" Height="56px" />
+                    </td>
 
-                    </tr>
-                    <tr>
-                        <td class="column">
-                            <asp:Literal ID="Literal15" runat="server">品名</asp:Literal>
-                        </td>
-                        <td colspan="3" class="row">
-                            <telerik:RadComboBox ID="RadSyohinmeisyou" runat="server" Width="400" Height="180px" AutoPostBack="true" EnableLoadOnDemand="True" OnItemsRequested="RadSyohinmeisyou_ItemsRequested"></telerik:RadComboBox>
-                        </td>
-                        <td class="column">
-                            <asp:Literal ID="Literal9" runat="server">担当者</asp:Literal></td>
-                        <td class="row">
-                            <telerik:RadComboBox ID="RadTanto" runat="server" Width="110" EmptyMessage="-------" Height="180px">
-                            </telerik:RadComboBox>
-                        </td>
-                        <td class="column">
-                            <asp:Literal ID="Literal2" runat="server">入力者</asp:Literal></td>
-                        <td class="row">
-                            <telerik:RadComboBox ID="RadNyuryoku" runat="server" Width="110" EmptyMessage="-------" Height="180px">
-                            </telerik:RadComboBox>
-                        </td>
-                        <td class="column">
-                            <asp:Literal ID="Literal10" runat="server">受注日</asp:Literal></td>
-                        <td class="row">
-                            <uc2:CtlNengappiFromTo ID="CtlJucyuBi" runat="server" />
-                        </td>
-                    </tr>
-                </tbody>
+                </tr>
+                <tr>
+                    <td>
+                        <table style="width: 100%; border-collapse: collapse">
+                            <tr>
+                                <td class="column">
+                                    <p>得意先</p>
+                                </td>
+                                <td colspan="2" class="row">
+                                    <telerik:RadComboBox ID="RadTokuiMeisyo" runat="server" Width="200" Height="180px" AutoPostBack="true" AllowCustomText="True" EnableLoadOnDemand="True" OnItemsRequested="RadTokuiMeisyo_ItemsRequested"></telerik:RadComboBox>
+                                </td>
+                                <td class="column">
+                                    <p>請求先</p>
+                                </td>
+                                <td colspan="2" class="row">
+                                    <telerik:RadComboBox ID="RadSekyuMeisyo" runat="server" Width="200" Height="180px" AllowCustomText="True" AutoPostBack="true" EnableLoadOnDemand="True" OnItemsRequested="RadTokuiMeisyo_ItemsRequested"></telerik:RadComboBox>
+                                </td>
+                                <td class="column">
+                                    <p>直送先</p>
+                                </td>
+                                <td colspan="2" class="row">
+                                    <telerik:RadComboBox ID="RadTyokusoMeisyo" runat="server" Width="250" Height="180px" AutoPostBack="true" EnableLoadOnDemand="True" OnItemsRequested="RadTyokusoMeisyo_ItemsRequested"></telerik:RadComboBox>
+                                </td>
+                                <td class="column">
+                                    <p>施設</p>
+                                </td>
+                                <td colspan="2" class="row">
+                                    <telerik:RadComboBox ID="RadSisetMeisyo" runat="server" Width="250" Height="180px" AutoPostBack="true" EnableLoadOnDemand="True" OnItemsRequested="RadSisetMeisyo_ItemsRequested"></telerik:RadComboBox>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table style="width: 100%; border-collapse: collapse">
+                            <tr>
+                                <td class="column">
+                                    <p>品番</p>
+                                </td>
+                                <td class="row">
+                                    <asp:TextBox ID="TbxHinban" runat="server" Width="100px"></asp:TextBox>
+                                </td>
+                                <td class="column">
+                                    <p>品名</p>
+                                </td>
+                                <td colspan="9" class="row">
+                                    <telerik:RadComboBox ID="RadSyohinmeisyou" runat="server" Width="400px" Height="100px" AutoPostBack="true" EnableLoadOnDemand="True" OnItemsRequested="RadSyohinmeisyou_ItemsRequested"></telerik:RadComboBox>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
             </table>
         </div>
         <br />
@@ -343,12 +368,13 @@
         <asp:Button ID="BtnSeikyu" runat="server" Text="請求書" Width="100px" style="height: 21px" />--%>
         <div id="Itiran" runat="server">
             <telerik:RadGrid ID="RadG" Width="100%" EnableEmbeddedBaseStylesheet="true" EnableEmbeddedSkins="false" AllowCustomPaging="false" runat="server" PageSize="30" AllowPaging="True" AutoGenerateColumns="False" OnItemDataBound="RadG_ItemDataBound" OnPageIndexChanged="RadG_PageIndexChanged" OnItemCreated="RadG_ItemCreated">
-                <PagerStyle Position="Top" PageSizeControlType="None" BackColor="#f3f3f3" Mode="NumericPages"  />
+                <PagerStyle Position="Top" PageSizeControlType="None" BackColor="#f3f3f3" Mode="NumericPages" />
                 <HeaderStyle BackColor="#ffd900" Font-Size="13" />
                 <AlternatingItemStyle BackColor="#fff2ab" />
                 <MasterTableView>
                     <Columns>
                         <telerik:GridTemplateColumn UniqueName="ColChk_Row">
+                            <HeaderStyle Width="50" />
                             <ItemStyle HorizontalAlign="Center" Wrap="false"></ItemStyle>
                             <ItemTemplate>
                                 <input id="ChkRow" runat="server" type="checkbox" />
@@ -356,56 +382,57 @@
                         </telerik:GridTemplateColumn>
 
                         <telerik:GridTemplateColumn UniqueName="Coljutyu" HeaderText="受注No">
-                            <HeaderStyle Width="50" HorizontalAlign="Center" />
-                            <ItemStyle HorizontalAlign="Left" Wrap="false" Font-Size="15"></ItemStyle>
+                            <HeaderStyle Width="50" HorizontalAlign="Center" Font-Size="10" />
+                            <ItemStyle HorizontalAlign="Left" Wrap="false" Font-Size="10"></ItemStyle>
                         </telerik:GridTemplateColumn>
 
                         <telerik:GridTemplateColumn UniqueName="ColCategori" HeaderText="カテゴリ">
-                            <HeaderStyle Width="65" HorizontalAlign="Center" />
-                            <ItemStyle HorizontalAlign="Left" Wrap="false" Font-Size="15" />
+                            <HeaderStyle Width="65" HorizontalAlign="Center" Font-Size="10" />
+                            <ItemStyle HorizontalAlign="Left" Wrap="false" Font-Size="10" />
                         </telerik:GridTemplateColumn>
 
                         <telerik:GridTemplateColumn UniqueName="ColBumon" HeaderText="部門">
-                            <HeaderStyle Width="100" HorizontalAlign="Center" />
-                            <ItemStyle Wrap="false" Font-Size="15" HorizontalAlign="Left" />
+                            <HeaderStyle Width="100" HorizontalAlign="Center" Font-Size="10" />
+                            <ItemStyle Wrap="false" Font-Size="10" HorizontalAlign="Left" />
                         </telerik:GridTemplateColumn>
 
                         <telerik:GridTemplateColumn UniqueName="ColTantousya" HeaderText="担当者">
-                            <HeaderStyle Width="65" HorizontalAlign="Center" />
+                            <HeaderStyle Width="65" HorizontalAlign="Center" Font-Size="10" />
                             <HeaderStyle />
-                            <ItemStyle HorizontalAlign="Left" Wrap="false" Font-Size="15" />
+                            <ItemStyle HorizontalAlign="Left" Wrap="false" Font-Size="10" />
                         </telerik:GridTemplateColumn>
 
 
                         <telerik:GridTemplateColumn UniqueName="ColTokuisakiCode" HeaderText="得意先コード">
-                            <HeaderStyle Width="130" HorizontalAlign="Center" />
-                            <ItemStyle HorizontalAlign="Left" Wrap="false" Font-Size="15" />
+                            <HeaderStyle Width="130" HorizontalAlign="Center" Font-Size="10" />
+                            <ItemStyle HorizontalAlign="Left" Wrap="false" Font-Size="10" />
                         </telerik:GridTemplateColumn>
 
                         <telerik:GridTemplateColumn UniqueName="ColTokuisakiName" HeaderText="得意先名">
-                            <HeaderStyle Width="180" HorizontalAlign="Center" />
-                            <ItemStyle HorizontalAlign="Left" Wrap="false" Font-Size="15" />
+                            <HeaderStyle Width="350" HorizontalAlign="Center" Font-Size="10" />
+                            <ItemStyle HorizontalAlign="Left" Wrap="false" Font-Size="10" />
                         </telerik:GridTemplateColumn>
 
 
                         <telerik:GridTemplateColumn UniqueName="ColSisetu" HeaderText="施設">
-                            <HeaderStyle HorizontalAlign="Center" />
-                            <ItemStyle HorizontalAlign="Left" Wrap="false" Font-Size="15" />
+                            <HeaderStyle HorizontalAlign="Center" Font-Size="10" />
+                            <ItemStyle HorizontalAlign="Left" Wrap="false" Font-Size="10" />
                         </telerik:GridTemplateColumn>
 
                         <telerik:GridTemplateColumn UniqueName="ColSuryo" HeaderText="数量">
-                            <HeaderStyle Width="50" HorizontalAlign="Center" />
+                            <HeaderStyle Width="50" HorizontalAlign="Center" Font-Size="10" />
                             <HeaderStyle />
-                            <ItemStyle HorizontalAlign="Center" Wrap="false" Font-Size="15" />
+                            <ItemStyle HorizontalAlign="Center" Wrap="false" Font-Size="10" />
                         </telerik:GridTemplateColumn>
 
                         <telerik:GridTemplateColumn UniqueName="ColKingaku" HeaderText="金額">
-                            <HeaderStyle Width="100" />
-                            <ItemStyle Wrap="false" Font-Size="15" HorizontalAlign="Right" />
+                            <HeaderStyle Width="100" Font-Size="10" />
+                            <ItemStyle Wrap="false" Font-Size="10" HorizontalAlign="Right" />
                         </telerik:GridTemplateColumn>
+
                         <telerik:GridTemplateColumn UniqueName="ColMitumoriDay" HeaderText="受注日">
-                            <HeaderStyle Width="100" HorizontalAlign="Center" />
-                            <ItemStyle Wrap="false" Font-Size="15" />
+                            <HeaderStyle Width="100" HorizontalAlign="Center" Font-Size="10" />
+                            <ItemStyle Wrap="false" Font-Size="10" />
                         </telerik:GridTemplateColumn>
                     </Columns>
                 </MasterTableView>

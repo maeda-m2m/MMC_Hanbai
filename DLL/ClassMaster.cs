@@ -1764,20 +1764,19 @@ namespace DLL
             }
         }
 
-        public static DataMaster.M_JoueiKakakuRow GetJoueiKakaku(string strShiireCode, string strMedia, string strHanni, string strSeki, SqlConnection sqlConnection)
+        public static DataMaster.M_JoueiKakaku2DataTable GetJoueiKakaku(string strShiireCode, string strMedia, string strHanni, string strSeki, SqlConnection sqlConnection)
         {
             SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
             da.SelectCommand.CommandText =
-                "select * from M_JoueiKakaku where ShiiresakiCode = @sc and Media = @m and Range = @ra and Capacity = @cp";
+                "select * from M_JoueiKakaku2 where ShiiresakiCode = @sc and Media = @m and Range = @ra";
             da.SelectCommand.Parameters.AddWithValue("@sc", strShiireCode);
             da.SelectCommand.Parameters.AddWithValue("@m", strMedia);
             da.SelectCommand.Parameters.AddWithValue("@ra", strHanni);
-            da.SelectCommand.Parameters.AddWithValue("@cp", strSeki);
-            DataMaster.M_JoueiKakakuDataTable dt = new DataMaster.M_JoueiKakakuDataTable();
+            DataMaster.M_JoueiKakaku2DataTable dt = new DataMaster.M_JoueiKakaku2DataTable();
             da.Fill(dt);
-            if (dt.Count == 1)
+            if (dt.Count > 0)
             {
-                return dt[0];
+                return dt;
             }
             else
             {

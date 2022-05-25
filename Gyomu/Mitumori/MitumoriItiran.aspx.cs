@@ -61,6 +61,7 @@ namespace Gyomu.Mitumori
 
         protected void RadG_PageIndexChanged(object source, Telerik.Web.UI.GridPageChangedEventArgs e)
         {
+            RadG.CurrentPageIndex = e.NewPageIndex;
             Create();
         }
 
@@ -383,16 +384,6 @@ namespace Gyomu.Mitumori
             this.Response.Redirect("../Kaihatsu.aspx");
         }
 
-        protected void BtnJutyu_Click(object sender, EventArgs e)
-        {
-            //受注ボタンクリック処理
-            string MitumoriNo = count.Value;
-
-            SessionManager.MitumoriSyusei(MitumoriNo);
-            SessionManager.MitumoriSyuseiRow("");
-            SessionManager.MitumoriType("Jutyu");
-            this.Response.Redirect("../OrderInput.aspx");
-        }
 
         protected void BtnDownlod_Click(object sender, EventArgs e)
         {
@@ -464,6 +455,7 @@ namespace Gyomu.Mitumori
 
         string strKeys = "";
         string Type = "";
+
         private void Insatu(string type)
         {
             //納品印刷設定
@@ -624,7 +616,7 @@ namespace Gyomu.Mitumori
                 this.Response.Redirect("../Kaihatsu.aspx");
             }
         }
-
+        //削除
         protected void BtnDelete_Click(object sender, EventArgs e)
         {
             string mNo = "";
@@ -669,7 +661,7 @@ namespace Gyomu.Mitumori
             Create();
 
         }
-
+        //印刷
         protected void BtnPrint_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < RadG.Items.Count; i++)
@@ -951,6 +943,25 @@ namespace Gyomu.Mitumori
                 lblMsg.Text = ex.Message;
             }
 
+        }
+
+        protected void BtnJutyu_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < RadG.Items.Count; i++)
+            {
+                HtmlInputCheckBox chk =
+                    (HtmlInputCheckBox)this.RadG.Items[i].Cells[RadG.Columns.FindByUniqueName("ColChk_Row").OrderIndex].FindControl("ChkRow");
+
+                if (chk.Checked && chk.Visible)
+                {
+                    if (this.strKeys != "") { this.strKeys += ","; }
+
+                    this.strKeys += chk.Value;
+                }
+            }
+            string[] strJutyuNo = this.strKeys.Split(',');
+            string strError = "";
+            for (int l = 0; l < strJutyuNo.Length; )
         }
     }
 

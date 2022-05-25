@@ -64,9 +64,17 @@ namespace Gyomu
                             DataLogin.T_LoginlogRow drLog = ClassLogin.GetLastLogin(Global.GetConnection());
                             if (drLog.LoginDate.ToShortDateString() != DateTime.Now.ToShortDateString())
                             {
-                                ClassMaster.DeleteProductList(Global.GetConnection());
-                                DataMaster.V_ProductListDataTable dtN = ClassMaster.GetList(Global.GetConnection());
-                                ClassMaster.CreateProductList(dtN, Global.GetConnection());
+                                try
+                                {
+                                    ClassMaster.DeleteProductList(Global.GetConnection());
+                                    DataMaster.V_ProductListDataTable dtN = ClassMaster.GetList(Global.GetConnection());
+                                    ClassMaster.CreateProductList(dtN, Global.GetConnection());
+                                }
+                                catch(Exception ex)
+                                {
+                                    string body = "商品マスタ | CSVアップロード" + "\r\n" + ex.Message + "\r\n" + ex.StackTrace + "\r\n" + ex.Source;
+                                    ClassMail.ErrorMail("maeda@m2m-asp.com", "ログイン時 | 商品データ更新時エラー", body);
+                                }
                             }
 
                             SessionManager.Login(dr);

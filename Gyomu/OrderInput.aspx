@@ -92,7 +92,7 @@
         #mInput2 {
             margin: 0;
             padding: 0;
-            width: 1300px;
+            width: 100%;
             border: 2px solid #ffd900;
         }
 
@@ -118,6 +118,16 @@
 
         .CategoryChabge {
             display: block;
+        }
+
+        #CtrlSyousai {
+            width: 100%;
+        }
+
+        #DivDataGrid {
+            height: 500px;
+            overflow: scroll;
+            width: 100%;
         }
     </style>
 
@@ -730,16 +740,140 @@
                 </tr>
             </table>
         </div>
-        <div>
-            <img src="~/Img/明細ヘッダ受注.png" runat="server" width="1300" id="head" />
+        <div runat="server" style="width: 100%;">
+            <table runat="server" style="text-align: center; width: 100%; border-collapse: collapse; background-color: white; border: 2px solid #ffd900" id="head">
+                <tr>
+                    <td rowspan="3" style="text-align: center; background-color: #ffef93; width: 90px;">
+                        <table>
+                            <tr>
+                                <td>
+                                    <p>削除</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>明細挿入</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>明細複写</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <table style="width: 100%; border-collapse: collapse; background-color: #e6e6e6;">
+                            <tr>
+                                <td style="width: 120px; border: 2px solid white;">
+                                    <p>メーカー品番</p>
+                                </td>
+                                <td style="width: 50%; border: 2px solid white;">
+                                    <p>商品名</p>
+                                </td>
+                                <td style="border: 2px solid white;">
+                                    <p>使用範囲</p>
+                                </td>
+                                <td style="border: 2px solid white;">
+                                    <p>媒体</p>
+                                </td>
+                                <td style="border: 2px solid white;">
+                                    <p>数量</p>
+                                </td>
+                                <td style="width: 100px; border: 2px solid white;">
+                                    <p>標準単価</p>
+                                </td>
+                                <td style="width: 100px; border: 2px solid white;">
+                                    <p>金額</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table style="width: 100%; border-collapse: collapse; background-color: #e6e6e6;">
+                            <tr>
+                                <td style="width: 50%; border: 2px solid white;">
+                                    <p>使用範囲</p>
+                                </td>
+                                <td style="border: 2px solid white;">
+                                    <p>席数</p>
+                                </td>
+                                <td style="border: 2px solid white;">
+                                    <p>使用開始</p>
+                                </td>
+                                <td style="border: 2px solid white;">
+                                    <p>使用終了</p>
+                                </td>
+                                <td style="border: 2px solid white;">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <p>掛率</p>
+                                            </td>
+                                            <td>
+                                                <p>税区分</p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td style="width: 100px; border: 2px solid white;">
+                                    <p>単価</p>
+                                </td>
+                                <td style="width: 100px; border: 2px solid white;">
+                                    <p>売上金額</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table style="width: 100%; border-collapse: collapse; background-color: #e6e6e6;">
+                            <tr>
+                                <td style="width: 300px; border: 2px solid white;">
+                                    <p>摘要</p>
+                                </td>
+                                <td style="border: 2px solid white;">
+                                    <p>発注先</p>
+                                </td>
+                                <td style="border: 2px solid white;">
+                                    <p>倉庫</p>
+                                </td>
+                                <td style="width: 100px; border: 2px solid white;">
+                                    <p>仕入単価</p>
+                                </td>
+                                <td style="width: 100px; border: 2px solid white;">
+                                    <p>仕入金額</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
         </div>
+        <table runat="server" id="TBAddRow">
+            <tr>
+                <td>
+                    <p>追加行：</p>
+                </td>
+                <td>
+                    <asp:TextBox runat="server" ID="TbxAddRow" Text="1" TextMode="Number" Width="25px"></asp:TextBox>
+                </td>
+                <td>行</td>
+                <td>
+                    <asp:Button runat="server" ID="BtnTool6" ToolTip="「明細追加」や「明細複写」で追加する行数を選択する。" Text="❔" OnClientClick="return false;" />
+                </td>
+            </tr>
+        </table>
 
-        <table>
+        <table style="width: 100%">
 
             <!-- ヘッダーテーブル -------------------------------------------------------------------------------------->
             <tr>
                 <td>
-                    <div>
+                    <div id="DivDataGrid">
                         <asp:DataGrid runat="server" ID="CtrlSyousai" AutoGenerateColumns="False" OnItemDataBound="CtrlSyousai_ItemDataBound" OnItemCommand="CtrlSyousai_ItemCommand">
                             <Columns>
 
