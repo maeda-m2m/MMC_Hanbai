@@ -20,6 +20,8 @@
         body {
             font-family: 'Meiryo UI';
             font-size: 9pt;
+            padding: 0;
+            margin: 0;
         }
 
         .sl {
@@ -36,7 +38,7 @@
             color: black;
             padding: 0.5em;
             font-size: 12px;
-            width:60px;
+            width: 60px;
         }
 
         .row {
@@ -260,6 +262,29 @@
             height: 100%;
             min-height: 100%;
         }
+
+        .gv a {
+            background-color: white;
+            text-decoration: none;
+            color: darkgreen;
+            font-size: 15px;
+        }
+
+            .gv a:link {
+                background-color: white;
+                text-decoration: none;
+                color: green;
+                font-weight: bold;
+                font-size: 15px;
+            }
+
+            .gv a:visited {
+                background-color: darkgreen;
+                text-decoration: none;
+                color: white;
+                font-weight: bold;
+                font-size: 15px;
+            }
     </style>
 
     <script type="text/javascript" src="../../Core.js"></script>
@@ -494,12 +519,15 @@
         <asp:Button ID="BtnDownlod" runat="server" Text="CSVダウンロード" Width="180px" CssClass="Btn10" OnClientClick="PostClick('DL')" OnClick="BtnDownlod_Click" />
         &nbsp;
         <asp:Button runat="server" ID="BtnMeisaiDownload" Text="明細CSVダウンロード" Width="200" CssClass="Btn10" OnClick="BtnMeisaiDownload_Click" />
-        <asp:Literal ID="Literal13" runat="server">発行:</asp:Literal>
+        &nbsp;
+
         <asp:Button ID="BtnPrint" runat="server" Text="印刷" CssClass="Btn10" OnClick="BtnPrint_Click" />
         &nbsp;
         <asp:Button ID="BtnSyusei" runat="server" Text="修正" CssClass="Btn10" OnClick="BtnSyusei_Click1" />
         &nbsp;
         <asp:Button ID="BtnDelete" runat="server" Text="削除" CssClass="Btn10" OnClick="BtnDelete_Click" OnClientClick="A()" />
+        &nbsp;
+        <asp:Button runat="server" ID="BtnJutyu" Text="受注" OnClick="BtnJutyu_Click" CssClass="Btn10" />
         <script type="text/javascript">
             function A() {
                 var a1 = window.confirm('本当に削除しますか？');
@@ -516,8 +544,8 @@
         <br />
         <br />
         <div id="Itiran" runat="server">
-            <telerik:RadGrid ID="RadG" runat="server" PageSize="1000" AllowPaging="True" Width="100%" EnableAJAX="True" EnableAJAXLoadingTemplate="True" AllowCustomPaging="True" EnableEmbeddedSkins="False" GridLines="None" CellPadding="0" EnableEmbeddedBaseStylesheet="False" AutoGenerateColumns="False" OnItemDataBound="RadG_ItemDataBound" OnPageIndexChanged="RadG_PageIndexChanged" OnItemCreated="RadG_ItemCreated">
-                <PagerStyle Position="Top" AlwaysVisible="true" BackColor="#dfecfe" PagerTextFormat="ページ移動: {4} &amp;nbsp;ページ : &lt;strong&gt;{0:N0}&lt;/strong&gt; / &lt;strong&gt;{1:N0}&lt;/strong&gt; | 件数: &lt;strong&gt;{2:N0}&lt;/strong&gt; - &lt;strong&gt;{3:N0}件&lt;/strong&gt; / &lt;strong&gt;{5:N0}&lt;/strong&gt;件中" PageSizeLabelText="ページサイズ:" FirstPageToolTip="最初のページに移動" LastPageToolTip="最後のページに移動" NextPageToolTip="次のページに移動" PrevPageToolTip="前のページに移動" />
+            <telerik:RadGrid ID="RadG" runat="server" PageSize="200" AllowPaging="True" Width="100%" EnableAJAX="True" EnableAJAXLoadingTemplate="True" EnableEmbeddedSkins="False" GridLines="None" CellPadding="0" EnableEmbeddedBaseStylesheet="False" AutoGenerateColumns="False" OnItemDataBound="RadG_ItemDataBound" OnPageIndexChanged="RadG_PageIndexChanged" OnItemCreated="RadG_ItemCreated">
+                <PagerStyle AlwaysVisible="true" Position="Top" Mode="NumericPages" CssClass="gv" />
                 <HeaderStyle Font-Size="8" HorizontalAlign="Center" BackColor="#53d153" ForeColor="black" BorderColor="#53d153" />
                 <ItemStyle Wrap="true" VerticalAlign="Middle" Font-Size="8" BorderColor="#ebebeb" Height="40px" />
                 <HeaderContextMenu EnableEmbeddedBaseStylesheet="False" CssClass="GridContextMenu GridContextMenu_Outlook">
@@ -537,7 +565,6 @@
                                 <input id="ChkRow" name="ChkRow" runat="server" type="checkbox" />
                             </ItemTemplate>
                         </telerik:GridTemplateColumn>
-
 
                         <telerik:GridTemplateColumn UniqueName="ColMitumori" HeaderText="見積No">
                             <HeaderStyle Width="40" Font-Size="10" HorizontalAlign="Center" />
@@ -598,7 +625,6 @@
                         </EditColumn>
                     </EditFormSettings>
 
-                    <PagerStyle AlwaysVisible="True"></PagerStyle>
                 </MasterTableView>
                 <FilterMenu EnableImageSprites="False" EnableEmbeddedBaseStylesheet="False">
                 </FilterMenu>

@@ -211,15 +211,6 @@ namespace Gyomu.Mitumori {
         protected global::System.Web.UI.WebControls.Button BtnMeisaiDownload;
         
         /// <summary>
-        /// Literal13 コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal Literal13;
-        
-        /// <summary>
         /// BtnPrint コントロール。
         /// </summary>
         /// <remarks>
@@ -245,6 +236,15 @@ namespace Gyomu.Mitumori {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnDelete;
+        
+        /// <summary>
+        /// BtnJutyu コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnJutyu;
         
         /// <summary>
         /// Itiran コントロール。

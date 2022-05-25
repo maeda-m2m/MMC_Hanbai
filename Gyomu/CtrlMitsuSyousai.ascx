@@ -196,6 +196,8 @@
                         TbxCpKakaku.value = String(cpkakaku).replace(/(\d)(?=(\d\d\d)+$)/g, "$1,");
                         TbxCpShiire.value = String(cpshiire).replace(/(\d)(?=(\d\d\d)+$)/g, "$1,");
                         RcbShiireName.set_text(shiirename);
+                        debugger;
+                        RcbShiireName.set_value(shiirecode);
                         Hachu.set_text(shiirename);
                         Hachu.set_value(shiirecode);
                         LblShiireCode.innerText = shiirecode;
@@ -245,7 +247,6 @@
                                 shiire = shiirekakaku;
                                 inputElement.style.color = 'blue';
                             }
-                            debugger;
                             var Kyodaku = RdpRightEnd.get_selectedDate();
                             if (Syokai >= Date.parse(Kyodaku)) {
                                 inputElement.style.color = 'red';
@@ -286,7 +287,6 @@
                             }
 
                             if (syouhincode == "1999") {
-                                debugger;
                                 HyoujyunTanka.readOnly = true;
                                 Kingaku.readOnly = true;
                                 ShiireTanka.readOnly = true;
@@ -339,7 +339,7 @@
             <td class="MeisaiMTD" runat="server">
                 <%--                                <telerik:RadComboBox ID="Hanni" runat="server" Width="100px"></telerik:RadComboBox>--%>
                 <asp:Label ID="LblHanni" runat="server" Text=""></asp:Label>
-                <telerik:RadComboBox runat="server" ID="RcbHanni" EnableLoadOnDemand="true" ShowToggleImage="False" AllowCustomText="True" ShowMoreResultsBox="True" EnableVirtualScrolling="True" OnSelectedIndexChanged="RcbHanni_SelectedIndexChanged" CssClass="Zasu" ViewStateMode="Enabled" EnableViewState="true" OnItemsRequested="RcbHanni_ItemsRequested"></telerik:RadComboBox>
+                <telerik:RadComboBox runat="server" ID="RcbHanni" AutoPostBack="true" EnableLoadOnDemand="true" ShowToggleImage="False" AllowCustomText="True" ShowMoreResultsBox="True" EnableVirtualScrolling="True" OnSelectedIndexChanged="RcbHanni_SelectedIndexChanged" CssClass="Zasu" ViewStateMode="Enabled" EnableViewState="true" OnItemsRequested="RcbHanni_ItemsRequested"></telerik:RadComboBox>
                 <asp:HiddenField runat="server" ID="HidHanni" />
                 <asp:HiddenField runat="server" ID="HidJoueiHanni" />
             </td>
@@ -369,7 +369,6 @@
                             <telerik:RadComboBox ID="ShiyouShisetsu" runat="server" Width="300px" OnItemsRequested="ShiyouShisetsu_ItemsRequested" AllowCustomText="True" EnableLoadOnDemand="True" ShowMoreResultsBox="True" ShowToggleImage="False" EnableVirtualScrolling="True" OnClientSelectedIndexChanged="SelectFacility"></telerik:RadComboBox>
                             <script type="text/javascript">
                                 function SelectFacility(sender, eventArgs) {
-                                    debugger;
                                     var id = sender.get_element().id;
                                     var rcb = $find(id)
                                     var IDtemplate = id.replace("ShiyouShisetsu", "temp");

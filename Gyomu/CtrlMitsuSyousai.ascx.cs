@@ -762,32 +762,75 @@ namespace Gyomu
             if (TbxZasu.Text != "")
             {
                 TbxHanni.Text = RcbHanni.Text;
-                string strShiireCode = HidShiireCode.Value;
+                string strShiireCode = RcbShiireName.SelectedValue;
                 string strMedia = RcbMedia.Text;
                 string strHanni = RcbHanni.SelectedItem.Text;
                 string strSeki = TbxZasu.Text;
-                DataMaster.M_JoueiKakakuRow dr = ClassMaster.GetJoueiKakaku(strShiireCode, strMedia, strHanni, strSeki, Global.GetConnection());
+                DataMaster.M_JoueiKakaku2DataTable dr = ClassMaster.GetJoueiKakaku(strShiireCode, strMedia, strHanni, strSeki, Global.GetConnection());
                 if (dr != null)
                 {
-                    if (dr.HyoujunKakaku != "OPEN")
+                    for (int i = 0; i < dr.Count; i++)
                     {
-                        int hk = int.Parse(dr.HyoujunKakaku);
-                        int sk = int.Parse(dr.ShiireKakaku);
-                        int kake = int.Parse(Kakeri.Text.Trim());
-                        double t = hk * kake / 100;
-                        double tt = Math.Floor(t);
-                        CtlKeisan(dr.HyoujunKakaku, dr.ShiireKakaku, tt);
+                        string[] AryCapacity = dr[i].Capacity.Split('~');
+                        if (AryCapacity.Length > 1)
+                        {
+                            if (int.Parse(AryCapacity[1]) >= int.Parse(strSeki) || int.Parse(strSeki) >= int.Parse(AryCapacity[0]))
+                            {
+                                if (dr[i].HyoujunKakaku != "OPEN")
+                                {
+                                    int hk = int.Parse(dr[i].HyoujunKakaku);
+                                    int sk = int.Parse(dr[i].ShiireKakaku);
+                                    int kake = int.Parse(Kakeri.Text.Trim());
+                                    double t = hk * kake / 100;
+                                    double tt = Math.Floor(t);
+                                    CtlKeisan(dr[i].HyoujunKakaku, dr[i].ShiireKakaku, tt);
+                                }
+                                else
+                                {
+                                    HyoujyunTanka.Text = "OPEN";
+                                    TbxHyoujun.Text = "OPEN";
+                                    Kingaku.Text = "0";
+                                    Tanka.Text = "0";
+                                    Uriage.Text = "0";
+                                    ShiireTanka.Text = "0";
+                                    ShiireKingaku.Text = "0";
+                                }
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            if (int.Parse(AryCapacity[0]) <= int.Parse(strSeki))
+                            {
+                                if (dr[i].HyoujunKakaku != "OPEN")
+                                {
+                                    int hk = int.Parse(dr[i].HyoujunKakaku);
+                                    int sk = int.Parse(dr[i].ShiireKakaku);
+                                    int kake = int.Parse(Kakeri.Text.Trim());
+                                    double t = hk * kake / 100;
+                                    double tt = Math.Floor(t);
+                                    CtlKeisan(dr[i].HyoujunKakaku, dr[i].ShiireKakaku, tt);
+                                }
+                                else
+                                {
+                                    HyoujyunTanka.Text = "OPEN";
+                                    TbxHyoujun.Text = "OPEN";
+                                    Kingaku.Text = "0";
+                                    Tanka.Text = "0";
+                                    Uriage.Text = "0";
+                                    ShiireTanka.Text = "0";
+                                    ShiireKingaku.Text = "0";
+                                }
+                                return;
+                            }
+                        }
+
                     }
-                    else
-                    {
-                        HyoujyunTanka.Text = "OPEN";
-                        TbxHyoujun.Text = "OPEN";
-                        Kingaku.Text = "0";
-                        Tanka.Text = "0";
-                        Uriage.Text = "0";
-                        ShiireTanka.Text = "0";
-                        ShiireKingaku.Text = "0";
-                    }
+                }
+                else
+                {
+                    ErrorSet(8);
+                    return;
                 }
             }
             else
@@ -821,6 +864,9 @@ namespace Gyomu
                     break;
                 case 7:
                     err.Text = "選択した仕入先は上映会価格表にありません。";
+                    break;
+                case 8:
+                    err.Text = "選択した席数と使用範囲は上映会価格表にはありません";
                     break;
             }
         }
@@ -1051,9 +1097,12 @@ namespace Gyomu
                 {
                     dr.Range = "";
                 }
-                if (!string.IsNullOrEmpty(RcbHanni.Text))
+                if (RcbHanni.SelectedItem != null)
                 {
-                    dr.Range = RcbHanni.Text;
+                    if (!string.IsNullOrEmpty(RcbHanni.SelectedItem.Text))
+                    {
+                        dr.Range = RcbHanni.SelectedItem.Text;
+                    }
                 }
                 Baitai.Text = RcbMedia.Text;
                 if (!string.IsNullOrEmpty(Baitai.Text))
@@ -1923,22 +1972,27 @@ namespace Gyomu
                 {
                     RdpCpEnd.SelectedDate = dr.CpEnd;
                 }
-                if (!dr.IsShiiresakiCodeNull() && dr.CategoryName == "上映会")
+                if (!dr.IsShiiresakiCodeNull() || dr.CategoryName == "上映会")
                 {
-                    DataMaster.M_JoueiKakaku2DataTable dtJ = ClassMaster.GetJouei(dr.ShiiresakiCode.ToString(), dr.KeitaiMei, dr.Zasu, Global.GetConnection());
+                    DataMaster.M_JoueiKakaku2DataTable dtJ = ClassMaster.GetJouei4(dr.ShiiresakiCode.ToString(), dr.KeitaiMei, Global.GetConnection());
                     RcbHanni.Items.Clear();
-                    if (dtJ.Count > 0)
+                    string added = "";
+                    for (int i = 0; i < dtJ.Count; i++)
                     {
-                        for (int items = 0; items < dtJ.Count; items++)
+                        string check = dtJ[i].Range;
+                        if (!added.Contains(check))
                         {
-                            RcbHanni.Items.Add(dtJ[items].Range);
+                            added += "/" + check;
+                            RcbHanni.Items.Add(new RadComboBoxItem(check, check));
                         }
-                        RcbHanni.SelectedItem.Text = dr.Range;
-                        TbxHanni.Text = dr.Range;
-                        Hachu.SelectedValue = dr.ShiiresakiCode.ToString();
-                        LblShiireCode.Text = dr.ShiiresakiCode.ToString();
-                        TbxZasu.Text = dr.Zasu;
                     }
+                    SerchProductJouei.Text = dr.SyouhinMei;
+                    RcbHanni.SelectedValue = dr.Range;
+                    TbxHanni.Text = dr.Range;
+                    Hachu.SelectedValue = dr.ShiiresakiCode.ToString();
+                    LblShiireCode.Text = dr.ShiiresakiCode.ToString();
+                    TbxZasu.Text = dr.Zasu;
+
                 }
                 else
                 {
@@ -2651,6 +2705,7 @@ namespace Gyomu
                 if (!string.IsNullOrEmpty(aryProductvalue[12]))
                 {
                     RcbShiireName.Text = aryProductvalue[12];
+                    RcbShiireName.SelectedValue = aryProductvalue[11];
                 }
                 //makernumber
                 if (!string.IsNullOrEmpty(aryProductvalue[13]))

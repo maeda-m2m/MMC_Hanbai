@@ -2018,6 +2018,7 @@ namespace Gyomu
                             DataJutyu.T_JutyuRow drJ = dtJ.NewT_JutyuRow();
                             drJ.ItemArray = dtM[i].ItemArray;
                             drJ.JutyuNo = jNo;
+                            drJ.JutyuFlg = false;
                             dtJ.AddT_JutyuRow(drJ);
                         }
                         ClassJutyu.UpDateJutyu(jNo, dtJ, dtHJ, Global.GetConnection());

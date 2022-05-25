@@ -192,23 +192,26 @@
                 <span class="spinner"></span>
                 <script type="text/javascript">
                     jQuery(function ($) {
-                        debugger;
+                        var HidSpinSwitch = document.getElementById('HidSpinSwitch');
+
                         $(document).ajaxSend(function () {
                             $("#overlay").fadeIn(300);
                         });
-
-                        $('#Button5').click(function () {
-                            $.ajax({
-                                type: 'GET',
-                                success: function (data) {
-                                    console.log(data);
-                                }
-                            }).done(function () {
-                                setTimeout(function () {
-                                    $("#overlay").fadeOut(300);
-                                }, 10000000);
+                        debugger;
+                        if (HidSpinSwitch.value == "true") {
+                            $('#Button5').click(function () {
+                                $.ajax({
+                                    type: 'GET',
+                                    success: function (data) {
+                                        console.log(data);
+                                    }
+                                }).done(function () {
+                                    setTimeout(function () {
+                                        $("#overlay").fadeOut(300);
+                                    }, 10000000);
+                                });
                             });
-                        });
+                        }
 
                         $('#Button7').click(function () {
                             $.ajax({
@@ -379,7 +382,7 @@
             </Tabs>
         </telerik:RadTabStrip>
         <br />
-
+        <asp:HiddenField runat="server" ID="HidSpinSwitch" />
         <table runat="server" id="SubMenu">
             <tr>
                 <td>
@@ -391,6 +394,7 @@
                         function Check() {
                             var bool = true;
                             var Err = document.getElementById('Err');
+                            var HidSpinSwitch = document.getElementById('HidSpinSwitch');
                             var RadComboCategory = $find('RadComboCategory');
                             var RadComboBox1 = $find('RadComboBox1');
                             var RadComboBox3 = $find('RadComboBox3');
@@ -402,7 +406,7 @@
                             var CtrlSyousai = "CtrlSyousai";
                             var ctl = "ctl";
                             var Syosai = "Syosai";
-
+                            debugger;
                             if (RadComboCategory.get_selectedItem().get_value() != "") {
                                 switch (RadComboCategory.get_selectedItem().get_value()) {
                                     case '101':
@@ -482,6 +486,7 @@
                             for (var i = 1; i < c; i++) {
                                 var x = i + 1;
                                 var SerchProduct = $find(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "SerchProduct");
+                                var SerchProductJouei = $find(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "SerchProductJouei");
                                 var Baitai = document.getElementById(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "Baitai");
                                 var HyoujyunTanka = document.getElementById(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "HyoujyunTanka");
                                 var Kingaku = document.getElementById(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "Kingaku");
@@ -504,6 +509,10 @@
                                     case '102':
                                     case '103':
                                     case '199':
+                                        if (SerchProduct.get_text() == "") {
+                                            SerchProduct._element.style.border = "solid 2px red";
+                                            bool = false;
+                                        }
                                         if (StartDate.get_selectedDate.get_value == "") {
                                             StartDate._element.style.border = "solid 2px red";
                                             bool = false;
@@ -518,6 +527,10 @@
                                         }
                                         break;
                                     case '205':
+                                        if (SerchProductJouei.get_text() == "") {
+                                            SerchProduct._element.style.border = "solid 2px red";
+                                            bool = false;
+                                        }
                                         if (StartDate.get_selectedDate.get_value == "") {
                                             StartDate._element.style.border = "solid 2px red";
                                             bool = false;
@@ -544,10 +557,6 @@
                                             EndDate._element.style.border = "solid 2px red";
                                             bool = false;
                                         }
-                                }
-                                if (SerchProduct.get_text() == "") {
-                                    SerchProduct._element.style.border = "solid 2px red";
-                                    bool = false;
                                 }
                                 if (Baitai.value == "") {
                                     Baitai.value = "媒体が表示されていません。商品詳細を確認して下さい。";
@@ -597,6 +606,7 @@
                             if (bool == false) {
                                 debugger;
                                 Err.innerText = "赤枠を入力して下さい";
+                                HidSpinSwitch.value = 'false';
                                 return false;
                             }
                             Cul();

@@ -43,7 +43,7 @@ namespace Gyomu.Jutyu
 
                 //担当名DropDwonList
                 ListSet.SetTanto(RadTanto);
-                ListSet.SetTanto(RadNyuryoku);
+                //ListSet.SetTanto(RadNyuryoku);
 
                 //部門DropDownList
                 ListSet.SetBumon(RadBumon);
@@ -109,9 +109,9 @@ namespace Gyomu.Jutyu
         {
             ClassKensaku.KensakuParam k = new ClassKensaku.KensakuParam();
 
-            if (DrpKeijoFlg.SelectedValue != "")
+            if (DrpFlg.SelectedValue != "")
             {
-                k.uFlg = DrpKeijoFlg.SelectedValue;
+                k.sFlg = DrpFlg.SelectedValue;
             }
             if (TbxJutyuNo.Text != "")
             {
@@ -150,10 +150,10 @@ namespace Gyomu.Jutyu
             {
                 k.sTanto = RadTanto.SelectedItem.Text;
             }
-            if (RadNyuryoku.SelectedValue != "")
-            {
-                k.sNyuryoku = RadNyuryoku.SelectedItem.Text;
-            }
+            //if (RadNyuryoku.SelectedValue != "")
+            //{
+            //    k.sNyuryoku = RadNyuryoku.SelectedItem.Text;
+            //}
 
             Common.CtlNengappiForm CtlJucyuBi = FindControl("CtlJucyuBi") as Common.CtlNengappiForm;
             if (CtlJucyuBi.KikanType != Core.Type.NengappiKikan.EnumKikanType.NONE)
@@ -183,28 +183,28 @@ namespace Gyomu.Jutyu
                 //BtnOrder.Attributes["onclick"] = string.Format("CntRow('{0}')", dr.JutyuNo);
                 //BtnOrder.Text = "発注";
 
-                if (DrpKeijoFlg.SelectedValue != "1")
-                {
-                    //BtnKeijo.Attributes["onclick"] = string.Format("JtuRow('{0}')", dr.JutyuNo);
-                    //BtnKeijo.Text = "計上";
-                    //BtnKeijo.Visible = true;
+                //if (DrpKeijoFlg.SelectedValue != "1")
+                //{
+                //    //BtnKeijo.Attributes["onclick"] = string.Format("JtuRow('{0}')", dr.JutyuNo);
+                //    //BtnKeijo.Text = "計上";
+                //    //BtnKeijo.Visible = true;
 
-                    //Button BtnSyusei = e.Item.FindControl("BtnSyusei") as Button;
-                    //BtnSyusei.Attributes["onclick"] = string.Format("CntRow('{0}')", dr.JutyuNo);
-                    //BtnSyusei.Text = "修正";
+                //    //Button BtnSyusei = e.Item.FindControl("BtnSyusei") as Button;
+                //    //BtnSyusei.Attributes["onclick"] = string.Format("CntRow('{0}')", dr.JutyuNo);
+                //    //BtnSyusei.Text = "修正";
 
-                    //Button BtnCopy = e.Item.FindControl("BtnCopy") as Button;
-                    //BtnCopy.Attributes["onclick"] = string.Format("CntRow('{0}')", dr.JutyuNo);
-                    //BtnCopy.Text = "複製";
-                }
-                else
-                {
-                    //BtnKeijo.Visible = false;
+                //    //Button BtnCopy = e.Item.FindControl("BtnCopy") as Button;
+                //    //BtnCopy.Attributes["onclick"] = string.Format("CntRow('{0}')", dr.JutyuNo);
+                //    //BtnCopy.Text = "複製";
+                //}
+                //else
+                //{
+                //    //BtnKeijo.Visible = false;
 
-                    //Button BtnSyusei = e.Item.FindControl("BtnSyusei") as Button;
-                    //BtnSyusei.Attributes["onclick"] = string.Format("CntRow('{0}')", dr.JutyuNo);
-                    //BtnSyusei.Text = "確認";
-                }
+                //    //Button BtnSyusei = e.Item.FindControl("BtnSyusei") as Button;
+                //    //BtnSyusei.Attributes["onclick"] = string.Format("CntRow('{0}')", dr.JutyuNo);
+                //    //BtnSyusei.Text = "確認";
+                //}
 
                 e.Item.Cells[RadG.Columns.FindByUniqueName("Coljutyu").OrderIndex].Text = dr.JutyuNo.ToString();
                 if (!dr.IsCategoryNameNull())
@@ -682,6 +682,14 @@ namespace Gyomu.Jutyu
             int noo = dru.UriageNo;
             int Uno = noo + 1;
             ClassUriage.InsertUriageHeader(jNo, Uno, Global.GetConnection());
+        }
+
+        protected void RadSisetMeisyo_ItemsRequested(object sender, RadComboBoxItemsRequestedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(e.Text))
+            {
+                ListSet.GetFacility(sender, e);
+            }
         }
     }
 }
