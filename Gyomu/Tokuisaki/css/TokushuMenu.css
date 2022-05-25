@@ -1,0 +1,113 @@
+﻿html {
+    font-size: 100%;
+    padding: 0;
+    margin: 0;
+    font-family: 'Yu Gothic UI';
+}
+
+body {
+    font-size: 100%;
+    padding: 0;
+    margin: 0;
+    font-family: 'Yu Gothic UI';
+    width: 100%;
+    height: auto;
+    min-width: 1000px;
+    max-width: 2000px;
+    background-color: #F2F2F2;
+}
+
+
+
+
+
+
+
+
+@media screen and (max-width: 2000px) {
+
+    #MainDiv textarea {
+        height: 60px;
+        width: 57rem;
+    }
+}
+
+
+
+
+
+@media screen and (max-width: 1500px) {
+
+    #MainDiv textarea {
+        height: 60px;
+        width: 47rem;
+    }
+}
+
+@media screen and (max-width: 1300px) {
+
+    #MainDiv textarea {
+        height: 60px;
+        width: 37rem;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#TokushuTitle {
+    font-size: x-large;
+    font-weight: bold;
+    text-align: center;
+}
+
+#MainDiv {
+    margin: 0 auto;
+    text-align: center;
+    width: 70%;
+    background-color: white;
+    border-radius: 40px;
+    margin-bottom: 40px;
+    box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
+
+
+#TokushuTitleDiv {
+    margin-left: 20px;
+}
+
+#ButtonDiv {
+    text-align: center;
+}
+
+#ConfirmButton {
+    width: 100px;
+    background-color: white;
+    border-color: #2F5597;
+    border-width: 3px;
+    border-radius: 7px;
+    color: #2F5597;
+    font-weight: 700;
+}
+
+    #ConfirmButton:hover {
+        cursor: pointer;
+        transition: .4s;
+        background-color: #2F5597;
+        color: white;
+        border-width: 3px;
+        border-style: outset;
+    }
+
+footer {
+    text-align: center;
+}

@@ -961,7 +961,7 @@ namespace Gyomu.Mitumori
             }
             string[] strJutyuNo = this.strKeys.Split(',');
             string strError = "";
-            for (int l = 0; l < strJutyuNo.Length; )
+            for (int l = 0; l < strJutyuNo.Length;) ;
         }
     }
 

@@ -1,0 +1,166 @@
+﻿html {
+    font-size: 100%;
+    padding: 0;
+    margin: 0;
+    font-family: 'Yu Gothic UI';
+}
+
+body {
+    font-size: 100%;
+    padding: 0;
+    margin: 0;
+    font-family: 'Yu Gothic UI';
+    width: 100%;
+    height: auto;
+    min-width: 1000px;
+    max-width: 2000px;
+    background-color: #F2F2F2;
+}
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 2000px) {
+    /* #MainListDiv textarea {
+        width: 650px;
+        height: 80px;
+    }*/
+    #MainDiv textarea {
+        height: 60px;
+        width: 57rem;
+    }
+}
+
+
+
+
+
+@media screen and (max-width: 1500px) {
+
+    #MainDiv textarea {
+        height: 60px;
+        width: 47rem;
+    }
+}
+
+@media screen and (max-width: 1300px) {
+
+    #MainDiv textarea {
+        height: 60px;
+        width: 37rem;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#MainDiv {
+}
+
+#TitleDiv {
+    text-align: center;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+#CategoryDiv {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+    #CategoryDiv select {
+        font-size: large;
+    }
+
+#MainListDiv {
+    margin: 0 auto;
+    background-color: white;
+    width: 80%;
+    margin-bottom: 40px;
+    border-radius: 30px;
+    box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
+
+
+#RankingTable input {
+    border-style: none;
+    width: 40px;
+    font-size: x-large;
+    margin-left: 10px;
+}
+
+#EmptyDiv {
+    text-align: center;
+}
+
+    #EmptyDiv p {
+        font-size: large;
+        font-weight: bold;
+        color: red;
+    }
+
+#ButtonDiv {
+    text-align: center;
+}
+
+#ConfirmButton {
+    width: 100px;
+    background-color: white;
+    border-color: #2F5597;
+    border-width: 3px;
+    border-radius: 7px;
+    color: #2F5597;
+    font-weight: 700;
+}
+
+    #ConfirmButton:hover {
+        cursor: pointer;
+        transition: .4s;
+        background-color: #2F5597;
+        color: white;
+        border-width: 3px;
+        border-style: outset;
+    }
+
+#BackButton {
+    width: 100px;
+    background-color: white;
+    border-color: #2F5597;
+    border-width: 3px;
+    border-radius: 7px;
+    color: #2F5597;
+    font-weight: 700;
+    margin-left: 30px;
+}
+
+    #BackButton:hover {
+        cursor: pointer;
+        transition: .4s;
+        background-color: #2F5597;
+        color: white;
+        border-width: 3px;
+        border-style: outset;
+    }
+
+footer {
+    text-align: center;
+}

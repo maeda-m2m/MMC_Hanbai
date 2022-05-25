@@ -1,0 +1,541 @@
+﻿html {
+    font-size: 100%;
+    padding: 0;
+    margin: 0;
+    font-family: 'Yu Gothic UI';
+}
+
+body {
+    font-size: 100%;
+    padding: 0;
+    margin: 0;
+    font-family: 'Yu Gothic UI';
+    width: 100%;
+    height: auto;
+    min-width: 1000px;
+    max-width: 2000px;
+    background-color: #F2F2F2;
+}
+
+
+
+
+
+@media screen and (max-width: 2000px) {
+    #MainGrid {
+    }
+
+        #MainGrid td {
+            font-size: x-large;
+        }
+
+    #SenteiFinishList td {
+        font-size: x-large;
+    }
+}
+
+
+
+
+@media screen and (max-width: 1200px) {
+    #MainGrid {
+    }
+
+        #MainGrid td {
+            font-size: small;
+        }
+
+    #SenteiFinishList td {
+        font-size: small;
+    }
+}
+
+
+
+
+#MainDiv {
+    display: flex;
+    justify-content: space-around;
+}
+
+
+
+footer {
+    text-align: center;
+}
+
+
+
+/********************************************************************************************************/
+#ShousaiMainDiv {
+    box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.5);
+    border-radius: 16px;
+    width: 900px;
+    margin: 0 auto;
+}
+
+#shousai_div {
+    background-color: white;
+    border-radius: 1px 1px 16px 16px;
+    margin-bottom: 50px;
+}
+
+#KensakuHidediv {
+    color: #4472C4;
+    background-color: white;
+    margin: 0 auto;
+    margin-top: 40px;
+    border-radius: 16px 16px 1px 1px;
+    height: 20px;
+}
+
+    #KensakuHidediv:hover {
+        cursor: pointer;
+    }
+
+#btn_p {
+    font-weight: bold;
+    padding-left: 60px;
+}
+
+    #btn_p:hover {
+    }
+
+
+
+#shousai_table {
+    background-color: #DEEBF7;
+    border-radius: 16px;
+    margin: 0 auto;
+    box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
+    #shousai_table th {
+        white-space: nowrap;
+        font-size: larger;
+        text-align: left;
+    }
+
+    #shousai_table td {
+        height: 40px;
+    }
+
+
+    #shousai_table input {
+        border-radius: 6px;
+        border-style: solid;
+    }
+
+#shousai_btn_div {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#shousai_btn {
+    width: 100px;
+    background-color: white;
+    border-color: #2F5597;
+    border-width: 3px;
+    border-radius: 7px;
+    color: #2F5597;
+    font-weight: 700;
+}
+
+    #shousai_btn:hover {
+        cursor: pointer;
+        transition: .4s;
+        background-color: #2F5597;
+        color: white;
+        border-width: 3px;
+        border-style: outset;
+    }
+
+#ClearButton {
+    width: 100px;
+    background-color: white;
+    border-color: #FF0101;
+    border-width: 3px;
+    border-radius: 7px;
+    color: #FF0101;
+    font-weight: 700;
+    margin-left: 30px;
+}
+
+    #ClearButton:hover {
+        cursor: pointer;
+        transition: .4s;
+        background-color: #FF0101;
+        color: white;
+        border-width: 3px;
+        border-style: outset;
+    }
+
+
+
+/*   #ContentPlaceHolder1_BackHome {
+            width: 100px;
+            background-color: white;
+            border-color: #2F5597;
+            border-width: 3px;
+            border-radius: 7px;
+            color: #2F5597;
+            font-weight: 700;
+            margin-left: 30px;
+        }
+
+            #ContentPlaceHolder1_BackHome:hover {
+                cursor: pointer;
+                transition: .4s;
+                background-color: #2F5597;
+                color: white;
+                border-width: 3px;
+                border-style: outset;
+            }*/
+/********************************************************************************************************/
+
+
+
+
+
+
+
+
+#main {
+    width: 40%;
+    height: 800px;
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
+    #main nav {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+    }
+
+
+
+#MainGridDiv {
+    /* width: 90%;*/
+    margin: 0 auto;
+}
+
+#MainGrid {
+}
+
+    #MainGrid th {
+        white-space: nowrap;
+        padding-left: 20px;
+    }
+
+    #MainGrid td {
+        height: 80px;
+        padding-left: 20px;
+    }
+
+
+
+.ShouhinButton:hover {
+    border-style: none none double none;
+    cursor: pointer;
+    border-width: thin;
+}
+/********************************************************************************************************/
+#Sentei {
+    height: 30px;
+    background-color: white;
+    border-color: #2F5597;
+    border-width: 3px;
+    border-radius: 7px;
+    color: #2F5597;
+    font-weight: 700;
+}
+
+    #Sentei:hover {
+        cursor: pointer;
+        transition: .4s;
+        background-color: #2F5597;
+        color: white;
+        border-width: 3px;
+        border-style: outset;
+    }
+
+#ALL_select_btn {
+    height: 30px;
+    background-color: white;
+    border-color: #2F5597;
+    border-width: 3px;
+    border-radius: 7px;
+    color: #2F5597;
+    font-weight: 700;
+}
+
+    #ALL_select_btn:hover {
+        cursor: pointer;
+        transition: .4s;
+        background-color: #2F5597;
+        color: white;
+        border-width: 3px;
+        border-style: outset;
+    }
+
+#ALL_uncheck {
+    height: 30px;
+    background-color: white;
+    border-color: #FF0101;
+    border-width: 3px;
+    border-radius: 7px;
+    color: #FF0101;
+    font-weight: 700;
+}
+
+    #ALL_uncheck:hover {
+        cursor: pointer;
+        transition: .4s;
+        background-color: #FF0101;
+        color: white;
+        border-width: 3px;
+        border-style: outset;
+    }
+
+#SearchCategoryDrop {
+    font-size: large;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/********************************************************************************************************/
+#SenteiFinish {
+    width: 40%;
+    height: 800px;
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
+    #SenteiFinish p {
+        font-weight: bold;
+        text-align: center;
+    }
+
+#SenteiFinishList {
+}
+
+
+
+#SenteiCategoryDiv {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+    #SenteiCategoryDiv table th {
+        white-space: nowrap;
+    }
+
+    #SenteiCategoryDiv table td select {
+        font-size: large;
+    }
+
+#SelectedGrid {
+}
+
+    #SelectedGrid th {
+        white-space: nowrap;
+    }
+
+    #SelectedGrid td {
+        height: 60px;
+        padding-left: 20px;
+    }
+
+
+#ShouhinEditButton {
+    width: 20%;
+    height: 30px;
+    background-color: white;
+    border-color: #2F5597;
+    border-width: 3px;
+    border-radius: 7px;
+    color: #2F5597;
+    font-weight: 700;
+}
+
+    #ShouhinEditButton:hover {
+        cursor: pointer;
+        transition: .4s;
+        background-color: #2F5597;
+        color: white;
+        border-width: 3px;
+        border-style: outset;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#TableDiv {
+    /*   border-style: solid;*/
+}
+
+    #TableDiv table tr {
+        /* border-style: solid;*/
+    }
+
+#ModalMainTable {
+}
+
+
+    #ModalMainTable th {
+        white-space: nowrap;
+        text-align: left;
+        border-style: solid;
+    }
+
+    #ModalMainTable td {
+        text-align: left;
+        border-style: solid;
+        font-size: large;
+        font-weight: bold;
+    }
+
+#CopyrightTable {
+    text-align: center;
+}
+
+#CopyrightLabel {
+    border-style: none;
+    text-align: center;
+    font-size: small
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/********************************************************************************************************/
+/* ボタンのデザイン */
+.btn {
+    display: inline-block;
+    text-decoration: none;
+    padding: 10px 20px;
+    background: linear-gradient(to right bottom, #FFA500, #FF6347);
+    border-radius: 5px;
+    color: #fff;
+    margin: 20px;
+    transition: 0.3s;
+}
+
+    .btn:hover {
+        opacity: .8;
+    }
+
+/* オーバーレイ */
+.overlay {
+    /* 位置を固定 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* 画面いっぱいに広がるようにする */
+    width: 100%;
+    height: 100vh;
+    /* rgbaを使って60%の黒いオーバーレイにする */
+    background: rgba(0, 0, 0, 0.6);
+    /* デフォルトでは見えないようにする */
+    opacity: 0;
+    visibility: hidden;
+    /* 表示する際の変化の所要時間 */
+    transition: .3s;
+}
+
+    /* activeクラスのついたオーバーレイ */
+    .overlay.active {
+        /* activeクラスがついたときにオーバーレイを表示する */
+        opacity: 1;
+        visibility: visible;
+    }
+
+/* モーダルウィンドウ */
+.modal {
+    max-width: 500px;
+    width: 86%;
+    padding: 15px 20px;
+    background: #fff;
+    /* 位置の調整(真ん中に表示) */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* デフォルトでは非表示にしておく */
+    opacity: 0;
+    visibility: hidden;
+    /* 表示の変化にかかる時間 */
+    transition: .3s;
+}
+
+    /* activeクラスのついたモーダルウィンドウ */
+    .modal.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* モーダルウィンドウ内の閉じるボタン */
+    .modal .close {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        cursor: pointer;
+        font-size: 20px;
+    }
+
+    .modal h2 {
+        font-size: 18px;
+        font-weight: normal;
+        margin-bottom: 10px;
+    }
+
+    .modal p {
+        font-size: 13px;
+    }
+
+/* スクロールできる高さを出すための設定 */
+section {
+    /*height: 200vh;*/
+}
+
+/********************************************************************************************************/

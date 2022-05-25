@@ -151,10 +151,11 @@
                                 </telerik:RadMenuItem>
                                 <telerik:RadMenuItem runat="server" Text="得意先ポータルマスタ">
                                     <Items>
-                                        <telerik:RadMenuItem runat="server" Text="ページ１" NavigateUrl=""></telerik:RadMenuItem>
-                                        <telerik:RadMenuItem runat="server" Text="ページ２" NavigateUrl=""></telerik:RadMenuItem>
-                                        <telerik:RadMenuItem runat="server" Text="ページ３" NavigateUrl=""></telerik:RadMenuItem>
-                                        <telerik:RadMenuItem runat="server" Text="ページ４" NavigateUrl=""></telerik:RadMenuItem>
+                                        <telerik:RadMenuItem runat="server" Text="お知らせ" NavigateUrl="~/Tokuisaki/Oshirase.aspx"></telerik:RadMenuItem>
+                                        <telerik:RadMenuItem runat="server" Text="特集マスター" NavigateUrl="~/Tokuisaki/TokushuMenu.aspx"></telerik:RadMenuItem>
+                                        <telerik:RadMenuItem runat="server" Text="特集商品編集" NavigateUrl="~/Tokuisaki/ShouhinCheck.aspx"></telerik:RadMenuItem>
+                                        <telerik:RadMenuItem runat="server" Text="特集商品検索" NavigateUrl="~/Tokuisaki/ShouhinSearch.aspx"></telerik:RadMenuItem>
+
                                     </Items>
                                 </telerik:RadMenuItem>
                             </Items>

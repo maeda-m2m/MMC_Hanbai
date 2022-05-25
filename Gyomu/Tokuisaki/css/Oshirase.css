@@ -1,0 +1,101 @@
+﻿html {
+    font-size: 100%;
+    padding: 0;
+    margin: 0;
+    font-family: 'Yu Gothic UI';
+}
+
+body {
+    font-size: 100%;
+    padding: 0;
+    margin: 0;
+    font-family: 'Yu Gothic UI';
+    width: 100%;
+    height: auto;
+    min-width: 1000px;
+    max-width: 2000px;
+    background-color: #F2F2F2;
+}
+
+
+
+
+
+#TokushuTitle {
+    text-align: center;
+}
+
+
+
+
+
+#MainDiv {
+    width: 70%;
+    height: 200px;
+    margin: 0 auto;
+    background-color: white;
+    margin-top: 30px;
+    border-radius: 20px;
+    background-color: #bfdbff;
+}
+
+#ShousaiTextDiv {
+    padding-left: 45px;
+}
+
+    #ShousaiTextDiv textarea {
+        height: 110px;
+        width: 80%;
+    }
+
+
+
+
+#TitleDiv {
+    display: flex;
+    /*  justify-content: space-between;*/
+    padding-top: 20px;
+    padding-left: 45px;
+    padding-right: 20px;
+    /*  background-color: #0070C0;*/
+}
+
+
+
+#ButtonDiv {
+    text-align: center;
+    padding-top: 30px;
+}
+
+.DeleteButton {
+    background-color: white;
+    border-color: #2F5597;
+    border-width: 3px;
+    border-radius: 7px;
+    color: #2F5597;
+    font-weight: bold;
+}
+
+    .DeleteButton:hover {
+        cursor: pointer;
+        transition: .4s;
+        background-color: #2F5597;
+        color: white;
+        border-width: 3px;
+        border-style: outset;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+footer p {
+    text-align: center;
+}

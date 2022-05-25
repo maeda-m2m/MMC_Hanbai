@@ -376,6 +376,14 @@
     <Content Include="Style\Telerik RadGrid Common CSS.css" />
     <Content Include="Style\Telerik RadGrid Outlook Skin.css" />
     <Content Include="Style\コピー ～ ComboBox.ykuri.css" />
+    <Content Include="Tokuisaki\css\Oshirase.css" />
+    <Content Include="Tokuisaki\css\ShouhinCheck.css" />
+    <Content Include="Tokuisaki\css\ShouhinSearch.css" />
+    <Content Include="Tokuisaki\css\TokushuMenu.css" />
+    <Content Include="Tokuisaki\Oshirase.aspx" />
+    <Content Include="Tokuisaki\ShouhinCheck.aspx" />
+    <Content Include="Tokuisaki\ShouhinSearch.aspx" />
+    <Content Include="Tokuisaki\TokushuMenu.aspx" />
     <Content Include="Uriage\CtlUriageSyosai.ascx" />
     <Content Include="Uriage\NyukinDenpyo.aspx" />
     <Content Include="Uriage\NyukinRireki.aspx" />
@@ -778,6 +786,34 @@
       <DependentUpon>ReturnList.aspx</DependentUpon>
     </Compile>
     <Compile Include="SessionManager.cs" />
+    <Compile Include="Tokuisaki\CommonClass.cs" />
+    <Compile Include="Tokuisaki\Oshirase.aspx.cs">
+      <DependentUpon>Oshirase.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tokuisaki\Oshirase.aspx.designer.cs">
+      <DependentUpon>Oshirase.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tokuisaki\ShouhinCheck.aspx.cs">
+      <DependentUpon>ShouhinCheck.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tokuisaki\ShouhinCheck.aspx.designer.cs">
+      <DependentUpon>ShouhinCheck.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tokuisaki\ShouhinSearch.aspx.cs">
+      <DependentUpon>ShouhinSearch.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tokuisaki\ShouhinSearch.aspx.designer.cs">
+      <DependentUpon>ShouhinSearch.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tokuisaki\TokushuMenu.aspx.cs">
+      <DependentUpon>TokushuMenu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tokuisaki\TokushuMenu.aspx.designer.cs">
+      <DependentUpon>TokushuMenu.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Uriage\CtlUriageSyosai.ascx.cs">
       <DependentUpon>CtlUriageSyosai.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
