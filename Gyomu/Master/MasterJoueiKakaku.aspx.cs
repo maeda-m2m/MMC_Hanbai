@@ -4,6 +4,9 @@ using System.Data;
 using System.Web.UI.WebControls;
 using Telerik.Web.UI;
 using System.Data.SqlClient;
+using System.Collections.Generic;
+using System.IO;
+
 namespace Gyomu.Master
 {
     public partial class MasterJoueiKakaku : System.Web.UI.Page
@@ -18,6 +21,7 @@ namespace Gyomu.Master
                 SetSeki(head_rcb2);//席数
                 SetHani(head_rcmb_hani);
                 head_lbl1.Visible = true;
+                MesseageLabel.Visible = true;
                 insert_panel.Visible = false;
             }
         }
@@ -156,6 +160,7 @@ namespace Gyomu.Master
                 if (dt.Rows.Count == 0)
                 {
                     head_lbl1.Visible = true;
+                    MesseageLabel.Visible = false;
                     head_lbl1.Text = "データが見つかりませんでした";
                     DGJoueiKakaku1.Visible = false;
                     return;
@@ -163,6 +168,7 @@ namespace Gyomu.Master
                 else
                 {
                     head_lbl1.Visible = false;
+                    MesseageLabel.Visible = false;
                     DGJoueiKakaku1.Visible = true;
                 }
                 DGJoueiKakaku1.VirtualItemCount = dt.Count;
@@ -626,6 +632,11 @@ namespace Gyomu.Master
                 sqlConnection.Close();
             }
         }
+
+
+
+
+
         //編集コマンドで値を変更する
         public static DataMaster.M_JoueiKakakuRow Update(DataMaster.M_JoueiKakakuRow dr, SqlConnection sql)
         {
@@ -657,6 +668,13 @@ namespace Gyomu.Master
                 return dr;
             }
         }
+
+
+
+
+
+
+
         public static void DeleteRow(DataMaster.M_JoueiKakakuRow dr, SqlConnection sql)
         {
             var da = new SqlCommand("", sql)
@@ -678,6 +696,198 @@ namespace Gyomu.Master
                 sql.Close();
             }
         }
+
+
+
+
+
+
+
+
+
+
+
+        protected void DownLoadButton_Click(object sender, EventArgs e)
+        {
+            string sqlCommand = "select * from M_JoueiKakaku";
+
+            var table = Tokuisaki.CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
+
+            string rows = "ID,メーカーコード,メーカー,メディア,範囲,容量,価格,メーカー価格" + "\r";
+
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                rows += $"{table.Rows[i].ItemArray[0]},{table.Rows[i].ItemArray[1]},{table.Rows[i].ItemArray[2]},{table.Rows[i].ItemArray[3]},{table.Rows[i].ItemArray[4]},{table.Rows[i].ItemArray[5]},{table.Rows[i].ItemArray[6]},{table.Rows[i].ItemArray[7]}" + "\r";
+            }
+
+            string strFileName = ("上映会マスタcsv") + "_" + DateTime.Now.ToString("yyyyMMdd") + "." + "csv";
+
+            this.Ram.ResponseScripts.Add(string.Format("window.location.href='{0}';", this.ResolveUrl("~/Common/DownloadDataForm.aspx?" + Common.DownloadDataForm.GetQueryString4Text(strFileName, rows))));
+
+
+        }
+
+
+
+
+
+
+
+
+
+        protected void Ram_AjaxRequest(object sender, AjaxRequestEventArgs e)
+        {
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+        protected void UploadButton_Click(object sender, EventArgs e)
+        {
+            if (!FileUpload.HasFile)
+            {
+                head_lbl1.Visible = false;
+                MesseageLabel.Visible = true;
+                MesseageLabel.Text = "アップロードするファイルを選択してください。";
+                return;
+            }
+
+
+            Stream s = FileUpload.FileContent;
+
+            System.Text.Encoding enc = System.Text.Encoding.GetEncoding(932);
+
+            StreamReader check = new StreamReader(s, enc);
+
+            string strCheck = check.ReadLine();
+
+            if (strCheck == null)
+            {
+                head_lbl1.Visible = false;
+                MesseageLabel.Visible = true;
+                MesseageLabel.Text = "ファイルが読み込めませんでした。";
+
+                return;
+            }
+
+            bool bTab = strCheck.Split('\t').Length > strCheck.Split(',').Length;
+
+
+
+            if (bTab)
+            {
+                while (check.EndOfStream == false)
+                {
+                    string strLineData = check.ReadLine();
+
+                    string[] mData = strLineData.Split('\t');
+
+                    var dt = new DataMaster.M_JoueiKakakuDataTable();
+
+                    var dr = dt.NewM_JoueiKakakuRow();
+
+                    dr.ItemArray = mData;
+
+                    dt.AddM_JoueiKakakuRow(dr);
+
+                    UpdateCSVtanto(dt, Global.GetConnection());
+                }
+            }
+            else
+            {
+                while (check.EndOfStream == false)
+                {
+                    string strLineData = check.ReadLine();
+
+                    string[] mData = strLineData.Split(',');
+
+                    var dt = new DataMaster.M_JoueiKakakuDataTable();
+
+                    var dr = dt.NewM_JoueiKakakuRow();
+
+                    dr.ItemArray = mData;
+
+                    dt.AddM_JoueiKakakuRow(dr);
+
+                    UpdateCSVtanto(dt, Global.GetConnection());
+                }
+            }
+            head_lbl1.Visible = false;
+            MesseageLabel.Visible = true;
+            MesseageLabel.Text = "ファイルのアップロードに成功しました。";
+
+
+        }
+
+
+
+
+
+        private void UpdateCSVtanto(DataMaster.M_JoueiKakakuDataTable dt, SqlConnection sqlConnection)
+        {
+
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+
+            da.SelectCommand.CommandText = "select * from M_JoueiKakaku where KanriNo = @u";
+
+            da.SelectCommand.Parameters.AddWithValue("@u", dt[0].KanriNo);
+
+            var dtN = new DataMaster.M_JoueiKakakuDataTable();
+
+            da.Fill(dtN);
+
+            SqlTransaction sqlTran = null;
+
+            da.UpdateCommand = new SqlCommandBuilder(da).GetUpdateCommand();
+
+            da.InsertCommand = new SqlCommandBuilder(da).GetInsertCommand();
+
+            try
+            {
+                if (dtN.Count > 0)
+                {
+                    sqlConnection.Open();
+                    sqlTran = sqlConnection.BeginTransaction();
+                    da.SelectCommand.Transaction = da.UpdateCommand.Transaction = sqlTran;
+                    dtN[0].ItemArray = dt[0].ItemArray;
+                    da.Update(dtN);
+                    sqlTran.Commit();
+                }
+                else
+                {
+                    sqlConnection.Open();
+                    sqlTran = sqlConnection.BeginTransaction();
+                    da.SelectCommand.Transaction = da.InsertCommand.Transaction = sqlTran;
+                    da.Update(dt);
+                    sqlTran.Commit();
+                }
+            }
+            catch (Exception ex)
+            {
+                if (sqlTran != null)
+                {
+                    head_lbl1.Visible = false;
+                    MesseageLabel.Visible = true;
+                    MesseageLabel.Text = "ファイルのアップロードに失敗しました。";
+
+                    sqlTran.Rollback();
+                }
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+
+        }
+
 
 
         //----------------------------------------------------------------------------------------------------------------------------------

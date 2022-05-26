@@ -187,7 +187,7 @@ namespace Gyomu.Tokuisaki
 
             var row = table.NewRow();
 
-            if (ID.Rows.Count == 0)
+            if (MainListView.Items.Count == 0)
             {
                 row[0] = "1";
             }

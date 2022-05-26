@@ -389,6 +389,14 @@ namespace Yodokou_HanbaiKanri
                 _writer = new System.Web.UI.HtmlTextWriter(tr);
             }
 
+            public static UserView GetUserView()
+            {
+                var v = new UserView();
+
+                return v;
+            }
+
+
             public static UserView New(int nListID, string strUserID, bool bLoadFromCache)
             {
                 Core.Sql.Dataset.T_UserListRow dr =

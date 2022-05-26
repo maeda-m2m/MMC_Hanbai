@@ -61,9 +61,7 @@
         }
         /*-----------------------------------------------------------------------*/
         .Btn10 {
-            font-size: 17px;
             text-align: center;
-            width: 130px;
             padding: 0.3em 1em;
             text-decoration: none;
             color: white;
@@ -171,13 +169,25 @@
                 </table>
                 <br />
                 <asp:Button runat="server" ID="head_shinki_btn1" Text="新規登録" OnClick="head_shinki_btn1_Click" CssClass="Btn10" />
+
                 <asp:Label runat="server" ID="head_lbl1" ForeColor="Red" Font-Size="Large"></asp:Label>
+                <asp:Label runat="server" ID="MesseageLabel" Font-Size="Large"></asp:Label>
+                <asp:Button runat="server" ID="DownLoadButton" Text="CSVダウンロード" OnClick="DownLoadButton_Click" CssClass="Btn10" />
+                <asp:Button runat="server" ID="UploadButton" Text="アップロード" OnClick="UploadButton_Click" CssClass="Btn10" />
+                <asp:FileUpload runat="server" ID="FileUpload" />
+
+
             </header>
             <%-- <div runat="server" id="K">
             <uc3:CtlFilter ID="F" runat="server" />
         </div>--%>
+
             <br />
+
             <main>
+
+
+
                 <telerik:RadGrid ID="DGJoueiKakaku1"
                     runat="server"
                     PageSize="20"
@@ -241,8 +251,24 @@
                         <ClientEvents OnGridCreated="Core.ResizeRadGrid" />
                     </ClientSettings>
                 </telerik:RadGrid>
+
+
             </main>
+
+
         </div>
+
+
+
+
+
+
+
+
+
+        <telerik:RadAjaxManager runat="server" OnAjaxRequest="Ram_AjaxRequest" ID="Ram"></telerik:RadAjaxManager>
+
+
     </form>
 </body>
 </html>
