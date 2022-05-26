@@ -198,6 +198,29 @@
                 background: #ffd900;
                 color: black;
             }
+
+        .gv a {
+            background-color: white;
+            text-decoration: none;
+            color: #c0a300;
+            font-size: 15px;
+        }
+
+            .gv a:link {
+                background-color: white;
+                text-decoration: none;
+                color: #c0a300;
+                font-weight: bold;
+                font-size: 15px;
+            }
+
+            .gv a:visited {
+                background-color: darkgreen;
+                text-decoration: none;
+                color: #c0a300;
+                font-weight: bold;
+                font-size: 15px;
+            }
     </style>
 
     <script type="text/javascript">
@@ -342,6 +365,8 @@
         <br />
         <asp:Button ID="BtnDownlod" runat="server" Text="CSVダウンロード" Width="180px" CssClass="Btn10" OnClick="BtnDownlod_Click" />
         &nbsp;
+        <asp:Button runat="server" Text="明細CSVダウンロード" Width="180px" CssClass="Btn10" ID="BtnMeisaiCSVdownload" OnClick="BtnMeisaiCSVdownload_Click" />
+        &nbsp;
         <asp:Button ID="BtnEdit" runat="server" Text="修正" CssClass="Btn10" Width="100px" OnClick="BtnEdit_Click" />
         &nbsp;
         <asp:Button ID="BtnOrdered" runat="server" Text="発注" CssClass="Btn10" Width="100px" OnClick="BtnOrdered_Click" />
@@ -367,8 +392,8 @@
         <asp:Button ID="BtnNouhin" runat="server" Text="納品書" Width="100px" style="height: 21px" />
         <asp:Button ID="BtnSeikyu" runat="server" Text="請求書" Width="100px" style="height: 21px" />--%>
         <div id="Itiran" runat="server">
-            <telerik:RadGrid ID="RadG" Width="100%" EnableEmbeddedBaseStylesheet="true" EnableEmbeddedSkins="false" AllowCustomPaging="false" runat="server" PageSize="30" AllowPaging="True" AutoGenerateColumns="False" OnItemDataBound="RadG_ItemDataBound" OnPageIndexChanged="RadG_PageIndexChanged" OnItemCreated="RadG_ItemCreated">
-                <PagerStyle Position="Top" PageSizeControlType="None" BackColor="#f3f3f3" Mode="NumericPages" />
+            <telerik:RadGrid ID="RadG" Width="100%" EnableEmbeddedBaseStylesheet="true" EnableEmbeddedSkins="false" AllowCustomPaging="false" runat="server" PageSize="200" AllowPaging="True" AutoGenerateColumns="False" OnItemDataBound="RadG_ItemDataBound" OnPageIndexChanged="RadG_PageIndexChanged" OnItemCreated="RadG_ItemCreated">
+                <PagerStyle AlwaysVisible="true" Position="Top" PageSizeControlType="None" Mode="NumericPages" CssClass="gv" />
                 <HeaderStyle BackColor="#ffd900" Font-Size="13" />
                 <AlternatingItemStyle BackColor="#fff2ab" />
                 <MasterTableView>
