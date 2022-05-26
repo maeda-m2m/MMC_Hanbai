@@ -698,41 +698,33 @@ namespace Gyomu.Master
         }
 
 
-
-
-
-
-
-
-
-
-
+        //csvダウンロード
+        //trycatch追加　前田　2022/05/26
         protected void DownLoadButton_Click(object sender, EventArgs e)
         {
-            string sqlCommand = "select * from M_JoueiKakaku";
-
-            var table = Tokuisaki.CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
-
-            string rows = "ID,メーカーコード,メーカー,メディア,範囲,容量,価格,メーカー価格" + "\r";
-
-            for (int i = 0; i < table.Rows.Count; i++)
+            try
             {
-                rows += $"{table.Rows[i].ItemArray[0]},{table.Rows[i].ItemArray[1]},{table.Rows[i].ItemArray[2]},{table.Rows[i].ItemArray[3]},{table.Rows[i].ItemArray[4]},{table.Rows[i].ItemArray[5]},{table.Rows[i].ItemArray[6]},{table.Rows[i].ItemArray[7]}" + "\r";
+                string sqlCommand = "select * from M_JoueiKakaku";
+
+                var table = Tokuisaki.CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
+
+                string rows = "ID,メーカーコード,メーカー,メディア,範囲,容量,価格,メーカー価格" + "\r";
+
+                for (int i = 0; i < table.Rows.Count; i++)
+                {
+                    rows += $"{table.Rows[i].ItemArray[0]},{table.Rows[i].ItemArray[1]},{table.Rows[i].ItemArray[2]},{table.Rows[i].ItemArray[3]},{table.Rows[i].ItemArray[4]},{table.Rows[i].ItemArray[5]},{table.Rows[i].ItemArray[6]},{table.Rows[i].ItemArray[7]}" + "\r";
+                }
+
+                string strFileName = ("上映会マスタcsv") + "_" + DateTime.Now.ToString("yyyyMMdd") + "." + "csv";
+
+                this.Ram.ResponseScripts.Add(string.Format("window.location.href='{0}';", this.ResolveUrl("~/Common/DownloadDataForm.aspx?" + Common.DownloadDataForm.GetQueryString4Text(strFileName, rows))));
             }
-
-            string strFileName = ("上映会マスタcsv") + "_" + DateTime.Now.ToString("yyyyMMdd") + "." + "csv";
-
-            this.Ram.ResponseScripts.Add(string.Format("window.location.href='{0}';", this.ResolveUrl("~/Common/DownloadDataForm.aspx?" + Common.DownloadDataForm.GetQueryString4Text(strFileName, rows))));
-
-
+            catch (Exception ex)
+            {
+                head_lbl1.Text = "csvダウンロードに失敗しました。";
+                ClassMail.ErrorMail("maeda@m2m-asp.com", "上映会価格マスタ | ｃｓｖダウンロード", ex.Message);
+            }
         }
-
-
-
-
-
-
-
 
 
         protected void Ram_AjaxRequest(object sender, AjaxRequestEventArgs e)
@@ -741,93 +733,92 @@ namespace Gyomu.Master
         }
 
 
-
-
-
-
-
-
-
-
-
+        //csvアップロード
+        //trycatch追加　前田　2022/05/26
         protected void UploadButton_Click(object sender, EventArgs e)
         {
-            if (!FileUpload.HasFile)
+            try
             {
+                if (!FileUpload.HasFile)
+                {
+                    head_lbl1.Visible = false;
+                    MesseageLabel.Visible = true;
+                    MesseageLabel.Text = "アップロードするファイルを選択してください。";
+                    return;
+                }
+
+
+                Stream s = FileUpload.FileContent;
+
+                System.Text.Encoding enc = System.Text.Encoding.GetEncoding(932);
+
+                StreamReader check = new StreamReader(s, enc);
+
+                string strCheck = check.ReadLine();
+
+                if (strCheck == null)
+                {
+                    head_lbl1.Visible = false;
+                    MesseageLabel.Visible = true;
+                    MesseageLabel.Text = "ファイルが読み込めませんでした。";
+
+                    return;
+                }
+
+                bool bTab = strCheck.Split('\t').Length > strCheck.Split(',').Length;
+
+
+
+                if (bTab)
+                {
+                    while (check.EndOfStream == false)
+                    {
+                        string strLineData = check.ReadLine();
+
+                        string[] mData = strLineData.Split('\t');
+
+                        var dt = new DataMaster.M_JoueiKakakuDataTable();
+
+                        var dr = dt.NewM_JoueiKakakuRow();
+
+                        dr.ItemArray = mData;
+
+                        dt.AddM_JoueiKakakuRow(dr);
+
+                        UpdateCSVtanto(dt, Global.GetConnection());
+                    }
+                }
+                else
+                {
+                    while (check.EndOfStream == false)
+                    {
+                        string strLineData = check.ReadLine();
+
+                        string[] mData = strLineData.Split(',');
+
+                        var dt = new DataMaster.M_JoueiKakakuDataTable();
+
+                        var dr = dt.NewM_JoueiKakakuRow();
+
+                        dr.ItemArray = mData;
+
+                        dt.AddM_JoueiKakakuRow(dr);
+
+                        UpdateCSVtanto(dt, Global.GetConnection());
+                    }
+                }
                 head_lbl1.Visible = false;
                 MesseageLabel.Visible = true;
-                MesseageLabel.Text = "アップロードするファイルを選択してください。";
-                return;
+                MesseageLabel.Text = "ファイルのアップロードに成功しました。";
+
+
             }
-
-
-            Stream s = FileUpload.FileContent;
-
-            System.Text.Encoding enc = System.Text.Encoding.GetEncoding(932);
-
-            StreamReader check = new StreamReader(s, enc);
-
-            string strCheck = check.ReadLine();
-
-            if (strCheck == null)
+            catch (Exception ex)
             {
-                head_lbl1.Visible = false;
-                MesseageLabel.Visible = true;
-                MesseageLabel.Text = "ファイルが読み込めませんでした。";
-
-                return;
+                head_lbl1.Text = "アップロードに失敗しました。";
+                ClassMail.ErrorMail("maeda@m2m-asp.com", "上映会価格マスタ | ｃｓｖアップロード", ex.Message);
             }
-
-            bool bTab = strCheck.Split('\t').Length > strCheck.Split(',').Length;
-
-
-
-            if (bTab)
-            {
-                while (check.EndOfStream == false)
-                {
-                    string strLineData = check.ReadLine();
-
-                    string[] mData = strLineData.Split('\t');
-
-                    var dt = new DataMaster.M_JoueiKakakuDataTable();
-
-                    var dr = dt.NewM_JoueiKakakuRow();
-
-                    dr.ItemArray = mData;
-
-                    dt.AddM_JoueiKakakuRow(dr);
-
-                    UpdateCSVtanto(dt, Global.GetConnection());
-                }
-            }
-            else
-            {
-                while (check.EndOfStream == false)
-                {
-                    string strLineData = check.ReadLine();
-
-                    string[] mData = strLineData.Split(',');
-
-                    var dt = new DataMaster.M_JoueiKakakuDataTable();
-
-                    var dr = dt.NewM_JoueiKakakuRow();
-
-                    dr.ItemArray = mData;
-
-                    dt.AddM_JoueiKakakuRow(dr);
-
-                    UpdateCSVtanto(dt, Global.GetConnection());
-                }
-            }
-            head_lbl1.Visible = false;
-            MesseageLabel.Visible = true;
-            MesseageLabel.Text = "ファイルのアップロードに成功しました。";
-
-
         }
-
-
 
 
 

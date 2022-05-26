@@ -66,23 +66,13 @@
     <Reference Include="ExcelCreator">
       <HintPath>dll\ExcelCreator.dll</HintPath>
     </Reference>
-    <Reference Include="ExcelCreator.XlsCrt">
-      <HintPath>dll\ExcelCreator.XlsCrt.dll</HintPath>
-    </Reference>
-    <Reference Include="ExcelCreator.XlsPDF">
-      <HintPath>dll\ExcelCreator.XlsPDF.dll</HintPath>
-    </Reference>
-    <Reference Include="ExcelCreator.XlsxCreator, Version=6.0.0.3419, Culture=neutral, PublicKeyToken=97d207c7dd0b8e91">
+    <Reference Include="ExcelCreator.XlsxCreator, Version=6.0.0.2215, Culture=neutral, PublicKeyToken=97d207c7dd0b8e91">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Mansei_HK_20190128\Mansei_HK\Yodokou_HanbaiKanri\bin\ExcelCreator.XlsxCreator.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\XlsCrt6\Bin\ExcelCreator.XlsxCreator.dll</HintPath>
     </Reference>
-    <Reference Include="ExcelCreator.XlsxCrt, Version=6.0.0.3419, Culture=neutral, PublicKeyToken=cf9444a2eda782e2">
+    <Reference Include="ExcelCreator.XlsxPDF, Version=6.0.0.2215, Culture=neutral, PublicKeyToken=8ca261be8eaece38">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Mansei_HK_20190128\Mansei_HK\Yodokou_HanbaiKanri\bin\ExcelCreator.XlsxCrt.dll</HintPath>
-    </Reference>
-    <Reference Include="ExcelCreator.XlsxPDF, Version=6.0.0.3419, Culture=neutral, PublicKeyToken=8ca261be8eaece38">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Mansei_HK_20190128\Mansei_HK\Yodokou_HanbaiKanri\bin\ExcelCreator.XlsxPDF.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\XlsCrt6\Bin\ExcelCreator.XlsxPDF.dll</HintPath>
     </Reference>
     <Reference Include="ExcelNumberFormat, Version=1.0.10.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
       <HintPath>..\packages\ExcelNumberFormat.1.0.10\lib\net20\ExcelNumberFormat.dll</HintPath>
