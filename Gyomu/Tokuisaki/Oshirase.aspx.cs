@@ -154,61 +154,33 @@ namespace Gyomu.Tokuisaki
         {
             string sqlCommand;
 
-            var table = new DataTable();
-
-            table.Columns.Add("OshiraseID");
-            table.Columns.Add("UserKey");
-            table.Columns.Add("Date");
-            table.Columns.Add("Title");
-            table.Columns.Add("Shousai");
-
-            sqlCommand = "select * from T_TokuisakiOshirase order by Date desc";
-
-            var mainTable = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
-
-
-
-            for (int i = 0; i < mainTable.Rows.Count; i++)
-            {
-                var mainrows = table.NewRow();
-                mainrows[0] = mainTable.Rows[i].ItemArray[0].ToString();
-                mainrows[1] = mainTable.Rows[i].ItemArray[1].ToString();
-                mainrows[2] = mainTable.Rows[i].ItemArray[2].ToString();
-                mainrows[3] = mainTable.Rows[i].ItemArray[3].ToString();
-                mainrows[4] = mainTable.Rows[i].ItemArray[4].ToString();
-                table.Rows.Add(mainrows);
-
-            }
 
             sqlCommand = "select OshiraseID from T_TokuisakiOshirase order by OshiraseID desc";
 
             var ID = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
 
 
-            var row = table.NewRow();
+            string oshiraseID;
 
-            if (MainListView.Items.Count == 0)
+            if (ID.Rows.Count == 0)
             {
-                row[0] = "1";
+                oshiraseID = "1";
             }
             else
             {
-                row[0] = (int.Parse(ID.Rows[0].ItemArray[0].ToString()) + 1).ToString();
+                oshiraseID = (int.Parse(ID.Rows[0].ItemArray[0].ToString()) + 1).ToString();
             }
 
+            var userKey = Session["SESSION_USER_ID"].ToString();
 
+            var date = DateTime.Now.Date.ToString();
 
+            string title = "", shousai = "";
 
-            row[1] = Session["SESSION_USER_ID"].ToString();
-            row[2] = DateTime.Now.Date.ToString();
-            row[3] = "";
-            row[4] = "";
+            InsertItem(oshiraseID, userKey, date, title, shousai);
 
-            table.Rows.Add(row);
+            Create();
 
-            MainListView.DataSource = table;
-
-            MainListView.DataBind();
 
         }
 

@@ -713,7 +713,7 @@ namespace Gyomu.Master
 
             var table = Tokuisaki.CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
 
-            string rows = "ID,メーカーコード,メーカー,メディア,範囲,容量,価格,メーカー価格" + "\r";
+            string rows = "ID,メーカーコード,メーカー,メディア,範囲,席数,価格,メーカー価格" + "\r";
 
             for (int i = 0; i < table.Rows.Count; i++)
             {
