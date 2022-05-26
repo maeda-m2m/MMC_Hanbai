@@ -931,7 +931,7 @@ namespace Gyomu.Mitumori
                 string strData = v.SqlDataFactory.GetTextData(dt, this.RadG.MasterTableView.SortExpressions.GetSortString(), Core.Data.DataTable2Text.EnumDataFormat.Csv);
 
                 string strExt = "csv";
-                string strFileName = ("見積DL") + "_" + DateTime.Now.ToString("yyyyMMdd") + "." + strExt;
+                string strFileName = ("見積明細") + "_" + DateTime.Now.ToString("yyyyMMdd") + "." + strExt;
                 Core.Data.DataTable2Text.EnumDataFormat fmt = Core.Data.DataTable2Text.EnumDataFormat.Csv;
 
                 this.Ram.ResponseScripts.Add(string.Format("window.location.href='{0}';",
@@ -961,7 +961,41 @@ namespace Gyomu.Mitumori
             }
             string[] strJutyuNo = this.strKeys.Split(',');
             string strError = "";
-            for (int l = 0; l < strJutyuNo.Length;) ;
+            for (int l = 0; l < strJutyuNo.Length; l++)
+            {
+                try
+                {
+                    string jNo = "2" + strJutyuNo[l].Substring(1, 7);
+                    DataJutyu.T_JutyuHeaderDataTable dtHJ = new DataJutyu.T_JutyuHeaderDataTable();
+                    DataJutyu.T_JutyuHeaderRow drHJ = dtHJ.NewT_JutyuHeaderRow();
+                    DataJutyu.T_JutyuDataTable dtJ = new DataJutyu.T_JutyuDataTable();
+                    DataMitumori.T_MitumoriDataTable dtM = ClassMitumori.GetMitumoriTable(strJutyuNo[l], Global.GetConnection());
+                    DataMitumori.T_MitumoriHeaderDataTable dtHM = ClassMitumori.GetMitumoriHeader(strJutyuNo[l], Global.GetConnection());
+                    if (dtHM.Count > 0)
+                    {
+                        drHJ.ItemArray = dtHM[0].ItemArray;
+                        drHJ.JutyuNo = int.Parse(jNo);
+                        dtHJ.AddT_JutyuHeaderRow(drHJ);
+
+                        for (int i = 0; i < dtM.Count; i++)
+                        {
+                            DataJutyu.T_JutyuRow drJ = dtJ.NewT_JutyuRow();
+                            drJ.ItemArray = dtM[i].ItemArray;
+                            drJ.JutyuNo = jNo;
+                            drJ.JutyuFlg = false;
+                            dtJ.AddT_JutyuRow(drJ);
+                        }
+                        ClassJutyu.UpDateJutyu(jNo, dtJ, dtHJ, Global.GetConnection());
+                        ClassMitumori.UpDateMitumorijutyu("Mitumori", strJutyuNo[l], Global.GetConnection());
+                        lblMsg.Text += "見積No." + strJutyuNo[l] + "を、受注No." + jNo + "で受注致しました。" + "<br>";
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    ClassMail.ErrorMail2("maeda@m2m-asp.com", "見積一覧 | 受注登録", ex.Message, DateTime.Now.ToString());
+                }
+            }
         }
     }
 
