@@ -2378,6 +2378,8 @@ namespace Gyomu
                 LblShiireKingaku.Visible = false;
                 Facility.Visible = false;
                 LblHachu.Visible = false;
+                BtnFacilityMeisai.Visible = true;
+                BtnProductMeisai.Visible = true;
             }
             else
             {
@@ -2455,6 +2457,8 @@ namespace Gyomu
                 LblShiireKingaku.Visible = true;
                 Facility.Visible = true;
                 LblHachu.Visible = true;
+                BtnFacilityMeisai.Visible = false;
+                BtnProductMeisai.Visible = false;
 
 
             }

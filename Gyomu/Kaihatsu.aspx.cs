@@ -288,6 +288,7 @@ namespace Gyomu
             {
                 RadComboCategory.SelectedValue = dr.CateGory.ToString();
                 strCategoryCode = dr.CateGory.ToString();
+                Session["CategoryCode"] = dr.CateGory.ToString();
                 strCategoryName = dr.CategoryName;
             }
             if (!dr.IsGokeiKingakuNull())
@@ -976,6 +977,8 @@ namespace Gyomu
 
                             Suryo.Style["display"] = "none";
                         }
+
+                        Ctl.EditMeisai(false);
                     }
                     else
                     {
@@ -1055,7 +1058,6 @@ namespace Gyomu
 
                             Suryo.Style["display"] = "none";
                         }
-
                     }//見積データがないとき(明細追加など)
 
                     if (CheckBox1.Checked == true)
