@@ -80,13 +80,19 @@ namespace Gyomu.Tokuisaki
             //最初に表示されているドロップダウンの項目名。
             string categoryCode = "205";
             string tokushuCode = "2";
-
             string sqlCommand = $@"
-select M_TokuisakiShouhin.SyouhinMei, T_tokusyu.Media, T_tokusyu.SyouhinCode 
+select distinct( M_Kakaku_2.SyouhinCode),M_Kakaku_2.SyouhinMei, M_Kakaku_2.Media 
 from T_tokusyu 
-inner join M_TokuisakiShouhin 
-on T_tokusyu.SyouhinCode = M_TokuisakiShouhin.Syouhincode
+inner join M_Kakaku_2 
+on T_tokusyu.SyouhinCode = M_Kakaku_2.SyouhinCode and T_tokusyu.Media = M_Kakaku_2.Media
 where T_tokusyu.CategoryCode = '{categoryCode}' and T_tokusyu.tokusyu_code = '{tokushuCode}'";
+
+            //            string sqlCommand = $@"
+            //select M_TokuisakiShouhin.SyouhinMei, T_tokusyu.Media, T_tokusyu.SyouhinCode 
+            //from T_tokusyu 
+            //inner join M_TokuisakiShouhin 
+            //on T_tokusyu.SyouhinCode = M_TokuisakiShouhin.Syouhincode and T_tokusyu.Media = M_TokuisakiShouhin.Media
+            //where T_tokusyu.CategoryCode = '{categoryCode}' and T_tokusyu.tokusyu_code = '{tokushuCode}'";
             SelectedGrid.DataSource = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
             SelectedGrid.DataBind();
         }
@@ -437,13 +443,19 @@ where M_Kakaku_2.CategoryCode = '{dropDownValue}'";
             string categoryCode = TokushuCategoryDrop.SelectedValue;
 
             string tokushuCode = TokushuNameDrop.SelectedValue;
-
             string sqlCommand = $@"
-select M_TokuisakiShouhin.SyouhinMei, T_tokusyu.Media, T_tokusyu.SyouhinCode 
+select distinct( M_Kakaku_2.SyouhinCode),M_Kakaku_2.SyouhinMei, M_Kakaku_2.Media 
 from T_tokusyu 
-inner join M_TokuisakiShouhin 
-on T_tokusyu.SyouhinCode = M_TokuisakiShouhin.Syouhincode and T_tokusyu.Media = M_TokuisakiShouhin.Media
+inner join M_Kakaku_2 
+on T_tokusyu.SyouhinCode = M_Kakaku_2.SyouhinCode and T_tokusyu.Media = M_Kakaku_2.Media
 where T_tokusyu.CategoryCode = '{categoryCode}' and T_tokusyu.tokusyu_code = '{tokushuCode}'";
+
+            //            string sqlCommand = $@"
+            //select M_TokuisakiShouhin.SyouhinMei, T_tokusyu.Media, T_tokusyu.SyouhinCode 
+            //from T_tokusyu 
+            //inner join M_TokuisakiShouhin 
+            //on T_tokusyu.SyouhinCode = M_TokuisakiShouhin.Syouhincode and T_tokusyu.Media = M_TokuisakiShouhin.Media
+            //where T_tokusyu.CategoryCode = '{categoryCode}' and T_tokusyu.tokusyu_code = '{tokushuCode}'";
             SelectedGrid.DataSource = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
             SelectedGrid.DataBind();
         }
