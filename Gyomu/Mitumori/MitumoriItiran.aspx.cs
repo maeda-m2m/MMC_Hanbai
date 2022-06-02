@@ -33,6 +33,11 @@ namespace Gyomu.Mitumori
         {
             if (!this.IsPostBack)
             {
+                Session.Remove("SessionMitsumori");
+                Session.Remove("FacilityData");
+                Session.Remove("Kakeritsu");
+                Session.Remove("Zeikubun");
+
                 SessionManager.JucyuSyusei("");
                 SessionManager.MitumoriType("");
                 SessionManager.MitumoriSyusei("");

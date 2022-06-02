@@ -76,6 +76,15 @@ namespace Gyomu {
         protected global::Telerik.Web.UI.RadComboBox SerchProductJouei;
         
         /// <summary>
+        /// LblSerchProduct コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblSerchProduct;
+        
+        /// <summary>
         /// BtnTool1 コントロール。
         /// </summary>
         /// <remarks>
@@ -148,15 +157,6 @@ namespace Gyomu {
         protected global::System.Web.UI.WebControls.HiddenField HidHanni;
         
         /// <summary>
-        /// HidJoueiHanni コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField HidJoueiHanni;
-        
-        /// <summary>
         /// Baitai コントロール。
         /// </summary>
         /// <remarks>
@@ -184,6 +184,15 @@ namespace Gyomu {
         protected global::System.Web.UI.WebControls.TextBox Suryo;
         
         /// <summary>
+        /// LblSuryo コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblSuryo;
+        
+        /// <summary>
         /// HyoujyunTanka コントロール。
         /// </summary>
         /// <remarks>
@@ -191,6 +200,15 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox HyoujyunTanka;
+        
+        /// <summary>
+        /// LblHyoujunTanka コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblHyoujunTanka;
         
         /// <summary>
         /// ht コントロール。
@@ -220,6 +238,15 @@ namespace Gyomu {
         protected global::System.Web.UI.WebControls.TextBox Kingaku;
         
         /// <summary>
+        /// LblHyoujunKingaku コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblHyoujunKingaku;
+        
+        /// <summary>
         /// kgk コントロール。
         /// </summary>
         /// <remarks>
@@ -236,6 +263,15 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputHidden zeikgk;
+        
+        /// <summary>
+        /// Facility コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Facility;
         
         /// <summary>
         /// ShiyouShisetsu コントロール。
@@ -265,15 +301,6 @@ namespace Gyomu {
         protected global::System.Web.UI.HtmlControls.HtmlInputHidden FacilityCode;
         
         /// <summary>
-        /// Facility コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Facility;
-        
-        /// <summary>
         /// FacilityAddress コントロール。
         /// </summary>
         /// <remarks>
@@ -301,6 +328,15 @@ namespace Gyomu {
         protected global::System.Web.UI.WebControls.TextBox TbxZasu;
         
         /// <summary>
+        /// LblZasu コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblZasu;
+        
+        /// <summary>
         /// StartDate コントロール。
         /// </summary>
         /// <remarks>
@@ -310,6 +346,15 @@ namespace Gyomu {
         protected global::Telerik.Web.UI.RadDatePicker StartDate;
         
         /// <summary>
+        /// LblStartDate コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblStartDate;
+        
+        /// <summary>
         /// EndDate コントロール。
         /// </summary>
         /// <remarks>
@@ -317,6 +362,15 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::Telerik.Web.UI.RadDatePicker EndDate;
+        
+        /// <summary>
+        /// LblEndDate コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblEndDate;
         
         /// <summary>
         /// Kakeri コントロール。
@@ -346,6 +400,15 @@ namespace Gyomu {
         protected global::System.Web.UI.WebControls.TextBox Tanka;
         
         /// <summary>
+        /// LblTanka コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblTanka;
+        
+        /// <summary>
         /// tk コントロール。
         /// </summary>
         /// <remarks>
@@ -362,6 +425,15 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Uriage;
+        
+        /// <summary>
+        /// LblUriage コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblUriage;
         
         /// <summary>
         /// ug コントロール。
@@ -382,6 +454,15 @@ namespace Gyomu {
         protected global::Telerik.Web.UI.RadComboBox Tekiyo;
         
         /// <summary>
+        /// LblTekiyo コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblTekiyo;
+        
+        /// <summary>
         /// Hachu コントロール。
         /// </summary>
         /// <remarks>
@@ -389,6 +470,15 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::Telerik.Web.UI.RadComboBox Hachu;
+        
+        /// <summary>
+        /// LblHachu コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblHachu;
         
         /// <summary>
         /// WareHouse コントロール。
@@ -407,6 +497,15 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox ShiireTanka;
+        
+        /// <summary>
+        /// LblShiireTanka コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblShiireTanka;
         
         /// <summary>
         /// st コントロール。
@@ -434,6 +533,15 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox ShiireKingaku;
+        
+        /// <summary>
+        /// LblShiireKingaku コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblShiireKingaku;
         
         /// <summary>
         /// sk コントロール。
@@ -796,12 +904,12 @@ namespace Gyomu {
         protected global::System.Web.UI.WebControls.Button BtnUpdateFaci;
         
         /// <summary>
-        /// Button4 コントロール。
+        /// ButtonClose コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button4;
+        protected global::System.Web.UI.WebControls.Button ButtonClose;
     }
 }
