@@ -370,10 +370,63 @@ p {
 #DivDataGrid {
     height: 500px;
     overflow: scroll;
-    width:100%;
+    width: 100%;
 }
 
 #CtrlSyousai {
     width: 100%;
-    
+}
+
+.SujiText {
+    text-align: right;
+}
+
+.Zasu {
+    display: block;
+}
+
+.CategoryChabge {
+    display: block;
+}
+
+.BtnMeiasai {
+    text-align: center;
+    width: 95px;
+    display: inline-block;
+    padding: 0.3em 1em;
+    text-decoration: none;
+    color: #5d5d5d;
+    border: solid 2px #8c8c8c;
+    border-radius: 3px;
+    transition: .4s;
+    font-family: Meiryo;
+    background-color: #e6e6e6;
+}
+
+    .BtnMeiasai:hover {
+        background: #717171;
+        color: black;
+        border: solid 2px #ababab;
+    }
+
+.MiniTitle2 {
+    background-color: #c4c4c4;
+    text-align: center;
+    font-size: 12px;
+    font: bold;
+    color: black;
+    width: 100px;
+    height: 20px;
+}
+
+#RcbHanni {
+    display: none;
+}
+
+#SyouhinSyousai {
+    display: none;
+}
+
+#SisetuSyousai {
+    display: none;
 }

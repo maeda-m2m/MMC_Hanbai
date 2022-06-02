@@ -921,20 +921,12 @@ namespace Gyomu
                 {
                     DataSet1.M_Kakaku_2Row dr = dt[i];
                     object[] item = dr.ItemArray;
-                    string items = "";
-                    for (int v = 0; v < item.Length; v++)
-                    {
-                        if (!string.IsNullOrEmpty(items))
-                        {
-                            items += "^" + item[v].ToString();
-                        }
-                        else
-                        {
-                            items = item[v].ToString();
-                        }
-                    }
-                    rcb.Items.Add(new RadComboBoxItem(dt[i].Makernumber + "/" + dt[i].SyouhinMei + "(" + dt[i].Media + ")" + "/" + dt[i].Hanni, items));
+                    item[4] = item[4].ToString();
+                    item[16] = item[16].ToString();
+                    item[17] = item[17].ToString();
 
+                    List<String> items = item.OfType<String>().ToList();
+                    rcb.Items.Add(new RadComboBoxItem(dt[i].Makernumber + "/" + dt[i].SyouhinMei + "(" + dt[i].Media + ")" + "/" + dt[i].Hanni,items.Aggregate((x, y) => x + "^" + y)));
                 }
             }
         }
