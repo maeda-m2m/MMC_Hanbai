@@ -1911,8 +1911,8 @@ namespace Gyomu
                                 drN.SisetuCode = dr.SisetuCode;
                             }
                         }
-                        dt.Rows.InsertAt(drN, focusRow + i + 1);
-                        HidNewRow.Value = (focusRow + i + 1).ToString();
+                        dt.Rows.InsertAt(drN, focusRow + 1);
+                        HidNewRow.Value = (focusRow + 1).ToString();
                     }
                     CtrlSyousai.Visible = false;//処理速度向上の為一旦非表示
                     CtrlSyousai.DataSource = dt;
