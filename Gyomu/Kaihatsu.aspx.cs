@@ -1735,6 +1735,10 @@ namespace Gyomu
                             }
                         }
                 }
+                else
+                {
+                    Session.Remove("FacilityData");
+                }
             }
             else
             {

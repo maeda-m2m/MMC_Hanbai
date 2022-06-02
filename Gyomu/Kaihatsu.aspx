@@ -1478,6 +1478,7 @@
                         else {
                             var count = x;
                         }
+                        debugger;
                         var Kingaku = document.getElementById(CtrlSyousai + "_" + ctl + count + "_" + Syosai + "_" + "Kingaku");
                         var LblHyoujunKingaku = document.getElementById(CtrlSyousai + "_" + ctl + count + "_" + Syosai + "_" + "LblHyoujunKingaku");
                         var Uriage = document.getElementById(CtrlSyousai + "_" + ctl + count + "_" + Syosai + "_" + "Uriage");
@@ -1524,7 +1525,7 @@
                             }
                             else {
                                 LblShiireKingaku = LblShiireKingaku.innerText.replace(",", "");
-                                Shiire += Number(LblShiireKingaku.value.replace(",", ""));
+                                Shiire += Number(LblShiireKingaku);
                             }
                         }
                         else {
