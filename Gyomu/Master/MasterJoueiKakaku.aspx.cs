@@ -12,6 +12,21 @@ namespace Gyomu.Master
     public partial class MasterJoueiKakaku : System.Web.UI.Page
     {
 
+        public string Text
+        {
+            get
+            {
+                object o = ViewState["Text"];
+                return (o == null) ? string.Empty : (string)o;
+            }
+
+            set
+            {
+                ViewState["Text"] = value;
+            }
+        }
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -235,13 +250,13 @@ namespace Gyomu.Master
             //    rad.Items.Add(new RadComboBoxItem(dt[i].Range, dt[i].Range));
             //}
         }
-        public static DataMaster.M_JoueiKakakuDataTable Shiire(string v, SqlConnection sqlConnection)
+        public static DataMaster.M_JoueiKakaku2DataTable Shiire(string v, SqlConnection sqlConnection)
         {
             var da = new SqlDataAdapter("", sqlConnection);
             da.SelectCommand.CommandText =
-                "SELECT * FROM M_JoueiKakaku where ShiiresakiCode like @e or ShiiresakiName like @e order by ShiiresakiCode asc, ShiiresakiName asc;";
+                "SELECT * FROM M_JoueiKakaku2 where ShiiresakiCode like @e or ShiiresakiName like @e order by ShiiresakiCode asc, ShiiresakiName asc;";
             da.SelectCommand.Parameters.AddWithValue("@e", v + "%");
-            var dt = new DataMaster.M_JoueiKakakuDataTable();
+            var dt = new DataMaster.M_JoueiKakaku2DataTable();
             da.Fill(dt);
             return dt;
         }
@@ -281,12 +296,12 @@ namespace Gyomu.Master
         //    //    rad.Items.Add(new RadComboBoxItem(dt[i].Range, dt[i].Range));
         //    //}
         //}
-        //public static DataMaster.M_JoueiKakakuDataTable ShiireCodeDrop(SqlConnection sqlConnection)
+        //public static DataMaster.M_JoueiKakaku2DataTable ShiireCodeDrop(SqlConnection sqlConnection)
         //{
         //    var da = new SqlDataAdapter("", sqlConnection);
         //    da.SelectCommand.CommandText =
-        //        "SELECT * FROM M_JoueiKakaku order by ShiiresakiCode asc";
-        //    var dt = new DataMaster.M_JoueiKakakuDataTable();
+        //        "SELECT * FROM M_JoueiKakaku2 order by ShiiresakiCode asc";
+        //    var dt = new DataMaster.M_JoueiKakaku2DataTable();
         //    da.Fill(dt);
         //    return dt;
         //}
@@ -326,12 +341,12 @@ namespace Gyomu.Master
             //    rad.Items.Add(new RadComboBoxItem(dt[i].Range, dt[i].Range));
             //}
         }
-        public static DataMaster.M_JoueiKakakuDataTable SekiDrop(SqlConnection sqlConnection)
+        public static DataMaster.M_JoueiKakaku2DataTable SekiDrop(SqlConnection sqlConnection)
         {
             var da = new SqlDataAdapter("", sqlConnection);
             da.SelectCommand.CommandText =
-                "SELECT * FROM M_JoueiKakaku order by Capacity asc ";
-            var dt = new DataMaster.M_JoueiKakakuDataTable();
+                "SELECT * FROM M_JoueiKakaku2 order by Capacity asc ";
+            var dt = new DataMaster.M_JoueiKakaku2DataTable();
             da.Fill(dt);
             return dt;
         }
@@ -368,12 +383,12 @@ namespace Gyomu.Master
             //    rad.Items.Add(new RadComboBoxItem(dt[i].Range, dt[i].Range));
             //}
         }
-        public static DataMaster.M_JoueiKakakuDataTable HaniDrop(SqlConnection sqlConnection)
+        public static DataMaster.M_JoueiKakaku2DataTable HaniDrop(SqlConnection sqlConnection)
         {
             var da = new SqlDataAdapter("", sqlConnection);
             da.SelectCommand.CommandText =
-                "SELECT * FROM M_JoueiKakaku order by Range";
-            var dt = new DataMaster.M_JoueiKakakuDataTable();
+                "SELECT * FROM M_JoueiKakaku2 order by Range";
+            var dt = new DataMaster.M_JoueiKakaku2DataTable();
             da.Fill(dt);
             return dt;
         }
@@ -391,12 +406,18 @@ namespace Gyomu.Master
         {
             try
             {
-                var dt = new DataMaster.M_JoueiKakakuDataTable();
-                var dr = dt.NewM_JoueiKakakuRow();
-                var dl = MaxNo(Global.GetConnection());
-                int no = dl.KanriNo;
-                dr.KanriNo = no + 1;
+                var dt = new DataMaster.M_JoueiKakaku2DataTable();
+
+                var dr = dt.NewM_JoueiKakaku2Row();
+
+                //var dl = MaxNo(Global.GetConnection());
+
+                //int no = dl.KanriNo;
+
+                //dr.KanriNo = no + 1;
+
                 string[] Additems = head_shiire_name.SelectedValue.Split('/');
+
                 dr.ShiiresakiCode = int.Parse(Additems[0]);
                 dr.ShiiresakiName = Additems[1];
                 dr.Media = head_cmb_media.SelectedValue;
@@ -404,8 +425,10 @@ namespace Gyomu.Master
                 dr.Capacity = head_txt_seki.Text;
                 dr.HyoujunKakaku = head_txt_hyoujun.Text;
                 dr.ShiireKakaku = head_txt_shiirekakaku.Text;
-                dt.AddM_JoueiKakakuRow(dr);
+                dt.AddM_JoueiKakaku2Row(dr);
+
                 Insert(dt, Global.GetConnection());
+
                 return (true);
             }
             catch
@@ -447,24 +470,45 @@ namespace Gyomu.Master
         //----------------------------------------------------------------------------------------------------------------------------------
         //以下グリッド表の各種イベント
         //----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
         protected void DGJoueiKakaku1_PageIndexChanged(object sender, GridPageChangedEventArgs e)
         {
             Create();
         }
+
+
+
+
+
         protected void DGJoueiKakaku1_EditCommand(object sender, GridCommandEventArgs e)
         {
+            //メディア、メーカーコード、範囲、席数
+            ViewState["Text"] = $"{(e.Item.Controls[2] as TableCell).Text}-{(e.Item.Controls[3] as TableCell).Text}-{(e.Item.Controls[5] as TableCell).Text}-{(e.Item.Controls[6] as TableCell).Text}";
+
+
+
             Create();
 
         }
+
+
+
+
+
+
         //桁区切りのため
         protected void DGJoueiKakaku1_ItemDataBound(object sender, GridItemEventArgs e)
         {
             try
             {
-                if (e.Item.ItemType == Telerik.Web.UI.GridItemType.Item || e.Item.ItemType == Telerik.Web.UI.GridItemType.AlternatingItem)
+                if (e.Item.ItemType == GridItemType.Item || e.Item.ItemType == GridItemType.AlternatingItem)
                 {
                     DataRowView drv = (DataRowView)e.Item.DataItem;
-                    var dr = (DataMaster.M_JoueiKakakuRow)drv.Row;
+                    var dr = (DataMaster.M_JoueiKakaku2Row)drv.Row;
 
                     if (!dr.IsShiireKakakuNull())
                     {
@@ -477,41 +521,108 @@ namespace Gyomu.Master
             }
             catch { }
         }
+
+
+
+
+
         protected void DGJoueiKakaku1_UpdateCommand(object sender, GridCommandEventArgs e)
         {
 
+
+
             //cellのitemのindex
-            TextBox a1 = e.Item.Cells[2].Controls[0] as TextBox;
-            TextBox a2 = e.Item.Cells[3].Controls[0] as TextBox;
-            TextBox a3 = e.Item.Cells[4].Controls[0] as TextBox;
-            TextBox a4 = e.Item.Cells[5].Controls[0] as TextBox;
-            TextBox a5 = e.Item.Cells[6].Controls[0] as TextBox;
-            TextBox a6 = e.Item.Cells[7].Controls[0] as TextBox;
-            TextBox a7 = e.Item.Cells[8].Controls[0] as TextBox;
-            string b1 = a1.Text.Trim();
-            string b2 = a2.Text.Trim();
-            string b3 = a3.Text.Trim();
-            string b4 = a4.Text.Trim();
-            string b5 = a5.Text.Trim();
-            string b6 = a6.Text.Trim();
-            string b7 = a7.Text.Trim();
-            //var dt = Get_All(Global.GetConnection());
+
+
             var k = SetKensakuParam();
+
             var dt = GetMitumori(k, Global.GetConnection());
+
             int i = e.Item.DataSetIndex;
-            var dr = dt.Rows[i] as DataMaster.M_JoueiKakakuRow;
+
+            var dr = dt.Rows[i] as DataMaster.M_JoueiKakaku2Row;
+
             //rowのitemのindex
-            dr[1] = b2.Trim();
-            dr[2] = b3.Trim();
-            dr[3] = b1.Trim();
-            dr[4] = b4.Trim();
-            dr[5] = b5.Trim();
-            dr[6] = b6.Trim();
-            dr[7] = b7.Trim();
-            Update(dr, Global.GetConnection());
+            dr[0] = (e.Item.Cells[3].Controls[0] as TextBox).Text.Trim();
+            dr[1] = (e.Item.Cells[4].Controls[0] as TextBox).Text.Trim();
+            dr[2] = (e.Item.Cells[2].Controls[0] as TextBox).Text.Trim();
+            dr[3] = (e.Item.Cells[5].Controls[0] as TextBox).Text.Trim();
+            dr[4] = (e.Item.Cells[6].Controls[0] as TextBox).Text.Trim();
+            dr[5] = (e.Item.Cells[7].Controls[0] as TextBox).Text.Trim();
+            dr[6] = (e.Item.Cells[8].Controls[0] as TextBox).Text.Trim();
+
+            var primeKeys = ViewState["Text"].ToString().Split('-');
+
+
+            Update(dr, primeKeys, Global.GetConnection());
+
             Create();
+
             System.Windows.Forms.MessageBox.Show("値が更新されました", "メッセージボックス", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information, System.Windows.Forms.MessageBoxDefaultButton.Button1, System.Windows.Forms.MessageBoxOptions.DefaultDesktopOnly);
         }
+
+
+
+
+
+
+        //編集コマンドで値を変更する
+        public static DataMaster.M_JoueiKakaku2Row Update(DataMaster.M_JoueiKakaku2Row dr, string[] primeKeys, SqlConnection sql)
+        {
+            {
+
+                var a = new SqlCommand("", sql)
+                {
+                    CommandText = @"
+                    UPDATE M_JoueiKakaku2 
+                    SET [ShiiresakiCode] = @shiiresakicode, [ShiiresakiName] = @shiiresakiname, [Media] = @media, [Range] = @range, [Capacity] = @capacity, [HyoujunKakaku] = @hyoujunkakaku, [ShiireKakaku] = @shiirekakaku
+                    where ShiiresakiCode = @primeCode and Media = @primeMedia and Range = @primeRange and Capacity = @primeCapacity
+                    "
+
+                };
+                a.Parameters.AddWithValue("@shiiresakicode", dr.ShiiresakiCode);
+                a.Parameters.AddWithValue("@shiiresakiname", dr.ShiiresakiName);
+                a.Parameters.AddWithValue("@media", dr.Media);
+                a.Parameters.AddWithValue("@range", dr.Range);
+                a.Parameters.AddWithValue("@capacity", dr.Capacity);
+                a.Parameters.AddWithValue("@hyoujunkakaku", dr.HyoujunKakaku);
+                a.Parameters.AddWithValue("@shiirekakaku", dr.ShiireKakaku);
+
+                //メディア、メーカーコード、範囲、席数
+                a.Parameters.AddWithValue("@primeMedia", primeKeys[0]);
+                a.Parameters.AddWithValue("@primeCode", primeKeys[1]);
+                a.Parameters.AddWithValue("@primeRange", primeKeys[2]);
+                a.Parameters.AddWithValue("@primeCapacity", primeKeys[3]);
+
+                try
+                {
+                    sql.Open();
+                    SqlTransaction sqltra = sql.BeginTransaction();
+                    a.Transaction = sqltra;
+                    a.ExecuteNonQuery();
+                    sqltra.Commit();
+                }
+                catch
+                {
+
+                }
+                finally
+                {
+                    sql.Close();
+                }
+                return dr;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
         protected void DGJoueiKakaku1_ItemCommand(object sender, GridCommandEventArgs e)
         {
             if (e.CommandName == "Delete")
@@ -523,7 +634,7 @@ namespace Gyomu.Master
                     //var dt = Get_All(Global.GetConnection());
                     var k = SetKensakuParam();
                     var dt = GetMitumori(k, Global.GetConnection());
-                    var dr = dt.Rows[i] as DataMaster.M_JoueiKakakuRow;
+                    var dr = dt.Rows[i] as DataMaster.M_JoueiKakaku2Row;
                     DeleteRow(dr, Global.GetConnection());
                 }
                 else if (result == System.Windows.Forms.DialogResult.No)
@@ -538,20 +649,20 @@ namespace Gyomu.Master
         //----------------------------------------------------------------------------------------------------------------------------------
         //クラス一覧
         //----------------------------------------------------------------------------------------------------------------------------------
-        public static DataMaster.M_JoueiKakakuDataTable Get_All(SqlConnection sqlConnection)
+        public static DataMaster.M_JoueiKakaku2DataTable Get_All(SqlConnection sqlConnection)
         {
             var da = new SqlDataAdapter("", sqlConnection);
             da.SelectCommand.CommandText =
-                "SELECT * FROM M_JoueiKakaku";
-            var dt = new DataMaster.M_JoueiKakakuDataTable();
+                "SELECT * FROM M_JoueiKakaku2";
+            var dt = new DataMaster.M_JoueiKakaku2DataTable();
             da.Fill(dt);
             return dt;
         }
-        public static DataMaster.M_JoueiKakakuDataTable GetMitumori(KensakuParam k, SqlConnection sqlConnection)
+        public static DataMaster.M_JoueiKakaku2DataTable GetMitumori(KensakuParam k, SqlConnection sqlConnection)
         {
             var da = new SqlDataAdapter("", sqlConnection);
             da.SelectCommand.CommandText =
-                "SELECT * FROM M_JoueiKakaku";
+                "SELECT * FROM M_JoueiKakaku2";
             if (k != null)
             {
                 var w = new WhereGenerator();
@@ -560,7 +671,7 @@ namespace Gyomu.Master
                     da.SelectCommand.CommandText += " Where " + w.WhereText;
                 da.SelectCommand.CommandText += " order by ShiiresakiCode asc ";
             }
-            var dt = new DataMaster.M_JoueiKakakuDataTable();
+            var dt = new DataMaster.M_JoueiKakaku2DataTable();
             da.Fill(dt);
             return dt;
         }
@@ -579,39 +690,46 @@ namespace Gyomu.Master
                 }
             }
         }
-        public static DataMaster.M_JoueiKakakuDataTable GetShiireDT1(string v, SqlConnection sqlConnection)
+        public static DataMaster.M_JoueiKakaku2DataTable GetShiireDT1(string v, SqlConnection sqlConnection)
         {
             SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
-            da.SelectCommand.CommandText = "SELECT * FROM M_JoueiKakaku WHERE (Capacity LIKE @e)";
+            da.SelectCommand.CommandText = "SELECT * FROM M_JoueiKakaku2 WHERE (Capacity LIKE @e)";
             da.SelectCommand.Parameters.AddWithValue("@e", v + "%");
-            var dt = new DataMaster.M_JoueiKakakuDataTable();
+            var dt = new DataMaster.M_JoueiKakaku2DataTable();
             da.Fill(dt);
             return dt;
         }
-        public static DataMaster.M_JoueiKakakuDataTable GetShiireDT2(SqlConnection sqlConnection)
+        public static DataMaster.M_JoueiKakaku2DataTable GetShiireDT2(SqlConnection sqlConnection)
         {
             SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
-            da.SelectCommand.CommandText = "SELECT Capacity FROM M_JoueiKakaku GROUP BY Capacity";
-            var dt = new DataMaster.M_JoueiKakakuDataTable();
+            da.SelectCommand.CommandText = "SELECT Capacity FROM M_JoueiKakaku2 GROUP BY Capacity";
+            var dt = new DataMaster.M_JoueiKakaku2DataTable();
             da.Fill(dt);
             return dt;
         }
-        //SdlNoの最大値を持ってくる
-        public static DataMaster.M_JoueiKakakuRow MaxNo(SqlConnection schedule)
-        {
-            var da = new SqlDataAdapter("", schedule);
-            da.SelectCommand.CommandText =
-                "SELECT * FROM M_JoueiKakaku ORDER BY KanriNo desc";
-            var dt = new DataMaster.M_JoueiKakakuDataTable();
-            da.Fill(dt);
-            return dt[0];
-        }
+
+
+
+
+        //public static DataMaster.M_JoueiKakaku2Row MaxNo(SqlConnection schedule)
+        //{
+        //    var da = new SqlDataAdapter("", schedule);
+        //    da.SelectCommand.CommandText =
+        //        "SELECT * FROM M_JoueiKakaku2 ORDER BY KanriNo desc";
+        //    var dt = new DataMaster.M_JoueiKakaku2DataTable();
+        //    da.Fill(dt);
+        //    return dt[0];
+        //}
+
+
+
+
         //登録に使うやつ
-        public static void Insert(DataMaster.M_JoueiKakakuDataTable dt, SqlConnection sqlConnection)
+        public static void Insert(DataMaster.M_JoueiKakaku2DataTable dt, SqlConnection sqlConnection)
         {
             var da = new SqlDataAdapter("", sqlConnection);
             da.SelectCommand.CommandText =
-                "Select * From M_JoueiKakaku";
+                "Select * From M_JoueiKakaku2";
             da.InsertCommand = (new SqlCommandBuilder(da)).GetInsertCommand();
             SqlTransaction sql = null;
             try
@@ -637,37 +755,6 @@ namespace Gyomu.Master
 
 
 
-        //編集コマンドで値を変更する
-        public static DataMaster.M_JoueiKakakuRow Update(DataMaster.M_JoueiKakakuRow dr, SqlConnection sql)
-        {
-            {
-                var a = new SqlCommand("", sql)
-                {
-                    CommandText = "UPDATE M_JoueiKakaku SET [ShiiresakiCode] = @shiiresakicode, [ShiiresakiName] = @shiiresakiname, [Media] = @media, [Range] = @range, [Capacity] = @capacity, [HyoujunKakaku] = @hyoujunkakaku, [ShiireKakaku] = @shiirekakaku where [KanriNo] = @kanrino"
-                };
-                a.Parameters.AddWithValue("@shiiresakicode", dr.ShiiresakiCode);
-                a.Parameters.AddWithValue("@shiiresakiname", dr.ShiiresakiName);
-                a.Parameters.AddWithValue("@media", dr.Media);
-                a.Parameters.AddWithValue("@range", dr.Range);
-                a.Parameters.AddWithValue("@capacity", dr.Capacity);
-                a.Parameters.AddWithValue("@hyoujunkakaku", dr.HyoujunKakaku);
-                a.Parameters.AddWithValue("@shiirekakaku", dr.ShiireKakaku);
-                a.Parameters.AddWithValue("@kanrino", dr.KanriNo);
-                try
-                {
-                    sql.Open();
-                    SqlTransaction sqltra = sql.BeginTransaction();
-                    a.Transaction = sqltra;
-                    a.ExecuteNonQuery();
-                    sqltra.Commit();
-                }
-                finally
-                {
-                    sql.Close();
-                }
-                return dr;
-            }
-        }
 
 
 
@@ -675,14 +762,22 @@ namespace Gyomu.Master
 
 
 
-        public static void DeleteRow(DataMaster.M_JoueiKakakuRow dr, SqlConnection sql)
+        public static void DeleteRow(DataMaster.M_JoueiKakaku2Row dr, SqlConnection sql)
         {
             var da = new SqlCommand("", sql)
             {
                 CommandText =
-                "DELETE FROM M_JoueiKakaku where [KanriNo] = @kanrino "
+                @"
+DELETE FROM M_JoueiKakaku2 
+where ShiiresakiCode = @ShiiresakiCode and Media = @Media and Range = @Range and Capacity = @Capacity"
             };
-            da.Parameters.AddWithValue("@kanrino", dr.KanriNo);
+
+            da.Parameters.AddWithValue("@ShiiresakiCode", dr.ShiiresakiCode);
+            da.Parameters.AddWithValue("@Media", dr.Media);
+            da.Parameters.AddWithValue("@Range", dr.Range);
+            da.Parameters.AddWithValue("@Capacity", dr.Capacity);
+
+
             try
             {
                 sql.Open();
@@ -709,15 +804,15 @@ namespace Gyomu.Master
 
         protected void DownLoadButton_Click(object sender, EventArgs e)
         {
-            string sqlCommand = "select * from M_JoueiKakaku";
+            string sqlCommand = "select * from M_JoueiKakaku2";
 
             var table = Tokuisaki.CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
 
-            string rows = "ID,メーカーコード,メーカー,メディア,範囲,席数,価格,メーカー価格" + "\r";
+            string rows = "仕入先コード,仕入先名,メディア,範囲,席数,価格,仕入先価格" + "\r";
 
             for (int i = 0; i < table.Rows.Count; i++)
             {
-                rows += $"{table.Rows[i].ItemArray[0]},{table.Rows[i].ItemArray[1]},{table.Rows[i].ItemArray[2]},{table.Rows[i].ItemArray[3]},{table.Rows[i].ItemArray[4]},{table.Rows[i].ItemArray[5]},{table.Rows[i].ItemArray[6]},{table.Rows[i].ItemArray[7]}" + "\r";
+                rows += $"{table.Rows[i].ItemArray[0]},{table.Rows[i].ItemArray[1]},{table.Rows[i].ItemArray[2]},{table.Rows[i].ItemArray[3]},{table.Rows[i].ItemArray[4]},{table.Rows[i].ItemArray[5]},{table.Rows[i].ItemArray[6]}" + "\r";
             }
 
             string strFileName = ("上映会マスタcsv") + "_" + DateTime.Now.ToString("yyyyMMdd") + "." + "csv";
@@ -790,13 +885,13 @@ namespace Gyomu.Master
 
                     string[] mData = strLineData.Split('\t');
 
-                    var dt = new DataMaster.M_JoueiKakakuDataTable();
+                    var dt = new DataMaster.M_JoueiKakaku2DataTable();
 
-                    var dr = dt.NewM_JoueiKakakuRow();
+                    var dr = dt.NewM_JoueiKakaku2Row();
 
                     dr.ItemArray = mData;
 
-                    dt.AddM_JoueiKakakuRow(dr);
+                    dt.AddM_JoueiKakaku2Row(dr);
 
                     UpdateCSVtanto(dt, Global.GetConnection());
                 }
@@ -809,13 +904,13 @@ namespace Gyomu.Master
 
                     string[] mData = strLineData.Split(',');
 
-                    var dt = new DataMaster.M_JoueiKakakuDataTable();
+                    var dt = new DataMaster.M_JoueiKakaku2DataTable();
 
-                    var dr = dt.NewM_JoueiKakakuRow();
+                    var dr = dt.NewM_JoueiKakaku2Row();
 
                     dr.ItemArray = mData;
 
-                    dt.AddM_JoueiKakakuRow(dr);
+                    dt.AddM_JoueiKakaku2Row(dr);
 
                     UpdateCSVtanto(dt, Global.GetConnection());
                 }
@@ -831,16 +926,21 @@ namespace Gyomu.Master
 
 
 
-        private void UpdateCSVtanto(DataMaster.M_JoueiKakakuDataTable dt, SqlConnection sqlConnection)
+        private void UpdateCSVtanto(DataMaster.M_JoueiKakaku2DataTable dt, SqlConnection sqlConnection)
         {
 
             SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
 
-            da.SelectCommand.CommandText = "select * from M_JoueiKakaku where KanriNo = @u";
+            da.SelectCommand.CommandText = @"
+select * from M_JoueiKakaku2 
+where ShiiresakiCode = @ShiiresakiCode and Media = @Media and Range = @Range and Capacity = @Capacity";
 
-            da.SelectCommand.Parameters.AddWithValue("@u", dt[0].KanriNo);
+            da.SelectCommand.Parameters.AddWithValue("@ShiiresakiCode", dt[0].ShiiresakiCode);
+            da.SelectCommand.Parameters.AddWithValue("@Media", dt[0].Media);
+            da.SelectCommand.Parameters.AddWithValue("@Range", dt[0].Range);
+            da.SelectCommand.Parameters.AddWithValue("@Capacity", dt[0].Capacity);
 
-            var dtN = new DataMaster.M_JoueiKakakuDataTable();
+            var dtN = new DataMaster.M_JoueiKakaku2DataTable();
 
             da.Fill(dtN);
 

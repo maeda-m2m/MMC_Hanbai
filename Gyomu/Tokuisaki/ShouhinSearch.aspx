@@ -54,7 +54,7 @@
                             <th>価格</th>
                             <td>
                                 <asp:DropDownList runat="server" ID="KakakuDropDown">
-                                    <asp:ListItem Text="-----" Value=""></asp:ListItem>
+                                    <asp:ListItem Text="" Value=""></asp:ListItem>
                                     <asp:ListItem Text="10,000円以下" Value="0,10000"></asp:ListItem>
                                     <asp:ListItem Text="10,000円~15,000円" Value="10000,15000"></asp:ListItem>
                                     <asp:ListItem Text="15,000円~20,000円" Value="15000,20000"></asp:ListItem>
@@ -88,7 +88,7 @@
                             <th>上映時間</th>
                             <td>
                                 <asp:DropDownList runat="server" ID="JoueiTimeDrop">
-                                    <asp:ListItem Text="-----" Value=""></asp:ListItem>
+                                    <asp:ListItem Text="" Value=""></asp:ListItem>
                                     <asp:ListItem Text="60分以下" Value="0,60"></asp:ListItem>
                                     <asp:ListItem Text="60分~100分" Value="60,100"></asp:ListItem>
                                     <asp:ListItem Text="100分~120分" Value="100,120"></asp:ListItem>
@@ -219,7 +219,7 @@
 
                                 <asp:TemplateField>
                                     <ItemTemplate>
-                                        <asp:ImageButton ID="Button1" ImageUrl="~/Tokuisaki/Image/DeleteImage.png" runat="server" ToolTip="削除" CommandName="sakujo" CommandArgument='<%# Container.DataItemIndex %>' OnClientClick="return confirm('削除を行います。よろしいですか？')" />
+                                        <asp:ImageButton ID="Button1" ImageUrl="~/Tokuisaki/image/DeleteImage.png" runat="server" ToolTip="削除" CommandName="sakujo" CommandArgument='<%# Container.DataItemIndex %>' OnClientClick="return confirm('削除を行います。よろしいですか？')" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
 
@@ -365,7 +365,7 @@
 
 
             /**/
-            var AryData = data.split('-');
+            var AryData = data.split(':');
 
             ShouhinLabel.textContent = AryData[0];
             MakerLabel.textContent = AryData[3];

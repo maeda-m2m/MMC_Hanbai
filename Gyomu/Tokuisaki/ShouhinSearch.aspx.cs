@@ -145,7 +145,7 @@ where M_Kakaku_2.CategoryCode = '205'";
 
 
                     //1商品コード,2メディア,4価格
-                    var hidden = (MainGrid.Rows[i].Cells[2].Controls[3] as HiddenField).Value.Split('-');
+                    var hidden = (MainGrid.Rows[i].Cells[2].Controls[3] as HiddenField).Value.Split(':');
 
                     //商品名
                     //var shouhinName = (MainGrid.Rows[i].Cells[1].Controls[1] as Label).Text;
@@ -171,7 +171,7 @@ where M_Kakaku_2.CategoryCode = '205'";
 
 
 
-                    TokushuShouhinInsert(shouhinNumber, kakaku, media, tokushuCode, categoryCode, row.Rows[0].ItemArray[0].ToString());
+                    TokushuShouhinInsert(shouhinNumber.Trim(), kakaku.Trim(), media.Trim(), tokushuCode.Trim(), categoryCode.Trim(), row.Rows[0].ItemArray[0].ToString().Trim());
                     count++;
 
 
@@ -207,7 +207,7 @@ where M_Kakaku_2.CategoryCode = '205'";
 select distinct( M_Kakaku_2.SyouhinCode),M_Kakaku_2.SyouhinMei, M_Kakaku_2.Media 
 from T_tokusyu 
 inner join M_Kakaku_2 
-on T_tokusyu.SyouhinCode = M_Kakaku_2.SyouhinCode
+on T_tokusyu.SyouhinCode = M_Kakaku_2.SyouhinCode and T_tokusyu.Media = M_Kakaku_2.Media
 where T_tokusyu.CategoryCode = '{categoryCode}' and T_tokusyu.tokusyu_code = '{tokushuCode}'";
 
                 SelectedGrid.DataSource = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
@@ -319,7 +319,7 @@ where T_tokusyu.CategoryCode = '{categoryCode}' and T_tokusyu.tokusyu_code = '{t
                 //表示するデータを増やす場合はここを修正する。
                 //HidData.Value = dr["SyouhinMei"] + "-" + dr["ShouhinCatch"] + "-" + dr["ShouhinContents"] + "-" + dr["MovieManager"] + "-" + dr["MovieActor"] + "-" + dr["HyoujunKakaku"] + "-" + dr["Media"] + "-" + dr["ShouhinAttribute"] + "-" + dr["Copyright"] + "-" + dr["SyouhinCode"] + "-" + hasImage + "-" + dr["ShiireName"] + "-" + dr["JoueiTime"];
 
-                HidData.Value = $@"{dr["SyouhinMei"]} - {dr["SyouhinCode"]} - {dr["Media"]} - {dr["ShiireName"]} - {dr["HyoujunKakaku"]} - {dr["ShiireKakaku"]} - {dr["ShouhinAttribute"]} - {dr["JoueiTime"]} - {dr["MovieManager"]} - {dr["MovieActor"]} - {dr["Copyright"]}";
+                HidData.Value = $@"{dr["SyouhinMei"]} : {dr["SyouhinCode"]} : {dr["Media"]} : {dr["ShiireName"]} : {dr["HyoujunKakaku"]} : {dr["ShiireKakaku"]} : {dr["ShouhinAttribute"]} : {dr["JoueiTime"]} : {dr["MovieManager"]} : {dr["MovieActor"]} : {dr["Copyright"]}";
 
                 btn.Attributes["onclick"] = string.Format("Create('{0}'); return false;", HidData.Value); ;
 
@@ -442,7 +442,7 @@ where M_Kakaku_2.CategoryCode = '{dropDownValue}'";
 select M_TokuisakiShouhin.SyouhinMei, T_tokusyu.Media, T_tokusyu.SyouhinCode 
 from T_tokusyu 
 inner join M_TokuisakiShouhin 
-on T_tokusyu.SyouhinCode = M_TokuisakiShouhin.Syouhincode
+on T_tokusyu.SyouhinCode = M_TokuisakiShouhin.Syouhincode and T_tokusyu.Media = M_TokuisakiShouhin.Media
 where T_tokusyu.CategoryCode = '{categoryCode}' and T_tokusyu.tokusyu_code = '{tokushuCode}'";
             SelectedGrid.DataSource = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
             SelectedGrid.DataBind();

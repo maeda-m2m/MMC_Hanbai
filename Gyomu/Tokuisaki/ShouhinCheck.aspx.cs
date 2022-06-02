@@ -77,7 +77,7 @@ order by T_tokusyu.Ranking";
 select M_TokuisakiShouhin.SyouhinMei,T_tokusyu.Media,T_tokusyu.tokusyu_shouhin_shoukai,T_tokusyu.Ranking,T_tokusyu.SyouhinCode  
 from T_tokusyu 
 inner join M_TokuisakiShouhin 
-on T_tokusyu.SyouhinCode = M_TokuisakiShouhin.Syouhincode
+on T_tokusyu.SyouhinCode = M_TokuisakiShouhin.Syouhincode and T_tokusyu.Media = M_TokuisakiShouhin.Media
 where T_tokusyu.tokusyu_code = '{tokushuCode}' and T_tokusyu.CategoryCode = '{categoryCode}'
 order by T_tokusyu.Ranking";
 

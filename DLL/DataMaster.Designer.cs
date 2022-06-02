@@ -54,8 +54,6 @@ namespace DLL {
         
         private M_JoueiKakakuDataTable tableM_JoueiKakaku;
         
-        private M_JoueiKakaku2DataTable tableM_JoueiKakaku2;
-        
         private M_Tanto1DataTable tableM_Tanto1;
         
         private M_BumonDataTable tableM_Bumon;
@@ -71,6 +69,8 @@ namespace DLL {
         private T_LogDataTable tableT_Log;
         
         private M_JoueiKakaku3DataTable tableM_JoueiKakaku3;
+        
+        private M_JoueiKakaku2DataTable tableM_JoueiKakaku2;
         
         private KariTableDataTable tableKariTable;
         
@@ -149,9 +149,6 @@ namespace DLL {
                 if ((ds.Tables["M_JoueiKakaku"] != null)) {
                     base.Tables.Add(new M_JoueiKakakuDataTable(ds.Tables["M_JoueiKakaku"]));
                 }
-                if ((ds.Tables["M_JoueiKakaku2"] != null)) {
-                    base.Tables.Add(new M_JoueiKakaku2DataTable(ds.Tables["M_JoueiKakaku2"]));
-                }
                 if ((ds.Tables["M_Tanto1"] != null)) {
                     base.Tables.Add(new M_Tanto1DataTable(ds.Tables["M_Tanto1"]));
                 }
@@ -175,6 +172,9 @@ namespace DLL {
                 }
                 if ((ds.Tables["M_JoueiKakaku3"] != null)) {
                     base.Tables.Add(new M_JoueiKakaku3DataTable(ds.Tables["M_JoueiKakaku3"]));
+                }
+                if ((ds.Tables["M_JoueiKakaku2"] != null)) {
+                    base.Tables.Add(new M_JoueiKakaku2DataTable(ds.Tables["M_JoueiKakaku2"]));
                 }
                 if ((ds.Tables["KariTable"] != null)) {
                     base.Tables.Add(new KariTableDataTable(ds.Tables["KariTable"]));
@@ -354,16 +354,6 @@ namespace DLL {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public M_JoueiKakaku2DataTable M_JoueiKakaku2 {
-            get {
-                return this.tableM_JoueiKakaku2;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
         public M_Tanto1DataTable M_Tanto1 {
             get {
                 return this.tableM_Tanto1;
@@ -437,6 +427,16 @@ namespace DLL {
         public M_JoueiKakaku3DataTable M_JoueiKakaku3 {
             get {
                 return this.tableM_JoueiKakaku3;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public M_JoueiKakaku2DataTable M_JoueiKakaku2 {
+            get {
+                return this.tableM_JoueiKakaku2;
             }
         }
         
@@ -572,9 +572,6 @@ namespace DLL {
                 if ((ds.Tables["M_JoueiKakaku"] != null)) {
                     base.Tables.Add(new M_JoueiKakakuDataTable(ds.Tables["M_JoueiKakaku"]));
                 }
-                if ((ds.Tables["M_JoueiKakaku2"] != null)) {
-                    base.Tables.Add(new M_JoueiKakaku2DataTable(ds.Tables["M_JoueiKakaku2"]));
-                }
                 if ((ds.Tables["M_Tanto1"] != null)) {
                     base.Tables.Add(new M_Tanto1DataTable(ds.Tables["M_Tanto1"]));
                 }
@@ -598,6 +595,9 @@ namespace DLL {
                 }
                 if ((ds.Tables["M_JoueiKakaku3"] != null)) {
                     base.Tables.Add(new M_JoueiKakaku3DataTable(ds.Tables["M_JoueiKakaku3"]));
+                }
+                if ((ds.Tables["M_JoueiKakaku2"] != null)) {
+                    base.Tables.Add(new M_JoueiKakaku2DataTable(ds.Tables["M_JoueiKakaku2"]));
                 }
                 if ((ds.Tables["KariTable"] != null)) {
                     base.Tables.Add(new KariTableDataTable(ds.Tables["KariTable"]));
@@ -728,12 +728,6 @@ namespace DLL {
                     this.tableM_JoueiKakaku.InitVars();
                 }
             }
-            this.tableM_JoueiKakaku2 = ((M_JoueiKakaku2DataTable)(base.Tables["M_JoueiKakaku2"]));
-            if ((initTable == true)) {
-                if ((this.tableM_JoueiKakaku2 != null)) {
-                    this.tableM_JoueiKakaku2.InitVars();
-                }
-            }
             this.tableM_Tanto1 = ((M_Tanto1DataTable)(base.Tables["M_Tanto1"]));
             if ((initTable == true)) {
                 if ((this.tableM_Tanto1 != null)) {
@@ -780,6 +774,12 @@ namespace DLL {
             if ((initTable == true)) {
                 if ((this.tableM_JoueiKakaku3 != null)) {
                     this.tableM_JoueiKakaku3.InitVars();
+                }
+            }
+            this.tableM_JoueiKakaku2 = ((M_JoueiKakaku2DataTable)(base.Tables["M_JoueiKakaku2"]));
+            if ((initTable == true)) {
+                if ((this.tableM_JoueiKakaku2 != null)) {
+                    this.tableM_JoueiKakaku2.InitVars();
                 }
             }
             this.tableKariTable = ((KariTableDataTable)(base.Tables["KariTable"]));
@@ -834,8 +834,6 @@ namespace DLL {
             base.Tables.Add(this.tableV_ProductList);
             this.tableM_JoueiKakaku = new M_JoueiKakakuDataTable();
             base.Tables.Add(this.tableM_JoueiKakaku);
-            this.tableM_JoueiKakaku2 = new M_JoueiKakaku2DataTable();
-            base.Tables.Add(this.tableM_JoueiKakaku2);
             this.tableM_Tanto1 = new M_Tanto1DataTable();
             base.Tables.Add(this.tableM_Tanto1);
             this.tableM_Bumon = new M_BumonDataTable();
@@ -852,6 +850,8 @@ namespace DLL {
             base.Tables.Add(this.tableT_Log);
             this.tableM_JoueiKakaku3 = new M_JoueiKakaku3DataTable();
             base.Tables.Add(this.tableM_JoueiKakaku3);
+            this.tableM_JoueiKakaku2 = new M_JoueiKakaku2DataTable();
+            base.Tables.Add(this.tableM_JoueiKakaku2);
             this.tableKariTable = new KariTableDataTable();
             base.Tables.Add(this.tableKariTable);
             this.tableT_ErrorNaiyou = new T_ErrorNaiyouDataTable();
@@ -950,12 +950,6 @@ namespace DLL {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private bool ShouldSerializeM_JoueiKakaku2() {
-            return false;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private bool ShouldSerializeM_Tanto1() {
             return false;
         }
@@ -999,6 +993,12 @@ namespace DLL {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private bool ShouldSerializeM_JoueiKakaku3() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        private bool ShouldSerializeM_JoueiKakaku2() {
             return false;
         }
         
@@ -1115,9 +1115,6 @@ namespace DLL {
         public delegate void M_JoueiKakakuRowChangeEventHandler(object sender, M_JoueiKakakuRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public delegate void M_JoueiKakaku2RowChangeEventHandler(object sender, M_JoueiKakaku2RowChangeEvent e);
-        
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public delegate void M_Tanto1RowChangeEventHandler(object sender, M_Tanto1RowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
@@ -1140,6 +1137,9 @@ namespace DLL {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public delegate void M_JoueiKakaku3RowChangeEventHandler(object sender, M_JoueiKakaku3RowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public delegate void M_JoueiKakaku2RowChangeEventHandler(object sender, M_JoueiKakaku2RowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public delegate void KariTableRowChangeEventHandler(object sender, KariTableRowChangeEvent e);
@@ -8627,348 +8627,6 @@ namespace DLL {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class M_JoueiKakaku2DataTable : global::System.Data.TypedTableBase<M_JoueiKakaku2Row> {
-            
-            private global::System.Data.DataColumn columnShiiresakiCode;
-            
-            private global::System.Data.DataColumn columnShiiresakiName;
-            
-            private global::System.Data.DataColumn columnMedia;
-            
-            private global::System.Data.DataColumn columnRange;
-            
-            private global::System.Data.DataColumn columnCapacity;
-            
-            private global::System.Data.DataColumn columnHyoujunKakaku;
-            
-            private global::System.Data.DataColumn columnShiireKakaku;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public M_JoueiKakaku2DataTable() {
-                this.TableName = "M_JoueiKakaku2";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal M_JoueiKakaku2DataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected M_JoueiKakaku2DataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn ShiiresakiCodeColumn {
-                get {
-                    return this.columnShiiresakiCode;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn ShiiresakiNameColumn {
-                get {
-                    return this.columnShiiresakiName;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn MediaColumn {
-                get {
-                    return this.columnMedia;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn RangeColumn {
-                get {
-                    return this.columnRange;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn CapacityColumn {
-                get {
-                    return this.columnCapacity;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn HyoujunKakakuColumn {
-                get {
-                    return this.columnHyoujunKakaku;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn ShiireKakakuColumn {
-                get {
-                    return this.columnShiireKakaku;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public M_JoueiKakaku2Row this[int index] {
-                get {
-                    return ((M_JoueiKakaku2Row)(this.Rows[index]));
-                }
-            }
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event M_JoueiKakaku2RowChangeEventHandler M_JoueiKakaku2RowChanging;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event M_JoueiKakaku2RowChangeEventHandler M_JoueiKakaku2RowChanged;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event M_JoueiKakaku2RowChangeEventHandler M_JoueiKakaku2RowDeleting;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event M_JoueiKakaku2RowChangeEventHandler M_JoueiKakaku2RowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void AddM_JoueiKakaku2Row(M_JoueiKakaku2Row row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public M_JoueiKakaku2Row AddM_JoueiKakaku2Row(int ShiiresakiCode, string ShiiresakiName, string Media, string Range, string Capacity, string HyoujunKakaku, string ShiireKakaku) {
-                M_JoueiKakaku2Row rowM_JoueiKakaku2Row = ((M_JoueiKakaku2Row)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        ShiiresakiCode,
-                        ShiiresakiName,
-                        Media,
-                        Range,
-                        Capacity,
-                        HyoujunKakaku,
-                        ShiireKakaku};
-                rowM_JoueiKakaku2Row.ItemArray = columnValuesArray;
-                this.Rows.Add(rowM_JoueiKakaku2Row);
-                return rowM_JoueiKakaku2Row;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public override global::System.Data.DataTable Clone() {
-                M_JoueiKakaku2DataTable cln = ((M_JoueiKakaku2DataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new M_JoueiKakaku2DataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal void InitVars() {
-                this.columnShiiresakiCode = base.Columns["ShiiresakiCode"];
-                this.columnShiiresakiName = base.Columns["ShiiresakiName"];
-                this.columnMedia = base.Columns["Media"];
-                this.columnRange = base.Columns["Range"];
-                this.columnCapacity = base.Columns["Capacity"];
-                this.columnHyoujunKakaku = base.Columns["HyoujunKakaku"];
-                this.columnShiireKakaku = base.Columns["ShiireKakaku"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            private void InitClass() {
-                this.columnShiiresakiCode = new global::System.Data.DataColumn("ShiiresakiCode", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnShiiresakiCode);
-                this.columnShiiresakiName = new global::System.Data.DataColumn("ShiiresakiName", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnShiiresakiName);
-                this.columnMedia = new global::System.Data.DataColumn("Media", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMedia);
-                this.columnRange = new global::System.Data.DataColumn("Range", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnRange);
-                this.columnCapacity = new global::System.Data.DataColumn("Capacity", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCapacity);
-                this.columnHyoujunKakaku = new global::System.Data.DataColumn("HyoujunKakaku", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnHyoujunKakaku);
-                this.columnShiireKakaku = new global::System.Data.DataColumn("ShiireKakaku", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnShiireKakaku);
-                this.columnShiiresakiCode.AllowDBNull = false;
-                this.columnShiiresakiName.MaxLength = 50;
-                this.columnMedia.AllowDBNull = false;
-                this.columnMedia.MaxLength = 3;
-                this.columnRange.AllowDBNull = false;
-                this.columnRange.MaxLength = 20;
-                this.columnCapacity.AllowDBNull = false;
-                this.columnCapacity.MaxLength = 10;
-                this.columnHyoujunKakaku.AllowDBNull = false;
-                this.columnHyoujunKakaku.MaxLength = 10;
-                this.columnShiireKakaku.MaxLength = 10;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public M_JoueiKakaku2Row NewM_JoueiKakaku2Row() {
-                return ((M_JoueiKakaku2Row)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new M_JoueiKakaku2Row(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Type GetRowType() {
-                return typeof(M_JoueiKakaku2Row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.M_JoueiKakaku2RowChanged != null)) {
-                    this.M_JoueiKakaku2RowChanged(this, new M_JoueiKakaku2RowChangeEvent(((M_JoueiKakaku2Row)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.M_JoueiKakaku2RowChanging != null)) {
-                    this.M_JoueiKakaku2RowChanging(this, new M_JoueiKakaku2RowChangeEvent(((M_JoueiKakaku2Row)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.M_JoueiKakaku2RowDeleted != null)) {
-                    this.M_JoueiKakaku2RowDeleted(this, new M_JoueiKakaku2RowChangeEvent(((M_JoueiKakaku2Row)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.M_JoueiKakaku2RowDeleting != null)) {
-                    this.M_JoueiKakaku2RowDeleting(this, new M_JoueiKakaku2RowChangeEvent(((M_JoueiKakaku2Row)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void RemoveM_JoueiKakaku2Row(M_JoueiKakaku2Row row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DataMaster ds = new DataMaster();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "M_JoueiKakaku2DataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class M_Tanto1DataTable : global::System.Data.TypedTableBase<M_Tanto1Row> {
             
             private global::System.Data.DataColumn columnUserKey;
@@ -12412,6 +12070,363 @@ namespace DLL {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "M_JoueiKakaku3DataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class M_JoueiKakaku2DataTable : global::System.Data.TypedTableBase<M_JoueiKakaku2Row> {
+            
+            private global::System.Data.DataColumn columnShiiresakiCode;
+            
+            private global::System.Data.DataColumn columnShiiresakiName;
+            
+            private global::System.Data.DataColumn columnMedia;
+            
+            private global::System.Data.DataColumn columnRange;
+            
+            private global::System.Data.DataColumn columnCapacity;
+            
+            private global::System.Data.DataColumn columnHyoujunKakaku;
+            
+            private global::System.Data.DataColumn columnShiireKakaku;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public M_JoueiKakaku2DataTable() {
+                this.TableName = "M_JoueiKakaku2";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal M_JoueiKakaku2DataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected M_JoueiKakaku2DataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn ShiiresakiCodeColumn {
+                get {
+                    return this.columnShiiresakiCode;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn ShiiresakiNameColumn {
+                get {
+                    return this.columnShiiresakiName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn MediaColumn {
+                get {
+                    return this.columnMedia;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn RangeColumn {
+                get {
+                    return this.columnRange;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn CapacityColumn {
+                get {
+                    return this.columnCapacity;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn HyoujunKakakuColumn {
+                get {
+                    return this.columnHyoujunKakaku;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn ShiireKakakuColumn {
+                get {
+                    return this.columnShiireKakaku;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public M_JoueiKakaku2Row this[int index] {
+                get {
+                    return ((M_JoueiKakaku2Row)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event M_JoueiKakaku2RowChangeEventHandler M_JoueiKakaku2RowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event M_JoueiKakaku2RowChangeEventHandler M_JoueiKakaku2RowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event M_JoueiKakaku2RowChangeEventHandler M_JoueiKakaku2RowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event M_JoueiKakaku2RowChangeEventHandler M_JoueiKakaku2RowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void AddM_JoueiKakaku2Row(M_JoueiKakaku2Row row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public M_JoueiKakaku2Row AddM_JoueiKakaku2Row(int ShiiresakiCode, string ShiiresakiName, string Media, string Range, string Capacity, string HyoujunKakaku, string ShiireKakaku) {
+                M_JoueiKakaku2Row rowM_JoueiKakaku2Row = ((M_JoueiKakaku2Row)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        ShiiresakiCode,
+                        ShiiresakiName,
+                        Media,
+                        Range,
+                        Capacity,
+                        HyoujunKakaku,
+                        ShiireKakaku};
+                rowM_JoueiKakaku2Row.ItemArray = columnValuesArray;
+                this.Rows.Add(rowM_JoueiKakaku2Row);
+                return rowM_JoueiKakaku2Row;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public M_JoueiKakaku2Row FindByShiiresakiCodeMediaRangeCapacity(int ShiiresakiCode, string Media, string Range, string Capacity) {
+                return ((M_JoueiKakaku2Row)(this.Rows.Find(new object[] {
+                            ShiiresakiCode,
+                            Media,
+                            Range,
+                            Capacity})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                M_JoueiKakaku2DataTable cln = ((M_JoueiKakaku2DataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new M_JoueiKakaku2DataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal void InitVars() {
+                this.columnShiiresakiCode = base.Columns["ShiiresakiCode"];
+                this.columnShiiresakiName = base.Columns["ShiiresakiName"];
+                this.columnMedia = base.Columns["Media"];
+                this.columnRange = base.Columns["Range"];
+                this.columnCapacity = base.Columns["Capacity"];
+                this.columnHyoujunKakaku = base.Columns["HyoujunKakaku"];
+                this.columnShiireKakaku = base.Columns["ShiireKakaku"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            private void InitClass() {
+                this.columnShiiresakiCode = new global::System.Data.DataColumn("ShiiresakiCode", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnShiiresakiCode);
+                this.columnShiiresakiName = new global::System.Data.DataColumn("ShiiresakiName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnShiiresakiName);
+                this.columnMedia = new global::System.Data.DataColumn("Media", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMedia);
+                this.columnRange = new global::System.Data.DataColumn("Range", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRange);
+                this.columnCapacity = new global::System.Data.DataColumn("Capacity", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCapacity);
+                this.columnHyoujunKakaku = new global::System.Data.DataColumn("HyoujunKakaku", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnHyoujunKakaku);
+                this.columnShiireKakaku = new global::System.Data.DataColumn("ShiireKakaku", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnShiireKakaku);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnShiiresakiCode,
+                                this.columnMedia,
+                                this.columnRange,
+                                this.columnCapacity}, true));
+                this.columnShiiresakiCode.AllowDBNull = false;
+                this.columnShiiresakiName.MaxLength = 50;
+                this.columnMedia.AllowDBNull = false;
+                this.columnMedia.MaxLength = 3;
+                this.columnRange.AllowDBNull = false;
+                this.columnRange.MaxLength = 20;
+                this.columnCapacity.AllowDBNull = false;
+                this.columnCapacity.MaxLength = 10;
+                this.columnHyoujunKakaku.AllowDBNull = false;
+                this.columnHyoujunKakaku.MaxLength = 10;
+                this.columnShiireKakaku.MaxLength = 10;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public M_JoueiKakaku2Row NewM_JoueiKakaku2Row() {
+                return ((M_JoueiKakaku2Row)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new M_JoueiKakaku2Row(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(M_JoueiKakaku2Row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.M_JoueiKakaku2RowChanged != null)) {
+                    this.M_JoueiKakaku2RowChanged(this, new M_JoueiKakaku2RowChangeEvent(((M_JoueiKakaku2Row)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.M_JoueiKakaku2RowChanging != null)) {
+                    this.M_JoueiKakaku2RowChanging(this, new M_JoueiKakaku2RowChangeEvent(((M_JoueiKakaku2Row)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.M_JoueiKakaku2RowDeleted != null)) {
+                    this.M_JoueiKakaku2RowDeleted(this, new M_JoueiKakaku2RowChangeEvent(((M_JoueiKakaku2Row)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.M_JoueiKakaku2RowDeleting != null)) {
+                    this.M_JoueiKakaku2RowDeleting(this, new M_JoueiKakaku2RowChangeEvent(((M_JoueiKakaku2Row)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void RemoveM_JoueiKakaku2Row(M_JoueiKakaku2Row row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                DataMaster ds = new DataMaster();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "M_JoueiKakaku2DataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -19927,132 +19942,6 @@ namespace DLL {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class M_JoueiKakaku2Row : global::System.Data.DataRow {
-            
-            private M_JoueiKakaku2DataTable tableM_JoueiKakaku2;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal M_JoueiKakaku2Row(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableM_JoueiKakaku2 = ((M_JoueiKakaku2DataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public int ShiiresakiCode {
-                get {
-                    return ((int)(this[this.tableM_JoueiKakaku2.ShiiresakiCodeColumn]));
-                }
-                set {
-                    this[this.tableM_JoueiKakaku2.ShiiresakiCodeColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string ShiiresakiName {
-                get {
-                    try {
-                        return ((string)(this[this.tableM_JoueiKakaku2.ShiiresakiNameColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("テーブル \'M_JoueiKakaku2\' にある列 \'ShiiresakiName\' の値は DBNull です。", e);
-                    }
-                }
-                set {
-                    this[this.tableM_JoueiKakaku2.ShiiresakiNameColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string Media {
-                get {
-                    return ((string)(this[this.tableM_JoueiKakaku2.MediaColumn]));
-                }
-                set {
-                    this[this.tableM_JoueiKakaku2.MediaColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string Range {
-                get {
-                    return ((string)(this[this.tableM_JoueiKakaku2.RangeColumn]));
-                }
-                set {
-                    this[this.tableM_JoueiKakaku2.RangeColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string Capacity {
-                get {
-                    return ((string)(this[this.tableM_JoueiKakaku2.CapacityColumn]));
-                }
-                set {
-                    this[this.tableM_JoueiKakaku2.CapacityColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string HyoujunKakaku {
-                get {
-                    return ((string)(this[this.tableM_JoueiKakaku2.HyoujunKakakuColumn]));
-                }
-                set {
-                    this[this.tableM_JoueiKakaku2.HyoujunKakakuColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string ShiireKakaku {
-                get {
-                    try {
-                        return ((string)(this[this.tableM_JoueiKakaku2.ShiireKakakuColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("テーブル \'M_JoueiKakaku2\' にある列 \'ShiireKakaku\' の値は DBNull です。", e);
-                    }
-                }
-                set {
-                    this[this.tableM_JoueiKakaku2.ShiireKakakuColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsShiiresakiNameNull() {
-                return this.IsNull(this.tableM_JoueiKakaku2.ShiiresakiNameColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetShiiresakiNameNull() {
-                this[this.tableM_JoueiKakaku2.ShiiresakiNameColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsShiireKakakuNull() {
-                return this.IsNull(this.tableM_JoueiKakaku2.ShiireKakakuColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetShiireKakakuNull() {
-                this[this.tableM_JoueiKakaku2.ShiireKakakuColumn] = global::System.Convert.DBNull;
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
         public partial class M_Tanto1Row : global::System.Data.DataRow {
             
             private M_Tanto1DataTable tableM_Tanto1;
@@ -22469,6 +22358,132 @@ namespace DLL {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
+        public partial class M_JoueiKakaku2Row : global::System.Data.DataRow {
+            
+            private M_JoueiKakaku2DataTable tableM_JoueiKakaku2;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal M_JoueiKakaku2Row(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableM_JoueiKakaku2 = ((M_JoueiKakaku2DataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public int ShiiresakiCode {
+                get {
+                    return ((int)(this[this.tableM_JoueiKakaku2.ShiiresakiCodeColumn]));
+                }
+                set {
+                    this[this.tableM_JoueiKakaku2.ShiiresakiCodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string ShiiresakiName {
+                get {
+                    try {
+                        return ((string)(this[this.tableM_JoueiKakaku2.ShiiresakiNameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("テーブル \'M_JoueiKakaku2\' にある列 \'ShiiresakiName\' の値は DBNull です。", e);
+                    }
+                }
+                set {
+                    this[this.tableM_JoueiKakaku2.ShiiresakiNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Media {
+                get {
+                    return ((string)(this[this.tableM_JoueiKakaku2.MediaColumn]));
+                }
+                set {
+                    this[this.tableM_JoueiKakaku2.MediaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Range {
+                get {
+                    return ((string)(this[this.tableM_JoueiKakaku2.RangeColumn]));
+                }
+                set {
+                    this[this.tableM_JoueiKakaku2.RangeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Capacity {
+                get {
+                    return ((string)(this[this.tableM_JoueiKakaku2.CapacityColumn]));
+                }
+                set {
+                    this[this.tableM_JoueiKakaku2.CapacityColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string HyoujunKakaku {
+                get {
+                    return ((string)(this[this.tableM_JoueiKakaku2.HyoujunKakakuColumn]));
+                }
+                set {
+                    this[this.tableM_JoueiKakaku2.HyoujunKakakuColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string ShiireKakaku {
+                get {
+                    try {
+                        return ((string)(this[this.tableM_JoueiKakaku2.ShiireKakakuColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("テーブル \'M_JoueiKakaku2\' にある列 \'ShiireKakaku\' の値は DBNull です。", e);
+                    }
+                }
+                set {
+                    this[this.tableM_JoueiKakaku2.ShiireKakakuColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsShiiresakiNameNull() {
+                return this.IsNull(this.tableM_JoueiKakaku2.ShiiresakiNameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetShiiresakiNameNull() {
+                this[this.tableM_JoueiKakaku2.ShiiresakiNameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsShiireKakakuNull() {
+                return this.IsNull(this.tableM_JoueiKakaku2.ShiireKakakuColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetShiireKakakuNull() {
+                this[this.tableM_JoueiKakaku2.ShiireKakakuColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
         public partial class KariTableRow : global::System.Data.DataRow {
             
             private KariTableDataTable tableKariTable;
@@ -23514,40 +23529,6 @@ namespace DLL {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public class M_JoueiKakaku2RowChangeEvent : global::System.EventArgs {
-            
-            private M_JoueiKakaku2Row eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public M_JoueiKakaku2RowChangeEvent(M_JoueiKakaku2Row row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public M_JoueiKakaku2Row Row {
-                get {
-                    return this.eventRow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataRowAction Action {
-                get {
-                    return this.eventAction;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public class M_Tanto1RowChangeEvent : global::System.EventArgs {
             
             private M_Tanto1Row eventRow;
@@ -23802,6 +23783,40 @@ namespace DLL {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public M_JoueiKakaku3Row Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public class M_JoueiKakaku2RowChangeEvent : global::System.EventArgs {
+            
+            private M_JoueiKakaku2Row eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public M_JoueiKakaku2RowChangeEvent(M_JoueiKakaku2Row row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public M_JoueiKakaku2Row Row {
                 get {
                     return this.eventRow;
                 }
@@ -32934,280 +32949,6 @@ SELECT KanriNo, ShiiresakiCode, ShiiresakiName, Media, Range, Capacity, HyoujunK
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class M_JoueiKakaku2TableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
-        
-        private global::System.Data.SqlClient.SqlConnection _connection;
-        
-        private global::System.Data.SqlClient.SqlTransaction _transaction;
-        
-        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
-        
-        private bool _clearBeforeFill;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public M_JoueiKakaku2TableAdapter() {
-            this.ClearBeforeFill = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
-            get {
-                if ((this._adapter == null)) {
-                    this.InitAdapter();
-                }
-                return this._adapter;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        internal global::System.Data.SqlClient.SqlConnection Connection {
-            get {
-                if ((this._connection == null)) {
-                    this.InitConnection();
-                }
-                return this._connection;
-            }
-            set {
-                this._connection = value;
-                if ((this.Adapter.InsertCommand != null)) {
-                    this.Adapter.InsertCommand.Connection = value;
-                }
-                if ((this.Adapter.DeleteCommand != null)) {
-                    this.Adapter.DeleteCommand.Connection = value;
-                }
-                if ((this.Adapter.UpdateCommand != null)) {
-                    this.Adapter.UpdateCommand.Connection = value;
-                }
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
-                    }
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        internal global::System.Data.SqlClient.SqlTransaction Transaction {
-            get {
-                return this._transaction;
-            }
-            set {
-                this._transaction = value;
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    this.CommandCollection[i].Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public bool ClearBeforeFill {
-            get {
-                return this._clearBeforeFill;
-            }
-            set {
-                this._clearBeforeFill = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private void InitAdapter() {
-            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
-            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
-            tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "M_JoueiKakaku2";
-            tableMapping.ColumnMappings.Add("ShiiresakiCode", "ShiiresakiCode");
-            tableMapping.ColumnMappings.Add("ShiiresakiName", "ShiiresakiName");
-            tableMapping.ColumnMappings.Add("Media", "Media");
-            tableMapping.ColumnMappings.Add("Range", "Range");
-            tableMapping.ColumnMappings.Add("Capacity", "Capacity");
-            tableMapping.ColumnMappings.Add("HyoujunKakaku", "HyoujunKakaku");
-            tableMapping.ColumnMappings.Add("ShiireKakaku", "ShiireKakaku");
-            this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [M_JoueiKakaku2] ([ShiiresakiCode], [ShiiresakiName], [Media], [Range" +
-                "], [Capacity], [HyoujunKakaku], [ShiireKakaku]) VALUES (@ShiiresakiCode, @Shiire" +
-                "sakiName, @Media, @Range, @Capacity, @HyoujunKakaku, @ShiireKakaku)";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ShiiresakiCode", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiiresakiCode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ShiiresakiName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiiresakiName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Media", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Media", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Range", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Range", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Capacity", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Capacity", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@HyoujunKakaku", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "HyoujunKakaku", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ShiireKakaku", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiireKakaku", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private void InitConnection() {
-            this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::DLL.Properties.Settings.Default.MMC_TestConnectionString;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
-            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT                      M_JoueiKakaku2.*\r\nFROM                         M_Joue" +
-                "iKakaku2";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DataMaster.M_JoueiKakaku2DataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DataMaster.M_JoueiKakaku2DataTable GetData() {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            DataMaster.M_JoueiKakaku2DataTable dataTable = new DataMaster.M_JoueiKakaku2DataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DataMaster.M_JoueiKakaku2DataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DataMaster dataSet) {
-            return this.Adapter.Update(dataSet, "M_JoueiKakaku2");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int ShiiresakiCode, string ShiiresakiName, string Media, string Range, string Capacity, string HyoujunKakaku, string ShiireKakaku) {
-            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(ShiiresakiCode));
-            if ((ShiiresakiName == null)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(ShiiresakiName));
-            }
-            if ((Media == null)) {
-                throw new global::System.ArgumentNullException("Media");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(Media));
-            }
-            if ((Range == null)) {
-                throw new global::System.ArgumentNullException("Range");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(Range));
-            }
-            if ((Capacity == null)) {
-                throw new global::System.ArgumentNullException("Capacity");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((string)(Capacity));
-            }
-            if ((HyoujunKakaku == null)) {
-                throw new global::System.ArgumentNullException("HyoujunKakaku");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(HyoujunKakaku));
-            }
-            if ((ShiireKakaku == null)) {
-                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[6].Value = ((string)(ShiireKakaku));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-    }
-    
-    /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
     public partial class M_Tanto1TableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.SqlClient.SqlDataAdapter _adapter;
@@ -37771,6 +37512,482 @@ SELECT UserID, UserName, LogDate, LogName, Page, Success FROM T_Log WHERE (LogDa
     }
     
     /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class M_JoueiKakaku2TableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public M_JoueiKakaku2TableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "M_JoueiKakaku2";
+            tableMapping.ColumnMappings.Add("ShiiresakiCode", "ShiiresakiCode");
+            tableMapping.ColumnMappings.Add("ShiiresakiName", "ShiiresakiName");
+            tableMapping.ColumnMappings.Add("Media", "Media");
+            tableMapping.ColumnMappings.Add("Range", "Range");
+            tableMapping.ColumnMappings.Add("Capacity", "Capacity");
+            tableMapping.ColumnMappings.Add("HyoujunKakaku", "HyoujunKakaku");
+            tableMapping.ColumnMappings.Add("ShiireKakaku", "ShiireKakaku");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [M_JoueiKakaku2] WHERE (([ShiiresakiCode] = @Original_ShiiresakiCode) AND ((@IsNull_ShiiresakiName = 1 AND [ShiiresakiName] IS NULL) OR ([ShiiresakiName] = @Original_ShiiresakiName)) AND ([Media] = @Original_Media) AND ([Range] = @Original_Range) AND ([Capacity] = @Original_Capacity) AND ([HyoujunKakaku] = @Original_HyoujunKakaku) AND ((@IsNull_ShiireKakaku = 1 AND [ShiireKakaku] IS NULL) OR ([ShiireKakaku] = @Original_ShiireKakaku)))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ShiiresakiCode", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiiresakiCode", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ShiiresakiName", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiiresakiName", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ShiiresakiName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiiresakiName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Media", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Media", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Range", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Range", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Capacity", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Capacity", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_HyoujunKakaku", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "HyoujunKakaku", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ShiireKakaku", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiireKakaku", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ShiireKakaku", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiireKakaku", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [M_JoueiKakaku2] ([ShiiresakiCode], [ShiiresakiName], [Media], [Range], [Capacity], [HyoujunKakaku], [ShiireKakaku]) VALUES (@ShiiresakiCode, @ShiiresakiName, @Media, @Range, @Capacity, @HyoujunKakaku, @ShiireKakaku);
+SELECT ShiiresakiCode, ShiiresakiName, Media, Range, Capacity, HyoujunKakaku, ShiireKakaku FROM M_JoueiKakaku2 WHERE (Capacity = @Capacity) AND (Media = @Media) AND (Range = @Range) AND (ShiiresakiCode = @ShiiresakiCode)";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ShiiresakiCode", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiiresakiCode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ShiiresakiName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiiresakiName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Media", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Media", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Range", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Range", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Capacity", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Capacity", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@HyoujunKakaku", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "HyoujunKakaku", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ShiireKakaku", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiireKakaku", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [M_JoueiKakaku2] SET [ShiiresakiCode] = @ShiiresakiCode, [ShiiresakiName] = @ShiiresakiName, [Media] = @Media, [Range] = @Range, [Capacity] = @Capacity, [HyoujunKakaku] = @HyoujunKakaku, [ShiireKakaku] = @ShiireKakaku WHERE (([ShiiresakiCode] = @Original_ShiiresakiCode) AND ((@IsNull_ShiiresakiName = 1 AND [ShiiresakiName] IS NULL) OR ([ShiiresakiName] = @Original_ShiiresakiName)) AND ([Media] = @Original_Media) AND ([Range] = @Original_Range) AND ([Capacity] = @Original_Capacity) AND ([HyoujunKakaku] = @Original_HyoujunKakaku) AND ((@IsNull_ShiireKakaku = 1 AND [ShiireKakaku] IS NULL) OR ([ShiireKakaku] = @Original_ShiireKakaku)));
+SELECT ShiiresakiCode, ShiiresakiName, Media, Range, Capacity, HyoujunKakaku, ShiireKakaku FROM M_JoueiKakaku2 WHERE (Capacity = @Capacity) AND (Media = @Media) AND (Range = @Range) AND (ShiiresakiCode = @ShiiresakiCode)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ShiiresakiCode", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiiresakiCode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ShiiresakiName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiiresakiName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Media", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Media", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Range", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Range", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Capacity", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Capacity", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@HyoujunKakaku", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "HyoujunKakaku", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ShiireKakaku", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiireKakaku", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ShiiresakiCode", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiiresakiCode", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ShiiresakiName", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiiresakiName", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ShiiresakiName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiiresakiName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Media", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Media", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Range", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Range", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Capacity", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Capacity", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_HyoujunKakaku", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "HyoujunKakaku", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ShiireKakaku", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiireKakaku", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ShiireKakaku", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiireKakaku", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::DLL.Properties.Settings.Default.MMC_TestConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT                      M_JoueiKakaku2.*\r\nFROM                         M_Joue" +
+                "iKakaku2";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(DataMaster.M_JoueiKakaku2DataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual DataMaster.M_JoueiKakaku2DataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            DataMaster.M_JoueiKakaku2DataTable dataTable = new DataMaster.M_JoueiKakaku2DataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(DataMaster.M_JoueiKakaku2DataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(DataMaster dataSet) {
+            return this.Adapter.Update(dataSet, "M_JoueiKakaku2");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(int Original_ShiiresakiCode, string Original_ShiiresakiName, string Original_Media, string Original_Range, string Original_Capacity, string Original_HyoujunKakaku, string Original_ShiireKakaku) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ShiiresakiCode));
+            if ((Original_ShiiresakiName == null)) {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_ShiiresakiName));
+            }
+            if ((Original_Media == null)) {
+                throw new global::System.ArgumentNullException("Original_Media");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((string)(Original_Media));
+            }
+            if ((Original_Range == null)) {
+                throw new global::System.ArgumentNullException("Original_Range");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_Range));
+            }
+            if ((Original_Capacity == null)) {
+                throw new global::System.ArgumentNullException("Original_Capacity");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((string)(Original_Capacity));
+            }
+            if ((Original_HyoujunKakaku == null)) {
+                throw new global::System.ArgumentNullException("Original_HyoujunKakaku");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_HyoujunKakaku));
+            }
+            if ((Original_ShiireKakaku == null)) {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((string)(Original_ShiireKakaku));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(int ShiiresakiCode, string ShiiresakiName, string Media, string Range, string Capacity, string HyoujunKakaku, string ShiireKakaku) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(ShiiresakiCode));
+            if ((ShiiresakiName == null)) {
+                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(ShiiresakiName));
+            }
+            if ((Media == null)) {
+                throw new global::System.ArgumentNullException("Media");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(Media));
+            }
+            if ((Range == null)) {
+                throw new global::System.ArgumentNullException("Range");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(Range));
+            }
+            if ((Capacity == null)) {
+                throw new global::System.ArgumentNullException("Capacity");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((string)(Capacity));
+            }
+            if ((HyoujunKakaku == null)) {
+                throw new global::System.ArgumentNullException("HyoujunKakaku");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(HyoujunKakaku));
+            }
+            if ((ShiireKakaku == null)) {
+                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[6].Value = ((string)(ShiireKakaku));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(int ShiiresakiCode, string ShiiresakiName, string Media, string Range, string Capacity, string HyoujunKakaku, string ShiireKakaku, int Original_ShiiresakiCode, string Original_ShiiresakiName, string Original_Media, string Original_Range, string Original_Capacity, string Original_HyoujunKakaku, string Original_ShiireKakaku) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(ShiiresakiCode));
+            if ((ShiiresakiName == null)) {
+                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(ShiiresakiName));
+            }
+            if ((Media == null)) {
+                throw new global::System.ArgumentNullException("Media");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(Media));
+            }
+            if ((Range == null)) {
+                throw new global::System.ArgumentNullException("Range");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(Range));
+            }
+            if ((Capacity == null)) {
+                throw new global::System.ArgumentNullException("Capacity");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(Capacity));
+            }
+            if ((HyoujunKakaku == null)) {
+                throw new global::System.ArgumentNullException("HyoujunKakaku");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(HyoujunKakaku));
+            }
+            if ((ShiireKakaku == null)) {
+                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(ShiireKakaku));
+            }
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(Original_ShiiresakiCode));
+            if ((Original_ShiiresakiName == null)) {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_ShiiresakiName));
+            }
+            if ((Original_Media == null)) {
+                throw new global::System.ArgumentNullException("Original_Media");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(Original_Media));
+            }
+            if ((Original_Range == null)) {
+                throw new global::System.ArgumentNullException("Original_Range");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((string)(Original_Range));
+            }
+            if ((Original_Capacity == null)) {
+                throw new global::System.ArgumentNullException("Original_Capacity");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((string)(Original_Capacity));
+            }
+            if ((Original_HyoujunKakaku == null)) {
+                throw new global::System.ArgumentNullException("Original_HyoujunKakaku");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_HyoujunKakaku));
+            }
+            if ((Original_ShiireKakaku == null)) {
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((string)(Original_ShiireKakaku));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(string ShiiresakiName, string HyoujunKakaku, string ShiireKakaku, int Original_ShiiresakiCode, string Original_ShiiresakiName, string Original_Media, string Original_Range, string Original_Capacity, string Original_HyoujunKakaku, string Original_ShiireKakaku) {
+            return this.Update(Original_ShiiresakiCode, ShiiresakiName, Original_Media, Original_Range, Original_Capacity, HyoujunKakaku, ShiireKakaku, Original_ShiiresakiCode, Original_ShiiresakiName, Original_Media, Original_Range, Original_Capacity, Original_HyoujunKakaku, Original_ShiireKakaku);
+        }
+    }
+    
+    /// <summary>
     ///TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     ///</summary>
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -37810,8 +38027,6 @@ SELECT UserID, UserName, LogDate, LogName, Page, Success FROM T_Log WHERE (LogDa
         
         private M_JoueiKakakuTableAdapter _m_JoueiKakakuTableAdapter;
         
-        private M_JoueiKakaku2TableAdapter _m_JoueiKakaku2TableAdapter;
-        
         private M_Tanto1TableAdapter _m_Tanto1TableAdapter;
         
         private M_BumonTableAdapter _m_BumonTableAdapter;
@@ -37825,6 +38040,8 @@ SELECT UserID, UserName, LogDate, LogName, Page, Success FROM T_Log WHERE (LogDa
         private T_LogTableAdapter _t_LogTableAdapter;
         
         private M_JoueiKakaku3TableAdapter _m_JoueiKakaku3TableAdapter;
+        
+        private M_JoueiKakaku2TableAdapter _m_JoueiKakaku2TableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -38042,20 +38259,6 @@ SELECT UserID, UserName, LogDate, LogName, Page, Success FROM T_Log WHERE (LogDa
         [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
             "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
             "a", "System.Drawing.Design.UITypeEditor")]
-        public M_JoueiKakaku2TableAdapter M_JoueiKakaku2TableAdapter {
-            get {
-                return this._m_JoueiKakaku2TableAdapter;
-            }
-            set {
-                this._m_JoueiKakaku2TableAdapter = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
-            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
-            "a", "System.Drawing.Design.UITypeEditor")]
         public M_Tanto1TableAdapter M_Tanto1TableAdapter {
             get {
                 return this._m_Tanto1TableAdapter;
@@ -38151,6 +38354,20 @@ SELECT UserID, UserName, LogDate, LogName, Page, Success FROM T_Log WHERE (LogDa
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
+            "a", "System.Drawing.Design.UITypeEditor")]
+        public M_JoueiKakaku2TableAdapter M_JoueiKakaku2TableAdapter {
+            get {
+                return this._m_JoueiKakaku2TableAdapter;
+            }
+            set {
+                this._m_JoueiKakaku2TableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public bool BackupDataSetBeforeUpdate {
             get {
                 return this._backupDataSetBeforeUpdate;
@@ -38224,10 +38441,6 @@ SELECT UserID, UserName, LogDate, LogName, Page, Success FROM T_Log WHERE (LogDa
                             && (this._m_JoueiKakakuTableAdapter.Connection != null))) {
                     return this._m_JoueiKakakuTableAdapter.Connection;
                 }
-                if (((this._m_JoueiKakaku2TableAdapter != null) 
-                            && (this._m_JoueiKakaku2TableAdapter.Connection != null))) {
-                    return this._m_JoueiKakaku2TableAdapter.Connection;
-                }
                 if (((this._m_Tanto1TableAdapter != null) 
                             && (this._m_Tanto1TableAdapter.Connection != null))) {
                     return this._m_Tanto1TableAdapter.Connection;
@@ -38255,6 +38468,10 @@ SELECT UserID, UserName, LogDate, LogName, Page, Success FROM T_Log WHERE (LogDa
                 if (((this._m_JoueiKakaku3TableAdapter != null) 
                             && (this._m_JoueiKakaku3TableAdapter.Connection != null))) {
                     return this._m_JoueiKakaku3TableAdapter.Connection;
+                }
+                if (((this._m_JoueiKakaku2TableAdapter != null) 
+                            && (this._m_JoueiKakaku2TableAdapter.Connection != null))) {
+                    return this._m_JoueiKakaku2TableAdapter.Connection;
                 }
                 return null;
             }
@@ -38311,9 +38528,6 @@ SELECT UserID, UserName, LogDate, LogName, Page, Success FROM T_Log WHERE (LogDa
                 if ((this._m_JoueiKakakuTableAdapter != null)) {
                     count = (count + 1);
                 }
-                if ((this._m_JoueiKakaku2TableAdapter != null)) {
-                    count = (count + 1);
-                }
                 if ((this._m_Tanto1TableAdapter != null)) {
                     count = (count + 1);
                 }
@@ -38335,6 +38549,9 @@ SELECT UserID, UserName, LogDate, LogName, Page, Success FROM T_Log WHERE (LogDa
                 if ((this._m_JoueiKakaku3TableAdapter != null)) {
                     count = (count + 1);
                 }
+                if ((this._m_JoueiKakaku2TableAdapter != null)) {
+                    count = (count + 1);
+                }
                 return count;
             }
         }
@@ -38352,6 +38569,15 @@ SELECT UserID, UserName, LogDate, LogName, Page, Success FROM T_Log WHERE (LogDa
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._m_AppSettingTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._t_LogTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.T_Log.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._t_LogTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -38397,15 +38623,6 @@ SELECT UserID, UserName, LogDate, LogName, Page, Success FROM T_Log WHERE (LogDa
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._m_Tanto1TableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._m_JoueiKakaku2TableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.M_JoueiKakaku2.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._m_JoueiKakaku2TableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -38526,21 +38743,21 @@ SELECT UserID, UserName, LogDate, LogName, Page, Success FROM T_Log WHERE (LogDa
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._t_LogTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.T_Log.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._t_LogTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._m_JoueiKakaku3TableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.M_JoueiKakaku3.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._m_JoueiKakaku3TableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._m_JoueiKakaku2TableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.M_JoueiKakaku2.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._m_JoueiKakaku2TableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -38559,6 +38776,14 @@ SELECT UserID, UserName, LogDate, LogName, Page, Success FROM T_Log WHERE (LogDa
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._m_AppSettingTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._t_LogTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.T_Log.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._t_LogTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -38599,14 +38824,6 @@ SELECT UserID, UserName, LogDate, LogName, Page, Success FROM T_Log WHERE (LogDa
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._m_Tanto1TableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._m_JoueiKakaku2TableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.M_JoueiKakaku2.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._m_JoueiKakaku2TableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -38714,19 +38931,19 @@ SELECT UserID, UserName, LogDate, LogName, Page, Success FROM T_Log WHERE (LogDa
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._t_LogTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.T_Log.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._t_LogTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._m_JoueiKakaku3TableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.M_JoueiKakaku3.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._m_JoueiKakaku3TableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._m_JoueiKakaku2TableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.M_JoueiKakaku2.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._m_JoueiKakaku2TableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -38740,19 +38957,19 @@ SELECT UserID, UserName, LogDate, LogName, Page, Success FROM T_Log WHERE (LogDa
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private int UpdateDeletedRows(DataMaster dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
+            if ((this._m_JoueiKakaku2TableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.M_JoueiKakaku2.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._m_JoueiKakaku2TableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
             if ((this._m_JoueiKakaku3TableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.M_JoueiKakaku3.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._m_JoueiKakaku3TableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._t_LogTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.T_Log.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._t_LogTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -38860,14 +39077,6 @@ SELECT UserID, UserName, LogDate, LogName, Page, Success FROM T_Log WHERE (LogDa
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._m_JoueiKakaku2TableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.M_JoueiKakaku2.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._m_JoueiKakaku2TableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._m_Tanto1TableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.M_Tanto1.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -38905,6 +39114,14 @@ SELECT UserID, UserName, LogDate, LogName, Page, Success FROM T_Log WHERE (LogDa
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._m_Shiire_NewTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._t_LogTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.T_Log.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._t_LogTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -39011,10 +39228,6 @@ SELECT UserID, UserName, LogDate, LogName, Page, Success FROM T_Log WHERE (LogDa
                         && (this.MatchTableAdapterConnection(this._m_JoueiKakakuTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("TableAdapterManager で管理されるすべての TableAdapter は同一の接続文字列を使用する必要があります。");
             }
-            if (((this._m_JoueiKakaku2TableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._m_JoueiKakaku2TableAdapter.Connection) == false))) {
-                throw new global::System.ArgumentException("TableAdapterManager で管理されるすべての TableAdapter は同一の接続文字列を使用する必要があります。");
-            }
             if (((this._m_Tanto1TableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._m_Tanto1TableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("TableAdapterManager で管理されるすべての TableAdapter は同一の接続文字列を使用する必要があります。");
@@ -39041,6 +39254,10 @@ SELECT UserID, UserName, LogDate, LogName, Page, Success FROM T_Log WHERE (LogDa
             }
             if (((this._m_JoueiKakaku3TableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._m_JoueiKakaku3TableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("TableAdapterManager で管理されるすべての TableAdapter は同一の接続文字列を使用する必要があります。");
+            }
+            if (((this._m_JoueiKakaku2TableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._m_JoueiKakaku2TableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("TableAdapterManager で管理されるすべての TableAdapter は同一の接続文字列を使用する必要があります。");
             }
             global::System.Data.IDbConnection workConnection = this.Connection;
@@ -39200,15 +39417,6 @@ SELECT UserID, UserName, LogDate, LogName, Page, Success FROM T_Log WHERE (LogDa
                         adaptersWithAcceptChangesDuringUpdate.Add(this._m_JoueiKakakuTableAdapter.Adapter);
                     }
                 }
-                if ((this._m_JoueiKakaku2TableAdapter != null)) {
-                    revertConnections.Add(this._m_JoueiKakaku2TableAdapter, this._m_JoueiKakaku2TableAdapter.Connection);
-                    this._m_JoueiKakaku2TableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._m_JoueiKakaku2TableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._m_JoueiKakaku2TableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._m_JoueiKakaku2TableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._m_JoueiKakaku2TableAdapter.Adapter);
-                    }
-                }
                 if ((this._m_Tanto1TableAdapter != null)) {
                     revertConnections.Add(this._m_Tanto1TableAdapter, this._m_Tanto1TableAdapter.Connection);
                     this._m_Tanto1TableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
@@ -39270,6 +39478,15 @@ SELECT UserID, UserName, LogDate, LogName, Page, Success FROM T_Log WHERE (LogDa
                     if (this._m_JoueiKakaku3TableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._m_JoueiKakaku3TableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._m_JoueiKakaku3TableAdapter.Adapter);
+                    }
+                }
+                if ((this._m_JoueiKakaku2TableAdapter != null)) {
+                    revertConnections.Add(this._m_JoueiKakaku2TableAdapter, this._m_JoueiKakaku2TableAdapter.Connection);
+                    this._m_JoueiKakaku2TableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._m_JoueiKakaku2TableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._m_JoueiKakaku2TableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._m_JoueiKakaku2TableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._m_JoueiKakaku2TableAdapter.Adapter);
                     }
                 }
                 // 
@@ -39386,10 +39603,6 @@ SELECT UserID, UserName, LogDate, LogName, Page, Success FROM T_Log WHERE (LogDa
                     this._m_JoueiKakakuTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._m_JoueiKakakuTableAdapter]));
                     this._m_JoueiKakakuTableAdapter.Transaction = null;
                 }
-                if ((this._m_JoueiKakaku2TableAdapter != null)) {
-                    this._m_JoueiKakaku2TableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._m_JoueiKakaku2TableAdapter]));
-                    this._m_JoueiKakaku2TableAdapter.Transaction = null;
-                }
                 if ((this._m_Tanto1TableAdapter != null)) {
                     this._m_Tanto1TableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._m_Tanto1TableAdapter]));
                     this._m_Tanto1TableAdapter.Transaction = null;
@@ -39417,6 +39630,10 @@ SELECT UserID, UserName, LogDate, LogName, Page, Success FROM T_Log WHERE (LogDa
                 if ((this._m_JoueiKakaku3TableAdapter != null)) {
                     this._m_JoueiKakaku3TableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._m_JoueiKakaku3TableAdapter]));
                     this._m_JoueiKakaku3TableAdapter.Transaction = null;
+                }
+                if ((this._m_JoueiKakaku2TableAdapter != null)) {
+                    this._m_JoueiKakaku2TableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._m_JoueiKakaku2TableAdapter]));
+                    this._m_JoueiKakaku2TableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];
