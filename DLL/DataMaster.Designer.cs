@@ -72,6 +72,8 @@ namespace DLL {
         
         private M_JoueiKakaku2DataTable tableM_JoueiKakaku2;
         
+        private M_TokuisakiShouhinDataTable tableM_TokuisakiShouhin;
+        
         private KariTableDataTable tableKariTable;
         
         private T_ErrorNaiyouDataTable tableT_ErrorNaiyou;
@@ -175,6 +177,9 @@ namespace DLL {
                 }
                 if ((ds.Tables["M_JoueiKakaku2"] != null)) {
                     base.Tables.Add(new M_JoueiKakaku2DataTable(ds.Tables["M_JoueiKakaku2"]));
+                }
+                if ((ds.Tables["M_TokuisakiShouhin"] != null)) {
+                    base.Tables.Add(new M_TokuisakiShouhinDataTable(ds.Tables["M_TokuisakiShouhin"]));
                 }
                 if ((ds.Tables["KariTable"] != null)) {
                     base.Tables.Add(new KariTableDataTable(ds.Tables["KariTable"]));
@@ -444,6 +449,16 @@ namespace DLL {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public M_TokuisakiShouhinDataTable M_TokuisakiShouhin {
+            get {
+                return this.tableM_TokuisakiShouhin;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
         public KariTableDataTable KariTable {
             get {
                 return this.tableKariTable;
@@ -598,6 +613,9 @@ namespace DLL {
                 }
                 if ((ds.Tables["M_JoueiKakaku2"] != null)) {
                     base.Tables.Add(new M_JoueiKakaku2DataTable(ds.Tables["M_JoueiKakaku2"]));
+                }
+                if ((ds.Tables["M_TokuisakiShouhin"] != null)) {
+                    base.Tables.Add(new M_TokuisakiShouhinDataTable(ds.Tables["M_TokuisakiShouhin"]));
                 }
                 if ((ds.Tables["KariTable"] != null)) {
                     base.Tables.Add(new KariTableDataTable(ds.Tables["KariTable"]));
@@ -782,6 +800,12 @@ namespace DLL {
                     this.tableM_JoueiKakaku2.InitVars();
                 }
             }
+            this.tableM_TokuisakiShouhin = ((M_TokuisakiShouhinDataTable)(base.Tables["M_TokuisakiShouhin"]));
+            if ((initTable == true)) {
+                if ((this.tableM_TokuisakiShouhin != null)) {
+                    this.tableM_TokuisakiShouhin.InitVars();
+                }
+            }
             this.tableKariTable = ((KariTableDataTable)(base.Tables["KariTable"]));
             if ((initTable == true)) {
                 if ((this.tableKariTable != null)) {
@@ -852,6 +876,8 @@ namespace DLL {
             base.Tables.Add(this.tableM_JoueiKakaku3);
             this.tableM_JoueiKakaku2 = new M_JoueiKakaku2DataTable();
             base.Tables.Add(this.tableM_JoueiKakaku2);
+            this.tableM_TokuisakiShouhin = new M_TokuisakiShouhinDataTable();
+            base.Tables.Add(this.tableM_TokuisakiShouhin);
             this.tableKariTable = new KariTableDataTable();
             base.Tables.Add(this.tableKariTable);
             this.tableT_ErrorNaiyou = new T_ErrorNaiyouDataTable();
@@ -1004,6 +1030,12 @@ namespace DLL {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        private bool ShouldSerializeM_TokuisakiShouhin() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private bool ShouldSerializeKariTable() {
             return false;
         }
@@ -1140,6 +1172,9 @@ namespace DLL {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public delegate void M_JoueiKakaku2RowChangeEventHandler(object sender, M_JoueiKakaku2RowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public delegate void M_TokuisakiShouhinRowChangeEventHandler(object sender, M_TokuisakiShouhinRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public delegate void KariTableRowChangeEventHandler(object sender, KariTableRowChangeEvent e);
@@ -12472,6 +12507,431 @@ namespace DLL {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class M_TokuisakiShouhinDataTable : global::System.Data.TypedTableBase<M_TokuisakiShouhinRow> {
+            
+            private global::System.Data.DataColumn columnSyouhincode;
+            
+            private global::System.Data.DataColumn columnSyouhinMei;
+            
+            private global::System.Data.DataColumn columnOfficialName;
+            
+            private global::System.Data.DataColumn columnShouhinCatch;
+            
+            private global::System.Data.DataColumn columnShouhinContents;
+            
+            private global::System.Data.DataColumn columnMovieManager;
+            
+            private global::System.Data.DataColumn columnMovieActor;
+            
+            private global::System.Data.DataColumn columnShouhinNumber;
+            
+            private global::System.Data.DataColumn columnShouhinAttribute;
+            
+            private global::System.Data.DataColumn columnCopyright;
+            
+            private global::System.Data.DataColumn columnMedia;
+            
+            private global::System.Data.DataColumn columnJoueiTime;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public M_TokuisakiShouhinDataTable() {
+                this.TableName = "M_TokuisakiShouhin";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal M_TokuisakiShouhinDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected M_TokuisakiShouhinDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn SyouhincodeColumn {
+                get {
+                    return this.columnSyouhincode;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn SyouhinMeiColumn {
+                get {
+                    return this.columnSyouhinMei;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn OfficialNameColumn {
+                get {
+                    return this.columnOfficialName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn ShouhinCatchColumn {
+                get {
+                    return this.columnShouhinCatch;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn ShouhinContentsColumn {
+                get {
+                    return this.columnShouhinContents;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn MovieManagerColumn {
+                get {
+                    return this.columnMovieManager;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn MovieActorColumn {
+                get {
+                    return this.columnMovieActor;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn ShouhinNumberColumn {
+                get {
+                    return this.columnShouhinNumber;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn ShouhinAttributeColumn {
+                get {
+                    return this.columnShouhinAttribute;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn CopyrightColumn {
+                get {
+                    return this.columnCopyright;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn MediaColumn {
+                get {
+                    return this.columnMedia;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn JoueiTimeColumn {
+                get {
+                    return this.columnJoueiTime;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public M_TokuisakiShouhinRow this[int index] {
+                get {
+                    return ((M_TokuisakiShouhinRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event M_TokuisakiShouhinRowChangeEventHandler M_TokuisakiShouhinRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event M_TokuisakiShouhinRowChangeEventHandler M_TokuisakiShouhinRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event M_TokuisakiShouhinRowChangeEventHandler M_TokuisakiShouhinRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event M_TokuisakiShouhinRowChangeEventHandler M_TokuisakiShouhinRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void AddM_TokuisakiShouhinRow(M_TokuisakiShouhinRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public M_TokuisakiShouhinRow AddM_TokuisakiShouhinRow(string Syouhincode, string SyouhinMei, string OfficialName, string ShouhinCatch, string ShouhinContents, string MovieManager, string MovieActor, string ShouhinNumber, string ShouhinAttribute, string Copyright, string Media, int JoueiTime) {
+                M_TokuisakiShouhinRow rowM_TokuisakiShouhinRow = ((M_TokuisakiShouhinRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        Syouhincode,
+                        SyouhinMei,
+                        OfficialName,
+                        ShouhinCatch,
+                        ShouhinContents,
+                        MovieManager,
+                        MovieActor,
+                        ShouhinNumber,
+                        ShouhinAttribute,
+                        Copyright,
+                        Media,
+                        JoueiTime};
+                rowM_TokuisakiShouhinRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowM_TokuisakiShouhinRow);
+                return rowM_TokuisakiShouhinRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public M_TokuisakiShouhinRow FindBySyouhincodeMedia(string Syouhincode, string Media) {
+                return ((M_TokuisakiShouhinRow)(this.Rows.Find(new object[] {
+                            Syouhincode,
+                            Media})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                M_TokuisakiShouhinDataTable cln = ((M_TokuisakiShouhinDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new M_TokuisakiShouhinDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal void InitVars() {
+                this.columnSyouhincode = base.Columns["Syouhincode"];
+                this.columnSyouhinMei = base.Columns["SyouhinMei"];
+                this.columnOfficialName = base.Columns["OfficialName"];
+                this.columnShouhinCatch = base.Columns["ShouhinCatch"];
+                this.columnShouhinContents = base.Columns["ShouhinContents"];
+                this.columnMovieManager = base.Columns["MovieManager"];
+                this.columnMovieActor = base.Columns["MovieActor"];
+                this.columnShouhinNumber = base.Columns["ShouhinNumber"];
+                this.columnShouhinAttribute = base.Columns["ShouhinAttribute"];
+                this.columnCopyright = base.Columns["Copyright"];
+                this.columnMedia = base.Columns["Media"];
+                this.columnJoueiTime = base.Columns["JoueiTime"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            private void InitClass() {
+                this.columnSyouhincode = new global::System.Data.DataColumn("Syouhincode", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSyouhincode);
+                this.columnSyouhinMei = new global::System.Data.DataColumn("SyouhinMei", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSyouhinMei);
+                this.columnOfficialName = new global::System.Data.DataColumn("OfficialName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOfficialName);
+                this.columnShouhinCatch = new global::System.Data.DataColumn("ShouhinCatch", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnShouhinCatch);
+                this.columnShouhinContents = new global::System.Data.DataColumn("ShouhinContents", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnShouhinContents);
+                this.columnMovieManager = new global::System.Data.DataColumn("MovieManager", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMovieManager);
+                this.columnMovieActor = new global::System.Data.DataColumn("MovieActor", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMovieActor);
+                this.columnShouhinNumber = new global::System.Data.DataColumn("ShouhinNumber", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnShouhinNumber);
+                this.columnShouhinAttribute = new global::System.Data.DataColumn("ShouhinAttribute", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnShouhinAttribute);
+                this.columnCopyright = new global::System.Data.DataColumn("Copyright", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCopyright);
+                this.columnMedia = new global::System.Data.DataColumn("Media", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMedia);
+                this.columnJoueiTime = new global::System.Data.DataColumn("JoueiTime", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnJoueiTime);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnSyouhincode,
+                                this.columnMedia}, true));
+                this.columnSyouhincode.AllowDBNull = false;
+                this.columnSyouhincode.MaxLength = 20;
+                this.columnSyouhinMei.MaxLength = 80;
+                this.columnOfficialName.MaxLength = 1000;
+                this.columnShouhinCatch.MaxLength = 1000;
+                this.columnShouhinContents.MaxLength = 1000;
+                this.columnMovieManager.MaxLength = 500;
+                this.columnMovieActor.MaxLength = 500;
+                this.columnShouhinNumber.MaxLength = 500;
+                this.columnShouhinAttribute.MaxLength = 1000;
+                this.columnCopyright.MaxLength = 1000;
+                this.columnMedia.AllowDBNull = false;
+                this.columnMedia.MaxLength = 10;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public M_TokuisakiShouhinRow NewM_TokuisakiShouhinRow() {
+                return ((M_TokuisakiShouhinRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new M_TokuisakiShouhinRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(M_TokuisakiShouhinRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.M_TokuisakiShouhinRowChanged != null)) {
+                    this.M_TokuisakiShouhinRowChanged(this, new M_TokuisakiShouhinRowChangeEvent(((M_TokuisakiShouhinRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.M_TokuisakiShouhinRowChanging != null)) {
+                    this.M_TokuisakiShouhinRowChanging(this, new M_TokuisakiShouhinRowChangeEvent(((M_TokuisakiShouhinRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.M_TokuisakiShouhinRowDeleted != null)) {
+                    this.M_TokuisakiShouhinRowDeleted(this, new M_TokuisakiShouhinRowChangeEvent(((M_TokuisakiShouhinRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.M_TokuisakiShouhinRowDeleting != null)) {
+                    this.M_TokuisakiShouhinRowDeleting(this, new M_TokuisakiShouhinRowChangeEvent(((M_TokuisakiShouhinRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void RemoveM_TokuisakiShouhinRow(M_TokuisakiShouhinRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                DataMaster ds = new DataMaster();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "M_TokuisakiShouhinDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class KariTableDataTable : global::System.Data.TypedTableBase<KariTableRow> {
             
             private global::System.Data.DataColumn columnSyouhinCode;
@@ -22484,6 +22944,323 @@ namespace DLL {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
+        public partial class M_TokuisakiShouhinRow : global::System.Data.DataRow {
+            
+            private M_TokuisakiShouhinDataTable tableM_TokuisakiShouhin;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal M_TokuisakiShouhinRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableM_TokuisakiShouhin = ((M_TokuisakiShouhinDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Syouhincode {
+                get {
+                    return ((string)(this[this.tableM_TokuisakiShouhin.SyouhincodeColumn]));
+                }
+                set {
+                    this[this.tableM_TokuisakiShouhin.SyouhincodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string SyouhinMei {
+                get {
+                    try {
+                        return ((string)(this[this.tableM_TokuisakiShouhin.SyouhinMeiColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("テーブル \'M_TokuisakiShouhin\' にある列 \'SyouhinMei\' の値は DBNull です。", e);
+                    }
+                }
+                set {
+                    this[this.tableM_TokuisakiShouhin.SyouhinMeiColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string OfficialName {
+                get {
+                    try {
+                        return ((string)(this[this.tableM_TokuisakiShouhin.OfficialNameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("テーブル \'M_TokuisakiShouhin\' にある列 \'OfficialName\' の値は DBNull です。", e);
+                    }
+                }
+                set {
+                    this[this.tableM_TokuisakiShouhin.OfficialNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string ShouhinCatch {
+                get {
+                    try {
+                        return ((string)(this[this.tableM_TokuisakiShouhin.ShouhinCatchColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("テーブル \'M_TokuisakiShouhin\' にある列 \'ShouhinCatch\' の値は DBNull です。", e);
+                    }
+                }
+                set {
+                    this[this.tableM_TokuisakiShouhin.ShouhinCatchColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string ShouhinContents {
+                get {
+                    try {
+                        return ((string)(this[this.tableM_TokuisakiShouhin.ShouhinContentsColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("テーブル \'M_TokuisakiShouhin\' にある列 \'ShouhinContents\' の値は DBNull です。", e);
+                    }
+                }
+                set {
+                    this[this.tableM_TokuisakiShouhin.ShouhinContentsColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string MovieManager {
+                get {
+                    try {
+                        return ((string)(this[this.tableM_TokuisakiShouhin.MovieManagerColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("テーブル \'M_TokuisakiShouhin\' にある列 \'MovieManager\' の値は DBNull です。", e);
+                    }
+                }
+                set {
+                    this[this.tableM_TokuisakiShouhin.MovieManagerColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string MovieActor {
+                get {
+                    try {
+                        return ((string)(this[this.tableM_TokuisakiShouhin.MovieActorColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("テーブル \'M_TokuisakiShouhin\' にある列 \'MovieActor\' の値は DBNull です。", e);
+                    }
+                }
+                set {
+                    this[this.tableM_TokuisakiShouhin.MovieActorColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string ShouhinNumber {
+                get {
+                    try {
+                        return ((string)(this[this.tableM_TokuisakiShouhin.ShouhinNumberColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("テーブル \'M_TokuisakiShouhin\' にある列 \'ShouhinNumber\' の値は DBNull です。", e);
+                    }
+                }
+                set {
+                    this[this.tableM_TokuisakiShouhin.ShouhinNumberColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string ShouhinAttribute {
+                get {
+                    try {
+                        return ((string)(this[this.tableM_TokuisakiShouhin.ShouhinAttributeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("テーブル \'M_TokuisakiShouhin\' にある列 \'ShouhinAttribute\' の値は DBNull です。", e);
+                    }
+                }
+                set {
+                    this[this.tableM_TokuisakiShouhin.ShouhinAttributeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Copyright {
+                get {
+                    try {
+                        return ((string)(this[this.tableM_TokuisakiShouhin.CopyrightColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("テーブル \'M_TokuisakiShouhin\' にある列 \'Copyright\' の値は DBNull です。", e);
+                    }
+                }
+                set {
+                    this[this.tableM_TokuisakiShouhin.CopyrightColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Media {
+                get {
+                    return ((string)(this[this.tableM_TokuisakiShouhin.MediaColumn]));
+                }
+                set {
+                    this[this.tableM_TokuisakiShouhin.MediaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public int JoueiTime {
+                get {
+                    try {
+                        return ((int)(this[this.tableM_TokuisakiShouhin.JoueiTimeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("テーブル \'M_TokuisakiShouhin\' にある列 \'JoueiTime\' の値は DBNull です。", e);
+                    }
+                }
+                set {
+                    this[this.tableM_TokuisakiShouhin.JoueiTimeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsSyouhinMeiNull() {
+                return this.IsNull(this.tableM_TokuisakiShouhin.SyouhinMeiColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetSyouhinMeiNull() {
+                this[this.tableM_TokuisakiShouhin.SyouhinMeiColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsOfficialNameNull() {
+                return this.IsNull(this.tableM_TokuisakiShouhin.OfficialNameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetOfficialNameNull() {
+                this[this.tableM_TokuisakiShouhin.OfficialNameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsShouhinCatchNull() {
+                return this.IsNull(this.tableM_TokuisakiShouhin.ShouhinCatchColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetShouhinCatchNull() {
+                this[this.tableM_TokuisakiShouhin.ShouhinCatchColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsShouhinContentsNull() {
+                return this.IsNull(this.tableM_TokuisakiShouhin.ShouhinContentsColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetShouhinContentsNull() {
+                this[this.tableM_TokuisakiShouhin.ShouhinContentsColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsMovieManagerNull() {
+                return this.IsNull(this.tableM_TokuisakiShouhin.MovieManagerColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetMovieManagerNull() {
+                this[this.tableM_TokuisakiShouhin.MovieManagerColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsMovieActorNull() {
+                return this.IsNull(this.tableM_TokuisakiShouhin.MovieActorColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetMovieActorNull() {
+                this[this.tableM_TokuisakiShouhin.MovieActorColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsShouhinNumberNull() {
+                return this.IsNull(this.tableM_TokuisakiShouhin.ShouhinNumberColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetShouhinNumberNull() {
+                this[this.tableM_TokuisakiShouhin.ShouhinNumberColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsShouhinAttributeNull() {
+                return this.IsNull(this.tableM_TokuisakiShouhin.ShouhinAttributeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetShouhinAttributeNull() {
+                this[this.tableM_TokuisakiShouhin.ShouhinAttributeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsCopyrightNull() {
+                return this.IsNull(this.tableM_TokuisakiShouhin.CopyrightColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetCopyrightNull() {
+                this[this.tableM_TokuisakiShouhin.CopyrightColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsJoueiTimeNull() {
+                return this.IsNull(this.tableM_TokuisakiShouhin.JoueiTimeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetJoueiTimeNull() {
+                this[this.tableM_TokuisakiShouhin.JoueiTimeColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
         public partial class KariTableRow : global::System.Data.DataRow {
             
             private KariTableDataTable tableKariTable;
@@ -23817,6 +24594,40 @@ namespace DLL {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public M_JoueiKakaku2Row Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public class M_TokuisakiShouhinRowChangeEvent : global::System.EventArgs {
+            
+            private M_TokuisakiShouhinRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public M_TokuisakiShouhinRowChangeEvent(M_TokuisakiShouhinRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public M_TokuisakiShouhinRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -37988,6 +38799,762 @@ SELECT ShiiresakiCode, ShiiresakiName, Media, Range, Capacity, HyoujunKakaku, Sh
     }
     
     /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class M_TokuisakiShouhinTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public M_TokuisakiShouhinTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "M_TokuisakiShouhin";
+            tableMapping.ColumnMappings.Add("Syouhincode", "Syouhincode");
+            tableMapping.ColumnMappings.Add("SyouhinMei", "SyouhinMei");
+            tableMapping.ColumnMappings.Add("OfficialName", "OfficialName");
+            tableMapping.ColumnMappings.Add("ShouhinCatch", "ShouhinCatch");
+            tableMapping.ColumnMappings.Add("ShouhinContents", "ShouhinContents");
+            tableMapping.ColumnMappings.Add("MovieManager", "MovieManager");
+            tableMapping.ColumnMappings.Add("MovieActor", "MovieActor");
+            tableMapping.ColumnMappings.Add("ShouhinNumber", "ShouhinNumber");
+            tableMapping.ColumnMappings.Add("ShouhinAttribute", "ShouhinAttribute");
+            tableMapping.ColumnMappings.Add("Copyright", "Copyright");
+            tableMapping.ColumnMappings.Add("Media", "Media");
+            tableMapping.ColumnMappings.Add("JoueiTime", "JoueiTime");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [M_TokuisakiShouhin] WHERE (([Syouhincode] = @Original_Syouhincode) AND ((@IsNull_SyouhinMei = 1 AND [SyouhinMei] IS NULL) OR ([SyouhinMei] = @Original_SyouhinMei)) AND ((@IsNull_OfficialName = 1 AND [OfficialName] IS NULL) OR ([OfficialName] = @Original_OfficialName)) AND ((@IsNull_ShouhinCatch = 1 AND [ShouhinCatch] IS NULL) OR ([ShouhinCatch] = @Original_ShouhinCatch)) AND ((@IsNull_ShouhinContents = 1 AND [ShouhinContents] IS NULL) OR ([ShouhinContents] = @Original_ShouhinContents)) AND ((@IsNull_MovieManager = 1 AND [MovieManager] IS NULL) OR ([MovieManager] = @Original_MovieManager)) AND ((@IsNull_MovieActor = 1 AND [MovieActor] IS NULL) OR ([MovieActor] = @Original_MovieActor)) AND ((@IsNull_ShouhinNumber = 1 AND [ShouhinNumber] IS NULL) OR ([ShouhinNumber] = @Original_ShouhinNumber)) AND ((@IsNull_ShouhinAttribute = 1 AND [ShouhinAttribute] IS NULL) OR ([ShouhinAttribute] = @Original_ShouhinAttribute)) AND ((@IsNull_Copyright = 1 AND [Copyright] IS NULL) OR ([Copyright] = @Original_Copyright)) AND ([Media] = @Original_Media) AND ((@IsNull_JoueiTime = 1 AND [JoueiTime] IS NULL) OR ([JoueiTime] = @Original_JoueiTime)))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Syouhincode", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Syouhincode", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SyouhinMei", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SyouhinMei", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SyouhinMei", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SyouhinMei", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_OfficialName", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OfficialName", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_OfficialName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OfficialName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ShouhinCatch", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShouhinCatch", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ShouhinCatch", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShouhinCatch", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ShouhinContents", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShouhinContents", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ShouhinContents", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShouhinContents", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MovieManager", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MovieManager", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MovieManager", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MovieManager", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MovieActor", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MovieActor", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MovieActor", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MovieActor", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ShouhinNumber", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShouhinNumber", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ShouhinNumber", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShouhinNumber", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ShouhinAttribute", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShouhinAttribute", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ShouhinAttribute", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShouhinAttribute", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Copyright", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Copyright", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Copyright", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Copyright", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Media", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Media", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_JoueiTime", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "JoueiTime", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_JoueiTime", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "JoueiTime", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [M_TokuisakiShouhin] ([Syouhincode], [SyouhinMei], [OfficialName], [ShouhinCatch], [ShouhinContents], [MovieManager], [MovieActor], [ShouhinNumber], [ShouhinAttribute], [Copyright], [Media], [JoueiTime]) VALUES (@Syouhincode, @SyouhinMei, @OfficialName, @ShouhinCatch, @ShouhinContents, @MovieManager, @MovieActor, @ShouhinNumber, @ShouhinAttribute, @Copyright, @Media, @JoueiTime);
+SELECT Syouhincode, SyouhinMei, OfficialName, ShouhinCatch, ShouhinContents, MovieManager, MovieActor, ShouhinNumber, ShouhinAttribute, Copyright, Media, JoueiTime FROM M_TokuisakiShouhin WHERE (Media = @Media) AND (Syouhincode = @Syouhincode)";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Syouhincode", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Syouhincode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SyouhinMei", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SyouhinMei", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@OfficialName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OfficialName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ShouhinCatch", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShouhinCatch", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ShouhinContents", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShouhinContents", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MovieManager", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MovieManager", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MovieActor", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MovieActor", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ShouhinNumber", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShouhinNumber", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ShouhinAttribute", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShouhinAttribute", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Copyright", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Copyright", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Media", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Media", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@JoueiTime", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "JoueiTime", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = "UPDATE [M_TokuisakiShouhin] SET [Syouhincode] = @Syouhincode, [SyouhinMei] = @Syo" +
+                "uhinMei, [OfficialName] = @OfficialName, [ShouhinCatch] = @ShouhinCatch, [Shouhi" +
+                "nContents] = @ShouhinContents, [MovieManager] = @MovieManager, [MovieActor] = @M" +
+                "ovieActor, [ShouhinNumber] = @ShouhinNumber, [ShouhinAttribute] = @ShouhinAttrib" +
+                "ute, [Copyright] = @Copyright, [Media] = @Media, [JoueiTime] = @JoueiTime WHERE " +
+                "(([Syouhincode] = @Original_Syouhincode) AND ((@IsNull_SyouhinMei = 1 AND [Syouh" +
+                "inMei] IS NULL) OR ([SyouhinMei] = @Original_SyouhinMei)) AND ((@IsNull_Official" +
+                "Name = 1 AND [OfficialName] IS NULL) OR ([OfficialName] = @Original_OfficialName" +
+                ")) AND ((@IsNull_ShouhinCatch = 1 AND [ShouhinCatch] IS NULL) OR ([ShouhinCatch]" +
+                " = @Original_ShouhinCatch)) AND ((@IsNull_ShouhinContents = 1 AND [ShouhinConten" +
+                "ts] IS NULL) OR ([ShouhinContents] = @Original_ShouhinContents)) AND ((@IsNull_M" +
+                "ovieManager = 1 AND [MovieManager] IS NULL) OR ([MovieManager] = @Original_Movie" +
+                "Manager)) AND ((@IsNull_MovieActor = 1 AND [MovieActor] IS NULL) OR ([MovieActor" +
+                "] = @Original_MovieActor)) AND ((@IsNull_ShouhinNumber = 1 AND [ShouhinNumber] I" +
+                "S NULL) OR ([ShouhinNumber] = @Original_ShouhinNumber)) AND ((@IsNull_ShouhinAtt" +
+                "ribute = 1 AND [ShouhinAttribute] IS NULL) OR ([ShouhinAttribute] = @Original_Sh" +
+                "ouhinAttribute)) AND ((@IsNull_Copyright = 1 AND [Copyright] IS NULL) OR ([Copyr" +
+                "ight] = @Original_Copyright)) AND ([Media] = @Original_Media) AND ((@IsNull_Joue" +
+                "iTime = 1 AND [JoueiTime] IS NULL) OR ([JoueiTime] = @Original_JoueiTime)));\r\nSE" +
+                "LECT Syouhincode, SyouhinMei, OfficialName, ShouhinCatch, ShouhinContents, Movie" +
+                "Manager, MovieActor, ShouhinNumber, ShouhinAttribute, Copyright, Media, JoueiTim" +
+                "e FROM M_TokuisakiShouhin WHERE (Media = @Media) AND (Syouhincode = @Syouhincode" +
+                ")";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Syouhincode", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Syouhincode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SyouhinMei", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SyouhinMei", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@OfficialName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OfficialName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ShouhinCatch", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShouhinCatch", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ShouhinContents", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShouhinContents", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MovieManager", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MovieManager", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MovieActor", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MovieActor", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ShouhinNumber", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShouhinNumber", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ShouhinAttribute", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShouhinAttribute", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Copyright", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Copyright", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Media", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Media", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@JoueiTime", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "JoueiTime", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Syouhincode", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Syouhincode", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SyouhinMei", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SyouhinMei", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SyouhinMei", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SyouhinMei", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_OfficialName", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OfficialName", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_OfficialName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OfficialName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ShouhinCatch", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShouhinCatch", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ShouhinCatch", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShouhinCatch", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ShouhinContents", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShouhinContents", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ShouhinContents", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShouhinContents", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MovieManager", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MovieManager", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MovieManager", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MovieManager", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MovieActor", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MovieActor", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MovieActor", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MovieActor", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ShouhinNumber", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShouhinNumber", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ShouhinNumber", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShouhinNumber", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ShouhinAttribute", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShouhinAttribute", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ShouhinAttribute", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShouhinAttribute", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Copyright", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Copyright", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Copyright", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Copyright", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Media", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Media", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_JoueiTime", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "JoueiTime", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_JoueiTime", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "JoueiTime", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::DLL.Properties.Settings.Default.MMC_TestConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT                      M_TokuisakiShouhin.*\r\nFROM                         M_" +
+                "TokuisakiShouhin";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(DataMaster.M_TokuisakiShouhinDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual DataMaster.M_TokuisakiShouhinDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            DataMaster.M_TokuisakiShouhinDataTable dataTable = new DataMaster.M_TokuisakiShouhinDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(DataMaster.M_TokuisakiShouhinDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(DataMaster dataSet) {
+            return this.Adapter.Update(dataSet, "M_TokuisakiShouhin");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(string Original_Syouhincode, string Original_SyouhinMei, string Original_OfficialName, string Original_ShouhinCatch, string Original_ShouhinContents, string Original_MovieManager, string Original_MovieActor, string Original_ShouhinNumber, string Original_ShouhinAttribute, string Original_Copyright, string Original_Media, global::System.Nullable<int> Original_JoueiTime) {
+            if ((Original_Syouhincode == null)) {
+                throw new global::System.ArgumentNullException("Original_Syouhincode");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[0].Value = ((string)(Original_Syouhincode));
+            }
+            if ((Original_SyouhinMei == null)) {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_SyouhinMei));
+            }
+            if ((Original_OfficialName == null)) {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_OfficialName));
+            }
+            if ((Original_ShouhinCatch == null)) {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_ShouhinCatch));
+            }
+            if ((Original_ShouhinContents == null)) {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((string)(Original_ShouhinContents));
+            }
+            if ((Original_MovieManager == null)) {
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[10].Value = ((string)(Original_MovieManager));
+            }
+            if ((Original_MovieActor == null)) {
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[12].Value = ((string)(Original_MovieActor));
+            }
+            if ((Original_ShouhinNumber == null)) {
+                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[14].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[14].Value = ((string)(Original_ShouhinNumber));
+            }
+            if ((Original_ShouhinAttribute == null)) {
+                this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[16].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[16].Value = ((string)(Original_ShouhinAttribute));
+            }
+            if ((Original_Copyright == null)) {
+                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[18].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[18].Value = ((string)(Original_Copyright));
+            }
+            if ((Original_Media == null)) {
+                throw new global::System.ArgumentNullException("Original_Media");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[19].Value = ((string)(Original_Media));
+            }
+            if ((Original_JoueiTime.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[20].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[21].Value = ((int)(Original_JoueiTime.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[20].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[21].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(string Syouhincode, string SyouhinMei, string OfficialName, string ShouhinCatch, string ShouhinContents, string MovieManager, string MovieActor, string ShouhinNumber, string ShouhinAttribute, string Copyright, string Media, global::System.Nullable<int> JoueiTime) {
+            if ((Syouhincode == null)) {
+                throw new global::System.ArgumentNullException("Syouhincode");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(Syouhincode));
+            }
+            if ((SyouhinMei == null)) {
+                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(SyouhinMei));
+            }
+            if ((OfficialName == null)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(OfficialName));
+            }
+            if ((ShouhinCatch == null)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(ShouhinCatch));
+            }
+            if ((ShouhinContents == null)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((string)(ShouhinContents));
+            }
+            if ((MovieManager == null)) {
+                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(MovieManager));
+            }
+            if ((MovieActor == null)) {
+                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[6].Value = ((string)(MovieActor));
+            }
+            if ((ShouhinNumber == null)) {
+                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[7].Value = ((string)(ShouhinNumber));
+            }
+            if ((ShouhinAttribute == null)) {
+                this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[8].Value = ((string)(ShouhinAttribute));
+            }
+            if ((Copyright == null)) {
+                this.Adapter.InsertCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[9].Value = ((string)(Copyright));
+            }
+            if ((Media == null)) {
+                throw new global::System.ArgumentNullException("Media");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[10].Value = ((string)(Media));
+            }
+            if ((JoueiTime.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[11].Value = ((int)(JoueiTime.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[11].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(
+                    string Syouhincode, 
+                    string SyouhinMei, 
+                    string OfficialName, 
+                    string ShouhinCatch, 
+                    string ShouhinContents, 
+                    string MovieManager, 
+                    string MovieActor, 
+                    string ShouhinNumber, 
+                    string ShouhinAttribute, 
+                    string Copyright, 
+                    string Media, 
+                    global::System.Nullable<int> JoueiTime, 
+                    string Original_Syouhincode, 
+                    string Original_SyouhinMei, 
+                    string Original_OfficialName, 
+                    string Original_ShouhinCatch, 
+                    string Original_ShouhinContents, 
+                    string Original_MovieManager, 
+                    string Original_MovieActor, 
+                    string Original_ShouhinNumber, 
+                    string Original_ShouhinAttribute, 
+                    string Original_Copyright, 
+                    string Original_Media, 
+                    global::System.Nullable<int> Original_JoueiTime) {
+            if ((Syouhincode == null)) {
+                throw new global::System.ArgumentNullException("Syouhincode");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(Syouhincode));
+            }
+            if ((SyouhinMei == null)) {
+                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(SyouhinMei));
+            }
+            if ((OfficialName == null)) {
+                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(OfficialName));
+            }
+            if ((ShouhinCatch == null)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(ShouhinCatch));
+            }
+            if ((ShouhinContents == null)) {
+                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(ShouhinContents));
+            }
+            if ((MovieManager == null)) {
+                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(MovieManager));
+            }
+            if ((MovieActor == null)) {
+                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(MovieActor));
+            }
+            if ((ShouhinNumber == null)) {
+                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(ShouhinNumber));
+            }
+            if ((ShouhinAttribute == null)) {
+                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(ShouhinAttribute));
+            }
+            if ((Copyright == null)) {
+                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Copyright));
+            }
+            if ((Media == null)) {
+                throw new global::System.ArgumentNullException("Media");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(Media));
+            }
+            if ((JoueiTime.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(JoueiTime.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
+            }
+            if ((Original_Syouhincode == null)) {
+                throw new global::System.ArgumentNullException("Original_Syouhincode");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((string)(Original_Syouhincode));
+            }
+            if ((Original_SyouhinMei == null)) {
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[14].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((string)(Original_SyouhinMei));
+            }
+            if ((Original_OfficialName == null)) {
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[16].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((string)(Original_OfficialName));
+            }
+            if ((Original_ShouhinCatch == null)) {
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[18].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((string)(Original_ShouhinCatch));
+            }
+            if ((Original_ShouhinContents == null)) {
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[20].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((string)(Original_ShouhinContents));
+            }
+            if ((Original_MovieManager == null)) {
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[22].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[22].Value = ((string)(Original_MovieManager));
+            }
+            if ((Original_MovieActor == null)) {
+                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[24].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[24].Value = ((string)(Original_MovieActor));
+            }
+            if ((Original_ShouhinNumber == null)) {
+                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[26].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[26].Value = ((string)(Original_ShouhinNumber));
+            }
+            if ((Original_ShouhinAttribute == null)) {
+                this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[28].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[28].Value = ((string)(Original_ShouhinAttribute));
+            }
+            if ((Original_Copyright == null)) {
+                this.Adapter.UpdateCommand.Parameters[29].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[30].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[29].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[30].Value = ((string)(Original_Copyright));
+            }
+            if ((Original_Media == null)) {
+                throw new global::System.ArgumentNullException("Original_Media");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[31].Value = ((string)(Original_Media));
+            }
+            if ((Original_JoueiTime.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[32].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[33].Value = ((int)(Original_JoueiTime.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[32].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[33].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(
+                    string SyouhinMei, 
+                    string OfficialName, 
+                    string ShouhinCatch, 
+                    string ShouhinContents, 
+                    string MovieManager, 
+                    string MovieActor, 
+                    string ShouhinNumber, 
+                    string ShouhinAttribute, 
+                    string Copyright, 
+                    global::System.Nullable<int> JoueiTime, 
+                    string Original_Syouhincode, 
+                    string Original_SyouhinMei, 
+                    string Original_OfficialName, 
+                    string Original_ShouhinCatch, 
+                    string Original_ShouhinContents, 
+                    string Original_MovieManager, 
+                    string Original_MovieActor, 
+                    string Original_ShouhinNumber, 
+                    string Original_ShouhinAttribute, 
+                    string Original_Copyright, 
+                    string Original_Media, 
+                    global::System.Nullable<int> Original_JoueiTime) {
+            return this.Update(Original_Syouhincode, SyouhinMei, OfficialName, ShouhinCatch, ShouhinContents, MovieManager, MovieActor, ShouhinNumber, ShouhinAttribute, Copyright, Original_Media, JoueiTime, Original_Syouhincode, Original_SyouhinMei, Original_OfficialName, Original_ShouhinCatch, Original_ShouhinContents, Original_MovieManager, Original_MovieActor, Original_ShouhinNumber, Original_ShouhinAttribute, Original_Copyright, Original_Media, Original_JoueiTime);
+        }
+    }
+    
+    /// <summary>
     ///TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     ///</summary>
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -38042,6 +39609,8 @@ SELECT ShiiresakiCode, ShiiresakiName, Media, Range, Capacity, HyoujunKakaku, Sh
         private M_JoueiKakaku3TableAdapter _m_JoueiKakaku3TableAdapter;
         
         private M_JoueiKakaku2TableAdapter _m_JoueiKakaku2TableAdapter;
+        
+        private M_TokuisakiShouhinTableAdapter _m_TokuisakiShouhinTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -38368,6 +39937,20 @@ SELECT ShiiresakiCode, ShiiresakiName, Media, Range, Capacity, HyoujunKakaku, Sh
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
+            "a", "System.Drawing.Design.UITypeEditor")]
+        public M_TokuisakiShouhinTableAdapter M_TokuisakiShouhinTableAdapter {
+            get {
+                return this._m_TokuisakiShouhinTableAdapter;
+            }
+            set {
+                this._m_TokuisakiShouhinTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public bool BackupDataSetBeforeUpdate {
             get {
                 return this._backupDataSetBeforeUpdate;
@@ -38473,6 +40056,10 @@ SELECT ShiiresakiCode, ShiiresakiName, Media, Range, Capacity, HyoujunKakaku, Sh
                             && (this._m_JoueiKakaku2TableAdapter.Connection != null))) {
                     return this._m_JoueiKakaku2TableAdapter.Connection;
                 }
+                if (((this._m_TokuisakiShouhinTableAdapter != null) 
+                            && (this._m_TokuisakiShouhinTableAdapter.Connection != null))) {
+                    return this._m_TokuisakiShouhinTableAdapter.Connection;
+                }
                 return null;
             }
             set {
@@ -38552,6 +40139,9 @@ SELECT ShiiresakiCode, ShiiresakiName, Media, Range, Capacity, HyoujunKakaku, Sh
                 if ((this._m_JoueiKakaku2TableAdapter != null)) {
                     count = (count + 1);
                 }
+                if ((this._m_TokuisakiShouhinTableAdapter != null)) {
+                    count = (count + 1);
+                }
                 return count;
             }
         }
@@ -38569,6 +40159,15 @@ SELECT ShiiresakiCode, ShiiresakiName, Media, Range, Capacity, HyoujunKakaku, Sh
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._m_AppSettingTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._m_JoueiKakaku3TableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.M_JoueiKakaku3.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._m_JoueiKakaku3TableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -38635,21 +40234,21 @@ SELECT ShiiresakiCode, ShiiresakiName, Media, Range, Capacity, HyoujunKakaku, Sh
                     allChangedRows.AddRange(updatedRows);
                 }
             }
+            if ((this._m_JoueiKakaku2TableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.M_JoueiKakaku2.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._m_JoueiKakaku2TableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._m_AccountPageTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.M_AccountPage.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._m_AccountPageTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._t_OshiraseTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.T_Oshirase.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._t_OshiraseTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -38743,21 +40342,21 @@ SELECT ShiiresakiCode, ShiiresakiName, Media, Range, Capacity, HyoujunKakaku, Sh
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._m_JoueiKakaku3TableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.M_JoueiKakaku3.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._t_OshiraseTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.T_Oshirase.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._m_JoueiKakaku3TableAdapter.Update(updatedRows));
+                    result = (result + this._t_OshiraseTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._m_JoueiKakaku2TableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.M_JoueiKakaku2.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._m_TokuisakiShouhinTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.M_TokuisakiShouhin.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._m_JoueiKakaku2TableAdapter.Update(updatedRows));
+                    result = (result + this._m_TokuisakiShouhinTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -38776,6 +40375,14 @@ SELECT ShiiresakiCode, ShiiresakiName, Media, Range, Capacity, HyoujunKakaku, Sh
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._m_AppSettingTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._m_JoueiKakaku3TableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.M_JoueiKakaku3.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._m_JoueiKakaku3TableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -38835,19 +40442,19 @@ SELECT ShiiresakiCode, ShiiresakiName, Media, Range, Capacity, HyoujunKakaku, Sh
                     allAddedRows.AddRange(addedRows);
                 }
             }
+            if ((this._m_JoueiKakaku2TableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.M_JoueiKakaku2.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._m_JoueiKakaku2TableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             if ((this._m_AccountPageTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.M_AccountPage.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._m_AccountPageTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._t_OshiraseTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.T_Oshirase.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._t_OshiraseTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -38931,19 +40538,19 @@ SELECT ShiiresakiCode, ShiiresakiName, Media, Range, Capacity, HyoujunKakaku, Sh
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._m_JoueiKakaku3TableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.M_JoueiKakaku3.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._t_OshiraseTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.T_Oshirase.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._m_JoueiKakaku3TableAdapter.Update(addedRows));
+                    result = (result + this._t_OshiraseTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._m_JoueiKakaku2TableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.M_JoueiKakaku2.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._m_TokuisakiShouhinTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.M_TokuisakiShouhin.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._m_JoueiKakaku2TableAdapter.Update(addedRows));
+                    result = (result + this._m_TokuisakiShouhinTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -38957,19 +40564,19 @@ SELECT ShiiresakiCode, ShiiresakiName, Media, Range, Capacity, HyoujunKakaku, Sh
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private int UpdateDeletedRows(DataMaster dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
-            if ((this._m_JoueiKakaku2TableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.M_JoueiKakaku2.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._m_TokuisakiShouhinTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.M_TokuisakiShouhin.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._m_JoueiKakaku2TableAdapter.Update(deletedRows));
+                    result = (result + this._m_TokuisakiShouhinTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._m_JoueiKakaku3TableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.M_JoueiKakaku3.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._t_OshiraseTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.T_Oshirase.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._m_JoueiKakaku3TableAdapter.Update(deletedRows));
+                    result = (result + this._t_OshiraseTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -39053,19 +40660,19 @@ SELECT ShiiresakiCode, ShiiresakiName, Media, Range, Capacity, HyoujunKakaku, Sh
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._t_OshiraseTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.T_Oshirase.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._t_OshiraseTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._m_AccountPageTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.M_AccountPage.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._m_AccountPageTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._m_JoueiKakaku2TableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.M_JoueiKakaku2.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._m_JoueiKakaku2TableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -39122,6 +40729,14 @@ SELECT ShiiresakiCode, ShiiresakiName, Media, Range, Capacity, HyoujunKakaku, Sh
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._t_LogTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._m_JoueiKakaku3TableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.M_JoueiKakaku3.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._m_JoueiKakaku3TableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -39258,6 +40873,10 @@ SELECT ShiiresakiCode, ShiiresakiName, Media, Range, Capacity, HyoujunKakaku, Sh
             }
             if (((this._m_JoueiKakaku2TableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._m_JoueiKakaku2TableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("TableAdapterManager で管理されるすべての TableAdapter は同一の接続文字列を使用する必要があります。");
+            }
+            if (((this._m_TokuisakiShouhinTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._m_TokuisakiShouhinTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("TableAdapterManager で管理されるすべての TableAdapter は同一の接続文字列を使用する必要があります。");
             }
             global::System.Data.IDbConnection workConnection = this.Connection;
@@ -39489,6 +41108,15 @@ SELECT ShiiresakiCode, ShiiresakiName, Media, Range, Capacity, HyoujunKakaku, Sh
                         adaptersWithAcceptChangesDuringUpdate.Add(this._m_JoueiKakaku2TableAdapter.Adapter);
                     }
                 }
+                if ((this._m_TokuisakiShouhinTableAdapter != null)) {
+                    revertConnections.Add(this._m_TokuisakiShouhinTableAdapter, this._m_TokuisakiShouhinTableAdapter.Connection);
+                    this._m_TokuisakiShouhinTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._m_TokuisakiShouhinTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._m_TokuisakiShouhinTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._m_TokuisakiShouhinTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._m_TokuisakiShouhinTableAdapter.Adapter);
+                    }
+                }
                 // 
                 //---- Perform updates -----------
                 //
@@ -39634,6 +41262,10 @@ SELECT ShiiresakiCode, ShiiresakiName, Media, Range, Capacity, HyoujunKakaku, Sh
                 if ((this._m_JoueiKakaku2TableAdapter != null)) {
                     this._m_JoueiKakaku2TableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._m_JoueiKakaku2TableAdapter]));
                     this._m_JoueiKakaku2TableAdapter.Transaction = null;
+                }
+                if ((this._m_TokuisakiShouhinTableAdapter != null)) {
+                    this._m_TokuisakiShouhinTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._m_TokuisakiShouhinTableAdapter]));
+                    this._m_TokuisakiShouhinTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];

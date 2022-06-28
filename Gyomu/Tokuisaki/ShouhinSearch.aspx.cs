@@ -148,10 +148,10 @@ where M_Kakaku_2.CategoryCode = '205'";
 
                 if (check.Checked)
                 {
-
+                    string[] vs = new string[] { "jj" };
 
                     //1商品コード,2メディア,4価格
-                    var hidden = (MainGrid.Rows[i].Cells[2].Controls[3] as HiddenField).Value.Split(':');
+                    var hidden = (MainGrid.Rows[i].Cells[2].Controls[3] as HiddenField).Value.Split(vs, StringSplitOptions.None);
 
                     //商品名
                     //var shouhinName = (MainGrid.Rows[i].Cells[1].Controls[1] as Label).Text;
@@ -191,7 +191,10 @@ where M_Kakaku_2.CategoryCode = '205'";
 
             if (count == 0)
             {
-                Response.Write("商品が選択されていません。");
+
+                string script = "alert('商品が選択されていません。');";
+                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
+
 
             }
             else
@@ -325,7 +328,7 @@ where T_tokusyu.CategoryCode = '{categoryCode}' and T_tokusyu.tokusyu_code = '{t
                 //表示するデータを増やす場合はここを修正する。
                 //HidData.Value = dr["SyouhinMei"] + "-" + dr["ShouhinCatch"] + "-" + dr["ShouhinContents"] + "-" + dr["MovieManager"] + "-" + dr["MovieActor"] + "-" + dr["HyoujunKakaku"] + "-" + dr["Media"] + "-" + dr["ShouhinAttribute"] + "-" + dr["Copyright"] + "-" + dr["SyouhinCode"] + "-" + hasImage + "-" + dr["ShiireName"] + "-" + dr["JoueiTime"];
 
-                HidData.Value = $@"{dr["SyouhinMei"]} : {dr["SyouhinCode"]} : {dr["Media"]} : {dr["ShiireName"]} : {dr["HyoujunKakaku"]} : {dr["ShiireKakaku"]} : {dr["ShouhinAttribute"]} : {dr["JoueiTime"]} : {dr["MovieManager"]} : {dr["MovieActor"]} : {dr["Copyright"]}";
+                HidData.Value = dr["SyouhinMei"] + "jj" + dr["SyouhinCode"] + "jj" + dr["Media"] + "jj" + dr["ShiireName"] + "jj" + dr["HyoujunKakaku"] + "jj" + dr["ShiireKakaku"] + "jj" + dr["ShouhinAttribute"] + "jj" + dr["JoueiTime"] + "jj" + dr["MovieManager"] + "jj" + dr["MovieActor"] + "jj" + dr["Copyright"];
 
                 btn.Attributes["onclick"] = string.Format("Create('{0}'); return false;", HidData.Value); ;
 

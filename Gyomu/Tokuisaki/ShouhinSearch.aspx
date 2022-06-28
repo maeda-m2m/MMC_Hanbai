@@ -365,7 +365,7 @@
 
 
             /**/
-            var AryData = data.split(':');
+            var AryData = data.split('jj');
 
             ShouhinLabel.textContent = AryData[0];
             MakerLabel.textContent = AryData[3];
@@ -379,7 +379,16 @@
             /*  MakerKakakuLabel.textContent = AryData[5];*/
 
             AttribuLabel.textContent = AryData[6];
-            TimeLabel.textContent = AryData[7] + '分';
+
+            if (AryData[7] == '') {
+                TimeLabel.textContent = AryData[7];
+            } else {
+                TimeLabel.textContent = AryData[7] + '分';
+            }
+
+
+
+
             ManagerLabel.textContent = AryData[8];
             ActorLabel.textContent = AryData[9];
             CopyrightLabel.textContent = AryData[10];
