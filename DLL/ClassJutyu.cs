@@ -574,7 +574,7 @@ namespace DLL
                 da.SelectCommand.Transaction = da.UpdateCommand.Transaction = sql;
 
                 Tdt[0].ItemArray = dp[0].ItemArray;
-
+                Tdt[0].JutyuFlg = "True";
                 da.Update(Tdt);
                 sql.Commit();
             }

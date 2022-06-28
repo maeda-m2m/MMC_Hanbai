@@ -59,7 +59,6 @@ window.onload = function () {
             break;
         default:
             for (var e = 0; e < cc.length; e++) {
-                debugger;
                 cc[c].style.display = 'none';
             }
             for (var f = 0; f < zs.length; f++) {

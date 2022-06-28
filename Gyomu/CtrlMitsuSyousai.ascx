@@ -1,7 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="CtrlMitsuSyousai.ascx.cs" Inherits="Gyomu.CtrlMitsuSyousai" %>
 
 
-
 <asp:Label ID="err" runat="server" Text="" ForeColor="#ff0000"></asp:Label>
 <asp:Label ID="end" runat="server" Text="" ForeColor="Green"></asp:Label>
 <div runat="server" style="width: 100%">
@@ -24,7 +23,6 @@
                 <telerik:RadComboBox ID="SerchProduct" AutoPostBack="false" EnableLoadOnDemand="true" ShowToggleImage="False" runat="server" AllowCustomText="True" ShowMoreResultsBox="True" EnableVirtualScrolling="True" OnItemsRequested="SerchProduct_ItemsRequested" EmptyMessage="" Width="500px" OnClientSelectedIndexChanged="select">
                 </telerik:RadComboBox>
                 <telerik:RadComboBox ID="SerchProductJouei" EnableLoadOnDemand="true" ShowToggleImage="False" runat="server" AllowCustomText="True" ShowMoreResultsBox="True" EnableVirtualScrolling="True" OnItemsRequested="SerchProductJouei_ItemsRequested" EmptyMessage="" Width="500px" OnSelectedIndexChanged="SerchProductJouei_SelectedIndexChanged" AutoPostBack="true"></telerik:RadComboBox>
-                <asp:Label runat="server" ID="LblSerchProduct"></asp:Label>
                 <asp:Button runat="server" ID="BtnTool1" ToolTip="登録する商品名を検索し、一覧上から選択。" Text="❔" OnClientClick="return false;" />
                 <asp:HiddenField runat="server" ID="HidColor" />
                 <asp:HiddenField runat="server" ID="HidCp" />
@@ -42,17 +40,14 @@
             </td>
             <td class="MeisaisTD" runat="server">
                 <asp:TextBox ID="Suryo" runat="server" Width="30px" Text="1" TextMode="Number"></asp:TextBox>
-                <asp:Label runat="server" ID="LblSuryo"></asp:Label>
             </td>
             <td class="MeisaikTD" runat="server">
                 <asp:TextBox ID="HyoujyunTanka" runat="server" Width="80px" Height="20px" CssClass="SujiText" EnableViewState="true" ViewStateMode="Enabled"></asp:TextBox>
-                <asp:Label runat="server" ID="LblHyoujunTanka"></asp:Label>
                 <input type="hidden" id="ht" runat="server" />
                 <input type="hidden" id="zeiht" runat="server" />
             </td>
             <td class="MeisaikTD" runat="server">
                 <asp:TextBox ID="Kingaku" runat="server" Width="80px" Height="20px" CssClass="SujiText"></asp:TextBox>
-                <asp:Label runat="server" ID="LblHyoujunKingaku"></asp:Label>
                 <input type="hidden" id="kgk" runat="server" />
                 <input type="hidden" id="zeikgk" runat="server" />
             </td>
@@ -91,11 +86,9 @@
             </td>
             <td class="MeisaiMTD" runat="server">
                 <telerik:RadDatePicker ID="StartDate" runat="server" Width="100px" CssClass="CategoryChabge"></telerik:RadDatePicker>
-                <asp:Label runat="server" ID="LblStartDate"></asp:Label>
             </td>
             <td class="MeisaiMTD" runat="server">
                 <telerik:RadDatePicker ID="EndDate" runat="server" Width="100px" CssClass="CategoryChabge"></telerik:RadDatePicker>
-                <asp:Label runat="server" ID="LblEndDate"></asp:Label>
             </td>
             <td class="MeisaiTD" runat="server">
                 <table>
@@ -111,12 +104,10 @@
             </td>
             <td class="MeisaikTD" runat="server">
                 <asp:TextBox ID="Tanka" runat="server" Width="80px" Height="20px" CssClass="SujiText"></asp:TextBox>
-                <asp:Label runat="server" ID="LblTanka"></asp:Label>
                 <input type="hidden" id="tk" runat="server" />
             </td>
             <td class="MeisaikTD" runat="server">
                 <asp:TextBox ID="Uriage" runat="server" Width="80px" Height="20px" CssClass="SujiText"></asp:TextBox>
-                <asp:Label runat="server" ID="LblUriage"></asp:Label>
                 <input type="hidden" id="ug" runat="server" />
             </td>
         </tr>
@@ -142,24 +133,21 @@
 
                     </Items>
                 </telerik:RadComboBox>
-                <asp:Label runat="server" ID="LblTekiyo"></asp:Label>
             </td>
             <td colspan="2" class="MeisaiTD" runat="server">
                 <telerik:RadComboBox ID="Hachu" runat="server" Culture="ja-JP" AllowCustomText="True" EnableLoadOnDemand="True" ShowMoreResultsBox="True" ShowToggleImage="False" EnableVirtualScrolling="True" OnItemsRequested="Hachu_ItemsRequested" OnSelectedIndexChanged="Hachu_SelectedIndexChanged" AutoPostBack="true"></telerik:RadComboBox>
-                <asp:Label runat="server" ID="LblHachu"></asp:Label>
+                <%--                <asp:Label runat="server" ID="LblHachu"></asp:Label>--%>
             </td>
             <td class="MeisaiTD" runat="server">
                 <asp:Label ID="WareHouse" runat="server" Text="不明"></asp:Label>
             </td>
             <td class="MeisaikTD" runat="server">
                 <asp:TextBox ID="ShiireTanka" runat="server" Width="80px" Height="20px" CssClass="SujiText"></asp:TextBox>
-                <asp:Label runat="server" ID="LblShiireTanka"></asp:Label>
                 <input type="hidden" id="st" runat="server" />
                 <input type="hidden" id="zeist" runat="server" />
             </td>
             <td class="MeisaikTD" runat="server">
                 <asp:TextBox ID="ShiireKingaku" runat="server" Width="80px" Height="20px" CssClass="SujiText"></asp:TextBox>
-                <asp:Label runat="server" ID="LblShiireKingaku"></asp:Label>
                 <input type="hidden" id="sk" runat="server" />
                 <input type="hidden" id="zeisk" runat="server" />
             </td>

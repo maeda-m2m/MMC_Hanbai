@@ -290,13 +290,19 @@ namespace Gyomu.Mitumori
                 {
                     if (strFacility == "")
                     {
-                        strFacility = dtM[m].SisetsuAbbreviration;
+                        if (!string.IsNullOrEmpty(dtM[m].SisetsuAbbreviration))
+                        {
+                            strFacility = dtM[m].SisetsuAbbreviration;
+                        }
                     }
                     else
                     {
                         if (!strFacility.Contains(dtM[m].SisetsuAbbreviration))
                         {
-                            strFacility += "/" + dtM[m].SisetsuAbbreviration;
+                            if (!string.IsNullOrEmpty(dtM[m].SisetsuAbbreviration))
+                            {
+                                strFacility += "/" + dtM[m].SisetsuAbbreviration;
+                            }
                         }
                     }
                 }

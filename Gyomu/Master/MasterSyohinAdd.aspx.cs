@@ -608,132 +608,152 @@ namespace Gyomu.Master
                 RadDatePicker RdpCpOwari = D.Items[i].FindControl("RdpCpOwari") as RadDatePicker;
                 TextBox TbxCpKakaku = D.Items[i].FindControl("TbxCpKakaku") as TextBox;
                 TextBox TbxCpShiire = D.Items[i].FindControl("TbxCpShiire") as TextBox;
+                DataSet1.M_Kakaku_2Row dr = dt.NewM_Kakaku_2Row();
+                if (!string.IsNullOrEmpty(RdpPermissionStart.SelectedDate.ToString()))
+                {
+                    dr.PermissionStart = RdpPermissionStart.SelectedDate.Value.ToShortDateString();
+                }
+                if (!string.IsNullOrEmpty(RdpRightEnd.SelectedDate.ToString()))
+                {
+                    dr.RightEnd = RdpRightEnd.SelectedDate.Value.ToShortDateString();
+                }
+                if (!string.IsNullOrEmpty(RcbCategory.Text))
+                {
+                    dr.Categoryname = RcbCategory.Text;
+                    dr.CategoryCode = int.Parse(RcbCategory.SelectedValue);
+                }
+                if (ChkJacket.Checked)
+                {
+                    dr.JacketPrint = "1";
+                }
+                else
+                {
+                    dr.JacketPrint = "0";
+                }
+                if (ChkKyodakusyo.Checked)
+                {
+                    dr.PermissionPrint = "1";
+                }
+                else
+                {
+                    dr.PermissionPrint = "0";
+                }
+                if (ChkReturn.Checked)
+                {
+                    dr.Henkyaku = "1";
+                }
+                else
+                {
+                    dr.Henkyaku = "0";
+                }
+                if (ChkHoukokusyo.Checked)
+                {
+                    dr.Houkokusyo = "1";
+                }
+                else
+                {
+                    dr.Houkokusyo = "0";
+                }
+                if (!string.IsNullOrEmpty(RcbMedia.SelectedValue))
+                {
+                    dr.Media = RcbMedia.SelectedValue;
+                }
+                if (!string.IsNullOrEmpty(RadMakerRyaku.Text))
+                {
+                    dr.ShiireName = RadMakerRyaku.Text;
+                    dr.ShiireCode = RadMakerRyaku.SelectedValue;
+                }
+                else
+                {
+                    dr.ShiireCode = "";
+                }
+                if (!string.IsNullOrEmpty(TbxMakerHinban.Text))
+                {
+                    dr.Makernumber = TbxMakerHinban.Text;
+                }
+                else
+                {
+                    dr.Makernumber = "";
+                }
+                dr.Hanni = TbxHanni.Text;
+
+                if (!string.IsNullOrEmpty(RcbWareHouse.SelectedValue))
+                {
+                    dr.WareHouse = RcbWareHouse.SelectedValue;
+                }
+                if (!string.IsNullOrEmpty(TbxHyoujunKakaku.Text))
+                {
+                    dr.HyoujunKakaku = int.Parse(TbxHyoujunKakaku.Text.Replace(",", ""));
+                }
+                if (!string.IsNullOrEmpty(TbxShiireKakaku.Text))
+                {
+                    dr.ShiireKakaku = int.Parse(TbxShiireKakaku.Text.Replace(",", ""));
+                }
+                if (!string.IsNullOrEmpty(RdpCpKaishi.SelectedDate.ToString()))
+                {
+                    dr.CpKaisi = RdpCpKaishi.SelectedDate.Value.ToShortDateString();
+                }
+                if (!string.IsNullOrEmpty(RdpCpOwari.SelectedDate.ToString()))
+                {
+                    dr.CpOwari = RdpCpOwari.SelectedDate.Value.ToShortDateString();
+                }
+                if (!string.IsNullOrEmpty(TbxCpKakaku.Text))
+                {
+                    dr.CpKakaku = TbxCpKakaku.Text.Replace(",", "");
+                }
+                if (!string.IsNullOrEmpty(TbxCpShiire.Text))
+                {
+                    dr.CpShiire = TbxCpShiire.Text.Replace(",", "");
+                }
                 if (e.CommandName == "Del")
                 {
                     if (i != row)
                     {
-                        DataSet1.M_Kakaku_2Row dr = dt.NewM_Kakaku_2Row();
-                        if (!string.IsNullOrEmpty(RdpPermissionStart.SelectedDate.ToString()))
-                        {
-                            dr.PermissionStart = RdpPermissionStart.SelectedDate.Value.ToShortDateString();
-                        }
-                        if (!string.IsNullOrEmpty(RdpRightEnd.SelectedDate.ToString()))
-                        {
-                            dr.RightEnd = RdpRightEnd.SelectedDate.Value.ToShortDateString();
-                        }
-                        if (!string.IsNullOrEmpty(RcbCategory.Text))
-                        {
-                            dr.Categoryname = RcbCategory.Text;
-                            dr.CategoryCode = int.Parse(RcbCategory.SelectedValue);
-                        }
-                        if (ChkJacket.Checked)
-                        {
-                            dr.JacketPrint = "1";
-                        }
-                        else
-                        {
-                            dr.JacketPrint = "0";
-                        }
-                        if (ChkKyodakusyo.Checked)
-                        {
-                            dr.PermissionPrint = "1";
-                        }
-                        else
-                        {
-                            dr.PermissionPrint = "0";
-                        }
-                        if (ChkReturn.Checked)
-                        {
-                            dr.Henkyaku = "1";
-                        }
-                        else
-                        {
-                            dr.Henkyaku = "0";
-                        }
-                        if (ChkHoukokusyo.Checked)
-                        {
-                            dr.Houkokusyo = "1";
-                        }
-                        else
-                        {
-                            dr.Houkokusyo = "0";
-                        }
-                        if (!string.IsNullOrEmpty(RcbMedia.SelectedValue))
-                        {
-                            dr.Media = RcbMedia.SelectedValue;
-                        }
-                        if (!string.IsNullOrEmpty(RadMakerRyaku.Text))
-                        {
-                            dr.ShiireName = RadMakerRyaku.Text;
-                            dr.ShiireCode = RadMakerRyaku.SelectedValue;
-                        }
-                        if (!string.IsNullOrEmpty(TbxMakerHinban.Text))
-                        {
-                            dr.Makernumber = TbxMakerHinban.Text;
-                        }
-                        dr.Hanni = TbxHanni.Text;
-
-                        if (!string.IsNullOrEmpty(RcbWareHouse.SelectedValue))
-                        {
-                            dr.WareHouse = RcbWareHouse.SelectedValue;
-                        }
-                        if (!string.IsNullOrEmpty(TbxHyoujunKakaku.Text))
-                        {
-                            dr.HyoujunKakaku = int.Parse(TbxHyoujunKakaku.Text.Replace(",", ""));
-                        }
-                        if (!string.IsNullOrEmpty(TbxShiireKakaku.Text))
-                        {
-                            dr.ShiireKakaku = int.Parse(TbxShiireKakaku.Text.Replace(",", ""));
-                        }
-                        if (!string.IsNullOrEmpty(RdpCpKaishi.SelectedDate.ToString()))
-                        {
-                            dr.CpKaisi = RdpCpKaishi.SelectedDate.Value.ToShortDateString();
-                        }
-                        if (!string.IsNullOrEmpty(RdpCpOwari.SelectedDate.ToString()))
-                        {
-                            dr.CpOwari = RdpCpOwari.SelectedDate.Value.ToShortDateString();
-                        }
-                        if (!string.IsNullOrEmpty(TbxCpKakaku.Text))
-                        {
-                            dr.CpKakaku = TbxCpKakaku.Text.Replace(",", "");
-                        }
-                        if (!string.IsNullOrEmpty(TbxCpShiire.Text))
-                        {
-                            dr.CpShiire = TbxCpShiire.Text.Replace(",", "");
-                        }
                         dr.SyouhinCode = TbxCode.Text;
                         dr.SyouhinMei = TbxSyohinMei.Text;
                         dt.AddM_Kakaku_2Row(dr);
                     }
                 }
+                else
+                {
+                    dr.SyouhinCode = TbxCode.Text;
+                    dr.SyouhinMei = TbxSyohinMei.Text;
+                    dt.AddM_Kakaku_2Row(dr);
+                }
             }
 
             if (e.CommandName == "Copy")
             {
-                bool result = false;
-                DataSet1.M_Kakaku_2Row dr = dt.NewM_Kakaku_2Row();
-                string[] strCategory = { "101", "102", "103", "109", "201", "202", "203", "204", "205", "206", "207", "208", "209", "299", "301", "302", "401", "402" };
-                for (int a = 0; a < strCategory.Length; a++)
+                try
                 {
-                    if (!result)
+                    bool result = false;
+                    DataSet1.M_Kakaku_2Row dr = dt.NewM_Kakaku_2Row();
+                    string[] strCategory = { "101", "102", "103", "109", "201", "202", "203", "204", "205", "206", "207", "208", "209", "299", "301", "302", "401", "402" };
+                    for (int a = 0; a < strCategory.Length; a++)
                     {
-                        try
+                        if (!result)
                         {
-                            dr.ItemArray = dt[row].ItemArray;
-                            dr.CategoryCode = int.Parse(strCategory[a]);
-                            dt.AddM_Kakaku_2Row(dr);
-                            result = true;
-                        }
-                        catch
-                        {
-                            result = false;
+                            try
+                            {
+                                dr.ItemArray = dt[row].ItemArray;
+                                dr.CategoryCode = int.Parse(strCategory[a]);
+                                dt.AddM_Kakaku_2Row(dr);
+                                result = true;
+                            }
+                            catch
+                            {
+                                result = false;
+                            }
                         }
                     }
+                    D.DataSource = dt;
+                    D.DataBind();
+                }
+                catch (Exception ex)
+                {
+
                 }
             }
-
-            D.DataSource = dt;
-            D.DataBind();
         }
 
         protected void RcbCategory_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)

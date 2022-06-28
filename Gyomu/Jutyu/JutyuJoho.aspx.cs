@@ -518,170 +518,202 @@ namespace Gyomu.Jutyu
 
         protected void BtnOrdered_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < RadG.Items.Count; i++)
+            try
             {
-                HtmlInputCheckBox chk =
-                    (HtmlInputCheckBox)this.RadG.Items[i].Cells[RadG.Columns.FindByUniqueName("ColChk_Row").OrderIndex].FindControl("ChkRow");
-
-                if (chk.Checked && chk.Visible)
+                for (int i = 0; i < RadG.Items.Count; i++)
                 {
-                    if (strKeys != "") { strKeys += ","; }
+                    HtmlInputCheckBox chk =
+                        (HtmlInputCheckBox)this.RadG.Items[i].Cells[RadG.Columns.FindByUniqueName("ColChk_Row").OrderIndex].FindControl("ChkRow");
 
-                    strKeys += chk.Value;
+                    if (chk.Checked && chk.Visible)
+                    {
+                        if (strKeys != "") { strKeys += ","; }
+
+                        strKeys += chk.Value;
+                    }
                 }
+                string JutyuNo = "";
+                string Facility = "";
+                string Category = "";
+                string[] Row = strKeys.Split(',');
+                for (int j = 0; j < Row.Length; j++)
+                {
+                    string[] retsu = Row[j].Split('_');
+                    JutyuNo = retsu[0];
+                    Facility = retsu[1];
+                    Category = retsu[2];
+
+
+                    DataJutyu.T_JutyuDataTable jdt = ClassJutyu.GetJutyu3(JutyuNo, Global.GetConnection());
+                    DataJutyu.T_JutyuHeaderDataTable hdt = ClassJutyu.GetJutyuHeader(JutyuNo, Global.GetConnection());
+
+                    string cate = "";
+                    string shiire = "";
+                    DataSet1.T_OrderedDataTable dt = new DataSet1.T_OrderedDataTable();
+
+                    for (int i = 0; i < jdt.Count; i++)
+                    {
+                        DataSet1.T_OrderedHeaderDataTable dth = new DataSet1.T_OrderedHeaderDataTable();
+                        DataSet1.T_OrderedHeaderRow dlh = dth.NewT_OrderedHeaderRow();
+                        string no = "";
+                        SessionManager.KI();
+                        int ki = int.Parse(SessionManager.KII);
+                        DataSet1.T_OrderedHeaderRow drr = ClassOrdered.GetMaxOrdered(ki, Global.GetConnection());
+                        if (drr != null)
+                        {
+                            no = (drr.OrderedNo + 1).ToString();
+                        }
+                        else
+                        {
+                            no = "3" + (ki * 100000 + 1).ToString();
+                        }
+
+
+                        DataSet1.T_OrderedRow dl = dt.NewT_OrderedRow();
+                        if (cate == "")
+                        {
+                            cate += jdt[i].CateGory.ToString();
+                        }
+                        else
+                        {
+                            cate += "," + jdt[i].CateGory;
+                        }
+                        if (shiire == "")
+                        {
+                            shiire += jdt[i].ShiireName;
+                        }
+                        else
+                        {
+                            shiire += "," + jdt[i].ShiireName;
+                        }
+
+                        dl.OrderedNo = int.Parse(no);
+                        dlh.OrderedNo = int.Parse(no);
+                        dl.RowNo = i + 1;
+                        dl.TokuisakiCode = jdt[i].TokuisakiCode;
+                        dlh.TokuisakiCode = jdt[i].TokuisakiCode;
+                        dl.TokuisakiMei = jdt[i].TokuisakiMei;
+                        dlh.TokuisakiName = jdt[i].TokuisakiMei;
+                        dl.SeikyusakiMei = jdt[i].SeikyusakiMei;
+                        dlh.SeikyusakiName = jdt[i].SeikyusakiMei;
+                        dl.Category = jdt[i].CateGory;
+                        dlh.Category = jdt[i].CateGory;
+                        dl.CategoryName = jdt[i].CategoryName;
+                        dlh.CategoryName = jdt[i].CategoryName;
+                        if (!jdt[i].IsTyokusousakiCDNull())
+                        {
+                            dl.TyokusodsakiCD = jdt[i].TyokusousakiCD;
+                            dlh.TyokusousakiCD = jdt[i].TyokusousakiCD;
+                        }
+                        if (!jdt[i].IsTyokusousakiMeiNull())
+                        {
+                            dl.TyokusosakiMei = jdt[i].TyokusousakiMei;
+                            dlh.TyokusousakiMei = jdt[i].TyokusousakiMei;
+                        }
+                        if (!jdt[i].IsJusyo1Null())
+                        {
+                            dl.Jusyo1 = jdt[i].Jusyo1;
+                        }
+                        if (!jdt[i].IsJusyo2Null())
+                        {
+                            dl.Jusyo2 = jdt[i].Jusyo2;
+                        }
+                        if (!jdt[i].IsSisetuCodeNull())
+                        {
+                            dl.FacilityCode = jdt[i].SisetuCode;
+                        }
+                        if (!jdt[i].IsSisetuMeiNull())
+                        {
+                            dl.FacilityName = jdt[i].SisetuMei;
+                        }
+                        if (!jdt[i].IsSisetsuTellNull())
+                        {
+                            dl.FacilityTel = jdt[i].SisetsuTell;
+                        }
+
+                        //if (!jdt[i].IsSisetuCodeNull())
+                        //{
+                        //    dl.FacilityCode = jdt[i].SisetuCode;
+                        //    string FacCode = jdt[i].SisetuCode.ToString();
+                        //    DataSet1.M_Facility_NewRow dr = Class1.FacilityRow(FacCode, Global.GetConnection());
+                        //}
+                        //if (!jdt[i].IsSisetuMeiNull())
+                        //{
+                        //    dl.FacilityName = jdt[i].SisetuMei;
+                        //    dlh.FacilityName = jdt[i].SisetuMei;
+                        //    string FacName = jdt[i].SisetuMei;
+                        //    DataSet1.M_Facility_NewRow dr = Class1.FacilityRow2(FacName, Global.GetConnection());
+                        //    dl.FacilityTel = dr.Tell;
+                        //}
+                        if (!jdt[i].IsSisetuJusyo1Null())
+                        { dl.FacilityJusyo1 = jdt[i].SisetuJusyo1; }
+                        if (!jdt[i].IsSiyouKaishiNull())
+                        { dl.SiyouKaishi = jdt[i].SiyouKaishi.ToShortDateString(); }
+                        if (!jdt[i].IsSiyouOwariNull())
+                        { dl.SiyouiOwari = jdt[i].SiyouOwari.ToShortDateString(); }
+                        if (!jdt[i].IsHyojunKakakuNull())
+                        { dl.HyoujyunKakaku = int.Parse(jdt[i].HyojunKakaku); }
+                        if (!jdt[i].IsTanTouNameNull())
+                        { dl.StaffName = jdt[i].TanTouName; }
+                        if (!jdt[i].IsBusyoNull())
+                        { dl.Department = jdt[i].Busyo; }
+                        if (!jdt[i].IsRangeNull())
+                        { dl.Range = jdt[i].Range; }
+                        if (!jdt[i].IsSyouhinMeiNull())
+                        { dl.ProductName = jdt[i].SyouhinMei; }
+                        if (!jdt[i].IsSyouhinCodeNull())
+                        { dl.ProductCode = int.Parse(jdt[i].SyouhinCode); }
+                        if (!jdt[i].IsMekarHinbanNull())
+                        { dl.MekerNo = jdt[i].MekarHinban; }
+                        if (!jdt[i].IsKeitaiMeiNull())
+                        { dl.Media = jdt[i].KeitaiMei; }
+                        dl.UriageFlg = jdt[i].JutyuFlg;
+                        dl.HatyuDay = DateTime.Now.ToShortDateString();
+                        dlh.CreateDate = DateTime.Now;
+                        dl.JutyuSuryou = jdt[i].JutyuSuryou;
+                        dlh.OrderedAmount = jdt[i].JutyuSuryou;
+                        dl.JutyuGokei = jdt[i].JutyuGokei;
+                        dl.ShiireTanka = jdt[i].ShiireTanka;
+                        dlh.ShiireKingaku = jdt[i].ShiireKingaku;
+                        dl.ShiireKingaku = jdt[i].ShiireKingaku;
+                        dl.WareHouse = jdt[i].WareHouse;
+                        dl.ShiireSakiName = jdt[i].ShiireName;
+                        dlh.ShiiresakiName = jdt[i].ShiireName;
+                        string abb = dl.ShiireSakiName;
+                        DataMaster.M_ShiiresakiDataTable dd = ClassMaster.GetShiiresaki(abb, Global.GetConnection());
+                        for (int l = 0; l < dd.Count; l++)
+                        {
+                            dl.ShiiresakiCode = dd[0].ShiiresakiCode.ToString();
+                            dlh.ShiiresakiCode = dd[0].ShiiresakiCode.ToString();
+                        }
+                        dl.Zeikubun = jdt[i].Zeikubun;
+                        dl.Kakeritsu = jdt[i].Kakeritsu;
+                        dl.Zansu = jdt[i].JutyuSuryou.ToString();
+                        dlh.InsertFlg = false;
+                        //dt.AddT_OrderedRow(dl);
+
+                        dth.AddT_OrderedHeaderRow(dlh);
+
+                        ClassOrdered.UpdateOrderedHeader(dth, dl, cate, shiire, Global.GetConnection());
+                        ClassJutyu.UpDateJutyuHeader(JutyuNo, hdt, Global.GetConnection());
+                        dth = null;
+                        lblMsg.Text = "発注処理を行いました。";
+                        ///売上データ作成
+
+                        Create();
+                    }
+                    //ClassOrdered.InsertOrdered2(dt, Global.GetConnection());
+                }
+                DataUriage.T_UriageHeaderRow dru = ClassUriage.GetMaxNo(Global.GetConnection());
+                string jNo = JutyuNo;
+                int noo = dru.UriageNo;
+                int Uno = noo + 1;
+                ClassUriage.InsertUriageHeader(jNo, Uno, Global.GetConnection());
             }
-            string JutyuNo = "";
-            string Facility = "";
-            string Category = "";
-            string[] Row = strKeys.Split(',');
-            for (int j = 0; j < Row.Length; j++)
+            catch (Exception ex)
             {
-                string[] retsu = Row[j].Split('_');
-                JutyuNo = retsu[0];
-                Facility = retsu[1];
-                Category = retsu[2];
-
-                DataJutyu.T_JutyuDataTable jdt = ClassJutyu.GetJutyu3(JutyuNo, Global.GetConnection());
-                DataJutyu.T_JutyuHeaderDataTable hdt = ClassJutyu.GetJutyuHeader(JutyuNo, Global.GetConnection());
-
-                string cate = "";
-                string shiire = "";
-                DataSet1.T_OrderedDataTable dt = new DataSet1.T_OrderedDataTable();
-
-
-                for (int i = 0; i < jdt.Count; i++)
-                {
-                    DataSet1.T_OrderedHeaderDataTable dth = new DataSet1.T_OrderedHeaderDataTable();
-                    DataSet1.T_OrderedHeaderRow drr = ClassOrdered.GetMaxOrdered(Global.GetConnection());
-                    DataSet1.T_OrderedHeaderRow dlh = dth.NewT_OrderedHeaderRow();
-
-                    DataSet1.T_OrderedRow dl = dt.NewT_OrderedRow();
-                    if (cate == "")
-                    {
-                        cate += jdt[i].CateGory.ToString();
-                    }
-                    else
-                    {
-                        cate += "," + jdt[i].CateGory;
-                    }
-                    if (shiire == "")
-                    {
-                        shiire += jdt[i].ShiireName;
-                    }
-                    else
-                    {
-                        shiire += "," + jdt[i].ShiireName;
-                    }
-
-                    dl.OrderedNo = drr.OrderedNo + 1;
-                    dlh.OrderedNo = drr.OrderedNo + 1;
-                    dl.RowNo = i + 1;
-                    dl.TokuisakiCode = int.Parse(jdt[i].TokuisakiCode);
-                    dlh.TokuisakiCode = jdt[i].TokuisakiCode;
-                    dl.TokuisakiMei = jdt[i].TokuisakiMei;
-                    dlh.TokuisakiName = jdt[i].TokuisakiMei;
-                    dl.SeikyusakiMei = jdt[i].SeikyusakiMei;
-                    dlh.SeikyusakiName = jdt[i].SeikyusakiMei;
-                    dl.Category = jdt[i].CateGory;
-                    dlh.Category = jdt[i].CateGory;
-                    dl.CategoryName = jdt[i].CategoryName;
-                    dlh.CategoryName = jdt[i].CategoryName;
-                    if (!jdt[i].IsTyokusousakiCDNull())
-                    {
-                        dl.TyokusodsakiCD = jdt[i].TyokusousakiCD;
-                        dlh.TyokusousakiCD = jdt[i].TyokusousakiCD;
-                    }
-                    if (!jdt[i].IsTyokusousakiMeiNull())
-                    {
-                        dl.TyokusosakiMei = jdt[i].TyokusousakiMei;
-                        dlh.TyokusousakiMei = jdt[i].TyokusousakiMei;
-                    }
-                    if (!jdt[i].IsJusyo1Null())
-                    {
-                        dl.Jusyo1 = jdt[i].Jusyo1;
-                    }
-                    if (!jdt[i].IsJusyo2Null())
-                    {
-                        dl.Jusyo2 = jdt[i].Jusyo2;
-                    }
-                    if (!jdt[i].IsSisetuCodeNull())
-                    {
-                        dl.FacilityCode = jdt[i].SisetuCode;
-                        string FacCode = jdt[i].SisetuCode.ToString();
-                        DataSet1.M_Facility_NewRow dr = Class1.FacilityRow(FacCode, Global.GetConnection());
-                    }
-                    if (!jdt[i].IsSisetuMeiNull())
-                    {
-                        dl.FacilityName = jdt[i].SisetuMei;
-                        dlh.FacilityName = jdt[i].SisetuMei;
-                        string FacName = jdt[i].SisetuMei;
-                        DataSet1.M_Facility_NewRow dr = Class1.FacilityRow2(FacName, Global.GetConnection());
-                        dl.FacilityTel = dr.Tell;
-                    }
-                    if (!jdt[i].IsSisetuJusyo1Null())
-                    { dl.FacilityJusyo1 = jdt[i].SisetuJusyo1; }
-                    if (!jdt[i].IsSiyouKaishiNull())
-                    { dl.SiyouKaishi = jdt[i].SiyouKaishi.ToShortDateString(); }
-                    if (!jdt[i].IsSiyouOwariNull())
-                    { dl.SiyouiOwari = jdt[i].SiyouOwari.ToShortDateString(); }
-                    if (!jdt[i].IsHyojunKakakuNull())
-                    { dl.HyoujyunKakaku = int.Parse(jdt[i].HyojunKakaku); }
-                    if (!jdt[i].IsTanTouNameNull())
-                    { dl.StaffName = jdt[i].TanTouName; }
-                    if (!jdt[i].IsBusyoNull())
-                    { dl.Department = jdt[i].Busyo; }
-                    if (!jdt[i].IsRangeNull())
-                    { dl.Range = jdt[i].Range; }
-                    if (!jdt[i].IsSyouhinMeiNull())
-                    { dl.ProductName = jdt[i].SyouhinMei; }
-                    if (!jdt[i].IsSyouhinCodeNull())
-                    { dl.ProductCode = int.Parse(jdt[i].SyouhinCode); }
-                    if (!jdt[i].IsMekarHinbanNull())
-                    { dl.MekerNo = jdt[i].MekarHinban; }
-                    if (!jdt[i].IsKeitaiMeiNull())
-                    { dl.Media = jdt[i].KeitaiMei; }
-                    dl.UriageFlg = jdt[i].JutyuFlg;
-                    dl.HatyuDay = DateTime.Now.ToShortDateString();
-                    dlh.CreateDate = DateTime.Now;
-                    dl.JutyuSuryou = jdt[i].JutyuSuryou;
-                    dlh.OrderedAmount = jdt[i].JutyuSuryou;
-                    dl.JutyuGokei = jdt[i].JutyuGokei;
-                    dl.ShiireTanka = jdt[i].ShiireTanka;
-                    dlh.ShiireKingaku = jdt[i].ShiireKingaku;
-                    dl.ShiireKingaku = jdt[i].ShiireKingaku;
-                    dl.WareHouse = jdt[i].WareHouse;
-                    dl.ShiireSakiName = jdt[i].ShiireName;
-                    dlh.ShiiresakiName = jdt[i].ShiireName;
-                    string abb = dl.ShiireSakiName;
-                    DataMaster.M_ShiiresakiDataTable dd = ClassMaster.GetShiiresaki(abb, Global.GetConnection());
-                    for (int l = 0; l < dd.Count; l++)
-                    {
-                        dl.ShiiresakiCode = dd[0].ShiiresakiCode.ToString();
-                        dlh.ShiiresakiCode = dd[0].ShiiresakiCode.ToString();
-                    }
-                    dl.Zeikubun = jdt[i].Zeikubun;
-                    dl.Kakeritsu = jdt[i].Kakeritsu;
-                    dl.Zansu = jdt[i].JutyuSuryou.ToString();
-                    dlh.InsertFlg = false;
-                    //dt.AddT_OrderedRow(dl);
-
-                    dth.AddT_OrderedHeaderRow(dlh);
-
-                    ClassOrdered.UpdateOrderedHeader(dth, dl, cate, shiire, Global.GetConnection());
-                    ClassJutyu.UpDateJutyuHeader(JutyuNo, hdt, Global.GetConnection());
-                    dth = null;
-                    lblMsg.Text = "発注処理を行いました。";
-                    ///売上データ作成
-
-                    Create();
-                }
-                //ClassOrdered.InsertOrdered2(dt, Global.GetConnection());
+                ClassMail.ErrorMail("maeda@m2m-asp.com", "受注一覧から発注ボタン", strKeys + "^" + ex.Message);
             }
-            DataUriage.T_UriageHeaderRow dru = ClassUriage.GetMaxNo(Global.GetConnection());
-            string jNo = JutyuNo;
-            int noo = dru.UriageNo;
-            int Uno = noo + 1;
-            ClassUriage.InsertUriageHeader(jNo, Uno, Global.GetConnection());
         }
 
         protected void RadSisetMeisyo_ItemsRequested(object sender, RadComboBoxItemsRequestedEventArgs e)

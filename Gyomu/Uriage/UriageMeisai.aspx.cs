@@ -117,12 +117,12 @@ namespace Gyomu.Uriage
                     DataSet1.M_Tokuisaki2DataTable dtT = ClassKensaku.GetTokuisakiSyousai(p, Global.GetConnection());
                     TokuisakiMei.Value = dtT[0].TokuisakiName1;
                     TokuisakiCode.Value = dtT[0].TokuisakiCode.ToString();
-                    Label3.Text = dtT[0].Kakeritsu;
+                    Label3.Text = dtT[0].Kakeritsu.ToString();
                     Shimebi.Text = dtT[0].Shimebi;
                     string name = drr.TantoName;
                     DataSet1.M_TantoDataTable dtM = Class1.GetStaff2(name, Global.GetConnection());
                     RadComboBox4.Items.Clear();
-                    for(int t = 0; t < dtM.Count; t++)
+                    for (int t = 0; t < dtM.Count; t++)
                     {
                         RadComboBox4.Items.Add(new RadComboBoxItem(dtM[t].BumonName, dtM[t].Bumon.ToString()));
                     }
