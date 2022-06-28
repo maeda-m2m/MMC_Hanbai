@@ -264,7 +264,7 @@ namespace Gyomu.Tokuisaki
             }
             else
             {
-
+                Create();
                 return;
 
             }
@@ -299,7 +299,7 @@ namespace Gyomu.Tokuisaki
         {
             string sqlCommand;
 
-            sqlCommand = $"select SyouhinMei from M_Kakaku_2 where SyouhinMei like '{e.Text.Trim()}%'";
+            sqlCommand = $"select SyouhinMei from M_TokuisakiShouhin where SyouhinMei like '{e.Text.Trim()}%'";
 
             SetCombo(sender, e, sqlCommand);
         }
@@ -312,7 +312,7 @@ namespace Gyomu.Tokuisaki
         {
             string sqlCommand;
 
-            sqlCommand = $"select SyouhinCode from M_Kakaku_2 where SyouhinCode like '{e.Text.Trim()}%'";
+            sqlCommand = $"select SyouhinCode from M_TokuisakiShouhin where SyouhinCode like '{e.Text.Trim()}%'";
 
             SetCombo(sender, e, sqlCommand);
         }
