@@ -69,13 +69,13 @@ namespace Gyomu.Tokuisaki
         protected global::System.Web.UI.WebControls.Button BackButton;
 
         /// <summary>
-        /// ShouhinCodeComboTouroku コントロール。
+        /// ShouhinCodeTxt コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox ShouhinCodeComboTouroku;
+        protected global::System.Web.UI.WebControls.TextBox ShouhinCodeTxt;
 
         /// <summary>
         /// shouhinTxt コントロール。
@@ -213,13 +213,13 @@ namespace Gyomu.Tokuisaki
         protected global::Telerik.Web.UI.RadComboBox ShouhinCodeCombo;
 
         /// <summary>
-        /// MakerCodeCombo コントロール。
+        /// MediaDrop コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox MakerCodeCombo;
+        protected global::System.Web.UI.WebControls.DropDownList MediaDrop;
 
         /// <summary>
         /// SearchButton コントロール。
@@ -231,15 +231,6 @@ namespace Gyomu.Tokuisaki
         protected global::System.Web.UI.WebControls.Button SearchButton;
 
         /// <summary>
-        /// ShouhinNameCombo コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox ShouhinNameCombo;
-
-        /// <summary>
         /// MakerCombo コントロール。
         /// </summary>
         /// <remarks>
@@ -249,13 +240,13 @@ namespace Gyomu.Tokuisaki
         protected global::Telerik.Web.UI.RadComboBox MakerCombo;
 
         /// <summary>
-        /// MediaDrop コントロール。
+        /// MakerCodeCombo コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList MediaDrop;
+        protected global::Telerik.Web.UI.RadComboBox MakerCodeCombo;
 
         /// <summary>
         /// NewTouroku コントロール。

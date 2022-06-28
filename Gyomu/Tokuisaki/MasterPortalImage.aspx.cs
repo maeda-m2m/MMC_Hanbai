@@ -241,18 +241,23 @@ namespace Gyomu.Tokuisaki
 
             if (!string.IsNullOrWhiteSpace(ShouhinCodeCombo.Text))
             {
-                sqlCommand += $"SyouhinCode = '{ShouhinCodeCombo.SelectedValue}' and ";
+                var item = ShouhinCodeCombo.Text.Split('/');
+
+                sqlCommand += $"SyouhinCode = '{item[0]}' and ";
+
+                //sqlCommand += $"SyouhinMei  = '{item[1]}' and ";
+
                 count++;
             }
 
 
 
 
-            if (!string.IsNullOrWhiteSpace(ShouhinNameCombo.Text))
-            {
-                sqlCommand += $"SyouhinMei  = '{ShouhinNameCombo.SelectedValue}' and ";
-                count++;
-            }
+            //if (!string.IsNullOrWhiteSpace(ShouhinNameCombo.Text))
+            //{
+            //    sqlCommand += $"SyouhinMei  = '{ShouhinNameCombo.SelectedValue}' and ";
+            //    count++;
+            //}
 
 
 
@@ -295,14 +300,14 @@ namespace Gyomu.Tokuisaki
 
 
 
-        protected void ShouhinNameCombo_ItemsRequested(object sender, Telerik.Web.UI.RadComboBoxItemsRequestedEventArgs e)
-        {
-            string sqlCommand;
+        //protected void ShouhinNameCombo_ItemsRequested(object sender, Telerik.Web.UI.RadComboBoxItemsRequestedEventArgs e)
+        //{
+        //    string sqlCommand;
 
-            sqlCommand = $"select SyouhinMei from M_TokuisakiShouhin where SyouhinMei like '{e.Text.Trim()}%'";
+        //    sqlCommand = $"select SyouhinMei from M_TokuisakiShouhin where SyouhinMei like '{e.Text.Trim()}%'";
 
-            SetCombo(sender, e, sqlCommand);
-        }
+        //    SetCombo(sender, e, sqlCommand);
+        //}
 
 
 
@@ -312,7 +317,7 @@ namespace Gyomu.Tokuisaki
         {
             string sqlCommand;
 
-            sqlCommand = $"select SyouhinCode from M_TokuisakiShouhin where SyouhinCode like '{e.Text.Trim()}%'";
+            sqlCommand = $"select SyouhinCode, SyouhinMei from M_TokuisakiShouhin where SyouhinCode like '{e.Text.Trim()}%' or SyouhinMei like '{e.Text.Trim()}%'";
 
             SetCombo(sender, e, sqlCommand);
         }
@@ -338,7 +343,7 @@ namespace Gyomu.Tokuisaki
             {
                 if (!items.Contains(table.Rows[i].ItemArray[0].ToString()))
                 {
-                    items.Add(table.Rows[i].ItemArray[0].ToString());
+                    items.Add(table.Rows[i].ItemArray[0].ToString() + "/" + table.Rows[i].ItemArray[1].ToString());
                 }
             }
 

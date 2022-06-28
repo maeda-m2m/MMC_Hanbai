@@ -68,7 +68,7 @@ namespace Gyomu.Tokuisaki
             {
                 EditCheckHidden.Value = "true";
                 shouhinCodeHidden.Value = row.Rows[0].ItemArray[0].ToString();
-                ShouhinCodeComboTouroku.Text = row.Rows[0].ItemArray[0].ToString();
+                ShouhinCodeTxt.Text = row.Rows[0].ItemArray[0].ToString();
                 shouhinTxt.Text = row.Rows[0].ItemArray[1].ToString();
                 MakerTxt.Text = row.Rows[0].ItemArray[2].ToString();
                 CatchTxt.Text = row.Rows[0].ItemArray[3].ToString();
@@ -123,7 +123,7 @@ namespace Gyomu.Tokuisaki
             MainPanel.Visible = false;
             EditCheckHidden.Value = "false";
             shouhinCodeHidden.Value = "";
-            ShouhinCodeComboTouroku.Text = "";
+            ShouhinCodeTxt.Text = "";
             shouhinTxt.Text = "";
             MakerTxt.Text = "";
             CatchTxt.Text = "";
@@ -144,14 +144,48 @@ namespace Gyomu.Tokuisaki
             Create();
         }
 
+
+
+
+
+
+
         protected void ShouhinCodeCombo_ItemsRequested(object sender, Telerik.Web.UI.RadComboBoxItemsRequestedEventArgs e)
         {
             string sqlCommand;
 
-            sqlCommand = $"select Syouhincode from M_TokuisakiShouhin where Syouhincode like '{e.Text.Trim()}%'";
+            sqlCommand = $"select Syouhincode, SyouhinMei from M_TokuisakiShouhin where Syouhincode like '{e.Text.Trim()}%' or SyouhinMei like '{e.Text.Trim()}%'";
 
-            SetCombo(sender, e, sqlCommand);
+            var rad = sender as RadComboBox;
+
+            rad.Items.Clear();
+
+            rad.Items.Add(new RadComboBoxItem("", ""));
+
+
+            var table = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
+
+            var items = new List<string>();
+
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                if (!items.Contains(table.Rows[i].ItemArray[0].ToString()))
+                {
+                    items.Add(table.Rows[i].ItemArray[0].ToString() + "/" + table.Rows[i].ItemArray[1].ToString());
+                }
+            }
+
+            foreach (var additems in items)
+            {
+                rad.Items.Add(new RadComboBoxItem(additems, additems));
+            }
         }
+
+
+
+
+
+
 
         private void SetCombo(object sender, RadComboBoxItemsRequestedEventArgs e, string sqlCommand)
         {
@@ -184,14 +218,14 @@ namespace Gyomu.Tokuisaki
 
         }
 
-        protected void ShouhinNameCombo_ItemsRequested(object sender, RadComboBoxItemsRequestedEventArgs e)
-        {
-            string sqlCommand;
+        //protected void ShouhinNameCombo_ItemsRequested(object sender, RadComboBoxItemsRequestedEventArgs e)
+        //{
+        //    string sqlCommand;
 
-            sqlCommand = $"select SyouhinMei from M_TokuisakiShouhin where SyouhinMei like '%{e.Text.Trim()}%'";
+        //    sqlCommand = $"select SyouhinMei from M_TokuisakiShouhin where SyouhinMei like '%{e.Text.Trim()}%'";
 
-            SetCombo(sender, e, sqlCommand);
-        }
+        //    SetCombo(sender, e, sqlCommand);
+        //}
 
         protected void MakerCodeCombo_ItemsRequested(object sender, RadComboBoxItemsRequestedEventArgs e)
         {
@@ -217,9 +251,31 @@ namespace Gyomu.Tokuisaki
         {
             string sqlCommand;
 
-            sqlCommand = $"select Syouhincode from M_TokuisakiShouhin where Syouhincode like '%{e.Text.Trim()}%'";
+            sqlCommand = $"select Syouhincode, SyouhinMei from M_Kakaku_2 where Syouhincode like '{e.Text.Trim()}%' or SyouhinMei like '{e.Text.Trim()}%'";
 
-            SetCombo(sender, e, sqlCommand);
+            var rad = sender as RadComboBox;
+
+            rad.Items.Clear();
+
+            rad.Items.Add(new RadComboBoxItem("", ""));
+
+
+            var table = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
+
+            var items = new List<string>();
+
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                if (!items.Contains(table.Rows[i].ItemArray[0].ToString()))
+                {
+                    items.Add(table.Rows[i].ItemArray[0].ToString() + "/" + table.Rows[i].ItemArray[1].ToString());
+                }
+            }
+
+            foreach (var additems in items)
+            {
+                rad.Items.Add(new RadComboBoxItem(additems, additems));
+            }
         }
 
 
@@ -239,18 +295,22 @@ namespace Gyomu.Tokuisaki
 
             if (!string.IsNullOrWhiteSpace(ShouhinCodeCombo.Text))
             {
-                sqlCommand += $"Syouhincode = '{ShouhinCodeCombo.SelectedValue}' and ";
+                var item = ShouhinCodeCombo.Text.Split('/');
+
+                sqlCommand += $"SyouhinCode = '{item[0]}' and ";
+
+                //sqlCommand += $"Syouhincode = '{ShouhinCodeCombo.SelectedValue}' and ";
                 count++;
             }
 
 
 
 
-            if (!string.IsNullOrWhiteSpace(ShouhinNameCombo.Text))
-            {
-                sqlCommand += $"SyouhinMei  = '{ShouhinNameCombo.SelectedValue}' and ";
-                count++;
-            }
+            //if (!string.IsNullOrWhiteSpace(ShouhinNameCombo.Text))
+            //{
+            //    sqlCommand += $"SyouhinMei  = '{ShouhinNameCombo.SelectedValue}' and ";
+            //    count++;
+            //}
 
 
 
@@ -323,8 +383,10 @@ namespace Gyomu.Tokuisaki
 
         protected void TourokuButton_Click(object sender, EventArgs e)
         {
+
+
             //商品コード、商品名、メーカー、キャッチコピー、内容、監督、出演、メーカーコード、仕様、コピーライト、メディア、上映時間,商品コードhidden
-            var word = new string[] { ShouhinCodeComboTouroku.Text.Trim(), shouhinTxt.Text.Trim(), MakerTxt.Text.Trim(), CatchTxt.Text.Trim(), NaiyouTxt.Text.Trim(), KantokuTxt.Text.Trim(), ActorTxt.Text.Trim(), MakerCodeTxt.Text.Trim(), ShiyouTxt.Text.Trim(), CopyrightTxt.Text.Trim(), MediaTxt.Text.Trim(), TimeTxt.Text.Trim(), shouhinCodeHidden.Value };
+            var word = new string[] { ShouhinCodeTxt.Text.Trim(), shouhinTxt.Text.Trim(), MakerTxt.Text.Trim(), CatchTxt.Text.Trim(), NaiyouTxt.Text.Trim(), KantokuTxt.Text.Trim(), ActorTxt.Text.Trim(), MakerCodeTxt.Text.Trim(), ShiyouTxt.Text.Trim(), CopyrightTxt.Text.Trim(), MediaTxt.Text.Trim(), TimeTxt.Text.Trim(), shouhinCodeHidden.Value };
 
             string script;
 
@@ -520,47 +582,61 @@ where Syouhincode = @a12
             bool bTab = strCheck.Split('\t').Length > strCheck.Split(',').Length;
 
 
-
-            if (bTab)
+            try
             {
-                while (check.EndOfStream == false)
+
+
+
+                if (bTab)
                 {
-                    string strLineData = check.ReadLine();
+                    while (check.EndOfStream == false)
+                    {
+                        string strLineData = check.ReadLine();
 
-                    string[] mData = strLineData.Split('\t');
+                        string[] mData = strLineData.Split('\t');
 
-                    var dt = new DataMaster.M_TokuisakiShouhinDataTable();
+                        var dt = new DataMaster.M_TokuisakiShouhinDataTable();
 
-                    var dr = dt.NewM_TokuisakiShouhinRow();
+                        var dr = dt.NewM_TokuisakiShouhinRow();
 
-                    dr.ItemArray = mData;
+                        dr.ItemArray = mData;
 
-                    dt.AddM_TokuisakiShouhinRow(dr);
+                        dt.AddM_TokuisakiShouhinRow(dr);
 
-                    UpdateCSVtanto(dt, Global.GetConnection());
+                        UpdateCSVtanto(dt, Global.GetConnection());
+                    }
+                }
+                else
+                {
+                    while (check.EndOfStream == false)
+                    {
+                        string strLineData = check.ReadLine();
+
+                        string[] mData = strLineData.Split(',');
+
+                        var dt = new DataMaster.M_TokuisakiShouhinDataTable();
+
+                        var dr = dt.NewM_TokuisakiShouhinRow();
+
+                        dr.ItemArray = mData;
+
+                        dt.AddM_TokuisakiShouhinRow(dr);
+
+                        UpdateCSVtanto(dt, Global.GetConnection());
+
+                        count++;
+                    }
                 }
             }
-            else
+            catch (Exception ex)
             {
-                while (check.EndOfStream == false)
-                {
-                    string strLineData = check.ReadLine();
-
-                    string[] mData = strLineData.Split(',');
-
-                    var dt = new DataMaster.M_TokuisakiShouhinDataTable();
-
-                    var dr = dt.NewM_TokuisakiShouhinRow();
-
-                    dr.ItemArray = mData;
-
-                    dt.AddM_TokuisakiShouhinRow(dr);
-
-                    UpdateCSVtanto(dt, Global.GetConnection());
-
-                    count++;
-                }
+                script = $"alert('ファイルのアップロードに失敗しました。{ex.Message}');";
+                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
             }
+
+
+
+
             script = "alert('ファイルのアップロードに成功しました。');";
             Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
             //head_lbl1.Visible = false;
