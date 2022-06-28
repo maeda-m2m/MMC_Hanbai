@@ -2715,7 +2715,7 @@ namespace Gyomu
                     }
                     else
                     {
-                        xlsxCreator.Cell("AE39").Value = "金額(税込)";
+                        xlsxCreator.Cell("AE37").Value = "金額(税込)";
                         if (!dtH[0].IsGokeiKingakuNull())
                         {
                             xlsxCreator.Cell("D27").Value = "￥" + dtH[0].GokeiKingaku.ToString("0,0");
