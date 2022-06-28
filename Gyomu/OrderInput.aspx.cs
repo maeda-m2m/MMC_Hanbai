@@ -19,36 +19,43 @@ namespace Gyomu
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            KariNouhin.Visible = false;
-            LblTantoStaffCode.Text = HidTantoStaffCode.Value;
-            Label3.Text = TbxKakeritsu.Text;
-            strKakeritsu = TbxKakeritsu.Text;
-            Shimebi.Text = RcbShimebi.Text;
-            strZeikubun = RcbTax.Text;
-            Err.Text = "";
-            End.Text = "";
-            NouhinsakiPanel.Visible = false;
-            if (!IsPostBack)
+            try
             {
-                TBTokuisaki.Style["display"] = "none";
-                Button1.OnClientClick = string.Format("Meisai2('{0}'); return false;", TBTokuisaki.ClientID);
-                Button6.OnClientClick = string.Format("Close2('{0}'); return false;", TBTokuisaki.ClientID);
-                mInput2.Visible = true;
-                CtrlSyousai.Visible = true;
-                SubMenu.Visible = true;
-                SubMenu2.Style["display"] = "none";
-                RadDatePicker1.SelectedDate = DateTime.Now;
-                RadDatePicker2.SelectedDate = DateTime.Now;
-                RadDatePicker3.SelectedDate = DateTime.Now;
-                ListSet.SetCategory(RadComboCategory);
-                if (SessionManager.HACCYU_NO != "")
+                KariNouhin.Visible = false;
+                LblTantoStaffCode.Text = HidTantoStaffCode.Value;
+                Label3.Text = TbxKakeritsu.Text;
+                strKakeritsu = TbxKakeritsu.Text;
+                Shimebi.Text = RcbShimebi.Text;
+                strZeikubun = RcbTax.Text;
+                Err.Text = "";
+                End.Text = "";
+                NouhinsakiPanel.Visible = false;
+                if (!IsPostBack)
                 {
-                    Create2();
+                    TBTokuisaki.Style["display"] = "none";
+                    Button1.OnClientClick = string.Format("Meisai2('{0}'); return false;", TBTokuisaki.ClientID);
+                    Button6.OnClientClick = string.Format("Close2('{0}'); return false;", TBTokuisaki.ClientID);
+                    mInput2.Visible = true;
+                    CtrlSyousai.Visible = true;
+                    SubMenu.Visible = true;
+                    SubMenu2.Style["display"] = "none";
+                    RadDatePicker1.SelectedDate = DateTime.Now;
+                    RadDatePicker2.SelectedDate = DateTime.Now;
+                    RadDatePicker3.SelectedDate = DateTime.Now;
+                    ListSet.SetCategory(RadComboCategory);
+                    if (SessionManager.HACCYU_NO != "")
+                    {
+                        Create2();
+                    }
+                    else
+                    {
+                        Create();
+                    }
                 }
-                else
-                {
-                    Create();
-                }
+            }
+            catch (Exception ex)
+            {
+                ClassMail.ErrorMail("maeda@m2m-asp.com", "受注明細", SessionManager.HACCYU_NO + "^" + ex.Message);
             }
         }
 
@@ -856,9 +863,9 @@ namespace Gyomu
                 ClassJutyu.InsertJutyu2(dg, Global.GetConnection());
                 JutyuNo.Text = dl.JutyuNo.ToString();
             }
-            catch
+            catch (Exception ex)
             {
-
+                ClassMail.ErrorMail("maeda@m2m-asp.com", "エラーメール | 受注登録", ex.Message + "\n" + ex.StackTrace + "\n" + ex.Source);
                 Err.Text = "データを登録することができませんでした。";
             }
             if (Err.Text == "")
@@ -1763,9 +1770,21 @@ namespace Gyomu
                     dh.CreateDate = DateTime.Now;
                     dh.SouSuryou = int.Parse(TextBox10.Text);
                     string mno = SessionManager.HACCYU_NO;
+                    SessionManager.KI();
+                    int ki = int.Parse(SessionManager.KII);
+                    string OrderedNo = "";
                     //DataMitumori.T_MitumoriHeaderDataTable db = ClassMitumori.GetMitumoriHeader(mno, Global.GetConnection());
-                    DataSet1.T_OrderedHeaderRow db = ClassOrdered.GetMaxOrdered(Global.GetConnection());
-                    string arrr = db.OrderedNo.ToString();
+                    DataSet1.T_OrderedHeaderRow db = ClassOrdered.GetMaxOrdered(ki, Global.GetConnection());
+                    if (db != null)
+                    {
+                        OrderedNo = (db.OrderedNo + 1).ToString();
+                    }
+                    else
+                    {
+                        OrderedNo = "3" + (ki * 10 + 1).ToString();
+                    }
+
+                    string arrr = OrderedNo.ToString();
                     //受注データに挿入
                     string arr = mno.ToString().Substring(1, 7);
                     string sub = arrr.Substring(1, 7);
@@ -1980,7 +1999,7 @@ namespace Gyomu
                             if (RadComboBox1.Text != "")
                             {
                                 dr.TokuisakiMei = TokuisakiMei.Value;
-                                dr.TokuisakiCode = int.Parse(TokuisakiCode.Value);
+                                dr.TokuisakiCode = TokuisakiCode.Value;
                             }
 
                             if (ShiyouShisetsu.Text != "")
@@ -2034,8 +2053,9 @@ namespace Gyomu
                 //ClassOrdered.InsertOrdered(dg, Global.GetConnection());
 
             }
-            catch
+            catch (Exception ex)
             {
+                ClassMail.ErrorMail("maeda@m2m-asp.com", "エラーメール | ", ex.Message + "\n" + ex.StackTrace + "\n" + ex.Source);
                 Err.Text = "データを登録することができませんでした。";
             }
             if (Err.Text == "")

@@ -215,7 +215,7 @@ namespace DLL
                 sqlTran.Commit();
 
             }
-            catch 
+            catch
             {
                 if (null != sqlTran)
                     sqlTran.Rollback();
@@ -306,7 +306,7 @@ namespace DLL
                 sql.Commit();
 
             }
-            catch 
+            catch
             {
                 if (null != sql)
                     sql.Rollback();
@@ -339,7 +339,7 @@ namespace DLL
                 sql.Commit();
 
             }
-            catch 
+            catch
             {
                 if (null != sql)
                     sql.Rollback();
@@ -351,11 +351,12 @@ namespace DLL
 
         }
 
-        public static DataSet1.T_OrderedHeaderRow GetMaxOrdered(SqlConnection sqlConnection)
+        public static DataSet1.T_OrderedHeaderRow GetMaxOrdered(int ki, SqlConnection sqlConnection)
         {
             SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
             da.SelectCommand.CommandText =
-                "SELECT Max(OrderedNo) AS OrderedNo  FROM T_OrderedHeader";
+                "SELECT OrderedNo FROM T_OrderedHeader where OrderedNo like @on order by OrderedNo desc";
+            da.SelectCommand.Parameters.AddWithValue("@on", "%" + ki + "%");
             DataSet1.T_OrderedHeaderDataTable dt = new DataSet1.T_OrderedHeaderDataTable();
             da.Fill(dt);
             if (dt.Rows.Count >= 1)
@@ -391,7 +392,7 @@ namespace DLL
                     sql.Commit();
 
                 }
-                catch 
+                catch
                 {
                     if (null != sql)
                         sql.Rollback();
@@ -424,7 +425,7 @@ namespace DLL
                 sql.Commit();
 
             }
-            catch 
+            catch
             {
                 if (null != sql)
                     sql.Rollback();
@@ -463,7 +464,7 @@ namespace DLL
                 da.Update(dt);
                 sql.Commit();
             }
-            catch 
+            catch
             {
                 if (null != sql)
                     sql.Rollback();
@@ -559,7 +560,7 @@ namespace DLL
 
                 }
             }
-            catch 
+            catch
             {
                 if (null != sqlTran)
                 { sqlTran.Rollback(); }

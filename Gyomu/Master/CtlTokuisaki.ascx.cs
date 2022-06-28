@@ -328,8 +328,8 @@ namespace Gyomu.Master
                     dr.TantoStaffCode = TbxTokuiTanto.Text;
                 }
 
-                int nR = int.Parse(TbxKakeritu.Text);
-                dr.Kakeritsu = nR.ToString();
+                double nR = double.Parse(TbxKakeritu.Text);
+                dr.Kakeritsu = nR;
 
 
                 if (DrpSimebi.SelectedValue != "")

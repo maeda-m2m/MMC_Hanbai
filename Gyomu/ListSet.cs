@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data;
 using System.Web.UI.WebControls;
 using Telerik.Web.UI;
 
@@ -547,30 +548,18 @@ namespace Gyomu
                 e.EndOfItems = endOffset == dt.Rows.Count;
                 string arypro = "";
 
-                for (int i = itemOffset; i < endOffset; i++)
+                HashSet<char> h = null;
+                DataTable dtdistinct = dt.DefaultView.ToTable(true, "SyouhinCode", "SyouhinMei", "PermissionStart", "RightEnd", "CategoryCode", "Categoryname", "Media", "ShiireCode", "ShiireName", "Makernumber", "WareHouse");
+
+                if (dtdistinct.Rows.Count > 0)
                 {
-
-                    DataMaster.V_Jouei_KakakuRow dr = dt[i];
-                    string productname = dr.SyouhinMei + "," + dr.Media;
-                    if (!arypro.Contains(productname))
+                    for (int i = 0; i < dtdistinct.Rows.Count; i++)
                     {
-
-                        arypro += productname + "/";
-
-                        object[] item = dr.ItemArray;
-                        string items = "";
-                        for (int v = 0; v < item.Length; v++)
-                        {
-                            if (!string.IsNullOrEmpty(items))
-                            {
-                                items += "^" + item[v].ToString();
-                            }
-                            else
-                            {
-                                items = item[v].ToString();
-                            }
-                        }
-                        rcb.Items.Add(new RadComboBoxItem(dt[i].Makernumber + "/" + dt[i].SyouhinMei + "(" + dt[i].Media + ")", items));
+                        object[] item = dtdistinct.Rows[i].ItemArray;
+                        item[4] = item[4].ToString();
+                        item[10] = item[10].ToString();
+                        List<String> items = item.OfType<String>().ToList();
+                        rcb.Items.Add(new RadComboBoxItem(item[9].ToString() + "/" + item[1] + "(" + item[6] + ")", items.Aggregate((x, y) => x + "^" + y)));
                     }
                 }
             }

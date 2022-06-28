@@ -2976,7 +2976,10 @@ namespace Gyomu
             }
             if (!dr.IsHyojunKakakuNull())
             {
-                xlsxCreator.Cell("AB" + plus1.ToString()).Value = int.Parse(dr.HyojunKakaku).ToString("0,0");
+                if (!dr.HyojunKakaku.Equals("OPEN"))
+                {
+                    xlsxCreator.Cell("AB" + plus1.ToString()).Value = int.Parse(dr.HyojunKakaku).ToString("0,0");
+                }
             }
             if (!dr.IsJutyuTankaNull())
             {

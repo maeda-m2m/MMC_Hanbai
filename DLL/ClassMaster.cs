@@ -5,6 +5,11 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System.Net.Http;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
+using System.Net;
 
 namespace DLL
 {
@@ -625,7 +630,7 @@ namespace DLL
         public static DataMaster.V_Jouei_KakakuDataTable GetJoueiKakakuView(string v, SqlConnection sqlConnection)
         {
             SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
-            da.SelectCommand.CommandText = "select * from V_Jouei_Kakaku where SyouhinMei like @syouhinmei";
+            da.SelectCommand.CommandText = "select *  from V_Jouei_Kakaku where SyouhinMei like @syouhinmei";
             da.SelectCommand.Parameters.AddWithValue("@syouhinmei", "%" + v + "%");
             DataMaster.V_Jouei_KakakuDataTable dt = new DataMaster.V_Jouei_KakakuDataTable();
             da.Fill(dt);
@@ -2034,5 +2039,6 @@ namespace DLL
             da.Fill(dt);
             return dt;
         }
+
     }
 }
