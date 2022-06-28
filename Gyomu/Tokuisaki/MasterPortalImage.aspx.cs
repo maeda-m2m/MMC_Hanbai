@@ -14,40 +14,8 @@ namespace Gyomu.Tokuisaki
 
 
 
-    public static class WebRequestExtensions
-    {
-        /// <summary>
-        /// リソースをローカル ファイルにダウンロードします。
-        /// </summary>
-        /// <param name="request">リソースへのリクエスト。</param>
-        /// <param name="fileName">データを受信するローカル ファイルの名前。</param>
-        public static void DownloadFileTo(this WebRequest request, string fileName)
-        {
-            var response = request.GetResponse();
-            var stream = response.GetResponseStream();
-
-            using (var file = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.Write))
-            {
-                int read;
-                byte[] buffer = new byte[1024];
-                while ((read = stream.Read(buffer, 0, buffer.Length)) > 0)
-                {
-                    file.Write(buffer, 0, read);
-                }
-            }
-        }
-    }
-
-
-
-
-
     public partial class MasterPortalImage : System.Web.UI.Page
     {
-
-
-
-
 
 
 
@@ -56,7 +24,6 @@ namespace Gyomu.Tokuisaki
         {
             if (!Page.IsPostBack)
             {
-                //Download();
 
                 Create();
             }
@@ -67,47 +34,7 @@ namespace Gyomu.Tokuisaki
 
 
 
-        private void Download()
-        {
 
-            string sqlCommand;
-
-            sqlCommand = "select Syouhincode from M_TokuisakiShouhin";
-
-            var table = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
-
-            var list = new List<string>();
-
-            for (int i = 0; i < table.Rows.Count; i++)
-            {
-                list.Add(table.Rows[i].ItemArray[0].ToString());
-            }
-
-            foreach (var item in list)
-            {
-                var url = $"http://192.168.1.13/MMC_Customer/image/{item}.jpg";
-
-                var baseDir = @"C:\Users\yanag\source\repos\MMC_Hanbai\Gyomu\Tokuisaki\image\";
-
-                // WebClientでファイルを保存します。
-                var client = new WebClient();
-                try
-                {
-                    client.DownloadFile(url, baseDir + $"{item}.jpg");
-                }
-                catch
-                {
-
-                }
-
-            }
-
-
-
-
-
-
-        }
 
 
 
