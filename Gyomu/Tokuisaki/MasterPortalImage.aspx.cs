@@ -86,7 +86,9 @@ namespace Gyomu.Tokuisaki
 
                 var ShouhinCode = e.Item.Cells[3].Text;
 
-                string path = $@"C:\Users\yanag\source\repos\MMC_Hanbai\Gyomu\Tokuisaki\image\{ShouhinCode}.jpg";
+                string physical = Request.PhysicalApplicationPath;
+
+                string path = physical + $@"Tokuisaki\image\{ShouhinCode}.jpg";
 
                 if (!File.Exists(path))
                 {
@@ -189,11 +191,15 @@ namespace Gyomu.Tokuisaki
             }
 
 
+
+
+            // "C:\\inetpub\\wwwroot\\HanshinDw\\hanshin-dw\\"
+            string physical = Request.PhysicalApplicationPath;
+
+            var folderPath = physical + @"Tokuisaki\image\";
+
+
             //ファイルの拡張子チェック
-
-
-            var folderPath = @"C:\Users\yanag\source\repos\MMC_Hanbai\Gyomu\Tokuisaki\image\";
-
             var allowedExtensions = new string[] { ".jpg" };
 
             for (int i = 0; i < FileUpload.PostedFiles.Count; i++)
