@@ -31,6 +31,7 @@ namespace Gyomu.Tokuisaki
 
 
 
+
         private void Create()
         {
             string sqlCommand = "select * from M_tokusyu";

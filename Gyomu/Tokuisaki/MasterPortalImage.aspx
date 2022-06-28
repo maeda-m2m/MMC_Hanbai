@@ -33,11 +33,11 @@
                 <tr>
                     <th>商品コード</th>
                     <td>
-                        <telerik:RadComboBox runat="server" ID="ShouhinCodeCombo" AutoPostBack="true" EnableLoadOnDemand="true" OnItemsRequested="ShouhinCodeCombo_ItemsRequested" Width="300"></telerik:RadComboBox>
+                        <telerik:RadComboBox runat="server" ID="ShouhinCodeCombo" AutoPostBack="true" EnableLoadOnDemand="true" OnItemsRequested="ShouhinCodeCombo_ItemsRequested" Width="300" Height="180px"></telerik:RadComboBox>
                     </td>
                     <th>商品名</th>
                     <td>
-                        <telerik:RadComboBox runat="server" ID="ShouhinNameCombo" AutoPostBack="true" EnableLoadOnDemand="true" OnItemsRequested="ShouhinNameCombo_ItemsRequested" Width="300"></telerik:RadComboBox>
+                        <telerik:RadComboBox runat="server" ID="ShouhinNameCombo" AutoPostBack="true" EnableLoadOnDemand="true" OnItemsRequested="ShouhinNameCombo_ItemsRequested" Width="300" Height="180px"></telerik:RadComboBox>
                     </td>
                     <td>
                         <asp:Button runat="server" ID="SearchButton" Text="検索" OnClick="SearchButton_Click" CssClass="Button" /></td>

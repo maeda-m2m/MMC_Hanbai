@@ -31,6 +31,7 @@ namespace Gyomu.Tokuisaki
 
 
 
+
         /// <summary>
         /// 画面読み込みの最初の一回だけ
         /// </summary>
