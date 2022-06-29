@@ -136,11 +136,14 @@ order by T_tokusyu.Ranking
             {
                 //ランキング、メディア、紹介メッセージ、商品コード
                 string[] shouhin = new string[] {
-                    (MainListView.Items[i].Controls[1] as TextBox).Text,
-                    (MainListView.Items[i].Controls[5] as Label).Text,
-                    (MainListView.Items[i].Controls[7] as TextBox).Text,
-                    (MainListView.Items[i].Controls[11] as HiddenField).Value,
+                    (MainListView.Items[i].FindControl("Rankingtext") as TextBox).Text,
+                    (MainListView.Items[i].FindControl("Label3") as Label).Text,
+                    (MainListView.Items[i].FindControl("ShoukaiText") as TextBox).Text,
+                    (MainListView.Items[i].FindControl("ShouhinCodeHidden") as HiddenField).Value,
                 };
+
+
+
 
 
 
@@ -169,6 +172,9 @@ where SyouhinCode = '{shouhin[3]}' and Media = '{shouhin[1]}' and CategoryCode =
 
 
         }
+
+
+
 
         protected void BackButton_Click(object sender, EventArgs e)
         {

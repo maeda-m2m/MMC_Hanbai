@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -42,6 +43,8 @@ namespace Gyomu.Tokuisaki
 
             MainListView.DataSource = table;
             MainListView.DataBind();
+
+
         }
 
 
@@ -56,16 +59,18 @@ namespace Gyomu.Tokuisaki
         {
             string sqlCommand;
 
+
+
             for (int i = 0; i < MainListView.Items.Count; i++)
             {
 
-                
-                //ランキング、メディア、紹介メッセージ、商品コード
+
+
                 string[] shouhin = new string[] {
-                    (MainListView.Items[i].Controls[3] as TextBox).Text,
-                    (MainListView.Items[i].Controls[5] as TextBox).Text,
-                    (MainListView.Items[i].Controls[8] as TextBox).Text,
-                    (MainListView.Items[i].Controls[10] as HiddenField).Value,
+                    (MainListView.Items[i].FindControl("TextBox2") as TextBox).Text,
+                    (MainListView.Items[i].FindControl("TextBox4") as TextBox).Text,
+                    (MainListView.Items[i].FindControl("TextBox3") as TextBox).Text,
+                    (MainListView.Items[i].FindControl("Hidden") as HiddenField).Value,
                 };
 
                 sqlCommand = $@"
@@ -79,132 +84,6 @@ where tokusyu_code = '{shouhin[3]}'";
 
             Create();
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
