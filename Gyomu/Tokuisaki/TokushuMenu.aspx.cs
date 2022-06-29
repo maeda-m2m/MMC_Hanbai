@@ -58,6 +58,8 @@ namespace Gyomu.Tokuisaki
 
             for (int i = 0; i < MainListView.Items.Count; i++)
             {
+
+                
                 //ランキング、メディア、紹介メッセージ、商品コード
                 string[] shouhin = new string[] {
                     (MainListView.Items[i].Controls[3] as TextBox).Text,

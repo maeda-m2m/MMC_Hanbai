@@ -42,12 +42,12 @@ namespace Gyomu.Tokuisaki
             string categoryCode = "205";
             string tokushuCode = "2";
             string sqlCommand = $@"
-select M_TokuisakiShouhin.SyouhinMei,T_tokusyu.Media,T_tokusyu.tokusyu_shouhin_shoukai,T_tokusyu.Ranking,T_tokusyu.SyouhinCode  
-from T_tokusyu 
-inner join M_TokuisakiShouhin 
-on T_tokusyu.SyouhinCode = M_TokuisakiShouhin.Syouhincode
-where T_tokusyu.tokusyu_code = '{tokushuCode}' and T_tokusyu.CategoryCode = '{categoryCode}'
-order by T_tokusyu.Ranking";
+            select M_TokuisakiShouhin.SyouhinMei,T_tokusyu.Media,T_tokusyu.tokusyu_shouhin_shoukai,T_tokusyu.Ranking,T_tokusyu.SyouhinCode  
+            from T_tokusyu 
+            inner join M_TokuisakiShouhin 
+            on T_tokusyu.SyouhinCode = M_TokuisakiShouhin.Syouhincode
+            where T_tokusyu.tokusyu_code = '{tokushuCode}' and T_tokusyu.CategoryCode = '{categoryCode}'
+            order by T_tokusyu.Ranking";
 
             MainListView.DataSource = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
             MainListView.DataBind();
@@ -75,12 +75,13 @@ order by T_tokusyu.Ranking";
             string categoryCode = TokushuCategoryDrop.SelectedValue;
 
             string sqlCommand = $@"
-select M_TokuisakiShouhin.SyouhinMei,T_tokusyu.Media,T_tokusyu.tokusyu_shouhin_shoukai,T_tokusyu.Ranking,T_tokusyu.SyouhinCode  
+select M_Kakaku_2.SyouhinMei,T_tokusyu.Media,T_tokusyu.tokusyu_shouhin_shoukai,T_tokusyu.Ranking,T_tokusyu.SyouhinCode  
 from T_tokusyu 
-inner join M_TokuisakiShouhin 
-on T_tokusyu.SyouhinCode = M_TokuisakiShouhin.Syouhincode and T_tokusyu.Media = M_TokuisakiShouhin.Media
-where T_tokusyu.tokusyu_code = '{tokushuCode}' and T_tokusyu.CategoryCode = '{categoryCode}'
-order by T_tokusyu.Ranking";
+inner join M_Kakaku_2 
+on T_tokusyu.SyouhinCode = M_Kakaku_2.Syouhincode and T_tokusyu.Media = M_Kakaku_2.Media
+where T_tokusyu.tokusyu_code = '{tokushuCode}' and T_tokusyu.CategoryCode = '{categoryCode}' and M_Kakaku_2.CategoryCode = '{categoryCode}'
+order by T_tokusyu.Ranking
+";
 
             MainListView.DataSource = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
             MainListView.DataBind();
@@ -117,14 +118,16 @@ order by T_tokusyu.Ranking";
         /// <param name="e"></param>
         protected void ConfirmButton_Click(object sender, EventArgs e)
         {
-            string sqlCommand;
+            string sqlCommand, script;
 
-            string tokushuCode = TokushuNameDrop.SelectedValue;
-            string categoryCode = TokushuCategoryDrop.SelectedValue;
+            string tokushuCode = TokushuNameDrop.Text;
+            string categoryCode = TokushuCategoryDrop.Text;
 
             if (MainListView.Items.Count == 0)
             {
-                Response.Write("商品が登録されていません。変更に失敗しました。");
+                script = "alert('商品が登録されていません。');";
+                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
+
                 return;
 
             }
@@ -143,7 +146,9 @@ order by T_tokusyu.Ranking";
 
                 if (!int.TryParse(shouhin[0], out int dummy))
                 {
-                    Response.Write("ランキングには数字を入力してください。");
+                    script = "alert('ランキングには数字を入力してください。');";
+                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
+
                     return;
                 }
 
@@ -158,7 +163,9 @@ where SyouhinCode = '{shouhin[3]}' and Media = '{shouhin[1]}' and CategoryCode =
             }
 
             Create();
-            Response.Write("特集商品情報が変更されました。");
+            script = "alert('特集商品情報が変更されました。');";
+            Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
+
 
 
         }

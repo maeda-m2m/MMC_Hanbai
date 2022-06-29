@@ -452,7 +452,8 @@ select distinct( M_Kakaku_2.SyouhinCode),M_Kakaku_2.SyouhinMei, M_Kakaku_2.Media
 from T_tokusyu 
 inner join M_Kakaku_2 
 on T_tokusyu.SyouhinCode = M_Kakaku_2.SyouhinCode and T_tokusyu.Media = M_Kakaku_2.Media
-where T_tokusyu.CategoryCode = '{categoryCode}' and T_tokusyu.tokusyu_code = '{tokushuCode}'";
+where T_tokusyu.CategoryCode = '{categoryCode}' and T_tokusyu.tokusyu_code = '{tokushuCode}'
+";
 
             //            string sqlCommand = $@"
             //select M_TokuisakiShouhin.SyouhinMei, T_tokusyu.Media, T_tokusyu.SyouhinCode 
