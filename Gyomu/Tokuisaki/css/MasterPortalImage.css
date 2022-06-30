@@ -33,6 +33,13 @@ body {
         border: solid 2px #2c75d0;
     }
 
+#MainRadGrid img {
+    width: 100px;
+    height: 150px;
+    /*width: 208px;
+    height: 296px;*/
+}
+
 
 #SearchTable {
     padding-top: 20px;
