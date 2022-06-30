@@ -158,7 +158,7 @@ namespace Gyomu.Jutyu
             Common.CtlNengappiForm CtlJucyuBi = FindControl("CtlJucyuBi") as Common.CtlNengappiForm;
             if (CtlJucyuBi.KikanType != Core.Type.NengappiKikan.EnumKikanType.NONE)
             {
-                k.KeijoBi = this.CtlJucyuBi.GetNengappiKikan();
+                k.JutyuBi = this.CtlJucyuBi.GetNengappiKikan();
             }
             return k;
         }
