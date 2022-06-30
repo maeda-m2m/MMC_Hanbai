@@ -111,5 +111,19 @@
         </div>
         <telerik:RadAjaxManager runat="server" ID="Ram" OnAjaxRequest="Ram_AjaxRequest"></telerik:RadAjaxManager>
     </form>
+    <script>
+        'use strict';
+
+
+
+        function keydown(e) {
+            if (e.keyCode === 13) {
+                document.getElementById('SearchButton').focus();
+            }
+        }
+
+        window.onkeydown = keydown;
+
+    </script>
 </body>
 </html>

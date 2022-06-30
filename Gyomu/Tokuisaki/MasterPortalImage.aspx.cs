@@ -213,15 +213,24 @@ namespace Gyomu.Tokuisaki
                     return;
                 }
 
-                FileUpload.PostedFiles[i].SaveAs(folderPath + FileUpload.PostedFiles[i].FileName);
+                FileUpload.PostedFiles[i].SaveAs(folderPath + FileUpload.PostedFiles[i].FileName.ToLower());
 
+                //デバックだったらテーブルに商品コードを登録しない。本番環境のみ有効。
+#if !DEBUG
+
+                string file = FileUpload.PostedFiles[i].FileName.Replace(".jpg", "");
+
+                string sqlCommand = $@"insert into T_TokuisakiImage values('{file}')";
+
+                CommonClass.TranSql(sqlCommand, Global.GetConnection());
+#endif
 
             }
 
 
             script = "alert('アップロードに成功しました。')";
             Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
-
+            Create();
 
         }
 
