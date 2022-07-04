@@ -102,13 +102,20 @@ namespace Gyomu.Tokuisaki
                 File.Delete(path);
 
                 string sqlCommand = "";
-                //本番環境のみ
-
-                sqlCommand = $"update T_TokuisakiImage set DeleteFlag = '1' where ShouhinCode = '{ShouhinCode}'";
-
-                //sqlCommand = $"insert into T_TokuisakiImage values('{ShouhinCode}',,0)";
 
 
+                sqlCommand = $"select * from T_TokuisakiImage where ShouhinCode = '{ShouhinCode}'";
+
+                var table = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
+
+                if (table.Rows.Count == 0)
+                {
+                    sqlCommand = $"insert into T_TokuisakiImage values('{ShouhinCode}',0,1)";
+                }
+                else
+                {
+                    sqlCommand = $"update T_TokuisakiImage set DeleteFlag = '1' where ShouhinCode = '{ShouhinCode}'";
+                }
 
                 CommonClass.TranSql(sqlCommand, Global.GetConnection());
 
