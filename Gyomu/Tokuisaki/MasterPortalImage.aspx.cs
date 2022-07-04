@@ -103,12 +103,12 @@ namespace Gyomu.Tokuisaki
 
                 string sqlCommand = "";
                 //本番環境のみ
-#if DEBUG
+
                 sqlCommand = $"update T_TokuisakiImage set DeleteFlag = '1' where ShouhinCode = '{ShouhinCode}'";
 
                 //sqlCommand = $"insert into T_TokuisakiImage values('{ShouhinCode}',,0)";
 
-#endif
+
 
                 CommonClass.TranSql(sqlCommand, Global.GetConnection());
 
@@ -237,7 +237,7 @@ namespace Gyomu.Tokuisaki
 
 
                 //デバックだったらテーブルに商品コードを登録しない。本番環境のみ有効。
-#if DEBUG
+
 
                 string file = FileUpload.PostedFiles[i].FileName.Replace(".jpg", "");
 
@@ -263,7 +263,6 @@ namespace Gyomu.Tokuisaki
 
 
 
-#endif
 
             }
 
