@@ -67,6 +67,24 @@ namespace Gyomu.Mitumori {
         protected global::Telerik.Web.UI.RadTabStrip RT;
         
         /// <summary>
+        /// TBKensaku コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTable TBKensaku;
+        
+        /// <summary>
+        /// TBKensaku2 コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTable TBKensaku2;
+        
+        /// <summary>
         /// DrpFlg コントロール。
         /// </summary>
         /// <remarks>

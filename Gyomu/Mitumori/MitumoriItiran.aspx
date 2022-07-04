@@ -5,7 +5,7 @@
 <%@ Register TagPrefix="uc3" TagName="CtlPager" Src="~/Common/CtlPager.ascx" %>
 
 <%@ Register TagPrefix="cc1" Assembly="Core" Namespace="Core.Web" %>
-<%@ Register TagPrefix="telerik" Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" %>
+<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 
 <!DOCTYPE html>
 
@@ -287,7 +287,8 @@
             }
     </style>
 
-    <script type="text/javascript" src="../../Core.js"></script>
+    <%--    <script type="text/javascript" src="../../Core.js"></script>--%>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 
     <script type="text/javascript">
 
@@ -406,10 +407,10 @@
             </table>--%>
         </div>
 
-        <table style="width: 100%; border-collapse: collapse; border: 1px solid #9d9d9d">
+        <table runat="server" id="TBKensaku" style="width: 100%; border-collapse: collapse; border: 1px solid #9d9d9d">
             <tr>
                 <td>
-                    <table style="width: 100%; border-collapse: collapse">
+                    <table runat="server" id="TBKensaku2" style="width: 100%; border-collapse: collapse">
                         <tr>
                             <td class="column">
                                 <p>受注</p>
@@ -631,7 +632,7 @@
                 <GroupingSettings CollapseAllTooltip="Collapse all groups"></GroupingSettings>
 
                 <ClientSettings>
-                    <ClientEvents OnGridCreated="core.resizeradgrid" />
+<%--                    <ClientEvents OnGridCreated="core.resizeradgrid" />--%>
                     <Scrolling AllowScroll="true" FrozenColumnsCount="0" SaveScrollPosition="true" ScrollHeight="500px" EnableColumnClientFreeze="true" UseStaticHeaders="true" />
                 </ClientSettings>
             </telerik:RadGrid>

@@ -3,17 +3,19 @@
 <%@ Register Src="~/CtlMenu.ascx" TagName="Menu" TagPrefix="uc" %>
 
 <%@ Register Src="../Common/CtlNengappiForm.ascx" TagName="CtlNengappiFromTo" TagPrefix="uc2" %>
-
+<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>受注情報</title>
-    <%--    <link href="../../Style/Grid.ykuri.css" rel="STYLESHEET" />
+    <link href="../../Style/Grid.ykuri.css" rel="STYLESHEET" />
     <link href="../../Style/ComboBox.ykuri.css" type="text/css" rel="STYLESHEET" />
-    <link href="../../MainStyle.css" type="text/css" rel="Stylesheet" />
+    <%--    <link href="../../MainStyle.css" type="text/css" rel="Stylesheet" />
     <link href="../sheet/MainStyles.css" rel="stylesheet" type="text/css" />--%>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+
     <style type="text/css">
         body {
             font-family: 'Meiryo UI';
@@ -254,10 +256,10 @@
                 </Tabs>
             </telerik:RadTabStrip>
             <br />
-            <table style="width: 100%; border-collapse: collapse; border: 1px solid #9d9d9d">
+            <table runat="server" style="width: 100%; border-collapse: collapse; border: 1px solid #9d9d9d">
                 <tr>
                     <td>
-                        <table style="width: 100%; border-collapse: collapse">
+                        <table runat="server" style="width: 100%; border-collapse: collapse">
                             <tr>
                                 <td class="column">
                                     <p>発注</p>
@@ -287,7 +289,7 @@
                                     <telerik:RadComboBox ID="RadBumon" runat="server" Width="100" Height="180px"></telerik:RadComboBox>
                                 </td>
                                 <td class="column">
-                                    <p>見積日</p>
+                                    <p>受注日</p>
                                 </td>
                                 <td class="row">
                                     <uc2:CtlNengappiFromTo ID="CtlJucyuBi" runat="server" />
@@ -465,7 +467,7 @@
             <input type="hidden" id="count" runat="server" />
         </div>
         <telerik:RadAjaxManager ID="Ram" runat="server" OnAjaxRequest="Ram_AjaxRequest">
-            <ClientEvents OnResponseEnd="OnResponseEnd" OnRequestStart="OnRequestStart" />
+<%--            <ClientEvents OnResponseEnd="OnResponseEnd" OnRequestStart="OnRequestStart" />--%>
             <AjaxSettings>
                 <telerik:AjaxSetting AjaxControlID="BtnL">
                     <UpdatedControls>

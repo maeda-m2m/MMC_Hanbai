@@ -164,7 +164,7 @@ namespace DLL
         {
             //受注No
             public string sJutyuNo = null;
-            public Core.Type.NengappiKikan KeijoBi = null;
+            public Core.Type.NengappiKikan JutyuBi = null;
             //見積検索
             public string sMitimoriNo = null;
             public string sTokuisaki = null;
@@ -240,6 +240,12 @@ namespace DLL
             //見積検索
             internal void SetWhere(SqlDataAdapter da, WhereGenerator w)
             {
+                if (JutyuBi != null)
+                {
+                    w.Add(JutyuBi.GenerateSQLAsDateTime("T_JutyuHeader.CreateDate"));//変更　2012/05
+                }
+
+
                 if (CreateDate_Oshirase != null)
                 {
                     w.Add("CreateDate between @cd and @cd2 ");
