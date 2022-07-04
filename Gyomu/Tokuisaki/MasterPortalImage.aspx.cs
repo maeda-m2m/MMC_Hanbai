@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -99,8 +100,21 @@ namespace Gyomu.Tokuisaki
                 }
 
                 File.Delete(path);
+
+                string sqlCommand = "";
+                //本番環境のみ
+#if DEBUG
+                sqlCommand = $"update T_TokuisakiImage set DeleteFlag = '1' where ShouhinCode = '{ShouhinCode}'";
+
+                //sqlCommand = $"insert into T_TokuisakiImage values('{ShouhinCode}',,0)";
+
+#endif
+
+                CommonClass.TranSql(sqlCommand, Global.GetConnection());
+
                 script = "alert('画像を削除しました。');";
                 Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
+
                 Create();
             }
 
@@ -215,14 +229,40 @@ namespace Gyomu.Tokuisaki
 
                 FileUpload.PostedFiles[i].SaveAs(folderPath + FileUpload.PostedFiles[i].FileName.ToLower());
 
+
+                var aryData = new byte[FileUpload.PostedFiles[i].ContentLength];
+
+                FileUpload.PostedFiles[i].InputStream.Read(aryData, 0, FileUpload.PostedFiles[i].ContentLength);
+
+
+
                 //デバックだったらテーブルに商品コードを登録しない。本番環境のみ有効。
-#if !DEBUG
+#if DEBUG
 
                 string file = FileUpload.PostedFiles[i].FileName.Replace(".jpg", "");
 
-                string sqlCommand = $@"insert into T_TokuisakiImage values('{file}')";
+                string sqlCommand = $"select * from T_TokuisakiImage where ShouhinCode = '{file}'";
 
-                CommonClass.TranSql(sqlCommand, Global.GetConnection());
+                var table = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
+
+                if (table.Rows.Count == 0)
+                {
+                    using (MemoryStream ms = new MemoryStream(aryData))
+                    {
+                        BinaryInsert(file, ms, Global.GetConnection());
+                    }
+                }
+                else
+                {
+                    using (MemoryStream ms = new MemoryStream(aryData))
+                    {
+                        BinaryUpdate(file, ms, Global.GetConnection());
+                    }
+                }
+
+
+
+
 #endif
 
             }
@@ -235,6 +275,68 @@ namespace Gyomu.Tokuisaki
         }
 
 
+
+
+
+        private void BinaryInsert(string ShouhinCode, MemoryStream stream, SqlConnection sql)
+        {
+            var da = new SqlCommand("", sql);
+
+            da.CommandText =
+               $@"insert into T_TokuisakiImage values('{ShouhinCode}',@stream,0)";
+
+            da.Parameters.AddWithValue("@stream", stream);
+
+            sql.Open();
+            var tran = sql.BeginTransaction();
+            try
+            {
+                da.Transaction = tran;
+                da.ExecuteNonQuery();
+                tran.Commit();
+            }
+            catch (Exception ex)
+            {
+                Response.Write(ex.Message);
+                tran.Rollback();
+            }
+            finally
+            {
+                sql.Close();
+            }
+        }
+
+
+
+
+        private void BinaryUpdate(string ShouhinCode, MemoryStream stream, SqlConnection sql)
+        {
+            var da = new SqlCommand("", sql);
+
+            da.CommandText =
+               $@"update T_TokuisakiImage set DeleteFlag = '0',ShouhinBinary = @stream where ShouhinCode = '{ShouhinCode}'";
+
+            da.Parameters.AddWithValue("@stream", stream);
+
+
+            sql.Open();
+            var tran = sql.BeginTransaction();
+            try
+            {
+                da.Transaction = tran;
+                da.ExecuteNonQuery();
+                tran.Commit();
+            }
+            catch (Exception ex)
+            {
+                Response.Write(ex.Message);
+                tran.Rollback();
+            }
+            finally
+            {
+                sql.Close();
+            }
+        }
 
 
 
