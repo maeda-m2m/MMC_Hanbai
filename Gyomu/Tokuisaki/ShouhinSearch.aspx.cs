@@ -47,7 +47,7 @@ namespace Gyomu.Tokuisaki
                 MainGridCreate();
 
                 FirstCreate();
-
+                FirsrDrop();
 
 
 
@@ -79,8 +79,11 @@ namespace Gyomu.Tokuisaki
         {
             //以下数字を直書きしている。
             //最初に表示されているドロップダウンの項目名。
+
             string categoryCode = "205";
+
             string tokushuCode = "2";
+
             string sqlCommand = $@"
 select distinct( M_Kakaku_2.SyouhinCode),M_Kakaku_2.SyouhinMei, M_Kakaku_2.Media 
 from T_tokusyu 
@@ -88,18 +91,17 @@ inner join M_Kakaku_2
 on T_tokusyu.SyouhinCode = M_Kakaku_2.SyouhinCode and T_tokusyu.Media = M_Kakaku_2.Media
 where T_tokusyu.CategoryCode = '{categoryCode}' and T_tokusyu.tokusyu_code = '{tokushuCode}'";
 
-            //            string sqlCommand = $@"
-            //select M_TokuisakiShouhin.SyouhinMei, T_tokusyu.Media, T_tokusyu.SyouhinCode 
-            //from T_tokusyu 
-            //inner join M_TokuisakiShouhin 
-            //on T_tokusyu.SyouhinCode = M_TokuisakiShouhin.Syouhincode and T_tokusyu.Media = M_TokuisakiShouhin.Media
-            //where T_tokusyu.CategoryCode = '{categoryCode}' and T_tokusyu.tokusyu_code = '{tokushuCode}'";
+
             SelectedGrid.DataSource = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
             SelectedGrid.DataBind();
         }
 
 
-
+        private void FirsrDrop()
+        {
+            TokushuCategoryDrop.SelectedValue = "205";
+            TokushuCategoryDrop.DataBind();
+        }
 
 
 
@@ -112,11 +114,12 @@ where T_tokusyu.CategoryCode = '{categoryCode}' and T_tokusyu.tokusyu_code = '{t
 
             //カテゴリコード直書き
             string sqlCommand = $@"
-select M_TokuisakiShouhin.Syouhincode, M_Kakaku_2.SyouhinMei,M_Kakaku_2.Media,M_Kakaku_2.ShiireName,M_Kakaku_2.HyoujunKakaku,M_Kakaku_2.ShiireKakaku,M_TokuisakiShouhin.ShouhinAttribute,M_TokuisakiShouhin.JoueiTime,M_TokuisakiShouhin.MovieManager,M_TokuisakiShouhin.MovieActor,M_TokuisakiShouhin.Copyright
+select TOP(200) M_TokuisakiShouhin.Syouhincode, M_Kakaku_2.SyouhinMei,M_Kakaku_2.Media,M_Kakaku_2.ShiireName,M_Kakaku_2.HyoujunKakaku,M_Kakaku_2.ShiireKakaku,M_TokuisakiShouhin.ShouhinAttribute,M_TokuisakiShouhin.JoueiTime,M_TokuisakiShouhin.MovieManager,M_TokuisakiShouhin.MovieActor,M_TokuisakiShouhin.Copyright
 from M_TokuisakiShouhin 
 inner join M_Kakaku_2 
 on M_TokuisakiShouhin.Syouhincode = M_Kakaku_2.SyouhinCode
-where M_Kakaku_2.CategoryCode = '205'";
+where M_Kakaku_2.CategoryCode = '205'
+";
             MainGrid.DataSource = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
             MainGrid.DataBind();
 

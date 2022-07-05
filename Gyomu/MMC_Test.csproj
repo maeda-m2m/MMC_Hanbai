@@ -901,6 +901,7 @@
     <Folder Include="sheet\Common\" />
     <Folder Include="Style\GridReport\" />
     <Folder Include="Style\GridYd\" />
+    <Folder Include="Tokuisaki\image\TokushuImage\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

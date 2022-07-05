@@ -38,7 +38,12 @@
             </div>
             <div id="CategoryDiv">
                 特集名:<asp:DropDownList runat="server" ID="TokushuNameDrop" DataSourceID="SqlDataSource1" DataTextField="tokusyu_name" DataValueField="tokusyu_code" AutoPostBack="true" OnSelectedIndexChanged="TokushuNameDrop_SelectedIndexChanged"></asp:DropDownList>
-                <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString='<%$ ConnectionStrings:GyomuConnectionString %>' SelectCommand="SELECT [tokusyu_code], [tokusyu_name] FROM [M_tokusyu] WHERE tokusyu_code != '1' "></asp:SqlDataSource>
+                <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString='<%$ ConnectionStrings:GyomuConnectionString %>' SelectCommand="SELECT [tokusyu_code], [tokusyu_name] FROM [M_tokusyu] WHERE tokusyu_code != '1' AND [CategoryCode] = @CategoryCode">
+                    <SelectParameters>
+                        <asp:ControlParameter ControlID="TokushuCategoryDrop" PropertyName="SelectedValue" Name="CategoryCode" Type="String" />
+                    </SelectParameters>
+
+                </asp:SqlDataSource>
 
                 カテゴリ:<asp:DropDownList runat="server" ID="TokushuCategoryDrop" DataSourceID="SqlDataSource2" DataTextField="Categoryname" DataValueField="CategoryCode" AutoPostBack="true" OnSelectedIndexChanged="TokushuCategoryDrop_SelectedIndexChanged"></asp:DropDownList>
                 <asp:SqlDataSource runat="server" ID="SqlDataSource2" ConnectionString='<%$ ConnectionStrings:GyomuConnectionString %>' SelectCommand="SELECT DISTINCT [CategoryCode], [Categoryname] FROM [M_Kakaku_2] WHERE CategoryCode = '203' or CategoryCode = '205' or CategoryCode = '209'"></asp:SqlDataSource>

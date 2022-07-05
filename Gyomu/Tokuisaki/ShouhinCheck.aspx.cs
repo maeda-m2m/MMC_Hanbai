@@ -18,7 +18,9 @@ namespace Gyomu.Tokuisaki
         {
             if (!Page.IsPostBack)
             {
+
                 FirstCreate();
+                Firstdrop();
             }
 
 
@@ -60,6 +62,12 @@ namespace Gyomu.Tokuisaki
                     MainListView.Items[i].Controls[1].Visible = false;
                 }
             }
+        }
+
+        private void Firstdrop()
+        {
+            TokushuCategoryDrop.SelectedValue = "205";
+            TokushuCategoryDrop.DataBind();
         }
 
 

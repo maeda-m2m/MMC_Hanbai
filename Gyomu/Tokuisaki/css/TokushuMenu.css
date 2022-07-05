@@ -24,7 +24,7 @@ body {
 
 
 
-@media screen and (max-width: 2000px) {
+/*@media screen and (max-width: 2000px) {
 
     #MainDiv textarea {
         height: 60px;
@@ -54,9 +54,17 @@ body {
 
 
 
+*/
 
 
 
+#Drop {
+    text-align: center;
+}
+
+    #Drop select {
+        font-size: larger;
+    }
 
 
 
@@ -79,11 +87,42 @@ body {
     box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.5);
 }
 
+    #MainDiv textarea {
+        height: 60px;
+        width: 100%;
+    }
 
+    #MainDiv select {
+        height: 60px;
+        width: 100%;
+    }
 
 #TokushuTitleDiv {
-    margin-left: 20px;
+    width: 70%;
+    /*  margin-left: 20px;*/
 }
+
+    #TokushuTitleDiv th {
+        white-space: nowrap;
+    }
+
+    #TokushuTitleDiv input {
+        height: 60px;
+        width: 100%;
+    }
+
+
+
+#UploadDiv {
+    padding-bottom: 20px;
+}
+
+
+
+
+
+
+
 
 #ButtonDiv {
     text-align: center;
@@ -96,7 +135,7 @@ body {
     border-width: 3px;
     border-radius: 7px;
     color: #2F5597;
-    font-weight: 700;
+    font-weight: bold;
 }
 
     #ConfirmButton:hover {
@@ -107,6 +146,36 @@ body {
         border-width: 3px;
         border-style: outset;
     }
+
+.Button {
+    width: 100px;
+    background-color: white;
+    border-color: #2F5597;
+    border-width: 3px;
+    border-radius: 7px;
+    color: #2F5597;
+    font-weight: bold;
+}
+
+    .Button:hover {
+        cursor: pointer;
+        transition: .4s;
+        background-color: #2F5597;
+        color: white;
+        border-width: 3px;
+        border-style: outset;
+    }
+
+
+
+
+
+
+
+
+
+
+
 
 footer {
     text-align: center;

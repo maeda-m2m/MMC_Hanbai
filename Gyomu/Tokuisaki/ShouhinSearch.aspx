@@ -190,13 +190,19 @@
                                     <asp:DropDownList runat="server" ID="TokushuNameDrop" DataSourceID="SqlDataSource1" DataTextField="tokusyu_name" DataValueField="tokusyu_code" OnSelectedIndexChanged="TokushuNameDrop_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
 
 
-                                    <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString='<%$ ConnectionStrings:GyomuConnectionString %>' SelectCommand="SELECT [tokusyu_code], [tokusyu_name] FROM [M_tokusyu] WHERE tokusyu_code != '1' "></asp:SqlDataSource>
+                                    <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString='<%$ ConnectionStrings:GyomuConnectionString %>' SelectCommand="SELECT [tokusyu_code], [tokusyu_name] FROM [M_tokusyu] WHERE tokusyu_code != '1' AND [CategoryCode] = @CategoryCode">
+
+                                        <SelectParameters>
+                                            <asp:ControlParameter ControlID="TokushuCategoryDrop" PropertyName="SelectedValue" Name="CategoryCode" Type="String" />
+                                        </SelectParameters>
+                                    </asp:SqlDataSource>
                                 </td>
                             </tr>
                             <tr>
                                 <th>カテゴリ</th>
                                 <td>
-                                    <asp:DropDownList runat="server" ID="TokushuCategoryDrop" DataSourceID="SqlDataSource2" DataTextField="Categoryname" DataValueField="CategoryCode" OnSelectedIndexChanged="TokushuCategoryDrop_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList></td>
+                                    <asp:DropDownList runat="server" ID="TokushuCategoryDrop" DataSourceID="SqlDataSource2" DataTextField="Categoryname" DataValueField="CategoryCode" OnSelectedIndexChanged="TokushuCategoryDrop_SelectedIndexChanged" AutoPostBack="true">
+                                    </asp:DropDownList></td>
                             </tr>
 
                         </table>
