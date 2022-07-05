@@ -1764,24 +1764,27 @@ namespace Gyomu
             Fukusu();
 
             string[] AryValue = FacilityRad.SelectedValue.Split('/');
-            TbxFacilityCode.Text = AryValue[0];
-            TbxFacilityRowCode.Text = AryValue[1];
-            RcbFacility.Text = AryValue[2];
-            TbxFacilityName2.Text = AryValue[3];
-            TbxFaci.Text = AryValue[4];
-            TbxFacilityResponsible.Text = AryValue[5];
-            TbxYubin.Text = AryValue[6];
-            TbxFaciAdress1.Text = AryValue[7];
-            TbxFaciAdress2.Text = AryValue[8];
-            TbxTel.Text = AryValue[9];
-            if (!RcbFacility.Text.Equals("複数施設"))
+            if (AryValue.Length > 1)
             {
-                RcbCity.SelectedValue = AryValue[10];
-            }
+                TbxFacilityCode.Text = AryValue[0];
+                TbxFacilityRowCode.Text = AryValue[1];
+                RcbFacility.Text = AryValue[2];
+                TbxFacilityName2.Text = AryValue[3];
+                TbxFaci.Text = AryValue[4];
+                TbxFacilityResponsible.Text = AryValue[5];
+                TbxYubin.Text = AryValue[6];
+                TbxFaciAdress1.Text = AryValue[7];
+                TbxFaciAdress2.Text = AryValue[8];
+                TbxTel.Text = AryValue[9];
+                if (!RcbFacility.Text.Equals("複数施設"))
+                {
+                    RcbCity.SelectedValue = AryValue[10];
+                }
 
-            CtrlMitsuSyousai CtlMitsuSyosai = CtrlSyousai.Items[0].FindControl("Syosai") as CtrlMitsuSyousai;
-            RadComboBox serchproduct = (RadComboBox)CtlMitsuSyosai.FindControl("SerchProduct");
-            serchproduct.Focus();
+                CtrlMitsuSyousai CtlMitsuSyosai = CtrlSyousai.Items[0].FindControl("Syosai") as CtrlMitsuSyousai;
+                RadComboBox serchproduct = (RadComboBox)CtlMitsuSyosai.FindControl("SerchProduct");
+                serchproduct.Focus();
+            }
         }
 
         protected void CheckBox4_CheckedChanged(object sender, EventArgs e)
@@ -1876,6 +1879,7 @@ namespace Gyomu
                                 DataMitumori.T_RowRow drN2 = dtN.NewT_RowRow();
                                 drN2.CategoryCode = CtrlMitsuSyousai.strCategoryCode;
                                 drN2.CategoryName = CtrlMitsuSyousai.strCategoryName;
+                                drN2.SyouhinCode = "";
                                 drN2 = AddNewRow2(drN2);
                                 dtN.AddT_RowRow(drN2);
                             }
