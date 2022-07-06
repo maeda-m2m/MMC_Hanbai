@@ -114,11 +114,11 @@ where T_tokusyu.CategoryCode = '{categoryCode}' and T_tokusyu.tokusyu_code = '{t
 
             //カテゴリコード直書き
             string sqlCommand = $@"
-select TOP(200) M_TokuisakiShouhin.Syouhincode, M_Kakaku_2.SyouhinMei,M_Kakaku_2.Media,M_Kakaku_2.ShiireName,M_Kakaku_2.HyoujunKakaku,M_Kakaku_2.ShiireKakaku,M_TokuisakiShouhin.ShouhinAttribute,M_TokuisakiShouhin.JoueiTime,M_TokuisakiShouhin.MovieManager,M_TokuisakiShouhin.MovieActor,M_TokuisakiShouhin.Copyright
-from M_TokuisakiShouhin 
-inner join M_Kakaku_2 
+select top(200) M_Kakaku_2.Syouhincode, M_Kakaku_2.SyouhinMei,M_Kakaku_2.Media,M_Kakaku_2.ShiireName,M_Kakaku_2.HyoujunKakaku,M_Kakaku_2.ShiireKakaku,M_TokuisakiShouhin.ShouhinAttribute,M_TokuisakiShouhin.JoueiTime,M_TokuisakiShouhin.MovieManager,M_TokuisakiShouhin.MovieActor,M_TokuisakiShouhin.Copyright
+from M_Kakaku_2 
+left outer join M_TokuisakiShouhin 
 on M_TokuisakiShouhin.Syouhincode = M_Kakaku_2.SyouhinCode
-where M_Kakaku_2.CategoryCode = '205'
+where M_Kakaku_2.CategoryCode = '205' and  not (M_Kakaku_2.Syouhincode = '1005' or M_Kakaku_2.Syouhincode = '10000000' or M_Kakaku_2.Syouhincode = '1999'or M_Kakaku_2.SyouhinCode = '1004')
 ";
             MainGrid.DataSource = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
             MainGrid.DataBind();
@@ -179,9 +179,20 @@ where M_Kakaku_2.CategoryCode = '205'
 
                     var row = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
 
+                    string contents;
+
+                    if (row.Rows.Count == 0)
+                    {
+                        contents = "";
+                    }
+                    else
+                    {
+                        contents = row.Rows[0].ItemArray[0].ToString().Trim();
+                    }
 
 
-                    TokushuShouhinInsert(shouhinNumber.Trim(), kakaku.Trim(), media.Trim(), tokushuCode.Trim(), categoryCode.Trim(), row.Rows[0].ItemArray[0].ToString().Trim());
+
+                    TokushuShouhinInsert(shouhinNumber.Trim(), kakaku.Trim(), media.Trim(), tokushuCode.Trim(), categoryCode.Trim(), contents);
                     count++;
 
 
@@ -429,10 +440,12 @@ where T_tokusyu.CategoryCode = '{categoryCode}' and T_tokusyu.tokusyu_code = '{t
 
 
             string sqlCommand = $@"
-select M_TokuisakiShouhin.Syouhincode, M_Kakaku_2.SyouhinMei,M_Kakaku_2.Media,M_Kakaku_2.ShiireName,M_Kakaku_2.HyoujunKakaku,M_Kakaku_2.ShiireKakaku,M_TokuisakiShouhin.ShouhinAttribute,M_TokuisakiShouhin.JoueiTime,M_TokuisakiShouhin.MovieManager,M_TokuisakiShouhin.MovieActor,M_TokuisakiShouhin.Copyright
-from M_TokuisakiShouhin inner join M_Kakaku_2 
+select M_Kakaku_2.Syouhincode, M_Kakaku_2.SyouhinMei,M_Kakaku_2.Media,M_Kakaku_2.ShiireName,M_Kakaku_2.HyoujunKakaku,M_Kakaku_2.ShiireKakaku,M_TokuisakiShouhin.ShouhinAttribute,M_TokuisakiShouhin.JoueiTime,M_TokuisakiShouhin.MovieManager,M_TokuisakiShouhin.MovieActor,M_TokuisakiShouhin.Copyright
+from M_Kakaku_2 
+left outer join M_TokuisakiShouhin 
 on M_TokuisakiShouhin.Syouhincode = M_Kakaku_2.SyouhinCode
-where M_Kakaku_2.CategoryCode = '{dropDownValue}'";
+where M_Kakaku_2.CategoryCode = '{dropDownValue}' and  not (M_Kakaku_2.Syouhincode = '1005' or M_Kakaku_2.Syouhincode = '10000000' or M_Kakaku_2.Syouhincode = '1999' or M_Kakaku_2.SyouhinCode = '1004')
+";
 
             MainGrid.DataSource = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
 
@@ -503,72 +516,69 @@ where T_tokusyu.CategoryCode = '{categoryCode}' and T_tokusyu.tokusyu_code = '{t
             string categoryCode = TokushuCategoryDrop.SelectedValue;
             string tokushuCode = TokushuNameDrop.SelectedValue;
 
-            var searchTables = new List<SearchTable1>();
+            //            var searchTables = new List<SearchTable1>();
 
 
 
-            sqlCommand = @"
-select M_Kakaku_2.SyouhinCode, M_TokuisakiShouhin.SyouhinMei,M_TokuisakiShouhin.ShouhinCatch,M_TokuisakiShouhin.ShouhinContents,M_TokuisakiShouhin.MovieManager,M_TokuisakiShouhin.MovieActor,M_Kakaku_2.HyoujunKakaku,M_Kakaku_2.Media,M_TokuisakiShouhin.ShouhinAttribute,M_TokuisakiShouhin.Copyright,M_Kakaku_2.Makernumber,M_Kakaku_2.ShiireName,M_TokuisakiShouhin.JoueiTime  
-from M_Kakaku_2 inner join M_TokuisakiShouhin on M_Kakaku_2.SyouhinCode = M_TokuisakiShouhin.SyouhinCode
-where CategoryCode = '203'";
+            //            sqlCommand = @"
+            //select M_Kakaku_2.SyouhinCode, M_TokuisakiShouhin.SyouhinMei,M_TokuisakiShouhin.ShouhinCatch,M_TokuisakiShouhin.ShouhinContents,M_TokuisakiShouhin.MovieManager,M_TokuisakiShouhin.MovieActor,M_Kakaku_2.HyoujunKakaku,M_Kakaku_2.Media,M_TokuisakiShouhin.ShouhinAttribute,M_TokuisakiShouhin.Copyright,M_Kakaku_2.Makernumber,M_Kakaku_2.ShiireName,M_TokuisakiShouhin.JoueiTime  
+            //from M_Kakaku_2 inner join M_TokuisakiShouhin on M_Kakaku_2.SyouhinCode = M_TokuisakiShouhin.SyouhinCode
+            //where CategoryCode = '203'";
 
 
-            var dataTable = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
-
-
-
-            for (int i = 0; i < dataTable.Rows.Count; i++)
-            {
-                var searchRow = new SearchTable1
-                {
-                    ShouhinNumber = dataTable.Rows[i].ItemArray[0].ToString(),
-                    ShouhinName = dataTable.Rows[i].ItemArray[1].ToString(),
-                    ShouhinCatch = dataTable.Rows[i].ItemArray[2].ToString(),
-                    ShouhinContents = dataTable.Rows[i].ItemArray[3].ToString(),
-                    Director = dataTable.Rows[i].ItemArray[4].ToString(),
-                    Actor = dataTable.Rows[i].ItemArray[5].ToString(),
-                    Kakaku = dataTable.Rows[i].ItemArray[6].ToString(),
-                    Media = dataTable.Rows[i].ItemArray[7].ToString(),
-                    Siyou = dataTable.Rows[i].ItemArray[8].ToString(),
-                    Copyright = dataTable.Rows[i].ItemArray[9].ToString(),
-                    MakerNumber = dataTable.Rows[i].ItemArray[10].ToString(),
-                    ShiireName = dataTable.Rows[i].ItemArray[11].ToString(),
+            //            var dataTable = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
 
 
 
-                };
+            //            for (int i = 0; i < dataTable.Rows.Count; i++)
+            //            {
+            //                var searchRow = new SearchTable1
+            //                {
+            //                    ShouhinNumber = dataTable.Rows[i].ItemArray[0].ToString(),
+            //                    ShouhinName = dataTable.Rows[i].ItemArray[1].ToString(),
+            //                    ShouhinCatch = dataTable.Rows[i].ItemArray[2].ToString(),
+            //                    ShouhinContents = dataTable.Rows[i].ItemArray[3].ToString(),
+            //                    Director = dataTable.Rows[i].ItemArray[4].ToString(),
+            //                    Actor = dataTable.Rows[i].ItemArray[5].ToString(),
+            //                    Kakaku = dataTable.Rows[i].ItemArray[6].ToString(),
+            //                    Media = dataTable.Rows[i].ItemArray[7].ToString(),
+            //                    Siyou = dataTable.Rows[i].ItemArray[8].ToString(),
+            //                    Copyright = dataTable.Rows[i].ItemArray[9].ToString(),
+            //                    MakerNumber = dataTable.Rows[i].ItemArray[10].ToString(),
+            //                    ShiireName = dataTable.Rows[i].ItemArray[11].ToString(),
 
-                searchTables.Add(searchRow);
 
-            }
 
-            var table = new DataTable();
-            table.Columns.Add("SyouhinCode");
-            table.Columns.Add("SyouhinMei");
-            table.Columns.Add("ShouhinCatch");
-            table.Columns.Add("ShouhinContents");
-            table.Columns.Add("MovieManager");
-            table.Columns.Add("MovieActor");
-            table.Columns.Add("HyoujunKakaku");
-            table.Columns.Add("Media");
-            table.Columns.Add("ShouhinAttribute");
-            table.Columns.Add("Copyright");
-            table.Columns.Add("Makernumber");
-            table.Columns.Add("ShiireName");
+            //                };
+
+            //                searchTables.Add(searchRow);
+
+            //            }
+
+            //            var table = new DataTable();
+            //            table.Columns.Add("SyouhinCode");
+            //            table.Columns.Add("SyouhinMei");
+            //            table.Columns.Add("ShouhinCatch");
+            //            table.Columns.Add("ShouhinContents");
+            //            table.Columns.Add("MovieManager");
+            //            table.Columns.Add("MovieActor");
+            //            table.Columns.Add("HyoujunKakaku");
+            //            table.Columns.Add("Media");
+            //            table.Columns.Add("ShouhinAttribute");
+            //            table.Columns.Add("Copyright");
+            //            table.Columns.Add("Makernumber");
+            //            table.Columns.Add("ShiireName");
 
 
 
             int count = 0;
 
-
-
-
-
-
-            sqlCommand = @"
-select M_TokuisakiShouhin.Syouhincode, M_Kakaku_2.SyouhinMei,M_Kakaku_2.Media,M_Kakaku_2.ShiireName,M_Kakaku_2.HyoujunKakaku,M_Kakaku_2.ShiireKakaku,M_TokuisakiShouhin.ShouhinAttribute,M_TokuisakiShouhin.JoueiTime,M_TokuisakiShouhin.MovieManager,M_TokuisakiShouhin.MovieActor,M_TokuisakiShouhin.Copyright
-from M_Kakaku_2 inner join M_TokuisakiShouhin on M_Kakaku_2.SyouhinCode = M_TokuisakiShouhin.SyouhinCode
-where CategoryCode = '203' and ";
+            sqlCommand = $@"
+select M_Kakaku_2.Syouhincode, M_Kakaku_2.SyouhinMei,M_Kakaku_2.Media,M_Kakaku_2.ShiireName,M_Kakaku_2.HyoujunKakaku,M_Kakaku_2.ShiireKakaku,M_TokuisakiShouhin.ShouhinAttribute,M_TokuisakiShouhin.JoueiTime,M_TokuisakiShouhin.MovieManager,M_TokuisakiShouhin.MovieActor,M_TokuisakiShouhin.Copyright
+from M_Kakaku_2 
+left outer join M_TokuisakiShouhin 
+on M_Kakaku_2.SyouhinCode = M_TokuisakiShouhin.SyouhinCode
+where CategoryCode = '{categoryCode}' and ";
 
 
             if (!string.IsNullOrWhiteSpace(ShouhinNameLabel.Text))
@@ -577,9 +587,9 @@ where CategoryCode = '203' and ";
                 count++;
             }
 
-            if (!string.IsNullOrWhiteSpace(MediaLabel.Text))
+            if (!string.IsNullOrWhiteSpace(MediaDrop.SelectedValue))
             {
-                sqlCommand += $" M_Kakaku_2.Media  = '{MediaLabel.Text}' and";
+                sqlCommand += $" M_Kakaku_2.Media  = '{MediaDrop.SelectedValue}' and";
                 count++;
             }
             if (!string.IsNullOrWhiteSpace(KakakuDropDown.Text))
@@ -617,7 +627,7 @@ where CategoryCode = '203' and ";
 
             if (!string.IsNullOrWhiteSpace(ShouhinCodeLabel.Text))
             {
-                sqlCommand += $" M_TokuisakiShouhin.Syouhincode  = '{ShouhinCodeLabel.Text}' and";
+                sqlCommand += $" M_Kakaku_2.Syouhincode  = '{ShouhinCodeLabel.Text}' and";
                 count++;
             }
 

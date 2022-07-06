@@ -45,12 +45,51 @@
 
                     <table id="shousai_table">
                         <tr>
+
+                            <th>商品コード</th>
+                            <td>
+                                <asp:TextBox runat="server" ID="ShouhinCodeLabel" TextMode="Number"></asp:TextBox></td>
+
                             <th>商品名</th>
                             <td>
                                 <asp:TextBox runat="server" ID="ShouhinNameLabel"></asp:TextBox></td>
                             <th>メディア</th>
                             <td>
-                                <asp:TextBox runat="server" ID="MediaLabel"></asp:TextBox></td>
+                                <asp:DropDownList runat="server" ID="MediaDrop">
+
+                                    <asp:ListItem></asp:ListItem>
+                                    <asp:ListItem Text="DVD" Value="DVD"></asp:ListItem>
+                                    <asp:ListItem Text="BD" Value="BD"></asp:ListItem>
+                                </asp:DropDownList>
+                            </td>
+
+
+                        </tr>
+
+                        <tr>
+
+                            <th>メーカー</th>
+                            <td>
+                                <asp:TextBox runat="server" ID="CompanyLabel"></asp:TextBox></td>
+
+
+
+                            <th>監督</th>
+                            <td>
+                                <asp:TextBox runat="server" ID="DirectiorLabel"></asp:TextBox></td>
+
+                            <th>出演</th>
+                            <td>
+                                <asp:TextBox runat="server" ID="ActorLabel1"></asp:TextBox></td>
+
+
+
+
+
+                        </tr>
+
+                        <tr>
+
                             <th>価格</th>
                             <td>
                                 <asp:DropDownList runat="server" ID="KakakuDropDown">
@@ -64,27 +103,6 @@
                                 </asp:DropDownList>
                             </td>
 
-                        </tr>
-
-                        <tr>
-
-                            <th>監督</th>
-                            <td>
-                                <asp:TextBox runat="server" ID="DirectiorLabel"></asp:TextBox></td>
-
-                            <th>出演者</th>
-                            <td>
-                                <asp:TextBox runat="server" ID="ActorLabel1"></asp:TextBox></td>
-
-
-                            <th>メーカー</th>
-                            <td>
-                                <asp:TextBox runat="server" ID="CompanyLabel"></asp:TextBox></td>
-
-
-                        </tr>
-
-                        <tr>
                             <th>上映時間</th>
                             <td>
                                 <asp:DropDownList runat="server" ID="JoueiTimeDrop">
@@ -101,9 +119,7 @@
                             <td>
                                 <asp:TextBox runat="server" ID="ShiyouLabel"></asp:TextBox></td>
 
-                            <th>商品コード</th>
-                            <td>
-                                <asp:TextBox runat="server" ID="ShouhinCodeLabel"></asp:TextBox></td>
+
 
 
 

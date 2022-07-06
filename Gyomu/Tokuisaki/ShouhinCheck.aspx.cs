@@ -43,13 +43,15 @@ namespace Gyomu.Tokuisaki
             //最初に表示されているドロップダウンの項目名。
             string categoryCode = "205";
             string tokushuCode = "2";
+
             string sqlCommand = $@"
-            select M_TokuisakiShouhin.SyouhinMei,T_tokusyu.Media,T_tokusyu.tokusyu_shouhin_shoukai,T_tokusyu.Ranking,T_tokusyu.SyouhinCode  
-            from T_tokusyu 
-            inner join M_TokuisakiShouhin 
-            on T_tokusyu.SyouhinCode = M_TokuisakiShouhin.Syouhincode
-            where T_tokusyu.tokusyu_code = '{tokushuCode}' and T_tokusyu.CategoryCode = '{categoryCode}'
-            order by T_tokusyu.Ranking";
+select M_Kakaku_2.SyouhinMei,T_tokusyu.Media,T_tokusyu.tokusyu_shouhin_shoukai,T_tokusyu.Ranking,T_tokusyu.SyouhinCode  
+from T_tokusyu 
+inner join M_Kakaku_2 
+on T_tokusyu.SyouhinCode = M_Kakaku_2.Syouhincode and T_tokusyu.CategoryCode = M_Kakaku_2.CategoryCode and T_tokusyu.Media = M_Kakaku_2.Media
+where T_tokusyu.tokusyu_code = '{tokushuCode}' and T_tokusyu.CategoryCode = '{categoryCode}'
+order by T_tokusyu.Ranking
+";
 
             MainListView.DataSource = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
             MainListView.DataBind();
