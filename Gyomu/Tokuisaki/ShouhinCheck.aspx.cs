@@ -54,14 +54,14 @@ namespace Gyomu.Tokuisaki
             MainListView.DataSource = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
             MainListView.DataBind();
 
-            if (tokushuCode == "2" | tokushuCode == "4")
-            {
-                for (int i = 0; i < MainListView.Items.Count; i++)
-                {
+            //if (tokushuCode == "2" | tokushuCode == "4")
+            //{
+            //    for (int i = 0; i < MainListView.Items.Count; i++)
+            //    {
 
-                    MainListView.Items[i].Controls[1].Visible = false;
-                }
-            }
+            //        MainListView.Items[i].Controls[1].Visible = false;
+            //    }
+            //}
         }
 
         private void Firstdrop()
@@ -94,14 +94,14 @@ order by T_tokusyu.Ranking
             MainListView.DataSource = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
             MainListView.DataBind();
 
-            if (tokushuCode == "2" | tokushuCode == "4")
-            {
-                for (int i = 0; i < MainListView.Items.Count; i++)
-                {
+            //if (tokushuCode == "2" | tokushuCode == "4")
+            //{
+            //    for (int i = 0; i < MainListView.Items.Count; i++)
+            //    {
 
-                    MainListView.Items[i].Controls[1].Visible = false;
-                }
-            }
+            //        MainListView.Items[i].Controls[1].Visible = false;
+            //    }
+            //}
 
         }
 
