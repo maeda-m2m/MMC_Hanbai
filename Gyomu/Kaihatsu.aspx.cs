@@ -895,16 +895,12 @@ namespace Gyomu
                     RadDatePicker RdpRightEnd = Ctl.FindControl("RdpRightEnd") as RadDatePicker;
                     RadDatePicker RdpCpStart = Ctl.FindControl("RdpCpStart") as RadDatePicker;
                     RadDatePicker RdpCpEnd = Ctl.FindControl("RdpCpEnd") as RadDatePicker;
-                    //Button BtnEdit = (Button)e.Item.FindControl("BtnEdit");
                     Button BtnAddRow = (Button)e.Item.FindControl("BtnAddRow");
                     Button BtnCopyAdd = (Button)e.Item.FindControl("BtnCopyAdd");
                     Button Button4 = (Button)e.Item.FindControl("Button4");
                     Button ButtonClose = (Button)Ctl.FindControl("ButtonClose");
                     Label Facility = Ctl.FindControl("Facility") as Label;
                     RadComboBox ShiyouShisetsu = Ctl.FindControl("ShiyouShisetsu") as RadComboBox;
-                    //Button BtnDoneEdit = (Button)e.Item.FindControl("BtnDoneEdit");
-
-                    //Label LblSerchProduct = (Label)Ctl.FindControl("LblSerchProduct");
 
 
                     RowNo.Text = no.ToString();
@@ -1470,33 +1466,42 @@ namespace Gyomu
                     DataMitumori.T_MitumoriRow dr = dg.NewT_MitumoriRow();
                     CtrlMitsuSyousai CtlMitsuSyosai = CtrlSyousai.Items[i].FindControl("Syosai") as CtrlMitsuSyousai;
                     dr = CtlMitsuSyosai.ItemGet2(dr);
-                    dr.TokuisakiCode = TbxCustomer.Text + "/" + TbxTokuisakiCode.Text;
-                    dr.TokuisakiMei = RcbTokuisakiNameSyousai.Text;
-                    dr.SeikyusakiMei = RcbTokuisakiNameSyousai.Text;
-                    dr.CateGory = int.Parse(RadComboCategory.SelectedValue);
-                    dr.CategoryName = RadComboCategory.Text;
-                    dr.TourokuName = Label1.Text;
-                    dr.TanTouName = Label1.Text;
-                    dr.Busyo = RadComboBox4.Text;
-                    if (CheckBox5.Checked)
+                    if (dr != null)
                     {
-                        dr.FukusuFaci = "true";
-                    }
-                    dr.RowNo = i + 1;
-                    if (Label94.Text != "")
-                    {
-                        dr.MitumoriNo = Label94.Text;
-                        dr.JutyuFlg = false;
-                        dg.AddT_MitumoriRow(dr);
-                        ClassMitumori.UpDateMitumori2(dg, Global.GetConnection());
+                        dr.TokuisakiCode = TbxCustomer.Text + "/" + TbxTokuisakiCode.Text;
+                        dr.TokuisakiMei = RcbTokuisakiNameSyousai.Text;
+                        dr.SeikyusakiMei = RcbTokuisakiNameSyousai.Text;
+                        dr.CateGory = int.Parse(RadComboCategory.SelectedValue);
+                        dr.CategoryName = RadComboCategory.Text;
+                        dr.TourokuName = Label1.Text;
+                        dr.TanTouName = Label1.Text;
+                        dr.Busyo = RadComboBox4.Text;
+                        if (CheckBox5.Checked)
+                        {
+                            dr.FukusuFaci = "true";
+                        }
+                        dr.RowNo = i + 1;
+                        if (Label94.Text != "")
+                        {
+                            dr.MitumoriNo = Label94.Text;
+                            dr.JutyuFlg = false;
+                            dg.AddT_MitumoriRow(dr);
+                            ClassMitumori.UpDateMitumori2(dg, Global.GetConnection());
+                        }
+                        else
+                        {
+                            dr.MitumoriNo = no;
+                            dr.JutyuFlg = false;
+                            dg.AddT_MitumoriRow(dr);
+                            ClassMitumori.InsertMitsumori(dg, Global.GetConnection());
+                            dg = null;
+                        }
                     }
                     else
                     {
-                        dr.MitumoriNo = no;
-                        dr.JutyuFlg = false;
-                        dg.AddT_MitumoriRow(dr);
-                        ClassMitumori.InsertMitsumori(dg, Global.GetConnection());
-                        dg = null;
+                        Err.Text = "見積登録時に施設情報に関してエラーが発生しました。施設情報をご確認下さい。";
+                        ClassMitumori.DelMitumori(dl.MitumoriNo.ToString(), Global.GetConnection());
+                        ClassMitumori.DelMitumoriHeader(dl.MitumoriNo.ToString(), Global.GetConnection());
                     }
                 }
                 if (dl != null)

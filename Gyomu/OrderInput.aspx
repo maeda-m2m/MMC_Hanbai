@@ -13,7 +13,7 @@
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script src="JavaScript.js"></script>
-
+    <link href="Kaihatsu.css" type="text/css" rel="stylesheet" />
     <title></title>
     <style type="text/css">
         .RowTD {
@@ -1249,6 +1249,387 @@
             </div>
         </asp:Panel>
         <script src="JavaScript.js"></script>
+
+        <script type="text/javascript">
+            function select(sender, eventArgs) {
+                var combo2 = document.activeElement.id;
+                var onk = event.keyCode;
+                var clid = combo2.split("_");
+                var combo3 = $find(combo2.replace("_Input", ""));
+                var vv;
+                if (onk == 13) {
+                    var c = combo3.get_items().get_count();
+                    if (c == 1) {
+                        vv = combo3.get_items().getItem(0).get_value();
+                    }
+                    else {
+                        vv = combo3.get_selectedItem().get_value();
+                    }
+                }
+                else {
+                    vv = combo3.get_selectedItem().get_value();
+                }
+                var Aryval = vv.split('^');
+                var syouhincode = Aryval[0];
+                var media = Aryval[10];
+                var hanni = Aryval[14];
+                var categorycode = Aryval[4];
+                var categoryname = Aryval[5];
+                var makernumber = Aryval[13];
+                var permisisionstart = Aryval[2];
+                var rightend = Aryval[3];
+                var cpkaishi = Aryval[18];
+                var cpowari = Aryval[19];
+                var hyoujunkakaku = Aryval[16];
+                var shiirename = Aryval[12];
+                var shiirecode = Aryval[11];
+                var shiirekakaku = Aryval[17];
+                var syouhinmei = Aryval[1];
+                var warehouse = Aryval[15];
+                var cpkakaku = Aryval[20];
+                var cpshiire = Aryval[21];
+
+                combo3.clearItems();
+
+
+                var TbxProductCode = document.getElementById(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "TbxProductCode");
+                var Baitai = document.getElementById(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "Baitai")
+                var LblCateCode = document.getElementById(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "LblCateCode");
+                var LblCategoryName = document.getElementById(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "LblCategoryName");
+                var LblProduct = document.getElementById(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "LblProduct");
+                var TbxMakerNo = document.getElementById(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "TbxMakerNo");
+                var RdpPermissionstart = $find(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "RdpPermissionstart");
+                var RdpRightEnd = $find(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "RdpRightEnd");
+                var RdpCpStart = $find(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "RdpCpStart");
+                var RdpCpEnd = $find(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "RdpCpEnd");
+                var TbxHyoujun = document.getElementById(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "TbxHyoujun");
+                var LblHanni = document.getElementById(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "LblHanni");
+                var TbxHanni = document.getElementById(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "TbxHanni");
+                var RcbHanni = $find(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "RcbHanni");
+                var RcbShiireName = $find(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "RcbShiireName");
+                var Hachu = $find(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "Hachu");
+                var LblShiireCode = document.getElementById(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "LblShiireCode");
+                var HidShiireCode = document.getElementById(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "HidShiireCode");
+                var RcbMedia = $find(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "RcbMedia");
+                var TbxProductName = document.getElementById(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "TbxProductName");
+                var WareHouse = document.getElementById(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "WareHouse");
+                var TbxWareHouse = document.getElementById(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "TbxWareHouse");
+                var SerchProduct = $find(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "SerchProduct");
+                var TbxShiirePrice = document.getElementById(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "TbxShiirePrice");
+                var HidMedia = document.getElementById(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "HidMedia");
+                var HidHanni = document.getElementById(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "HidHanni");
+                var HidJoueiHanni = document.getElementById(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "HidJoueiHanni");
+                var TbxCpKakaku = document.getElementById(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "TbxCpKakaku");
+                var TbxCpShiire = document.getElementById(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "TbxCpShiire");
+                var ShiyouShisetsu = $find(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "ShiyouShisetsu");
+                var StartDate = $find(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "StartDate");
+                var EndDate = $find(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "EndDate");
+                var SyokaiDate = $find('RadDatePicker1');
+                var HidSyokaiDate = document.getElementById("HidSyokaiDate");
+
+                permisisionstart = new Date(permisisionstart);
+                rightend = new Date(rightend);
+                cpkaishi = new Date(cpkaishi);
+                cpowari = new Date(cpowari);
+                TbxProductCode.value = syouhincode;
+                Baitai.innerText = media;
+                RcbMedia.set_text(media);
+                HidMedia.value = media;
+                HidShiireCode.value = shiirecode;
+                LblCateCode.innerText = categorycode;
+                LblCategoryName.innerText = categoryname;
+                LblProduct.innerText = makernumber;
+                TbxMakerNo.value = makernumber;
+                RdpPermissionstart.set_selectedDate(permisisionstart);
+                RdpRightEnd.set_selectedDate(rightend);
+                RdpCpStart.set_selectedDate(cpkaishi);
+                RdpCpEnd.set_selectedDate(cpowari);
+                TbxHyoujun.value = String(hyoujunkakaku).replace(/(\d)(?=(\d\d\d)+$)/g, "$1,");
+                TbxShiirePrice.value = String(shiirekakaku).replace(/(\d)(?=(\d\d\d)+$)/g, "$1,");
+                LblHanni.innerText = hanni;
+                TbxHanni.value = hanni;
+                HidHanni.value = hanni;
+                TbxCpKakaku.value = String(cpkakaku).replace(/(\d)(?=(\d\d\d)+$)/g, "$1,");
+                TbxCpShiire.value = String(cpshiire).replace(/(\d)(?=(\d\d\d)+$)/g, "$1,");
+                RcbShiireName.set_text(shiirename);
+                RcbShiireName.set_value(shiirecode);
+                Hachu.set_text(shiirename);
+                Hachu.set_value(shiirecode);
+                LblShiireCode.innerText = shiirecode;
+                SerchProduct.set_text(syouhinmei);
+                TbxProductName.value = syouhinmei;
+                WareHouse.innerText = warehouse;
+                TbxWareHouse.value = warehouse;
+                if (categorycode != "205") {
+                    var Kakeri = document.getElementById(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "Kakeri");
+                    var zeikubun = document.getElementById(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "zeiku");
+                    var suryo = document.getElementById(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "Suryo");
+                    var HyoujyunTanka = document.getElementById(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "HyoujyunTanka");
+                    var Kingaku = document.getElementById(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "Kingaku");
+                    var Tanka = document.getElementById(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "Tanka");
+                    var Uriage = document.getElementById(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "Uriage");
+                    var ShiireTanka = document.getElementById(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "ShiireTanka");
+                    var ShiireKingaku = document.getElementById(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "ShiireKingaku");
+                    var HidColor = document.getElementById(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "HidColor");
+
+                    var kakaku;
+                    var shiire;
+                    var Syokai;
+                    if (SyokaiDate != null) {
+                        Syokai = SyokaiDate.get_selectedDate();
+                    }
+                    else {
+                        Syokai = HidSyokaiDate.value;
+                    }
+                    var inputElement = combo3.get_inputDomElement();
+                    if (Syokai >= Date.parse(cpkaishi)) {
+                        if (Syokai <= Date.parse(cpowari)) {
+                            kakaku = cpkakaku;
+                            shiire = cpshiire;
+                            inputElement.style.color = 'orange';
+                            HidColor.value = 'orange';
+                        }
+                        else {
+                            kakaku = hyoujunkakaku;
+                            shiire = shiirekakaku;
+                            inputElement.style.color = 'black';
+                        }
+                    }
+                    else {
+                        kakaku = hyoujunkakaku;
+                        shiire = shiirekakaku;
+                        inputElement.style.color = 'black';
+                    }
+                    if (Syokai <= Date.parse(permisisionstart)) {
+                        kakaku = hyoujunkakaku;
+                        shiire = shiirekakaku;
+                        inputElement.style.color = 'blue';
+                    }
+                    var Kyodaku = RdpRightEnd.get_selectedDate();
+                    if (Syokai >= Date.parse(Kyodaku)) {
+                        inputElement.style.color = 'red';
+                    }
+                    if (zeikubun.innerText == "税込") {//税区分が税込の場合、商品選択時の計算
+                        //標準単価＆金額（金額 ＝　標準単価 × 数量）
+                        HyoujyunTanka.value = String(kakaku).replace(/(\d)(?=(\d\d\d)+$)/g, "$1,");
+                        var kin = kakaku * suryo.value;
+                        Kingaku.value = String(kin).replace(/(\d)(?=(\d\d\d)+$)/g, "$1,");
+                        //仕入単価＆仕入金額（仕入金額　＝　仕入単価　×　数量　×　税込なので1.1）
+                        ShiireTanka.value = String(shiire).replace(/(\d)(?=(\d\d\d)+$)/g, "$1,");
+                        var shiirekin = shiire * suryo.value * 1.1;
+                        shiirekin = Math.trunc(shiirekin);
+                        ShiireKingaku.value = String(shiirekin).replace(/(\d)(?=(\d\d\d)+$)/g, "$1,");
+                        //単価＆売上金額（売上金額　＝　掛率計算済「税込」標準単価　×　数量）
+                        var tanka = kakaku * Kakeri.innerText * 1.1 / 100;
+                        tanka = Math.trunc(tanka);
+                        Tanka.value = String(tanka).replace(/(\d)(?=(\d\d\d)+$)/g, "$1,");
+                        var uriage = tanka * suryo.value;
+                        Uriage.value = String(uriage).replace(/(\d)(?=(\d\d\d)+$)/g, "$1,");
+                    }
+                    else {//税抜の場合の計算
+                        //標準単価＆金額（金額 ＝　標準単価 × 数量）
+                        HyoujyunTanka.value = String(kakaku).replace(/(\d)(?=(\d\d\d)+$)/g, "$1,");
+                        var kin = kakaku * suryo.value;
+                        Kingaku.value = String(kin).replace(/(\d)(?=(\d\d\d)+$)/g, "$1,");
+                        //仕入単価＆仕入金額（仕入金額　＝　仕入単価　×　数量）
+                        ShiireTanka.value = String(shiire).replace(/(\d)(?=(\d\d\d)+$)/g, "$1,");
+                        var shiirekin = shiire * suryo.value;
+                        shiirekin = Math.trunc(shiirekin);
+                        ShiireKingaku.value = String(shiirekin).replace(/(\d)(?=(\d\d\d)+$)/g, "$1,");
+                        //単価＆売上金額（売上金額　＝　掛率計算済「税抜」標準単価　×　数量）
+                        var tanka = kakaku * Kakeri.innerText / 100;
+                        tanka = Math.trunc(tanka);
+                        Tanka.value = String(tanka).replace(/(\d)(?=(\d\d\d)+$)/g, "$1,");
+                        var uriage = tanka * suryo.value;
+                        Uriage.value = String(uriage).replace(/(\d)(?=(\d\d\d)+$)/g, "$1,");
+                    }
+
+                    if (syouhincode == "1999") {
+                        HyoujyunTanka.readOnly = true;
+                        Kingaku.readOnly = true;
+                        ShiireTanka.readOnly = true;
+                        ShiireKingaku.readOnly = true;
+
+                        HyoujyunTanka.style.backgroundColor = "lightgray";
+                        Kingaku.style.backgroundColor = "lightgray";
+                        ShiireTanka.style.backgroundColor = "lightgray";
+                        ShiireKingaku.style.backgroundColor = "lightgray";
+
+                        suryo.style.display = "none";
+                    }
+
+                    const BtnAddRow = document.getElementById(clid[0] + "_" + clid[1] + "_" + "BtnAddRow");
+                    if (ShiyouShisetsu.get_text() == "") {
+                        ShiyouShisetsu.focus();
+                    }
+                    else {
+                        switch (categorycode) {
+                            case "101":
+                            case "102":
+                            case "103":
+                            case "199":
+                                BtnAddRow.focus();
+                                break;
+                            default:
+                                if (StartDate.get_selectedDate() != Date("")) {
+                                    BtnAddRow.focus();
+                                }
+                                else {
+                                    StartDate.focus();
+                                }
+                                break;
+                        }
+                    }
+                }
+            }
+
+        </script>
+        <script type="text/javascript">
+            function Keisan(tbx) {
+                var ary = tbx.split('-');
+                var tanka = document.getElementById(ary[0]).value;
+                var suryo = document.getElementById(ary[1]).value;
+                var Hyoutan = document.getElementById(ary[3]).value;
+                document.getElementById(ary[7]).value = Hyoutan;
+                var Shitan = document.getElementById(ary[4]).value;
+                var tan = tanka.replace(",", "");
+                var hyo = Hyoutan.replace(",", "");
+                var shi = Shitan.replace(",", "");
+                var num = tan * suryo;
+                var num1 = hyo * suryo;
+                var num2 = shi * suryo;
+
+                var num = String(num).replace(/(\d)(?=(\d\d\d)+$)/g, "$1,");
+                var numm = num1.toString();
+                if (numm != "NaN") {
+                    var num1 = String(num1).replace(/(\d)(?=(\d\d\d)+$)/g, "$1,");
+                    document.getElementById(ary[5]).value = num1;
+                }
+                var num2 = String(num2).replace(/(\d)(?=(\d\d\d)+$)/g, "$1,");
+
+                document.getElementById(ary[2]).value = num;
+                document.getElementById(ary[6]).value = num2;
+
+            }
+        </script>
+        <script type="text/javascript">
+            function SelectFacility(sender, eventArgs) {
+                var id = sender.get_element().id;
+                var rcb = $find(id)
+                var IDtemplate = id.replace("ShiyouShisetsu", "temp");
+                var TbxFacilityCode = document.getElementById(IDtemplate.replace("temp", "TbxFacilityCode"));
+                var TbxFacilityRowCode = document.getElementById(IDtemplate.replace("temp", "TbxFacilityRowCode"));
+                var TbxFacilityName = document.getElementById(IDtemplate.replace("temp", "TbxFacilityName"));
+                var TbxFacilityName2 = document.getElementById(IDtemplate.replace("temp", "TbxFacilityName2"));
+                var TbxFaci = document.getElementById(IDtemplate.replace("temp", "TbxFaci"));
+                var TbxFacilityResponsible = document.getElementById(IDtemplate.replace("temp", "TbxFacilityResponsible"));
+                var TbxYubin = document.getElementById(IDtemplate.replace("temp", "TbxYubin"));
+                var TbxFaciAdress = document.getElementById(IDtemplate.replace("temp", "TbxFaciAdress"));
+                var TbxTel = document.getElementById(IDtemplate.replace("temp", "TbxTel"));
+                var RcbCity = $find(IDtemplate.replace("temp", "RcbCity"));
+
+                var items = rcb.get_selectedItem().get_value().split('/');
+
+                TbxFacilityCode.value = items[0];
+                TbxFacilityRowCode.value = items[1];
+                TbxFacilityName.value = items[2];
+                TbxFacilityName2.value = items[3];
+                TbxFaci.value = items[4];
+                TbxFacilityResponsible.value = items[5];
+                TbxYubin.value = items[6];
+                TbxFaciAdress.value = items[7] + items[8];
+                TbxTel.value = items[9];
+                RcbCity.findItemByValue(items[10]).select();
+            }
+        </script>
+        <script>
+            function SerchFocus(fcs) {
+                var ary = fcs.split('-');
+                var rcb = document.getElementById(ary[0]);
+                var btn = document.getElementById(ary[1]);
+                btn.focus();
+            }
+        </script>
+        <script type="text/javascript">
+            function Meisai(ss) {
+                let ss2 = document.getElementById(ss);
+                ss2.style.display = "";
+            }
+        </script>
+        <script type="text/javascript">
+            function BtnUpdateFaci() {
+                try {
+                    var TbxFaci = document.getElementById(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "TbxFaci");
+                    var ShiyouShisetsu = $find(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "ShiyouShisetsu");
+                    ShiyouShisetsu.set_text = TbxFaci.innerText;
+                    const SisetuSyousai = document.getElementById("SisetuSyousai");
+                    SisetuSyousai.style.display = '';
+                }
+                catch {
+                    var Err = document.getElementById(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "ShiyouShisetsu");
+                    Err.innerText = "施設名略称を入力して下さい";
+                }
+            }
+        </script>
+        <script type="text/javascript">
+            function HyoujunKeyDown(hy) {
+                var hyoujun = document.getElementById(hy).onkeydown;
+                var g = event.keyCode;
+                if ((g == 13)
+                ) {
+                    return false;
+                }
+                if ((g == 9)) {
+                    var combo2 = document.activeElement.id;
+                    var clid = combo2.split("_");
+                    var combo3 = $find(combo2.replace("_Input", ""));
+                    const tanka = (clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "Tanka");
+                    tanka.focus();
+                }
+            }
+        </script>
+        <script type="text/javascript">
+            function TankaKeyDown(ta) {
+                var tanka = document.getElementById(ta);
+                if ((tanka.which == 13)
+                ) {
+                    tanka.which = null;
+                    return false;
+                }
+                if ((tanka.which == 9)) {
+                    var combo2 = document.activeElement.id;
+                    var clid = combo2.split("_");
+                    var combo3 = $find(combo2.replace("_Input", ""));
+                    const shiire = document.getElementById('ShiireTanka');
+                    shiire.focus();
+                }
+            }
+        </script>
+        <script type="text/javascript">
+            function ShiireKeyDown(shi) {
+                var shiire = document.getElementById(shi);
+                if ((shiire.which == 13)
+                ) {
+                    shiire.which = null;
+                    return false;
+                }
+                if ((shiire.which == 9)) {
+                    var combo2 = document.activeElement.id;
+                    var clid = combo2.split("_");
+                    var combo3 = $find(combo2.replace("_Input", ""));
+
+                    const bar = document.getElementById('BtnAddRow');
+                    bar.focus();
+                }
+            }
+        </script>
+        <script type="text/javascript">
+            function Close(ss) {
+                let ss2 = document.getElementById(ss);
+                ss2.style.display = "none";
+            }
+        </script>
+
     </form>
 </body>
 </html>

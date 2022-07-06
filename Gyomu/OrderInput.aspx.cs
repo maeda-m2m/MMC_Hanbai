@@ -616,7 +616,8 @@ namespace Gyomu
                         Button BtnClose = (Button)Ctl.FindControl("BtnClose");
                         Button BtnFacilityMeisai = (Button)Ctl.FindControl("BtnFacilityMeisai");
                         Panel SisetuSyousai = (Panel)Ctl.FindControl("SisetuSyousai");
-                        Button Button4 = (Button)Ctl.FindControl("Button4");
+                        Button ButtonClose = (Button)Ctl.FindControl("ButtonClose");
+
                         Label RowNo = e.Item.FindControl("RowNo") as Label;
                         RowNo.Text = no.ToString();
 
@@ -629,9 +630,7 @@ namespace Gyomu
                         BtnSyouhinSyousai.OnClientClick = string.Format("Meisai('{0}'); return false;", SyouhinSyousai.ClientID);
                         BtnClose.OnClientClick = string.Format("Close('{0}'); return false;", SyouhinSyousai.ClientID);
                         BtnFacilityMeisai.OnClientClick = string.Format("Meisai('{0}'); return false;", SisetuSyousai.ClientID);
-                        Button4.OnClientClick = string.Format("Close('{0}'); return false;", SisetuSyousai.ClientID);
-
-                        //kari();
+                        ButtonClose.OnClientClick = string.Format("Close('{0}'); return false;", SisetuSyousai.ClientID);
 
                         if (CheckBox1.Checked == true)
                         {

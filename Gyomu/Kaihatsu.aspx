@@ -710,7 +710,9 @@
                         <telerik:RadComboBox ID="RadComboBox1" runat="server" Culture="ja-JP" OnItemsRequested="RadComboBox1_ItemsRequested" AllowCustomText="false" EnableLoadOnDemand="True" ShowMoreResultsBox="True" ShowToggleImage="False" EnableVirtualScrolling="True" Width="300px" OnClientSelectedIndexChanged="TokuisakiSelect" AutoPostBack="true" OnSelectedIndexChanged="RadComboBox1_SelectedIndexChanged"></telerik:RadComboBox>
                         <script type="text/javascript">
                             function TokuisakiSelect(sender, eventArgs) {
-                                var rcbTokuisaki = $find("<%=RadComboBox1.ClientID%>");
+                                var id = sender.get_element().id;
+                                var rcbTokuisaki = $find(id);
+                                debugger;
                                 var selectedvalue = rcbTokuisaki.get_selectedItem().get_value();
                                 var AryValue = selectedvalue.split(',');
                                 var CustomerCode = AryValue[0];
@@ -1575,7 +1577,7 @@
                     <p>得意先名<span style="color: red">*</span></p>
                                         </asp:TableCell>
                                         <asp:TableCell ColumnSpan="2" CssClass="waku">
-                                            <telerik:RadComboBox ID="RcbTokuisakiNameSyousai" runat="server" Culture="ja-JP" OnItemsRequested="RadComboBox1_ItemsRequested" AllowCustomText="false" EnableLoadOnDemand="True" ShowMoreResultsBox="True" ShowToggleImage="False" EnableVirtualScrolling="True" Width="300px" OnClientSelectedIndexChanged="TokuisakiSelect" AutoPostBack="true"></telerik:RadComboBox>
+                                            <telerik:RadComboBox ID="RcbTokuisakiNameSyousai" runat="server" Culture="ja-JP" OnItemsRequested="RadComboBox1_ItemsRequested" AllowCustomText="false" EnableLoadOnDemand="True" ShowMoreResultsBox="True" ShowToggleImage="False" EnableVirtualScrolling="True" Width="300px" OnClientSelectedIndexChanged="TokuisakiSelect"></telerik:RadComboBox>
                                             <p style="font-size: 10px">得意先として印刷時に反映されます。</p>
                                         </asp:TableCell>
                                     </asp:TableRow>

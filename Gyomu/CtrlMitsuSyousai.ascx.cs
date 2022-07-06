@@ -1231,6 +1231,24 @@ namespace Gyomu
                 if (!dr.IsSyouhinCodeNull())
                 {
                     TbxProductCode.Text = dr.SyouhinCode;
+                    if (dr.SyouhinCode.Equals("1999"))
+                    {
+                        HyoujyunTanka.ReadOnly = true;
+                        Kingaku.ReadOnly = true;
+                        ShiireKingaku.ReadOnly = true;
+                        ShiireTanka.ReadOnly = true;
+
+                        HyoujyunTanka.Style["backgroundcolor"] = "lightgray";
+                        Kingaku.Style["backgroundcolor"] = "lightgray";
+                        ShiireKingaku.Style["backgroundcolor"] = "lightgray";
+                        ShiireTanka.Style["backgroundcolor"] = "lightgray";
+                        Suryo.Style["display"] = "none";
+                    }
+                    else
+                    {
+                        SerchProductJouei.Style["display"] = "none";
+                        ProductName = "";
+                    }
                 }
                 if (!dr.IsHyojunKakakuNull())
                 {
@@ -1344,7 +1362,7 @@ namespace Gyomu
                                         RcbHanni.SelectedValue = dr.Range;
                                         TbxHanni.Text = dr.Range;
                                         LblHanni.Text = dr.Range;
-                                        //RcbHanni.Visible = false;
+                                        LblHanni.Visible = false;
                                     }
                                     if (!dr.IsHyojunKakakuNull())
                                     {
@@ -1475,24 +1493,7 @@ namespace Gyomu
                 {
                     TbxCpShiire.Text = int.Parse(dr.CpShiire).ToString("0,0");
                 }
-                if (dr.SyouhinCode.Equals("1999"))
-                {
-                    HyoujyunTanka.ReadOnly = true;
-                    Kingaku.ReadOnly = true;
-                    ShiireKingaku.ReadOnly = true;
-                    ShiireTanka.ReadOnly = true;
 
-                    HyoujyunTanka.Style["backgroundcolor"] = "lightgray";
-                    Kingaku.Style["backgroundcolor"] = "lightgray";
-                    ShiireKingaku.Style["backgroundcolor"] = "lightgray";
-                    ShiireTanka.Style["backgroundcolor"] = "lightgray";
-                    Suryo.Style["display"] = "none";
-                }
-                else
-                {
-                    SerchProductJouei.Style["display"] = "none";
-                    ProductName = "";
-                }
                 if (!dr.IsZeikuNull())
                 {
                     zeiku.Text = dr.Zeiku;
@@ -2049,7 +2050,10 @@ namespace Gyomu
                     TbxHanni.Text = dr.Range;
                     Hachu.SelectedValue = dr.ShiiresakiCode.ToString();
                     LblShiireCode.Text = dr.ShiiresakiCode.ToString();
-                    TbxZasu.Text = dr.Zasu;
+                    if (!dr.IsZasuNull())
+                    {
+                        TbxZasu.Text = dr.Zasu;
+                    }
 
                 }
                 else
@@ -2069,7 +2073,7 @@ namespace Gyomu
             {
                 err.Text = ex.Message;
                 string body = ex.Message + "\r\n" + ex.StackTrace + "\r\n" + ex.Source;
-                ClassMail.ErrorMail(Kaihatsu.mail_to, Kaihatsu.mail_title, body);
+                ClassMail.ErrorMail(Kaihatsu.mail_to, "エラーメール | 受注データ修正時", body);
             }
         }
 
@@ -2469,6 +2473,7 @@ namespace Gyomu
                 else
                 {
                     ClassMail.ErrorMail("maeda@m2m-asp.com", "エラーメール | 見積登録時", "TbxFaciに値がセットされていません。");
+                    return null;
                 }
                 if (TbxTel.Text != "")
                 {
