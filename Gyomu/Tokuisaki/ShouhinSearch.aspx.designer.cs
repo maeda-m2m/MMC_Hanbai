@@ -42,6 +42,15 @@ namespace Gyomu.Tokuisaki
         protected global::Telerik.Web.UI.RadTabStrip RT;
 
         /// <summary>
+        /// ShouhinCodeLabel コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox ShouhinCodeLabel;
+
+        /// <summary>
         /// ShouhinNameLabel コントロール。
         /// </summary>
         /// <remarks>
@@ -51,22 +60,22 @@ namespace Gyomu.Tokuisaki
         protected global::System.Web.UI.WebControls.TextBox ShouhinNameLabel;
 
         /// <summary>
-        /// MediaLabel コントロール。
+        /// MediaDrop コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox MediaLabel;
+        protected global::System.Web.UI.WebControls.DropDownList MediaDrop;
 
         /// <summary>
-        /// KakakuDropDown コントロール。
+        /// CompanyLabel コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList KakakuDropDown;
+        protected global::System.Web.UI.WebControls.TextBox CompanyLabel;
 
         /// <summary>
         /// DirectiorLabel コントロール。
@@ -87,13 +96,13 @@ namespace Gyomu.Tokuisaki
         protected global::System.Web.UI.WebControls.TextBox ActorLabel1;
 
         /// <summary>
-        /// CompanyLabel コントロール。
+        /// KakakuDropDown コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox CompanyLabel;
+        protected global::System.Web.UI.WebControls.DropDownList KakakuDropDown;
 
         /// <summary>
         /// JoueiTimeDrop コントロール。
@@ -112,15 +121,6 @@ namespace Gyomu.Tokuisaki
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox ShiyouLabel;
-
-        /// <summary>
-        /// ShouhinCodeLabel コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ShouhinCodeLabel;
 
         /// <summary>
         /// shousai_btn コントロール。
