@@ -149,9 +149,11 @@
                                 </telerik:RadMenuItem>
                                 <telerik:RadMenuItem runat="server" NavigateUrl="~/Master/MasterOshirase.aspx" Text="お知らせマスタ">
                                 </telerik:RadMenuItem>
-                                 <telerik:RadMenuItem runat="server" NavigateUrl="~/Tokuisaki/MasterPortal.aspx" Text="得意先ポータルマスタ">
+                                <telerik:RadMenuItem runat="server" NavigateUrl="~/Tokuisaki/MasterPortal.aspx" Text="得意先ポータルマスタ">
                                 </telerik:RadMenuItem>
-                                 <telerik:RadMenuItem runat="server"  Text="得意先ポータル画像マスタ" NavigateUrl="~/Tokuisaki/MasterPortalImage.aspx">
+                                <telerik:RadMenuItem runat="server" NavigateUrl="~/Tokuisaki/MasterPortalImage.aspx" Text="得意先ポータル画像マスタ">
+                                </telerik:RadMenuItem>
+                                <telerik:RadMenuItem runat="server" NavigateUrl="~/Tokuisaki/TokuisakiAccount.aspx" Text="得意先アカウントマスタ">
                                 </telerik:RadMenuItem>
                                 <telerik:RadMenuItem runat="server" Text="得意先ポータルマスタ">
                                     <Items>

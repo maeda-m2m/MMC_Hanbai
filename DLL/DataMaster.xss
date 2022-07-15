@@ -30,9 +30,9 @@
     <Shape ID="DesignTable:T_Log" ZOrder="5" X="452" Y="977" Height="191" Width="187" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="140" />
     <Shape ID="DesignTable:M_JoueiKakaku3" ZOrder="4" X="665" Y="1021" Height="229" Width="235" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="178" />
     <Shape ID="DesignTable:M_JoueiKakaku2" ZOrder="3" X="204" Y="919" Height="210" Width="235" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="159" />
+    <Shape ID="DesignTable:M_TokuisakiShouhin" ZOrder="1" X="1192" Y="847" Height="305" Width="257" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
     <Shape ID="DesignTable:KariTable" ZOrder="22" X="451" Y="336" Height="315" Width="194" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="311" />
     <Shape ID="DesignTable:T_ErrorNaiyou" ZOrder="7" X="1376" Y="54" Height="67" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="63" />
-    <Shape ID="DesignTable:M_TokuisakiShouhin" ZOrder="1" X="1192" Y="847" Height="305" Width="257" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
   </Shapes>
   <Connectors />
 </DiagramLayout>

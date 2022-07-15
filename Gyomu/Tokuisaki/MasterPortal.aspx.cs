@@ -26,6 +26,10 @@ namespace Gyomu.Tokuisaki
             if (!Page.IsPostBack)
             {
 
+
+
+
+
                 EditPanel.Visible = false;
                 Create();
             }
@@ -212,9 +216,6 @@ namespace Gyomu.Tokuisaki
             {
                 rad.Items.Add(new RadComboBoxItem(additems, additems));
             }
-
-
-
 
         }
 
@@ -699,7 +700,7 @@ select * from M_TokuisakiShouhin where Syouhincode = @Syouhincode";
             {
                 if (sqlTran != null)
                 {
-                    string script = "alert('ファイルのアップロードに失敗しました。');";
+                    string script = $"alert('ファイルのアップロードに失敗しました。{ex}');";
                     Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
                     //head_lbl1.Visible = false;
                     //MesseageLabel.Visible = true;

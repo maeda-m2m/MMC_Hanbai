@@ -47,7 +47,7 @@
                         <th>商品コード</th>
                         <td>
                             <asp:TextBox runat="server" ID="ShouhinCodeTxt" TextMode="Number" CssClass="TableInput"></asp:TextBox>
-                            <%--   <telerik:RadComboBox runat="server" ID="ShouhinCodeComboTouro" AutoPostBack="true" EnableLoadOnDemand="true" OnItemsRequested="ShouhinCodeComboTouroku_ItemsRequested" Width="500px" Height="180px"></telerik:RadComboBox>--%>
+                            <%--   <telerik:RadComboBox runat="server" ID="ShouhinCodeComboTouro" AutoPostBack="true" EnableLoadOnDemand="true" OnItemsRequested="ShouhinCodeComboTouroku_ItemsRequested" Width="500px" ></telerik:RadComboBox>--%>
                         </td>
                     </tr>
                     <tr>
@@ -121,7 +121,7 @@
                         <tr>
                             <th>商品コード/商品名</th>
                             <td>
-                                <telerik:RadComboBox runat="server" ID="ShouhinCodeCombo" AutoPostBack="true" EnableLoadOnDemand="true" OnItemsRequested="ShouhinCodeCombo_ItemsRequested" Width="400px" Height="180px"></telerik:RadComboBox>
+                                <telerik:RadComboBox runat="server" ID="ShouhinCodeCombo" AutoPostBack="true" EnableLoadOnDemand="true" OnItemsRequested="ShouhinCodeCombo_ItemsRequested" Width="400px"></telerik:RadComboBox>
                             </td>
                             <th>メディア</th>
                             <td>
@@ -138,15 +138,15 @@
                         <tr>
                             <%--<th>商品名</th>
                             <td>
-                                <telerik:RadComboBox runat="server" ID="ShouhinNameCombo" AutoPostBack="true" EnableLoadOnDemand="true" OnItemsRequested="ShouhinNameCombo_ItemsRequested" Width="400px" Height="180px"></telerik:RadComboBox>
+                                <telerik:RadComboBox runat="server" ID="ShouhinNameCombo" AutoPostBack="true" EnableLoadOnDemand="true" OnItemsRequested="ShouhinNameCombo_ItemsRequested" Width="400px" ></telerik:RadComboBox>
                             </td>--%>
                             <th>メーカー</th>
                             <td>
-                                <telerik:RadComboBox runat="server" ID="MakerCombo" AutoPostBack="true" EnableLoadOnDemand="true" OnItemsRequested="MakerCombo_ItemsRequested" Width="400px" Height="180px"></telerik:RadComboBox>
+                                <telerik:RadComboBox runat="server" ID="MakerCombo" AutoPostBack="true" EnableLoadOnDemand="true" OnItemsRequested="MakerCombo_ItemsRequested" Width="400px"></telerik:RadComboBox>
                             </td>
                             <th>メーカー品番</th>
                             <td>
-                                <telerik:RadComboBox runat="server" ID="MakerCodeCombo" AutoPostBack="true" EnableLoadOnDemand="true" OnItemsRequested="MakerCodeCombo_ItemsRequested" Width="400px" Height="180px"></telerik:RadComboBox>
+                                <telerik:RadComboBox runat="server" ID="MakerCodeCombo" AutoPostBack="true" EnableLoadOnDemand="true" OnItemsRequested="MakerCodeCombo_ItemsRequested" Width="400px"></telerik:RadComboBox>
                             </td>
                         </tr>
 

@@ -479,5 +479,10 @@ namespace Gyomu.Tokuisaki
 
 
         }
+
+        protected void MainRadGrid_DataBound(object sender, EventArgs e)
+        {
+
+        }
     }
 }
