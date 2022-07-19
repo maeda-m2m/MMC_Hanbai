@@ -93,7 +93,7 @@
                     <tr>
                         <th>ID</th>
                         <td>
-                            <asp:TextBox runat="server" ID="IDText" ReadOnly="true"></asp:TextBox></td>
+                            <asp:TextBox runat="server" ID="IDText" ReadOnly="true" placeholder="IDは自動採番となっております。"></asp:TextBox></td>
 
                     </tr>
                     <tr>
@@ -115,8 +115,8 @@
                 </table>
 
                 <asp:HiddenField runat="server" ID="EditCheckHidden" />
-                <asp:HiddenField runat="server" ID="ShisetsuCodeHidden" />
-                <asp:HiddenField runat="server" ID="AccountIDHidden" />
+               <%-- <asp:HiddenField runat="server" ID="ShisetsuCodeHidden" />
+                <asp:HiddenField runat="server" ID="AccountIDHidden" />--%>
 
 
             </asp:Panel>

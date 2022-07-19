@@ -164,8 +164,8 @@ where M_Facility_NewBackup.FacilityNo = '{ShisetsuNo}'";
             {
                 EditCheckHidden.Value = "true";
 
-                ShisetsuCodeHidden.Value = row.Rows[0].ItemArray[8].ToString();
-                AccountIDHidden.Value = row.Rows[0].ItemArray[9].ToString();
+                //ShisetsuCodeHidden.Value = row.Rows[0].ItemArray[8].ToString();
+                //AccountIDHidden.Value = row.Rows[0].ItemArray[9].ToString();
 
 
                 CategoryDropTouroku.SelectedValue = row.Rows[0].ItemArray[0].ToString();
@@ -470,23 +470,27 @@ values('{facilityTable.FacilityNo}','{facilityTable.FacilityName1}','{facilityTa
         {
             string sqlCommand = "";
 
-            string facilityNo;
+            string facilityNo, newID;
 
-            if (string.IsNullOrWhiteSpace(ShisetsuCodeHidden.Value))
-            {
-                sqlCommand = $"select FacilityNo from M_Facility_NewBackup where FacilityName1 = '{word[2]}'";
 
-                var data = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
 
-                facilityNo = data.Rows[0].ItemArray[0].ToString();
 
-            }
-            else
-            {
-                facilityNo = ShisetsuCodeHidden.Value;
-            }
+            sqlCommand = $"select FacilityNo from M_Facility_NewBackup where FacilityName1 = '{word[2]}'";
 
-            string newID = AccountIDHidden.Value;
+            var dataFacilityNo = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
+
+            facilityNo = dataFacilityNo.Rows[0].ItemArray[0].ToString();
+
+
+            sqlCommand = $"select ID from M_tokuisaki_account where FacilityName1 = '{word[2]}'";
+
+            var dataID = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
+
+            newID = dataID.Rows[0].ItemArray[0].ToString();
+
+
+
+
 
 
             string[] row = word;
@@ -567,19 +571,16 @@ update M_tokuisaki_account set FacilityNo = @a0, FacilityName1 = @a1, ID = @a2, 
 
             string facilityNo;
 
-            if (string.IsNullOrWhiteSpace(ShisetsuCodeHidden.Value))
-            {
-                sqlCommand = $"select FacilityNo from M_Facility_NewBackup where FacilityName1 = '{word[2]}'";
 
-                var data = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
+            sqlCommand = $"select FacilityNo from M_Facility_NewBackup where FacilityName1 = '{word[2]}'";
 
-                facilityNo = data.Rows[0].ItemArray[0].ToString();
+            var data = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
 
-            }
-            else
-            {
-                facilityNo = ShisetsuCodeHidden.Value;
-            }
+            facilityNo = data.Rows[0].ItemArray[0].ToString();
+
+
+
+
 
 
             string[] row = word;
@@ -740,8 +741,8 @@ where FacilityNo = @a0
             EditPanel.Visible = true;
 
             EditCheckHidden.Value = "false";
-            ShisetsuCodeHidden.Value = "";
-            AccountIDHidden.Value = "";
+            //ShisetsuCodeHidden.Value = "";
+            //AccountIDHidden.Value = "";
 
             CategoryDropTouroku.SelectedValue = "203";
             CompanyText.Text = "";
@@ -900,7 +901,7 @@ on M_tokuisaki_account.FacilityNo = M_Facility_NewBackup.FacilityNo and M_Facili
 
         protected void UploadButton_Click(object sender, EventArgs e)
         {
-            string script = "";
+            string script;
 
             if (!FileUpload.HasFile)
             {
@@ -910,11 +911,11 @@ on M_tokuisaki_account.FacilityNo = M_Facility_NewBackup.FacilityNo and M_Facili
                 return;
             }
 
-            int count = 0;
+
 
             Stream s = FileUpload.FileContent;
 
-            System.Text.Encoding enc = System.Text.Encoding.GetEncoding(932);
+            Encoding enc = Encoding.GetEncoding(932);
 
             StreamReader check = new StreamReader(s, enc);
 

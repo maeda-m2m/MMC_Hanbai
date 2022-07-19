@@ -186,24 +186,6 @@ namespace Gyomu.Tokuisaki
         protected global::System.Web.UI.WebControls.HiddenField EditCheckHidden;
 
         /// <summary>
-        /// ShisetsuCodeHidden コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField ShisetsuCodeHidden;
-
-        /// <summary>
-        /// AccountIDHidden コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField AccountIDHidden;
-
-        /// <summary>
         /// MainPanel コントロール。
         /// </summary>
         /// <remarks>
