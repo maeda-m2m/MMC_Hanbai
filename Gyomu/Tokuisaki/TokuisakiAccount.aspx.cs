@@ -686,7 +686,7 @@ where FacilityNo = @a0
         {
             string facility = ConfigurationManager.AppSettings["M_Facility"];
 
-            string sqlCommand = $"select FacilityNo from {facility} order by FacilityNo desc";
+            string sqlCommand = $"select FacilityNo from M_Facility_NewBackup order by FacilityNo desc";
 
             int Number = int.Parse(CommonClass.SelectedTable(sqlCommand, Global.GetConnection()).Rows[0].ItemArray[0].ToString());
 
@@ -876,6 +876,16 @@ on M_tokuisaki_account.FacilityNo = M_Facility_NewBackup.FacilityNo and M_Facili
 
 
 
+
+
+
+
+
+
+
+
+
+
         protected void DownLoadButton_Click(object sender, EventArgs e)
         {
             string sqlCommand = @"
@@ -898,6 +908,21 @@ on M_tokuisaki_account.FacilityNo = M_Facility_NewBackup.FacilityNo and M_Facili
 
             this.Ram.ResponseScripts.Add(string.Format("window.location.href='{0}';", this.ResolveUrl("~/Common/DownloadDataForm.aspx?" + Common.DownloadDataForm.GetQueryString4Text(strFileName, rows))));
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         protected void UploadButton_Click(object sender, EventArgs e)
         {
@@ -987,11 +1012,18 @@ on M_tokuisaki_account.FacilityNo = M_Facility_NewBackup.FacilityNo and M_Facili
         }
 
 
+
+
+
+
+
+
+
         private void UpdateCSV(string[] word)
         {
             string facility = ConfigurationManager.AppSettings["M_Facility"];
 
-            string sqlCommand = $"select * from {facility} where FacilityName1 = '{word[2]}'";
+            string sqlCommand = $"select * from M_Facility_NewBackup where FacilityName1 = '{word[2]}'";
 
             var table = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
 
@@ -1008,6 +1040,16 @@ on M_tokuisaki_account.FacilityNo = M_Facility_NewBackup.FacilityNo and M_Facili
 
             }
         }
+
+
+
+
+
+
+
+
+
+
 
 
         private void SetCombo(object sender, RadComboBoxItemsRequestedEventArgs e, string sqlCommand)
@@ -1037,6 +1079,20 @@ on M_tokuisaki_account.FacilityNo = M_Facility_NewBackup.FacilityNo and M_Facili
             }
 
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         protected void ShisetsuNoCombo_ItemsRequested(object sender, RadComboBoxItemsRequestedEventArgs e)
         {
