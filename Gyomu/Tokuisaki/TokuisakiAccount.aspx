@@ -115,10 +115,8 @@
                 </table>
 
                 <asp:HiddenField runat="server" ID="EditCheckHidden" />
-               <%-- <asp:HiddenField runat="server" ID="ShisetsuCodeHidden" />
+                <%-- <asp:HiddenField runat="server" ID="ShisetsuCodeHidden" />
                 <asp:HiddenField runat="server" ID="AccountIDHidden" />--%>
-
-
             </asp:Panel>
 
 
@@ -253,5 +251,14 @@
         </div>
         <telerik:RadAjaxManager runat="server" ID="Ram" OnAjaxRequest="Ram_AjaxRequest"></telerik:RadAjaxManager>
     </form>
+    <script>
+        'use strict';
+        function keydown(e) {
+            if (e.keyCode === 13) {
+                document.getElementById('SearchButton').focus();
+            }
+        }
+        window.onkeydown = keydown;
+    </script>
 </body>
 </html>

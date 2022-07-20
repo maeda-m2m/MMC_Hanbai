@@ -164,8 +164,6 @@ where M_Facility_NewBackup.FacilityNo = '{ShisetsuNo}'";
             {
                 EditCheckHidden.Value = "true";
 
-                //ShisetsuCodeHidden.Value = row.Rows[0].ItemArray[8].ToString();
-                //AccountIDHidden.Value = row.Rows[0].ItemArray[9].ToString();
 
 
                 CategoryDropTouroku.SelectedValue = row.Rows[0].ItemArray[0].ToString();
@@ -275,7 +273,7 @@ where M_Facility_NewBackup.FacilityNo = '{ShisetsuNo}'";
             string[] word = new string[] { mailText.Text, PWText.Text, CompanyText.Text, CompanykanaText.Text, PostNumberText.Text, CityText.Text, AddressText2.Text, PhoneNumberText.Text, "", TantouText.Text, "", CategoryDropTouroku.SelectedValue, AvailableDrop.SelectedValue };
 
 
-
+            //このフラグで新規登録か登録情報の変更可をチェックしている。
             if (EditCheckHidden.Value == "true")
             {
 
@@ -284,9 +282,9 @@ where M_Facility_NewBackup.FacilityNo = '{ShisetsuNo}'";
             }
             else
             {
-                string facility = ConfigurationManager.AppSettings["M_Facility"];
 
-                sqlCommand = $"select FacilityName1 from {facility}";
+
+                sqlCommand = $"select FacilityName1 from M_Facility_NewBackup";
 
                 var rows = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
 
@@ -339,7 +337,7 @@ where M_Facility_NewBackup.FacilityNo = '{ShisetsuNo}'";
             string sqlCommand, newID;
 
 
-            if (CategoryDropTouroku.SelectedValue == "209") //キッズ・BGV
+            if (word[11] == "209") //キッズ・BGV
             {
                 sqlCommand = "select ID from M_tokuisaki_account where ID like 'KB%' order by ID desc";
 
@@ -445,17 +443,16 @@ values('{accountTable.FacilityNo}','{accountTable.FacilityName1}','{accountTable
                 UpDateUser = null,
             };
 
-            string facility = ConfigurationManager.AppSettings["M_Facility"];
+
 
             sqlCommand = $@"
-insert into {facility}
+insert into M_Facility_NewBackup
 (FacilityNo,FacilityName1,Code,FacilityName2,Abbreviation,FacilityResponsible,PostNo,Address1,Address2,Tell,CityCode,Capacity,Titles,State,UpDateUser,UpDateDay) 
 values('{facilityTable.FacilityNo}','{facilityTable.FacilityName1}','{facilityTable.Code}','{facilityTable.FacilityName2}','{facilityTable.Abbreviation}','{facilityTable.FacilityResponsible}','{facilityTable.PostNo}','{facilityTable.Address1}','{facilityTable.Address2}','{facilityTable.Tell}','{facilityTable.CityCode}','{facilityTable.Capacity}','{facilityTable.Titles}','{facilityTable.State}','{facilityTable.UpDateUser}','{facilityTable.UpDateDay}')";
 
             CommonClass.TranSql(sqlCommand, Global.GetConnection());
 
-            //string testScript = $"alert('登録に成功しました。IDは{newID}です。');";
-            //Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", testScript, true);
+
 
         }
 
@@ -468,7 +465,7 @@ values('{facilityTable.FacilityNo}','{facilityTable.FacilityName1}','{facilityTa
 
         private void UpdateTable(string[] word)
         {
-            string sqlCommand = "";
+            string sqlCommand;
 
             string facilityNo, newID;
 
@@ -543,7 +540,7 @@ update M_tokuisaki_account set FacilityNo = @a0, FacilityName1 = @a1, ID = @a2, 
 
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 transaction.Rollback();
 
@@ -606,7 +603,7 @@ update M_tokuisaki_account set FacilityNo = @a0, FacilityName1 = @a1, ID = @a2, 
                 UpDateUser = "",
             };
 
-            string facility = ConfigurationManager.AppSettings["M_Facility"];
+
 
             var connection = Global.GetConnection();
 
@@ -654,7 +651,7 @@ where FacilityNo = @a0
 
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 transaction.Rollback();
 
@@ -684,7 +681,7 @@ where FacilityNo = @a0
         /// <returns></returns>
         private int GetFacilityNo()
         {
-            string facility = ConfigurationManager.AppSettings["M_Facility"];
+
 
             string sqlCommand = $"select FacilityNo from M_Facility_NewBackup order by FacilityNo desc";
 
@@ -741,8 +738,7 @@ where FacilityNo = @a0
             EditPanel.Visible = true;
 
             EditCheckHidden.Value = "false";
-            //ShisetsuCodeHidden.Value = "";
-            //AccountIDHidden.Value = "";
+
 
             CategoryDropTouroku.SelectedValue = "203";
             CompanyText.Text = "";
@@ -850,8 +846,6 @@ on M_tokuisaki_account.FacilityNo = M_Facility_NewBackup.FacilityNo and M_Facili
             }
             else
             {
-                string script = "alert('一致するアカウントは見つかりませんでした。');";
-                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
                 return;
 
             }
@@ -1021,7 +1015,7 @@ on M_tokuisaki_account.FacilityNo = M_Facility_NewBackup.FacilityNo and M_Facili
 
         private void UpdateCSV(string[] word)
         {
-            string facility = ConfigurationManager.AppSettings["M_Facility"];
+
 
             string sqlCommand = $"select * from M_Facility_NewBackup where FacilityName1 = '{word[2]}'";
 
@@ -1098,7 +1092,7 @@ on M_tokuisaki_account.FacilityNo = M_Facility_NewBackup.FacilityNo and M_Facili
         {
             string sqlCommand;
 
-            sqlCommand = $"select FacilityNo, FacilityName1 from M_Facility_NewBackup where FacilityNo like '{e.Text.Trim()}%' or FacilityName1 like '{e.Text.Trim()}%'";
+            sqlCommand = $"select M_Facility_NewBackup.FacilityNo, M_Facility_NewBackup.FacilityName1 from M_Facility_NewBackup inner join M_tokuisaki_account on M_Facility_NewBackup.FacilityNo = M_tokuisaki_account.FacilityNo where M_tokuisaki_account.FacilityNo like '{e.Text.Trim()}%' or M_tokuisaki_account.FacilityName1 like '{e.Text.Trim()}%'";
 
             var rad = sender as RadComboBox;
 
@@ -1131,7 +1125,7 @@ on M_tokuisaki_account.FacilityNo = M_Facility_NewBackup.FacilityNo and M_Facili
         {
             string sqlCommand;
 
-            sqlCommand = $"select PostNo from M_Facility_NewBackup where PostNo like '{e.Text.Trim()}%'";
+            sqlCommand = $"select PostNo from M_Facility_NewBackup inner join M_tokuisaki_account on M_Facility_NewBackup.FacilityNo = M_tokuisaki_account.FacilityNo where PostNo like '{e.Text.Trim()}%'";
 
             SetCombo(sender, e, sqlCommand);
         }
@@ -1140,7 +1134,7 @@ on M_tokuisaki_account.FacilityNo = M_Facility_NewBackup.FacilityNo and M_Facili
         {
             string sqlCommand;
 
-            sqlCommand = $"select Address1 from M_Facility_NewBackup where Address1 like '{e.Text.Trim()}%'";
+            sqlCommand = $"select Address1 from M_Facility_NewBackup inner join M_tokuisaki_account on M_Facility_NewBackup.FacilityNo = M_tokuisaki_account.FacilityNo where Address1 like '{e.Text.Trim()}%'";
 
             SetCombo(sender, e, sqlCommand);
         }
@@ -1149,7 +1143,7 @@ on M_tokuisaki_account.FacilityNo = M_Facility_NewBackup.FacilityNo and M_Facili
         {
             string sqlCommand;
 
-            sqlCommand = $"select FacilityResponsible from M_Facility_NewBackup where FacilityResponsible like '{e.Text.Trim()}%'";
+            sqlCommand = $"select FacilityResponsible from M_Facility_NewBackup inner join M_tokuisaki_account on M_Facility_NewBackup.FacilityNo = M_tokuisaki_account.FacilityNo where FacilityResponsible like '{e.Text.Trim()}%'";
 
             SetCombo(sender, e, sqlCommand);
         }
