@@ -50,7 +50,7 @@ namespace Gyomu.Tokuisaki
 
         private void Create()
         {
-            CategoryDrop.SelectedValue = "203";
+            CategoryDrop.SelectedValue = "205";
 
             string sqlCommand = $"select * from M_tokusyu where CategoryCode = {CategoryDrop.SelectedValue}";
 
@@ -117,56 +117,29 @@ where tokusyu_code = '{shouhin[4]}' and CategoryCode = '{shouhin[5]}'
 
 
 
+
+
+
+
         protected void CategoryDrop_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            if (CategoryDrop.SelectedValue == "") return;
+            if (CategoryDrop.SelectedValue == "") CategoryDrop.SelectedValue = "0";
+
 
             string sqlCommand = $"select * from M_tokusyu where CategoryCode = {CategoryDrop.SelectedValue}";
 
             var table = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
 
-            //table.Rows.RemoveAt(0);
-
-
-
             MainListView.DataSource = table;
             MainListView.DataBind();
-
-
-            //for (int i = 0; i < table.Rows.Count; i++)
-            //{
-            //    if (table.Rows[i].ItemArray[3].ToString() == "")
-            //    {
-
-            //    }
-            //}
-
-
-            //for (int i = 0; i < MainListView.Items.Count; i++)
-            //{
-            //    string[] shouhin = new string[] {
-            //    (MainListView.Items[i].FindControl("TokushuNameTxt") as TextBox).Text,
-            //    (MainListView.Items[i].FindControl("TypeDrop") as DropDownList).Text,
-            //    (MainListView.Items[i].FindControl("RankingTxt") as TextBox).Text,
-            //    (MainListView.Items[i].FindControl("ShousaiTxt") as TextBox).Text,
-            //    (MainListView.Items[i].FindControl("Hidden") as HiddenField).Value,
-            //};
-
-            //    if (shouhin[0] == "")
-            //    {
-            //        shouhin[1].
-            //    }
-            //    else
-            //    {
-
-            //    }
-
-
-            //}
-
-
         }
+
+
+
+
+
+
 
         protected void MainListView_ItemDataBound(object sender, ListViewItemEventArgs e)
         {
@@ -179,6 +152,12 @@ where tokusyu_code = '{shouhin[4]}' and CategoryCode = '{shouhin[5]}'
                 dropDown.SelectedValue = dr["TokushuType"].ToString();
             }
         }
+
+
+
+
+
+
 
         protected void SubButton_Click(object sender, EventArgs e)
         {

@@ -66,11 +66,19 @@ order by T_tokusyu.Ranking
             //}
         }
 
+
+
+
+
+
         private void Firstdrop()
         {
             TokushuCategoryDrop.SelectedValue = "205";
             TokushuCategoryDrop.DataBind();
         }
+
+
+
 
 
 
@@ -83,6 +91,9 @@ order by T_tokusyu.Ranking
 
             string tokushuCode = TokushuNameDrop.SelectedValue;
             string categoryCode = TokushuCategoryDrop.SelectedValue;
+
+            TokushuNameDrop.SelectedValue = tokushuCode;
+            TokushuCategoryDrop.SelectedValue = categoryCode;
 
             string sqlCommand = $@"
 select M_Kakaku_2.SyouhinMei,T_tokusyu.Media,T_tokusyu.tokusyu_shouhin_shoukai,T_tokusyu.Ranking,T_tokusyu.SyouhinCode  
@@ -107,6 +118,10 @@ order by T_tokusyu.Ranking
 
         }
 
+
+
+
+
         protected void TokushuNameDrop_SelectedIndexChanged(object sender, EventArgs e)
         {
             Create();
@@ -118,6 +133,11 @@ order by T_tokusyu.Ranking
         {
             Create();
         }
+
+
+
+
+
 
 
 

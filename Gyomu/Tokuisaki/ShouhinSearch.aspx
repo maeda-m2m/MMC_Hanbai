@@ -145,11 +145,8 @@
 
                     <nav>
                         <asp:Button runat="server" ID="Sentei" Text="チェックしたタイトルを選定" OnClick="Sentei_Click" />
+
                         <asp:DropDownList runat="server" ID="SearchCategoryDrop" DataSourceID="SqlDataSource2" DataTextField="Categoryname" DataValueField="CategoryCode" OnSelectedIndexChanged="SearchCategoryDrop_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
-
-                        <%--   <asp:Button runat="server" ID="ALL_select_btn" Text="全選択" OnClick="ALL_select_btn_Click" />
-                        <asp:Button runat="server" ID="ALL_uncheck" Text="全てのチェックを外す" OnClick="ALL_uncheck_Click" />--%>
-
 
                         <asp:SqlDataSource runat="server" ID="SqlDataSource2" ConnectionString='<%$ ConnectionStrings:GyomuConnectionString %>' SelectCommand="SELECT DISTINCT [CategoryCode], [Categoryname] FROM [M_Kakaku_2] WHERE CategoryCode = '203' or CategoryCode = '205' or CategoryCode = '209'"></asp:SqlDataSource>
                     </nav>
@@ -354,6 +351,9 @@
 
 
 
+
+
+
         function keydown(e) {
             if (e.keyCode === 13) {
                 document.getElementById('shousai_btn').focus();
@@ -422,6 +422,8 @@
 
         /*document.addEventListener('DOMContentLoaded', function () {*/
         window.onload = function () {
+
+
 
             let modal = document.getElementById('modal');
             let closeBtn = document.getElementById('close');

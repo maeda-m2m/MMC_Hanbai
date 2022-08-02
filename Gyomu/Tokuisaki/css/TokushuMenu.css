@@ -90,6 +90,7 @@ body {
     #MainDiv textarea {
         height: 60px;
         width: 100%;
+        resize: none;
     }
 
     #MainDiv select {

@@ -222,9 +222,6 @@ where M_Kakaku_2.CategoryCode = '205' and  not (M_Kakaku_2.Syouhincode = '1005' 
                 }
 
 
-                //var dropDownValue = TokushuNameDrop.SelectedValue;
-
-
 
 
                 sqlCommand = $@"
@@ -293,32 +290,16 @@ where T_tokusyu.CategoryCode = '{categoryCode}' and T_tokusyu.tokusyu_code = '{t
 
 
 
+
+
+
         protected void TokushuNameDrop_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             SelectedGridCreate();
-
-            //            var dropDown = (DropDownList)sender;
-
-            //            var dropDownValue = dropDown.SelectedValue;
-
-
-
-
-
-            //            string sqlCommand = $@"
-            //select distinct( M_Kakaku_2.SyouhinCode),M_Kakaku_2.SyouhinMei, M_Kakaku_2.Media 
-            //from T_tokusyu 
-            //inner join M_Kakaku_2 
-            //on T_tokusyu.SyouhinCode = M_Kakaku_2.SyouhinCode 
-            //where T_tokusyu.tokusyu_code = '{dropDownValue}'";
-
-            //            SelectedGrid.DataSource = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
-
-
-
-            //            SelectedGrid.DataBind();
         }
+
+
+
 
 
 
@@ -337,11 +318,6 @@ where T_tokusyu.CategoryCode = '{categoryCode}' and T_tokusyu.tokusyu_code = '{t
 
                 btn.Text = dr["SyouhinMei"].ToString();
 
-                //ここでは未使用。javascriptの配列を共通化するため
-                //var hasImage = "";
-
-                //表示するデータを増やす場合はここを修正する。
-                //HidData.Value = dr["SyouhinMei"] + "-" + dr["ShouhinCatch"] + "-" + dr["ShouhinContents"] + "-" + dr["MovieManager"] + "-" + dr["MovieActor"] + "-" + dr["HyoujunKakaku"] + "-" + dr["Media"] + "-" + dr["ShouhinAttribute"] + "-" + dr["Copyright"] + "-" + dr["SyouhinCode"] + "-" + hasImage + "-" + dr["ShiireName"] + "-" + dr["JoueiTime"];
 
                 HidData.Value = dr["SyouhinMei"] + "jj" + dr["SyouhinCode"] + "jj" + dr["Media"] + "jj" + dr["ShiireName"] + "jj" + dr["HyoujunKakaku"] + "jj" + dr["ShiireKakaku"] + "jj" + dr["ShouhinAttribute"] + "jj" + dr["JoueiTime"] + "jj" + dr["MovieManager"] + "jj" + dr["MovieActor"] + "jj" + dr["Copyright"];
 
@@ -386,8 +362,6 @@ where T_tokusyu.CategoryCode = '{categoryCode}' and T_tokusyu.tokusyu_code = '{t
                     }
                 }
             }
-
-
 
         }
 
@@ -436,9 +410,6 @@ where T_tokusyu.CategoryCode = '{categoryCode}' and T_tokusyu.tokusyu_code = '{t
         /// <param name="dropDownValue"></param>
         private void DropDownMainGridCreate(string dropDownValue)
         {
-
-
-
             string sqlCommand = $@"
 select M_Kakaku_2.Syouhincode, M_Kakaku_2.SyouhinMei,M_Kakaku_2.Media,M_Kakaku_2.ShiireName,M_Kakaku_2.HyoujunKakaku,M_Kakaku_2.ShiireKakaku,M_TokuisakiShouhin.ShouhinAttribute,M_TokuisakiShouhin.JoueiTime,M_TokuisakiShouhin.MovieManager,M_TokuisakiShouhin.MovieActor,M_TokuisakiShouhin.Copyright
 from M_Kakaku_2 
@@ -455,14 +426,23 @@ where M_Kakaku_2.CategoryCode = '{dropDownValue}' and  not (M_Kakaku_2.Syouhinco
 
 
 
+
+
+
+
+
         /// <summary>
         /// 
         /// </summary>
         private void SelectedGridCreate()
         {
             string categoryCode = TokushuCategoryDrop.SelectedValue;
-
             string tokushuCode = TokushuNameDrop.SelectedValue;
+
+            TokushuNameDrop.SelectedValue = tokushuCode;
+            TokushuCategoryDrop.SelectedValue = categoryCode;
+
+
             string sqlCommand = $@"
 select distinct( M_Kakaku_2.SyouhinCode),M_Kakaku_2.SyouhinMei, M_Kakaku_2.Media 
 from T_tokusyu 
@@ -471,20 +451,27 @@ on T_tokusyu.SyouhinCode = M_Kakaku_2.SyouhinCode and T_tokusyu.Media = M_Kakaku
 where T_tokusyu.CategoryCode = '{categoryCode}' and T_tokusyu.tokusyu_code = '{tokushuCode}'
 ";
 
-            //            string sqlCommand = $@"
-            //select M_TokuisakiShouhin.SyouhinMei, T_tokusyu.Media, T_tokusyu.SyouhinCode 
-            //from T_tokusyu 
-            //inner join M_TokuisakiShouhin 
-            //on T_tokusyu.SyouhinCode = M_TokuisakiShouhin.Syouhincode and T_tokusyu.Media = M_TokuisakiShouhin.Media
-            //where T_tokusyu.CategoryCode = '{categoryCode}' and T_tokusyu.tokusyu_code = '{tokushuCode}'";
             SelectedGrid.DataSource = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
             SelectedGrid.DataBind();
         }
+
+
+
+
+
+
 
         protected void ShouhinEditButton_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Tokuisaki/ShouhinCheck.aspx");
         }
+
+
+
+
+
+
+
 
         protected void ALL_select_btn_Click(object sender, EventArgs e)
         {
@@ -507,68 +494,19 @@ where T_tokusyu.CategoryCode = '{categoryCode}' and T_tokusyu.tokusyu_code = '{t
 
         }
 
+
+
+
+
+
         protected void shousai_btn_Click(object sender, EventArgs e)
         {
-            //var gridView = (GridView)MainContents1.FindControl("grid1");
+
 
             string sqlCommand;
 
             string categoryCode = TokushuCategoryDrop.SelectedValue;
-            string tokushuCode = TokushuNameDrop.SelectedValue;
-
-            //            var searchTables = new List<SearchTable1>();
-
-
-
-            //            sqlCommand = @"
-            //select M_Kakaku_2.SyouhinCode, M_TokuisakiShouhin.SyouhinMei,M_TokuisakiShouhin.ShouhinCatch,M_TokuisakiShouhin.ShouhinContents,M_TokuisakiShouhin.MovieManager,M_TokuisakiShouhin.MovieActor,M_Kakaku_2.HyoujunKakaku,M_Kakaku_2.Media,M_TokuisakiShouhin.ShouhinAttribute,M_TokuisakiShouhin.Copyright,M_Kakaku_2.Makernumber,M_Kakaku_2.ShiireName,M_TokuisakiShouhin.JoueiTime  
-            //from M_Kakaku_2 inner join M_TokuisakiShouhin on M_Kakaku_2.SyouhinCode = M_TokuisakiShouhin.SyouhinCode
-            //where CategoryCode = '203'";
-
-
-            //            var dataTable = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
-
-
-
-            //            for (int i = 0; i < dataTable.Rows.Count; i++)
-            //            {
-            //                var searchRow = new SearchTable1
-            //                {
-            //                    ShouhinNumber = dataTable.Rows[i].ItemArray[0].ToString(),
-            //                    ShouhinName = dataTable.Rows[i].ItemArray[1].ToString(),
-            //                    ShouhinCatch = dataTable.Rows[i].ItemArray[2].ToString(),
-            //                    ShouhinContents = dataTable.Rows[i].ItemArray[3].ToString(),
-            //                    Director = dataTable.Rows[i].ItemArray[4].ToString(),
-            //                    Actor = dataTable.Rows[i].ItemArray[5].ToString(),
-            //                    Kakaku = dataTable.Rows[i].ItemArray[6].ToString(),
-            //                    Media = dataTable.Rows[i].ItemArray[7].ToString(),
-            //                    Siyou = dataTable.Rows[i].ItemArray[8].ToString(),
-            //                    Copyright = dataTable.Rows[i].ItemArray[9].ToString(),
-            //                    MakerNumber = dataTable.Rows[i].ItemArray[10].ToString(),
-            //                    ShiireName = dataTable.Rows[i].ItemArray[11].ToString(),
-
-
-
-            //                };
-
-            //                searchTables.Add(searchRow);
-
-            //            }
-
-            //            var table = new DataTable();
-            //            table.Columns.Add("SyouhinCode");
-            //            table.Columns.Add("SyouhinMei");
-            //            table.Columns.Add("ShouhinCatch");
-            //            table.Columns.Add("ShouhinContents");
-            //            table.Columns.Add("MovieManager");
-            //            table.Columns.Add("MovieActor");
-            //            table.Columns.Add("HyoujunKakaku");
-            //            table.Columns.Add("Media");
-            //            table.Columns.Add("ShouhinAttribute");
-            //            table.Columns.Add("Copyright");
-            //            table.Columns.Add("Makernumber");
-            //            table.Columns.Add("ShiireName");
-
+            //string tokushuCode = TokushuNameDrop.SelectedValue;
 
 
             int count = 0;
@@ -653,26 +591,37 @@ where CategoryCode = '{categoryCode}' and ";
             MainGrid.DataSource = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
 
             MainGrid.DataBind();
-
-
-
-
-
-
-
-
         }
+
+
+
+
+
+
+
 
         protected void ClearButton_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Tokuisaki/ShouhinSearch.aspx");
         }
 
+
+
+
+
+
+
+
+
         protected void HederCheck_CheckedChanged(object sender, EventArgs e)
         {
-            CheckBox check = MainGrid.Rows[0].Cells[0].Controls[1] as CheckBox;
+            //CheckBox check = MainGrid.Rows[0].Cells[0].Controls[1] as CheckBox;
+            CheckBox check = MainGrid.HeaderRow.Cells[0].Controls[1] as CheckBox;
 
-            if (!check.Checked)
+
+
+
+            if (check.Checked)
             {
                 for (int i = 0; i < MainGrid.Rows.Count; i++)
                 {

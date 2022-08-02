@@ -51,9 +51,9 @@
 
                 <div id="Drop">
                     カテゴリ:<asp:DropDownList runat="server" ID="CategoryDrop" OnSelectedIndexChanged="CategoryDrop_SelectedIndexChanged" AutoPostBack="true">
-                        <asp:ListItem Text="バス" Value="203"></asp:ListItem>
-                        <asp:ListItem Text="キッズ・BGV" Value="209"></asp:ListItem>
                         <asp:ListItem Text="上映会" Value="205"></asp:ListItem>
+                        <asp:ListItem Text="キッズ・BGV" Value="209"></asp:ListItem>
+                        <asp:ListItem Text="バス" Value="203"></asp:ListItem>
                     </asp:DropDownList>
                     <asp:Button runat="server" ID="SubButton" Text="画像の確認" OnClick="SubButton_Click" CssClass="Button" />
                 </div>

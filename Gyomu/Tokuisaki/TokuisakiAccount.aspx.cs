@@ -277,36 +277,68 @@ where M_Facility_NewBackup.FacilityNo = '{ShisetsuNo}'";
             if (EditCheckHidden.Value == "true")
             {
 
-                UpdateTable(word);
-                Update(word);
+                AccountMasterUpdate(word);
+                FacilityUpdate(word);
             }
             else
             {
 
+                sqlCommand = $"select FacilityNo from M_Facility_NewBackup where FacilityName1 = '{word[2]}'";
 
-                sqlCommand = $"select FacilityName1 from M_Facility_NewBackup";
+                var facilityNo = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
 
-                var rows = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
+                sqlCommand = $"select ID from M_tokuisaki_account where FacilityName1 = '{word[2]}'";
 
-                var faciliryLists = new List<string>();
+                var dataID = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
 
 
-                for (int i = 0; i < rows.Rows.Count; i++)
+                if (facilityNo.Rows.Count != 0)//既に施設マスタに登録されている
                 {
-                    faciliryLists.Add(rows.Rows[i].ItemArray[0].ToString());
+                    if (dataID.Rows.Count != 0)//アカウントマスタにも登録されている
+                    {
+                        AccountMasterUpdate(word);
+                        FacilityUpdate(word);
+
+                    }
+                    else
+                    {
+                        AccountMasterInsert(word, int.Parse(facilityNo.Rows[0].ItemArray[0].ToString()));
+                        FacilityUpdate(word);
+                    }
+
+
+                }
+                else//施設マスタに登録されていない
+                {
+                    int number = GetFacilityNo();
+                    AccountMasterInsert(word, number);
+                    FacilityInsert(word, number);
                 }
 
 
+                //sqlCommand = $"select FacilityName1 from M_Facility_NewBackup";
 
-                if (faciliryLists.Any(n => n.Contains(CompanyText.Text)))
-                {
-                    script = "alert('その事業所名は既に登録されています。別の事業所名をご利用ください。');";
-                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
-                    return;
-                }
+                //var rows = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
+
+                //var faciliryLists = new List<string>();
 
 
-                InsertTable(word);
+                //for (int i = 0; i < rows.Rows.Count; i++)
+                //{
+                //    faciliryLists.Add(rows.Rows[i].ItemArray[0].ToString());
+                //}
+
+
+
+                //if (faciliryLists.Any(n => n.Contains(CompanyText.Text)))
+                //{
+                //    script = "alert('その事業所名は既に登録されています。別の事業所名をご利用ください。');";
+                //    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
+                //    return;
+                //}
+
+
+                //InsertTable(word);
 
             }
 
@@ -331,9 +363,139 @@ where M_Facility_NewBackup.FacilityNo = '{ShisetsuNo}'";
 
 
 
-        private void InsertTable(string[] word)
+        private void UpdateCSV(string[] word)
         {
+            //0メールアドレス、1パスワード、2事業所名、3ジギョウショメイ、4郵便番号、5住所、6建物名、7電話番号、8都市コード、9担当者名、10認証番号、11カテゴリコード、12有効/無効
 
+            string script;
+
+            if (string.IsNullOrWhiteSpace(word[0]))
+            {
+                script = "alert('メールアドレスに空白の行がありました。');";
+                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
+                return; ;
+            }
+            if (string.IsNullOrWhiteSpace(word[1]))
+            {
+                script = "alert('パスワードに空白の行がありました。');";
+                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
+                return; ;
+            }
+            if (string.IsNullOrWhiteSpace(word[2]))
+            {
+                script = "alert('事業所名に空白の行がありました。');";
+                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
+                return; ;
+            }
+            //if (string.IsNullOrWhiteSpace(word[3]))
+            //{
+            //    script = "alert('ジギョウショメイに空白の行がありました。');";
+            //    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
+            //    return; ;
+            //}
+            if (string.IsNullOrWhiteSpace(word[4]))
+            {
+                script = "alert('郵便番号に空白の行がありました。');";
+                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
+                return; ;
+            }
+            if (string.IsNullOrWhiteSpace(word[5]))
+            {
+                script = "alert('住所に空白の行がありました。');";
+                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
+                return; ;
+            }
+            //if (string.IsNullOrWhiteSpace(word[6]))
+            //{
+            //    script = "alert('建物名に空白の行がありました。');";
+            //    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
+            //    return; ;
+            //}
+            if (string.IsNullOrWhiteSpace(word[7]))
+            {
+                script = "alert('電話番号に空白の行がありました。');";
+                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
+                return; ;
+            }
+            //if (string.IsNullOrWhiteSpace(word[8]))
+            //{
+            //    script = "alert('。');";
+            //    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
+            //    return; ;
+            //}
+            if (string.IsNullOrWhiteSpace(word[9]))
+            {
+                script = "alert('御担当者名に空白の行がありました。');";
+                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
+                return; ;
+            }
+            //if (string.IsNullOrWhiteSpace(word[10]))
+            //{
+            //    script = "alert('メールアドレスで空白がありました。');";
+            //    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
+            //    return; ;
+            //}
+            if (string.IsNullOrWhiteSpace(word[11]))
+            {
+                script = "alert('カテゴリコードに空白の行がありました。');";
+                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
+                return; ;
+            }
+            if (string.IsNullOrWhiteSpace(word[12]))
+            {
+                script = "alert('有効/無効に空白の行がありました。');";
+                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
+                return; ;
+            }
+
+
+
+            string sqlCommand = $"select FacilityNo from M_Facility_NewBackup where FacilityName1 = '{word[2]}'";
+
+            var facilityNo = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
+
+            sqlCommand = $"select ID from M_tokuisaki_account where FacilityName1 = '{word[2]}'";
+
+            var dataID = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
+
+
+            if (facilityNo.Rows.Count != 0)//既に施設マスタに登録されている
+            {
+                if (dataID.Rows.Count != 0)//アカウントマスタにも登録されている
+                {
+                    AccountMasterUpdate(word);
+                    FacilityUpdate(word);
+                }
+                else
+                {
+                    AccountMasterInsert(word, int.Parse(facilityNo.Rows[0].ItemArray[0].ToString()));
+                    FacilityUpdate(word);
+                }
+
+
+            }
+            else//施設マスタに登録されていない
+            {
+                int number = GetFacilityNo();
+                AccountMasterInsert(word, number);
+                FacilityInsert(word, number);
+            }
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+        private void AccountMasterInsert(string[] word, int facilityNo)
+        {
             string sqlCommand, newID;
 
 
@@ -365,7 +527,7 @@ where M_Facility_NewBackup.FacilityNo = '{ShisetsuNo}'";
 
                 newID = "KB" + count;
             }
-            else
+            else //バス
             {
                 sqlCommand = "select ID from M_tokuisaki_account where ID like 'BS%' order by ID desc";
 
@@ -396,7 +558,7 @@ where M_Facility_NewBackup.FacilityNo = '{ShisetsuNo}'";
 
 
             //二つのテーブルで施設ナンバーを統一する
-            int facilityNo = GetFacilityNo();
+            //int facilityNo = GetFacilityNo();
 
 
             //0メールアドレス、1パスワード、2事業所名、3ジギョウショメイ、4郵便番号、5住所、6施設名、7電話番号、8都市コード、9担当者名、10認証番号
@@ -422,6 +584,21 @@ values('{accountTable.FacilityNo}','{accountTable.FacilityName1}','{accountTable
             CommonClass.TranSql(sqlCommand, Global.GetConnection());
 
 
+        }
+
+
+
+
+
+
+
+
+        private void FacilityInsert(string[] word, int facilityNo)
+        {
+            string sqlCommand;
+
+            //0メールアドレス、1パスワード、2事業所名、3ジギョウショメイ、4郵便番号、5住所、6施設名、7電話番号、8都市コード、9担当者名、10認証番号
+            string[] row = word;
 
             var facilityTable = new MFacility_New
             {
@@ -463,7 +640,7 @@ values('{facilityTable.FacilityNo}','{facilityTable.FacilityName1}','{facilityTa
 
 
 
-        private void UpdateTable(string[] word)
+        private void AccountMasterUpdate(string[] word)
         {
             string sqlCommand;
 
@@ -482,6 +659,10 @@ values('{facilityTable.FacilityNo}','{facilityTable.FacilityName1}','{facilityTa
             sqlCommand = $"select ID from M_tokuisaki_account where FacilityName1 = '{word[2]}'";
 
             var dataID = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
+
+
+
+
 
             newID = dataID.Rows[0].ItemArray[0].ToString();
 
@@ -562,7 +743,7 @@ update M_tokuisaki_account set FacilityNo = @a0, FacilityName1 = @a1, ID = @a2, 
 
 
 
-        private void Update(string[] word)
+        private void FacilityUpdate(string[] word)
         {
             string sqlCommand = "";
 
@@ -948,7 +1129,6 @@ on M_tokuisaki_account.FacilityNo = M_Facility_NewBackup.FacilityNo and M_Facili
             {
                 script = "alert('ファイルが読み込めませんでした。');";
                 Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
-
                 return;
             }
 
@@ -1010,30 +1190,6 @@ on M_tokuisaki_account.FacilityNo = M_Facility_NewBackup.FacilityNo and M_Facili
 
 
 
-
-
-
-        private void UpdateCSV(string[] word)
-        {
-
-
-            string sqlCommand = $"select * from M_Facility_NewBackup where FacilityName1 = '{word[2]}'";
-
-            var table = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
-
-
-            if (table.Rows.Count != 0)
-            {
-
-                UpdateTable(word);
-                Update(word);
-            }
-            else
-            {
-                InsertTable(word);
-
-            }
-        }
 
 
 

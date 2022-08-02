@@ -34,6 +34,7 @@ body {
     #MainDiv textarea {
         height: 60px;
         width: 57rem;
+        resize: none;
     }
 }
 
@@ -46,6 +47,7 @@ body {
     #MainDiv textarea {
         height: 60px;
         width: 47rem;
+        resize: none;
     }
 }
 
@@ -54,6 +56,7 @@ body {
     #MainDiv textarea {
         height: 60px;
         width: 37rem;
+        resize: none;
     }
 }
 
