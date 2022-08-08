@@ -209,7 +209,11 @@ where M_Facility_NewBackup.FacilityNo = '{ShisetsuNo}'";
 
 
 
-
+        /// <summary>
+        /// 新規アカウント作成ボタンからの登録
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void TourokuButton_Click(object sender, EventArgs e)
         {
 
@@ -258,7 +262,6 @@ where M_Facility_NewBackup.FacilityNo = '{ShisetsuNo}'";
             }
             if (string.IsNullOrWhiteSpace(PWText.Text))
             {
-
                 string testScript = "alert('パスワードが未入力です。');";
                 Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", testScript, true);
                 return;
@@ -276,13 +279,12 @@ where M_Facility_NewBackup.FacilityNo = '{ShisetsuNo}'";
             //このフラグで新規登録か登録情報の変更可をチェックしている。
             if (EditCheckHidden.Value == "true")
             {
-
                 AccountMasterUpdate(word);
                 FacilityUpdate(word);
             }
             else
             {
-
+                //施設名で重複チェック
                 sqlCommand = $"select FacilityNo from M_Facility_NewBackup where FacilityName1 = '{word[2]}'";
 
                 var facilityNo = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
@@ -294,19 +296,23 @@ where M_Facility_NewBackup.FacilityNo = '{ShisetsuNo}'";
 
                 if (facilityNo.Rows.Count != 0)//既に施設マスタに登録されている
                 {
-                    if (dataID.Rows.Count != 0)//アカウントマスタにも登録されている
+                    if (CategoryDropTouroku.SelectedValue == "209")//キッズ・BGV
+                    {
+                        int number = GetFacilityNo();
+                        AccountMasterInsert(word, number);
+                        FacilityInsert(word, number);
+
+                    }
+                    else if (dataID.Rows.Count != 0)//アカウントマスタにも登録されている（バス）
                     {
                         AccountMasterUpdate(word);
                         FacilityUpdate(word);
-
                     }
                     else
                     {
                         AccountMasterInsert(word, int.Parse(facilityNo.Rows[0].ItemArray[0].ToString()));
                         FacilityUpdate(word);
                     }
-
-
                 }
                 else//施設マスタに登録されていない
                 {
@@ -362,7 +368,10 @@ where M_Facility_NewBackup.FacilityNo = '{ShisetsuNo}'";
 
 
 
-
+        /// <summary>
+        /// CSVからの登録
+        /// </summary>
+        /// <param name="word"></param>
         private void UpdateCSV(string[] word)
         {
             //0メールアドレス、1パスワード、2事業所名、3ジギョウショメイ、4郵便番号、5住所、6建物名、7電話番号、8都市コード、9担当者名、10認証番号、11カテゴリコード、12有効/無効
@@ -461,7 +470,14 @@ where M_Facility_NewBackup.FacilityNo = '{ShisetsuNo}'";
 
             if (facilityNo.Rows.Count != 0)//既に施設マスタに登録されている
             {
-                if (dataID.Rows.Count != 0)//アカウントマスタにも登録されている
+                if (word[11] == "209")//キッズ・BGV
+                {
+                    int number = GetFacilityNo();
+                    AccountMasterInsert(word, number);
+                    FacilityInsert(word, number);
+
+                }
+                else if (dataID.Rows.Count != 0)//アカウントマスタにも登録されている（バス）
                 {
                     AccountMasterUpdate(word);
                     FacilityUpdate(word);
@@ -471,6 +487,16 @@ where M_Facility_NewBackup.FacilityNo = '{ShisetsuNo}'";
                     AccountMasterInsert(word, int.Parse(facilityNo.Rows[0].ItemArray[0].ToString()));
                     FacilityUpdate(word);
                 }
+                //if (dataID.Rows.Count != 0)//アカウントマスタにも登録されている
+                //{
+                //    AccountMasterUpdate(word);
+                //    FacilityUpdate(word);
+                //}
+                //else
+                //{
+                //    AccountMasterInsert(word, int.Parse(facilityNo.Rows[0].ItemArray[0].ToString()));
+                //    FacilityUpdate(word);
+                //}
 
 
             }

@@ -18,11 +18,10 @@ namespace Gyomu.Tokuisaki
         /// <returns></returns>
         public static DataTable SelectedTable(string command, SqlConnection sql)
         {
-            SqlDataAdapter da = new SqlDataAdapter(command, sql);
+            var da = new SqlDataAdapter(command, sql);
             var dt = new DataTable();
             da.Fill(dt);
             return dt;
-
         }
 
         /// <summary>
@@ -41,9 +40,8 @@ namespace Gyomu.Tokuisaki
                 da.ExecuteNonQuery();
                 tran.Commit();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
                 tran.Rollback();
             }
             finally
