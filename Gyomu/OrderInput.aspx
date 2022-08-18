@@ -874,9 +874,9 @@
             <tr>
                 <td>
                     <div id="DivDataGrid">
-                        <asp:DataGrid runat="server" ID="CtrlSyousai" AutoGenerateColumns="False" OnItemDataBound="CtrlSyousai_ItemDataBound" OnItemCommand="CtrlSyousai_ItemCommand">
+                        <asp:DataGrid runat="server" ID="CtrlSyousai" PageSize="10" AllowPaging="true" AutoGenerateColumns="False" OnItemDataBound="CtrlSyousai_ItemDataBound" OnItemCommand="CtrlSyousai_ItemCommand" OnPageIndexChanged="CtrlSyousai_PageIndexChanged">
+                            <PagerStyle Position="TopAndBottom" Mode="NumericPages" />
                             <Columns>
-
                                 <asp:TemplateColumn HeaderStyle-BorderStyle="None" ItemStyle-BorderStyle="None" ItemStyle-Width="30px">
                                     <ItemStyle HorizontalAlign="Center" />
                                     <ItemTemplate>

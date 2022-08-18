@@ -87,7 +87,7 @@ namespace Gyomu.Closing
                                     int Keisan = Calculate(Karikata, Zandaka, Kashikata, strTable);
                                     drU.HattyuGokei = Keisan;
                                     Zandaka = Keisan;
-                                    drU.UriageFlg = true;
+                                    //drU.UriageFlg = true;
                                     dtUN.AddT_UriageRow(drU);
                                     DataUriage.T_UriageRow drUn = dtUN.NewT_UriageRow();
                                     drUn.ItemArray = dtU[u].ItemArray;

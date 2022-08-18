@@ -20,7 +20,7 @@
                 <input type="hidden" id="HidCategoryCode" runat="server" />
             </td>
             <td class="MeisaiProNm" runat="server" colspan="5">
-                <telerik:RadComboBox ID="SerchProduct" AutoPostBack="false" EnableLoadOnDemand="true" ShowToggleImage="False" runat="server" AllowCustomText="True" ShowMoreResultsBox="True" EnableVirtualScrolling="True" OnItemsRequested="SerchProduct_ItemsRequested" EmptyMessage="" Width="500px" OnClientSelectedIndexChanged="select">
+                <telerik:RadComboBox ID="SerchProduct" AutoPostBack="false" EnableLoadOnDemand="true" ShowToggleImage="False" runat="server" ShowMoreResultsBox="true" ItemsPerRequest="10" AllowCustomText="True" EnableVirtualScrolling="false" OnItemsRequested="SerchProduct_ItemsRequested" EmptyMessage="" Width="500px" OnClientSelectedIndexChanged="select">
                 </telerik:RadComboBox>
                 <telerik:RadComboBox ID="SerchProductJouei" EnableLoadOnDemand="true" ShowToggleImage="False" runat="server" AllowCustomText="True" ShowMoreResultsBox="True" EnableVirtualScrolling="True" OnItemsRequested="SerchProductJouei_ItemsRequested" EmptyMessage="" Width="500px" OnSelectedIndexChanged="SerchProductJouei_SelectedIndexChanged" AutoPostBack="true"></telerik:RadComboBox>
                 <asp:Button runat="server" ID="BtnTool1" ToolTip="登録する商品名を検索し、一覧上から選択。" Text="❔" OnClientClick="return false;" />

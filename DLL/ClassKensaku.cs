@@ -613,7 +613,7 @@ namespace DLL
         public static DataSet1.M_Kakaku_2DataTable GetProduct5(string v, string cate, string strSyokaiDate, SqlConnection sqlConn)
         {
             SqlDataAdapter da = new SqlDataAdapter("", sqlConn);
-            da.SelectCommand.CommandText = "SELECT TOP 10 * FROM M_Kakaku_2 WHERE (CategoryCode = @c) and (Makernumber like @e) OR (CategoryCode = @c) AND (SyouhinMei like @e)";
+            da.SelectCommand.CommandText = "SELECT TOP 100 * FROM M_Kakaku_2 WHERE (CategoryCode = @c) and (Makernumber like @e) OR (CategoryCode = @c) AND (SyouhinMei like @e)";
             da.SelectCommand.Parameters.AddWithValue("@c", cate);
             da.SelectCommand.Parameters.AddWithValue("@e", "%" + v + "%");
             DataSet1.M_Kakaku_2DataTable dt = new DataSet1.M_Kakaku_2DataTable();

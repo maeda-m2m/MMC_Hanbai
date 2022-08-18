@@ -276,7 +276,7 @@
 
         <asp:Button ID="BtnOrder" runat="server" Text="発注書" Width="100px" CssClass="Btn" OnClick="BtnOrdered_Click" />
         <asp:Button ID="BtnEdit" runat="server" Text="修正" CssClass="Btn" Width="100px" OnClick="BtnEdit_Click" />
-        <asp:Button ID="BtnOrdered" runat="server" Text="発注" CssClass="Btn" Width="100px" />
+        <asp:Button ID="BtnOrdered" runat="server" Text="仕入" CssClass="Btn" Width="100px" />
         <asp:Button ID="BtnDel" runat="server" Text="削除" CssClass="Btn" Width="100px" OnClick="BtnDel_Click" OnClientClick="A()" />
         <script type="text/javascript">
             function A() {

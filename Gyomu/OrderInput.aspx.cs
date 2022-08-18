@@ -21,6 +21,7 @@ namespace Gyomu
         {
             try
             {
+                Session["MeisaiJutyuData"] = null;
                 KariNouhin.Visible = false;
                 LblTantoStaffCode.Text = HidTantoStaffCode.Value;
                 Label3.Text = TbxKakeritsu.Text;
@@ -59,7 +60,6 @@ namespace Gyomu
             }
         }
 
-
         private void Create2()
         {
             string MNo = SessionManager.HACCYU_NO;
@@ -84,11 +84,13 @@ namespace Gyomu
             if (!dr.IsKakeritsuNull())
             {
                 strKakeritsu = dr.Kakeritsu;
+                Session["Kakeritsu"] = dr.Kakeritsu;
             }
             if (!dr.IsCategoryNameNull())
             {
                 RadComboCategory.SelectedValue = dr.CateGory.ToString();
                 strCategoryCode = dr.CateGory.ToString();
+                Session["CategoryCode"] = dr.CateGory.ToString();
                 strCategoryName = dr.CategoryName;
             }
             //if (!dr.IsKariFLGNull())
@@ -209,6 +211,7 @@ namespace Gyomu
                     RadZeiKubun.SelectedValue = dr.Zeikubun;
                     RcbTax.SelectedValue = dr.Zeikubun;
                     strZeikubun = dr.Zeikubun;
+                    Session["Zeikubun"] = dr.Zeikubun;
                     Shimebi.Text = dr.Shimebi;
                     RcbShimebi.SelectedValue = dr.Shimebi;
                     Label3.Text = dr.Kakeritsu;
@@ -236,6 +239,7 @@ namespace Gyomu
             {
                 RadDatePicker2.SelectedDate = dr.CreateDate;
             }
+            Session["MeisaiJutyuData"] = dt;
 
             this.CtrlSyousai.DataSource = dt;
             this.CtrlSyousai.DataBind();
@@ -830,11 +834,29 @@ namespace Gyomu
                     ClassJutyu.InsertJutyuHeader(dp, Global.GetConnection());
                 }
 
-                DataJutyu.T_JutyuDataTable dg = new DataJutyu.T_JutyuDataTable();
-                DataJutyu.T_JutyuDataTable dt = ClassJutyu.GetJutyu(Global.GetConnection());
+                DataJutyu.T_JutyuDataTable dtN = null;
+                if ((DataJutyu.T_JutyuDataTable)Session["MeisaiJutyuData"] == null)
+                {
+                    dtN = new DataJutyu.T_JutyuDataTable();
+                }
+                else
+                {
+                    dtN = (DataJutyu.T_JutyuDataTable)Session["MeisaiJutyuData"];
+                }
+
+
+                int NowPage = CtrlSyousai.CurrentPageIndex;
+                int kijunRow = NowPage * 10;
+                if (dtN.Count > 0)
+                {
+                    for (int d = kijunRow; kijunRow < dtN.Count;)
+                    {
+                        dtN.RemoveT_JutyuRow(dtN[kijunRow]);
+                    }
+                }
                 for (int i = 0; i < CtrlSyousai.Items.Count; i++)
                 {
-                    DataJutyu.T_JutyuRow dr = dg.NewT_JutyuRow();
+                    DataJutyu.T_JutyuRow dr = dtN.NewT_JutyuRow();
                     CtrlMitsuSyousai CtlMitsuSyosai = CtrlSyousai.Items[i].FindControl("Syosai") as CtrlMitsuSyousai;
                     dr = CtlMitsuSyosai.ItemGet3(dr);
 
@@ -850,16 +872,16 @@ namespace Gyomu
                     {
                         dr.JutyuNo = JutyuNo.Text;
                         //dr.UriageFlg = false;
-                        dg.AddT_JutyuRow(dr);
+                        dtN.AddT_JutyuRow(dr);
                     }
                     else
                     {
                         dr.JutyuNo = vsNo;
                         //dr.UriageFlg = false;
-                        dg.AddT_JutyuRow(dr);
+                        dtN.AddT_JutyuRow(dr);
                     }
                 }
-                ClassJutyu.InsertJutyu2(dg, Global.GetConnection());
+                ClassJutyu.InsertJutyu2(dtN, Global.GetConnection());
                 JutyuNo.Text = dl.JutyuNo.ToString();
             }
             catch (Exception ex)
@@ -873,7 +895,6 @@ namespace Gyomu
             }
         }
         //登録ボタン
-
         protected void Button6_Click(object sender, EventArgs e)
         {
             TBTokuisaki.Style["display"] = "none";
@@ -1309,15 +1330,32 @@ namespace Gyomu
             //int sIndex = int.Parse(e.CommandArgument.ToString());
             if (e.CommandName == "Del")
             {
+                DataMitumori.T_MitumoriDataTable dtN = null;
+                if ((DataMitumori.T_MitumoriDataTable)Session["MeisaiJutyuData"] == null)
+                {
+                    dtN = new DataMitumori.T_MitumoriDataTable();
+                }
+                else
+                {
+                    dtN = (DataMitumori.T_MitumoriDataTable)Session["MeisaiJutyuData"];
+                }
+                int NowPage = CtrlSyousai.CurrentPageIndex;
+                int kijunRow = NowPage * 10;
+                if (dtN.Count > 0)
+                {
+                    for (int d = kijunRow; kijunRow < dtN.Count;)
+                    {
+                        dtN.RemoveT_MitumoriRow(dtN[kijunRow]);
+                    }
+                }
+
+
                 for (int i = 0; i < CtrlSyousai.Items.Count; i++)
                 {
                     DataMitumori.T_RowRow dr = dt.NewT_RowRow();
 
                     CtrlMitsuSyousai CtlMitsuSyosai = CtrlSyousai.Items[i].FindControl("Syosai") as CtrlMitsuSyousai;
                     Label RowNo = e.Item.FindControl("RowNo") as Label;
-                    //TextBox MakerHinban = (TextBox)CtlMitsuSyosai.FindControl("MakerHinban");
-                    //RadComboBox ProductName = (RadComboBox)CtlMitsuSyosai.FindControl("ProductName");
-                    //RadComboBox Hanni = (RadComboBox)CtlMitsuSyosai.FindControl("Hanni");
                     RadComboBox Zaseki = (RadComboBox)CtlMitsuSyosai.FindControl("Zasu");
                     Label Media = (Label)CtlMitsuSyosai.FindControl("Baitai");
                     TextBox HyoujyunTanka = (TextBox)CtlMitsuSyosai.FindControl("HyoujyunTanka");
@@ -1469,28 +1507,61 @@ namespace Gyomu
                     }
                 }
                 //AddCreate(dt);
-                DelCreate(dt);
+                Session["MeisaiJutyuData"] = dtN;
+                CtrlSyousai.CurrentPageIndex = (dtN.Count - 1) / 10;
+                CtrlSyousai.DataSource = dtN;
+                CtrlSyousai.DataBind();
+
+                //DelCreate(dt);
             }
             if (e.CommandName.Equals("Add"))
             {
                 strCategoryCode = RadComboCategory.SelectedValue;
                 strCategoryName = RadComboCategory.Text;
-                DataMitumori.T_RowDataTable dtN = new DataMitumori.T_RowDataTable();
+
+                DataJutyu.T_JutyuDataTable dtN = null;
+                if ((DataJutyu.T_JutyuDataTable)Session["MeisaiJutyuData"] == null)
+                {
+                    dtN = new DataJutyu.T_JutyuDataTable();
+                }
+                else
+                {
+                    dtN = (DataJutyu.T_JutyuDataTable)Session["MeisaiJutyuData"];
+                }
+                int NowPage = CtrlSyousai.CurrentPageIndex;
+                int kijunRow = NowPage * 10;
+                if (dtN.Count > 0)
+                {
+                    for (int d = kijunRow; kijunRow < dtN.Count;)
+                    {
+                        dtN.RemoveT_JutyuRow(dtN[kijunRow]);
+                    }
+                }
+
                 for (int i = 0; i < CtrlSyousai.Items.Count; i++)
                 {
-                    DataMitumori.T_RowRow drN = dtN.NewT_RowRow();
+                    DataJutyu.T_JutyuRow drN = dtN.NewT_JutyuRow();
                     CtrlMitsuSyousai CtlMitsuSyosai = CtrlSyousai.Items[i].FindControl("Syosai") as CtrlMitsuSyousai;
-                    DataMitumori.T_RowRow drG = CtlMitsuSyosai.ItemGet();
-                    drN.ItemArray = drG.ItemArray;
-                    dtN.AddT_RowRow(drN);
+                    drN = CtlMitsuSyosai.ItemGet4(drN);
+                    drN.ItemArray = drN.ItemArray;
+                    dtN.AddT_JutyuRow(drN);
                     if (a == i)
                     {
                         //新規の空の明細を追加
-                        DataMitumori.T_RowRow drN2 = dtN.NewT_RowRow();
-                        drN2 = AddNewRow2(drN2);
-                        dtN.AddT_RowRow(drN2);
+                        DataJutyu.T_JutyuRow drN2 = dtN.NewT_JutyuRow();
+                        drN2 = AddNewRow3(drN2);
+                        dtN.AddT_JutyuRow(drN2);
                     }
                 }
+
+                int page = dtN.Count / (CtrlSyousai.PageSize + 1);
+                if (page < 0)
+                {
+                    page = 0;
+                }
+
+                CtrlSyousai.CurrentPageIndex = page;
+                Session["MeisaiJutyuData"] = dtN;
                 CtrlSyousai.DataSource = dtN;
                 CtrlSyousai.DataBind();
             }
@@ -1498,29 +1569,89 @@ namespace Gyomu
             {
                 strCategoryCode = RadComboCategory.SelectedValue;
                 strCategoryName = RadComboCategory.Text;
-                DataMitumori.T_RowDataTable dtN = new DataMitumori.T_RowDataTable();
+                DataJutyu.T_JutyuDataTable dtN = null;
+                if ((DataJutyu.T_JutyuDataTable)Session["MeisaiJutyuData"] == null)
+                {
+                    dtN = new DataJutyu.T_JutyuDataTable();
+                }
+                else
+                {
+                    dtN = (DataJutyu.T_JutyuDataTable)Session["MeisaiJutyuData"];
+                }
+                int NowPage = CtrlSyousai.CurrentPageIndex;
+                int kijunRow = NowPage * 10;
+                if (dtN.Count > 0)
+                {
+                    for (int d = kijunRow; kijunRow < dtN.Count;)
+                    {
+                        dtN.RemoveT_JutyuRow(dtN[kijunRow]);
+                    }
+                }
+
                 for (int i = 0; i < CtrlSyousai.Items.Count; i++)
                 {
-                    DataMitumori.T_RowRow drN = dtN.NewT_RowRow();
+                    DataJutyu.T_JutyuRow drN = dtN.NewT_JutyuRow();
                     CtrlMitsuSyousai CtlMitsuSyosai = CtrlSyousai.Items[i].FindControl("Syosai") as CtrlMitsuSyousai;
-                    DataMitumori.T_RowRow drG = CtlMitsuSyosai.ItemGet();
+                    DataJutyu.T_JutyuRow drG = CtlMitsuSyosai.ItemGet4(drN);
                     drN.ItemArray = drG.ItemArray;
-                    dtN.AddT_RowRow(drN);
+                    dtN.AddT_JutyuRow(drN);
                     if (a == i)
                     {
                         //新規の空の明細を追加
-                        DataMitumori.T_RowRow drN2 = dtN.NewT_RowRow();
-                        DataMitumori.T_RowRow drG2 = CtlMitsuSyosai.ItemGet();
+                        DataJutyu.T_JutyuRow drN2 = dtN.NewT_JutyuRow();
+                        DataJutyu.T_JutyuRow drG2 = CtlMitsuSyosai.ItemGet4(drN2);
                         drN2.ItemArray = drG2.ItemArray;
-                        dtN.AddT_RowRow(drN2);
+                        dtN.AddT_JutyuRow(drN2);
                     }
                 }
+                Session["MeisaiJutyuData"] = dtN;
                 CtrlSyousai.DataSource = dtN;
                 CtrlSyousai.DataBind();
             }
 
         }//
-         //行削除、行追加、行複写---------------------------------------------------------------------------------------
+
+        private DataJutyu.T_JutyuRow AddNewRow3(DataJutyu.T_JutyuRow drN2)
+        {
+            drN2.Kakeritsu = strKakeritsu;
+            drN2.Zeikubun = strZeikubun;
+            drN2.CateGory = int.Parse(strCategoryCode);
+            drN2.CategoryName = strCategoryName;
+            if (CheckBox4.Checked)
+            {
+                if (!string.IsNullOrEmpty(strStartDate))
+                {
+                    drN2.SiyouKaishi = DateTime.Parse(strStartDate);
+                }
+                if (!string.IsNullOrEmpty(strEndDate))
+                {
+                    drN2.SiyouOwari = DateTime.Parse(strEndDate);
+                }
+            }
+            if (objFacility.Length > 0)
+            {
+                drN2.SisetuCode = int.Parse(objFacility[0].ToString());
+                drN2.SisetuRowCode = objFacility[1].ToString();
+                drN2.SisetuMei = objFacility[2].ToString();
+                if (!string.IsNullOrEmpty(objFacility[3].ToString()))
+                {
+                    drN2.SisetsuMei2 = objFacility[3].ToString();
+                }
+                drN2.SisetsuAbbreviration = objFacility[4].ToString();
+                drN2.SisetuTanto = objFacility[5].ToString();
+                drN2.SisetuPost = objFacility[6].ToString();
+                drN2.SisetuJusyo1 = objFacility[7].ToString();
+                if (!string.IsNullOrEmpty(objFacility[8].ToString()))
+                {
+                    drN2.SisetuJusyo2 += objFacility[8].ToString();
+                }
+                drN2.SisetsuTell = objFacility[9].ToString();
+                drN2.SisetuCityCode = objFacility[10].ToString();
+            }
+            return drN2;
+        }
+
+        //行削除、行追加、行複写---------------------------------------------------------------------------------------
 
         private DataMitumori.T_RowRow AddNewRow2(DataMitumori.T_RowRow dr)
         {
@@ -2065,7 +2196,7 @@ namespace Gyomu
             string jNo = JutyuNo.Text;
             int noo = dru.UriageNo;
             int Uno = noo + 1;
-            ClassUriage.InsertUriageHeader(jNo, Uno, Global.GetConnection());
+            ClassUriage.InsertUriage(jNo, Uno, Global.GetConnection());
         }
         //発注ボタン
         protected void Back_Click(object sender, EventArgs e)
@@ -2239,5 +2370,67 @@ namespace Gyomu
             }
         }
 
+        protected void CtrlSyousai_PageIndexChanged(object source, DataGridPageChangedEventArgs e)
+        {
+            DataJutyu.T_JutyuDataTable dtN = null;
+            if ((DataJutyu.T_JutyuDataTable)Session["MeisaiJutyuData"] == null)
+            {
+                dtN = new DataJutyu.T_JutyuDataTable();
+            }
+            else
+            {
+                dtN = (DataJutyu.T_JutyuDataTable)Session["MeisaiJutyuData"];
+            }
+            int NowPage = CtrlSyousai.CurrentPageIndex;
+            int kijunRow = NowPage * 10;
+            if (dtN.Count > 0)
+            {
+                for (int d = kijunRow; d < kijunRow + CtrlSyousai.Items.Count; d++)
+                {
+                    dtN.RemoveT_JutyuRow(dtN[kijunRow]);
+                }
+            }
+
+            for (int i = 0; i < CtrlSyousai.Items.Count; i++)
+            {
+                DataJutyu.T_JutyuDataTable dd = new DataJutyu.T_JutyuDataTable();
+                dd = dtN;
+                DataRow ddr = dd.NewRow() as DataJutyu.T_JutyuRow;
+                DataJutyu.T_JutyuDataTable dtNN = new DataJutyu.T_JutyuDataTable();
+                DataJutyu.T_JutyuRow drN = dtNN.NewT_JutyuRow();
+                CtrlMitsuSyousai CtlMitsuSyosai = CtrlSyousai.Items[i].FindControl("Syosai") as CtrlMitsuSyousai;
+                string cp = SessionManager.strCp;
+                DataJutyu.T_JutyuRow drG = CtlMitsuSyosai.ItemGet4(drN);
+                drG.RowNo = i + (kijunRow);
+                ddr.ItemArray = drG.ItemArray;
+                ddr["CategoryName"] = RadComboCategory.Text;
+                ddr["CateGory"] = (object)Session["CategoryCode"];
+                if (ddr["SyouhinCode"] == null)
+                {
+                    ddr["SyouhinCode"] = "";
+                }
+                ddr["JutyuNo"] = "";
+                ddr["JutyuFlg"] = false;
+                dd.Rows.InsertAt(ddr, kijunRow + i);
+            }
+
+            Session["MeisaiJutyuData"] = dtN;
+            CtrlSyousai.CurrentPageIndex = e.NewPageIndex;
+            Create3();
+
+        }
+
+        private void Create3()
+        {
+            DataJutyu.T_JutyuDataTable dt = (DataJutyu.T_JutyuDataTable)Session["MeisaiJutyuData"];
+            if (dt.Count > 0)
+            {
+                CtrlSyousai.VirtualItemCount = dt.Count;
+                int nPageSize = CtrlSyousai.PageSize;
+                int nPageCount = dt.Count / nPageSize;
+                CtrlSyousai.DataSource = dt;
+                CtrlSyousai.DataBind();
+            }
+        }
     }
 }

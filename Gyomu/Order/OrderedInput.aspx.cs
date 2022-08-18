@@ -31,8 +31,9 @@ namespace Gyomu.Order
                         }
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
+                    Err.Text = ex.Message;
                     Create();
                 }
             }
@@ -68,7 +69,10 @@ namespace Gyomu.Order
                     dl.CategoryName = dd[u].CategoryName;
                     dl.FacilityCode = dd[u].FacilityCode;
                     dl.FacilityName = dd[u].FacilityName;
-                    dl.FacilityJusyo1 = dd[u].FacilityJusyo1;
+                    if (!dd[u].IsFacilityJusyo1Null())
+                    {
+                        dl.FacilityJusyo1 = dd[u].FacilityJusyo1;
+                    }
                     if (!dd[u].IsSiyouKaishiNull())
                     { dl.SiyouKaishi = dd[u].SiyouKaishi; }
                     if (!dd[u].IsSiyouiOwariNull())
@@ -367,16 +371,17 @@ namespace Gyomu.Order
                 }
                 else
                 {
-                    DataAppropriate.T_AppropriateHeaderRow drM = Class1.GetMaxShiireNo(Global.GetConnection());
-                    int no = drM.ShiireNo;
-                    drH.ShiireNo = drM.ShiireNo + 1;
-                    No = (drM.ShiireNo + 1).ToString();
+                    DataAppropriate.T_AppropriateHeaderDataTable drM = Class1.GetMaxShiireNo(Global.GetConnection());
+                    int no = drM.Count;
+                    No = drM.Count.ToString();
+                    drH.ShiireNo = no + 1;
                     DataSet1.T_OrderedHeaderRow dtOH = ClassOrdered.GetOrderedH(LblOrdered.Text, Global.GetConnection());
+                    string[] strTokuisaki = dtOH.TokuisakiCode.Split('/');
+
                     drH.ItemArray = dtOH.ItemArray;
                     drH.ShiiresakiName = LblShiiresaki.Text;
                     drH.ShiireAmount = int.Parse(LblSu.Text);
                     drH.CreateDate = DateTime.Now;
-                    drH.ShiireNo = int.Parse(No);
                     dtH.AddT_AppropriateHeaderRow(drH);
                     Class1.InsertAppropriateHeader(dtH, Global.GetConnection());
                 }
@@ -400,6 +405,7 @@ namespace Gyomu.Order
             }
             catch (Exception ex)
             {
+                ClassMail.ErrorMail("maeda@m2m-asp.com", "エラーメール | 発注明細→仕入登録処理", ex.Message + "<br><br>" + ex.Source);
                 Err.Text = ex.Message;
             }
         }

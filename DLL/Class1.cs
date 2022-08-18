@@ -837,7 +837,7 @@ namespace DLL
 
             DataAppropriate.T_AppropriateDataTable dt = new DataAppropriate.T_AppropriateDataTable();
             da.Fill(dt);
-            if (dt.Count == 1)
+            if (dt.Count > 0)
             {
                 return dt[0] as DataAppropriate.T_AppropriateRow;
             }
@@ -1318,17 +1318,14 @@ namespace DLL
 
         }
 
-        public static DataAppropriate.T_AppropriateHeaderRow GetMaxShiireNo(SqlConnection sqlConnection)
+        public static DataAppropriate.T_AppropriateHeaderDataTable GetMaxShiireNo(SqlConnection sqlConnection)
         {
             SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
             da.SelectCommand.CommandText =
-                "SELECT Max(ShiireNo) as ShiireNo FROM T_AppropriateHeader";
+                "SELECT * FROM T_AppropriateHeader";
             DataAppropriate.T_AppropriateHeaderDataTable dt = new DataAppropriate.T_AppropriateHeaderDataTable();
             da.Fill(dt);
-            if (dt.Rows.Count >= 1)
-                return dt[0] as DataAppropriate.T_AppropriateHeaderRow;
-            else
-                return null;
+            return dt;
         }
 
         public static DataAppropriate.T_AppropriateDataTable GetAppropriate(SqlConnection sqlConnection)

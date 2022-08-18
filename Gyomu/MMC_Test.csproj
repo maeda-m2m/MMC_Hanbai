@@ -385,6 +385,8 @@
     <Content Include="Tokuisaki\css\ShouhinSearch.css" />
     <Content Include="Tokuisaki\css\TokuisakiAccount.css" />
     <Content Include="Tokuisaki\css\TokushuMenu.css" />
+    <Content Include="Tokuisaki\image\DeleteImage.png" />
+    <Content Include="Tokuisaki\image\NoImage.jpg" />
     <Content Include="Tokuisaki\js\ShouhinSearch.js" />
     <Content Include="Tokuisaki\MasterPortal.aspx" />
     <Content Include="Tokuisaki\MasterPortalImage.aspx" />
@@ -910,6 +912,7 @@
     <Folder Include="sheet\Common\" />
     <Folder Include="Style\GridReport\" />
     <Folder Include="Style\GridYd\" />
+    <Folder Include="Tokuisaki\image\TokushuImage\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

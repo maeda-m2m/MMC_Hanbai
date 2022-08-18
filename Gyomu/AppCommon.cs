@@ -1825,7 +1825,7 @@ namespace Gyomu
             int SouGokei = 0;
             int gokei = 0;
             //一枚に表示出来る最大行数 
-            int iViewCount = 50;
+            int iViewCount = 100;
 
             //何枚のPDFが出力されるか算出
             int iPdfCntAll = 0;

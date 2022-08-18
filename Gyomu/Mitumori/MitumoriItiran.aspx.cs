@@ -37,6 +37,11 @@ namespace Gyomu.Mitumori
                 Session.Remove("FacilityData");
                 Session.Remove("Kakeritsu");
                 Session.Remove("Zeikubun");
+                Session.Remove("CategoryCode");
+                Session.Remove("StartDate");
+                Session.Remove("EndDate");
+                Session.Remove("MitumoriNo");
+                Session.Remove("MeisaiData");
 
                 SessionManager.JucyuSyusei("");
                 SessionManager.MitumoriType("");

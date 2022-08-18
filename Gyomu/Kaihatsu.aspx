@@ -337,7 +337,7 @@
         <table runat="server" id="SubMenu">
             <tr>
                 <td>
-                    <asp:Button ID="BtnKeisan" runat="server" Text="計算" CssClass="Btn10" OnClientClick="Cul(); return false;" />
+                    <asp:Button ID="BtnKeisan" runat="server" Text="計算" CssClass="Btn10" OnClientClick="Cul(); return false;" OnClick="BtnKeisan_Click" />
                 </td>
                 <td>
                     <asp:Button ID="Button5" runat="server" Text="登録" CssClass="Btn10" OnClick="Button5_Click" OnClientClick="return Check(this)" />
@@ -1306,7 +1306,6 @@
                     <td>
                         <asp:Button runat="server" ID="BtnCloseHeader" OnClick="BtnCloseHeader_Click" Text="ヘッダー折りたたむ" />
                     </td>
-
                 </tr>
             </table>
         </div>
@@ -1316,26 +1315,20 @@
             <tr>
                 <td>
                     <div runat="server" id="DivDataGrid">
-                        <asp:DataGrid runat="server" ID="CtrlSyousai" AutoGenerateColumns="False" OnItemDataBound="CtrlSyousai_ItemDataBound" OnItemCommand="CtrlSyousai_ItemCommand" BorderColor="White" on>
+                        <asp:DataGrid runat="server" ID="CtrlSyousai" PageSize="10" AllowPaging="true" AutoGenerateColumns="False" OnItemDataBound="CtrlSyousai_ItemDataBound" OnItemCommand="CtrlSyousai_ItemCommand" BorderColor="White" OnPageIndexChanged="CtrlSyousai_PageIndexChanged">
+                            <PagerStyle Position="TopAndBottom" Mode="NumericPages" />
                             <Columns>
-
                                 <asp:TemplateColumn HeaderStyle-BorderStyle="None" ItemStyle-BorderStyle="None" ItemStyle-Width="30px">
                                     <ItemStyle HorizontalAlign="Center" />
-
                                     <ItemTemplate>
-
                                         <asp:Label ID="RowNo" runat="server" Text="" Font-Size="25px"></asp:Label>
-                                        <%--                                        <asp:Button runat="server" ID="BtnEdit" Text="編集" Width="90px" CommandName="Edit" CssClass="Btn10" />--%>
-                                        <%--                                        <asp:Button runat="server" ID="BtnDoneEdit" Text="編集完了" Width="90px" Visible="false" CommandName="EditDone" CssClass="Btn10" />--%>
                                         <asp:Button ID="Button4" runat="server" Text="削除" Width="90px" CssClass="Btn10" CommandName="Del" />
                                         <asp:Button ID="BtnAddRow" runat="server" Text="明細挿入" Width="90px" CssClass="Btn10" CommandName="Add" />
                                         <asp:Button runat="server" ID="BtnCopyAdd" Text="明細複写" Width="90px" CssClass="Btn10" CommandName="Copy" />
                                         <asp:Button runat="server" ID="BtnTool5" ToolTip="「削除」明細を1行削除。「明細挿入」空の明細を1行追加。「明細複写」クリックした明細のデータを複写して追加。" Text="❔" OnClientClick="return false;" />
-
                                         <input type="hidden" runat="server" id="HidAddFLG" /><%--dataT_rowにデータを持っているかいないかのフラグ--%>
                                     </ItemTemplate>
                                 </asp:TemplateColumn>
-
                                 <asp:TemplateColumn HeaderStyle-BorderStyle="None" ItemStyle-BorderStyle="None">
                                     <ItemTemplate>
                                         <uc2:Syosai ID="Syosai" runat="server" />
@@ -2443,6 +2436,7 @@
                         }
                     }
                 }
+                combo2.clearItems();
             }
 
         </script>
@@ -2591,7 +2585,6 @@
                 ss2.style.display = "none";
             }
         </script>
-
     </form>
 </body>
 </html>

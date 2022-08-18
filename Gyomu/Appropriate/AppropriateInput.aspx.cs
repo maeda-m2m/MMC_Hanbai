@@ -251,7 +251,7 @@ namespace Gyomu.Appropriate
                     dp.OrderedSuryo = dl.JutyuSuryou.ToString();
                     dp.NyukaSuryo = Nyuka.Text;
                     dp.StaffName = SessionManager.User.UserID;
-                    dp.MakerNo = TbxMaker.Text;
+                    dp.MakerNo = LblProductName.Text;
                     dp.ProductName = strProduct;
                     dp.Hanni = strHanni;
                     dp.Media = strMedia;
@@ -283,7 +283,6 @@ namespace Gyomu.Appropriate
             Label LblProductName = (Label)Ctl.FindControl("LblProductName");
             Label LblHanni = (Label)Ctl.FindControl("LblHanni");
             Label LblMedia = (Label)Ctl.FindControl("LblMedia");
-            TextBox Maker = (TextBox)Ctl.FindControl("TbxMaker");
 
             string hCode = "";
 
@@ -292,10 +291,7 @@ namespace Gyomu.Appropriate
                 DataMaster.M_HanniRow dl = ClassMaster.GetHanniCode(LblHanni.Text.Trim(), Global.GetConnection());
                 hCode = dl.HanniCode.ToString();
             }
-
-
-            string strKey = No.Value + "," + Maker.Text.Trim() + "," + hCode.Trim() + "," + LblMedia.Text.Trim();
-
+            string strKey = No.Value + "," + LblProductName.Text.Trim() + "," + hCode.Trim() + "," + LblMedia.Text.Trim();
             Response.Write("<script>");
             Response.Write("window.open('OrderedInput2.aspx?id=" + strKey + "' , 'テスト', 'width=600, height=600, toolbar=1, menubar=1, scrollbars=1')");
             Response.Write("</script>");

@@ -173,11 +173,11 @@ namespace Gyomu.Order
             //}
 
             k.oFlg = DrpFlg.Text;
-            if(RadCate.Text != "")
+            if (RadCate.Text != "")
             {
                 k.oCate = RadCate.Text;
             }
-            if(RadShiire.Text != "")
+            if (RadShiire.Text != "")
             {
                 k.sShiire = RadShiire.Text;
             }
@@ -218,7 +218,7 @@ namespace Gyomu.Order
                 { e.Item.Cells[RadG.Columns.FindByUniqueName("ColSuryo").OrderIndex].Text = dr.OrderedAmount.ToString(); }
                 if (!dr.IsShiireKingakuNull())
                 { e.Item.Cells[RadG.Columns.FindByUniqueName("ColShiireKingaku").OrderIndex].Text = dr.ShiireKingaku.ToString("0,0"); }
-                if(!dr.IsCreateDateNull())
+                if (!dr.IsCreateDateNull())
                 { e.Item.Cells[RadG.Columns.FindByUniqueName("ColOrderedDate").OrderIndex].Text = dr.CreateDate.ToShortDateString(); }
 
             }
@@ -299,6 +299,7 @@ namespace Gyomu.Order
             }
             catch (Exception ex)
             {
+                ClassMail.ErrorMail("maeda@m2m-asp.com", "エラーメール | 発注一覧→CSVダウンロード", ex.Message + "<br><br>" + ex.Source);
                 lblMsg.Text = ex.Message;
             }
         }
@@ -449,7 +450,7 @@ namespace Gyomu.Order
 
         protected void RadShiire_ItemsRequested(object sender, RadComboBoxItemsRequestedEventArgs e)
         {
-            if(e.Text != "")
+            if (e.Text != "")
             {
                 ListSet.SetShiireSaki3(sender, e);
             }

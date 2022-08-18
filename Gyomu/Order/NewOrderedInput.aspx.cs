@@ -506,7 +506,7 @@ namespace Gyomu.Order
                     dr.HatyuDay = DateTime.Now.ToShortDateString();
                     dr.HatyuFLG = "true";
                     if (HidTokuisakiCode.Value != "")
-                    { dr.TokuisakiCode = int.Parse(HidTokuisakiCode.Value); }
+                    { dr.TokuisakiCode = HidTokuisakiCode.Value; }
                     if (HidTokuisakiName.Value != "")
                     { dr.TokuisakiMei = HidTokuisakiName.Value; }
                     //ヘッダ
@@ -523,22 +523,22 @@ namespace Gyomu.Order
                         drH.CreateDate = DateTime.Now;
                         drH.ShiiresakiCode = ShiireRad.SelectedValue;
                         drH.ShiiresakiName = ShiireRad.Text;
-                        DataAppropriate.T_AppropriateHeaderRow drM = Class1.GetMaxShiireNo(Global.GetConnection());
-                        drH.ShiireNo = drM.ShiireNo + 1;
-                        dr.ShiireNo = drM.ShiireNo + 1;
+                        DataAppropriate.T_AppropriateHeaderDataTable drM = Class1.GetMaxShiireNo(Global.GetConnection());
+                        drH.ShiireNo = drM.Count + 1;
+                        dr.ShiireNo = drM.Count + 1;
                         dr.RowNo = int.Parse(RowNo.Text);
                         if (StartDate.SelectedDate != null)
                         {
                             dr.SiyouKaishi = StartDate.SelectedDate.Value.ToShortDateString();
                         }
-                        if(EndDate.SelectedDate != null)
+                        if (EndDate.SelectedDate != null)
                         {
                             dr.SiyouiOwari = EndDate.SelectedDate.Value.ToShortDateString();
                         }
                         dtH.AddT_AppropriateHeaderRow(drH);
                         Class1.InsertAppropriateHeader(dtH, Global.GetConnection());
                         dt.AddT_AppropriateRow(dr);
-                        shiiireno = drM.ShiireNo + 1;
+                        shiiireno = drM.Count + 1;
                     }
                     else
                     {
@@ -787,11 +787,11 @@ namespace Gyomu.Order
 
         protected void ChkFuku_CheckedChanged(object sender, EventArgs e)
         {
-            if(ChkFuku.Checked)
+            if (ChkFuku.Checked)
             {
-                if(StartDate.SelectedDate != null)
+                if (StartDate.SelectedDate != null)
                 {
-                    for(int i = 0; i < CtrlSyousai.Items.Count; i++)
+                    for (int i = 0; i < CtrlSyousai.Items.Count; i++)
                     {
                         CtrlNewOrderedMeisai ctl = (CtrlNewOrderedMeisai)CtrlSyousai.Items[i].FindControl("Syosai");
                         RadDatePicker rdps = (RadDatePicker)ctl.FindControl("SiyoukaishiRDP");

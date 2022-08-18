@@ -705,10 +705,20 @@ namespace Gyomu.Jutyu
                     //ClassOrdered.InsertOrdered2(dt, Global.GetConnection());
                 }
                 DataUriage.T_UriageHeaderRow dru = ClassUriage.GetMaxNo(Global.GetConnection());
-                string jNo = JutyuNo;
-                int noo = dru.UriageNo;
-                int Uno = noo + 1;
-                ClassUriage.InsertUriageHeader(jNo, Uno, Global.GetConnection());
+                string jNo;
+                int Uno;
+                if (dru != null)
+                {
+                    jNo = JutyuNo;
+                    int noo = dru.UriageNo;
+                    Uno = noo + 1;
+                }
+                else
+                {
+                    jNo = JutyuNo;
+                    Uno = 52700001;
+                }
+                ClassUriage.InsertUriage(jNo, Uno, Global.GetConnection());
             }
             catch (Exception ex)
             {

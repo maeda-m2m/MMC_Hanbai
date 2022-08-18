@@ -945,7 +945,7 @@ namespace DLL
             return dt;
         }
 
-        public static void InsertMitsumori(DataMitumori.T_MitumoriDataTable dt, SqlConnection sql)
+        public static void InsertMitsumori(DataMitumori.T_MitumoriRow dt, SqlConnection sql)
         {
             SqlDataAdapter da = new SqlDataAdapter("", sql);
             da.SelectCommand.CommandText =
@@ -960,8 +960,11 @@ namespace DLL
                 sqltra = sql.BeginTransaction();
 
                 da.SelectCommand.Transaction = da.InsertCommand.Transaction = sqltra;
-
-                da.Update(dt);
+                DataMitumori.T_MitumoriDataTable dtN = new DataMitumori.T_MitumoriDataTable();
+                DataMitumori.T_MitumoriRow drN = dtN.NewT_MitumoriRow();
+                drN.ItemArray = dt.ItemArray;
+                dtN.AddT_MitumoriRow(drN);
+                da.Update(dtN);
                 sqltra.Commit();
             }
             catch (Exception ex)
@@ -972,11 +975,11 @@ namespace DLL
                 }
                 ClassMail.ErrorMail("maeda@m2m-asp.com", "エラーメール | 見積登録処理",
                     ex.Message +
-                    dt[0].MitumoriNo + "\r\n"
-                    + dt[0].TokuisakiCode + "\r\n"
-                    + dt[0].TokuisakiMei + "\r\n"
-                    + dt[0].SisetuMei + "\r\n"
-                    + dt[0].SisetsuAbbreviration);
+                    dt.MitumoriNo + "\r\n"
+                    + dt.TokuisakiCode + "\r\n"
+                    + dt.TokuisakiMei + "\r\n"
+                    + dt.SisetuMei + "\r\n"
+                    + dt.SisetsuAbbreviration);
             }
             finally
             {
@@ -1298,10 +1301,10 @@ namespace DLL
             throw new NotImplementedException();
         }
 
-        public static void UpDateMitumori2(DataMitumori.T_MitumoriDataTable dg, SqlConnection sqlConnection)
+        public static void UpDateMitumori2(DataMitumori.T_MitumoriRow dg, string mno, SqlConnection sqlConnection)
         {
-            string no = dg[0].MitumoriNo;
-            string row = dg[0].RowNo.ToString();
+            string no = dg.MitumoriNo;
+            string row = dg.RowNo.ToString();
             SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
             da.SelectCommand.CommandText =
                 "select * from T_Mitumori where MitumoriNo = @no and RowNo = @row";
@@ -1320,7 +1323,8 @@ namespace DLL
                 {
                     da.SelectCommand.Transaction = da.InsertCommand.Transaction = sqltra;
                     DataMitumori.T_MitumoriRow dr = dt.NewT_MitumoriRow();
-                    dr.ItemArray = dg[0].ItemArray;
+                    dr.ItemArray = dg.ItemArray;
+                    dr.MitumoriNo = mno;
                     dt.AddT_MitumoriRow(dr);
                     da.Update(dt);
                     sqltra.Commit();
@@ -1328,7 +1332,8 @@ namespace DLL
                 else
                 {
                     da.SelectCommand.Transaction = da.UpdateCommand.Transaction = sqltra;
-                    dt[0].ItemArray = dg[0].ItemArray;
+                    dt[0].ItemArray = dg.ItemArray;
+                    dt[0].MitumoriNo = mno;
                     da.Update(dt);
                     sqltra.Commit();
                 }
@@ -1345,6 +1350,38 @@ namespace DLL
                 sqlConnection.Close();
             }
 
+        }
+
+        public static void UpdateFromPortaltoMitumori(DataMitumori.T_MitumoriHeaderDataTable dp, string strPortalNo, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select * from T_MitumoriHeader where MitumoriNo = @mn";
+            da.SelectCommand.Parameters.AddWithValue("@mn", strPortalNo);
+            DataMitumori.T_MitumoriHeaderDataTable dt = new DataMitumori.T_MitumoriHeaderDataTable();
+            da.Fill(dt);
+            SqlTransaction sqltra = null;
+            da.UpdateCommand = (new SqlCommandBuilder(da)).GetUpdateCommand();
+            try
+            {
+                sqlConnection.Open();
+                sqltra = sqlConnection.BeginTransaction();
+                da.SelectCommand.Transaction = da.UpdateCommand.Transaction = sqltra;
+                dt[0].ItemArray = dp[0].ItemArray;
+                dt[0].JutyuFlg = "False";
+                da.Update(dt);
+                sqltra.Commit();
+            }
+            catch
+            {
+                if (sqltra != null)
+                {
+                    sqltra.Rollback();
+                }
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
         }
     }
 }
