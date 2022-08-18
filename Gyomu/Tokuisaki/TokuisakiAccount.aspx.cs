@@ -1,4 +1,5 @@
 ﻿using DLL;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -6,7 +7,9 @@ using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -68,10 +71,10 @@ namespace Gyomu.Tokuisaki
 
             sqlCommand = @"
 select M_Facility_NewBackup.FacilityNo,M_Facility_NewBackup.FacilityName1,M_tokuisaki_account.ID,
-M_tokuisaki_account.password,M_tokuisaki_account.CategoryCode,M_Facility_NewBackup.Address1,M_Facility_NewBackup.FacilityResponsible,M_Facility_NewBackup.PostNo
+M_tokuisaki_account.password,M_tokuisaki_account.CategoryCode,M_Facility_NewBackup.Address1,M_Facility_NewBackup.FacilityResponsible,M_Facility_NewBackup.PostNo, M_Facility_NewBackup.Code
 from M_tokuisaki_account 
 inner join M_Facility_NewBackup 
-on M_tokuisaki_account.FacilityNo = M_Facility_NewBackup.FacilityNo and M_Facility_NewBackup.FacilityName1 = M_tokuisaki_account.FacilityName1
+on M_tokuisaki_account.FacilityNo = M_Facility_NewBackup.FacilityNo and M_Facility_NewBackup.Code = M_tokuisaki_account.Code
 ";
             var table = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
 
@@ -92,7 +95,7 @@ on M_tokuisaki_account.FacilityNo = M_Facility_NewBackup.FacilityNo and M_Facili
 
 
 
-        protected void Ram_AjaxRequest(object sender, Telerik.Web.UI.AjaxRequestEventArgs e)
+        protected void Ram_AjaxRequest(object sender, AjaxRequestEventArgs e)
         {
 
         }
@@ -128,12 +131,13 @@ on M_tokuisaki_account.FacilityNo = M_Facility_NewBackup.FacilityNo and M_Facili
             {
 
                 var ShisetsuNo = e.Item.Cells[3].Text;
+                var code = e.Item.Cells[4].Text;
 
                 MainPanel.Visible = false;
                 EditPanel.Visible = true;
 
 
-                TourokuCreate(ShisetsuNo);
+                TourokuCreate(ShisetsuNo, code);
 
 
             }
@@ -141,7 +145,7 @@ on M_tokuisaki_account.FacilityNo = M_Facility_NewBackup.FacilityNo and M_Facili
 
 
 
-        private void TourokuCreate(string ShisetsuNo)
+        private void TourokuCreate(string ShisetsuNo, string code)
         {
 
 
@@ -149,14 +153,16 @@ on M_tokuisaki_account.FacilityNo = M_Facility_NewBackup.FacilityNo and M_Facili
             string sqlCommand = "";
 
             sqlCommand = $@"
-select M_tokuisaki_account.CategoryCode,M_Facility_NewBackup.FacilityName1,M_Facility_NewBackup.FacilityName2,M_Facility_NewBackup.FacilityResponsible,M_Facility_NewBackup.PostNo,M_tokuisaki_account.mailaddress,M_Facility_NewBackup.Tell,M_tokuisaki_account.password,M_Facility_NewBackup.FacilityNo, M_tokuisaki_account.ID,M_Facility_NewBackup.Address1 ,M_Facility_NewBackup.Address2, M_tokuisaki_account.Available  
+select M_tokuisaki_account.CategoryCode,M_Facility_NewBackup.FacilityNo,M_Facility_NewBackup.Code, M_Facility_NewBackup.FacilityName1,
+M_Facility_NewBackup.FacilityName2,M_Facility_NewBackup.FacilityResponsible,M_Facility_NewBackup.PostNo,M_Facility_NewBackup.CityCode,M_Facility_NewBackup.Address1,M_Facility_NewBackup.Address2,M_tokuisaki_account.mailaddress,M_Facility_NewBackup.Tell,
+M_tokuisaki_account.ID, M_tokuisaki_account.password, M_tokuisaki_account.Available   
 from M_tokuisaki_account 
 inner join M_Facility_NewBackup 
-on M_tokuisaki_account.FacilityNo = M_Facility_NewBackup.FacilityNo and M_Facility_NewBackup.FacilityName1 = M_tokuisaki_account.FacilityName1 
-where M_Facility_NewBackup.FacilityNo = '{ShisetsuNo}'";
+on M_tokuisaki_account.FacilityNo = M_Facility_NewBackup.FacilityNo and M_Facility_NewBackup.Code = M_tokuisaki_account.Code 
+where M_Facility_NewBackup.FacilityNo = '{ShisetsuNo}' and M_Facility_NewBackup.Code = '{code}'";
 
 
-            //カテゴリコード、施設名、シセツメイ、責任者、郵便番号、メールアドレス、電話番号、パスワード、施設コード、ID,住所1、住所2、有効無効
+            //カテゴリコード、施設コード、子コード、施設名1、施設名カナ、担当者、郵便番号、都市コード、住所1、建物名、メールアドレス、電話番号、ID、PW、有効無効
             var row = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
 
 
@@ -164,23 +170,35 @@ where M_Facility_NewBackup.FacilityNo = '{ShisetsuNo}'";
             {
                 EditCheckHidden.Value = "true";
 
+                CategoryDropTouroku.SelectedValue =
+                    row.Rows[0].ItemArray[0].ToString();
+                ShisetsuCode.Text =
+                    row.Rows[0].ItemArray[1].ToString();
+                Code.Text =
+                    row.Rows[0].ItemArray[2].ToString();
+                CompanyText.Text =
+                    row.Rows[0].ItemArray[3].ToString();
+                CompanykanaText.Text =
+                    row.Rows[0].ItemArray[4].ToString();
+                TantouText.Text =
+                    row.Rows[0].ItemArray[5].ToString();
+                PostNumberText.Text =
+                    row.Rows[0].ItemArray[6].ToString();
+                CityCode.Text =
+                    row.Rows[0].ItemArray[7].ToString();
+                CityText.Text =
+                    row.Rows[0].ItemArray[8].ToString();
+                AddressText2.Text =
+                    row.Rows[0].ItemArray[9].ToString();
+                PhoneNumberText.Text =
+                    row.Rows[0].ItemArray[11].ToString();
+                mailText.Text =
+                    row.Rows[0].ItemArray[10].ToString();
 
+                IDText.Text = row.Rows[0].ItemArray[12].ToString();
+                PWText.Text = row.Rows[0].ItemArray[13].ToString();
 
-                CategoryDropTouroku.SelectedValue = row.Rows[0].ItemArray[0].ToString();
-                CompanyText.Text = row.Rows[0].ItemArray[1].ToString();
-                CompanykanaText.Text = row.Rows[0].ItemArray[2].ToString();
-                TantouText.Text = row.Rows[0].ItemArray[3].ToString();
-                PostNumberText.Text = row.Rows[0].ItemArray[4].ToString();
-                CityText.Text = row.Rows[0].ItemArray[10].ToString();
-                AddressText2.Text = row.Rows[0].ItemArray[11].ToString();
-
-                mailText.Text = row.Rows[0].ItemArray[5].ToString();
-                PhoneNumberText.Text = row.Rows[0].ItemArray[6].ToString();
-
-                IDText.Text = row.Rows[0].ItemArray[9].ToString();
-                PWText.Text = row.Rows[0].ItemArray[7].ToString();
-
-                AvailableDrop.SelectedValue = row.Rows[0].ItemArray[12].ToString();
+                AvailableDrop.SelectedValue = row.Rows[0].ItemArray[14].ToString();
 
 
 
@@ -194,10 +212,39 @@ where M_Facility_NewBackup.FacilityNo = '{ShisetsuNo}'";
 
 
 
-        protected void MainRadGrid_ItemDataBound(object sender, Telerik.Web.UI.GridItemEventArgs e)
-        {
 
+
+
+
+
+
+        protected void NewTouroku_Click(object sender, EventArgs e)
+        {
+            MainPanel.Visible = false;
+            EditPanel.Visible = true;
+
+            EditCheckHidden.Value = "false";
+
+
+
+            CategoryDropTouroku.SelectedValue = "203";
+            ShisetsuCode.Text = "";
+            Code.Text = "";
+            CompanyText.Text = "";
+            CompanykanaText.Text = "";
+            TantouText.Text = "";
+            PostNumberText.Text = "";
+            CityCode.Text = "";
+            CityText.Text = "";
+            AddressText2.Text = "";
+            PhoneNumberText.Text = "";
+            mailText.Text = "";
+            PWText.Text = "";
+            IDText.Text = "";
+            AvailableDrop.SelectedValue = "True";
         }
+
+
 
 
 
@@ -216,143 +263,142 @@ where M_Facility_NewBackup.FacilityNo = '{ShisetsuNo}'";
         /// <param name="e"></param>
         protected void TourokuButton_Click(object sender, EventArgs e)
         {
+            //参照元
+            //0カテゴリコード,1施設No,2コード,3事業所名,4ジギョウショメイ,5御担当者名,6郵便番号,7住所,8建物名,9電話番号,10メールアドレス,11ID,12パスワード,13有効/無効14,CSV
+            var word = new string[] { CategoryDropTouroku.SelectedValue, ShisetsuCode.Text, Code.Text, CompanyText.Text, CompanykanaText.Text, TantouText.Text, PostNumberText.Text, CityText.Text, AddressText2.Text, PhoneNumberText.Text, mailText.Text, IDText.Text, PWText.Text, AvailableDrop.SelectedValue, "" };
 
-            if (string.IsNullOrWhiteSpace(CompanyText.Text))
+            UpdateCSV(word);
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        private void UpdateCSV(string[] vs)
+        {
+
+            string sqlCommand, script;
+
+            //値が正しいのかチェックを行う。
+            var dataCheck = CheckData(vs);
+
+            if (!dataCheck)
             {
-
-                string testScript = "alert('事業所名が未入力です。');";
-                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", testScript, true);
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(TantouText.Text))
-            {
-
-                string testScript = "alert('担当者名が未入力です。');";
-                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", testScript, true);
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(PostNumberText.Text))
-            {
-
-                string testScript = "alert('郵便番号が未入力です。');";
-                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", testScript, true);
-                return;
-            }
-
-            if (string.IsNullOrWhiteSpace(CityText.Text))
-            {
-
-                string testScript = "alert('住所が未入力です。');";
-                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", testScript, true);
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(mailText.Text))
-            {
-
-                string testScript = "alert('メールアドレスが未入力です。');";
-                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", testScript, true);
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(PhoneNumberText.Text))
-            {
-
-                string testScript = "alert('電話番号が未入力です。');";
-                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", testScript, true);
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(PWText.Text))
-            {
-                string testScript = "alert('パスワードが未入力です。');";
-                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", testScript, true);
+                script = $"alert('登録に失敗しました。')";
+                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
                 return;
             }
 
 
+            string[] word = vs;
 
-            string script, sqlCommand;
+            //参照元
+            //0施設コード、1施設名、2ID、3PW、4メールアドレス、5認証ID、6カテゴリコード、7有効無効、8子コード
+            string[] accountMasterStr = new string[] { word[1], word[3], word[11], word[12], word[10], "", word[0], word[13], word[2] };
 
+            string cityCode = "";
 
-            //0メールアドレス、1パスワード、2事業者名、3ジギョウシャ名、4郵便番号、5住所、6建物名、7電話番号、8都市コード、9担当者名、10認証ID、11カテゴリ、12有効無効
-            string[] word = new string[] { mailText.Text, PWText.Text, CompanyText.Text, CompanykanaText.Text, PostNumberText.Text, CityText.Text, AddressText2.Text, PhoneNumberText.Text, "", TantouText.Text, "", CategoryDropTouroku.SelectedValue, AvailableDrop.SelectedValue };
+            var post = SearchPostNumber(false);
 
-
-            //このフラグで新規登録か登録情報の変更可をチェックしている。
-            if (EditCheckHidden.Value == "true")
+            foreach (var item in post)
             {
-                AccountMasterUpdate(word);
-                FacilityUpdate(word);
+                cityCode = item.CityCode;
             }
-            else
+
+
+
+            //参照元
+            //0施設コード、1子コード、2施設名、3施設名カナ、4略称、5担当者、6郵便番号、7住所1、8建物名、9電話番号、10都市コード、11キャパ、12タイトル、13状態、14最終更新ユーザー、15最終更新日
+            string[] facilityStr = new string[] { word[1], word[2], word[3], word[4], word[3], word[5], word[6], word[7], word[8], word[9], cityCode, "", "", "", "", "" };
+
+            //施設マスタの重複チェック
+            sqlCommand = $"select * from M_Facility_NewBackup where FacilityNo = '{facilityStr[0]}' and Code = '{facilityStr[1]}'";
+            var facilityNo = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
+
+            //アカウントマスタの重複チェック
+            sqlCommand = $"select * from M_tokuisaki_account where FacilityNo = '{facilityStr[0]}' and Code = '{facilityStr[1]}'";
+            var dataID = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
+
+            if (word[14] == "CSV")//CSVの処理
             {
-                //施設名で重複チェック
-                sqlCommand = $"select FacilityNo from M_Facility_NewBackup where FacilityName1 = '{word[2]}'";
 
-                var facilityNo = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
-
-                sqlCommand = $"select ID from M_tokuisaki_account where FacilityName1 = '{word[2]}'";
-
-                var dataID = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
-
-
-                if (facilityNo.Rows.Count != 0)//既に施設マスタに登録されている
+                if (facilityNo.Rows.Count == 0)//既に施設マスタに登録されていない、新規登録
                 {
-                    if (CategoryDropTouroku.SelectedValue == "209")//キッズ・BGV
+
+                    AccountMasterInsert(accountMasterStr);
+                    FacilityInsert(facilityStr);
+                }
+                else//施設マスタに登録されている
+                {
+
+                    if (dataID.Rows.Count == 0)//アカウントマスタには登録されていない
                     {
-                        int number = GetFacilityNo();
-                        AccountMasterInsert(word, number);
-                        FacilityInsert(word, number);
+                        AccountMasterInsert(accountMasterStr);
+                        FacilityUpdate(facilityStr);
 
                     }
-                    else if (dataID.Rows.Count != 0)//アカウントマスタにも登録されている（バス）
+                    else//アカウントマスタにも登録されている
                     {
-                        AccountMasterUpdate(word);
-                        FacilityUpdate(word);
-                    }
-                    else
-                    {
-                        AccountMasterInsert(word, int.Parse(facilityNo.Rows[0].ItemArray[0].ToString()));
-                        FacilityUpdate(word);
+                        AccountMasterUpdate(accountMasterStr);
+                        FacilityUpdate(facilityStr);
                     }
                 }
-                else//施設マスタに登録されていない
-                {
-                    int number = GetFacilityNo();
-                    AccountMasterInsert(word, number);
-                    FacilityInsert(word, number);
-                }
-
-
-                //sqlCommand = $"select FacilityName1 from M_Facility_NewBackup";
-
-                //var rows = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
-
-                //var faciliryLists = new List<string>();
-
-
-                //for (int i = 0; i < rows.Rows.Count; i++)
-                //{
-                //    faciliryLists.Add(rows.Rows[i].ItemArray[0].ToString());
-                //}
-
-
-
-                //if (faciliryLists.Any(n => n.Contains(CompanyText.Text)))
-                //{
-                //    script = "alert('その事業所名は既に登録されています。別の事業所名をご利用ください。');";
-                //    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
-                //    return;
-                //}
-
-
-                //InsertTable(word);
-
             }
+            else//新規登録ページからの処理
+            {
+                //このフラグで新規登録か登録情報の変更可をチェックしている。
+                if (EditCheckHidden.Value == "true")
+                {
+                    AccountMasterUpdate(accountMasterStr);
+                    FacilityUpdate(facilityStr);
+                }
+                else
+                {
+                    if (facilityNo.Rows.Count == 0)//既に施設マスタに登録されていない、新規登録
+                    {
+                        AccountMasterInsert(accountMasterStr);
+                        FacilityInsert(facilityStr);
+                    }
+                    else//施設マスタに登録されている
+                    {
+                        if (CategoryDropTouroku.SelectedValue == "209")//キッズ・BGV
+                        {
+                            accountMasterStr[0] = facilityStr[0] = GetFacilityNo().ToString();
+                            AccountMasterInsert(accountMasterStr);
+                            FacilityInsert(facilityStr);
 
-            sqlCommand = $"select ID from M_tokuisaki_account where FacilityName1 = '{word[2]}'";
+                        }
+                        else if (dataID.Rows.Count == 0)//アカウントマスタには登録されていない、バス
+                        {
+                            AccountMasterInsert(accountMasterStr);
+                            FacilityUpdate(facilityStr);
 
+                        }
+                        else//アカウントマスタ二も登録されている、バス
+                        {
+                            AccountMasterUpdate(accountMasterStr);
+                            FacilityUpdate(facilityStr);
+                        }
+                    }
+
+                }
+            }
+            //IDのテキストボックスに値を入れる処理
+            sqlCommand = $"select ID from M_tokuisaki_account where FacilityNo = '{facilityStr[0]}' and Code = '{facilityStr[1]}'";
             var data = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
-
             IDText.Text = data.Rows[0].ItemArray[0].ToString();
+
 
             script = $"alert('登録に成功しました。')";
             Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
@@ -360,151 +406,90 @@ where M_Facility_NewBackup.FacilityNo = '{ShisetsuNo}'";
 
 
 
-
-
         }
 
 
 
 
 
-        /// <summary>
-        /// CSVからの登録
-        /// </summary>
-        /// <param name="word"></param>
-        private void UpdateCSV(string[] word)
-        {
-            //0メールアドレス、1パスワード、2事業所名、3ジギョウショメイ、4郵便番号、5住所、6建物名、7電話番号、8都市コード、9担当者名、10認証番号、11カテゴリコード、12有効/無効
 
+
+
+
+        private bool CheckData(string[] word)
+        {
             string script;
 
-            if (string.IsNullOrWhiteSpace(word[0]))
+            //"0カテゴリコード,1施設No,2コード,3事業所名,4ジギョウショメイ,5御担当者名,6郵便番号,7住所,8建物名,9電話番号,10メールアドレス,11ID,12パスワード,13有効/無効,14CSV判定" + "\r";
+
+            if (string.IsNullOrWhiteSpace(word[1]))
+            {
+                script = "alert('施設コードに空白の行がありました。');";
+                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(word[10]))
             {
                 script = "alert('メールアドレスに空白の行がありました。');";
                 Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
-                return; ;
+                return false;
             }
-            if (string.IsNullOrWhiteSpace(word[1]))
+            else if (string.IsNullOrWhiteSpace(word[12]))
             {
                 script = "alert('パスワードに空白の行がありました。');";
                 Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
-                return; ;
+                return false;
             }
-            if (string.IsNullOrWhiteSpace(word[2]))
+            else if (string.IsNullOrWhiteSpace(word[3]))
             {
                 script = "alert('事業所名に空白の行がありました。');";
                 Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
-                return; ;
+                return false;
             }
-            //if (string.IsNullOrWhiteSpace(word[3]))
-            //{
-            //    script = "alert('ジギョウショメイに空白の行がありました。');";
-            //    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
-            //    return; ;
-            //}
-            if (string.IsNullOrWhiteSpace(word[4]))
+
+            else if (string.IsNullOrWhiteSpace(word[6]))
             {
                 script = "alert('郵便番号に空白の行がありました。');";
                 Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
-                return; ;
+                return false;
             }
-            if (string.IsNullOrWhiteSpace(word[5]))
+            else if (string.IsNullOrWhiteSpace(word[7]))
             {
                 script = "alert('住所に空白の行がありました。');";
                 Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
-                return; ;
+                return false;
             }
-            //if (string.IsNullOrWhiteSpace(word[6]))
-            //{
-            //    script = "alert('建物名に空白の行がありました。');";
-            //    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
-            //    return; ;
-            //}
-            if (string.IsNullOrWhiteSpace(word[7]))
+
+            else if (string.IsNullOrWhiteSpace(word[9]))
             {
                 script = "alert('電話番号に空白の行がありました。');";
                 Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
-                return; ;
+                return false;
             }
-            //if (string.IsNullOrWhiteSpace(word[8]))
-            //{
-            //    script = "alert('。');";
-            //    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
-            //    return; ;
-            //}
-            if (string.IsNullOrWhiteSpace(word[9]))
+
+            else if (string.IsNullOrWhiteSpace(word[5]))
             {
                 script = "alert('御担当者名に空白の行がありました。');";
                 Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
-                return; ;
+                return false;
             }
-            //if (string.IsNullOrWhiteSpace(word[10]))
-            //{
-            //    script = "alert('メールアドレスで空白がありました。');";
-            //    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
-            //    return; ;
-            //}
-            if (string.IsNullOrWhiteSpace(word[11]))
+
+            else if (string.IsNullOrWhiteSpace(word[0]))
             {
                 script = "alert('カテゴリコードに空白の行がありました。');";
                 Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
-                return; ;
+                return false;
             }
-            if (string.IsNullOrWhiteSpace(word[12]))
+            else if (string.IsNullOrWhiteSpace(word[13]))
             {
                 script = "alert('有効/無効に空白の行がありました。');";
                 Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
-                return; ;
+                return false;
             }
-
-
-
-            string sqlCommand = $"select FacilityNo from M_Facility_NewBackup where FacilityName1 = '{word[2]}'";
-
-            var facilityNo = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
-
-            sqlCommand = $"select ID from M_tokuisaki_account where FacilityName1 = '{word[2]}'";
-
-            var dataID = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
-
-
-            if (facilityNo.Rows.Count != 0)//既に施設マスタに登録されている
+            else
             {
-                if (word[11] == "209")//キッズ・BGV
-                {
-                    int number = GetFacilityNo();
-                    AccountMasterInsert(word, number);
-                    FacilityInsert(word, number);
-
-                }
-                else if (dataID.Rows.Count != 0)//アカウントマスタにも登録されている（バス）
-                {
-                    AccountMasterUpdate(word);
-                    FacilityUpdate(word);
-                }
-                else
-                {
-                    AccountMasterInsert(word, int.Parse(facilityNo.Rows[0].ItemArray[0].ToString()));
-                    FacilityUpdate(word);
-                }
-                //if (dataID.Rows.Count != 0)//アカウントマスタにも登録されている
-                //{
-                //    AccountMasterUpdate(word);
-                //    FacilityUpdate(word);
-                //}
-                //else
-                //{
-                //    AccountMasterInsert(word, int.Parse(facilityNo.Rows[0].ItemArray[0].ToString()));
-                //    FacilityUpdate(word);
-                //}
-
-
-            }
-            else//施設マスタに登録されていない
-            {
-                int number = GetFacilityNo();
-                AccountMasterInsert(word, number);
-                FacilityInsert(word, number);
+                return true;
             }
 
 
@@ -513,19 +498,11 @@ where M_Facility_NewBackup.FacilityNo = '{ShisetsuNo}'";
 
 
 
-
-
-
-
-
-
-
-        private void AccountMasterInsert(string[] word, int facilityNo)
+        private string CreateID(string categoryCode)
         {
-            string sqlCommand, newID;
+            string sqlCommand;
 
-
-            if (word[11] == "209") //キッズ・BGV
+            if (categoryCode == "209") //キッズ・BGV
             {
                 sqlCommand = "select ID from M_tokuisaki_account where ID like 'KB%' order by ID desc";
 
@@ -551,7 +528,7 @@ where M_Facility_NewBackup.FacilityNo = '{ShisetsuNo}'";
                     count = count.Insert(0, "0");
                 }
 
-                newID = "KB" + count;
+                return "KB" + count;
             }
             else //バス
             {
@@ -577,38 +554,50 @@ where M_Facility_NewBackup.FacilityNo = '{ShisetsuNo}'";
                     count = count.Insert(0, "0");
                 }
 
-                newID = "BS" + count;
+                return "BS" + count;
             }
+        }
 
 
 
 
-            //二つのテーブルで施設ナンバーを統一する
-            //int facilityNo = GetFacilityNo();
 
 
-            //0メールアドレス、1パスワード、2事業所名、3ジギョウショメイ、4郵便番号、5住所、6施設名、7電話番号、8都市コード、9担当者名、10認証番号
-            string[] row = word;
+
+        private void AccountMasterInsert(string[] word)
+        {
+            string sqlCommand, newID;
+
+            newID = CreateID(word[6]);
 
             var accountTable = new Mtokuisaki_account
             {
-                FacilityNo = facilityNo.ToString(),
-                FacilityName1 = row[2],
-                ID = newID,
-                password = row[1],
-                mailaddress = row[0],
-                account_ninshou_ID = row[9],
-                CategoryCode = CategoryDropTouroku.SelectedValue,
-                Available = word[12]
+                FacilityNo =
+                word[0],
+                FacilityName1 =
+                word[1],
+                ID =
+                newID,
+                password =
+                word[3],
+                mailaddress =
+                word[4],
+                account_ninshou_ID =
+                word[5],
+                CategoryCode =
+                word[6],
+                Available =
+                word[7],
+                Code =
+                word[8]
             };
 
             sqlCommand = $@"
 insert into M_tokuisaki_account
-(FacilityNo,FacilityName1,ID,password,mailaddress,account_ninshou_ID,CategoryCode,Available) 
-values('{accountTable.FacilityNo}','{accountTable.FacilityName1}','{accountTable.ID}','{accountTable.password}','{accountTable.mailaddress}','{accountTable.account_ninshou_ID}','{accountTable.CategoryCode}','{accountTable.Available}')";
+(FacilityNo,FacilityName1,ID,password,mailaddress,account_ninshou_ID,CategoryCode,Available,Code) 
+values('{accountTable.FacilityNo}','{accountTable.FacilityName1}','{accountTable.ID}','{accountTable.password}','{accountTable.mailaddress}','{accountTable.account_ninshou_ID}','{accountTable.CategoryCode}','{accountTable.Available}','{accountTable.Code}')";
 
             CommonClass.TranSql(sqlCommand, Global.GetConnection());
-
 
         }
 
@@ -619,31 +608,44 @@ values('{accountTable.FacilityNo}','{accountTable.FacilityName1}','{accountTable
 
 
 
-        private void FacilityInsert(string[] word, int facilityNo)
+        private void FacilityInsert(string[] word)
         {
             string sqlCommand;
 
-            //0メールアドレス、1パスワード、2事業所名、3ジギョウショメイ、4郵便番号、5住所、6施設名、7電話番号、8都市コード、9担当者名、10認証番号
-            string[] row = word;
-
             var facilityTable = new MFacility_New
             {
-                FacilityNo = facilityNo.ToString(),
-                FacilityName1 = row[2],
-                Code = "1",
-                FacilityName2 = row[3],
-                Abbreviation = row[2],
-                PostNo = row[4],
-                Address1 = row[5],
-                Address2 = row[6],
-                Tell = row[7],
-                CityCode = "0",
-                Capacity = "",
-                FacilityResponsible = row[9],
-                Titles = "",
-                State = "1",
-                UpDateDay = null,
-                UpDateUser = null,
+                FacilityNo =
+                word[0],
+                FacilityName1 =
+                word[2],
+                Code =
+                word[1],
+                FacilityName2 =
+                word[3],
+                Abbreviation =
+                word[2],
+                PostNo =
+                word[6],
+                Address1 =
+                word[7],
+                Address2 =
+                word[8],
+                Tell =
+                word[9],
+                CityCode =
+                word[10],
+                Capacity =
+                "",
+                FacilityResponsible =
+                word[5],
+                Titles =
+                "",
+                State =
+                "1",
+                UpDateDay =
+                "",
+                UpDateUser =
+                "",
             };
 
 
@@ -668,48 +670,47 @@ values('{facilityTable.FacilityNo}','{facilityTable.FacilityName1}','{facilityTa
 
         private void AccountMasterUpdate(string[] word)
         {
-            string sqlCommand;
+            //string sqlCommand;
 
-            string facilityNo, newID;
+            //string facilityNo, newID;
 
+            //sqlCommand = $"select FacilityNo from M_Facility_NewBackup where FacilityNo = ''";
 
+            //var dataFacilityNo = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
 
+            //facilityNo = dataFacilityNo.Rows[0].ItemArray[0].ToString();
 
-            sqlCommand = $"select FacilityNo from M_Facility_NewBackup where FacilityName1 = '{word[2]}'";
+            //sqlCommand = $"select ID from M_tokuisaki_account where FacilityNo = ''";
 
-            var dataFacilityNo = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
+            //var dataID = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
 
-            facilityNo = dataFacilityNo.Rows[0].ItemArray[0].ToString();
+            //newID = dataID.Rows[0].ItemArray[0].ToString();
 
-
-            sqlCommand = $"select ID from M_tokuisaki_account where FacilityName1 = '{word[2]}'";
-
-            var dataID = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
-
-
+            //string[] row = word;
 
 
 
-            newID = dataID.Rows[0].ItemArray[0].ToString();
-
-
-
-
-
-
-            string[] row = word;
-
-
+            //0施設コード、1施設名、2ID、3PW、4メールアドレス、5認証ID、6カテゴリコード、7有効無効、8子コード
             var accountTable = new Mtokuisaki_account
             {
-                FacilityNo = facilityNo.ToString(),
-                FacilityName1 = row[2],
-                ID = newID,
-                password = row[1],
-                mailaddress = row[0],
-                account_ninshou_ID = row[9],
-                CategoryCode = word[11],
-                Available = word[12]
+                FacilityNo =
+                word[0],
+                FacilityName1 =
+                word[1],
+                ID =
+                word[2],
+                password =
+                word[3],
+                mailaddress =
+                word[4],
+                account_ninshou_ID =
+                word[5],
+                CategoryCode =
+                word[6],
+                Available =
+                word[7],
+                Code =
+                word[8]
             };
 
             var connection = Global.GetConnection();
@@ -718,7 +719,8 @@ values('{facilityTable.FacilityNo}','{facilityTable.FacilityName1}','{facilityTa
             var da = new SqlCommand("", connection)
             {
                 CommandText = @"
-update M_tokuisaki_account set FacilityNo = @a0, FacilityName1 = @a1, ID = @a2, password = @a3, mailaddress = @a4, account_ninshou_ID = @a5,CategoryCode = @a6, Available = @a7 where FacilityNo = @a0
+update M_tokuisaki_account set FacilityNo = @a0, FacilityName1 = @a1, ID = @a2, password = @a3, mailaddress = @a4, account_ninshou_ID = @a5,CategoryCode = @a6, Available = @a7, Code = @a8 
+where FacilityNo = @a0 and Code = @a8
 "
             };
             da.Parameters.AddWithValue("@a0", accountTable.FacilityNo);
@@ -729,36 +731,25 @@ update M_tokuisaki_account set FacilityNo = @a0, FacilityName1 = @a1, ID = @a2, 
             da.Parameters.AddWithValue("@a5", accountTable.account_ninshou_ID);
             da.Parameters.AddWithValue("@a6", accountTable.CategoryCode);
             da.Parameters.AddWithValue("@a7", accountTable.Available);
-
-
+            da.Parameters.AddWithValue("@a8", accountTable.Code);
 
 
             connection.Open();
-
             SqlTransaction transaction = connection.BeginTransaction();
-
             try
             {
                 da.Transaction = transaction;
-
                 da.ExecuteNonQuery();
-
                 transaction.Commit();
-
-
             }
             catch (Exception)
             {
                 transaction.Rollback();
-
             }
             finally
             {
                 connection.Close();
-
             }
-
-
         }
 
 
@@ -771,43 +762,59 @@ update M_tokuisaki_account set FacilityNo = @a0, FacilityName1 = @a1, ID = @a2, 
 
         private void FacilityUpdate(string[] word)
         {
-            string sqlCommand = "";
+            //string sqlCommand = "";
 
-            string facilityNo;
-
-
-            sqlCommand = $"select FacilityNo from M_Facility_NewBackup where FacilityName1 = '{word[2]}'";
-
-            var data = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
-
-            facilityNo = data.Rows[0].ItemArray[0].ToString();
+            //string facilityNo;
 
 
+            //sqlCommand = $"select FacilityNo from M_Facility_NewBackup where FacilityNo = ''";
+
+            //var data = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
+
+            //facilityNo = data.Rows[0].ItemArray[0].ToString();
 
 
 
 
-            string[] row = word;
 
 
+            //string[] row = word;
+
+            //0施設コード、1子コード、2施設名、3施設名カナ、4略称、5担当者、6郵便番号、7住所1、8建物名、9電話番号、10都市コード、11キャパ、12タイトル、13状態、14最終更新ユーザー、15最終更新日
             var facilityTable = new MFacility_New
             {
-                FacilityNo = facilityNo.ToString(),
-                FacilityName1 = row[2],
-                Code = "1",
-                FacilityName2 = row[3],
-                Abbreviation = row[2],
-                PostNo = row[4],
-                Address1 = row[5],
-                Address2 = row[6],
-                Tell = row[7],
-                CityCode = "0",
-                Capacity = "",
-                FacilityResponsible = row[9],
-                Titles = "",
-                State = "1",
-                UpDateDay = "",
-                UpDateUser = "",
+                FacilityNo =
+                word[0],
+                FacilityName1 =
+                word[2],
+                Code =
+                word[1],
+                FacilityName2 =
+                word[3],
+                Abbreviation =
+                word[2],
+                PostNo =
+                word[6],
+                Address1 =
+                word[7],
+                Address2 =
+                word[8],
+                Tell =
+                word[9],
+                CityCode =
+                word[10],
+                Capacity =
+                "",
+                FacilityResponsible =
+                word[5],
+                Titles =
+                "",
+                State =
+                "1",
+                UpDateDay =
+                "",
+                UpDateUser =
+                "",
             };
 
 
@@ -819,7 +826,7 @@ update M_tokuisaki_account set FacilityNo = @a0, FacilityName1 = @a1, ID = @a2, 
                 CommandText = @"
 update M_Facility_NewBackup 
 set FacilityNo = @a0,Code = @a1,FacilityName1 = @a2, FacilityName2 = @a3, Abbreviation = @a4,FacilityResponsible = @a5, PostNo = @a6,Address1 = @a7, Address2 = @a8,Tell = @a9, CityCode = @a10,Capacity = @a11,Titles = @a12,State = @a13,UpDateUser = @a14,UpDateDay= @a15
-where FacilityNo = @a0
+where FacilityNo = @a0 and Code = @a1
 "
             };
             da.Parameters.AddWithValue("@a0", facilityTable.FacilityNo);
@@ -841,32 +848,21 @@ where FacilityNo = @a0
 
 
 
-
-
-
             connection.Open();
-
             SqlTransaction transaction = connection.BeginTransaction();
-
             try
             {
                 da.Transaction = transaction;
-
                 da.ExecuteNonQuery();
-
                 transaction.Commit();
-
-
             }
             catch (Exception)
             {
                 transaction.Rollback();
-
             }
             finally
             {
                 connection.Close();
-
             }
         }
 
@@ -888,16 +884,11 @@ where FacilityNo = @a0
         /// <returns></returns>
         private int GetFacilityNo()
         {
-
-
             string sqlCommand = $"select FacilityNo from M_Facility_NewBackup order by FacilityNo desc";
 
             int Number = int.Parse(CommonClass.SelectedTable(sqlCommand, Global.GetConnection()).Rows[0].ItemArray[0].ToString());
 
             return Number + 1;
-
-
-
 
         }
 
@@ -939,27 +930,6 @@ where FacilityNo = @a0
 
 
 
-        protected void NewTouroku_Click(object sender, EventArgs e)
-        {
-            MainPanel.Visible = false;
-            EditPanel.Visible = true;
-
-            EditCheckHidden.Value = "false";
-
-
-            CategoryDropTouroku.SelectedValue = "203";
-            CompanyText.Text = "";
-            CompanykanaText.Text = "";
-            TantouText.Text = "";
-            PostNumberText.Text = "";
-            CityText.Text = "";
-            AddressText2.Text = "";
-            mailText.Text = "";
-            PhoneNumberText.Text = "";
-            PWText.Text = "";
-            IDText.Text = "";
-            AvailableDrop.SelectedValue = "True";
-        }
 
 
 
@@ -1090,19 +1060,19 @@ on M_tokuisaki_account.FacilityNo = M_Facility_NewBackup.FacilityNo and M_Facili
         protected void DownLoadButton_Click(object sender, EventArgs e)
         {
             string sqlCommand = @"
-select M_tokuisaki_account.CategoryCode,M_Facility_NewBackup.FacilityName1,M_Facility_NewBackup.FacilityName2,M_Facility_NewBackup.FacilityResponsible,M_Facility_NewBackup.PostNo,M_Facility_NewBackup.Address1,M_Facility_NewBackup.Address2,M_tokuisaki_account.mailaddress,M_Facility_NewBackup.Tell,M_tokuisaki_account.ID,M_tokuisaki_account.password,M_tokuisaki_account.Available
+select M_tokuisaki_account.CategoryCode,M_Facility_NewBackup.FacilityNo,M_Facility_NewBackup.Code,M_Facility_NewBackup.FacilityName1,M_Facility_NewBackup.FacilityName2,M_Facility_NewBackup.FacilityResponsible,M_Facility_NewBackup.PostNo,M_Facility_NewBackup.Address1,M_Facility_NewBackup.Address2,M_Facility_NewBackup.Tell,M_tokuisaki_account.mailaddress,M_tokuisaki_account.ID,M_tokuisaki_account.password,M_tokuisaki_account.Available
 from M_tokuisaki_account 
 inner join M_Facility_NewBackup 
-on M_tokuisaki_account.FacilityNo = M_Facility_NewBackup.FacilityNo and M_Facility_NewBackup.FacilityName1 = M_tokuisaki_account.FacilityName1
+on M_tokuisaki_account.FacilityNo = M_Facility_NewBackup.FacilityNo and M_Facility_NewBackup.Code = M_tokuisaki_account.Code
 ";
 
             var table = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
 
-            string rows = "カテゴリコード,事業所名,ジギョウショメイ,御担当者名,郵便番号,住所,建物名,メールアドレス,電話番号,ID,パスワード,有効/無効" + "\r";
+            string rows = "カテゴリコード,施設No,コード,事業所名,ジギョウショメイ,御担当者名,郵便番号,住所,建物名,電話番号,メールアドレス,ID,パスワード,有効/無効" + "\r";
 
             for (int i = 0; i < table.Rows.Count; i++)
             {
-                rows += $"{table.Rows[i].ItemArray[0]},{table.Rows[i].ItemArray[1]},{table.Rows[i].ItemArray[2]},{table.Rows[i].ItemArray[3]},{table.Rows[i].ItemArray[4]},{table.Rows[i].ItemArray[5]},{table.Rows[i].ItemArray[6]},{table.Rows[i].ItemArray[7]},{table.Rows[i].ItemArray[8]},{table.Rows[i].ItemArray[9]},{table.Rows[i].ItemArray[10]},{table.Rows[i].ItemArray[11]}" + "\r";
+                rows += $"{table.Rows[i].ItemArray[0]},{table.Rows[i].ItemArray[1]},{table.Rows[i].ItemArray[2]},{table.Rows[i].ItemArray[3]},{table.Rows[i].ItemArray[4]},{table.Rows[i].ItemArray[5]},{table.Rows[i].ItemArray[6]},{table.Rows[i].ItemArray[7]},{table.Rows[i].ItemArray[8]},{table.Rows[i].ItemArray[9]},{table.Rows[i].ItemArray[10]},{table.Rows[i].ItemArray[11]},{table.Rows[i].ItemArray[12]},{table.Rows[i].ItemArray[13]}" + "\r";
             }
 
             string strFileName = ("得意先アカウントマスタ") + "_" + DateTime.Now.ToString("yyyyMMdd") + "." + "csv";
@@ -1137,8 +1107,6 @@ on M_tokuisaki_account.FacilityNo = M_Facility_NewBackup.FacilityNo and M_Facili
                 return;
             }
 
-
-
             Stream s = FileUpload.FileContent;
 
             Encoding enc = Encoding.GetEncoding(932);
@@ -1146,10 +1114,6 @@ on M_tokuisaki_account.FacilityNo = M_Facility_NewBackup.FacilityNo and M_Facili
             StreamReader check = new StreamReader(s, enc);
 
             string strCheck = check.ReadLine();
-
-
-
-
 
             if (strCheck == null)
             {
@@ -1160,25 +1124,22 @@ on M_tokuisaki_account.FacilityNo = M_Facility_NewBackup.FacilityNo and M_Facili
 
             bool bTab = strCheck.Split('\t').Length > strCheck.Split(',').Length;
 
-
             try
             {
-
-
-
                 if (bTab)
                 {
                     while (check.EndOfStream == false)
                     {
-                        string strLineData = check.ReadLine();
+                        string strLineData = check.ReadLine() + $"{'\t'}CSV";
 
-                        //0カテゴリ、
                         string[] mData = strLineData.Split('\t');
 
-                        string[] word = new string[] { mData[7], mData[10], mData[1], mData[2], mData[4], mData[5], mData[6], mData[8], "", mData[3], "", mData[0], mData[11] };
+                        //string[] word = new string[] { mData[7], mData[10], mData[1], mData[2], mData[4], mData[5], mData[6], mData[8], "", mData[3], "", mData[0], mData[11] };
+                        //"0カテゴリコード,1施設No,2コード,3事業所名,4ジギョウショメイ,5御担当者名,6郵便番号,7住所,8建物名,9電話番号,10メールアドレス,11ID,12パスワード,13有効/無効,14CSV判定" + "\r";
 
-                        //0メールアドレス、1パスワード、2事業所名、3ジギョウショメイ、4郵便番号、5住所、6建物名、7電話番号、8都市コード、9担当者名、10認証番号、11カテゴリコード、12有効/無効
-                        UpdateCSV(word);
+
+
+                        UpdateCSV(mData);
                     }
                 }
                 else
@@ -1186,13 +1147,13 @@ on M_tokuisaki_account.FacilityNo = M_Facility_NewBackup.FacilityNo and M_Facili
 
                     while (check.EndOfStream == false)
                     {
-                        string strLineData = check.ReadLine();
+                        string strLineData = check.ReadLine() + $"{','}CSV";
 
                         string[] mData = strLineData.Split(',');
 
-                        string[] word = new string[] { mData[7], mData[10], mData[1], mData[2], mData[4], mData[5], mData[6], mData[8], "", mData[3], "", mData[0], mData[11] };
 
-                        UpdateCSV(word);
+
+                        UpdateCSV(mData);
                     }
                 }
             }
@@ -1201,9 +1162,6 @@ on M_tokuisaki_account.FacilityNo = M_Facility_NewBackup.FacilityNo and M_Facili
                 script = $"alert('ファイルのアップロードに失敗しました。{ex.Message}');";
                 Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
             }
-
-
-
 
             script = "alert('ファイルのアップロードに成功しました。');";
             Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
@@ -1338,13 +1296,160 @@ on M_tokuisaki_account.FacilityNo = M_Facility_NewBackup.FacilityNo and M_Facili
 
             SetCombo(sender, e, sqlCommand);
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        private bool IsOnlyAlphanumeric3(string text)
+        {
+            //123-4567
+            return Regex.IsMatch(text, @"^[0-9]{3}-[0-9]{4}$");
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+        private List<Post> SearchPostNumber(bool checkButton)
+        {
+            var text = PostNumberText.Text.Trim();
+
+            if (!IsOnlyAlphanumeric3(text))
+            {
+                if (checkButton)
+                {
+                    string testScript = "alert('半角7桁の数字、半角ハイフンで郵便番号を検索することができます。例）123-4567')";
+                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", testScript, true);
+                    return new List<Post>();
+                }
+                else
+                {
+                    return new List<Post>();
+                }
+
+            }
+
+            text = text.Replace("-", "");
+
+
+
+            //パスを変更
+            string filePath = @"C:\Users\yanag\Source\Repos\MMC_CustomerPortal\Document\KEN_ALL.CSV";
+
+            filePath = @"C:\Users\yanag\source\repos\MMC_Hanbai\Gyomu\Tokuisaki\Format\KEN_ALL.CSV";
+
+            // "C:\\inetpub\\wwwroot\\HanshinDw\\hanshin-dw\\"
+            filePath = Request.PhysicalApplicationPath + @"Tokuisaki\Format\KEN_ALL.CSV";
+
+
+            string[] line = File.ReadAllLines(filePath, Encoding.GetEncoding("Shift-JIS"));
+
+            // 配列からリストに格納する
+            List<string> lists = new List<string>();
+
+            List<Post> PostLists = new List<Post>();
+
+            foreach (var item in line)
+            {
+                lists.Add(item);
+            }
+
+
+            foreach (var item in lists)
+            {
+                string[] strs = item.Split(',', '/', '"', '"');
+
+                var table = new Post
+                {
+                    CityCode = strs[0],
+                    PostNumber = strs[5],
+                    Prefecture = strs[17],
+                    City = strs[20],
+                    Address1 = strs[23],
+                };
+
+                PostLists.Add(table);
+
+            }
+
+
+            if (PostLists.Any(n => n.PostNumber == text))
+            {
+
+                var row = PostLists.Where(n => n.PostNumber == text);
+
+                return row.ToList();
+
+
+
+
+            }
+            else
+            {
+                if (checkButton)
+                {
+                    string testScript = "alert('該当する住所がありませんでした。');";
+                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", testScript, true);
+                    return new List<Post>();
+                }
+                else
+                {
+                    return new List<Post>();
+                }
+
+
+            }
+        }
+
+        protected void SearchPostNumberButton_Click(object sender, EventArgs e)
+        {
+            var post = SearchPostNumber(true);
+
+            foreach (var item in post)
+            {
+
+                CityCode.Text = item.CityCode;
+
+                CityText.Text = item.City + item.Address1;
+            }
+
+        }
     }
 
 
 
 
 
+    public class Post
+    {
+        public string CityCode { get; set; }
+        public string PostNumber { get; set; }
+        public string Prefecture { get; set; }
+        public string City { get; set; }
+        public string Address1 { get; set; }
 
+    }
 
 
 
@@ -1363,6 +1468,7 @@ on M_tokuisaki_account.FacilityNo = M_Facility_NewBackup.FacilityNo and M_Facili
         public string account_ninshou_ID { get; set; }
         public string CategoryCode { get; set; }
         public string Available { get; set; }
+        public string Code { get; set; }
     }
     public class MFacility_New
     {

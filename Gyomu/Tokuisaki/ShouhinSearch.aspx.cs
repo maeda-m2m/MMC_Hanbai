@@ -37,32 +37,17 @@ namespace Gyomu.Tokuisaki
 
 
 
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
 
-
-
                 MainGridCreate();
 
                 FirstCreate();
                 FirsrDrop();
-
-
-
-
-
-
             }
-
-
-
-
-
-
-
-
 
         }
 
@@ -106,6 +91,11 @@ where T_tokusyu.CategoryCode = '{categoryCode}' and T_tokusyu.tokusyu_code = '{t
 
 
 
+
+
+
+
+
         /// <summary>
         /// 画面読み込みの最初の一回だけ
         /// </summary>
@@ -118,7 +108,8 @@ select top(200) M_Kakaku_2.Syouhincode, M_Kakaku_2.SyouhinMei,M_Kakaku_2.Media,M
 from M_Kakaku_2 
 left outer join M_TokuisakiShouhin 
 on M_TokuisakiShouhin.Syouhincode = M_Kakaku_2.SyouhinCode
-where M_Kakaku_2.CategoryCode = '205' and  not (M_Kakaku_2.Syouhincode = '1005' or M_Kakaku_2.Syouhincode = '10000000' or M_Kakaku_2.Syouhincode = '1999'or M_Kakaku_2.SyouhinCode = '1004')
+where M_Kakaku_2.CategoryCode = '205' 
+and  not (M_Kakaku_2.Syouhincode = '1005' or M_Kakaku_2.Syouhincode = '10000000' or M_Kakaku_2.Syouhincode = '1999' or M_Kakaku_2.SyouhinCode = '1001' or M_Kakaku_2.SyouhinCode = '1002' or M_Kakaku_2.SyouhinCode = '28643001')
 ";
             MainGrid.DataSource = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
             MainGrid.DataBind();
@@ -157,14 +148,8 @@ where M_Kakaku_2.CategoryCode = '205' and  not (M_Kakaku_2.Syouhincode = '1005' 
                     //1商品コード,2メディア,4価格
                     var hidden = (MainGrid.Rows[i].Cells[2].Controls[3] as HiddenField).Value.Split(vs, StringSplitOptions.None);
 
-                    //商品名
-                    //var shouhinName = (MainGrid.Rows[i].Cells[1].Controls[1] as Label).Text;
-
                     //メディア
                     var media = hidden[2];
-
-                    //特集コード
-                    //tokushuCode = TokushuNameDrop.SelectedValue;
 
                     //価格
                     var kakaku = hidden[4];
@@ -172,8 +157,6 @@ where M_Kakaku_2.CategoryCode = '205' and  not (M_Kakaku_2.Syouhincode = '1005' 
                     //商品コード
                     var shouhinNumber = hidden[1].Trim();
 
-                    //カテゴリコード
-                    //var categoryCode = SearchCategoryDrop.SelectedValue;
 
                     sqlCommand = $"select ShouhinContents from M_TokuisakiShouhin where Syouhincode = '{shouhinNumber}'";
 
@@ -190,19 +173,11 @@ where M_Kakaku_2.CategoryCode = '205' and  not (M_Kakaku_2.Syouhincode = '1005' 
                         contents = row.Rows[0].ItemArray[0].ToString().Trim();
                     }
 
-
-
                     TokushuShouhinInsert(shouhinNumber.Trim(), kakaku.Trim(), media.Trim(), tokushuCode.Trim(), categoryCode.Trim(), contents);
                     count++;
-
-
-
-
-
-
-
                 }
             }
+
 
             if (count == 0)
             {
@@ -516,7 +491,8 @@ select M_Kakaku_2.Syouhincode, M_Kakaku_2.SyouhinMei,M_Kakaku_2.Media,M_Kakaku_2
 from M_Kakaku_2 
 left outer join M_TokuisakiShouhin 
 on M_Kakaku_2.SyouhinCode = M_TokuisakiShouhin.SyouhinCode
-where CategoryCode = '{categoryCode}' and ";
+where CategoryCode = '{categoryCode}'
+and  not (M_Kakaku_2.Syouhincode = '1005' or M_Kakaku_2.Syouhincode = '10000000' or M_Kakaku_2.Syouhincode = '1999' or M_Kakaku_2.SyouhinCode = '1001' or M_Kakaku_2.SyouhinCode = '1002' or M_Kakaku_2.SyouhinCode = '28643001' or M_Kakaku_2.SyouhinCode = '1004') and";
 
 
             if (!string.IsNullOrWhiteSpace(ShouhinNameLabel.Text))

@@ -155,6 +155,8 @@
                                 </telerik:RadMenuItem>
                                 <telerik:RadMenuItem runat="server" NavigateUrl="~/Tokuisaki/TokuisakiAccount.aspx" Text="得意先アカウントマスタ">
                                 </telerik:RadMenuItem>
+                                 <telerik:RadMenuItem runat="server" NavigateUrl="~/Tokuisaki/TestFacility.aspx" Text="テスト施設マスタ">
+                                </telerik:RadMenuItem>
                                 <telerik:RadMenuItem runat="server" Text="得意先ポータルマスタ">
                                     <Items>
 

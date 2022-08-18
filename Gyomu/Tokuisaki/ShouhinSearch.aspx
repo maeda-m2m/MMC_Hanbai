@@ -48,7 +48,7 @@
 
                             <th>商品コード</th>
                             <td>
-                                <asp:TextBox runat="server" ID="ShouhinCodeLabel" TextMode="Number"></asp:TextBox></td>
+                                <asp:TextBox runat="server" ID="ShouhinCodeLabel" TextMode="Number" min="1" step="1"></asp:TextBox></td>
 
                             <th>商品名</th>
                             <td>

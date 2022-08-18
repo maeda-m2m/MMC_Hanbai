@@ -16,6 +16,31 @@ body {
     max-width: 2000px;*/
 }
 
+/* デフォルトでは非表示 */
+.error {
+    display: none;
+}
+/* 隣接セレクタで
+ * input:invalidの隣の
+ * エラーメッセージは表示する
+ */
+input:invalid + .error {
+    display: block;
+    color: red;
+    font-size: 0.9em;
+}
+
+/* Chrome, Safari, Edge */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    margin: 0;
+    -webkit-appearance: none;
+}
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
 
 #EditPanelDiv {
     padding-top: 20px;
@@ -23,17 +48,29 @@ body {
 
 #TourokuTable {
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
-    #TourokuTable input {
-        width: 600px;
-        height: 40px;
+    #TourokuTable th {
+        border-style: solid
     }
 
-    #TourokuTable select {
-        width: 608px;
-        height: 40px;
+    #TourokuTable td {
+        border-style: solid
     }
+
+.TextBox {
+    width: 600px;
+    height: 40px;
+}
+
+#TourokuTable input {
+}
+
+#TourokuTable select {
+    width: 608px;
+    height: 40px;
+}
 
 
 
