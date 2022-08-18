@@ -98,12 +98,9 @@ namespace Gyomu.Tokuisaki
                 {
                     InsertItem(oshiraseID, userKey, date, title, shousai);
                 }
-
-
-
-
             }
 
+            Create();
         }
 
 

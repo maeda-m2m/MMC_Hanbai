@@ -39,7 +39,7 @@
                     <asp:Button runat="server" ID="BackButton" Text="戻る" OnClick="BackButton_Click" CssClass="Button" />
                 </div>
 
-                <table id="TourokuTable" border="1">
+                <table id="TourokuTable">
                     <tr>
                         <th>カテゴリ</th>
                         <td>
@@ -50,56 +50,78 @@
                             </asp:DropDownList></td>
                     </tr>
                     <tr>
+                        <th>施設No</th>
+                        <td>
+                            <asp:TextBox runat="server" ID="ShisetsuCode" TextMode="Number" placeholder="例）10000" min="1" pattern="\d+(?:\.\d+)?" CssClass="TextBox"></asp:TextBox><div class="error">0より大きい数のみ入力できます</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>コード</th>
+                        <td>
+                            <asp:TextBox runat="server" ID="Code" TextMode="Number" placeholder="例）1" min="1" pattern="\d+(?:\.\d+)?" CssClass="TextBox"></asp:TextBox><div class="error">0より大きい数のみ入力できます</div>
+                        </td>
+                    </tr>
+                    <tr>
                         <th>事業所名</th>
                         <td>
-                            <asp:TextBox runat="server" ID="CompanyText" placeholder="例）株式会社ムービーマネジメントカンパニー"></asp:TextBox></td>
+                            <asp:TextBox runat="server" ID="CompanyText" placeholder="例）株式会社ムービーマネジメントカンパニー" CssClass="TextBox"></asp:TextBox></td>
                     </tr>
                     <tr>
                         <th>ジギョウショメイ</th>
                         <td>
-                            <asp:TextBox runat="server" ID="CompanykanaText" placeholder="例）ムービーマネジメントカンパニー"></asp:TextBox></td>
+                            <asp:TextBox runat="server" ID="CompanykanaText" placeholder="例）ムービーマネジメントカンパニー" CssClass="TextBox"></asp:TextBox></td>
                     </tr>
                     <tr>
                         <th>御担当者</th>
                         <td>
-                            <asp:TextBox runat="server" ID="TantouText" placeholder="例）山田 太郎"></asp:TextBox></td>
+                            <asp:TextBox runat="server" ID="TantouText" placeholder="例）山田 太郎" CssClass="TextBox"></asp:TextBox></td>
                     </tr>
                     <tr>
                         <th>郵便番号</th>
                         <td>
-                            <asp:TextBox runat="server" ID="PostNumberText" autocomplete="shipping postal-code" MaxLength="8" placeholder="例）1500022"></asp:TextBox></td>
+                            <asp:TextBox runat="server" ID="PostNumberText" MaxLength="8" placeholder="例）150-0022" pattern="^[0-9]{3}-[0-9]{4}$" CssClass="TextBox"></asp:TextBox><div class="error">半角7桁の数字、半角ハイフンで郵便番号を入力することができます。例）123-4567</div>
+                        </td>
+                        <td>
+                            <asp:Button runat="server" ID="SearchPostNumberButton" Text="住所検索" OnClick="SearchPostNumberButton_Click" CssClass="Button" /></td>
+                    </tr>
+                    <tr>
+                        <th>都市コード</th>
+                        <td>
+                            <asp:TextBox runat="server" ID="CityCode" TextMode="Number" min="0" placeholder="例）12345" pattern="\d+(?:\.\d+)?" CssClass="TextBox"></asp:TextBox><div class="error">0より大きい数のみ入力できます</div>
+                        </td>
                     </tr>
                     <tr>
                         <th>住所</th>
                         <td>
-                            <asp:TextBox runat="server" ID="CityText" placeholder="例）東京都渋谷区恵比寿南1-1-10"></asp:TextBox></td>
+                            <asp:TextBox runat="server" ID="CityText" placeholder="例）東京都渋谷区恵比寿南1-1-10" CssClass="TextBox"></asp:TextBox></td>
                     </tr>
                     <tr>
                         <th>建物</th>
                         <td>
-                            <asp:TextBox runat="server" ID="AddressText2" placeholder="例）サウスコラム小林8F"></asp:TextBox></td>
-                    </tr>
-                    <tr>
-                        <th>メールアドレス</th>
-                        <td>
-                            <asp:TextBox runat="server" ID="mailText" TextMode="Email" placeholder="例）info@mmc-inc.jp"></asp:TextBox></td>
+                            <asp:TextBox runat="server" ID="AddressText2" placeholder="例）サウスコラム小林8F" CssClass="TextBox"></asp:TextBox></td>
                     </tr>
                     <tr>
                         <th>電話番号</th>
                         <td>
-                            <asp:TextBox runat="server" ID="PhoneNumberText" TextMode="Phone" placeholder="例）03-5768-0821"></asp:TextBox></td>
+                            <asp:TextBox runat="server" ID="PhoneNumberText" TextMode="Phone" placeholder="例）03-5768-0821" CssClass="TextBox"></asp:TextBox></td>
 
                     </tr>
                     <tr>
+                        <th>メールアドレス</th>
+                        <td>
+                            <asp:TextBox runat="server" ID="mailText" TextMode="Email" placeholder="例）info@mmc-inc.jp" CssClass="TextBox"></asp:TextBox></td>
+                    </tr>
+
+                    <tr>
                         <th>ID</th>
                         <td>
-                            <asp:TextBox runat="server" ID="IDText" ReadOnly="true" placeholder="IDは自動採番となっております。"></asp:TextBox></td>
+                            <asp:TextBox runat="server" ID="IDText" ReadOnly="true" placeholder="IDは自動採番となっております。" CssClass="TextBox"></asp:TextBox></td>
 
                     </tr>
                     <tr>
                         <th>パスワード</th>
                         <td>
-                            <asp:TextBox runat="server" ID="PWText"></asp:TextBox></td>
+                            <asp:TextBox runat="server" ID="PWText" placeholder="パスワード" CssClass="TextBox"></asp:TextBox></td>
 
                     </tr>
                     <tr>
@@ -115,8 +137,7 @@
                 </table>
 
                 <asp:HiddenField runat="server" ID="EditCheckHidden" />
-                <%-- <asp:HiddenField runat="server" ID="ShisetsuCodeHidden" />
-                <asp:HiddenField runat="server" ID="AccountIDHidden" />--%>
+
             </asp:Panel>
 
 
@@ -197,7 +218,7 @@
 
                     <telerik:RadGrid ID="MainRadGrid" runat="server" PageSize="20" AllowPaging="True" AutoGenerateColumns="False"
                         OnPageIndexChanged="MainRadGrid_PageIndexChanged"
-                        OnItemCommand="MainRadGrid_ItemCommand" OnItemDataBound="MainRadGrid_ItemDataBound">
+                        OnItemCommand="MainRadGrid_ItemCommand">
 
                         <PagerStyle Position="Top" AlwaysVisible="true" PageSizeControlType="None"
                             PagerTextFormat="ページ移動: {4} &amp;nbsp;ページ : &lt;strong&gt;{0:N0}&lt;/strong&gt; / &lt;strong&gt;{1:N0}&lt;/strong&gt; | 件数: &lt;strong&gt;{2:N0}&lt;/strong&gt; - &lt;strong&gt;{3:N0}件&lt;/strong&gt; / &lt;strong&gt;{5:N0}&lt;/strong&gt;件中"
@@ -211,6 +232,7 @@
                             <Columns>
                                 <telerik:GridBoundColumn DataField="CategoryCode" HeaderText="カテゴリコード"></telerik:GridBoundColumn>
                                 <telerik:GridBoundColumn DataField="FacilityNo" HeaderText="施設No."></telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn DataField="Code" HeaderText="コード"></telerik:GridBoundColumn>
                                 <telerik:GridBoundColumn DataField="FacilityName1" HeaderText="施設名"></telerik:GridBoundColumn>
                                 <telerik:GridBoundColumn DataField="PostNo" HeaderText="郵便番号"></telerik:GridBoundColumn>
                                 <telerik:GridBoundColumn DataField="Address1" HeaderText="住所"></telerik:GridBoundColumn>

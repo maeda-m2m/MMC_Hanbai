@@ -393,6 +393,7 @@
     <Content Include="Tokuisaki\Oshirase.aspx" />
     <Content Include="Tokuisaki\ShouhinCheck.aspx" />
     <Content Include="Tokuisaki\ShouhinSearch.aspx" />
+    <Content Include="Tokuisaki\TestFacility.aspx" />
     <Content Include="Tokuisaki\TokuisakiAccount.aspx" />
     <Content Include="Tokuisaki\TokushuMenu.aspx" />
     <Content Include="Uriage\CtlUriageSyosai.ascx" />
@@ -832,6 +833,13 @@
     <Compile Include="Tokuisaki\ShouhinSearch.aspx.designer.cs">
       <DependentUpon>ShouhinSearch.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Tokuisaki\TestFacility.aspx.cs">
+      <DependentUpon>TestFacility.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tokuisaki\TestFacility.aspx.designer.cs">
+      <DependentUpon>TestFacility.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Tokuisaki\TokuisakiAccount.aspx.cs">
       <DependentUpon>TokuisakiAccount.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -917,6 +925,7 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Tokuisaki\Format\KEN_ALL.CSV" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -78,6 +78,24 @@ namespace Gyomu.Tokuisaki
         protected global::System.Web.UI.WebControls.DropDownList CategoryDropTouroku;
 
         /// <summary>
+        /// ShisetsuCode コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox ShisetsuCode;
+
+        /// <summary>
+        /// Code コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Code;
+
+        /// <summary>
         /// CompanyText コントロール。
         /// </summary>
         /// <remarks>
@@ -114,6 +132,24 @@ namespace Gyomu.Tokuisaki
         protected global::System.Web.UI.WebControls.TextBox PostNumberText;
 
         /// <summary>
+        /// SearchPostNumberButton コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button SearchPostNumberButton;
+
+        /// <summary>
+        /// CityCode コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox CityCode;
+
+        /// <summary>
         /// CityText コントロール。
         /// </summary>
         /// <remarks>
@@ -132,15 +168,6 @@ namespace Gyomu.Tokuisaki
         protected global::System.Web.UI.WebControls.TextBox AddressText2;
 
         /// <summary>
-        /// mailText コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox mailText;
-
-        /// <summary>
         /// PhoneNumberText コントロール。
         /// </summary>
         /// <remarks>
@@ -148,6 +175,15 @@ namespace Gyomu.Tokuisaki
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox PhoneNumberText;
+
+        /// <summary>
+        /// mailText コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox mailText;
 
         /// <summary>
         /// IDText コントロール。
