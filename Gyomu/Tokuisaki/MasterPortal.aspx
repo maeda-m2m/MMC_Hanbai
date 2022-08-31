@@ -46,7 +46,7 @@
                     <tr>
                         <th>商品コード</th>
                         <td>
-                            <asp:TextBox runat="server" ID="ShouhinCodeTxt" TextMode="Number" CssClass="TableInput"></asp:TextBox>
+                            <asp:TextBox runat="server" ID="ShouhinCodeTxt" TextMode="Number" step="1" min="1" MaxLength="20" CssClass="TableInput"></asp:TextBox>
                             <%--   <telerik:RadComboBox runat="server" ID="ShouhinCodeComboTouro" AutoPostBack="true" EnableLoadOnDemand="true" OnItemsRequested="ShouhinCodeComboTouroku_ItemsRequested" Width="500px" ></telerik:RadComboBox>--%>
                         </td>
                     </tr>
@@ -84,7 +84,7 @@
                     <tr>
                         <th>メーカー品番</th>
                         <td>
-                            <asp:TextBox runat="server" ID="MakerCodeTxt" TextMode="Number" CssClass="TableInput"></asp:TextBox></td>
+                            <asp:TextBox runat="server" ID="MakerCodeTxt" MaxLength="20" CssClass="TableInput"></asp:TextBox></td>
                     </tr>
                     <tr>
                         <th>仕様</th>
@@ -104,7 +104,7 @@
                     <tr>
                         <th>上映時間</th>
                         <td>
-                            <asp:TextBox runat="server" ID="TimeTxt" TextMode="Number" CssClass="TableInput"></asp:TextBox></td>
+                            <asp:TextBox runat="server" ID="TimeTxt" TextMode="Number" step="1" min="1" MaxLength="20" CssClass="TableInput"></asp:TextBox></td>
                     </tr>
                 </table>
                 <asp:HiddenField runat="server" ID="shouhinCodeHidden" />
