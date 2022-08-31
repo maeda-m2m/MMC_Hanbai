@@ -24,6 +24,7 @@ body {
 
 #TourokuTable {
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
     #TourokuTable .TableInput {
@@ -34,6 +35,7 @@ body {
     #TourokuTable textarea {
         width: 600px;
         height: 150px;
+        resize: none;
     }
 
 .Button {

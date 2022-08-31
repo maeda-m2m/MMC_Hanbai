@@ -806,7 +806,7 @@ where ShiiresakiCode = @ShiiresakiCode and Media = @Media and Range = @Range and
         {
             string sqlCommand = "select * from M_JoueiKakaku2";
 
-            var table = Tokuisaki.CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
+            var table = SelectedTable(sqlCommand, Global.GetConnection());
 
             string rows = "仕入先コード,仕入先名,メディア,範囲,席数,価格,仕入先価格" + "\r";
 
@@ -825,7 +825,13 @@ where ShiiresakiCode = @ShiiresakiCode and Media = @Media and Range = @Range and
 
 
 
-
+        public static DataTable SelectedTable(string command, SqlConnection sql)
+        {
+            var da = new SqlDataAdapter(command, sql);
+            var dt = new DataTable();
+            da.Fill(dt);
+            return dt;
+        }
 
 
 
