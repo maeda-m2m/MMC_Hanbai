@@ -21,7 +21,6 @@ namespace Gyomu
         {
             try
             {
-                Session["MeisaiJutyuData"] = null;
                 KariNouhin.Visible = false;
                 LblTantoStaffCode.Text = HidTantoStaffCode.Value;
                 Label3.Text = TbxKakeritsu.Text;
@@ -33,6 +32,7 @@ namespace Gyomu
                 NouhinsakiPanel.Visible = false;
                 if (!IsPostBack)
                 {
+                    Session["MeisaiJutyuData"] = null;
                     TBTokuisaki.Style["display"] = "none";
                     Button1.OnClientClick = string.Format("Meisai2('{0}'); return false;", TBTokuisaki.ClientID);
                     Button6.OnClientClick = string.Format("Close2('{0}'); return false;", TBTokuisaki.ClientID);
@@ -143,7 +143,7 @@ namespace Gyomu
                     DataSet1.M_Tokuisaki2DataTable dg = Class1.GetTokuisakiName(toku, Global.GetConnection());
                     for (int j = 0; j < dg.Count; j++)
                     {
-                        RadComboBox1.SelectedValue = dg[j].TokuisakiCode.ToString();
+                        RadComboBox1.SelectedValue = dg[j].CustomerCode + "/" + dg[j].TokuisakiCode.ToString();
                         TokuisakiCode.Value = dg[j].TokuisakiCode.ToString();
                         CustomerCode.Value = dg[j].CustomerCode;
                     }
@@ -216,6 +216,7 @@ namespace Gyomu
                     RcbShimebi.SelectedValue = dr.Shimebi;
                     Label3.Text = dr.Kakeritsu;
                     TbxKakeritsu.Text = dr.Kakeritsu;
+                    Session["Kakeritsu"] = dr.Kakeritsu;
                 }
             }
             if (!dr.IsFacilityNameNull())
@@ -235,6 +236,7 @@ namespace Gyomu
                     RadComboBox2.Text = dr.TyokusosakiName;
                 }
             }
+
             if (!dr.IsCreateDateNull())
             {
                 RadDatePicker2.SelectedDate = dr.CreateDate;
@@ -595,8 +597,8 @@ namespace Gyomu
                 {
                     try
                     {
+                        int page = CtrlSyousai.CurrentPageIndex * 10;
                         int no = CtrlSyousai.Items.Count + 1;
-
                         DataMitumori.T_RowRow dr = (e.Item.DataItem as DataRowView).Row as DataMitumori.T_RowRow;
                         DataJutyu.T_JutyuRow df = (e.Item.DataItem as DataRowView).Row as DataJutyu.T_JutyuRow;
                         CtrlMitsuSyousai Ctl = e.Item.FindControl("Syosai") as CtrlMitsuSyousai;
@@ -645,8 +647,6 @@ namespace Gyomu
                             RadComboBox2.Visible = false;
                             RadComboBox3.Visible = false;
                         }
-
-
                         if (df != null)
                         {
                             Ctl.ItemSet3(df);
@@ -1771,273 +1771,271 @@ namespace Gyomu
                 //見積ヘッダー部分登録
 
                 DataSet1.T_OrderedDataTable dd = ClassOrdered.GetOrdered(Global.GetConnection());
-                for (int i = 0; i < CtrlSyousai.Items.Count; i++)
+                DataJutyu.T_JutyuHeaderDataTable dw = new DataJutyu.T_JutyuHeaderDataTable();
+                DataJutyu.T_JutyuHeaderRow dh = dw.NewT_JutyuHeaderRow();
+                DataSet1.T_OrderedHeaderDataTable dp = new DataSet1.T_OrderedHeaderDataTable();
+                DataSet1.T_OrderedHeaderRow dl = dp.NewT_OrderedHeaderRow();
+
+                if (Uriagekeijyou.Text != "")
                 {
-                    DataJutyu.T_JutyuHeaderDataTable dw = new DataJutyu.T_JutyuHeaderDataTable();
-                    DataJutyu.T_JutyuHeaderRow dh = dw.NewT_JutyuHeaderRow();
-                    DataSet1.T_OrderedHeaderDataTable dp = new DataSet1.T_OrderedHeaderDataTable();
-                    DataSet1.T_OrderedHeaderRow dl = dp.NewT_OrderedHeaderRow();
+                    string r1 = Uriagekeijyou.Text.Replace(",", "");
+                    dl.SoukeiGaku = int.Parse(r1);
+                    dh.GokeiKingaku = int.Parse(r1);
+                    dh.SoukeiGaku = int.Parse(r1);
+                }
+                if (Shiirekei.Text != "")
+                {
+                    string r2 = Shiirekei.Text.Replace(",", "");
+                    dl.ShiireKingaku = int.Parse(r2);
+                    dh.ShiireKingaku = int.Parse(r2);
+                }
+                if (Zei.Text != "")
+                {
+                    string r3 = Zei.Text.Replace(",", "");
+                    dl.Tax = int.Parse(r3);
+                    dh.SyohiZeiGokei = int.Parse(r3);
+                }
+                dl.CategoryName = RadComboCategory.Text;
+                dl.Category = int.Parse(CategoryCode.Value);
+                dh.CategoryName = RadComboCategory.Text;
+                dh.CateGory = int.Parse(CategoryCode.Value);
 
-                    if (Uriagekeijyou.Text != "")
-                    {
-                        string r1 = Uriagekeijyou.Text.Replace(",", "");
-                        dl.SoukeiGaku = int.Parse(r1);
-                        dh.GokeiKingaku = int.Parse(r1);
-                        dh.SoukeiGaku = int.Parse(r1);
-                    }
-                    if (Shiirekei.Text != "")
-                    {
-                        string r2 = Shiirekei.Text.Replace(",", "");
-                        dl.ShiireKingaku = int.Parse(r2);
-                        dh.ShiireKingaku = int.Parse(r2);
-                    }
-                    if (Zei.Text != "")
-                    {
-                        string r3 = Zei.Text.Replace(",", "");
-                        dl.Tax = int.Parse(r3);
-                        dh.SyohiZeiGokei = int.Parse(r3);
-                    }
-                    dl.CategoryName = RadComboCategory.Text;
-                    dl.Category = int.Parse(CategoryCode.Value);
-                    dh.CategoryName = RadComboCategory.Text;
-                    dh.CateGory = int.Parse(CategoryCode.Value);
+                if (TextBox6.Text != "")
+                {
+                    string r4 = TextBox6.Text.Replace(",", "");
+                    dl.ArariGokeigaku = r4;
+                    dh.ArariGokeigaku = int.Parse(r4);
+                }
 
-                    if (TextBox6.Text != "")
-                    {
-                        string r4 = TextBox6.Text.Replace(",", "");
-                        dl.ArariGokeigaku = r4;
-                        dh.ArariGokeigaku = int.Parse(r4);
-                    }
+                if (TextBox2.Text != "")
+                {
+                    dh.Bikou = TextBox2.Text;
+                }
+                if (UriageGokei.Text != "0")
+                {
+                    string sou = UriageGokei.Text;
+                    string r9 = sou.Replace(",", "");
+                    dl.SoukeiGaku = int.Parse(r9);
+                    dh.SoukeiGaku = int.Parse(r9);
+                }
+                else
+                {
+                    string r5 = Uriagekeijyou.Text.Replace(",", "");
+                    dl.SoukeiGaku = int.Parse(r5);
+                    dh.GokeiKingaku = int.Parse(r5);
+                }
 
-                    if (TextBox2.Text != "")
+                if (CheckBox1.Checked == true)
+                {
+                    dl.TokuisakiName = KariTokui.Text;
+                    dh.TokuisakiName = KariTokui.Text;
+                }
+                else
+                {
+                    if (RadComboBox1.Text != "")
                     {
-                        dh.Bikou = TextBox2.Text;
-                    }
-                    if (UriageGokei.Text != "0")
-                    {
-                        string sou = UriageGokei.Text;
-                        string r9 = sou.Replace(",", "");
-                        dl.SoukeiGaku = int.Parse(r9);
-                        dh.SoukeiGaku = int.Parse(r9);
-                    }
-                    else
-                    {
-                        string r5 = Uriagekeijyou.Text.Replace(",", "");
-                        dl.SoukeiGaku = int.Parse(r5);
-                        dh.GokeiKingaku = int.Parse(r5);
-                    }
+                        dl.TokuisakiName = RadComboBox1.Text;
+                        dh.TokuisakiName = RadComboBox1.Text;
 
-                    if (CheckBox1.Checked == true)
-                    {
-                        dl.TokuisakiName = KariTokui.Text;
-                        dh.TokuisakiName = KariTokui.Text;
-                    }
-                    else
-                    {
-                        if (RadComboBox1.Text != "")
+                        DataSet1.M_Tokuisaki2DataTable du = Class1.GetTokuisaki2(CustomerCode.Value, TokuisakiCode.Value, Global.GetConnection());
+                        for (int j = 0; j < du.Count; j++)
                         {
-                            dl.TokuisakiName = RadComboBox1.Text;
-                            dh.TokuisakiName = RadComboBox1.Text;
-
-                            string[] toku = TokuisakiCode.Value.Split('/');
-                            DataSet1.M_Tokuisaki2DataTable du = Class1.GetTokuisaki2(toku[0], toku[1], Global.GetConnection());
-                            for (int j = 0; j < du.Count; j++)
-                            {
-                                dl.TokuisakiCode = du[j].CustomerCode + "/" + du[j].TokuisakiCode;
-                                dh.TokuisakiCode = du[j].CustomerCode + "/" + du[j].TokuisakiCode;
-                            }
+                            dl.TokuisakiCode = du[j].CustomerCode + "/" + du[j].TokuisakiCode;
+                            dh.TokuisakiCode = du[j].CustomerCode + "/" + du[j].TokuisakiCode;
                         }
                     }
-                    if (RadComboBox3.Text != "")
-                    {
-                        dl.SeikyusakiName = RadComboBox3.Text;
-                        dh.SeikyusakiName = RadComboBox3.Text;
-                    }
-                    if (RadComboBox2.Text != "")
-                    {
-                        dl.TyokusousakiMei = RadComboBox2.Text;
-                        dh.TyokusosakiName = RadComboBox2.Text;
-                    }
-                    if (FacilityRad.Text != "")
-                    {
-                        dl.FacilityName = FacilityRad.Text;
-                        dh.FacilityName = FacilityRad.Text;
-                    }
-                    if (Tantou.Text != "")
-                    {
-                        dl.StaffName = Tantou.Text;
-                        dh.TantoName = Tantou.Text;
-                    }
-                    dl.Relay = "発注済";
-                    if (RadComboBox4.Text != "")
-                    {
-                        dl.Department = RadComboBox4.Text;
-                        dh.Bumon = RadComboBox4.Text;
-                    }
-                    if (RadZeiKubun.Text != "")
-                    {
-                        dl.Zeikubun = RadZeiKubun.Text;
-                        dh.Zeikubun = RadZeiKubun.Text;
+                }
+                if (RadComboBox3.Text != "")
+                {
+                    dl.SeikyusakiName = RadComboBox3.Text;
+                    dh.SeikyusakiName = RadComboBox3.Text;
+                }
+                if (RadComboBox2.Text != "")
+                {
+                    dl.TyokusousakiMei = RadComboBox2.Text;
+                    dh.TyokusosakiName = RadComboBox2.Text;
+                }
+                if (FacilityRad.Text != "")
+                {
+                    dl.FacilityName = FacilityRad.Text;
+                    dh.FacilityName = FacilityRad.Text;
+                }
+                if (Tantou.Text != "")
+                {
+                    dl.StaffName = Tantou.Text;
+                    dh.TantoName = Tantou.Text;
+                }
+                dl.Relay = "発注済";
+                if (RadComboBox4.Text != "")
+                {
+                    dl.Department = RadComboBox4.Text;
+                    dh.Bumon = RadComboBox4.Text;
+                }
+                if (RadZeiKubun.Text != "")
+                {
+                    dl.Zeikubun = RadZeiKubun.Text;
+                    dh.Zeikubun = RadZeiKubun.Text;
 
-                    }
-                    //if (CheckBox1.Checked == true)
-                    //{
-                    //    dl.KariFLG = CheckBox1.Checked.ToString();
-                    //    dh.KariFLG = CheckBox1.Checked.ToString();
-                    //}
+                }
+                //if (CheckBox1.Checked == true)
+                //{
+                //    dl.KariFLG = CheckBox1.Checked.ToString();
+                //    dh.KariFLG = CheckBox1.Checked.ToString();
+                //}
 
-                    if (Label3.Text != "")
+                if (Label3.Text != "")
+                {
+                    dl.Kakeritsu = Label3.Text;
+                    dh.Kakeritsu = Label3.Text;
+                }
+                if (TbxKake.Text != "")
+                {
+                    dl.Kakeritsu = TbxKake.Text;
+                    dh.Kakeritsu = TbxKake.Text;
+                }
+                dl.CreateDate = RadDatePicker2.SelectedDate.Value;
+                dh.CreateDate = DateTime.Now;
+                dh.SouSuryou = int.Parse(TextBox10.Text);
+                string mno = SessionManager.HACCYU_NO;
+                SessionManager.KI();
+                int ki = int.Parse(SessionManager.KII);
+                string OrderedNo = "";
+                //DataMitumori.T_MitumoriHeaderDataTable db = ClassMitumori.GetMitumoriHeader(mno, Global.GetConnection());
+                DataSet1.T_OrderedHeaderRow db = ClassOrdered.GetMaxOrdered(ki, Global.GetConnection());
+                if (db != null)
+                {
+                    OrderedNo = (db.OrderedNo + 1).ToString();
+                }
+                else
+                {
+                    OrderedNo = "3" + (ki * 10 + 1).ToString();
+                }
+
+                string arrr = OrderedNo.ToString();
+                //受注データに挿入
+                string arr = mno.ToString().Substring(1, 7);
+                string sub = arrr.Substring(1, 7);
+                int su = int.Parse(sub);
+                int max = su + 1;
+
+                //string no = "3" + arr;
+                string no = "3" + max;
+                dl.OrderedNo = int.Parse(no);
+                string[] strAry = mno.Split('_');
+                dh.JutyuNo = int.Parse(strAry[0]);
+                //ClassOrdered.InsertOrderedHeader(dp, Global.GetConnection());
+                dh.Relay = "発注済";
+                //dh.HatyuFlg = "true";
+                dh.Shimebi = Shimebi.Text;
+                dw.AddT_JutyuHeaderRow(dh);
+                ClassJutyu.UpDateJutyuHeader(strAry[0], dw, Global.GetConnection());
+
+                DataSet1.T_OrderedDataTable dg = new DataSet1.T_OrderedDataTable();
+                DataJutyu.T_JutyuDataTable dt = ClassJutyu.GetJutyu(Global.GetConnection());
+                string cate = "";
+                string shiire = "";
+
+                DataJutyu.T_JutyuDataTable dtN = null;
+                if ((DataJutyu.T_JutyuDataTable)Session["MeisaiJutyuData"] == null)
+                {
+                    dtN = new DataJutyu.T_JutyuDataTable();
+                }
+                else
+                {
+                    dtN = (DataJutyu.T_JutyuDataTable)Session["MeisaiJutyuData"];
+                }
+                int NowPage = CtrlSyousai.CurrentPageIndex;
+                int kijunRow = NowPage * 10;
+                if (dtN.Count > 0)
+                {
+                    for (int d = kijunRow; d < kijunRow + CtrlSyousai.Items.Count; d++)
                     {
-                        dl.Kakeritsu = Label3.Text;
-                        dh.Kakeritsu = Label3.Text;
+                        dtN.RemoveT_JutyuRow(dtN[kijunRow]);
                     }
-                    if (TbxKake.Text != "")
-                    {
-                        dl.Kakeritsu = TbxKake.Text;
-                        dh.Kakeritsu = TbxKake.Text;
-                    }
-                    dl.CreateDate = RadDatePicker2.SelectedDate.Value;
-                    dh.CreateDate = DateTime.Now;
-                    dh.SouSuryou = int.Parse(TextBox10.Text);
-                    string mno = SessionManager.HACCYU_NO;
-                    SessionManager.KI();
-                    int ki = int.Parse(SessionManager.KII);
-                    string OrderedNo = "";
-                    //DataMitumori.T_MitumoriHeaderDataTable db = ClassMitumori.GetMitumoriHeader(mno, Global.GetConnection());
-                    DataSet1.T_OrderedHeaderRow db = ClassOrdered.GetMaxOrdered(ki, Global.GetConnection());
-                    if (db != null)
-                    {
-                        OrderedNo = (db.OrderedNo + 1).ToString();
-                    }
-                    else
-                    {
-                        OrderedNo = "3" + (ki * 10 + 1).ToString();
-                    }
-
-                    string arrr = OrderedNo.ToString();
-                    //受注データに挿入
-                    string arr = mno.ToString().Substring(1, 7);
-                    string sub = arrr.Substring(1, 7);
-                    int su = int.Parse(sub);
-                    int max = su + 1;
-
-                    //string no = "3" + arr;
-                    string no = "3" + max;
-                    dl.OrderedNo = int.Parse(no);
-                    string[] strAry = mno.Split('_');
-                    dh.JutyuNo = int.Parse(strAry[0]);
-                    //ClassOrdered.InsertOrderedHeader(dp, Global.GetConnection());
-                    dh.Relay = "発注済";
-                    //dh.HatyuFlg = "true";
-                    dh.Shimebi = Shimebi.Text;
-                    dw.AddT_JutyuHeaderRow(dh);
-                    ClassJutyu.UpDateJutyuHeader(strAry[0], dw, Global.GetConnection());
-
-                    DataSet1.T_OrderedDataTable dg = new DataSet1.T_OrderedDataTable();
-                    DataJutyu.T_JutyuDataTable dt = ClassJutyu.GetJutyu(Global.GetConnection());
-                    string cate = "";
-                    string shiire = "";
-
-                    DataSet1.T_OrderedRow dr = dg.NewT_OrderedRow();
+                }
+                DataJutyu.T_JutyuDataTable dtJutyu = new DataJutyu.T_JutyuDataTable();
+                for (int i = 0; i < CtrlSyousai.Items.Count; i++)
+                {
+                    dtJutyu = dtN;
+                    DataRow ddr = dtJutyu.NewRow() as DataJutyu.T_JutyuRow;
+                    DataJutyu.T_JutyuDataTable dtNN = new DataJutyu.T_JutyuDataTable();
+                    DataJutyu.T_JutyuRow drN = dtNN.NewT_JutyuRow();
                     CtrlMitsuSyousai CtlMitsuSyosai = CtrlSyousai.Items[i].FindControl("Syosai") as CtrlMitsuSyousai;
-                    //TextBox MakerHinban = (TextBox)CtlMitsuSyosai.FindControl("MakerHinban");
-                    //RadComboBox ProductName = (RadComboBox)CtlMitsuSyosai.FindControl("ProductName");
-                    //RadComboBox Hanni = (RadComboBox)CtlMitsuSyosai.FindControl("Hanni");
-                    RadComboBox Zaseki = (RadComboBox)CtlMitsuSyosai.FindControl("Zasu");
-                    Label Media = (Label)CtlMitsuSyosai.FindControl("Baitai");
-                    TextBox HyoujyunTanka = (TextBox)CtlMitsuSyosai.FindControl("HyoujyunTanka");
-                    TextBox Kingaku = (TextBox)CtlMitsuSyosai.FindControl("Kingaku");
-                    RadComboBox ShiyouShisetsu = (RadComboBox)CtlMitsuSyosai.FindControl("ShiyouShisetsu");
-                    RadDatePicker StartDate = (RadDatePicker)CtlMitsuSyosai.FindControl("StartDate");
-                    RadDatePicker EndDate = (RadDatePicker)CtlMitsuSyosai.FindControl("EndDate");
-                    TextBox Tanka = (TextBox)CtlMitsuSyosai.FindControl("Tanka");
-                    TextBox Uriage = (TextBox)CtlMitsuSyosai.FindControl("Uriage");
-                    RadComboBox Hachu = (RadComboBox)CtlMitsuSyosai.FindControl("Hachu");
-                    TextBox ShiireTanka = (TextBox)CtlMitsuSyosai.FindControl("ShiireTanka");
-                    TextBox ShiireKingaku = (TextBox)CtlMitsuSyosai.FindControl("ShiireKingaku");
-                    HtmlInputHidden FacilityCode = (HtmlInputHidden)CtlMitsuSyosai.FindControl("FacilityCode");
-                    HtmlInputHidden procd = (HtmlInputHidden)CtlMitsuSyosai.FindControl("procd");
-                    Label Facility = (Label)CtlMitsuSyosai.FindControl("Facility");
-                    Label end = (Label)CtlMitsuSyosai.FindControl("Label12");
-                    Label start = (Label)CtlMitsuSyosai.FindControl("Label11");
-                    Label RowNo = CtrlSyousai.Items[i].FindControl("RowNo") as Label;
-                    RadComboBox Tekiyou = (RadComboBox)CtlMitsuSyosai.FindControl("Tekiyo");
-                    TextBox Suryo = (TextBox)CtlMitsuSyosai.FindControl("Suryo");
-                    HtmlInputHidden ht = (HtmlInputHidden)CtlMitsuSyosai.FindControl("ht");
-                    HtmlInputHidden st = (HtmlInputHidden)CtlMitsuSyosai.FindControl("st");
-                    HtmlInputHidden tk = (HtmlInputHidden)CtlMitsuSyosai.FindControl("tk");
-                    HtmlInputHidden ug = (HtmlInputHidden)CtlMitsuSyosai.FindControl("ug");
-                    HtmlInputHidden kgk = (HtmlInputHidden)CtlMitsuSyosai.FindControl("kgk");
-                    HtmlInputHidden sk = (HtmlInputHidden)CtlMitsuSyosai.FindControl("sk");
-                    TextBox KariFaci = (TextBox)CtlMitsuSyosai.FindControl("KariFaci");
-                    HtmlInputHidden FacAdd = (HtmlInputHidden)CtlMitsuSyosai.FindControl("FacilityAddress");
-                    Label WareHouse = (Label)CtlMitsuSyosai.FindControl("WareHouse");
-                    Label kakeri = (Label)CtlMitsuSyosai.FindControl("Kakeri");
-                    Label Lblproduct = (Label)CtlMitsuSyosai.FindControl("LblProduct");
-                    RadComboBox SerchProduct = (RadComboBox)CtlMitsuSyosai.FindControl("SerchProduct");
-                    Label LblHanni = (Label)CtlMitsuSyosai.FindControl("LblHanni");
+                    string cp = SessionManager.strCp;
+                    DataJutyu.T_JutyuRow drG = CtlMitsuSyosai.ItemGet4(drN);
+                    drG.RowNo = i + (kijunRow);
+                    ddr.ItemArray = drG.ItemArray;
+                    ddr["CategoryName"] = RadComboCategory.Text;
+                    ddr["CateGory"] = (object)Session["CategoryCode"];
+                    if (ddr["SyouhinCode"] == null)
+                    {
+                        ddr["SyouhinCode"] = "";
+                    }
+                    ddr["JutyuNo"] = "";
+                    ddr["JutyuFlg"] = false;
+                    dtJutyu.Rows.InsertAt(ddr, kijunRow + i);
+                }
+                Session["MeisaiJutyuData"] = dtJutyu;
 
-
+                for (int i = 0; i < dtN.Count; i++)
+                {
+                    DataSet1.T_OrderedRow dr = dg.NewT_OrderedRow();
                     dr.HatyuDay = DateTime.Now.ToString();
-                    dr.JutyuSuryou = int.Parse(Suryo.Text);
-                    dr.Zansu = Suryo.Text;
-                    dl.OrderedAmount = int.Parse(Suryo.Text);
+                    dr.JutyuSuryou = dtN[i].JutyuSuryou;
+                    dr.Zansu = dtN[i].JutyuSuryou.ToString();
+                    //dl.OrderedAmount = dtN[i].JutyuSuryou;
                     dr.StaffName = Tantou.Text;
                     dr.RowNo = i + 1;
-
                     if (RadZeiKubun.Text != "")
                     {
                         dr.Zeikubun = RadZeiKubun.Text;
                     }
-
-                    if (Hachu.Text != "")
+                    if (!dtN[i].IsShiireNameNull())
                     {
-                        dr.ShiireSakiName = Hachu.Text;
-                        dl.ShiiresakiName = Hachu.Text;
-                        DataMaster.M_ShiiresakiDataTable drr = ClassMaster.GetShiiresaki(Hachu.Text, Global.GetConnection());
+                        dr.ShiireSakiName = dtN[i].ShiireName;
+                        DataMaster.M_ShiiresakiDataTable drr = ClassMaster.GetShiiresaki(dtN[i].ShiireName, Global.GetConnection());
                         dr.ShiiresakiCode = drr[0].ShiiresakiCode.ToString();
-                        dl.ShiiresakiCode = drr[0].ShiiresakiCode.ToString();
                     }
-                    if (kakeri.Text != "")
+                    if (Session["Kakeritsu"].Equals(""))
                     {
-                        dr.Kakeritsu = kakeri.Text;
+                        dr.Kakeritsu = (string)Session["Kakeritsu"];
                     }
-                    if (Lblproduct.Text != "")
+                    if (!dtN[i].IsMekarHinbanNull())
                     {
-                        dr.MekerNo = Lblproduct.Text;
+                        dr.MekerNo = dtN[i].MekarHinban;
                     }
-                    if (SerchProduct.Text != "")
+                    if (!dtN[i].IsSyouhinMeiNull())
                     {
-                        dr.ProductName = SerchProduct.Text;
+                        dr.ProductName = dtN[i].SyouhinMei;
                         cate = RadComboCategory.Text;
-                        string hanni = LblHanni.Text;
+                        string hanni = dtN[i].Range;
                         //dr.SyouhinCode = arr[1];
-                        DataSet1.M_Kakaku_2DataTable dk = Class1.getproduct(Lblproduct.Text, cate.Trim(), hanni, Global.GetConnection());
+                        DataSet1.M_Kakaku_2DataTable dk = Class1.getproduct(dr.MekerNo, cate.Trim(), hanni, Global.GetConnection());
                         dr.ProductCode = int.Parse(dk[0].SyouhinCode);
                         dr.ShiiresakiCode = dk[0].ShiireCode;
                         dr.ShiireSakiName = dk[0].ShiireName;
                     }
-                    if (LblHanni.Text != "")
+                    if (!dtN[i].IsRangeNull())
                     {
-                        dr.Range = LblHanni.Text;
+                        dr.Range = dtN[i].Range;
                     }
-                    if (Zaseki.Text != "")
+                    if (!dtN[i].IsZasuNull())
                     {
-                        dr.Zasu = Zaseki.Text;
+                        dr.Zasu = dtN[i].Zasu;
                     }
-                    if (Media.Text != "")
+                    if (!dtN[i].IsKeitaiMeiNull())
                     {
-                        dr.Media = Media.Text;
+                        dr.Media = dtN[i].KeitaiMei;
                     }
-                    if (HyoujyunTanka.Text != "")
+                    if (!dtN[i].IsHyojunKakakuNull())
                     {
-                        string hyoutan = HyoujyunTanka.Text;
+                        string hyoutan = dtN[i].HyojunKakaku;
                         string r1 = hyoutan.Replace(",", "");
                         dr.HyoujyunKakaku = int.Parse(r1);
                     }
-                    if (Kingaku.Text != "")
+                    if (!dtN[i].IsJutyuGokeiNull())
                     {
-                        string kin = Kingaku.Text;
+                        string kin = dtN[i].JutyuGokei.ToString();
                         string r4 = kin.Replace(",", "");
                         dr.Ryoukin = r4;
                         dr.JutyuGokei = int.Parse(r4);
@@ -2047,44 +2045,30 @@ namespace Gyomu
                         dr.TyokusousakiMei = TokuisakiMei.Value;
                         // dr.TyokusousakiCD = int.Parse(TyokusoCode.Value);
                     }
-                    if (CheckBox4.Checked == true)
+                    if (!dtN[i].IsSiyouKaishiNull())
                     {
-                        dr.SiyouKaishi = start.Text;
-                        //dr.SiyouiOwari = end.Text;
+                        dr.SiyouKaishi = dtN[i].SiyouKaishi.ToShortDateString();
                     }
-                    if (CheckBox4.Checked == false)
+                    if (!dtN[i].IsSiyouOwariNull())
                     {
-                        if (StartDate.SelectedDate != null)
-                        {
-                            dr.SiyouKaishi = StartDate.SelectedDate.Value.ToShortDateString();
-                        }
-                        if (EndDate.SelectedDate != null)
-                        {
-                            dr.SiyouiOwari = EndDate.SelectedDate.Value.ToShortDateString();
-                        }
+                        dr.SiyouiOwari = dtN[i].SiyouOwari.ToShortDateString();
                     }
-                    if (Tanka.Text != "")
+                    if (!dtN[i].IsJutyuTankaNull())
                     {
-                        string tan = Tanka.Text;
+                        string tan = dtN[i].JutyuTanka.ToString();
                         string r1 = tan.Replace(",", "");
                         dr.JutyuTanka = int.Parse(r1);
                     }
-                    if (Uriage.Text != "")
-                    {
-                        string uri = Uriage.Text;
-                        string r1 = uri.Replace(",", "");
-                        dr.JutyuGokei = int.Parse(r1);
-                    }
 
-                    if (ShiireTanka.Text != "")
+                    if (!dtN[i].IsShiireTankaNull())
                     {
-                        string shitan = ShiireTanka.Text;
+                        string shitan = dtN[i].ShiireTanka.ToString();
                         string r2 = shitan.Replace(",", "");
                         dr.ShiireTanka = int.Parse(r2);
                     }
-                    if (ShiireKingaku.Text != "")
+                    if (!dtN[i].IsShiireKingakuNull())
                     {
-                        string shikin = ShiireKingaku.Text;
+                        string shikin = dtN[i].ShiireKingaku.ToString();
                         string r3 = shikin.Replace(",", "");
                         dr.ShiireKingaku = int.Parse(r3);
                     }
@@ -2098,105 +2082,89 @@ namespace Gyomu
                         dr.CategoryName = RadComboCategory.Text;
                         dr.Category = int.Parse(CategoryCode.Value);
                     }
-
-                    if (CheckBox5.Checked == true)
+                    if (!dtN[i].IsSisetuCodeNull())
                     {
-                        dr.FukusuFaci = "true";
-                        dr.FacilityName = Facility.Text;
-                        string fac = Facility.Text;
-
-                        DataSet1.M_Facility_NewDataTable de = Class1.FacilityDT(fac, Global.GetConnection());
-
-                        for (int d = 0; d < de.Count; d++)
-                        {
-                            FacilityAddress.Value = de[d].Address1 + de[d].Address2;
-                            dr.FacilityCode = de[d].FacilityNo;
-                            dr.TyokusousakiMei = Facility.Text;
-                            dr.FacilityJusyo1 = FacilityAddress.Value;
-                        }
+                        dr.FacilityCode = dtN[i].SisetuCode;
                     }
-                    else
+                    if (!dtN[i].IsSisetuMeiNull())
                     {
-                        if (CheckBox1.Checked == true)
-                        {
-                            dr.FacilityName = KariFaci.Text;
-                            dr.FacilityCode = int.Parse(FacilityCode.Value);
-                            dr.FacilityJusyo1 = FacAdd.Value;
-                            dr.TokuisakiMei = KariTokui.Text;
-                        }
-                        else
-                        {
-                            if (RadComboBox1.Text != "")
-                            {
-                                dr.TokuisakiMei = TokuisakiMei.Value;
-                                dr.TokuisakiCode = TokuisakiCode.Value;
-                            }
-
-                            if (ShiyouShisetsu.Text != "")
-                            {
-                                dr.FacilityName = ShiyouShisetsu.Text;
-                                string fac = ShiyouShisetsu.Text;
-                                DataSet1.M_Facility_NewDataTable de = Class1.FacilityDT(fac, Global.GetConnection());
-                                for (int d = 0; d < de.Count; d++)
-                                {
-                                    FacilityAddress.Value = de[d].Address1 + de[d].Address2;
-                                    FacilityCode.Value = de[d].FacilityNo.ToString();
-                                }
-                                dr.FacilityJusyo1 = FacilityAddress.Value;
-                                dr.FacilityCode = int.Parse(FacilityCode.Value);
-                            }
-                        }
+                        dr.FacilityName = dtN[i].SisetuMei;
                     }
-                    if (Tantou.Text != "")
+                    if (!dtN[i].IsSisetuJusyo1Null())
+                    {
+                        dr.FacilityJusyo1 = dtN[i].SisetuJusyo1;
+                    }
+                    if (!dtN[i].IsSisetuJusyo2Null())
+                    {
+                        dr.FacilityJusyo2 = dtN[i].SisetuJusyo2;
+                    }
+                    if (!dtN[i].IsSisetsuTellNull())
+                    {
+                        dr.FacilityTel = dtN[i].SisetsuTell;
+                    }
+                    if (RadComboBox1.SelectedValue != null)
+                    {
+                        dr.TokuisakiCode = RadComboBox1.SelectedValue;
+                    }
+                    if (!string.IsNullOrEmpty(RadComboBox1.Text))
+                    {
+                        dr.TokuisakiMei = RadComboBox1.Text;
+                    }
+                    if (!string.IsNullOrEmpty(RadComboBox3.Text))
+                    {
+                        dr.SeikyusakiMei = RadComboBox3.Text;
+                    }
+                    //if (RadComboBox2.SelectedValue != null)
+                    //{
+                    //    dr.TyokusodsakiCD = int.Parse(RadComboBox2.SelectedValue);
+                    //}
+                    if (!string.IsNullOrEmpty(RadComboBox2.Text))
+                    {
+                        dr.TyokusosakiMei = RadComboBox2.Text;
+                    }
+                    if (!dtN[i].IsTanTouNameNull())
                     {
                         dr.StaffName = Tantou.Text;
                     }
-                    if (RadComboBox4.Text != "")
+                    if (!dtN[i].IsJutyuSuryouNull())
                     {
-                        dr.Department = RadComboBox4.Text;
+                        dr.JutyuSuryou = dtN[i].JutyuSuryou;
                     }
-                    if (Tekiyou.Text != "")
+                    if (!dtN[i].IsTekiyou1Null())
                     {
-                        dr.Tekiyou1 = Tekiyou.Text;
+                        dr.Tekiyou1 = dtN[i].Tekiyou1;
                     }
-
-                    if (TextBox10.Text != "")
+                    if (!dtN[i].IsTekiyou2Null())
                     {
-                        dr.JutyuSuryou = int.Parse(Suryo.Text);
+                        dr.Tekiyou2 = dtN[i].Tekiyou2;
                     }
-                    if (FacilityAddress.Value != "")
-                    {
-                        dr.FacilityJusyo1 = FacilityAddress.Value;
-                    }
-                    if (WareHouse.Text != "")
-                    {
-                        dr.WareHouse = WareHouse.Text;
-                    }
-
                     dr.OrderedNo = int.Parse(no);
                     dr.UriageFlg = false;
                     //dg.AddT_OrderedRow(dr);
-                    dp.AddT_OrderedHeaderRow(dl);
-                    ClassOrdered.UpdateOrderedHeader(dp, dr, cate, shiire, Global.GetConnection());
+                    if (i == 0)
+                    {
+                        dp.AddT_OrderedHeaderRow(dl);
+                    }
+                    ClassOrdered.UpdateOrdered(dr.Category.ToString(), dr.ShiireSakiName, Global.GetConnection());
+                    //ClassOrdered.UpdateOrderedHeader(dp, dr, cate, shiire, Global.GetConnection());
                     dp = null;
                 }
+                DataUriage.T_UriageHeaderRow dru = ClassUriage.GetMaxNo(Global.GetConnection());
+                string jNo = JutyuNo.Text;
+                int noo = dru.UriageNo;
+                int Uno = noo + 1;
+                ClassUriage.InsertUriage(jNo, Uno, Global.GetConnection());
                 //ClassOrdered.InsertOrdered(dg, Global.GetConnection());
-
             }
             catch (Exception ex)
             {
-                ClassMail.ErrorMail("maeda@m2m-asp.com", "エラーメール | ", ex.Message + "\n" + ex.StackTrace + "\n" + ex.Source);
+                ClassMail.ErrorMail("maeda@m2m-asp.com", "エラーメール | 発注登録", ex.Message + "\n" + ex.StackTrace + "\n" + ex.Source);
                 Err.Text = "データを登録することができませんでした。";
             }
             if (Err.Text == "")
             {
                 End.Text = "データを登録しました。";
             }
-            DataUriage.T_UriageHeaderRow dru = ClassUriage.GetMaxNo(Global.GetConnection());
-            string jNo = JutyuNo.Text;
-            int noo = dru.UriageNo;
-            int Uno = noo + 1;
-            ClassUriage.InsertUriage(jNo, Uno, Global.GetConnection());
         }
         //発注ボタン
         protected void Back_Click(object sender, EventArgs e)

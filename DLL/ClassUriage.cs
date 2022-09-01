@@ -187,7 +187,7 @@ namespace DLL
 
                 return true;
             }
-            catch 
+            catch
             {
                 return false;
             }
@@ -344,7 +344,7 @@ namespace DLL
                 daU.Update(ddt);
                 sql.Commit();
             }
-            catch 
+            catch (Exception ex)
             {
                 sql.Rollback();
             }
@@ -451,7 +451,7 @@ namespace DLL
                 }
                 sql.Commit();
             }
-            catch 
+            catch
             {
                 sql.Rollback();
             }
@@ -482,7 +482,7 @@ namespace DLL
                 da.Update(dt);
                 sql.Commit();
             }
-            catch 
+            catch
             {
                 sql.Rollback();
             }

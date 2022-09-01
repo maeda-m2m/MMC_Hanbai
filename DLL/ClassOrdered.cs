@@ -583,5 +583,45 @@ namespace DLL
             da.Fill(dt);
             return (dt);
         }
+
+        public static void UpdateOrdered(string catecode, string shiname, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter daH = new SqlDataAdapter("", sqlConnection);
+            daH.SelectCommand.CommandText =
+                "SELECT * FROM T_OrderedHeader where Category = @ca and ShiiresakiName = @shi and InsertFlg = 'False' ";
+            daH.SelectCommand.Parameters.AddWithValue("@ca", catecode);
+            daH.SelectCommand.Parameters.AddWithValue("@shi", shiname);
+            DataSet1.T_OrderedHeaderDataTable dd = new DataSet1.T_OrderedHeaderDataTable();
+            daH.UpdateCommand = (new SqlCommandBuilder(daH)).GetUpdateCommand();
+            daH.InsertCommand = (new SqlCommandBuilder(daH).GetInsertCommand());
+            daH.Fill(dd);
+
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText
+                = "SELECT * FROM T_Ordered where Category = @ca and ShiiresakiName = @shi order by RowNo desc";
+            da.SelectCommand.Parameters.AddWithValue("@ca", catecode);
+            da.SelectCommand.Parameters.AddWithValue("@shi", shiname);
+            DataSet1.T_OrderedDataTable dt = new DataSet1.T_OrderedDataTable();
+            da.InsertCommand = (new SqlCommandBuilder(da).GetInsertCommand());
+            SqlTransaction sqlTran = null;
+            da.Fill(dt);
+
+            if (dt.Count > 0)
+            {
+                //ヘッダー更新
+                //OrderAmount
+                //ShiireKingaku
+                da.SelectCommand.Transaction = da.InsertCommand.Transaction = sqlTran;
+
+            }
+            else
+            {
+                //ヘッダー更新
+                //OrderAmount
+                //ShiireKingaku
+                da.SelectCommand.Transaction = da.UpdateCommand.Transaction = sqlTran;
+
+            }
+        }
     }
 }

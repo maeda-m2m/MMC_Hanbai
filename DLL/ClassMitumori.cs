@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -1033,7 +1034,7 @@ namespace DLL
         {
             SqlDataAdapter da = new SqlDataAdapter("", sql);
             da.SelectCommand.CommandText =
-                "SELECT MitumoriNo AS MitumoriNo  FROM T_MitumoriHeader where MitumoriNo like @ki order by MitumoriNo desc";
+                "select SUBSTRING(CONVERT(NVARCHAR(20), MitumoriNo), 2,2) as KessanKI, MitumoriNo from T_MitumoriHeader where KessanKI like @ki order by MitumoriNo desc";
             da.SelectCommand.Parameters.AddWithValue("@ki", "%" + ki.ToString() + "%");
             DataMitumori.T_MitumoriHeaderDataTable dt = new DataMitumori.T_MitumoriHeaderDataTable();
             da.Fill(dt);
@@ -1381,6 +1382,23 @@ namespace DLL
             finally
             {
                 sqlConnection.Close();
+            }
+        }
+
+        public static DataMitumori.T_MitumoriHeaderRow GetMitumoriMaxNo(int ki, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select MitumoriNo from T_MitumoriHeader where SUBSTRING(CONVERT(NVARCHAR(20), MitumoriNo), 2,2) like @ki order by MitumoriNo desc";
+            da.SelectCommand.Parameters.AddWithValue("@ki", "%" + ki + "%");
+            DataMitumori.T_MitumoriHeaderDataTable dt = new DataMitumori.T_MitumoriHeaderDataTable();
+            da.Fill(dt);
+            if (dt.Count > 0)
+            {
+                return dt[0];
+            }
+            else
+            {
+                return null;
             }
         }
     }

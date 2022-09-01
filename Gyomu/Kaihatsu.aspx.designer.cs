@@ -859,6 +859,15 @@ namespace Gyomu {
         protected global::System.Web.UI.WebControls.TextBox TbxTokuisakiTEL;
         
         /// <summary>
+        /// BtnCopy1 コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnCopy1;
+        
+        /// <summary>
         /// TbxTokuisakiFax コントロール。
         /// </summary>
         /// <remarks>
@@ -1048,6 +1057,15 @@ namespace Gyomu {
         protected global::System.Web.UI.WebControls.TextBox TbxTel2;
         
         /// <summary>
+        /// BtnCopy2 コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnCopy2;
+        
+        /// <summary>
         /// TbxFAX2 コントロール。
         /// </summary>
         /// <remarks>
@@ -1210,6 +1228,15 @@ namespace Gyomu {
         protected global::System.Web.UI.WebControls.TextBox TbxNouhinsakiTell;
         
         /// <summary>
+        /// BtnCopy3 コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnCopy3;
+        
+        /// <summary>
         /// TbxNouhinsakiKeisyo コントロール。
         /// </summary>
         /// <remarks>
@@ -1343,6 +1370,15 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxTel;
+        
+        /// <summary>
+        /// BtnCopy4 コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnCopy4;
         
         /// <summary>
         /// TbxKeisyo コントロール。

@@ -1637,6 +1637,11 @@
                                         </asp:TableCell>
                                     </asp:TableRow>
                                     <asp:TableRow>
+                                        <asp:TableCell ColumnSpan="3">
+                                            <asp:Button runat="server" ID="BtnCopy1" Text="郵便番号、住所、電話番号をコピーする" OnClick="BtnCopy1_Click" />
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                    <asp:TableRow>
                                         <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
                    <p>FAX</p>
                                         </asp:TableCell>
@@ -1724,7 +1729,7 @@
                                     </asp:TableRow>
                                 </asp:Table>
                             </td>
-                            <td>
+                            <td style="vertical-align: top">
                                 <table>
                                     <tr>
                                         <td style="vertical-align: top">
@@ -1818,6 +1823,11 @@
                                                     </asp:TableCell>
                                                 </asp:TableRow>
                                                 <asp:TableRow>
+                                                    <asp:TableCell ColumnSpan="3">
+                                                        <asp:Button runat="server" ID="BtnCopy2" Text="郵便番号、住所、電話番号をコピーする" OnClick="BtnCopy2_Click" />
+                                                    </asp:TableCell>
+                                                </asp:TableRow>
+                                                <asp:TableRow>
                                                     <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
                    <p>FAX</p>
                                                     </asp:TableCell>
@@ -1903,7 +1913,7 @@
                                     </tr>
                                 </table>
                             </td>
-                            <td>
+                            <td style="vertical-align: top">
                                 <table runat="server" id="TBNouhinsaki">
                                     <tr>
                                         <td runat="server" class="MiniTitle">
@@ -2027,6 +2037,11 @@
                                         </td>
                                     </tr>
                                     <tr>
+                                        <td colspan="2">
+                                            <asp:Button runat="server" ID="BtnCopy3" Text="郵便番号、住所、電話番号をコピーする" OnClick="BtnCopy3_Click" />
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <td runat="server" class="MiniTitle">
                                             <p>敬称</p>
                                         </td>
@@ -2045,7 +2060,7 @@
                                 </table>
 
                             </td>
-                            <td>
+                            <td style="vertical-align: top">
                                 <table runat="server" id="TBFacilityDetail">
                                     <tr>
                                         <td class="MiniTitle" style="width: 120px; height: 20px;">
@@ -2152,6 +2167,11 @@
                                         </td>
                                         <td class="waku">
                                             <asp:TextBox ID="TbxTel" runat="server"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <asp:Button runat="server" ID="BtnCopy4" Text="郵便番号、住所、電話番号をコピーする" OnClick="BtnCopy4_Click" />
                                         </td>
                                     </tr>
                                     <tr>
