@@ -202,7 +202,7 @@ namespace Gyomu.Tokuisaki
 
         protected void ImageUploadButton_Click(object sender, EventArgs e)
         {
-            string script = "";
+            string script, sqlCommand;
 
             if (!FileUpload.HasFile)
             {
@@ -221,10 +221,12 @@ namespace Gyomu.Tokuisaki
 
 
             //ファイルの拡張子チェック
+            //必要な場合はここに拡張子を追加する。
             var allowedExtensions = new string[] { ".jpg" };
 
             for (int i = 0; i < FileUpload.PostedFiles.Count; i++)
             {
+                //ファイルの拡張子を取得する。
                 var fileExtension = Path.GetExtension(FileUpload.PostedFiles[i].FileName).ToLower();
 
                 if (!allowedExtensions.Contains(fileExtension))
@@ -234,7 +236,32 @@ namespace Gyomu.Tokuisaki
                     return;
                 }
 
-                FileUpload.PostedFiles[i].SaveAs(folderPath + FileUpload.PostedFiles[i].FileName.ToLower());
+                //拡張子を外したファイル名のみ取得
+                string shouhinCode = FileUpload.PostedFiles[i].FileName.Replace(".jpg", "").Replace(".JPG", "");
+
+                sqlCommand = "select distinct(SyouhinCode) from M_Kakaku_2";
+
+                var shouhincodeData = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
+
+                var lists = new List<string>();
+
+                for (int i2 = 0; i2 < shouhincodeData.Rows.Count; i2++)
+                {
+                    lists.Add(shouhincodeData.Rows[i2].ItemArray[0].ToString());
+                }
+
+                //価格マスタに登録されている商品コードかチェックを行う。
+                if (!lists.Contains(shouhinCode))
+                {
+                    script = "alert('無効なファイル名です。');";
+                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
+                    return;
+                }
+
+                //完全パス
+                string savefile = folderPath + shouhinCode + fileExtension;
+
+                FileUpload.PostedFiles[i].SaveAs(savefile);
 
 
                 var aryData = new byte[FileUpload.PostedFiles[i].ContentLength];
@@ -246,31 +273,22 @@ namespace Gyomu.Tokuisaki
                 //デバックだったらテーブルに商品コードを登録しない。本番環境のみ有効。
 
 
-                string file = FileUpload.PostedFiles[i].FileName.Replace(".jpg", "");
-
-                string sqlCommand = $"select * from T_TokuisakiImage where ShouhinCode = '{file}'";
+                sqlCommand = $"select * from T_TokuisakiImage where ShouhinCode = '{shouhinCode}'";
 
                 var table = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
 
-                if (table.Rows.Count == 0)
+
+                using (MemoryStream ms = new MemoryStream(aryData))
                 {
-                    using (MemoryStream ms = new MemoryStream(aryData))
+                    if (table.Rows.Count == 0)
                     {
-                        BinaryInsert(file, ms, Global.GetConnection());
+                        BinaryInsert(shouhinCode, ms, Global.GetConnection());
+                    }
+                    else
+                    {
+                        BinaryUpdate(shouhinCode, ms, Global.GetConnection());
                     }
                 }
-                else
-                {
-                    using (MemoryStream ms = new MemoryStream(aryData))
-                    {
-                        BinaryUpdate(file, ms, Global.GetConnection());
-                    }
-                }
-
-
-
-
-
             }
 
 
@@ -279,6 +297,15 @@ namespace Gyomu.Tokuisaki
             Create();
 
         }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -311,6 +338,11 @@ namespace Gyomu.Tokuisaki
                 sql.Close();
             }
         }
+
+
+
+
+
 
 
 
