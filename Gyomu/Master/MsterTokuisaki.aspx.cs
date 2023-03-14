@@ -328,6 +328,10 @@ namespace Gyomu.Master
                             string[] mData = strLineData.Split(',');
                             DataSet1.M_Tokuisaki2DataTable dt = new DataSet1.M_Tokuisaki2DataTable();
                             DataSet1.M_Tokuisaki2Row dr = dt.NewM_Tokuisaki2Row();
+                            if (string.IsNullOrEmpty(mData[4]))
+                            {
+                                mData[4] = "0";
+                            }
                             dr.ItemArray = mData;
                             dt.AddM_Tokuisaki2Row(dr);
                             ClassMaster.UpdateCSVtokuisaki(dt, Global.GetConnection());
@@ -403,8 +407,11 @@ namespace Gyomu.Master
                 }
                 if (!dr.IsTantoStaffCodeNull())
                 {
-                    DataMaster.M_Tanto1DataTable dt = ClassMaster.GetTanto1(dr.TantoStaffCode, Global.GetConnection());
-                    LblTanto.Text = dt[0].UserName;
+                    DataMaster.M_Tanto1DataTable dt = ClassMaster.GetTanto1(dr.TantoStaffCode.Trim(), Global.GetConnection());
+                    if (dt.Count > 0)
+                    {
+                        LblTanto.Text = dt[0].UserName;
+                    }
                 }
                 if (!dr.IsTokuisakiAddress1Null())
                 {

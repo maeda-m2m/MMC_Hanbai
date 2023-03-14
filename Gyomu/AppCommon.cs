@@ -2637,7 +2637,10 @@ namespace Gyomu
                     xlsxCreator.Cell("AC4").Value = date[1];
                     xlsxCreator.Cell("AF4").Value = date[2];
                 }
-
+                if (!dtH[0].IsKibouNoukiNull())
+                {
+                    xlsxCreator.Cell("Z25").Value = "希望納期：" + dtH[0].KibouNouki;
+                }
                 if (!dtH[0].IsTokuisakiAddressNull())
                 {
                     xlsxCreator.Cell("A6").Value = dtH[0].TokuisakiAddress;
@@ -2833,6 +2836,8 @@ namespace Gyomu
             //見積書　ヘッダ
             if (iGyousu == 1)
             {
+
+
                 if (flg == "0")
                 {
                     DataMaster.M_AccountPageRow drD = ClassMaster.GetDaihyo(flg, Global.GetConnection());
@@ -2856,6 +2861,10 @@ namespace Gyomu
                     xlsxCreator.Cell("Y4").Value = date[0];
                     xlsxCreator.Cell("AC4").Value = date[1];
                     xlsxCreator.Cell("AF4").Value = date[2];
+                }
+                if (!dtH[0].IsKibouNoukiNull())
+                {
+                    xlsxCreator.Cell("Z24").Value = "希望納期：" + dtH[0].KibouNouki;
                 }
 
                 if (!dtH[0].IsTokuisakiAddressNull())

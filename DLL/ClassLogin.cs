@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,6 +24,16 @@ namespace DLL
                 return dt[0] as DataSet1.M_TantoRow;
             else
                 return null;
+        }
+
+        public static void DeleteIP(SqlConnection sqlConnection)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void GetIP(IPHostEntry ipentry, SqlConnection sqlConnection)
+        {
+            throw new NotImplementedException();
         }
 
         public static DataLogin.M_TantoRow getM_TantoRow(string userID, SqlConnection sqlConnection)
@@ -87,5 +98,6 @@ namespace DLL
             da.Fill(dt);
             return dt[0];
         }
+
     }
 }

@@ -66,6 +66,7 @@ namespace Gyomu
 
             //private DataSet1.M_UserRow _drUser = null;
             private DataLogin.M_TantoRow _drUser = null;
+            private DataSet1.M_BumonDataTable _drBumon = null;
 
             private System.Collections.Hashtable _tblSessionData = new System.Collections.Hashtable();
 
@@ -79,11 +80,10 @@ namespace Gyomu
                     _drUser = ClassLogin.getM_TantoRow(userID, Global.GetConnection())
                 };
                 if (null == u._drUser) return null;
-
-                //u.TwoLetterISOLanguageName = v;
-
                 return u;
             }
+
+
 
             //public DataSet1.M_UserRow M_User
             public DataLogin.M_TantoRow M_user
@@ -108,6 +108,15 @@ namespace Gyomu
                     return this._drUser.UserName;
                 }
             }
+
+            public string UserBumon
+            {
+                get
+                {
+                    return this._drUser.BumonName;
+                }
+            }
+
 
             public string TwoLetterISOLanguageName
             {
@@ -157,7 +166,6 @@ namespace Gyomu
                 }
             }
         }
-
         internal static void MitumoriSyusei(string MitumoriNo)
         {
             System.Web.HttpContext.Current.Session[SESSION_HACCYU_NO] = MitumoriNo;

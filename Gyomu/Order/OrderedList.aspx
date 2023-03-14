@@ -11,7 +11,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server" id="Head1">
-    <title>受注情報</title>
+    <title>発注情報</title>
     <link href="../../Style/Grid.ykuri.css" rel="STYLESHEET" />
     <link href="../../Style/ComboBox.ykuri.css" type="text/css" rel="STYLESHEET" />
     <link href="../../MainStyle.css" type="text/css" rel="Stylesheet" />
@@ -241,23 +241,23 @@
             <br />
             <table style="background-color: #e5e5e5">
                 <tr>
-                    <td class="kMenu" style="background-color: #c1c2ff; text-align: center; font-family: Meiryo; color: #5d5d5d;">
+                    <td class="kMenu" style="background-color: #c1c2ff; text-align: center; font-family: Meiryo; color: #303030;">
                         <p>発注書</p>
                     </td>
                     <td>
                         <asp:DropDownList ID="DrpFlg" runat="server" Width="120">
-                            <asp:ListItem Selected="True" Value="False">発注書未作成</asp:ListItem>
-                            <asp:ListItem Value="True">発注書作成済</asp:ListItem>
+                            <asp:ListItem Selected="True" Value="0">発注書未作成</asp:ListItem>
+                            <asp:ListItem Value="1">発注書作成済</asp:ListItem>
                         </asp:DropDownList>
 
                     </td>
-                    <td class="kMenu" runat="server" style="background-color: #c1c2ff; text-align: center; font-family: Meiryo; color: #5d5d5d;">
+                    <td class="kMenu" runat="server" style="background-color: #c1c2ff; text-align: center; font-family: Meiryo; color: #303030;">
                         <p>カテゴリー</p>
                     </td>
                     <td>
                         <telerik:RadComboBox ID="RadCate" runat="server" Width="120" AllowCustomText="True" EnableLoadOnDemand="True" MarkFirstMatch="True" ShowMoreResultsBox="True" ShowToggleImage="False" EnableVirtualScrolling="True" OnItemsRequested="RadCate_ItemsRequested"></telerik:RadComboBox>
                     </td>
-                    <td class="kMenu" style="background-color: #c1c2ff; text-align: center; font-family: Meiryo; color: #5d5d5d;">
+                    <td class="kMenu" style="background-color: #c1c2ff; text-align: center; font-family: Meiryo; color: #303030;">
                         <p>仕入先名</p>
                     </td>
                     <td>
@@ -318,37 +318,37 @@
 
                         <telerik:GridTemplateColumn UniqueName="ColMitumori" HeaderText="発注No">
                             <HeaderStyle Width="50" Font-Size="15" HorizontalAlign="Center" BackColor="#c1c2ff" ForeColor="#303030" />
-                            <ItemStyle HorizontalAlign="Left" Wrap="false" Font-Size="15" ForeColor="#5d5d5d"></ItemStyle>
+                            <ItemStyle HorizontalAlign="Left" Wrap="false" Font-Size="15" ForeColor="#303030"></ItemStyle>
                         </telerik:GridTemplateColumn>
 
                         <telerik:GridTemplateColumn UniqueName="ColCategori" HeaderText="カテゴリ">
                             <HeaderStyle Width="65" Font-Size="15" HorizontalAlign="Center" BackColor="#c1c2ff" ForeColor="#303030" />
-                            <ItemStyle HorizontalAlign="Left" Wrap="false" Font-Size="15" ForeColor="#5d5d5d" />
+                            <ItemStyle HorizontalAlign="Left" Wrap="false" Font-Size="15" ForeColor="#303030" />
                         </telerik:GridTemplateColumn>
 
                         <telerik:GridTemplateColumn UniqueName="ColShiireCode" HeaderText="仕入先コード">
                             <HeaderStyle Width="65" Font-Size="15" HorizontalAlign="Center" BackColor="#c1c2ff" ForeColor="#303030" />
-                            <ItemStyle HorizontalAlign="Left" Wrap="false" Font-Size="15" ForeColor="#5d5d5d" />
+                            <ItemStyle HorizontalAlign="Left" Wrap="false" Font-Size="15" ForeColor="#303030" />
                         </telerik:GridTemplateColumn>
 
                         <telerik:GridTemplateColumn UniqueName="ColShiireName" HeaderText="仕入先名">
                             <HeaderStyle Width="65" Font-Size="15" HorizontalAlign="Center" BackColor="#c1c2ff" ForeColor="#303030" />
-                            <ItemStyle HorizontalAlign="Left" Wrap="false" Font-Size="15" ForeColor="#5d5d5d" />
+                            <ItemStyle HorizontalAlign="Left" Wrap="false" Font-Size="15" ForeColor="#303030" />
                         </telerik:GridTemplateColumn>
 
                         <telerik:GridTemplateColumn UniqueName="ColSuryo" HeaderText="数量">
                             <HeaderStyle Width="65" Font-Size="15" HorizontalAlign="Center" BackColor="#c1c2ff" ForeColor="#303030" />
-                            <ItemStyle HorizontalAlign="Left" Wrap="false" Font-Size="15" ForeColor="#5d5d5d" />
+                            <ItemStyle HorizontalAlign="Left" Wrap="false" Font-Size="15" ForeColor="#303030" />
                         </telerik:GridTemplateColumn>
 
                         <telerik:GridTemplateColumn UniqueName="ColShiirekingaku" HeaderText="仕入金額">
                             <HeaderStyle Width="65" Font-Size="15" HorizontalAlign="Center" BackColor="#c1c2ff" ForeColor="#303030" />
-                            <ItemStyle HorizontalAlign="Right" Wrap="false" Font-Size="15" ForeColor="#5d5d5d" />
+                            <ItemStyle HorizontalAlign="Right" Wrap="false" Font-Size="15" ForeColor="#303030" />
                         </telerik:GridTemplateColumn>
 
                         <telerik:GridTemplateColumn UniqueName="ColOrderedDate" HeaderText="発注日">
                             <HeaderStyle Width="65" Font-Size="15" HorizontalAlign="Center" BackColor="#c1c2ff" ForeColor="#303030" />
-                            <ItemStyle HorizontalAlign="Right" Wrap="false" Font-Size="15" ForeColor="#5d5d5d" />
+                            <ItemStyle HorizontalAlign="Right" Wrap="false" Font-Size="15" ForeColor="#303030" />
                         </telerik:GridTemplateColumn>
 
 

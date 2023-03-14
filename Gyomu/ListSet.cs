@@ -696,7 +696,7 @@ namespace Gyomu
             RadComboBox rcb = (RadComboBox)sender;
             rcb.Items.Clear();
             rcb.Items.Add(new RadComboBoxItem(rcb.EmptyMessage, "-1"));
-            DataDrop.M_Customer_NewDataTable dt = ClassDrop.GetRyakusyou(e.Text.Trim(), Global.SqlConn);
+            DataSet1.M_Tokuisaki2DataTable dt = ClassDrop.GetTokuisaki(e.Text.Trim(), Global.GetConnection());
 
             int itemOffset = e.NumberOfItems;
             //表示件数を最大15件に設定
@@ -712,7 +712,7 @@ namespace Gyomu
             e.EndOfItems = endOffset == dt.Rows.Count;
             for (int i = itemOffset; i < endOffset; i++)
             {
-                rcb.Items.Add(new RadComboBoxItem(dt[i].CustomerCode + "/" + dt[i].Abbreviation, dt[i].CustomerCode));
+                rcb.Items.Add(new RadComboBoxItem(dt[i].CustomerCode + "/" + dt[i].TokuisakiCode + "　" + dt[i].TokuisakiRyakusyo, dt[i].CustomerCode + "/" + dt[i].TokuisakiCode));
             }
         }
 

@@ -12,6 +12,7 @@ namespace Gyomu
         protected void Page_Load(object sender, EventArgs e)
         {
             lblName.Text = SessionManager.User.M_user.UserName;
+
             if (SessionManager.User.UserID != "72" && SessionManager.User.UserID != "83" && SessionManager.User.UserID != "33495081" && SessionManager.User.UserID != "2")
             {
                 RadMenu1.Items.FindItemByValue("Master").Style["display"] = "none";

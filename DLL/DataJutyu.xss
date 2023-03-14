@@ -7,8 +7,8 @@
 <DiagramLayout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ex:showrelationlabel="False" ViewPortX="491" ViewPortY="18" xmlns:ex="urn:schemas-microsoft-com:xml-msdatasource-layout-extended" xmlns="urn:schemas-microsoft-com:xml-msdatasource-layout">
   <Shapes>
     <Shape ID="DesignTable:T_Row" ZOrder="3" X="708" Y="38" Height="305" Width="178" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
-    <Shape ID="DesignTable:T_JutyuHeader" ZOrder="2" X="901" Y="40" Height="305" Width="224" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
-    <Shape ID="DesignTable:T_Jutyu" ZOrder="1" X="515" Y="39" Height="305" Width="183" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
+    <Shape ID="DesignTable:T_Jutyu" ZOrder="2" X="515" Y="39" Height="305" Width="183" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
+    <Shape ID="DesignTable:T_JutyuHeader" ZOrder="1" X="897" Y="37" Height="305" Width="224" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
   </Shapes>
   <Connectors />
 </DiagramLayout>

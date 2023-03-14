@@ -55,6 +55,10 @@ namespace Gyomu
             SisetuSyousai.Style["display"] = "none";
             RcbHanni.Style["display"] = "none";
 
+            if (!string.IsNullOrEmpty((string)Session["CategoryCode"]))
+            {
+                LblCateCode.Text = (string)Session["CategoryCode"];
+            }
 
             if (RcbCity.Items.Count == 0)
             {
@@ -337,7 +341,6 @@ namespace Gyomu
         {
             StartDate.Visible = true;
             EndDate.Visible = true;
-
         }
 
         protected void Suryo_TextChanged(object sender, EventArgs e)
@@ -1536,11 +1539,17 @@ namespace Gyomu
             {
                 if (!dr.IsCpKakakuNull())
                 {
-                    TbxCpKakaku.Text = int.Parse(dr.CpKakaku).ToString("0,0");
+                    if (int.TryParse(dr.CpKakaku, out int ReCpKakaku))
+                    {
+                        TbxCpKakaku.Text = ReCpKakaku.ToString("0,0");
+                    }
                 }
                 if (!dr.IsCpShiireNull())
                 {
-                    TbxCpShiire.Text = int.Parse(dr.CpShiire).ToString("0,0");
+                    if (int.TryParse(dr.CpShiire, out int ReCpShiire))
+                    {
+                        TbxCpShiire.Text = ReCpShiire.ToString("0,0");
+                    }
                 }
                 if (!dr.IsTekiyou1Null())
                 {
@@ -1568,12 +1577,21 @@ namespace Gyomu
                 {
                     TbxProductCode.Text = dr.SyouhinCode;
                 }
+
                 if (!dr.IsHyojunKakakuNull())
                 {
                     if (dr.HyojunKakaku != "OPEN")
                     {
-                        TbxHyoujun.Text = int.Parse(dr.HyojunKakaku).ToString("0,0");
-                        HyoujyunTanka.Text = int.Parse(dr.HyojunKakaku).ToString("0,0");
+                        if (!dr.HyojunKakaku.Equals("0"))
+                        {
+                            TbxHyoujun.Text = int.Parse(dr.HyojunKakaku).ToString("0,0");
+                            HyoujyunTanka.Text = int.Parse(dr.HyojunKakaku).ToString("0,0");
+                        }
+                        else
+                        {
+                            TbxHyoujun.Text = dr.HyojunKakaku;
+                            HyoujyunTanka.Text = dr.HyojunKakaku;
+                        }
                     }
                     else
                     {
@@ -1585,7 +1603,14 @@ namespace Gyomu
                 {
                     if (!dr.Ryoukin.Equals("OPEN"))
                     {
-                        Kingaku.Text = int.Parse(dr.Ryoukin).ToString("0,0");
+                        if (!dr.Ryoukin.Equals("0"))
+                        {
+                            Kingaku.Text = int.Parse(dr.Ryoukin).ToString("0,0");
+                        }
+                        else
+                        {
+                            Kingaku.Text = "0";
+                        }
                     }
                     else
                     {
@@ -1604,7 +1629,7 @@ namespace Gyomu
                     }
                     else
                     {
-                        Tanka.Text = "";
+                        Tanka.Text = "0";
                     }
                 }
                 if (!dr.IsJutyuGokeiNull())
@@ -1615,7 +1640,7 @@ namespace Gyomu
                     }
                     else
                     {
-                        Uriage.Text = "";
+                        Uriage.Text = "0";
                     }
                 }
                 if (!dr.IsMekarHinbanNull())
@@ -1636,15 +1661,23 @@ namespace Gyomu
                     }
                     else
                     {
-                        ShiireKingaku.Text = "OPEN";
+                        ShiireKingaku.Text = "0";
                     }
                 }
                 if (!dr.IsShiireTankaNull())
                 {
-                    if (!dr.ShiireTanka.Equals(0))
+                    if (!dr.ShiireTanka.Equals("OPEN"))
                     {
-                        ShiireTanka.Text = dr.ShiireTanka.ToString("0,0");
-                        TbxShiirePrice.Text = dr.ShiireTanka.ToString("0,0");
+                        if (!dr.ShiireTanka.Equals(0))
+                        {
+                            ShiireTanka.Text = dr.ShiireTanka.ToString("0,0");
+                            TbxShiirePrice.Text = dr.ShiireTanka.ToString("0,0");
+                        }
+                        else
+                        {
+                            ShiireTanka.Text = "0";
+                            TbxShiirePrice.Text = "0";
+                        }
                     }
                     else
                     {
@@ -2172,9 +2205,12 @@ namespace Gyomu
                 }
                 if (!dr.IsSisetuCityCodeNull())
                 {
-                    RcbCity.SelectedValue = dr.SisetuCityCode.ToString();
-                    DataMaster.M_CityRow drC = ClassMaster.GetCity(dr.SisetuCityCode.ToString(), Global.GetConnection());
-                    RcbCity.Text = drC.CityName;
+                    if (!string.IsNullOrEmpty(dr.SisetuCityCode))
+                    {
+                        RcbCity.SelectedValue = dr.SisetuCityCode.ToString();
+                        DataMaster.M_CityRow drC = ClassMaster.GetCity(dr.SisetuCityCode.ToString(), Global.GetConnection());
+                        RcbCity.Text = drC.CityName;
+                    }
                 }
                 if (!dr.IsSisetuCodeNull())
                 {
@@ -2680,8 +2716,9 @@ namespace Gyomu
                 }
                 else
                 {
-                    ClassMail.ErrorMail("maeda@m2m-asp.com", "エラーメール | 見積登録時", "TbxFaciに値がセットされていません。");
-                    return null;
+                    dr.SisetsuAbbreviration = "";
+                    //ClassMail.ErrorMail("maeda@m2m-asp.com", "エラーメール | 見積登録時", "TbxFaciに値がセットされていません。");
+                    //return null;
                 }
                 if (TbxTel.Text != "")
                 {

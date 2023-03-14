@@ -7,14 +7,13 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
     <script src="JavaScript.js"></script>
     <link href="Kaihatsu.css" type="text/css" rel="stylesheet" />
-    <title></title>
+    <title>受注明細</title>
     <style type="text/css">
         .RowTD {
             width: 90px;
@@ -129,6 +128,29 @@
             overflow: scroll;
             width: 100%;
         }
+
+        .gv a {
+            background-color: white;
+            text-decoration: none;
+            color: darkgreen;
+            font-size: 15px;
+        }
+
+            .gv a:link {
+                background-color: white;
+                text-decoration: none;
+                color: #ffd900;
+                font-weight: bold;
+                font-size: 15px;
+            }
+
+            .gv a:visited {
+                background-color: darkgreen;
+                text-decoration: none;
+                color: #ffd900;
+                font-weight: bold;
+                font-size: 15px;
+            }
     </style>
 
 </head>
@@ -144,235 +166,23 @@
                 </telerik:RadTab>
             </Tabs>
         </telerik:RadTabStrip>
-        <br />
+        <table>
+            <tr>
+                <td style="height: 5px;"></td>
+            </tr>
+        </table>
         <table id="SubMenu" runat="server">
             <tr>
                 <td>
                     <asp:Button ID="Keisan" runat="server" Text="計算" CssClass="Btn11" OnClick="Keisan_Click" />
-
                 </td>
                 <td>
                     <asp:Button ID="Register" runat="server" Text="登録" CssClass="Btn11" OnClick="Button5_Click" OnClientClick="return Check(this)" />
-                    <script type="text/javascript">
-                        function Check() {
-                            var bool;
-                            var Err = document.getElementById('Err');
-                            var RadComboCategory = $find('RadComboCategory');
-                            var RadComboBox1 = $find('RadComboBox1');
-                            var RadComboBox3 = $find('RadComboBox3');
-                            var FacilityRad = $find('FacilityRad');
-                            var RadDatePicker3 = $find('RadDatePicker3');
-                            var RadDatePicker4 = $find('RadDatePicker4');
-                            var label3 = document.getElementById("Label3");
-                            var shimebi = document.getElementById("Shimebi");
-                            var CtrlSyousai = "CtrlSyousai";
-                            var ctl = "ctl";
-                            var Syosai = "Syosai";
-
-                            if (RadComboCategory.get_selectedItem().get_value() != "") {
-                                switch (RadComboCategory.get_selectedItem().get_value()) {
-                                    case '101':
-                                    case '102':
-                                    case '103':
-                                    case '199':
-                                        if (RadComboBox1.get_text() != "") {
-                                        }
-                                        else {
-                                            debugger;
-                                            RadComboBox1._element.style.border = "solid 1px red";
-                                            bool = false;
-                                            break;
-                                        }
-                                        if (FacilityRad.get_text() != "") {
-
-                                        }
-                                        else {
-                                            debugger;
-                                            FacilityRad._element.style.border = "solid 1px red";
-                                            bool = false;
-                                        }
-                                        if (label3.value != "") {
-
-                                        }
-                                        else {
-                                            label3.value = "掛率が表示されていません。得意先詳細を確認して下さい。";
-                                            label3.style.color = "red";
-                                            bool = false;
-                                        }
-                                        if (shimebi.value != "") {
-
-                                        }
-                                        else {
-                                            shimebi.value = "締日が表示されていません。得意先詳細を確認して下さい";
-                                            shimebi.style.color = "red";
-                                            bool = false;
-                                        }
-                                    default:
-                                        if (RadComboBox1.get_text() != "") {
-                                        }
-                                        else {
-                                            debugger;
-                                            RadComboBox1._element.style.border = "solid 1px red";
-                                            bool = false;
-                                        }
-                                        if (FacilityRad.get_text() != "") {
-
-                                        }
-                                        else {
-                                            debugger;
-                                            FacilityRad._element.style.border = "solid 1px red";
-                                            bool = false;
-                                        }
-                                        if (label3.value != "") {
-
-                                        }
-                                        else {
-                                            label3.value = "掛率が表示されていません。得意先詳細を確認して下さい。";
-                                            label3.style.color = "red";
-                                            bool = false;
-                                        }
-                                        if (shimebi.value != "") {
-
-                                        }
-                                        else {
-                                            shimebi.value = "締日が表示されていません。得意先詳細を確認して下さい";
-                                            shimebi.style.color = "red";
-                                            bool = false;
-                                        }
-                                }
-                            }
-                            else {
-                                Err.innerText = "カテゴリーを選択して下さい";
-                                bool = false;
-                            }
-                            var dg = document.getElementById('CtrlSyousai');
-                            var c = dg.rows.length;
-                            for (var i = 1; i < c; i++) {
-                                var x = i + 1;
-                                var SerchProduct = $find(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "SerchProduct");
-                                var Baitai = document.getElementById(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "Baitai");
-                                var HyoujyunTanka = document.getElementById(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "HyoujyunTanka");
-                                var Kingaku = document.getElementById(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "Kingaku");
-                                var Tanka = document.getElementById(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "Tanka");
-                                var Uriage = document.getElementById(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "Uriage");
-                                var ShiyouShisetsu = $find(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "ShiyouShisetsu");
-                                var StartDate = $find(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "StartDate");
-                                var EndDate = $find(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "EndDate");
-                                var Kakeri = document.getElementById(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "Kakeri");
-                                var zeiku = document.getElementById(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "zeiku");
-                                var Hachu = $find(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "Hachu");
-                                var WareHouse = document.getElementById(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "WareHouse");
-                                var ShiireTanka = document.getElementById(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "ShiireTanka");
-                                var ShiireKingaku = document.getElementById(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "ShiireKingaku");
-                                var RcbHanni = $find(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "RcbHanni");
-                                var Zasu = $find(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "Zasu");
-                                debugger;
-                                var catecode = RadComboCategory.get_selectedItem().get_value();
-                                switch (catecode) {
-                                    case '101':
-                                    case '102':
-                                    case '103':
-                                    case '199':
-                                    case '205':
-                                        if (StartDate.get_selectedDate.get_value == "") {
-                                            StartDate._element.style.border = "solid 1px red";
-                                            bool = false;
-                                        }
-                                        if (EndDate.get_selectedDate.get_value == "") {
-                                            EndDate._element.style.border = "solid 1px red";
-                                            bool = false;
-                                        }
-                                        if (RcbHanni.get_text == "") {
-                                            RcbHanni._element.style.border = "solid 1px red";
-                                            bool = false;
-                                        }
-                                        if (Zasu.get_text == "") {
-                                            Zasu._element.style.border = "solid 1px red";
-                                            bool = false;
-                                        }
-                                        break;
-                                    default:
-                                        if (StartDate.get_selectedDate.get_value == "") {
-                                            StartDate._element.style.border = "solid 1px red";
-                                            bool = false;
-                                        }
-                                        if (EndDate.get_selectedDate.get_value == "") {
-                                            EndDate._element.style.border = "solid 1px red";
-                                            bool = false;
-                                        }
-                                }
-                                if (SerchProduct.get_text() == "") {
-                                    SerchProduct._element.style.border = "solid 1px red";
-                                    bool = false;
-                                }
-                                if (Baitai.value == "") {
-                                    Baitai.value = "媒体が表示されていません。商品詳細を確認して下さい。";
-                                    bool = false;
-                                }
-                                if (HyoujyunTanka.value == "") {
-                                    HyoujyunTanka.style.border = "solid 1px red";
-                                    bool = false;
-                                }
-                                if (Kingaku.value == "") {
-                                    Kingaku.style.border = "solid 1px red";
-                                    bool = false;
-                                }
-                                if (Tanka.value == "") {
-                                    Tanka.style.border = "solid 1px red";
-                                    bool = false;
-                                }
-                                if (Uriage.value == "") {
-                                    Uriage.style.border = "solid 1px red";
-                                    bool = false;
-                                }
-                                if (ShiyouShisetsu.get_text() == "") {
-                                    ShiyouShisetsu._element.style.border = "solid 1px red";
-                                    bool = false;
-                                }
-                                if (Kakeri.value == "") {
-                                    Kakeri.value = "掛率が表示されていません。得意先詳細を確認してください。";
-                                    bool = false;
-                                }
-                                if (zeiku.value == "") {
-                                    zeiku.value = "税区分が表示されていません。得意先詳細を確認してください。";
-                                    bool = false;
-                                }
-                                if (WareHouse.value == "") {
-                                    WareHouse.value = "倉庫が表示されていません。商品詳細を確認してください。";
-                                    bool = false;
-                                }
-                                if (ShiireTanka.value == "") {
-                                    ShiireTanka.style.border = "solid 1px red";
-                                    bool = false;
-                                }
-                                if (ShiireKingaku.value == "") {
-                                    ShiireKingaku.style.border = "solid 1px red";
-                                    bool = false;
-                                }
-                            }
-                            debugger;
-                            if (bool == false) {
-                                Err.innerText = "赤枠を入力して下さい";
-                                return false;
-                            }
-                        }
-                    </script>
 
                 </td>
                 <td>
                     <asp:Button ID="DelBtn" runat="server" Text="削除" CssClass="Btn11" OnClick="DelBtn_Click" OnClientClick="A()" />
-                    <script type="text/javascript">
-                        function A() {
-                            var a1 = window.confirm('本当に削除しますか？');
-                            if (a1 === true) {
-                                return (true)
-                            }
-                            else if (a1 === false) {
-                                return (false
-                                )
-                            }
-                        }
-                    </script>
+                    <script type="text/javascript"></script>
 
                 </td>
                 <td>
@@ -391,8 +201,11 @@
                 </td>
             </tr>
         </table>
-        <br />
-
+        <table>
+            <tr>
+                <td style="height: 5px;"></td>
+            </tr>
+        </table>
         <asp:Label ID="Err" runat="server" Text="" ForeColor="Red"></asp:Label>
         <asp:Label ID="End" runat="server" Text="" ForeColor="Green"></asp:Label>
         <div id="header">
@@ -443,108 +256,13 @@
                         <p>得意先</p>
                     </td>
                     <td class="waku">
-                        <asp:Button ID="Button1" runat="server" Text="得意先詳細" CssClass="Btn11" OnClick="Button1_Click" />
-                        <script type="text/javascript">
-                            function Meisai2(ss) {
-                                debugger;
-                                document.getElementById(ss).style.display = "";
-                                document.getElementById("mInput").style.display = "none";
-                                document.getElementById("CtrlSyousai").style.display = "none";
-                                document.getElementById("head").style.display = "none";
-                                document.getElementById("Button13").style.display = "none";
-                                document.getElementById("SubMenu").style.display = "none";
-                                document.getElementById("SubMenu2").style.display = "";
-                                debugger;
-                            }
-                        </script>
-                        <script type="text/javascript">
-                            function Close2(ss) {
-                                debugger;
-                                document.getElementById(ss).style.display = "none";
-                                document.getElementById("mInput").style.display = "";
-                                document.getElementById("CtrlSyousai").style.display = "";
-                                document.getElementById("head").style.display = "";
-                                document.getElementById("Button13").style.display = "";
-                                document.getElementById("SubMenu").style.display = "";
-                                document.getElementById("SubMenu2").style.display = "none";
-                                debugger;
-                            }
-                        </script>
+                        <asp:Button ID="Button1" runat="server" Text="詳細" CssClass="Btn11" />
+                        <script type="text/javascript"></script>
+                        <script type="text/javascript"></script>
                     </td>
                     <td colspan="4" class="waku">
-                        <telerik:RadComboBox ID="RadComboBox1" runat="server" Culture="ja-JP" OnItemsRequested="RadComboBox1_ItemsRequested" AllowCustomText="True" EnableLoadOnDemand="True" ShowMoreResultsBox="True" ShowToggleImage="False" EnableVirtualScrolling="True" AutoPostBack="True" OnSelectedIndexChanged="RadComboBox1_SelectedIndexChanged" Width="300px"></telerik:RadComboBox>
-                        <script type="text/javascript">
-                            function TokuisakiSelect(sender, eventArgs) {
-                                var rcbTokuisaki = $find("<%=RadComboBox1.ClientID%>");
-                                var selectedvalue = rcbTokuisaki.get_selectedItem().get_value();
-                                var AryValue = selectedvalue.split(',');
-                                var CustomerCode = AryValue[0];
-                                var TokuisakiCode = AryValue[1];
-                                var TokuisakiName1 = AryValue[2];
-                                var TantoStaffCode = AryValue[5];
-                                var TokuisakiFurifana = AryValue[6];
-                                var TokuisakiRyakusyo = AryValue[7];
-                                var TokuisakiPostNo = AryValue[8];
-                                var TokuisakiAddress1 = AryValue[9];
-                                var TokuisakiAddress2 = AryValue[10];
-                                var TokuisakiTEL = AryValue[11];
-                                var TokuisakiFAX = AryValue[12];
-                                var TokuisakiStaff = AryValue[13];
-                                var TokuisakiDepartment = AryValue[14];
-                                var Kakeritsu = AryValue[16];
-                                var Shimebi = AryValue[17];
-                                var Zeikubun = AryValue[19];
-
-                                //得意先を選択した際に入力される内容
-                                var RadComboBox3 = $find('RadComboBox3');
-                                var Label1 = document.getElementById("<%=JutyuNo.ClientID%>");
-                                var shimebi = document.getElementById('Shimebi');
-                                var RadZeiKubun = $find('RadZeiKubun');
-                                var TbxCustomer = document.getElementById('TbxCustomer');
-                                var TbxTokuisakiCode = document.getElementById('TbxTokuisakiCode');
-                                var TbxTokuisakiName = document.getElementById('TbxTokuisakiName');
-                                var TbxTokuisakiFurigana = document.getElementById('TbxTokuisakiFurigana');
-                                var TbxTokuisakiRyakusyo = document.getElementById('TbxTokuisakiRyakusyo');
-                                var TbxTokuisakiStaff = document.getElementById('TbxTokuisakiStaff');
-                                var TbxTokuisakiPostNo = document.getElementById('TbxTokuisakiPostNo');
-                                var TbxTokuisakiAddress = document.getElementById('TbxTokuisakiAddress');
-                                var TbxTokuisakiTEL = document.getElementById('TbxTokuisakiTEL');
-                                var TbxTokuisakiFax = document.getElementById('TbxTokuisakiFax');
-                                var TbxTokuisakiDepartment = document.getElementById('TbxTokuisakiDepartment');
-                                var RcbTax = $find('RcbTax');
-                                var TbxKakeritsu = document.getElementById('TbxKakeritsu');
-                                var RcbShimebi = $find('RcbShimebi');
-                                var HidShimebi = document.getElementById("HidShimebi");
-                                var LblTantoStaffCode = document.getElementById("<%=LblTantoStaffCode.ClientID%>");
-                                var HidTantoStaffCode = document.getElementById("<%=HidTantoStaffCode.ClientID%>");
-                                var HidKakeritsu = document.getElementById("<%=HidKakeritsu.ClientID%>");
-                                const Textbox12 = document.getElementById("<%=UriageGokei.ClientID%>");
-                                //入力
-                                RadComboBox3.set_text(TokuisakiRyakusyo);
-                                HidKakeritsu.value = Kakeritsu;
-                                shimebi.innerText = Shimebi;
-                                HidShimebi.value = Shimebi;
-                                RadZeiKubun.set_text(Zeikubun);
-                                TbxCustomer.value = CustomerCode;
-                                TbxTokuisakiCode.value = TokuisakiCode;
-                                TbxTokuisakiName.value = TokuisakiName1;
-                                TbxTokuisakiFurigana.value = TokuisakiFurifana;
-                                TbxTokuisakiRyakusyo.value = TokuisakiRyakusyo;
-                                TbxTokuisakiStaff.value = TokuisakiStaff;
-                                TbxTokuisakiPostNo.value = TokuisakiPostNo;
-                                TbxTokuisakiAddress.value = TokuisakiAddress1 + TokuisakiAddress2;
-                                TbxTokuisakiTEL.value = TokuisakiTEL;
-                                TbxTokuisakiFax.value = TokuisakiFAX;
-                                TbxTokuisakiDepartment.value = TokuisakiDepartment;
-                                RcbTax.set_text(Zeikubun);
-                                TbxKakeritsu.value = Kakeritsu;
-                                RcbShimebi.set_text(Shimebi);
-                                LblTantoStaffCode.innerText = TantoStaffCode;
-                                Label1.innerText = TantoStaffCode;
-                                HidTantoStaffCode.value = TantoStaffCode;
-                                debugger;
-                            }
-                        </script>
+                        <telerik:RadComboBox OnClientSelectedIndexChanged="TokuisakiSelect" ID="RadComboBox1" runat="server" Culture="ja-JP" OnItemsRequested="RadComboBox1_ItemsRequested" AllowCustomText="True" EnableLoadOnDemand="True" ShowMoreResultsBox="True" ShowToggleImage="False" EnableVirtualScrolling="True" AutoPostBack="True" OnSelectedIndexChanged="RadComboBox1_SelectedIndexChanged" Width="300px"></telerik:RadComboBox>
+                        <script type="text/javascript"><%=RadComboBox1.ClientID%><%=JutyuNo.ClientID%><%=LblTantoStaffCode.ClientID%><%=HidTantoStaffCode.ClientID%><%=HidKakeritsu.ClientID%><%=UriageGokei.ClientID%></script>
                         <input type="hidden" id="TokuisakiCode" runat="server" />
                         <input type="hidden" id="TokuisakiMei" runat="server" />
                         <input type="hidden" id="CustomerCode" runat="server" />
@@ -584,10 +302,10 @@
                         <p>請求先</p>
                     </td>
                     <td class="waku">
-                        <asp:Button ID="Button2" runat="server" Text="請求先詳細" CssClass="Btn11" OnClick="Button2_Click" />
+                        <%--                        <asp:Button ID="Button2" runat="server" Text="請求先詳細" CssClass="Btn11" OnClick="Button2_Click" />--%>
                     </td>
                     <td colspan="4" class="waku">
-                        <telerik:RadComboBox ID="RadComboBox3" runat="server" AllowCustomText="True" EnableLoadOnDemand="True" ShowMoreResultsBox="True" ShowToggleImage="False" EnableVirtualScrolling="True" OnItemsRequested="RadComboBox3_ItemsRequested" Width="300px"></telerik:RadComboBox>
+                        <telerik:RadComboBox ID="RadComboBox3" OnClientSelectedIndexChanged="SeikyusakiSelected" runat="server" AllowCustomText="True" EnableLoadOnDemand="True" ShowMoreResultsBox="True" ShowToggleImage="False" EnableVirtualScrolling="True" OnItemsRequested="RadComboBox3_ItemsRequested" Width="300px"></telerik:RadComboBox>
                         <asp:TextBox ID="kariSekyu" runat="server" Width="300px"></asp:TextBox>
 
                     </td>
@@ -606,6 +324,7 @@
                     </td>
                     <td class="waku">
                         <asp:Label ID="Shimebi" runat="server" Text=""></asp:Label>
+                        <asp:HiddenField runat="server" ID="HidShimebi" />
                     </td>
                     <td style="background-color: #fff1a0; text-align: center; font-size: 12px; font: bold; color: #5d5d5d; width: 100px; height: 20px;">
                         <p>数量合計</p>
@@ -620,10 +339,10 @@
                         <p>納品先</p>
                     </td>
                     <td class="waku">
-                        <asp:Button ID="Button3" runat="server" Text="納品先詳細" CssClass="Btn11" OnClick="Button3_Click" />
+                        <%--                        <asp:Button ID="Button3" runat="server" Text="納品先詳細" CssClass="Btn11" OnClick="Button3_Click" />--%>
                     </td>
                     <td colspan="4" class="waku">
-                        <telerik:RadComboBox ID="RadComboBox2" runat="server" Culture="ja-JP" OnItemsRequested="RadComboBox2_ItemsRequested" AllowCustomText="True" EnableLoadOnDemand="True" ShowMoreResultsBox="True" ShowToggleImage="False" EnableVirtualScrolling="True" Width="300px"></telerik:RadComboBox>
+                        <telerik:RadComboBox ID="RadComboBox2" runat="server" Culture="ja-JP" OnClientSelectedIndexChanged="Nouhinsaki2" OnItemsRequested="RadComboBox2_ItemsRequested" AllowCustomText="True" EnableLoadOnDemand="True" ShowMoreResultsBox="True" ShowToggleImage="False" EnableVirtualScrolling="True" Width="300px"></telerik:RadComboBox>
                         <input type="hidden" id="TyokusoCode" runat="server" />
                         <input type="hidden" runat="server" id="TyokusoJusyo" />
                         <asp:TextBox ID="KariNouhin" runat="server" Width="300px"></asp:TextBox>
@@ -720,9 +439,16 @@
                     <td style="background-color: #ffd900; text-align: center; font-size: 12px; font: bold; color: #5d5d5d; width: 80px; height: 30px;" runat="server">
                         <p>備考</p>
                     </td>
-                    <td colspan="9" class="waku">
+                    <td colspan="5" class="waku">
                         <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
                     </td>
+                    <td class="MiniTitle">
+                        <p>希望納期</p>
+                    </td>
+                    <td colspan="3" class="waku">
+                        <asp:TextBox runat="server" ID="TbxKibouNouki" Width="200px"></asp:TextBox>
+                    </td>
+
                     <td style="background-color: #fff1a0; text-align: center; font-size: 12px; font: bold; color: #5d5d5d; width: 100px; height: 20px;">
                         <p>売上合計</p>
                     </td>
@@ -867,27 +593,27 @@
                 </td>
             </tr>
         </table>
+        <asp:HiddenField runat="server" ID="HidNewRow" />
+        <asp:HiddenField runat="server" ID="HidSyokaiDate" />
 
         <table style="width: 100%">
 
             <!-- ヘッダーテーブル -------------------------------------------------------------------------------------->
             <tr>
                 <td>
-                    <div id="DivDataGrid">
+                    <div runat="server" id="DivDataGrid">
                         <asp:DataGrid runat="server" ID="CtrlSyousai" PageSize="10" AllowPaging="true" AutoGenerateColumns="False" OnItemDataBound="CtrlSyousai_ItemDataBound" OnItemCommand="CtrlSyousai_ItemCommand" OnPageIndexChanged="CtrlSyousai_PageIndexChanged">
-                            <PagerStyle Position="TopAndBottom" Mode="NumericPages" />
+                            <PagerStyle Position="TopAndBottom" Mode="NumericPages" CssClass="gv" />
                             <Columns>
                                 <asp:TemplateColumn HeaderStyle-BorderStyle="None" ItemStyle-BorderStyle="None" ItemStyle-Width="30px">
                                     <ItemStyle HorizontalAlign="Center" />
                                     <ItemTemplate>
                                         <asp:Label ID="RowNo" runat="server" Text="" Font-Size="25px"></asp:Label>
                                         <asp:Button ID="Button4" runat="server" Text="削除" CssClass="Btn11" CommandName="Del" />
-                                        <asp:Button ID="BtnAddRow" runat="server" Text="明細挿入" Width="90px" CssClass="Btn11" CommandName="Add" />
-                                        <asp:Button runat="server" ID="BtnCopyAdd" Text="明細複写" Width="90px" CssClass="Btn11" CommandName="Copy" />
-
+                                        <asp:Button ID="BtnAddRow" runat="server" Text="明細挿入" CssClass="Btn11" CommandName="Add" />
+                                        <asp:Button runat="server" ID="BtnCopyAdd" Text="明細複写" CssClass="Btn11" CommandName="Copy" />
                                     </ItemTemplate>
                                 </asp:TemplateColumn>
-
                                 <asp:TemplateColumn HeaderStyle-BorderStyle="None" ItemStyle-BorderStyle="None">
                                     <ItemTemplate>
                                         <uc2:Syosai ID="Syosai" runat="server" />
@@ -900,7 +626,993 @@
             </tr>
 
         </table>
-        <script>
+        <script></script>
+
+        &nbsp;
+        <asp:Button ID="Button13" runat="server" Text="計算" CssClass="Btn11" OnClick="Keisan_Click" OnClientClick="Cul();" />
+        <script type="text/javascript"></script>
+
+        <!--明細部分------------------------------------------------------------------------------------------------>
+
+
+        <!-- 得意先詳細--------------------------------------------------------------------------------------->
+        <asp:Table runat="server" ID="TBSyousais">
+            <asp:TableRow>
+                <asp:TableCell>
+                    <table>
+                        <tr>
+                            <td style="border-bottom: 2px solid #ffd900">
+                                <p>得意先詳細</p>
+                            </td>
+                            <td style="border-bottom: 2px solid #ffd900">
+                                <p>請求先詳細</p>
+                            </td>
+                            <td style="border-bottom: 2px solid #ffd900">
+                                <p>納品先詳細</p>
+                            </td>
+                            <td style="border-bottom: 2px solid #ffd900">
+                                <p>使用施設詳細</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Table runat="server" ID="TBTokuisaki">
+                                    <asp:TableRow>
+                                        <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
+                    <p>顧客コード<span style="color: red">*</span></p>
+                                        </asp:TableCell>
+                                        <asp:TableCell ColumnSpan="2" CssClass="waku">
+                                            <asp:TextBox runat="server" ID="TbxCustomer"></asp:TextBox>
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                    <asp:TableRow>
+                                        <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
+                    <p>得意先コード<span style="color: red">*</span></p>
+                                        </asp:TableCell>
+                                        <asp:TableCell ColumnSpan="2" CssClass="waku">
+                                            <asp:TextBox runat="server" ID="TbxTokuisakiCode"></asp:TextBox>
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                    <asp:TableRow>
+                                        <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
+                    <p>得意先名<span style="color: red">*</span></p>
+                                        </asp:TableCell>
+                                        <asp:TableCell ColumnSpan="2" CssClass="waku">
+                                            <telerik:RadComboBox ID="RcbTokuisakiNameSyousai" runat="server" Culture="ja-JP" OnItemsRequested="RadComboBox1_ItemsRequested" AllowCustomText="false" EnableLoadOnDemand="True" ShowMoreResultsBox="True" ShowToggleImage="False" EnableVirtualScrolling="True" Width="300px" OnClientSelectedIndexChanged="TokuisakiSelect"></telerik:RadComboBox>
+                                            <p style="font-size: 10px">得意先として印刷時に反映されます。</p>
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                    <asp:TableRow>
+                                        <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
+                    <p>得意先フリガナ</p>
+                                        </asp:TableCell>
+                                        <asp:TableCell ColumnSpan="2" CssClass="waku">
+                                            <asp:TextBox runat="server" ID="TbxTokuisakiFurigana"></asp:TextBox>
+                                        </asp:TableCell>
+
+                                    </asp:TableRow>
+                                    <asp:TableRow>
+                                        <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
+                    <p>得意先略称<span style="color: red">*</span></p>
+                                        </asp:TableCell>
+                                        <asp:TableCell ColumnSpan="2" CssClass="waku">
+                                            <asp:TextBox runat="server" ID="TbxTokuisakiRyakusyo"></asp:TextBox><br />
+                                            <p style="font-size: 10px">得意先として画面上に反映されます。</p>
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                    <asp:TableRow>
+                                        <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
+                   <p>得意先担当者名</p>
+                                        </asp:TableCell>
+                                        <asp:TableCell ColumnSpan="2" CssClass="waku">
+                                            <asp:TextBox runat="server" ID="TbxTokuisakiStaff"></asp:TextBox>
+                                        </asp:TableCell>
+
+                                    </asp:TableRow>
+                                    <asp:TableRow>
+                                        <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
+                    <p>郵便番号</p>
+                                        </asp:TableCell>
+                                        <asp:TableCell ColumnSpan="2" CssClass="waku">
+                                            <asp:TextBox runat="server" ID="TbxTokuisakiPostNo"></asp:TextBox>
+                                            <asp:Button runat="server" ID="BtnPostNoSerch4" CssClass="Btn11" Text="郵便番号検索" OnClick="BtnPostNoSerch4_Click" />
+
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                    <asp:TableRow>
+                                        <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
+                    <p>得意先住所</p>
+                                        </asp:TableCell>
+                                        <asp:TableCell ColumnSpan="2" CssClass="waku">
+                                            <asp:TextBox runat="server" ID="TbxTokuisakiAddress" Width="200px"></asp:TextBox>
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                    <asp:TableRow>
+                                        <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
+                    <p>得意先住所2</p>
+                                        </asp:TableCell>
+                                        <asp:TableCell ColumnSpan="2" CssClass="waku">
+                                            <asp:TextBox runat="server" ID="TbxTokuisakiAddress1" Width="200px"></asp:TextBox>
+                                        </asp:TableCell>
+
+                                    </asp:TableRow>
+                                    <asp:TableRow>
+                                        <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
+                    <p>電話番号</p>
+                                        </asp:TableCell>
+                                        <asp:TableCell ColumnSpan="2" CssClass="waku">
+                                            <asp:TextBox runat="server" ID="TbxTokuisakiTEL"></asp:TextBox>
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                    <asp:TableRow>
+                                        <asp:TableCell ColumnSpan="3">
+                                            <asp:Button runat="server" ID="BtnCopy1" Text="郵便番号、住所、電話番号をコピーする" OnClick="BtnCopy1_Click" />
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                    <asp:TableRow>
+                                        <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
+                   <p>FAX</p>
+                                        </asp:TableCell>
+                                        <asp:TableCell ColumnSpan="2" CssClass="waku">
+                                            <asp:TextBox runat="server" ID="TbxTokuisakiFax"></asp:TextBox>
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                    <asp:TableRow>
+                                        <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
+                    <p>担当部署</p>
+                                        </asp:TableCell>
+                                        <asp:TableCell ColumnSpan="2" CssClass="waku">
+                                            <asp:TextBox runat="server" ID="TbxTokuisakiDepartment"></asp:TextBox>
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                    <asp:TableRow>
+                                        <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
+                    <p>税区分<span style="color: red">*</span></p>
+                                        </asp:TableCell>
+                                        <asp:TableCell ColumnSpan="2" CssClass="waku">
+                                            <telerik:RadComboBox runat="server" ID="RcbTax">
+                                                <Items>
+                                                    <telerik:RadComboBoxItem Text="" Value="" />
+                                                    <telerik:RadComboBoxItem Text="税込" Value="税込" />
+                                                    <telerik:RadComboBoxItem Text="税抜" Value="税抜" />
+                                                </Items>
+                                            </telerik:RadComboBox>
+                                        </asp:TableCell>
+
+                                    </asp:TableRow>
+                                    <asp:TableRow>
+                                        <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
+                    <p>掛率<span style="color: red">*</span></p>
+                                        </asp:TableCell>
+                                        <asp:TableCell ColumnSpan="2" CssClass="waku">
+                                            <asp:TextBox runat="server" ID="TbxKakeritsu"></asp:TextBox>
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                    <asp:TableRow>
+                                        <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
+                    <p>締日<span style="color: red">*</span></p>
+                                        </asp:TableCell>
+                                        <asp:TableCell ColumnSpan="2" CssClass="waku">
+                                            <telerik:RadComboBox runat="server" ID="RcbShimebi">
+                                                <Items>
+                                                    <telerik:RadComboBoxItem Text="" Value="" />
+                                                    <telerik:RadComboBoxItem Text="都度" Value="都度" />
+                                                    <telerik:RadComboBoxItem Text="月末" Value="月末" />
+                                                    <telerik:RadComboBoxItem Text="20日締め" Value="20" />
+                                                </Items>
+                                            </telerik:RadComboBox>
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                    <asp:TableRow>
+                                        <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
+                    <p>担当スタッフ名</p>
+                                        </asp:TableCell>
+                                        <asp:TableCell ColumnSpan="2" CssClass="waku">
+                                            <telerik:RadComboBox runat="server" ID="RadComboBox5" OnItemsRequested="RadComboBox5_ItemsRequested" EnableLoadOnDemand="true" AllowCustomText="true" OnSelectedIndexChanged="RadComboBox5_SelectedIndexChanged"></telerik:RadComboBox>
+                                        </asp:TableCell>
+
+                                    </asp:TableRow>
+                                    <asp:TableRow>
+                                        <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
+                    <p>担当スタッフNo.<span style="color: red">*</span></p>
+                                        </asp:TableCell>
+                                        <asp:TableCell ColumnSpan="2" CssClass="waku">
+                                            <asp:Label runat="server" ID="LblTantoStaffCode"></asp:Label>
+                                            <asp:HiddenField runat="server" ID="HidTantoStaffCode" />
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                    <asp:TableRow>
+                                        <asp:TableCell ColumnSpan="4">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <asp:Button runat="server" ID="BtnToMaster" Text="得意先マスターに移動" OnClick="BtnToMaster_Click" Width="180px" CssClass="Btn11" />
+                                                    </td>
+                                                    <td>
+                                                        <%--                                                        <asp:Button runat="server" ID="BtnTouroku" Text="見積ヘッダーに適応" OnClick="BtnTouroku_Click" CssClass="Btn10" Width="180px" />--%>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                </asp:Table>
+                            </td>
+                            <td style="vertical-align: top">
+                                <table>
+                                    <tr>
+                                        <td style="vertical-align: top">
+                                            <asp:Table runat="server" ID="TBSeikyusaki" CaptionAlign="Top">
+                                                <asp:TableRow>
+                                                    <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
+                    <p>顧客コード<span style="color: red">*</span></p>
+                                                    </asp:TableCell>
+                                                    <asp:TableCell ColumnSpan="2" CssClass="waku">
+                                                        <asp:TextBox runat="server" ID="TbxCustomerCode2"></asp:TextBox>
+                                                    </asp:TableCell>
+                                                </asp:TableRow>
+                                                <asp:TableRow>
+                                                    <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
+                    <p>得意先コード<span style="color: red">*</span></p>
+                                                    </asp:TableCell>
+                                                    <asp:TableCell ColumnSpan="2" CssClass="waku">
+                                                        <asp:TextBox runat="server" ID="TbxTokuisakiCode2"></asp:TextBox>
+                                                    </asp:TableCell>
+
+                                                </asp:TableRow>
+                                                <asp:TableRow>
+                                                    <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
+                    <p>請求先名<span style="color: red">*</span></p>
+                                                    </asp:TableCell>
+                                                    <asp:TableCell ColumnSpan="2" CssClass="waku">
+                                                        <telerik:RadComboBox ID="RcbSeikyusaki" runat="server" AllowCustomText="True" EnableLoadOnDemand="True" ShowMoreResultsBox="True" ShowToggleImage="False" EnableVirtualScrolling="True" OnItemsRequested="RadComboBox3_ItemsRequested" Width="300px" OnClientSelectedIndexChanged="SeikyusakiSelected"></telerik:RadComboBox>
+                                                        <p style="font-size: 10px">請求先として印刷時に反映されます。</p>
+                                                    </asp:TableCell>
+                                                </asp:TableRow>
+                                                <asp:TableRow>
+                                                    <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
+                    <p>請求先フリガナ</p>
+                                                    </asp:TableCell>
+                                                    <asp:TableCell ColumnSpan="2" CssClass="waku">
+                                                        <asp:TextBox runat="server" ID="TbxTokuisakiFurigana2"></asp:TextBox>
+                                                    </asp:TableCell>
+
+                                                </asp:TableRow>
+                                                <asp:TableRow>
+                                                    <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
+                    <p>請求先略称<span style="color: red">*</span></p>
+                                                    </asp:TableCell>
+                                                    <asp:TableCell ColumnSpan="2" CssClass="waku">
+                                                        <asp:TextBox runat="server" ID="TbxTokuisakiRyakusyou2"></asp:TextBox><br />
+                                                        <p style="font-size: 10px">請求先として画面上に反映されます。</p>
+                                                    </asp:TableCell>
+                                                </asp:TableRow>
+                                                <asp:TableRow>
+                                                    <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
+                   <p>請求先担当者名</p>
+                                                    </asp:TableCell>
+                                                    <asp:TableCell ColumnSpan="2" CssClass="waku">
+                                                        <asp:TextBox runat="server" ID="TbxTokuisakiStaff2"></asp:TextBox>
+                                                    </asp:TableCell>
+
+                                                </asp:TableRow>
+                                                <asp:TableRow>
+                                                    <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
+                    <p>郵便番号</p>
+                                                    </asp:TableCell>
+                                                    <asp:TableCell ColumnSpan="2" CssClass="waku">
+                                                        <asp:TextBox runat="server" ID="TbxPostNo2"></asp:TextBox>
+                                                        <asp:Button runat="server" ID="BtnPostNoSerch3" CssClass="Btn11" Text="郵便番号検索" OnClick="BtnPostNoSerch3_Click" />
+
+                                                    </asp:TableCell>
+                                                </asp:TableRow>
+                                                <asp:TableRow>
+                                                    <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
+                    <p>請求先住所</p>
+                                                    </asp:TableCell>
+                                                    <asp:TableCell ColumnSpan="2" CssClass="waku">
+                                                        <asp:TextBox runat="server" ID="TbxTokuisakiAddress2" Width="200px"></asp:TextBox>
+                                                    </asp:TableCell>
+                                                </asp:TableRow>
+                                                <asp:TableRow>
+                                                    <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
+                    <p>請求先住所2</p>
+                                                    </asp:TableCell>
+                                                    <asp:TableCell ColumnSpan="2" CssClass="waku">
+                                                        <asp:TextBox runat="server" ID="TbxTokuisakiAddress3" Width="200px"></asp:TextBox>
+                                                    </asp:TableCell>
+
+                                                </asp:TableRow>
+                                                <asp:TableRow>
+                                                    <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
+                    <p>電話番号</p>
+                                                    </asp:TableCell>
+                                                    <asp:TableCell ColumnSpan="2" CssClass="waku">
+                                                        <asp:TextBox runat="server" ID="TbxTel2"></asp:TextBox>
+                                                    </asp:TableCell>
+                                                </asp:TableRow>
+                                                <asp:TableRow>
+                                                    <asp:TableCell ColumnSpan="3">
+                                                        <asp:Button runat="server" ID="BtnCopy2" Text="郵便番号、住所、電話番号をコピーする" OnClick="BtnCopy2_Click" />
+                                                    </asp:TableCell>
+                                                </asp:TableRow>
+                                                <asp:TableRow>
+                                                    <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
+                   <p>FAX</p>
+                                                    </asp:TableCell>
+                                                    <asp:TableCell ColumnSpan="2" CssClass="waku">
+                                                        <asp:TextBox runat="server" ID="TbxFAX2"></asp:TextBox>
+                                                    </asp:TableCell>
+
+                                                </asp:TableRow>
+                                                <asp:TableRow>
+                                                    <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
+                    <p>担当部署</p>
+                                                    </asp:TableCell>
+                                                    <asp:TableCell ColumnSpan="2" CssClass="waku">
+                                                        <asp:TextBox runat="server" ID="TbxDepartment2"></asp:TextBox>
+                                                    </asp:TableCell>
+                                                </asp:TableRow>
+                                                <asp:TableRow>
+                                                    <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
+                    <p>税区分<span style="color: red">*</span></p>
+                                                    </asp:TableCell>
+                                                    <asp:TableCell ColumnSpan="2" CssClass="waku">
+                                                        <telerik:RadComboBox runat="server" ID="RcbZeikubun2">
+                                                            <Items>
+                                                                <telerik:RadComboBoxItem Text="" Value="" />
+                                                                <telerik:RadComboBoxItem Text="税込" Value="税込" />
+                                                                <telerik:RadComboBoxItem Text="税抜" Value="税抜" />
+                                                            </Items>
+                                                        </telerik:RadComboBox>
+                                                    </asp:TableCell>
+                                                </asp:TableRow>
+                                                <asp:TableRow>
+                                                    <%--                <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
+                    <p>掛率<span style="color: red">*</span></p>
+                </asp:TableCell>
+                <asp:TableCell ColumnSpan="2" CssClass="waku">
+                    <asp:TextBox runat="server" ID="TbxKakeritsu2"></asp:TextBox>
+                </asp:TableCell>--%>
+                                                    <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
+                    <p>締日<span style="color: red">*</span></p>
+                                                    </asp:TableCell>
+                                                    <asp:TableCell ColumnSpan="2" CssClass="waku">
+                                                        <telerik:RadComboBox runat="server" ID="RadShimebi2">
+                                                            <Items>
+                                                                <telerik:RadComboBoxItem Text="" Value="" />
+                                                                <telerik:RadComboBoxItem Text="都度" Value="都度" />
+                                                                <telerik:RadComboBoxItem Text="月末" Value="月末" />
+                                                                <telerik:RadComboBoxItem Text="20日締め" Value="20" />
+                                                            </Items>
+                                                        </telerik:RadComboBox>
+                                                    </asp:TableCell>
+                                                </asp:TableRow>
+                                                <asp:TableRow>
+                                                    <asp:TableCell ColumnSpan="4" CssClass="waku">
+                                                        <table>
+                                                            <tr>
+                                                                <td>
+                                                                    <asp:Button runat="server" ID="BtnToMasterS" Text="得意先マスターに移動" OnClick="BtnToMasterS_Click" Width="180px" CssClass="Btn11" />
+                                                                </td>
+                                                                <td>
+                                                                    <%--                                                                    <asp:Button runat="server" ID="BtnSekyu" Text="見積ヘッダーに適応" OnClick="BtnSekyu_Click" CssClass="Btn10" Width="180px" />--%>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </asp:TableCell>
+                                                </asp:TableRow>
+                                                <%--            <asp:TableRow>
+                <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
+                    <p>担当スタッフNo.<span style="color: red">*</span></p>
+                </asp:TableCell>
+                <asp:TableCell ColumnSpan="2" CssClass="waku">
+                    <asp:Label runat="server" ID="LblTantoStaffNo2"></asp:Label>
+                    <asp:HiddenField runat="server" ID="HidTantoStaffCode2" />
+                </asp:TableCell>
+                <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
+                    <p>担当スタッフ名</p>
+                </asp:TableCell>
+                <asp:TableCell ColumnSpan="2" CssClass="waku">
+                    <telerik:RadComboBox runat="server" ID="RcbStaffName" OnItemsRequested="RadComboBox5_ItemsRequested" EnableLoadOnDemand="true" AllowCustomText="true" AutoPostBack="true" OnSelectedIndexChanged="RadComboBox5_SelectedIndexChanged"></telerik:RadComboBox>
+                </asp:TableCell>
+            </asp:TableRow>--%>
+                                            </asp:Table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td style="vertical-align: top">
+                                <table runat="server" id="TBNouhinsaki">
+                                    <tr>
+                                        <td runat="server" class="MiniTitle">
+                                            <p>施設No.<span style="color: red">*</span></p>
+                                        </td>
+                                        <td runat="server" class="waku">
+                                            <asp:TextBox runat="server" ID="TbxNouhinSisetsu"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td runat="server" class="MiniTitle">
+                                            <p>施設行コード</p>
+                                        </td>
+                                        <td runat="server" class="waku">
+                                            <asp:TextBox runat="server" ID="TbxCode"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td runat="server" class="MiniTitle">
+                                            <p>直送先名</p>
+                                        </td>
+                                        <td class="waku">
+                                            <telerik:RadComboBox runat="server" ID="RcbNouhinsakiMei" OnItemsRequested="RcbNouhinsakiMei_ItemsRequested" AllowCustomText="false" EnableLoadOnDemand="True" ShowMoreResultsBox="True" ShowToggleImage="False" EnableVirtualScrolling="True" OnClientSelectedIndexChanged="Nouhinsaki2"></telerik:RadComboBox>
+                                            <br />
+                                            <p style="font-size: 10px">納品先として印刷時に反映されます。</p>
+                                            <script type="text/javascript"><%=RcbNouhinsakiMei.ClientID%><%=RadComboBox2.ClientID%></script>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td runat="server" class="MiniTitle">
+                                            <p>直送先名2</p>
+                                        </td>
+                                        <td class="waku">
+                                            <asp:TextBox runat="server" ID="TbxNouhinTyokusousakiMei2"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td runat="server" class="MiniTitle">
+                                            <p>略称</p>
+                                        </td>
+                                        <td class="waku">
+                                            <asp:TextBox runat="server" ID="TbxNouhinsakiRyakusyou"></asp:TextBox><br />
+                                            <p style="font-size: 10px">納品先として画面上に反映されます。</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td runat="server" class="MiniTitle">
+                                            <p>担当</p>
+                                        </td>
+                                        <td class="waku">
+                                            <asp:TextBox runat="server" ID="TbxNouhinsakiTanto"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td runat="server" class="MiniTitle">
+                                            <p>郵便番号</p>
+                                        </td>
+                                        <td class="waku">
+                                            <asp:TextBox runat="server" ID="TbxNouhinsakiYubin"></asp:TextBox>
+                                            <asp:Button runat="server" ID="BtnPostNoSerch2" CssClass="Btn11" Text="郵便番号検索" OnClick="BtnPostNoSerch2_Click" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td runat="server" class="MiniTitle">
+                                            <p>住所1</p>
+                                        </td>
+                                        <td class="waku">
+                                            <asp:TextBox runat="server" ID="TbxNouhinsakiAddress"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td runat="server" class="MiniTitle">
+                                            <p>住所2</p>
+                                        </td>
+                                        <td class="waku">
+                                            <asp:TextBox runat="server" ID="TbxNouhinsakiAddress2"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td runat="server" class="MiniTitle">
+                                            <p>市町村コード</p>
+                                        </td>
+                                        <td class="waku">
+                                            <telerik:RadComboBox runat="server" ID="RcbNouhinsakiCity"></telerik:RadComboBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td runat="server" class="MiniTitle">
+                                            <p>電話番号</p>
+                                        </td>
+                                        <td class="waku">
+                                            <asp:TextBox runat="server" ID="TbxNouhinsakiTell"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <asp:Button runat="server" ID="BtnCopy3" Text="郵便番号、住所、電話番号をコピーする" OnClick="BtnCopy3_Click" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td runat="server" class="MiniTitle">
+                                            <p>敬称</p>
+                                        </td>
+                                        <td class="waku">
+                                            <asp:TextBox runat="server" ID="TbxNouhinsakiKeisyo"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="waku">
+                                            <asp:Button runat="server" ID="BtnNouhinMasta" OnClick="BtnNouhinMasta_Click" Text="納品先マスタに移動" CssClass="Btn11" Width="150px" />
+                                        </td>
+                                        <td class="waku">
+                                            <%--                                            <asp:Button runat="server" ID="BtnNouhisakiTekiou" OnClick="BtnNouhisakiTekiou_Click" Text="見積ヘッダーに適応" CssClass="Btn10" Width="150px" />--%>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </td>
+                            <td style="vertical-align: top">
+                                <table runat="server" id="TBFacilityDetail">
+                                    <tr>
+                                        <td class="MiniTitle" style="width: 120px; height: 20px;">
+                                            <p>施設No.<span style="color: red;">*</span></p>
+                                        </td>
+                                        <td class="waku">
+                                            <asp:TextBox ID="TbxFacilityCode" runat="server"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="MiniTitle" style="width: 120px; height: 20px;">
+                                            <p>施設行コード<span style="color: red;">*</span></p>
+                                        </td>
+                                        <td class="waku">
+                                            <asp:TextBox ID="TbxFacilityRowCode" runat="server"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="MiniTitle" style="width: 120px; height: 20px;">
+                                            <p>施設名1<span style="color: red;">*</span></p>
+                                        </td>
+                                        <td class="waku">
+                                            <telerik:RadComboBox runat="server" ID="RcbFacility" OnItemsRequested="RcbFacility_ItemsRequested" OnClientSelectedIndexChanged="FacilitySelected" Culture="ja-JP" AllowCustomText="True" EnableLoadOnDemand="True" ShowMoreResultsBox="True" ShowToggleImage="False" EnableVirtualScrolling="True"></telerik:RadComboBox>
+                                            <script type="text/javascript"></script>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="MiniTitle" style="width: 120px; height: 20px;">
+                                            <p>施設名2</p>
+                                        </td>
+                                        <td class="waku">
+                                            <asp:TextBox ID="TbxFacilityName2" runat="server"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="MiniTitle" style="width: 120px; height: 20px;">
+                                            <p>施設名略称<span style="color: red;">*</span></p>
+                                        </td>
+                                        <td class="waku">
+                                            <asp:TextBox ID="TbxFaci" runat="server"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="MiniTitle" style="width: 120px; height: 20px;">
+                                            <p>施設担当者名</p>
+                                        </td>
+                                        <td class="waku">
+                                            <asp:TextBox runat="server" ID="TbxFacilityResponsible"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="MiniTitle" style="width: 120px; height: 20px;">
+                                            <p>郵便番号</p>
+                                        </td>
+                                        <td class="waku">
+                                            <asp:TextBox ID="TbxYubin" runat="server"></asp:TextBox>
+                                            <asp:Button runat="server" ID="BtnPostNoSerch" Text="郵便番号検索" OnClick="BtnPostNoSerch_Click" CssClass="Btn11" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="MiniTitle" style="width: 120px; height: 20px;">
+                                            <p>住所1<span style="color: red;">*</span></p>
+                                        </td>
+                                        <td class="waku">
+                                            <asp:TextBox ID="TbxFaciAdress1" runat="server"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="MiniTitle" style="width: 120px; height: 20px;">
+                                            <p>住所2<span style="color: red;">*</span></p>
+                                        </td>
+                                        <td class="waku">
+                                            <asp:TextBox ID="TbxFaciAdress2" runat="server"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="MiniTitle" style="width: 120px; height: 20px;">
+                                            <p>市町村コード</p>
+                                        </td>
+                                        <td class="waku">
+                                            <telerik:RadComboBox runat="server" ID="RcbCity" AllowCustomText="True" EnableLoadOnDemand="True" ShowMoreResultsBox="True" ShowToggleImage="False" EnableVirtualScrolling="True" placeholder="市町村名を入力"></telerik:RadComboBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="MiniTitle" style="width: 120px; height: 20px;">
+                                            <p>電話番号</p>
+                                        </td>
+                                        <td class="waku">
+                                            <asp:TextBox ID="TbxTel" runat="server"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <asp:Button runat="server" ID="BtnCopy4" Text="郵便番号、住所、電話番号をコピーする" OnClick="BtnCopy4_Click" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td runat="server" class="MiniTitle">
+                                            <p>敬称</p>
+                                        </td>
+                                        <td class="waku">
+                                            <asp:TextBox runat="server" ID="TbxKeisyo"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <asp:Button runat="server" ID="BtnFacilityMaster" Text="直送先・施設マスタに移動" CssClass="Btn11" Width="160px" />
+                                        </td>
+                                        <td>
+                                            <%--                                            <asp:Button runat="server" ID="BtnHeaderFit" Text="見積ヘッダーに適応" CssClass="Btn10" Width="150px" OnClick="BtnHeaderFit_Click" />--%>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </asp:TableCell>
+            </asp:TableRow>
+        </asp:Table>
+        <script type="text/javascript">
+            function Check() {
+                var bool;
+                var Err = document.getElementById('Err');
+                var RadComboCategory = $find('RadComboCategory');
+                var RadComboBox1 = $find('RadComboBox1');
+                var RadComboBox3 = $find('RadComboBox3');
+                var FacilityRad = $find('FacilityRad');
+                var RadDatePicker3 = $find('RadDatePicker3');
+                var RadDatePicker4 = $find('RadDatePicker4');
+                var label3 = document.getElementById("Label3");
+                var shimebi = document.getElementById("Shimebi");
+                var CtrlSyousai = "CtrlSyousai";
+                var ctl = "ctl";
+                var Syosai = "Syosai";
+
+                if (RadComboCategory.get_selectedItem().get_value() != "") {
+                    switch (RadComboCategory.get_selectedItem().get_value()) {
+                        case '101':
+                        case '102':
+                        case '103':
+                        case '199':
+                            if (RadComboBox1.get_text() != "") {
+                            }
+                            else {
+                                debugger;
+                                RadComboBox1._element.style.border = "solid 1px red";
+                                bool = false;
+                                break;
+                            }
+                            if (FacilityRad.get_text() != "") {
+
+                            }
+                            else {
+                                debugger;
+                                FacilityRad._element.style.border = "solid 1px red";
+                                bool = false;
+                            }
+                            if (label3.value != "") {
+
+                            }
+                            else {
+                                label3.value = "掛率が表示されていません。得意先詳細を確認して下さい。";
+                                label3.style.color = "red";
+                                bool = false;
+                            }
+                            if (shimebi.value != "") {
+
+                            }
+                            else {
+                                shimebi.value = "締日が表示されていません。得意先詳細を確認して下さい";
+                                shimebi.style.color = "red";
+                                bool = false;
+                            }
+                        default:
+                            if (RadComboBox1.get_text() != "") {
+                            }
+                            else {
+                                debugger;
+                                RadComboBox1._element.style.border = "solid 1px red";
+                                bool = false;
+                            }
+                            if (FacilityRad.get_text() != "") {
+
+                            }
+                            else {
+                                debugger;
+                                FacilityRad._element.style.border = "solid 1px red";
+                                bool = false;
+                            }
+                            if (label3.value != "") {
+
+                            }
+                            else {
+                                label3.value = "掛率が表示されていません。得意先詳細を確認して下さい。";
+                                label3.style.color = "red";
+                                bool = false;
+                            }
+                            if (shimebi.value != "") {
+
+                            }
+                            else {
+                                shimebi.value = "締日が表示されていません。得意先詳細を確認して下さい";
+                                shimebi.style.color = "red";
+                                bool = false;
+                            }
+                    }
+                }
+                else {
+                    Err.innerText = "カテゴリーを選択して下さい";
+                    bool = false;
+                }
+                var dg = document.getElementById('CtrlSyousai');
+                var c = dg.rows.length;
+                for (var i = 1; i < c; i++) {
+                    var x = i + 1;
+                    var SerchProduct = $find(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "SerchProduct");
+                    var Baitai = document.getElementById(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "Baitai");
+                    var HyoujyunTanka = document.getElementById(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "HyoujyunTanka");
+                    var Kingaku = document.getElementById(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "Kingaku");
+                    var Tanka = document.getElementById(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "Tanka");
+                    var Uriage = document.getElementById(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "Uriage");
+                    var ShiyouShisetsu = $find(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "ShiyouShisetsu");
+                    var StartDate = $find(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "StartDate");
+                    var EndDate = $find(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "EndDate");
+                    var Kakeri = document.getElementById(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "Kakeri");
+                    var zeiku = document.getElementById(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "zeiku");
+                    var Hachu = $find(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "Hachu");
+                    var WareHouse = document.getElementById(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "WareHouse");
+                    var ShiireTanka = document.getElementById(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "ShiireTanka");
+                    var ShiireKingaku = document.getElementById(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "ShiireKingaku");
+                    var RcbHanni = $find(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "RcbHanni");
+                    var Zasu = $find(CtrlSyousai + "_" + ctl + "0" + x + "_" + Syosai + "_" + "Zasu");
+                    debugger;
+                    var catecode = RadComboCategory.get_selectedItem().get_value();
+                    switch (catecode) {
+                        case '101':
+                        case '102':
+                        case '103':
+                        case '199':
+                        case '205':
+                            if (StartDate.get_selectedDate.get_value == "") {
+                                StartDate._element.style.border = "solid 1px red";
+                                bool = false;
+                            }
+                            if (EndDate.get_selectedDate.get_value == "") {
+                                EndDate._element.style.border = "solid 1px red";
+                                bool = false;
+                            }
+                            if (RcbHanni.get_text == "") {
+                                RcbHanni._element.style.border = "solid 1px red";
+                                bool = false;
+                            }
+                            if (Zasu.get_text == "") {
+                                Zasu._element.style.border = "solid 1px red";
+                                bool = false;
+                            }
+                            break;
+                        default:
+                            if (StartDate.get_selectedDate.get_value == "") {
+                                StartDate._element.style.border = "solid 1px red";
+                                bool = false;
+                            }
+                            if (EndDate.get_selectedDate.get_value == "") {
+                                EndDate._element.style.border = "solid 1px red";
+                                bool = false;
+                            }
+                    }
+                    if (SerchProduct.get_text() == "") {
+                        SerchProduct._element.style.border = "solid 1px red";
+                        bool = false;
+                    }
+                    if (Baitai.value == "") {
+                        Baitai.value = "媒体が表示されていません。商品詳細を確認して下さい。";
+                        bool = false;
+                    }
+                    if (HyoujyunTanka.value == "") {
+                        HyoujyunTanka.style.border = "solid 1px red";
+                        bool = false;
+                    }
+                    if (Kingaku.value == "") {
+                        Kingaku.style.border = "solid 1px red";
+                        bool = false;
+                    }
+                    if (Tanka.value == "") {
+                        Tanka.style.border = "solid 1px red";
+                        bool = false;
+                    }
+                    if (Uriage.value == "") {
+                        Uriage.style.border = "solid 1px red";
+                        bool = false;
+                    }
+                    if (ShiyouShisetsu.get_text() == "") {
+                        ShiyouShisetsu._element.style.border = "solid 1px red";
+                        bool = false;
+                    }
+                    if (Kakeri.value == "") {
+                        Kakeri.value = "掛率が表示されていません。得意先詳細を確認してください。";
+                        bool = false;
+                    }
+                    if (zeiku.value == "") {
+                        zeiku.value = "税区分が表示されていません。得意先詳細を確認してください。";
+                        bool = false;
+                    }
+                    if (WareHouse.value == "") {
+                        WareHouse.value = "倉庫が表示されていません。商品詳細を確認してください。";
+                        bool = false;
+                    }
+                    if (ShiireTanka.value == "") {
+                        ShiireTanka.style.border = "solid 1px red";
+                        bool = false;
+                    }
+                    if (ShiireKingaku.value == "") {
+                        ShiireKingaku.style.border = "solid 1px red";
+                        bool = false;
+                    }
+                }
+                debugger;
+                if (bool == false) {
+                    Err.innerText = "赤枠を入力して下さい";
+                    return false;
+                }
+            }
+        </script>
+        <script type="text/javascript">
+            function A() {
+                var a1 = window.confirm('本当に削除しますか？');
+                if (a1 === true) {
+                    return (true)
+                }
+                else if (a1 === false) {
+                    return (false
+                    )
+                }
+            }
+        </script>
+        <script type="text/javascript">
+            function Meisai2(ss) {
+                debugger;
+                document.getElementById(ss).style.display = "";
+                document.getElementById("mInput2").style.display = "none";
+                document.getElementById("CtrlSyousai").style.display = "none";
+                document.getElementById("head").style.display = "none";
+                document.getElementById("TBAddRow").style.display = "none";
+                document.getElementById("SubMenu").style.display = "none";
+                document.getElementById("SubMenu2").style.display = "";
+                document.getElementById("DivDataGrid").style.display = "none";
+
+                debugger;
+            }
+        </script>
+        <script type="text/javascript">
+            function Close2(ss) {
+                debugger;
+                document.getElementById(ss).style.display = "none";
+                document.getElementById("mInput2").style.display = "";
+                document.getElementById("CtrlSyousai").style.display = "";
+                document.getElementById("head").style.display = "";
+                document.getElementById("Button13").style.display = "";
+                document.getElementById("SubMenu").style.display = "";
+                document.getElementById("SubMenu2").style.display = "none";
+                document.getElementById("DivDataGrid").style.display = "";
+
+                debugger;
+            }
+        </script>
+        <script type="text/javascript">
+            function TokuisakiSelect(sender, eventArgs) {
+                var id = sender.get_element().id;
+                var rcbTokuisaki = $find(id);
+                var selectedvalue = rcbTokuisaki.get_selectedItem().get_value();
+                var AryValue = selectedvalue.split(',');
+                var CustomerCode = AryValue[0];
+                var TokuisakiCode = AryValue[1];
+                var TokuisakiName1 = AryValue[2];
+                var TantoStaffCode = AryValue[5];
+                var TokuisakiFurifana = AryValue[6];
+                var TokuisakiRyakusyo = AryValue[7];
+                var TokuisakiPostNo = AryValue[8];
+                var TokuisakiAddress1 = AryValue[9];
+                var TokuisakiAddress2 = AryValue[10];
+                var TokuisakiTEL = AryValue[11];
+                var TokuisakiFAX = AryValue[12];
+                var TokuisakiStaff = AryValue[13];
+                var TokuisakiDepartment = AryValue[14];
+                var Kakeritsu = AryValue[16];
+                var Shimebi = AryValue[17];
+                var Zeikubun = AryValue[19];
+
+                //得意先を選択した際に入力される内容
+                var RadComboBox3 = $find('RadComboBox3');
+                var shimebi = document.getElementById('Shimebi');
+                var RadZeiKubun = $find('RadZeiKubun');
+                var TbxCustomer = document.getElementById('TbxCustomer');
+                var TbxTokuisakiCode = document.getElementById('TbxTokuisakiCode');
+                var TbxTokuisakiName = $find('RcbTokuisakiNameSyousai');
+                var TbxTokuisakiFurigana = document.getElementById('TbxTokuisakiFurigana');
+                var TbxTokuisakiRyakusyo = document.getElementById('TbxTokuisakiRyakusyo');
+                var TbxTokuisakiStaff = document.getElementById('TbxTokuisakiStaff');
+                var TbxTokuisakiPostNo = document.getElementById('TbxTokuisakiPostNo');
+                var TbxTokuisakiAddress = document.getElementById('TbxTokuisakiAddress');
+                var TbxTokuisakiAddress1 = document.getElementById('TbxTokuisakiAddress1');
+                var TbxTokuisakiTEL = document.getElementById('TbxTokuisakiTEL');
+                var TbxTokuisakiFax = document.getElementById('TbxTokuisakiFax');
+                var TbxTokuisakiDepartment = document.getElementById('TbxTokuisakiDepartment');
+                var RcbTax = $find('RcbTax');
+                var TbxKakeritsu = document.getElementById('TbxKakeritsu');
+                var RcbShimebi = $find('RcbShimebi');
+                var HidShimebi = document.getElementById("HidShimebi");
+                var LblTantoStaffCode = document.getElementById("<%=LblTantoStaffCode.ClientID%>");
+                var HidTantoStaffCode = document.getElementById("<%=HidTantoStaffCode.ClientID%>");
+                var HidKakeritsu = document.getElementById("<%=HidKakeritsu.ClientID%>");
+                const Textbox12 = document.getElementById("<%=UriageGokei.ClientID%>");
+                //請求先詳細にもまず記載する
+                var TbxCustomerCode2 = document.getElementById('TbxCustomerCode2');
+                var TbxTokuisakiCode2 = document.getElementById('TbxTokuisakiCode2');
+                var RcbSeikyusaki = $find('RcbSeikyusaki');
+                var TbxTokuisakiFurigana2 = document.getElementById('TbxTokuisakiFurigana2');
+                var TbxTokuisakiRyakusyou2 = document.getElementById('TbxTokuisakiRyakusyou2');
+                var TbxTokuisakiStaff2 = document.getElementById('TbxTokuisakiStaff2');
+                var TbxPostNo2 = document.getElementById('TbxPostNo2');
+                var TbxTokuisakiAddress2 = document.getElementById('TbxTokuisakiAddress2');
+                var TbxTokuisakiAddress3 = document.getElementById('TbxTokuisakiAddress3');
+                var TbxTel2 = document.getElementById('TbxTel2');
+                var TbxFAX2 = document.getElementById('TbxFAX2');
+                var TbxDepartment2 = document.getElementById('TbxDepartment2');
+                var RcbZeikubun2 = $find("RcbZeikubun2");
+                var RadShimebi2 = $find('RadShimebi2');
+
+                //入力
+                RadComboBox3.set_text(TokuisakiRyakusyo);
+                HidKakeritsu.value = Kakeritsu;
+                debugger;
+                shimebi.innerText = Shimebi;
+                HidShimebi.value = Shimebi;
+                RadZeiKubun.set_text(Zeikubun);
+                TbxCustomer.value = CustomerCode;
+                TbxTokuisakiCode.value = TokuisakiCode;
+                TbxTokuisakiName.set_text(TokuisakiName1);
+                TbxTokuisakiFurigana.value = TokuisakiFurifana;
+                TbxTokuisakiRyakusyo.value = TokuisakiRyakusyo;
+                TbxTokuisakiStaff.value = TokuisakiStaff;
+                TbxTokuisakiPostNo.value = TokuisakiPostNo;
+                TbxTokuisakiAddress.value = TokuisakiAddress1;
+                TbxTokuisakiAddress1.value = TokuisakiAddress2;
+                TbxTokuisakiTEL.value = TokuisakiTEL;
+                TbxTokuisakiFax.value = TokuisakiFAX;
+                TbxTokuisakiDepartment.value = TokuisakiDepartment;
+                RcbTax.set_text(Zeikubun);
+                TbxKakeritsu.value = Kakeritsu;
+                RcbShimebi.set_text(Shimebi);
+                LblTantoStaffCode.innerText = TantoStaffCode;
+                HidTantoStaffCode.value = TantoStaffCode;
+                ////////請求先記載/////////////
+                TbxCustomerCode2.value = CustomerCode;
+                TbxTokuisakiCode2.value = TokuisakiCode;
+                RcbSeikyusaki.set_text(TokuisakiName1);
+                TbxTokuisakiFurigana2.value = TokuisakiFurifana;
+                TbxTokuisakiRyakusyou2.value = TokuisakiRyakusyo;
+                TbxTokuisakiStaff2.value = TokuisakiStaff;
+                TbxPostNo2.value = TokuisakiPostNo;
+                TbxTokuisakiAddress2.value = TokuisakiAddress1;
+                TbxTokuisakiAddress3.value = TokuisakiAddress2;
+                TbxTel2.value = TokuisakiTEL;
+                TbxFAX2.value = TokuisakiFAX;
+                TbxDepartment2.value = TokuisakiDepartment;
+                RcbZeikubun2.set_text(Zeikubun);
+                RadShimebi2.set_text(Shimebi);
+                rcbTokuisaki.clearItems();
+
+            }
+        </script>
+        <script type="text/javascript">
             function AddFocus(Fcs) {
                 var a = document.getElementById(Fcs);
                 debugger;
@@ -940,9 +1652,6 @@
                 debugger;
             }
         </script>
-
-        &nbsp;
-        <asp:Button ID="Button13" runat="server" Text="計算" CssClass="Btn11" OnClick="Keisan_Click" OnClientClick="Cul();" />
         <script type="text/javascript">
             function Cul() {
                 debugger;
@@ -1014,242 +1723,177 @@
                 window.scrollTo(0, 0);
             }
         </script>
+        <script type="text/javascript">
+            function Nouhinsaki2(sender, eventArgs) {
+                var selval = $find("<%=RadComboBox2.ClientID%>");
+                var val = selval.get_selectedItem().get_value();
+                var settext = $find("<%=RcbNouhinsakiMei.ClientID%>");
+                settext.set_text(selval.get_selectedItem().get_text());
 
-        <!--明細部分------------------------------------------------------------------------------------------------>
+                var Ary = val.split('/');
+                var TbxNouhinSisetsu = document.getElementById('TbxNouhinSisetsu');
+                var TbxCode = document.getElementById('TbxCode');
+                var TbxNouhinTyokusousakiMei2 = document.getElementById('TbxNouhinTyokusousakiMei2');
+                var TbxNouhinsakiRyakusyou = document.getElementById('TbxNouhinsakiRyakusyou');
+                var TbxNouhinsakiTanto = document.getElementById('TbxNouhinsakiTanto');
+                var TbxNouhinsakiYubin = document.getElementById('TbxNouhinsakiYubin');
+                var TbxNouhinsakiAddress = document.getElementById('TbxNouhinsakiAddress');
+                var TbxNouhinsakiAddress2 = document.getElementById('TbxNouhinsakiAddress2');
+                var TbxNouhinsakiTell = document.getElementById('TbxNouhinsakiTell');
+                var TbxNouhinsakiKeisyo = document.getElementById('TbxNouhinsakiKeisyo');
+                var RcbNouhinsakiCity = $find('RcbNouhinsakiCity');
+                var RcbNouhinsakiMei = $find('RcbNouhinsakiMei');
+                //施設にも
+                var FacilityRad = $find('FacilityRad');
+                var TbxFacilityCode = document.getElementById('TbxFacilityCode');
+                var TbxFacilityRowCode = document.getElementById('TbxFacilityRowCode');
+                var TbxFacilityName2 = document.getElementById('TbxFacilityName2');
+                var TbxFaci = document.getElementById('TbxFaci');
+                var TbxFacilityResponsible = document.getElementById('TbxFacilityResponsible');
+                var TbxYubin = document.getElementById('TbxYubin');
+                var TbxFaciAdress1 = document.getElementById('TbxFaciAdress1');
+                var TbxFaciAdress2 = document.getElementById('TbxFaciAdress2');
+                var TbxTel = document.getElementById('TbxTel');
+                var TbxKeisyo = document.getElementById('TbxKeisyo');
+                var RcbFacility = $find('RcbFacility');
+                var RcbCity = $find('RcbCity');
+
+                FacilityRad.set_text(Ary[4]);
+                FacilityRad.set_value(val);
+                TbxNouhinSisetsu.value = Ary[0];
+                TbxFacilityCode.value = Ary[0];
+                TbxCode.value = Ary[1];
+                TbxFacilityRowCode.value = Ary[1];
+                RcbNouhinsakiMei.set_text(Ary[2]);
+                RcbFacility.set_text(Ary[2]);
+                TbxNouhinTyokusousakiMei2.value = Ary[3];
+                TbxFacilityName2.value = Ary[3];
+                TbxNouhinsakiRyakusyou.value = Ary[4];
+                TbxFaci.value = Ary[4];
+                TbxNouhinsakiTanto.value = Ary[5];
+                TbxFacilityResponsible.value = Ary[5];
+                TbxNouhinsakiYubin.value = Ary[6];
+                TbxYubin.value = Ary[6];
+                TbxNouhinsakiAddress.value = Ary[7];
+                TbxFaciAdress1.value = Ary[7];
+                TbxNouhinsakiAddress2.value = Ary[8];
+                TbxFaciAdress2.value = Ary[8];
+                TbxNouhinsakiTell.value = Ary[9];
+                TbxTel.value = Ary[9];
+                RcbNouhinsakiCity.findItemByValue(Ary[10]).select();
+                RcbCity.findItemByValue(Ary[10]).select();
+                var faccombo = $find('CtrlSyousai_ctl02_Syosai_SerchProduct');
+                var input = faccombo.get_inputDomElement();
+                input.focus();
+                selval.clearItems();
+                settext.clearItems();
+            }
+        </script>
+        <script type="text/javascript">
+            function FacilitySelected(sender, eventArgs) {
+                var RcbFacility = $find('RcbFacility');
+                var selectedvalue = RcbFacility.get_selectedItem().get_value().split('/');
+                document.getElementById('TbxFacilityCode').value = selectedvalue[0];
+                document.getElementById('TbxFacilityRowCode').value = selectedvalue[1];
+                RcbFacility.set_text(selectedvalue[2]);
+                document.getElementById('TbxFacilityName2').value = selectedvalue[3];
+                document.getElementById('TbxFaci').value = selectedvalue[4];
+                document.getElementById('TbxFacilityResponsible').value = selectedvalue[5];
+                document.getElementById('TbxYubin').value = selectedvalue[6];
+                document.getElementById('TbxFaciAdress1').value = selectedvalue[7];
+                document.getElementById('TbxFaciAdress2').value = selectedvalue[8];
+                $find('RcbCity').set_value(selectedvalue[9]);
+                document.getElementById('TbxTel').value = selectedvalue[10];
+                document.getElementById('TbxKeisyo').value = selectedvalue[11];
+            }
+        </script>
+
+        <script type="text/javascript">
+            function SeikyusakiSelected(sender, eventArgs) {
+                var rcbTokuisaki = $find("<%=RadComboBox3.ClientID%>");
+                var selectedvalue = rcbTokuisaki.get_selectedItem().get_value();
+                var AryValue = selectedvalue.split(',');
+                var CustomerCode = AryValue[0];
+                var TokuisakiCode = AryValue[1];
+                var TokuisakiName1 = AryValue[2];
+                var TantoStaffCode = AryValue[5];
+                var TokuisakiFurifana = AryValue[6];
+                var TokuisakiRyakusyo = AryValue[7];
+                var TokuisakiPostNo = AryValue[8];
+                var TokuisakiAddress1 = AryValue[9];
+                var TokuisakiAddress2 = AryValue[10];
+                var TokuisakiTEL = AryValue[11];
+                var TokuisakiFAX = AryValue[12];
+                var TokuisakiStaff = AryValue[13];
+                var TokuisakiDepartment = AryValue[14];
+                var Kakeritsu = AryValue[16];
+                var Shimebi = AryValue[17];
+                var Zeikubun = AryValue[19];
+                var TbxCustomerCode2 = document.getElementById('TbxCustomerCode2');
+                var TbxTokuisakiCode2 = document.getElementById('TbxTokuisakiCode2');
+                var TbxTokuisakiMei2 = document.getElementById('TbxTokuisakiMei2');
+                var TbxTokuisakiFurigana2 = document.getElementById('TbxTokuisakiFurigana2');
+                var TbxTokuisakiRyakusyou2 = document.getElementById('TbxTokuisakiRyakusyou2');
+                var TbxTokuisakiStaff2 = document.getElementById('TbxTokuisakiStaff2');
+                var TbxPostNo2 = document.getElementById('TbxPostNo2');
+                var TbxTokuisakiAddress2 = document.getElementById('TbxTokuisakiAddress2');
+                var TbxTel2 = document.getElementById('TbxTel2');
+                var TbxFAX2 = document.getElementById('TbxFAX2');
+                var TbxDepartment2 = document.getElementById('TbxDepartment2');
+                var RcbZeikubun2 = $find("RcbZeikubun2");
+                //var TbxKakeritsu2 = document.getElementById('TbxKakeritsu2');
+                var RadShimebi2 = $find('RadShimebi2');
+                var HidTantoStaffCode2 = document.getElementById('HidTantoStaffCode2');
+                //var LblTantoStaffNo2 = document.getElementById('LblTantoStaffNo2');
 
 
-        <!-- 得意先詳細--------------------------------------------------------------------------------------->
-        <asp:Panel runat="server" ID="TokuisakiSyousai">
-            <div>
-                <asp:Table runat="server" ID="TBTokuisaki">
-                    <asp:TableRow>
-                        <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
-                    <p>顧客コード<span style="color: red">*</span></p>
-                        </asp:TableCell>
-                        <asp:TableCell ColumnSpan="2" CssClass="waku">
-                            <asp:TextBox runat="server" ID="TbxCustomer"></asp:TextBox>
-                        </asp:TableCell>
-                        <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
-                    <p>得意先コード<span style="color: red">*</span></p>
-                        </asp:TableCell>
-                        <asp:TableCell ColumnSpan="2" CssClass="waku">
-                            <asp:TextBox runat="server" ID="TbxTokuisakiCode"></asp:TextBox>
-                        </asp:TableCell>
-                    </asp:TableRow>
-                    <asp:TableRow>
-                        <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
-                    <p>得意先名<span style="color: red">*</span></p>
-                        </asp:TableCell>
-                        <asp:TableCell ColumnSpan="2" CssClass="waku">
-                            <asp:TextBox runat="server" ID="TbxTokuisakiName"></asp:TextBox>
-                        </asp:TableCell>
-                        <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
-                    <p>得意先フリガナ</p>
-                        </asp:TableCell>
-                        <asp:TableCell ColumnSpan="2" CssClass="waku">
-                            <asp:TextBox runat="server" ID="TbxTokuisakiFurigana"></asp:TextBox>
-                        </asp:TableCell>
-                    </asp:TableRow>
-                    <asp:TableRow>
-                        <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
-                    <p>得意先略称<span style="color: red">*</span></p>
-                        </asp:TableCell>
-                        <asp:TableCell ColumnSpan="2" CssClass="waku">
-                            <asp:TextBox runat="server" ID="TbxTokuisakiRyakusyo"></asp:TextBox>
-                        </asp:TableCell>
-                        <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
-                   <p>得意先担当者名</p>
-                        </asp:TableCell>
-                        <asp:TableCell ColumnSpan="2" CssClass="waku">
-                            <asp:TextBox runat="server" ID="TbxTokuisakiStaff"></asp:TextBox>
-                        </asp:TableCell>
+                TbxCustomerCode2.value = CustomerCode;
+                TbxTokuisakiCode2.value = TokuisakiCode;
+                TbxTokuisakiMei2.value = TokuisakiName1;
+                TbxTokuisakiFurigana2.value = TokuisakiFurifana;
+                TbxTokuisakiRyakusyou2.value = TokuisakiRyakusyo;
+                TbxTokuisakiStaff2.value = TokuisakiStaff;
+                TbxPostNo2.value = TokuisakiPostNo;
+                TbxTokuisakiAddress2.value = TokuisakiAddress1 + TokuisakiAddress2;
+                TbxTel2.value = TokuisakiTEL;
+                TbxFAX2.value = TokuisakiFAX;
+                TbxDepartment2.value = TokuisakiDepartment;
+                RcbZeikubun2.set_text(Zeikubun);
+                //TbxKakeritsu2.value = Kakeritsu;
+                RadShimebi2.set_text(Shimebi);
+                //LblTantoStaffNo2.innerText = TantoStaffCode;
+                HidTantoStaffCode2.value = TantoStaffCode;
+                rcbTokuisaki.clearItems();
+            }
+        </script>
 
-                    </asp:TableRow>
-                    <asp:TableRow>
-                        <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
-                    <p>郵便番号</p>
-                        </asp:TableCell>
-                        <asp:TableCell ColumnSpan="6" CssClass="waku">
-                            <asp:TextBox runat="server" ID="TbxTokuisakiPostNo" Width="400px"></asp:TextBox>
-                        </asp:TableCell>
-                    </asp:TableRow>
-                    <asp:TableRow>
-                        <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
-                    <p>得意先住所</p>
-                        </asp:TableCell>
-                        <asp:TableCell ColumnSpan="6" CssClass="waku">
-                            <asp:TextBox runat="server" ID="TbxTokuisakiAddress" Width="400px"></asp:TextBox>
-                        </asp:TableCell>
-                    </asp:TableRow>
-                    <asp:TableRow>
-                        <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
-                    <p>電話番号</p>
-                        </asp:TableCell>
-                        <asp:TableCell ColumnSpan="2" CssClass="waku">
-                            <asp:TextBox runat="server" ID="TbxTokuisakiTEL"></asp:TextBox>
-                        </asp:TableCell>
-                        <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
-                   <p>FAX</p>
-                        </asp:TableCell>
-                        <asp:TableCell ColumnSpan="2" CssClass="waku">
-                            <asp:TextBox runat="server" ID="TbxTokuisakiFax"></asp:TextBox>
-                        </asp:TableCell>
-                    </asp:TableRow>
-                    <asp:TableRow>
-                        <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
-                    <p>担当部署</p>
-                        </asp:TableCell>
-                        <asp:TableCell ColumnSpan="2" CssClass="waku">
-                            <asp:TextBox runat="server" ID="TbxTokuisakiDepartment"></asp:TextBox>
-                        </asp:TableCell>
-                        <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
-                    <p>税区分<span style="color: red">*</span></p>
-                        </asp:TableCell>
-                        <asp:TableCell ColumnSpan="2" CssClass="waku">
-                            <telerik:RadComboBox runat="server" ID="RcbTax">
-                                <Items>
-                                    <telerik:RadComboBoxItem Text="" Value="" />
-                                    <telerik:RadComboBoxItem Text="税込" Value="税込" />
-                                    <telerik:RadComboBoxItem Text="税抜" Value="税抜" />
-                                </Items>
-                            </telerik:RadComboBox>
-                        </asp:TableCell>
 
-                    </asp:TableRow>
-                    <asp:TableRow>
-                        <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
-                    <p>掛率<span style="color: red">*</span></p>
-                        </asp:TableCell>
-                        <asp:TableCell ColumnSpan="2" CssClass="waku">
-                            <asp:TextBox runat="server" ID="TbxKakeritsu"></asp:TextBox>
-                        </asp:TableCell>
-                        <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
-                    <p>締日<span style="color: red">*</span></p>
-                        </asp:TableCell>
-                        <asp:TableCell ColumnSpan="2" CssClass="waku">
-                            <telerik:RadComboBox runat="server" ID="RcbShimebi">
-                                <Items>
-                                    <telerik:RadComboBoxItem Text="" Value="" />
-                                    <telerik:RadComboBoxItem Text="都度" Value="都度" />
-                                    <telerik:RadComboBoxItem Text="月末" Value="月末" />
-                                    <telerik:RadComboBoxItem Text="20日締め" Value="20" />
-                                </Items>
-                            </telerik:RadComboBox>
-                        </asp:TableCell>
-                    </asp:TableRow>
-                    <asp:TableRow>
-                    </asp:TableRow>
-                    <asp:TableRow>
-                        <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
-                    <p>担当スタッフNo.<span style="color: red">*</span></p>
-                        </asp:TableCell>
-                        <asp:TableCell ColumnSpan="2" CssClass="waku">
-                            <asp:Label runat="server" ID="LblTantoStaffCode"></asp:Label>
-                            <asp:HiddenField runat="server" ID="HidTantoStaffCode" />
-
-                        </asp:TableCell>
-                        <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
-                    <p>担当スタッフ名</p>
-                        </asp:TableCell>
-                        <asp:TableCell ColumnSpan="2" CssClass="waku">
-                            <telerik:RadComboBox runat="server" ID="RadComboBox5" OnItemsRequested="RadComboBox5_ItemsRequested" EnableLoadOnDemand="true" AllowCustomText="true" OnSelectedIndexChanged="RadComboBox5_SelectedIndexChanged" AutoPostBack="true"></telerik:RadComboBox>
-                        </asp:TableCell>
-                    </asp:TableRow>
-                    <asp:TableRow>
-                        <asp:TableCell ColumnSpan="4" CssClass="waku" HorizontalAlign="Center">
-                            <asp:Button runat="server" ID="BtnToMaster" Text="得意先マスターに移動" OnClick="BtnToMaster_Click" Width="180px" CssClass="Btn11" />
-                        </asp:TableCell>
-                        <asp:TableCell ColumnSpan="4" CssClass="waku" HorizontalAlign="Center">
-                            <asp:Button runat="server" ID="BtnTouroku" Text="見積ヘッダーに適応" OnClick="BtnTouroku_Click" CssClass="Btn11" Width="180px" />
-                        </asp:TableCell>
-                    </asp:TableRow>
-                </asp:Table>
-            </div>
-        </asp:Panel>
-        <!------------納入先詳細--------------------------------------------------------------------------->
-        <asp:Panel runat="server" ID="NouhinsakiPanel">
-            <div>
-                <table id="NouhinsakiSyousai">
-                    <tr>
-                        <td colspan="2" class="MiniTitle">
-                            <p>納品先コード</p>
-                        </td>
-                        <td colspan="2" class="waku">
-                            <asp:TextBox ID="TextBox27" runat="server"></asp:TextBox>
-                        </td>
-
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="MiniTitle">
-                            <p>納品先名</p>
-                        </td>
-                        <td colspan="2" class="waku">
-                            <asp:TextBox ID="TextBox28" runat="server"></asp:TextBox>
-                        </td>
-
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="MiniTitle">
-                            <p>郵便番号</p>
-                        </td>
-                        <td colspan="2" class="waku">
-                            <asp:TextBox ID="TextBox35" runat="server"></asp:TextBox>
-                        </td>
-
-                    </tr>
-
-                    <tr>
-                        <td colspan="2" class="MiniTitle">
-                            <p>住所</p>
-                        </td>
-                        <td colspan="2" class="waku">
-                            <asp:TextBox ID="TextBox29" runat="server"></asp:TextBox>
-                        </td>
-
-                    </tr>
-                    <tr>
-                        <td class="MiniTitle">
-                            <p>電話番号</p>
-                        </td>
-                        <td class="waku">
-                            <asp:TextBox ID="TextBox30" runat="server"></asp:TextBox>
-                        </td>
-                        <td class="MiniTitle">
-                            <p>FAX番号</p>
-                        </td>
-                        <td class="waku">
-                            <asp:TextBox ID="TextBox31" runat="server"></asp:TextBox>
-                        </td>
-
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="MiniTitle">
-                            <p>納品先担当者名</p>
-                        </td>
-                        <td colspan="2" class="waku">
-                            <asp:TextBox ID="TextBox32" runat="server"></asp:TextBox>
-                        </td>
-
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="MiniTitle">
-                            <p>部署</p>
-                        </td>
-                        <td colspan="2" class="waku">
-                            <asp:TextBox ID="TextBox33" runat="server"></asp:TextBox>
-                        </td>
-
-                    </tr>
-                    <tr>
-                        <td colspan="4" class="waku">
-                            <asp:Button ID="Button11" runat="server" Text="直送先マスタに移動" CssClass="Btn11" Width="150px" />
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </asp:Panel>
-        <script src="JavaScript.js"></script>
-
+        <script type="text/javascript">
+            function MeisaiFacility(btn) {
+                let TBFacilityDetail = document.getElementById('TBFacilityDetail');
+                TBFacilityDetail.style.display = "";
+                document.getElementById("mInput").style.display = "none";
+                document.getElementById("CtrlSyousai").style.display = "none";
+                document.getElementById("head").style.display = "none";
+                document.getElementById("TBAddRow").style.display = "none";
+                document.getElementById("SubMenu").style.display = "none";
+                document.getElementById("SubMenu2").style.display = "";
+                document.getElementById("DivDataGrid").style.display = "none";
+            }
+        </script>
+        <script type="text/javascript">
+            function Close3(Btn) {
+                let TBFacilityDetail = document.getElementById('TBFacilityDetail');
+                TBFacilityDetail.style.display = "none";
+                document.getElementById("mInput").style.display = "";
+                document.getElementById("CtrlSyousai").style.display = "";
+                document.getElementById("head").style.display = "";
+                document.getElementById("TBAddRow").style.display = "";
+                document.getElementById("SubMenu").style.display = "";
+                document.getElementById("SubMenu2").style.display = "none";
+                document.getElementById("DivDataGrid").style.display = "";
+            }
+        </script>
         <script type="text/javascript">
             function select(sender, eventArgs) {
                 var combo2 = document.activeElement.id;
@@ -1326,8 +1970,6 @@
                 var EndDate = $find(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "EndDate");
                 var SyokaiDate = $find('RadDatePicker1');
                 var HidSyokaiDate = document.getElementById("HidSyokaiDate");
-
-                permisisionstart = new Date(permisisionstart);
                 rightend = new Date(rightend);
                 cpkaishi = new Date(cpkaishi);
                 cpowari = new Date(cpowari);
@@ -1340,7 +1982,7 @@
                 LblCategoryName.innerText = categoryname;
                 LblProduct.innerText = makernumber;
                 TbxMakerNo.value = makernumber;
-                RdpPermissionstart.set_selectedDate(permisisionstart);
+                RdpPermissionstart.set_selectedDate(new Date(permisisionstart));
                 RdpRightEnd.set_selectedDate(rightend);
                 RdpCpStart.set_selectedDate(cpkaishi);
                 RdpCpEnd.set_selectedDate(cpowari);
@@ -1360,6 +2002,7 @@
                 TbxProductName.value = syouhinmei;
                 WareHouse.innerText = warehouse;
                 TbxWareHouse.value = warehouse;
+                debugger;
                 if (categorycode != "205") {
                     var Kakeri = document.getElementById(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "Kakeri");
                     var zeikubun = document.getElementById(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "zeiku");
@@ -1419,7 +2062,7 @@
                         var shiirekin = shiire * suryo.value * 1.1;
                         shiirekin = Math.trunc(shiirekin);
                         ShiireKingaku.value = String(shiirekin).replace(/(\d)(?=(\d\d\d)+$)/g, "$1,");
-                        //単価＆売上金額（売上金額　＝　掛率計算済「税込」標準単価　×　数量）
+                        //単価＆売上金額（売上金額　＝　掛率計算済「税込」標準単価　×　数量　×　税込なので1.1）
                         var tanka = kakaku * Kakeri.innerText * 1.1 / 100;
                         tanka = Math.trunc(tanka);
                         Tanka.value = String(tanka).replace(/(\d)(?=(\d\d\d)+$)/g, "$1,");
@@ -1481,6 +2124,7 @@
                         }
                     }
                 }
+                combo2.clearItems();
             }
 
         </script>
@@ -1542,7 +2186,7 @@
                 RcbCity.findItemByValue(items[10]).select();
             }
         </script>
-        <script>
+        <script type="text/javascript">
             function SerchFocus(fcs) {
                 var ary = fcs.split('-');
                 var rcb = document.getElementById(ary[0]);
@@ -1629,7 +2273,17 @@
                 ss2.style.display = "none";
             }
         </script>
-
+        <telerik:RadAjaxManager runat="server" ID="Ram" OnAjaxRequest="Ram_AjaxRequest">
+            <AjaxSettings>
+                <telerik:AjaxSetting AjaxControlID="DivDataGrid">
+                    <UpdatedControls>
+                        <telerik:AjaxUpdatedControl ControlID="CtrlSyousai" LoadingPanelID="Lp" UpdatePanelRenderMode="Block" />
+                    </UpdatedControls>
+                </telerik:AjaxSetting>
+            </AjaxSettings>
+        </telerik:RadAjaxManager>
+        <telerik:RadAjaxLoadingPanel runat="server" ID="Lp" Skin="Telerik" Height="500px">
+        </telerik:RadAjaxLoadingPanel>
     </form>
 </body>
 </html>

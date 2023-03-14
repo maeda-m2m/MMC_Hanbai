@@ -15,7 +15,7 @@ namespace Gyomu.Jutyu
 {
     public partial class Jutyujoho : System.Web.UI.Page
     {
-        const int LIST_ID_DL = 20;
+        const int LIST_ID_DL = 21;
 
         private string vsNo
         {
@@ -66,14 +66,98 @@ namespace Gyomu.Jutyu
         {
             try
             {
+                string code = "";
                 ClassKensaku.KensakuParam k = SetKensakuParam();
+                DataJutyu.T_JutyuHeaderDataTable dtH = new DataJutyu.T_JutyuHeaderDataTable();
+                DataJutyu.T_JutyuHeaderDataTable dt = ClassKensaku.GetMitumori(k, Global.GetConnection());
 
-                DataJutyu.T_JutyuHeaderDataTable dt =
-                    ClassKensaku.GetMitumori(k, Global.GetConnection());
+                if (!string.IsNullOrEmpty(TbxHinban.Text) || !string.IsNullOrEmpty(RadSyohinmeisyou.Text.Trim()))
+                {
+                    if (!string.IsNullOrEmpty(TbxHinban.Text))
+                    {
+                        DataJutyu.T_JutyuDataTable dtJ = ClassJutyu.GetJutyuNoFromHinban(TbxHinban.Text, Global.GetConnection());
+                        if (dtJ.Count > 0)
+                        {
+                            for (int i = 0; i < dtJ.Count; i++)
+                            {
+                                if (code == "")
+                                {
+                                    code += dtJ[i].JutyuNo;
+                                }
+                                else
+                                {
+                                    if (!code.Contains(dtJ[i].JutyuNo))
+                                    {
+                                        code += "," + dtJ[i].JutyuNo;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (RadSyohinmeisyou.Text != "")
+                    {
+                        DataJutyu.T_JutyuDataTable dtJ = ClassJutyu.GetJutyuNoFromSyouhinMei(RadSyohinmeisyou.Text, Global.GetConnection());
+                        if (dtJ.Count > 0)
+                        {
+                            for (int i = 0; i < dtJ.Count; i++)
+                            {
+                                if (code == "")
+                                {
+                                    code += dtJ[i].JutyuNo;
+                                }
+                                else
+                                {
+                                    if (!code.Contains(dtJ[i].JutyuNo))
+                                    {
+                                        code += dtJ[i].JutyuNo;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (!string.IsNullOrEmpty(code))
+                    {
+                        string codeH = "";
+                        for (int r = 0; r < dt.Count; r++)
+                        {
+                            if (code.Contains(dt[r].JutyuNo.ToString()))
+                            {
+                                if (codeH == "")
+                                {
+                                    codeH += dt[r].JutyuNo.ToString();
+                                }
+                                else
+                                {
+                                    codeH += "," + dt[r].JutyuNo.ToString();
+                                }
+                            }
+                        }
+                        string[] codeAry = code.Split(',');
+                        for (int j = 0; j < codeAry.Length; j++)
+                        {
+                            DataJutyu.T_JutyuHeaderRow dtR = dtH.NewT_JutyuHeaderRow();
+                            DataJutyu.T_JutyuHeaderDataTable dtK = ClassJutyu.GetJutyuHeader(codeAry[j], Global.GetConnection());
+                            dtR.ItemArray = dtK[0].ItemArray;
+                            dtH.AddT_JutyuHeaderRow(dtR);
+                        }
+                    }
+                }
+                else
+                {
+                    if(dt.Count > 0)
+                    {
+                        for(int j = 0; j < dt.Count; j++)
+                        {
+                            DataJutyu.T_JutyuHeaderRow dtR = dtH.NewT_JutyuHeaderRow();
+                            dtR.ItemArray = dt[j].ItemArray;
+                            dtH.AddT_JutyuHeaderRow(dtR);
+                        }
+                    }
+                }
 
                 //DataJutyu.T_JutyuHeaderDataTable dt = ClassJutyu.GetMitumori(Global.GetConnection());
 
-                if (dt.Rows.Count == 0)
+                if (dtH.Rows.Count == 0)
                 {
                     lblMsg.Text = "データがありません";
                     this.RadG.Visible = false;
@@ -84,16 +168,16 @@ namespace Gyomu.Jutyu
                     this.RadG.Visible = true;
                 }
 
-                this.RadG.VirtualItemCount = dt.Count;
+                this.RadG.VirtualItemCount = dtH.Count;
 
                 int nPageSize = this.RadG.PageSize;
-                int nPageCount = dt.Count / nPageSize;
-                if (0 < dt.Count % nPageSize) nPageCount++;
+                int nPageCount = dtH.Count / nPageSize;
+                if (0 < dtH.Count % nPageSize) nPageCount++;
                 if (nPageCount <= this.RadG.MasterTableView.CurrentPageIndex) this.RadG.MasterTableView.CurrentPageIndex = 0;
 
                 DataTable dtC = new DataTable();
 
-                dtC = dt;
+                dtC = dtH;
 
                 this.RadG.DataSource = dtC;
                 this.RadG.DataBind();
@@ -139,13 +223,13 @@ namespace Gyomu.Jutyu
             }
             if (RadBumon.SelectedValue != "")
             {
-                k.sBumon = RadBumon.SelectedValue;
+                k.sBumon = RadBumon.SelectedItem.Text;
             }
 
-            if (RadSyohinmeisyou.SelectedValue != "" && RadSyohinmeisyou.SelectedValue != "-1")
-            {
-                k.sHinmei = RadSyohinmeisyou.SelectedValue;
-            }
+            //if (RadSyohinmeisyou.SelectedValue != "" && RadSyohinmeisyou.SelectedValue != "-1")
+            //{
+            //    k.sHinmei = RadSyohinmeisyou.SelectedValue;
+            //}
             if (RadTanto.SelectedValue != "")
             {
                 k.sTanto = RadTanto.SelectedItem.Text;
@@ -282,9 +366,38 @@ namespace Gyomu.Jutyu
 
         protected void BtnDownlod_Click(object sender, EventArgs e)
         {
-            //CsvDownLoad
-            OnDownLoad();
-            Create();
+            try
+            {
+                lblMsg.Text = "";
+
+                UserViewManager.UserView v = SessionManager.User.GetUserView(20);
+                v.SortExpression = "JutyuNo ASC";
+
+                SqlDataAdapter da = new SqlDataAdapter(v.SqlDataFactory.SelectCommand.CommandText, Global.GetConnection());
+
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                if (0 == dt.Rows.Count)
+                {
+                    lblMsg.Text = "該当データがありません";
+                    return;
+                }
+
+                string strData = v.SqlDataFactory.GetTextData(dt, this.RadG.MasterTableView.SortExpressions.GetSortString(), Core.Data.DataTable2Text.EnumDataFormat.Csv);
+
+                string strExt = "csv";
+                string strFileName = ("受注データ") + "_" + DateTime.Now.ToString("yyyyMMdd") + "." + strExt;
+                Core.Data.DataTable2Text.EnumDataFormat fmt = Core.Data.DataTable2Text.EnumDataFormat.Csv;
+
+                this.Ram.ResponseScripts.Add(string.Format("window.location.href='{0}';",
+                     this.ResolveUrl("~/Common/DownloadDataForm.aspx?" +
+                     Common.DownloadDataForm.GetQueryString4Text(strFileName, v.CreateTextData(dt, fmt, null)))));
+            }
+            catch (Exception ex)
+            {
+                lblMsg.Text = ex.Message;
+            }
         }
 
         private void OnDownLoad()
@@ -310,7 +423,7 @@ namespace Gyomu.Jutyu
                 string strData = v.SqlDataFactory.GetTextData(dt, this.RadG.MasterTableView.SortExpressions.GetSortString(), Core.Data.DataTable2Text.EnumDataFormat.Csv);
 
                 string strExt = "csv";
-                string strFileName = ("受注DL") + "_" + DateTime.Now.ToString("yyyyMMdd") + "." + strExt;
+                string strFileName = ("受注明細") + "_" + DateTime.Now.ToString("yyyyMMdd") + "." + strExt;
                 Core.Data.DataTable2Text.EnumDataFormat fmt = Core.Data.DataTable2Text.EnumDataFormat.Csv;
 
                 this.Ram.ResponseScripts.Add(string.Format("window.location.href='{0}';",
@@ -550,26 +663,50 @@ namespace Gyomu.Jutyu
                     string cate = "";
                     string shiire = "";
                     DataSet1.T_OrderedDataTable dt = new DataSet1.T_OrderedDataTable();
-
+                    string strOrderNo = "";
+                    DataSet1.T_OrderedDataTable dtC = ClassOrdered.GetOrdered(Global.GetConnection());
                     for (int i = 0; i < jdt.Count; i++)
                     {
+                        DataSet1.T_OrderedRow dl = dt.NewT_OrderedRow();
                         DataSet1.T_OrderedHeaderDataTable dth = new DataSet1.T_OrderedHeaderDataTable();
                         DataSet1.T_OrderedHeaderRow dlh = dth.NewT_OrderedHeaderRow();
                         string no = "";
                         SessionManager.KI();
                         int ki = int.Parse(SessionManager.KII);
-                        DataSet1.T_OrderedHeaderRow drr = ClassOrdered.GetMaxOrdered(ki, Global.GetConnection());
-                        if (drr != null)
+                        if (dtC.Count > 0)
                         {
-                            no = (drr.OrderedNo + 1).ToString();
+                            string OrderedFlg = ClassOrdered.ChkOrderedData(Category, jdt[i].ShiiresakiCode, Global.GetConnection());
+                            if (OrderedFlg.Equals("1"))
+                            {
+                                string strHatyuFlg = ClassOrdered.ChkHatyuFlg(Category, jdt[i].ShiiresakiCode, Global.GetConnection());
+                                if (strHatyuFlg.Equals("1"))
+                                {
+                                    string strOrderData = "";
+                                    strOrderData = ClassOrdered.GetOrderedNo(Category, jdt[i].ShiiresakiCode, Global.GetConnection());
+                                    strOrderNo = strOrderData.Split(',')[0];
+                                    dl.RowNo = int.Parse(strOrderData.Split(',')[1]);
+                                }
+                                else
+                                {
+                                    DataSet1.T_OrderedRow db = ClassOrdered.GetMaxOrdered(ki, Global.GetConnection());
+                                    strOrderNo = (db.OrderedNo + 1).ToString();
+                                    dl.RowNo = 1;
+                                }
+                            }
+                            else
+                            {
+                                DataSet1.T_OrderedRow db = ClassOrdered.GetMaxOrdered(ki, Global.GetConnection());
+                                strOrderNo = (db.OrderedNo + 1).ToString();
+                                dl.RowNo = 1;
+                            }
                         }
                         else
                         {
-                            no = "3" + (ki * 100000 + 1).ToString();
+                            strOrderNo = "3" + (ki * 100000 + 1).ToString();
+                            dl.RowNo = 1;
                         }
 
 
-                        DataSet1.T_OrderedRow dl = dt.NewT_OrderedRow();
                         if (cate == "")
                         {
                             cate += jdt[i].CateGory.ToString();
@@ -587,9 +724,9 @@ namespace Gyomu.Jutyu
                             shiire += "," + jdt[i].ShiireName;
                         }
 
-                        dl.OrderedNo = int.Parse(no);
-                        dlh.OrderedNo = int.Parse(no);
-                        dl.RowNo = i + 1;
+                        dl.OrderedNo = int.Parse(strOrderNo);
+                        dlh.OrderedNo = int.Parse(strOrderNo);
+                        //dl.RowNo = i + 1;
                         dl.TokuisakiCode = jdt[i].TokuisakiCode;
                         dlh.TokuisakiCode = jdt[i].TokuisakiCode;
                         dl.TokuisakiMei = jdt[i].TokuisakiMei;
@@ -667,6 +804,7 @@ namespace Gyomu.Jutyu
                         { dl.MekerNo = jdt[i].MekarHinban; }
                         if (!jdt[i].IsKeitaiMeiNull())
                         { dl.Media = jdt[i].KeitaiMei; }
+                        dl.HatyuFLG = "0";
                         dl.UriageFlg = jdt[i].JutyuFlg;
                         dl.HatyuDay = DateTime.Now.ToShortDateString();
                         dlh.CreateDate = DateTime.Now;
@@ -676,16 +814,22 @@ namespace Gyomu.Jutyu
                         dl.ShiireTanka = jdt[i].ShiireTanka;
                         dlh.ShiireKingaku = jdt[i].ShiireKingaku;
                         dl.ShiireKingaku = jdt[i].ShiireKingaku;
-                        dl.WareHouse = jdt[i].WareHouse;
+                        if (!jdt[i].IsWareHouseNull())
+                        {
+                            dl.WareHouse = jdt[i].WareHouse;
+                        }
                         dl.ShiireSakiName = jdt[i].ShiireName;
                         dlh.ShiiresakiName = jdt[i].ShiireName;
-                        string abb = dl.ShiireSakiName;
-                        DataMaster.M_ShiiresakiDataTable dd = ClassMaster.GetShiiresaki(abb, Global.GetConnection());
-                        for (int l = 0; l < dd.Count; l++)
-                        {
-                            dl.ShiiresakiCode = dd[0].ShiiresakiCode.ToString();
-                            dlh.ShiiresakiCode = dd[0].ShiiresakiCode.ToString();
-                        }
+                        //string abb = dl.ShiireSakiName;
+                        //DataMaster.M_ShiiresakiDataTable dd = ClassMaster.GetShiiresaki(abb, Global.GetConnection());
+                        //for (int l = 0; l < dd.Count; l++)
+                        //{
+                        //    dl.ShiiresakiCode = dd[0].ShiiresakiCode.ToString();
+                        //    dlh.ShiiresakiCode = dd[0].ShiiresakiCode.ToString();
+                        //}
+                        dl.ShiiresakiCode = jdt[i].ShiiresakiCode.ToString();
+                        dlh.ShiiresakiCode = jdt[i].ShiiresakiCode.ToString();
+
                         dl.Zeikubun = jdt[i].Zeikubun;
                         dl.Kakeritsu = jdt[i].Kakeritsu;
                         dl.Zansu = jdt[i].JutyuSuryou.ToString();
@@ -700,7 +844,6 @@ namespace Gyomu.Jutyu
                         lblMsg.Text = "発注処理を行いました。";
                         ///売上データ作成
 
-                        Create();
                     }
                     //ClassOrdered.InsertOrdered2(dt, Global.GetConnection());
                 }
@@ -719,6 +862,7 @@ namespace Gyomu.Jutyu
                     Uno = 52700001;
                 }
                 ClassUriage.InsertUriage(jNo, Uno, Global.GetConnection());
+                Create();
             }
             catch (Exception ex)
             {

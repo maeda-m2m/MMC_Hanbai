@@ -392,5 +392,15 @@ namespace DLL
             da.Fill(dt);
             return dt;
         }
+
+        public static DataSet1.M_Tokuisaki2DataTable GetTokuisaki(string strTokuisaiRyaku, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select * from M_Tokuisaki2 where TokuisakiRyakusyo like @tr";
+            da.SelectCommand.Parameters.AddWithValue("@tr", "%" + strTokuisaiRyaku + "%");
+            DataSet1.M_Tokuisaki2DataTable dt = new DataSet1.M_Tokuisaki2DataTable();
+            da.Fill(dt);
+            return dt;
+        }
     }
 }

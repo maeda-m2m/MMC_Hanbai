@@ -613,8 +613,8 @@ namespace DLL
         {
             SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
             da.SelectCommand.CommandText = "select * from M_Tanto where UserName = @un and BumonName = @bn";
-            da.SelectCommand.Parameters.AddWithValue("@un", un);
-            da.SelectCommand.Parameters.AddWithValue("@bn", bn);
+            da.SelectCommand.Parameters.AddWithValue("@un", un.Trim());
+            da.SelectCommand.Parameters.AddWithValue("@bn", bn.Trim());
             DataSet1.M_TantoDataTable dt = new DataSet1.M_TantoDataTable();
             da.Fill(dt);
             return dt;
@@ -1679,6 +1679,41 @@ namespace DLL
             DataSet1.M_Tokuisaki2DataTable dt = new DataSet1.M_Tokuisaki2DataTable();
             da.Fill(dt);
             return dt[0];
+        }
+
+        public static DataSet1.M_Kakaku_2Row GetSyouhinCSV(string strCategory, string strHinban, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select* from M_Kakaku_2 where Makernumber = @mn and Categoryname = @cn ";
+            da.SelectCommand.Parameters.AddWithValue("@mn", strHinban);
+            da.SelectCommand.Parameters.AddWithValue("@cn", strCategory);
+            DataSet1.M_Kakaku_2DataTable dt = new DataSet1.M_Kakaku_2DataTable();
+            da.Fill(dt);
+            if (dt.Count.Equals(1))
+            {
+                return dt[0];
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static DataSet1.M_CategoryRow GetCategory(string strCategory, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select * from M_Category where CategoryName = @cn";
+            da.SelectCommand.Parameters.AddWithValue("@cn", strCategory);
+            DataSet1.M_CategoryDataTable dt = new DataSet1.M_CategoryDataTable();
+            da.Fill(dt);
+            if (dt.Count == 1)
+            {
+                return dt[0];
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

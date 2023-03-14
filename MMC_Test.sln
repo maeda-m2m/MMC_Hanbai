@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.757
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMC_Test", "Gyomu\MMC_Test.csproj", "{B98F2336-88F8-4165-A885-CE691B790748}"
 EndProject
