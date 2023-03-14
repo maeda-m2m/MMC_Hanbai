@@ -217,17 +217,19 @@
                 <main>
 
                     <telerik:RadGrid ID="MainRadGrid" runat="server" PageSize="20" AllowPaging="True" AutoGenerateColumns="False"
-                        OnPageIndexChanged="MainRadGrid_PageIndexChanged"
-                        OnItemCommand="MainRadGrid_ItemCommand">
+                        OnItemCommand="MainRadGrid_ItemCommand" OnPageIndexChanged="MainRadGrid_PageIndexChanged">
 
                         <PagerStyle Position="Top" AlwaysVisible="true" PageSizeControlType="None"
                             PagerTextFormat="ページ移動: {4} &amp;nbsp;ページ : &lt;strong&gt;{0:N0}&lt;/strong&gt; / &lt;strong&gt;{1:N0}&lt;/strong&gt; | 件数: &lt;strong&gt;{2:N0}&lt;/strong&gt; - &lt;strong&gt;{3:N0}件&lt;/strong&gt; / &lt;strong&gt;{5:N0}&lt;/strong&gt;件中"
                             FirstPageToolTip="最初のページに移動" LastPageToolTip="最後のページに移動" NextPageToolTip="次のページに移動" PrevPageToolTip="前のページに移動" />
 
 
+
+
                         <AlternatingItemStyle BackColor="#93bbff" />
 
                         <MasterTableView>
+
 
                             <Columns>
                                 <telerik:GridBoundColumn DataField="CategoryCode" HeaderText="カテゴリコード"></telerik:GridBoundColumn>

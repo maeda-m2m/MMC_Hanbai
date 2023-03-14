@@ -23,7 +23,7 @@ namespace Gyomu.Tokuisaki
 
         private void Create()
         {
-            string sqlCommand = "select * from M_Facility_NewBackup";
+            string sqlCommand = "select * from M_Facility_NewBackup order by FacilityNo desc";
 
             var table = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
 

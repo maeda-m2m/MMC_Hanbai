@@ -16,7 +16,6 @@
     <form id="form1" runat="server">
         <div>
 
-
             <div>
                 <uc:Menu ID="Menu" runat="server" />
                 <telerik:RadTabStrip ID="RT" runat="server" Skin="Office2007" AutoPostBack="True" SelectedIndex="1" BackColor="#8dea8d">
@@ -26,8 +25,6 @@
                     </Tabs>
                 </telerik:RadTabStrip>
             </div>
-
-
 
             <table id="SearchTable" border="1">
                 <tr>
@@ -51,21 +48,10 @@
                 </tr>--%>
             </table>
 
-
-
-
-
-
-
             <div id="UploadDiv">
                 <asp:Button runat="server" ID="ImageUploadButton" Text="アップロード" OnClick="ImageUploadButton_Click" CssClass="Button" />
                 <asp:FileUpload runat="server" ID="FileUpload" AllowMultiple="true" />
             </div>
-
-
-
-
-
 
             <main>
                 <telerik:RadGrid ID="MainRadGrid" runat="server" PageSize="20" AllowPaging="True" AutoGenerateColumns="False"
@@ -74,7 +60,6 @@
                     <PagerStyle Position="Top" AlwaysVisible="true" PageSizeControlType="None"
                         PagerTextFormat="ページ移動: {4} &amp;nbsp;ページ : &lt;strong&gt;{0:N0}&lt;/strong&gt; / &lt;strong&gt;{1:N0}&lt;/strong&gt; | 件数: &lt;strong&gt;{2:N0}&lt;/strong&gt; - &lt;strong&gt;{3:N0}件&lt;/strong&gt; / &lt;strong&gt;{5:N0}&lt;/strong&gt;件中"
                         FirstPageToolTip="最初のページに移動" LastPageToolTip="最後のページに移動" NextPageToolTip="次のページに移動" PrevPageToolTip="前のページに移動" />
-
 
                     <AlternatingItemStyle BackColor="#93bbff" />
 
@@ -92,20 +77,14 @@
 
                             <telerik:GridButtonColumn ButtonType="PushButton" CommandName="Delete" Text="画像削除" HeaderText="削除" ButtonCssClass="Button"></telerik:GridButtonColumn>
                         </Columns>
-
                     </MasterTableView>
-
-
                 </telerik:RadGrid>
             </main>
-
-
-
-
-
-
-
-
+            <footer>
+                <div>
+                    <br />
+                </div>
+            </footer>
 
             <%--*********************************************--%>
         </div>
@@ -114,8 +93,6 @@
     <script>
         'use strict';
 
-
-
         function keydown(e) {
             if (e.keyCode === 13) {
                 document.getElementById('SearchButton').focus();
@@ -123,7 +100,6 @@
         }
 
         window.onkeydown = keydown;
-
     </script>
 </body>
 </html>
