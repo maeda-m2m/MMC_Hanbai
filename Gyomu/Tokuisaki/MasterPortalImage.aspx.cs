@@ -1,52 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Telerik.Web.UI;
 
 namespace Gyomu.Tokuisaki
 {
-
-
-
     public partial class MasterPortalImage : System.Web.UI.Page
     {
-
-
-
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
-
                 Create();
             }
-
         }
-
-
-
-
-
-
-
-
-
-
-
 
         private void Create()
         {
             string sqlCommand;
 
-            sqlCommand = "select distinct(SyouhinCode),SyouhinMei from M_Kakaku_2 order by SyouhinCode";
+            sqlCommand = @"
+select distinct(SyouhinCode),SyouhinMei from M_Kakaku_2
+where
+SyouhinCode <> '10000000' and
+SyouhinCode <> '1001' and
+SyouhinCode <> '1002' and
+SyouhinCode <> '1003' and
+SyouhinCode <> '1004' and
+SyouhinCode <> '1005' and
+SyouhinCode <> '1006' and
+SyouhinCode <> '1007'
+order by SyouhinCode
+";
 
             var table = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
 
@@ -56,35 +47,24 @@ namespace Gyomu.Tokuisaki
             if (0 < table.Rows.Count % nPageSize) nPageCount++;
             if (nPageCount <= MainRadGrid.MasterTableView.CurrentPageIndex) MainRadGrid.MasterTableView.CurrentPageIndex = 0;
 
-
-
             MainRadGrid.DataSource = table;
 
             MainRadGrid.DataBind();
         }
-
-
-
-
-
 
         protected void MainRadGrid_PageIndexChanged(object sender, Telerik.Web.UI.GridPageChangedEventArgs e)
         {
             Create();
         }
 
-
-
-
-
-
         protected void MainRadGrid_ItemCommand(object sender, Telerik.Web.UI.GridCommandEventArgs e)
         {
             string script;
 
+            string sqlCommand;
+
             if (e.CommandName.Equals("Delete"))
             {
-
                 var ShouhinCode = e.Item.Cells[3].Text;
 
                 string physical = Request.PhysicalApplicationPath;
@@ -100,9 +80,6 @@ namespace Gyomu.Tokuisaki
                 }
 
                 File.Delete(path);
-
-                string sqlCommand = "";
-
 
                 sqlCommand = $"select * from T_TokuisakiImage where ShouhinCode = '{ShouhinCode}'";
 
@@ -124,27 +101,11 @@ namespace Gyomu.Tokuisaki
 
                 Create();
             }
-
-
-
         }
-
-
-
-
 
         protected void Ram_AjaxRequest(object sender, Telerik.Web.UI.AjaxRequestEventArgs e)
         {
-
         }
-
-
-
-
-
-
-
-
 
         protected void MainRadGrid_ItemDataBound(object sender, Telerik.Web.UI.GridItemEventArgs e)
         {
@@ -160,45 +121,22 @@ namespace Gyomu.Tokuisaki
 
                 string anotherPath;
 
-
                 //path = $@"~\image\{dr["SyouhinCode"]}_{dr["SyouhinMei"]}.jpg";
 
                 path = $@"~\Tokuisaki\image\{a}.jpg";
 
                 anotherPath = @"~\Tokuisaki\image\Noimage.Jpg";
 
-
-
-
                 if (File.Exists(Server.MapPath(path)))
                 {
-
                     shouhinImage.ImageUrl = path;
-
                 }
                 else
                 {
-
                     shouhinImage.AlternateText = "画像がありません。";
-
                 }
-
-
-
-
-
             }
         }
-
-
-
-
-
-
-
-
-
-
 
         protected void ImageUploadButton_Click(object sender, EventArgs e)
         {
@@ -211,13 +149,17 @@ namespace Gyomu.Tokuisaki
                 return;
             }
 
+            sqlCommand = "select distinct(SyouhinCode) from M_Kakaku_2";
 
+            var shouhincodeData = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
 
+            var shouhinCodeLists = new List<string>();
 
-            // "C:\\inetpub\\wwwroot\\HanshinDw\\hanshin-dw\\"
-            string physical = Request.PhysicalApplicationPath;
+            for (int i2 = 0; i2 < shouhincodeData.Rows.Count; i2++)
+            {
+                shouhinCodeLists.Add(shouhincodeData.Rows[i2]["SyouhinCode"].ToString());
+            }
 
-            var folderPath = physical + @"Tokuisaki\image\";
 
 
             //ファイルの拡張子チェック
@@ -239,44 +181,69 @@ namespace Gyomu.Tokuisaki
                 //拡張子を外したファイル名のみ取得
                 string shouhinCode = FileUpload.PostedFiles[i].FileName.Replace(".jpg", "").Replace(".JPG", "");
 
-                sqlCommand = "select distinct(SyouhinCode) from M_Kakaku_2";
-
-                var shouhincodeData = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
-
-                var lists = new List<string>();
-
-                for (int i2 = 0; i2 < shouhincodeData.Rows.Count; i2++)
-                {
-                    lists.Add(shouhincodeData.Rows[i2].ItemArray[0].ToString());
-                }
-
                 //価格マスタに登録されている商品コードかチェックを行う。
-                if (!lists.Contains(shouhinCode))
+                if (!shouhinCodeLists.Contains(shouhinCode))
                 {
                     script = "alert('無効なファイル名です。');";
                     Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
                     return;
                 }
 
-                //完全パス
-                string savefile = folderPath + shouhinCode + fileExtension;
+                string savefile = ConfigurationManager.AppSettings["MainFilePath"] + @"\" + shouhinCode + fileExtension;
 
-                FileUpload.PostedFiles[i].SaveAs(savefile);
+                try
+                {
+                    FileUpload.PostedFiles[i].SaveAs(savefile);
+                }
+                catch (Exception ex)
+                {
+                    string mail_to, title, body, from;
 
+                    mail_to = ConfigurationManager.AppSettings["MailTo"]; ;
+
+                    title = "MMC販売管理画像アップロードメインエラーメール";
+
+                    body = CommonClass.GetErrorInfo(ex);
+
+                    from = "example@example.com";
+
+                    CommonClass.Mail(mail_to, title, body, from);
+                }
+
+                string anotherSaveFile = ConfigurationManager.AppSettings["BackupFilePaht"] + @"\" + shouhinCode + fileExtension;
+
+                try
+                {
+                    FileUpload.PostedFiles[i].SaveAs(anotherSaveFile);
+                }
+                catch (Exception ex)
+                {
+                    string mail_to, title, body, from;
+
+                    mail_to = ConfigurationManager.AppSettings["MailTo"]; ;
+
+                    title = "MMC販売管理画像アップロードバックアップエラーメール";
+
+                    body = CommonClass.GetErrorInfo(ex);
+
+                    from = "example@example.com";
+
+                    CommonClass.Mail(mail_to, title, body, from);
+
+                    script = "alert('アップロードに失敗しました。')";
+                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
+                    return;
+
+                }
 
                 var aryData = new byte[FileUpload.PostedFiles[i].ContentLength];
 
                 FileUpload.PostedFiles[i].InputStream.Read(aryData, 0, FileUpload.PostedFiles[i].ContentLength);
 
 
-
-                //デバックだったらテーブルに商品コードを登録しない。本番環境のみ有効。
-
-
                 sqlCommand = $"select * from T_TokuisakiImage where ShouhinCode = '{shouhinCode}'";
 
                 var table = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
-
 
                 using (MemoryStream ms = new MemoryStream(aryData))
                 {
@@ -291,25 +258,10 @@ namespace Gyomu.Tokuisaki
                 }
             }
 
-
             script = "alert('アップロードに成功しました。')";
             Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "key", script, true);
             Create();
-
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         private void BinaryInsert(string ShouhinCode, MemoryStream stream, SqlConnection sql)
         {
@@ -339,14 +291,6 @@ namespace Gyomu.Tokuisaki
             }
         }
 
-
-
-
-
-
-
-
-
         private void BinaryUpdate(string ShouhinCode, MemoryStream stream, SqlConnection sql)
         {
             var da = new SqlCommand("", sql);
@@ -355,7 +299,6 @@ namespace Gyomu.Tokuisaki
                $@"update T_TokuisakiImage set DeleteFlag = '0',ShouhinBinary = @stream where ShouhinCode = '{ShouhinCode}'";
 
             da.Parameters.AddWithValue("@stream", stream);
-
 
             sql.Open();
             var tran = sql.BeginTransaction();
@@ -376,14 +319,6 @@ namespace Gyomu.Tokuisaki
             }
         }
 
-
-
-
-
-
-
-
-
         protected void SearchButton_Click(object sender, EventArgs e)
         {
             int count = 0;
@@ -392,31 +327,14 @@ namespace Gyomu.Tokuisaki
 
             sqlCommand = "select distinct(SyouhinCode),SyouhinMei from M_Kakaku_2 where Syouhincode like '%' and ";
 
-
-
             if (!string.IsNullOrWhiteSpace(ShouhinCodeCombo.Text))
             {
                 var item = ShouhinCodeCombo.Text.Split('/');
 
                 sqlCommand += $"SyouhinCode = '{item[0]}' and ";
 
-                //sqlCommand += $"SyouhinMei  = '{item[1]}' and ";
-
                 count++;
             }
-
-
-
-
-            //if (!string.IsNullOrWhiteSpace(ShouhinNameCombo.Text))
-            //{
-            //    sqlCommand += $"SyouhinMei  = '{ShouhinNameCombo.SelectedValue}' and ";
-            //    count++;
-            //}
-
-
-
-
 
             if (count != 0)
             {
@@ -426,11 +344,7 @@ namespace Gyomu.Tokuisaki
             {
                 Create();
                 return;
-
             }
-
-
-
 
             var table = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
 
@@ -440,33 +354,10 @@ namespace Gyomu.Tokuisaki
             if (0 < table.Rows.Count % nPageSize) nPageCount++;
             if (nPageCount <= MainRadGrid.MasterTableView.CurrentPageIndex) MainRadGrid.MasterTableView.CurrentPageIndex = 0;
 
-
-
             MainRadGrid.DataSource = table;
 
             MainRadGrid.DataBind();
         }
-
-
-
-
-
-
-
-
-
-        //protected void ShouhinNameCombo_ItemsRequested(object sender, Telerik.Web.UI.RadComboBoxItemsRequestedEventArgs e)
-        //{
-        //    string sqlCommand;
-
-        //    sqlCommand = $"select SyouhinMei from M_TokuisakiShouhin where SyouhinMei like '{e.Text.Trim()}%'";
-
-        //    SetCombo(sender, e, sqlCommand);
-        //}
-
-
-
-
 
         protected void ShouhinCodeCombo_ItemsRequested(object sender, Telerik.Web.UI.RadComboBoxItemsRequestedEventArgs e)
         {
@@ -477,10 +368,6 @@ namespace Gyomu.Tokuisaki
             SetCombo(sender, e, sqlCommand);
         }
 
-
-
-
-
         private void SetCombo(object sender, RadComboBoxItemsRequestedEventArgs e, string sqlCommand)
         {
             var rad = sender as RadComboBox;
@@ -488,7 +375,6 @@ namespace Gyomu.Tokuisaki
             rad.Items.Clear();
 
             rad.Items.Add(new RadComboBoxItem("", ""));
-
 
             var table = CommonClass.SelectedTable(sqlCommand, Global.GetConnection());
 
@@ -506,15 +392,6 @@ namespace Gyomu.Tokuisaki
             {
                 rad.Items.Add(new RadComboBoxItem(additems, additems));
             }
-
-
-
-
-        }
-
-        protected void MainRadGrid_DataBound(object sender, EventArgs e)
-        {
-
         }
     }
 }
