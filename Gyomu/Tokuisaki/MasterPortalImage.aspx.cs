@@ -18,6 +18,8 @@ namespace Gyomu.Tokuisaki
             if (!Page.IsPostBack)
             {
                 Create();
+
+                //test
             }
         }
 

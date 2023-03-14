@@ -21,6 +21,8 @@ namespace Gyomu.Tokuisaki
             {
                 EditPanel.Visible = false;
                 Create();
+
+                //test
             }
         }
 
