@@ -76,19 +76,19 @@
 
         <table class="MeisaiTB">
             <tr>
-                <td class="TitleTD">
+                <td class="TitleTD" style="color: #303030">
                     <p>仕入先</p>
                 </td>
                 <td class="MeisaiTD" style="width: 120px">
                     <asp:Label runat="server" ID="LblShiiresaki"></asp:Label>
                 </td>
-                <td class="TitleTD">
+                <td class="TitleTD" style="color: #303030">
                     <p>カテゴリ</p>
                 </td>
                 <td class="MeisaiTD" style="width: 120px">
                     <asp:Label runat="server" ID="LblCategory"></asp:Label>
                 </td>
-                <td class="TitleTD">
+                <td class="TitleTD" style="color: #303030">
                     <p>発注No</p>
                 </td>
                 <td class="MeisaiTD" style="width: 120px">
@@ -96,19 +96,19 @@
                 </td>
             </tr>
             <tr>
-                <td class="TitleTD">
+                <td class="TitleTD" style="color: #303030">
                     <p>数量合計</p>
                 </td>
                 <td class="MeisaiTD" style="width: 120px">
                     <asp:Label runat="server" ID="LblSu"></asp:Label>
                 </td>
-                <td class="TitleTD">
+                <td class="TitleTD" style="color: #303030">
                     <p>仕入合計金額</p>
                 </td>
                 <td class="MeisaiTD" style="text-align: right; width: 120px">
                     <asp:Label runat="server" ID="LblShiirekei"></asp:Label>
                 </td>
-                <td class="TitleTD">
+                <td class="TitleTD" style="color: #303030">
                     <p>発注日付</p>
                 </td>
                 <td class="MeisaiTD" style="width: 120px">
@@ -123,6 +123,7 @@
             <Columns>
 
                 <asp:TemplateColumn HeaderStyle-BorderStyle="None" ItemStyle-BorderStyle="None">
+                    <ItemStyle ForeColor="#303030" />
                     <ItemTemplate>
                         <uc2:Syosai ID="Syosai" runat="server" />
                     </ItemTemplate>

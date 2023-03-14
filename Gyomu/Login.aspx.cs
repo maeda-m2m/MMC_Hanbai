@@ -1,5 +1,6 @@
 ﻿using DLL;
 using System;
+using System.Net;
 
 namespace Gyomu
 {
@@ -9,7 +10,28 @@ namespace Gyomu
         {
             if (!this.IsPostBack)
             {
+                string ipaddress = "";
 
+                IPHostEntry ipentry = Dns.GetHostEntry(Dns.GetHostName());
+                string strKaihatsuIP = "192.168.2.148";
+                string strMMCIP = "150.249.251.141";
+                bool bMarchIP = false;
+                //foreach (IPAddress ip in ipentry.AddressList)
+                //{
+                //    if (ip.ToString().Equals(strKaihatsuIP) || ip.ToString().Equals(strMMCIP))
+                //    {
+                //        bMarchIP = true;
+                //        break;
+                //    }
+                //}
+                //if (!bMarchIP)
+                //{
+                //    //ClassLogin.DeleteIP(Global.GetConnection());
+                //    //ClassLogin.GetIP(ipentry, Global.GetConnection());
+                //    ClassMail.GetErrorIP(ipentry);
+                //    Response.Redirect("https://www.google.co.jp");
+                //}
+                //ClassMail.GetIP(ipentry);
                 //2022/05/18
 
                 Create();
@@ -70,7 +92,7 @@ namespace Gyomu
                                     DataMaster.V_ProductListDataTable dtN = ClassMaster.GetList(Global.GetConnection());
                                     ClassMaster.CreateProductList(dtN, Global.GetConnection());
                                 }
-                                catch(Exception ex)
+                                catch (Exception ex)
                                 {
                                     string body = "商品マスタ | CSVアップロード" + "\r\n" + ex.Message + "\r\n" + ex.StackTrace + "\r\n" + ex.Source;
                                     ClassMail.ErrorMail("maeda@m2m-asp.com", "ログイン時 | 商品データ更新時エラー", body);

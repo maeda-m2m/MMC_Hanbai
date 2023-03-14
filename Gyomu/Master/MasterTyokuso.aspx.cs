@@ -158,8 +158,6 @@ namespace Gyomu.Master
             }
         }
 
-
-
         protected void BtnSerch_Click(object sender, EventArgs e)
         {
             CreatePage();
@@ -253,7 +251,12 @@ namespace Gyomu.Master
                             string[] mData = strLineData.Split(',');
                             DataSet1.M_Facility_NewDataTable dt = new DataSet1.M_Facility_NewDataTable();
                             DataSet1.M_Facility_NewRow dr = dt.NewM_Facility_NewRow();
+                            if (string.IsNullOrEmpty(mData[10].ToString()))
+                            {
+                                mData[10] = "0";
+                            }
                             dr.ItemArray = mData;
+                            //if(string.IsNullOrEmpty(dr.CityCode))
                             dt.AddM_Facility_NewRow(dr);
                             ClassMaster.UpdateCSVfacility(dt, Global.GetConnection());
                         }

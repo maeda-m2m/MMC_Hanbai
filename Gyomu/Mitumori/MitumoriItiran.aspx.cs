@@ -37,6 +37,11 @@ namespace Gyomu.Mitumori
                 Session.Remove("FacilityData");
                 Session.Remove("Kakeritsu");
                 Session.Remove("Zeikubun");
+                Session.Remove("CategoryCode");
+                Session.Remove("StartDate");
+                Session.Remove("EndDate");
+                Session.Remove("MitumoriNo");
+                Session.Remove("MeisaiData");
 
                 SessionManager.JucyuSyusei("");
                 SessionManager.MitumoriType("");
@@ -59,7 +64,7 @@ namespace Gyomu.Mitumori
 
                 //商品情報DropDownList
                 //ListSet.SetSyohin(RadSyohinmeisyou);
-
+                SessionManager.KI();
                 //Create();
             }
         }
@@ -230,13 +235,13 @@ namespace Gyomu.Mitumori
 
             if (RadTokuiMeisyo.SelectedValue != "" && RadTokuiMeisyo.SelectedValue != "-1")
             {
-                string toku = RadTokuiMeisyo.Text;
+                string toku = RadTokuiMeisyo.SelectedValue.Split(',')[0] + "/" + RadTokuiMeisyo.SelectedValue.Split(',')[1];
                 k.sTokuisaki = toku;
             }
             if (RadSekyuMeisyo.SelectedValue != "" && RadSekyuMeisyo.SelectedValue != "-1")
             {
-                string sei = RadSekyuMeisyo.Text;
-                k.sSeikyu = RadSekyuMeisyo.Text;
+                string sei = RadSekyuMeisyo.SelectedValue.Split(',')[0] + "/" + RadSekyuMeisyo.SelectedValue.Split(',')[1];
+                k.sSeikyu = sei;
             }
             if (RadTyokusoMeisyo.SelectedValue != "" && RadTyokusoMeisyo.SelectedValue != "-1")
             {
@@ -999,6 +1004,7 @@ namespace Gyomu.Mitumori
                         ClassJutyu.UpDateJutyu(jNo, dtJ, dtHJ, Global.GetConnection());
                         ClassMitumori.UpDateMitumorijutyu("Mitumori", strJutyuNo[l], Global.GetConnection());
                         lblMsg.Text += "見積No." + strJutyuNo[l] + "を、受注No." + jNo + "で受注致しました。" + "<br>";
+                        Create();
                     }
                 }
                 catch (Exception ex)

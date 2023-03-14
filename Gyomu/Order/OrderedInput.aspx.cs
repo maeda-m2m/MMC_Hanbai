@@ -17,24 +17,48 @@ namespace Gyomu.Order
             {
                 try
                 {
-                    if (SessionManager.ORDERED_DATA == null)
+                    string strOrderedNo = Request.QueryString["strKeys"];
+                    if (!string.IsNullOrEmpty(strOrderedNo))
                     {
-                        Create();
+                        Create2(strOrderedNo);
                     }
                     else
                     {
-                        string session = SessionManager.ORDERED_DATA;
-
-                        if (session != "")
-                        {
-                            Create2();
-                        }
+                        Create();
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
+                    Err.Text = ex.Message;
                     Create();
                 }
+            }
+        }
+
+        private void Create2(string strOrderedNo)
+        {
+            try
+            {
+                DataSet1.T_OrderedDataTable dt = ClassOrdered.GetOrderedMeisai(strOrderedNo, Global.GetConnection());
+                DataSet1.T_OrderedRow dr = dt[0];
+                LblShiiresaki.Text = dr.ShiireSakiName;
+                LblCategory.Text = dr.CategoryName;
+                LblOrdered.Text = dr.OrderedNo.ToString();
+                int iSuryo = 0;
+                int iShiireKingaku = 0;
+                for (int i = 0; i < dt.Count; i++)
+                {
+                    iSuryo += dt[i].JutyuSuryou;
+                    iShiireKingaku += dt[i].ShiireKingaku;
+                }
+                LblSu.Text = iSuryo.ToString("0,0");
+                LblShiirekei.Text = iShiireKingaku.ToString("0,0");
+                CtrlSyousai.DataSource = dt;
+                CtrlSyousai.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Err.Text = "発注データに不備があります。";
             }
         }
 
@@ -48,58 +72,61 @@ namespace Gyomu.Order
 
             string session = SessionManager.ORDERED_DATA;
             string[] SpRow = session.Split('_');
-            for (int i = 0; i < SpRow.Length; i++)
-            {
-                string[] SpKey = SpRow[i].Split(',');
-                strOrderedNo = SpKey[0];
-                CountRow += 1;
-                DataSet1.T_OrderedDataTable dd = ClassOrdered.GetOrdered2(strOrderedNo, Global.GetConnection());
-                for (int u = 0; u < dd.Count; u++)
-                {
-                    DataSet1.T_KariOrderedRow dl = dt.NewT_KariOrderedRow();
-                    dl.OrderedNo = dd[u].OrderedNo;
-                    if (!dd[u].IsTokuisakiCodeNull())
-                    {
-                        dl.TokuisakiCode = dd[u].TokuisakiCode;
-                    }
-                    dl.TokuisakiMei = dd[u].TokuisakiMei;
-                    dl.SeikyusakiMei = dd[u].SeikyusakiMei;
-                    dl.Category = dd[u].Category;
-                    dl.CategoryName = dd[u].CategoryName;
-                    dl.FacilityCode = dd[u].FacilityCode;
-                    dl.FacilityName = dd[u].FacilityName;
-                    dl.FacilityJusyo1 = dd[u].FacilityJusyo1;
-                    if (!dd[u].IsSiyouKaishiNull())
-                    { dl.SiyouKaishi = dd[u].SiyouKaishi; }
-                    if (!dd[u].IsSiyouiOwariNull())
-                    { dl.SiyouiOwari = dd[u].SiyouiOwari; }
-                    dl.HyoujyunKakaku = dd[u].HyoujyunKakaku;
-                    dl.StaffName = dd[u].StaffName;
-                    dl.Department = dd[u].Department;
-                    dl.Range = dd[u].Range;
-                    dl.ProductCode = dd[u].ProductCode;
-                    dl.ProductName = dd[u].ProductName;
-                    dl.MekerNo = dd[u].MekerNo;
-                    dl.Media = dd[u].Media;
-                    dl.HatyuDay = dd[u].HatyuDay;
-                    dl.JutyuSuryou = dd[u].JutyuSuryou;
-                    dl.JutyuGokei = dd[u].JutyuGokei;
-                    dl.ShiireTanka = dd[u].ShiireTanka;
-                    dl.ShiireKingaku = dd[u].ShiireKingaku;
-                    dl.WareHouse = dd[u].WareHouse;
-                    dl.ShiireSakiName = dd[u].ShiireSakiName;
-                    dl.ShiiresakiCode = dd[u].ShiiresakiCode;
-                    dl.Zeikubun = dd[u].Zeikubun;
-                    dl.Kakeritsu = dd[u].Kakeritsu;
-                    dl.Zansu = dd[u].Zansu;
-                    if (u >= 1)
-                    {
-                        CountRow += 1;
-                    }
-                    dl.RowNo = CountRow;
-                    dt.AddT_KariOrderedRow(dl);
-                }
-            }
+            //for (int i = 0; i < SpRow.Length; i++)
+            //{
+            //    string[] SpKey = SpRow[i].Split(',');
+            //    strOrderedNo = SpKey[0];
+            //    CountRow += 1;
+            //    DataSet1.T_OrderedDataTable dd = ClassOrdered.GetOrdered2(strOrderedNo, Global.GetConnection());
+            //    for (int u = 0; u < dd.Count; u++)
+            //    {
+            //        DataSet1.T_KariOrderedRow dl = dt.NewT_KariOrderedRow();
+            //        dl.OrderedNo = dd[u].OrderedNo;
+            //        if (!dd[u].IsTokuisakiCodeNull())
+            //        {
+            //            dl.TokuisakiCode = dd[u].TokuisakiCode;
+            //        }
+            //        dl.TokuisakiMei = dd[u].TokuisakiMei;
+            //        dl.SeikyusakiMei = dd[u].SeikyusakiMei;
+            //        dl.Category = dd[u].Category;
+            //        dl.CategoryName = dd[u].CategoryName;
+            //        dl.FacilityCode = dd[u].FacilityCode;
+            //        dl.FacilityName = dd[u].FacilityName;
+            //        if (!dd[u].IsFacilityJusyo1Null())
+            //        {
+            //            dl.FacilityJusyo1 = dd[u].FacilityJusyo1;
+            //        }
+            //        if (!dd[u].IsSiyouKaishiNull())
+            //        { dl.SiyouKaishi = dd[u].SiyouKaishi; }
+            //        if (!dd[u].IsSiyouiOwariNull())
+            //        { dl.SiyouiOwari = dd[u].SiyouiOwari; }
+            //        dl.HyoujyunKakaku = dd[u].HyoujyunKakaku;
+            //        dl.StaffName = dd[u].StaffName;
+            //        dl.Department = dd[u].Department;
+            //        dl.Range = dd[u].Range;
+            //        dl.ProductCode = dd[u].ProductCode;
+            //        dl.ProductName = dd[u].ProductName;
+            //        dl.MekerNo = dd[u].MekerNo;
+            //        dl.Media = dd[u].Media;
+            //        dl.HatyuDay = dd[u].HatyuDay;
+            //        dl.JutyuSuryou = dd[u].JutyuSuryou;
+            //        dl.JutyuGokei = dd[u].JutyuGokei;
+            //        dl.ShiireTanka = dd[u].ShiireTanka;
+            //        dl.ShiireKingaku = dd[u].ShiireKingaku;
+            //        dl.WareHouse = dd[u].WareHouse;
+            //        dl.ShiireSakiName = dd[u].ShiireSakiName;
+            //        dl.ShiiresakiCode = dd[u].ShiiresakiCode;
+            //        dl.Zeikubun = dd[u].Zeikubun;
+            //        dl.Kakeritsu = dd[u].Kakeritsu;
+            //        dl.Zansu = dd[u].Zansu;
+            //        if (u >= 1)
+            //        {
+            //            CountRow += 1;
+            //        }
+            //        dl.RowNo = CountRow;
+            //        dt.AddT_KariOrderedRow(dl);
+            //    }
+            //}
             CtrlSyousai.DataSource = dt;
             CtrlSyousai.DataBind();
         }
@@ -168,7 +195,7 @@ namespace Gyomu.Order
         {
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
-                DataSet1.T_KariOrderedRow dr = (e.Item.DataItem as DataRowView).Row as DataSet1.T_KariOrderedRow;
+                DataSet1.T_OrderedRow dr = (e.Item.DataItem as DataRowView).Row as DataSet1.T_OrderedRow;
 
                 CtlOrderedMeisai2 Ctl = e.Item.FindControl("Syosai") as CtlOrderedMeisai2;
                 ///定義集//////////////////////////////////////
@@ -197,15 +224,14 @@ namespace Gyomu.Order
                 string no = dr.OrderedNo.ToString();
                 if (no != "1")
                 {
-                    DataSet1.T_OrderedHeaderRow drH = ClassOrdered.GetOrderedH(no, Global.GetConnection());
-                    LblShiiresaki.Text = drH.ShiiresakiName.Trim();
-                    LblCategory.Text = drH.CategoryName;
-                    LblOrdered.Text = drH.OrderedNo.ToString();
-                    LblSu.Text = drH.OrderedAmount.ToString();
-                    LblShiirekei.Text = drH.ShiireKingaku.ToString("0,0");
-                    LblOrderedDate.Text = drH.CreateDate.ToString();
-                    if (!dr.IsMekerNoNull())
-                    { TbxMaker.Text = dr.MekerNo; }
+                    //DataSet1.T_OrderedHeaderRow drH = ClassOrdered.GetOrderedH(no, Global.GetConnection());
+                    //LblShiiresaki.Text = drH.ShiiresakiName.Trim();
+                    //LblCategory.Text = drH.CategoryName;
+                    //LblOrdered.Text = drH.OrderedNo.ToString();
+                    //LblSu.Text = drH.OrderedAmount.ToString();
+                    //LblShiirekei.Text = drH.ShiireKingaku.ToString("0,0");
+                    //LblOrderedDate.Text = drH.CreateDate.ToString();
+                    TbxMaker.Text = dr.MekerNo;
                     if (!dr.IsProductNameNull())
                     { LblProductName.Text = dr.ProductName; }
                     if (!dr.IsJutyuSuryouNull())
@@ -367,16 +393,17 @@ namespace Gyomu.Order
                 }
                 else
                 {
-                    DataAppropriate.T_AppropriateHeaderRow drM = Class1.GetMaxShiireNo(Global.GetConnection());
-                    int no = drM.ShiireNo;
-                    drH.ShiireNo = drM.ShiireNo + 1;
-                    No = (drM.ShiireNo + 1).ToString();
+                    DataAppropriate.T_AppropriateHeaderDataTable drM = Class1.GetMaxShiireNo(Global.GetConnection());
+                    int no = drM.Count;
+                    No = drM.Count.ToString();
+                    drH.ShiireNo = no + 1;
                     DataSet1.T_OrderedHeaderRow dtOH = ClassOrdered.GetOrderedH(LblOrdered.Text, Global.GetConnection());
+                    string[] strTokuisaki = dtOH.TokuisakiCode.Split('/');
+
                     drH.ItemArray = dtOH.ItemArray;
                     drH.ShiiresakiName = LblShiiresaki.Text;
                     drH.ShiireAmount = int.Parse(LblSu.Text);
                     drH.CreateDate = DateTime.Now;
-                    drH.ShiireNo = int.Parse(No);
                     dtH.AddT_AppropriateHeaderRow(drH);
                     Class1.InsertAppropriateHeader(dtH, Global.GetConnection());
                 }
@@ -400,6 +427,7 @@ namespace Gyomu.Order
             }
             catch (Exception ex)
             {
+                ClassMail.ErrorMail("maeda@m2m-asp.com", "エラーメール | 発注明細→仕入登録処理", ex.Message + "<br><br>" + ex.Source);
                 Err.Text = ex.Message;
             }
         }

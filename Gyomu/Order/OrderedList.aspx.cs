@@ -40,26 +40,6 @@ namespace Gyomu.Order
                 SessionManager.JucyuSyusei("");
                 SessionManager.MitumoriType("");
 
-                //得意先、仕入先DDropDownList
-                //ListSet.SetRyakusyou(RadTokuiMeisyo, RadSekyuMeisyo);
-
-                ////担当名DropDwonList
-                //ListSet.SetTanto(RadTanto);
-                //ListSet.SetTanto(RadNyuryoku);
-
-                ////部門DropDownList
-                //ListSet.SetBumon(RadBumon);
-
-                ////CategoryDropDownList
-                //ListSet.SetCate(RadCate);
-
-                ////直送先・施設DropDownList
-                //ListSet.SetTyokuso(RadTyokusoMeisyo, RadSisetMeisyo);
-                ////ListSet.SetTyokuso(RadSisetMeisyo);
-
-                ////商品情報DropDownList
-                //ListSet.SetSyohin(RadSyohinmeisyou);
-
                 Create();
             }
         }
@@ -69,7 +49,8 @@ namespace Gyomu.Order
             try
             {
                 ClassKensaku.KensakuParam k = SetKensakuParam();
-                DataSet1.T_OrderedHeaderDataTable dt = ClassKensaku.GetOrderedHeader(k, Global.GetConnection());
+                //DataSet1.T_OrderedHeaderDataTable dt = ClassKensaku.GetOrderedHeader(k, Global.GetConnection());
+                DataTable dt = ClassKensaku.GetOrderedList(k, Global.GetConnection());
                 //DataSet1.T_OrderedHeaderDataTable dt = ClassOrdered.GetOrderedHeader(Global.GetConnection());
                 //DataSet1.T_OrderedHeaderDataTable dt = ClassOrdered.GetOrderedHeader(Global.GetConnection());
 
@@ -85,11 +66,11 @@ namespace Gyomu.Order
                     this.RadG.Visible = true;
                 }
 
-                this.RadG.VirtualItemCount = dt.Count;
+                this.RadG.VirtualItemCount = dt.Rows.Count;
 
                 int nPageSize = this.RadG.PageSize;
-                int nPageCount = dt.Count / nPageSize;
-                if (0 < dt.Count % nPageSize) nPageCount++;
+                int nPageCount = dt.Rows.Count / nPageSize;
+                if (0 < dt.Rows.Count % nPageSize) nPageCount++;
                 if (nPageCount <= this.RadG.MasterTableView.CurrentPageIndex) this.RadG.MasterTableView.CurrentPageIndex = 0;
 
                 DataTable dtC = new DataTable();
@@ -117,6 +98,7 @@ namespace Gyomu.Order
 
             //if (DrpFlg.SelectedValue != "")
             //{
+            //    k.sFlg = DrpFlg.SelectedValue;
             //    k.sFlg = DrpFlg.SelectedValue;
             //}
 
@@ -173,11 +155,11 @@ namespace Gyomu.Order
             //}
 
             k.oFlg = DrpFlg.Text;
-            if(RadCate.Text != "")
+            if (RadCate.Text != "")
             {
                 k.oCate = RadCate.Text;
             }
-            if(RadShiire.Text != "")
+            if (RadShiire.Text != "")
             {
                 k.sShiire = RadShiire.Text;
             }
@@ -193,33 +175,33 @@ namespace Gyomu.Order
                 DataRowView drv = (DataRowView)e.Item.DataItem;
                 //DataMitumori.T_MitumoriRow dr = (DataMitumori.T_MitumoriRow)drv.Row;
                 //DataSet1.T_OrderedHeaderRow dr = (DataSet1.T_OrderedHeaderRow)drv.Row;
-                DataSet1.T_OrderedHeaderRow dr = (DataSet1.T_OrderedHeaderRow)drv.Row;
+                DataRow dr = (DataRow)drv.Row;
 
                 int rgItemIndex = e.Item.ItemIndex;
 
                 //string sKey = dr.MitumoriNo;
-                string sKey = dr.OrderedNo.ToString();
+                string sKey = dr["OrderedNo"].ToString();
 
 
                 HtmlInputCheckBox chk = e.Item.FindControl("ChkRow") as HtmlInputCheckBox;
                 bool b = chk.Checked;
 
 
-                chk.Value = string.Format("{0}", dr.OrderedNo);
+                chk.Value = string.Format("{0}", dr["OrderedNo"]);
 
 
-                e.Item.Cells[RadG.Columns.FindByUniqueName("ColMitumori").OrderIndex].Text = dr.OrderedNo.ToString();
-                e.Item.Cells[RadG.Columns.FindByUniqueName("ColCategori").OrderIndex].Text = dr.CategoryName;
-                if (!dr.IsShiiresakiCodeNull())
-                { e.Item.Cells[RadG.Columns.FindByUniqueName("ColShiireCode").OrderIndex].Text = dr.ShiiresakiCode; }
-                if (!dr.IsShiiresakiNameNull())
-                { e.Item.Cells[RadG.Columns.FindByUniqueName("ColShiireName").OrderIndex].Text = dr.ShiiresakiName; }
-                if (!dr.IsOrderedAmountNull())
-                { e.Item.Cells[RadG.Columns.FindByUniqueName("ColSuryo").OrderIndex].Text = dr.OrderedAmount.ToString(); }
-                if (!dr.IsShiireKingakuNull())
-                { e.Item.Cells[RadG.Columns.FindByUniqueName("ColShiireKingaku").OrderIndex].Text = dr.ShiireKingaku.ToString("0,0"); }
-                if(!dr.IsCreateDateNull())
-                { e.Item.Cells[RadG.Columns.FindByUniqueName("ColOrderedDate").OrderIndex].Text = dr.CreateDate.ToShortDateString(); }
+                e.Item.Cells[RadG.Columns.FindByUniqueName("ColMitumori").OrderIndex].Text = dr["OrderedNo"].ToString();
+                e.Item.Cells[RadG.Columns.FindByUniqueName("ColCategori").OrderIndex].Text = dr["CategoryName"].ToString();
+                if (!dr.IsNull("ShiiresakiCode"))
+                { e.Item.Cells[RadG.Columns.FindByUniqueName("ColShiireCode").OrderIndex].Text = dr["ShiiresakiCode"].ToString(); }
+                if (!dr.IsNull("ShiiresakiName"))
+                { e.Item.Cells[RadG.Columns.FindByUniqueName("ColShiireName").OrderIndex].Text = dr["ShiiresakiName"].ToString(); }
+                if (!dr.IsNull("OrderedAmount"))
+                { e.Item.Cells[RadG.Columns.FindByUniqueName("ColSuryo").OrderIndex].Text = dr["OrderedAmount"].ToString(); }
+                if (!dr.IsNull("OrderedPrice"))
+                { e.Item.Cells[RadG.Columns.FindByUniqueName("ColShiireKingaku").OrderIndex].Text = int.Parse(dr["OrderedPrice"].ToString()).ToString("0,0"); }
+                //if (!dr.IsNull("HatyuDay"))
+                //{ e.Item.Cells[RadG.Columns.FindByUniqueName("ColOrderedDate").OrderIndex].Text = dr["HatyuDay"].ToString(); }
 
             }
         }
@@ -299,6 +281,7 @@ namespace Gyomu.Order
             }
             catch (Exception ex)
             {
+                ClassMail.ErrorMail("maeda@m2m-asp.com", "エラーメール | 発注一覧→CSVダウンロード", ex.Message + "<br><br>" + ex.Source);
                 lblMsg.Text = ex.Message;
             }
         }
@@ -430,11 +413,11 @@ namespace Gyomu.Order
                 }
             }
             string[] strAry = strKeys.Split('_');
-            if (strAry.Length >= 1)
+            if (strAry.Length == 1)
             {
 
                 SessionManager.OrderedData(strKeys);
-                Response.Redirect("OrderedInput.aspx");
+                Response.Redirect("OrderedInput.aspx?strKeys=" + strKeys);
             }
             else
             {
@@ -449,7 +432,7 @@ namespace Gyomu.Order
 
         protected void RadShiire_ItemsRequested(object sender, RadComboBoxItemsRequestedEventArgs e)
         {
-            if(e.Text != "")
+            if (e.Text != "")
             {
                 ListSet.SetShiireSaki3(sender, e);
             }

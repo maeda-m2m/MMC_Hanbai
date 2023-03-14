@@ -7,11 +7,13 @@
 // </自動生成>
 //------------------------------------------------------------------------------
 
-namespace Gyomu {
-    
-    
-    public partial class Kaihatsu {
-        
+namespace Gyomu
+{
+
+
+    public partial class Kaihatsu
+    {
+
         /// <summary>
         /// form1 コントロール。
         /// </summary>
@@ -20,7 +22,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
+
         /// <summary>
         /// DivMenu コントロール。
         /// </summary>
@@ -29,7 +31,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivMenu;
-        
+
         /// <summary>
         /// Menu コントロール。
         /// </summary>
@@ -38,7 +40,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::Gyomu.CtlMenu Menu;
-        
+
         /// <summary>
         /// RT コントロール。
         /// </summary>
@@ -47,7 +49,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::Telerik.Web.UI.RadTabStrip RT;
-        
+
         /// <summary>
         /// HidSpinSwitch コントロール。
         /// </summary>
@@ -56,7 +58,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField HidSpinSwitch;
-        
+
         /// <summary>
         /// SubMenu コントロール。
         /// </summary>
@@ -65,7 +67,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTable SubMenu;
-        
+
         /// <summary>
         /// BtnKeisan コントロール。
         /// </summary>
@@ -74,7 +76,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnKeisan;
-        
+
         /// <summary>
         /// Button5 コントロール。
         /// </summary>
@@ -83,7 +85,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button5;
-        
+
         /// <summary>
         /// Button7 コントロール。
         /// </summary>
@@ -92,7 +94,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button7;
-        
+
         /// <summary>
         /// HatyuBtn コントロール。
         /// </summary>
@@ -101,7 +103,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button HatyuBtn;
-        
+
         /// <summary>
         /// DelBtn コントロール。
         /// </summary>
@@ -110,7 +112,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button DelBtn;
-        
+
         /// <summary>
         /// Button8 コントロール。
         /// </summary>
@@ -119,7 +121,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button8;
-        
+
         /// <summary>
         /// SubMenu2 コントロール。
         /// </summary>
@@ -128,7 +130,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTable SubMenu2;
-        
+
         /// <summary>
         /// Button6 コントロール。
         /// </summary>
@@ -137,7 +139,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button6;
-        
+
         /// <summary>
         /// BtnTekiou コントロール。
         /// </summary>
@@ -146,7 +148,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnTekiou;
-        
+
         /// <summary>
         /// Err コントロール。
         /// </summary>
@@ -155,7 +157,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Err;
-        
+
         /// <summary>
         /// End コントロール。
         /// </summary>
@@ -164,7 +166,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label End;
-        
+
         /// <summary>
         /// header コントロール。
         /// </summary>
@@ -173,7 +175,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl header;
-        
+
         /// <summary>
         /// mInput コントロール。
         /// </summary>
@@ -182,7 +184,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTable mInput;
-        
+
         /// <summary>
         /// Label94 コントロール。
         /// </summary>
@@ -191,7 +193,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label94;
-        
+
         /// <summary>
         /// RadComboCategory コントロール。
         /// </summary>
@@ -200,7 +202,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::Telerik.Web.UI.RadComboBox RadComboCategory;
-        
+
         /// <summary>
         /// CategoryCode コントロール。
         /// </summary>
@@ -209,7 +211,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputHidden CategoryCode;
-        
+
         /// <summary>
         /// RadComboBox4 コントロール。
         /// </summary>
@@ -218,7 +220,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::Telerik.Web.UI.RadComboBox RadComboBox4;
-        
+
         /// <summary>
         /// BumonCode コントロール。
         /// </summary>
@@ -227,7 +229,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputHidden BumonCode;
-        
+
         /// <summary>
         /// BumonKubun コントロール。
         /// </summary>
@@ -236,7 +238,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputHidden BumonKubun;
-        
+
         /// <summary>
         /// Label1 コントロール。
         /// </summary>
@@ -245,7 +247,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label1;
-        
+
         /// <summary>
         /// UserID コントロール。
         /// </summary>
@@ -254,7 +256,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputHidden UserID;
-        
+
         /// <summary>
         /// RadDatePicker1 コントロール。
         /// </summary>
@@ -263,7 +265,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::Telerik.Web.UI.RadDatePicker RadDatePicker1;
-        
+
         /// <summary>
         /// Button1 コントロール。
         /// </summary>
@@ -272,7 +274,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button1;
-        
+
         /// <summary>
         /// RadComboBox1 コントロール。
         /// </summary>
@@ -281,7 +283,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::Telerik.Web.UI.RadComboBox RadComboBox1;
-        
+
         /// <summary>
         /// TokuisakiCode コントロール。
         /// </summary>
@@ -290,7 +292,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputHidden TokuisakiCode;
-        
+
         /// <summary>
         /// CustomerCode コントロール。
         /// </summary>
@@ -299,7 +301,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputHidden CustomerCode;
-        
+
         /// <summary>
         /// KariTokui コントロール。
         /// </summary>
@@ -308,7 +310,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox KariTokui;
-        
+
         /// <summary>
         /// LblAlert コントロール。
         /// </summary>
@@ -317,7 +319,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LblAlert;
-        
+
         /// <summary>
         /// BtnTool2 コントロール。
         /// </summary>
@@ -326,7 +328,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnTool2;
-        
+
         /// <summary>
         /// CheckBox1 コントロール。
         /// </summary>
@@ -335,7 +337,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox CheckBox1;
-        
+
         /// <summary>
         /// RadDatePicker2 コントロール。
         /// </summary>
@@ -344,7 +346,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::Telerik.Web.UI.RadDatePicker RadDatePicker2;
-        
+
         /// <summary>
         /// RadZeiKubun コントロール。
         /// </summary>
@@ -353,7 +355,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::Telerik.Web.UI.RadComboBox RadZeiKubun;
-        
+
         /// <summary>
         /// RadComboBox3 コントロール。
         /// </summary>
@@ -362,7 +364,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::Telerik.Web.UI.RadComboBox RadComboBox3;
-        
+
         /// <summary>
         /// kariSekyu コントロール。
         /// </summary>
@@ -371,7 +373,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox kariSekyu;
-        
+
         /// <summary>
         /// BtnTool3 コントロール。
         /// </summary>
@@ -380,7 +382,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnTool3;
-        
+
         /// <summary>
         /// TextBox1 コントロール。
         /// </summary>
@@ -389,7 +391,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBox1;
-        
+
         /// <summary>
         /// Shimebi コントロール。
         /// </summary>
@@ -398,7 +400,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Shimebi;
-        
+
         /// <summary>
         /// HidShimebi コントロール。
         /// </summary>
@@ -407,7 +409,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField HidShimebi;
-        
+
         /// <summary>
         /// TextBox10 コントロール。
         /// </summary>
@@ -416,7 +418,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBox10;
-        
+
         /// <summary>
         /// RadComboBox2 コントロール。
         /// </summary>
@@ -425,7 +427,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::Telerik.Web.UI.RadComboBox RadComboBox2;
-        
+
         /// <summary>
         /// BtnTool4 コントロール。
         /// </summary>
@@ -434,7 +436,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnTool4;
-        
+
         /// <summary>
         /// TyokusoCode コントロール。
         /// </summary>
@@ -443,7 +445,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputHidden TyokusoCode;
-        
+
         /// <summary>
         /// Label3 コントロール。
         /// </summary>
@@ -452,7 +454,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label3;
-        
+
         /// <summary>
         /// HidKakeritsu コントロール。
         /// </summary>
@@ -461,7 +463,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField HidKakeritsu;
-        
+
         /// <summary>
         /// TbxKake コントロール。
         /// </summary>
@@ -470,7 +472,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxKake;
-        
+
         /// <summary>
         /// TextBox7 コントロール。
         /// </summary>
@@ -479,7 +481,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBox7;
-        
+
         /// <summary>
         /// urikei コントロール。
         /// </summary>
@@ -488,7 +490,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputHidden urikei;
-        
+
         /// <summary>
         /// TextBox8 コントロール。
         /// </summary>
@@ -497,7 +499,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBox8;
-        
+
         /// <summary>
         /// shikei コントロール。
         /// </summary>
@@ -506,7 +508,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputHidden shikei;
-        
+
         /// <summary>
         /// FacilityRad コントロール。
         /// </summary>
@@ -515,7 +517,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::Telerik.Web.UI.RadComboBox FacilityRad;
-        
+
         /// <summary>
         /// CheckBox5 コントロール。
         /// </summary>
@@ -524,7 +526,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox CheckBox5;
-        
+
         /// <summary>
         /// BtnTool1 コントロール。
         /// </summary>
@@ -533,7 +535,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnTool1;
-        
+
         /// <summary>
         /// FacilityAddress コントロール。
         /// </summary>
@@ -542,7 +544,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputHidden FacilityAddress;
-        
+
         /// <summary>
         /// RadDatePicker3 コントロール。
         /// </summary>
@@ -551,7 +553,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::Telerik.Web.UI.RadDatePicker RadDatePicker3;
-        
+
         /// <summary>
         /// DropDownList9 コントロール。
         /// </summary>
@@ -560,7 +562,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DropDownList9;
-        
+
         /// <summary>
         /// CheckBox4 コントロール。
         /// </summary>
@@ -569,7 +571,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox CheckBox4;
-        
+
         /// <summary>
         /// BtnTool5 コントロール。
         /// </summary>
@@ -578,7 +580,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnTool5;
-        
+
         /// <summary>
         /// RadDatePicker4 コントロール。
         /// </summary>
@@ -587,7 +589,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::Telerik.Web.UI.RadDatePicker RadDatePicker4;
-        
+
         /// <summary>
         /// TextBox5 コントロール。
         /// </summary>
@@ -596,7 +598,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBox5;
-        
+
         /// <summary>
         /// zeikei コントロール。
         /// </summary>
@@ -605,7 +607,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputHidden zeikei;
-        
+
         /// <summary>
         /// TextBox6 コントロール。
         /// </summary>
@@ -614,7 +616,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBox6;
-        
+
         /// <summary>
         /// arakei コントロール。
         /// </summary>
@@ -623,7 +625,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputHidden arakei;
-        
+
         /// <summary>
         /// TextBox2 コントロール。
         /// </summary>
@@ -632,7 +634,16 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBox2;
-        
+
+        /// <summary>
+        /// TbxKibouNouki コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TbxKibouNouki;
+
         /// <summary>
         /// TextBox12 コントロール。
         /// </summary>
@@ -641,7 +652,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBox12;
-        
+
         /// <summary>
         /// soukei コントロール。
         /// </summary>
@@ -650,7 +661,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputHidden soukei;
-        
+
         /// <summary>
         /// TextBox13 コントロール。
         /// </summary>
@@ -659,7 +670,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBox13;
-        
+
         /// <summary>
         /// head コントロール。
         /// </summary>
@@ -668,7 +679,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTable head;
-        
+
         /// <summary>
         /// TBAddRow コントロール。
         /// </summary>
@@ -677,7 +688,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTable TBAddRow;
-        
+
         /// <summary>
         /// TbxAddRow コントロール。
         /// </summary>
@@ -686,7 +697,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxAddRow;
-        
+
         /// <summary>
         /// BtnTool6 コントロール。
         /// </summary>
@@ -695,7 +706,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnTool6;
-        
+
         /// <summary>
         /// BtnCloseHeader コントロール。
         /// </summary>
@@ -704,7 +715,25 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnCloseHeader;
-        
+
+        /// <summary>
+        /// FU コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload FU;
+
+        /// <summary>
+        /// BtnSyouhinUpload コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnSyouhinUpload;
+
         /// <summary>
         /// HidNewRow コントロール。
         /// </summary>
@@ -713,7 +742,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField HidNewRow;
-        
+
         /// <summary>
         /// HidSyokaiDate コントロール。
         /// </summary>
@@ -722,7 +751,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField HidSyokaiDate;
-        
+
         /// <summary>
         /// DivDataGrid コントロール。
         /// </summary>
@@ -731,7 +760,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivDataGrid;
-        
+
         /// <summary>
         /// CtrlSyousai コントロール。
         /// </summary>
@@ -740,7 +769,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.DataGrid CtrlSyousai;
-        
+
         /// <summary>
         /// TBSyousais コントロール。
         /// </summary>
@@ -749,7 +778,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Table TBSyousais;
-        
+
         /// <summary>
         /// TBTokuisaki コントロール。
         /// </summary>
@@ -758,7 +787,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Table TBTokuisaki;
-        
+
         /// <summary>
         /// TbxCustomer コントロール。
         /// </summary>
@@ -767,7 +796,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxCustomer;
-        
+
         /// <summary>
         /// TbxTokuisakiCode コントロール。
         /// </summary>
@@ -776,7 +805,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxTokuisakiCode;
-        
+
         /// <summary>
         /// RcbTokuisakiNameSyousai コントロール。
         /// </summary>
@@ -785,7 +814,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::Telerik.Web.UI.RadComboBox RcbTokuisakiNameSyousai;
-        
+
         /// <summary>
         /// TbxTokuisakiFurigana コントロール。
         /// </summary>
@@ -794,7 +823,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxTokuisakiFurigana;
-        
+
         /// <summary>
         /// TbxTokuisakiRyakusyo コントロール。
         /// </summary>
@@ -803,7 +832,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxTokuisakiRyakusyo;
-        
+
         /// <summary>
         /// TbxTokuisakiStaff コントロール。
         /// </summary>
@@ -812,7 +841,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxTokuisakiStaff;
-        
+
         /// <summary>
         /// TbxTokuisakiPostNo コントロール。
         /// </summary>
@@ -821,7 +850,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxTokuisakiPostNo;
-        
+
         /// <summary>
         /// BtnPostNoSerch4 コントロール。
         /// </summary>
@@ -830,7 +859,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnPostNoSerch4;
-        
+
         /// <summary>
         /// TbxTokuisakiAddress コントロール。
         /// </summary>
@@ -839,7 +868,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxTokuisakiAddress;
-        
+
         /// <summary>
         /// TbxTokuisakiAddress1 コントロール。
         /// </summary>
@@ -848,7 +877,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxTokuisakiAddress1;
-        
+
         /// <summary>
         /// TbxTokuisakiTEL コントロール。
         /// </summary>
@@ -857,7 +886,16 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxTokuisakiTEL;
-        
+
+        /// <summary>
+        /// BtnCopy1 コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnCopy1;
+
         /// <summary>
         /// TbxTokuisakiFax コントロール。
         /// </summary>
@@ -866,7 +904,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxTokuisakiFax;
-        
+
         /// <summary>
         /// TbxTokuisakiDepartment コントロール。
         /// </summary>
@@ -875,7 +913,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxTokuisakiDepartment;
-        
+
         /// <summary>
         /// RcbTax コントロール。
         /// </summary>
@@ -884,7 +922,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::Telerik.Web.UI.RadComboBox RcbTax;
-        
+
         /// <summary>
         /// TbxKakeritsu コントロール。
         /// </summary>
@@ -893,7 +931,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxKakeritsu;
-        
+
         /// <summary>
         /// RcbShimebi コントロール。
         /// </summary>
@@ -902,7 +940,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::Telerik.Web.UI.RadComboBox RcbShimebi;
-        
+
         /// <summary>
         /// RadComboBox5 コントロール。
         /// </summary>
@@ -911,7 +949,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::Telerik.Web.UI.RadComboBox RadComboBox5;
-        
+
         /// <summary>
         /// LblTantoStaffCode コントロール。
         /// </summary>
@@ -920,7 +958,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LblTantoStaffCode;
-        
+
         /// <summary>
         /// HidTantoStaffCode コントロール。
         /// </summary>
@@ -929,7 +967,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField HidTantoStaffCode;
-        
+
         /// <summary>
         /// BtnToMaster コントロール。
         /// </summary>
@@ -938,7 +976,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnToMaster;
-        
+
         /// <summary>
         /// TBSeikyusaki コントロール。
         /// </summary>
@@ -947,7 +985,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Table TBSeikyusaki;
-        
+
         /// <summary>
         /// TbxCustomerCode2 コントロール。
         /// </summary>
@@ -956,7 +994,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxCustomerCode2;
-        
+
         /// <summary>
         /// TbxTokuisakiCode2 コントロール。
         /// </summary>
@@ -965,7 +1003,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxTokuisakiCode2;
-        
+
         /// <summary>
         /// RcbSeikyusaki コントロール。
         /// </summary>
@@ -974,7 +1012,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::Telerik.Web.UI.RadComboBox RcbSeikyusaki;
-        
+
         /// <summary>
         /// TbxTokuisakiFurigana2 コントロール。
         /// </summary>
@@ -983,7 +1021,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxTokuisakiFurigana2;
-        
+
         /// <summary>
         /// TbxTokuisakiRyakusyou2 コントロール。
         /// </summary>
@@ -992,7 +1030,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxTokuisakiRyakusyou2;
-        
+
         /// <summary>
         /// TbxTokuisakiStaff2 コントロール。
         /// </summary>
@@ -1001,7 +1039,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxTokuisakiStaff2;
-        
+
         /// <summary>
         /// TbxPostNo2 コントロール。
         /// </summary>
@@ -1010,7 +1048,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxPostNo2;
-        
+
         /// <summary>
         /// BtnPostNoSerch3 コントロール。
         /// </summary>
@@ -1019,7 +1057,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnPostNoSerch3;
-        
+
         /// <summary>
         /// TbxTokuisakiAddress2 コントロール。
         /// </summary>
@@ -1028,7 +1066,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxTokuisakiAddress2;
-        
+
         /// <summary>
         /// TbxTokuisakiAddress3 コントロール。
         /// </summary>
@@ -1037,7 +1075,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxTokuisakiAddress3;
-        
+
         /// <summary>
         /// TbxTel2 コントロール。
         /// </summary>
@@ -1046,7 +1084,16 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxTel2;
-        
+
+        /// <summary>
+        /// BtnCopy2 コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnCopy2;
+
         /// <summary>
         /// TbxFAX2 コントロール。
         /// </summary>
@@ -1055,7 +1102,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxFAX2;
-        
+
         /// <summary>
         /// TbxDepartment2 コントロール。
         /// </summary>
@@ -1064,7 +1111,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxDepartment2;
-        
+
         /// <summary>
         /// RcbZeikubun2 コントロール。
         /// </summary>
@@ -1073,7 +1120,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::Telerik.Web.UI.RadComboBox RcbZeikubun2;
-        
+
         /// <summary>
         /// RadShimebi2 コントロール。
         /// </summary>
@@ -1082,7 +1129,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::Telerik.Web.UI.RadComboBox RadShimebi2;
-        
+
         /// <summary>
         /// BtnToMasterS コントロール。
         /// </summary>
@@ -1091,7 +1138,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnToMasterS;
-        
+
         /// <summary>
         /// TBNouhinsaki コントロール。
         /// </summary>
@@ -1100,7 +1147,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTable TBNouhinsaki;
-        
+
         /// <summary>
         /// TbxNouhinSisetsu コントロール。
         /// </summary>
@@ -1109,7 +1156,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxNouhinSisetsu;
-        
+
         /// <summary>
         /// TbxCode コントロール。
         /// </summary>
@@ -1118,7 +1165,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxCode;
-        
+
         /// <summary>
         /// RcbNouhinsakiMei コントロール。
         /// </summary>
@@ -1127,7 +1174,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::Telerik.Web.UI.RadComboBox RcbNouhinsakiMei;
-        
+
         /// <summary>
         /// TbxNouhinTyokusousakiMei2 コントロール。
         /// </summary>
@@ -1136,7 +1183,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxNouhinTyokusousakiMei2;
-        
+
         /// <summary>
         /// TbxNouhinsakiRyakusyou コントロール。
         /// </summary>
@@ -1145,7 +1192,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxNouhinsakiRyakusyou;
-        
+
         /// <summary>
         /// TbxNouhinsakiTanto コントロール。
         /// </summary>
@@ -1154,7 +1201,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxNouhinsakiTanto;
-        
+
         /// <summary>
         /// TbxNouhinsakiYubin コントロール。
         /// </summary>
@@ -1163,7 +1210,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxNouhinsakiYubin;
-        
+
         /// <summary>
         /// BtnPostNoSerch2 コントロール。
         /// </summary>
@@ -1172,7 +1219,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnPostNoSerch2;
-        
+
         /// <summary>
         /// TbxNouhinsakiAddress コントロール。
         /// </summary>
@@ -1181,7 +1228,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxNouhinsakiAddress;
-        
+
         /// <summary>
         /// TbxNouhinsakiAddress2 コントロール。
         /// </summary>
@@ -1190,7 +1237,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxNouhinsakiAddress2;
-        
+
         /// <summary>
         /// RcbNouhinsakiCity コントロール。
         /// </summary>
@@ -1199,7 +1246,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::Telerik.Web.UI.RadComboBox RcbNouhinsakiCity;
-        
+
         /// <summary>
         /// TbxNouhinsakiTell コントロール。
         /// </summary>
@@ -1208,7 +1255,16 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxNouhinsakiTell;
-        
+
+        /// <summary>
+        /// BtnCopy3 コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnCopy3;
+
         /// <summary>
         /// TbxNouhinsakiKeisyo コントロール。
         /// </summary>
@@ -1217,7 +1273,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxNouhinsakiKeisyo;
-        
+
         /// <summary>
         /// BtnNouhinMasta コントロール。
         /// </summary>
@@ -1226,7 +1282,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnNouhinMasta;
-        
+
         /// <summary>
         /// TBFacilityDetail コントロール。
         /// </summary>
@@ -1235,7 +1291,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTable TBFacilityDetail;
-        
+
         /// <summary>
         /// TbxFacilityCode コントロール。
         /// </summary>
@@ -1244,7 +1300,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxFacilityCode;
-        
+
         /// <summary>
         /// TbxFacilityRowCode コントロール。
         /// </summary>
@@ -1253,7 +1309,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxFacilityRowCode;
-        
+
         /// <summary>
         /// RcbFacility コントロール。
         /// </summary>
@@ -1262,7 +1318,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::Telerik.Web.UI.RadComboBox RcbFacility;
-        
+
         /// <summary>
         /// TbxFacilityName2 コントロール。
         /// </summary>
@@ -1271,7 +1327,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxFacilityName2;
-        
+
         /// <summary>
         /// TbxFaci コントロール。
         /// </summary>
@@ -1280,7 +1336,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxFaci;
-        
+
         /// <summary>
         /// TbxFacilityResponsible コントロール。
         /// </summary>
@@ -1289,7 +1345,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxFacilityResponsible;
-        
+
         /// <summary>
         /// TbxYubin コントロール。
         /// </summary>
@@ -1298,7 +1354,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxYubin;
-        
+
         /// <summary>
         /// BtnPostNoSerch コントロール。
         /// </summary>
@@ -1307,7 +1363,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnPostNoSerch;
-        
+
         /// <summary>
         /// TbxFaciAdress1 コントロール。
         /// </summary>
@@ -1316,7 +1372,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxFaciAdress1;
-        
+
         /// <summary>
         /// TbxFaciAdress2 コントロール。
         /// </summary>
@@ -1325,7 +1381,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxFaciAdress2;
-        
+
         /// <summary>
         /// RcbCity コントロール。
         /// </summary>
@@ -1334,7 +1390,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::Telerik.Web.UI.RadComboBox RcbCity;
-        
+
         /// <summary>
         /// TbxTel コントロール。
         /// </summary>
@@ -1343,7 +1399,16 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxTel;
-        
+
+        /// <summary>
+        /// BtnCopy4 コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnCopy4;
+
         /// <summary>
         /// TbxKeisyo コントロール。
         /// </summary>
@@ -1352,7 +1417,7 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbxKeisyo;
-        
+
         /// <summary>
         /// BtnFacilityMaster コントロール。
         /// </summary>
@@ -1361,5 +1426,23 @@ namespace Gyomu {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnFacilityMaster;
+
+        /// <summary>
+        /// Ram コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadAjaxManager Ram;
+
+        /// <summary>
+        /// Lp コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadAjaxLoadingPanel Lp;
     }
 }

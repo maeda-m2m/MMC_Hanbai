@@ -33,6 +33,38 @@ namespace Gyomu.Uriage
         {
             if (SessionManager.HACCYU_NO != "")
             {
+                Label94.Text = SessionManager.HACCYU_NO;
+                DataUriage.T_UriageHeaderDataTable dtH = ClassUriage.GetUriageHeader(SessionManager.HACCYU_NO, Global.GetConnection());
+                DataUriage.T_UriageHeaderRow drr = dtH[0];
+                TextBox7.Text = drr.GokeiKingaku.ToString("0,0");
+                TextBox8.Text = drr.ShiireKingaku.ToString("0,0");
+                TextBox5.Text = drr.SyohiZeiGokei.ToString("0,0");
+                TextBox6.Text = drr.ArariGokeigaku.ToString("0,0");
+                TextBox12.Text = drr.SoukeiGaku.ToString("0,0");
+                TextBox10.Text = drr.SouSuryou.ToString();
+                RadComboCategory.Text = drr.CategoryName;
+                RadComboCategory.SelectedValue = drr.CateGory.ToString();
+                RadComboCategory.SelectedValue = drr.CateGory.ToString();
+                RadComboBox1.Text = RadComboBox3.Text = drr.TokuisakiName;
+                string[] tokuisaki = drr.TokuisakiCode.Split('/');
+                TokuisakiCode.Value = tokuisaki[1];
+                RadComboBox1.SelectedValue = drr.TokuisakiCode;
+
+                string name = drr.TantoName;
+                DataSet1.M_TantoDataTable dtM = Class1.GetStaff2(name, Global.GetConnection());
+                RadComboBox4.Items.Clear();
+                for (int t = 0; t < dtM.Count; t++)
+                {
+                    RadComboBox4.Items.Add(new RadComboBoxItem(dtM[t].BumonName, dtM[t].Bumon.ToString()));
+                }
+
+                RadComboBox4.Text = drr.Bumon;
+                FacilityRad.Text = drr.FacilityName;
+                DataSet1.M_Facility_NewRow drf = Class1.Getfacility(drr.FacilityName, Global.GetConnection());
+                FacilityRad.SelectedValue = drf.FacilityNo.ToString();
+                RadZeiKubun.SelectedValue = drr.Zeikubun.Trim();
+
+
                 DataUriage.T_UriageDataTable dt = ClassUriage.GetUriageMeisai(SessionManager.HACCYU_NO, Global.GetConnection());
                 CtrlSyousai.DataSource = dt;
                 CtrlSyousai.DataBind();
@@ -41,7 +73,10 @@ namespace Gyomu.Uriage
             {
                 return;
             }
-            strSyokaiDate = RadDatePicker1.SelectedDate.Value.ToShortDateString();
+            if (RadDatePicker1.SelectedDate != null)
+            {
+                strSyokaiDate = RadDatePicker1.SelectedDate.Value.ToShortDateString();
+            }
         }
         //ItemDataBound
         protected void CtrlSyousai_ItemDataBound(object sender, DataGridItemEventArgs e)
@@ -80,14 +115,17 @@ namespace Gyomu.Uriage
                     HyoujunTanka.Text = dr.HyojunKakaku.ToString("0,0");
                     Kingaku.Text = int.Parse(dr.Ryoukin).ToString("0,0");
                     ShiyouShisetsu.Text = dr.SisetuMei;
-                    RadDatePicker3.SelectedDate = dr.SiyouKaishi;
-                    RadDatePicker4.SelectedDate = dr.SiyouOwari;
                     if (!dr.IsZasuNull())
                     {
                         Zasu.Text = dr.Zasu;
                     }
-                    StartDate.SelectedDate = dr.SiyouKaishi;
-                    EndDate.SelectedDate = dr.SiyouOwari;
+                    if (!dr.IsSiyouKaishiNull())
+                    {
+                        StartDate.SelectedDate = dr.SiyouKaishi;
+                        EndDate.SelectedDate = dr.SiyouOwari;
+                        RadDatePicker3.SelectedDate = dr.SiyouKaishi;
+                        RadDatePicker4.SelectedDate = dr.SiyouOwari;
+                    }
                     Kakeri.Text = dr.Kakeritsu;
                     zeiku.Text = dr.ZeiKubun;
                     Tanka.Text = dr.JutyuTanka.ToString("0,0");
@@ -95,21 +133,6 @@ namespace Gyomu.Uriage
                     Label1.Text = dr.TanTouName;
                     RadComboBox4.Text = dr.Busyo;
                     //ヘッダーの方
-                    Label94.Text = SessionManager.HACCYU_NO;
-                    DataUriage.T_UriageHeaderDataTable dt = ClassUriage.GetUriageHeader(SessionManager.HACCYU_NO, Global.GetConnection());
-                    DataUriage.T_UriageHeaderRow drr = dt[0];
-                    TextBox7.Text = drr.GokeiKingaku.ToString("0,0");
-                    TextBox8.Text = drr.ShiireKingaku.ToString("0,0");
-                    TextBox5.Text = drr.SyohiZeiGokei.ToString("0,0");
-                    TextBox6.Text = drr.ArariGokeigaku.ToString("0,0");
-                    TextBox12.Text = drr.SoukeiGaku.ToString("0,0");
-                    TextBox10.Text = drr.SouSuryou.ToString();
-                    RadComboCategory.Text = drr.CategoryName;
-                    RadComboCategory.SelectedValue = drr.CateGory.ToString();
-                    RadComboBox1.Text = RadComboBox3.Text = drr.TokuisakiName;
-                    string[] tokuisaki = drr.TokuisakiCode.Split('/');
-                    TokuisakiCode.Value = tokuisaki[1];
-                    RadComboBox1.SelectedValue = drr.TokuisakiCode;
 
                     ClassKensaku.KensakuParam p = new ClassKensaku.KensakuParam();
                     KensakuPara(p);
@@ -119,31 +142,18 @@ namespace Gyomu.Uriage
                     TokuisakiCode.Value = dtT[0].TokuisakiCode.ToString();
                     Label3.Text = dtT[0].Kakeritsu.ToString();
                     Shimebi.Text = dtT[0].Shimebi;
-                    string name = drr.TantoName;
-                    DataSet1.M_TantoDataTable dtM = Class1.GetStaff2(name, Global.GetConnection());
-                    RadComboBox4.Items.Clear();
-                    for (int t = 0; t < dtM.Count; t++)
-                    {
-                        RadComboBox4.Items.Add(new RadComboBoxItem(dtM[t].BumonName, dtM[t].Bumon.ToString()));
-                    }
 
-                    RadComboBox4.Text = drr.Bumon;
-                    FacilityRad.Text = drr.FacilityName;
-                    DataSet1.M_Facility_NewRow drf = Class1.Getfacility(drr.FacilityName, Global.GetConnection());
-                    FacilityRad.SelectedValue = drf.FacilityNo.ToString();
-                    RadZeiKubun.SelectedValue = drr.ZeiKubun.Trim();
-
-                    if (!drr.IsKariFLGNull())
-                    {
-                        if (drr.KariFLG.Trim() == "True")
-                        {
-                            CheckBox1.Checked = true;
-                        }
-                        else
-                        {
-                            CheckBox1.Checked = false;
-                        }
-                    }
+                    //if (!drr.IsKariFLGNull())
+                    //{
+                    //    if (drr.KariFLG.Trim() == "True")
+                    //    {
+                    //        CheckBox1.Checked = true;
+                    //    }
+                    //    else
+                    //    {
+                    //        CheckBox1.Checked = false;
+                    //    }
+                    //}
                 }
             }
             catch (Exception ex)
@@ -520,7 +530,7 @@ namespace Gyomu.Uriage
                             drh.TantoName = Label1.Text;
                             drh.Bumon = RadComboBox4.Text;
                             drh.Relay = "売上";
-                            drh.ZeiKubun = RadZeiKubun.Text;
+                            drh.Zeikubun = RadZeiKubun.Text;
                             int no = 0;
                             DataReturn.T_ReturnHeaderRow dr = ClassReturn.GetMaxNo(Global.GetConnection());
                             if (dr == null)

@@ -88,10 +88,8 @@ namespace Gyomu.Appropriate
 
                 e.Item.Cells[RadG.Columns.FindByUniqueName("ColNo").OrderIndex].Text = dr.ShiireNo.ToString();
                 e.Item.Cells[RadG.Columns.FindByUniqueName("ColCategory").OrderIndex].Text = dr.CategoryName;
-                if (!dr.IsShiiresakiCodeNull())
-                {
-                    e.Item.Cells[RadG.Columns.FindByUniqueName("ColShiiresakiCode").OrderIndex].Text = dr.ShiiresakiCode;
-                }
+                e.Item.Cells[RadG.Columns.FindByUniqueName("ColShiiresakiCode").OrderIndex].Text = dr.ShiiresakiCode;
+
                 if (!dr.IsShiiresakiNameNull())
                 {
                     e.Item.Cells[RadG.Columns.FindByUniqueName("ColShiire").OrderIndex].Text = dr.ShiiresakiName.ToString();
@@ -107,11 +105,11 @@ namespace Gyomu.Appropriate
                     e.Item.Cells[RadG.Columns.FindByUniqueName("ColShiireKingaku").OrderIndex].Text = dr.ShiireKingaku.ToString("0,0");
                 }
 
-                if(!dr.IsCreateDateNull())
+                if (!dr.IsCreateDateNull())
                 {
                     e.Item.Cells[RadG.Columns.FindByUniqueName("ColCreateDate").OrderIndex].Text = dr.CreateDate.ToShortDateString();
                 }
-               
+
 
             }
         }
@@ -152,7 +150,6 @@ namespace Gyomu.Appropriate
                     this.strKeys += chk.Value;
                 }
             }
-
             string[] strShiire = strKeys.Split('_');
 
             Doc pdf = new Doc();
@@ -164,7 +161,6 @@ namespace Gyomu.Appropriate
 
             sArg = Common.DownloadDataForm.GetQueryString4Binary("ShiireDenpyou" + DateTime.Now + ".pdf", acApp.theData);
             Telerik.Web.UI.RadAjaxManager.GetCurrent(this.Page).ResponseScripts.Add(string.Format("window.location.href='{0}';", this.ResolveUrl("~/Common/DownloadDataForm.aspx?" + sArg)));
-
         }
 
         string strKeys = "";
@@ -192,7 +188,7 @@ namespace Gyomu.Appropriate
                 SessionManager.OrderedData(strKeys);
                 Response.Redirect("AppropriateInput.aspx");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 err.Text = ex.Message;
             }

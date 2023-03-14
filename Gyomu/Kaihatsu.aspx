@@ -6,7 +6,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href="Kaihatsu.css" type="text/css" rel="stylesheet" />
@@ -173,6 +173,30 @@
             animation: sp-anime 0.8s infinite linear;
         }
 
+        .gv a {
+            background-color: white;
+            text-decoration: none;
+            color: darkgreen;
+            font-size: 15px;
+        }
+
+            .gv a:link {
+                background-color: white;
+                text-decoration: none;
+                color: green;
+                font-weight: bold;
+                font-size: 15px;
+            }
+
+            .gv a:visited {
+                background-color: darkgreen;
+                text-decoration: none;
+                color: white;
+                font-weight: bold;
+                font-size: 15px;
+            }
+
+
         @keyframes sp-anime {
             100% {
                 transform: rotate(360deg);
@@ -192,130 +216,104 @@
                 <span class="spinner"></span>
                 <script type="text/javascript">
                     jQuery(function ($) {
-                        var HidSpinSwitch = document.getElementById('HidSpinSwitch');
+                        //    var HidSpinSwitch = document.getElementById('HidSpinSwitch');
 
-                        $(document).ajaxSend(function () {
-                            $("#overlay").fadeIn(300);
-                        });
-                        if (HidSpinSwitch.value == "true") {
-                            $('#Button5').click(function () {
-                                $.ajax({
-                                    type: 'GET',
-                                    success: function (data) {
-                                        console.log(data);
-                                    }
-                                }).done(function () {
-                                    setTimeout(function () {
-                                        $("#overlay").fadeOut(300);
-                                    }, 10000000);
-                                });
-                            });
-                        }
+                        //$("CheckBox5").ajaxSend(function () {
+                        //    $("#overlay").fadeIn(300);
+                        //});
+                        //    if (HidSpinSwitch.value == "true") {
+                        //        $('#Button5').click(function () {
+                        //            $.ajax({
+                        //                type: 'GET',
+                        //                success: function (data) {
+                        //                    console.log(data);
+                        //                }
+                        //            }).done(function () {
+                        //                setTimeout(function () {
+                        //                    $("#overlay").fadeOut(300);
+                        //                }, 10000000);
+                        //            });
+                        //        });
+                        //    }
 
-                        $('#Button7').click(function () {
-                            $.ajax({
-                                type: 'GET',
-                                success: function (data) {
-                                    console.log(data);
-                                }
-                            }).done(function () {
-                                setTimeout(function () {
-                                    $("#overlay").fadeOut(300);
-                                }, 1000);
-                            });
-                        });
+                        //    $('#Button7').click(function () {
+                        //        $.ajax({
+                        //            type: 'GET',
+                        //            success: function (data) {
+                        //                console.log(data);
+                        //            }
+                        //        }).done(function () {
+                        //            setTimeout(function () {
+                        //                $("#overlay").fadeOut(300);
+                        //            }, 1000);
+                        //        });
+                        //    });
 
-                        $('#Button8').click(function () {
-                            $.ajax({
-                                type: 'GET',
-                                success: function (data) {
-                                    console.log(data);
-                                }
-                            }).done(function () {
-                                setTimeout(function () {
-                                    $("#overlay").fadeOut(300);
-                                }, 1000);
-                            });
-                        });
+                        //    $('#Button8').click(function () {
+                        //        $.ajax({
+                        //            type: 'GET',
+                        //            success: function (data) {
+                        //                console.log(data);
+                        //            }
+                        //        }).done(function () {
+                        //            setTimeout(function () {
+                        //                $("#overlay").fadeOut(300);
+                        //            }, 1000);
+                        //        });
+                        //    });
 
-                        $('#RadComboCategory').change(function () {
-                            $.ajax({
-                                type: 'GET',
-                                success: function (data) {
-                                    console.log(data);
-                                }
-                            }).done(function () {
-                                setTimeout(function () {
-                                    $("#overlay").fadeOut(300);
-                                }, 1000);
-                            });
-                        });
+                        //    $('#RadComboCategory').change(function () {
+                        //        $.ajax({
+                        //            type: 'GET',
+                        //            success: function (data) {
+                        //                console.log(data);
+                        //            }
+                        //        }).done(function () {
+                        //            setTimeout(function () {
+                        //                $("#overlay").fadeOut(300);
+                        //            }, 1000);
+                        //        });
+                        //    });
 
-                        $('#RadComboBox1').change(function () {
-                            $.ajax({
-                                type: 'GET',
-                                success: function (data) {
-                                    console.log(data);
-                                }
-                            }).done(function () {
-                                setTimeout(function () {
-                                    $("#overlay").fadeOut(300);
-                                }, 1000);
-                            });
-                        });
+                        //    $('#RadComboBox1').change(function () {
+                        //        $.ajax({
+                        //            type: 'GET',
+                        //            success: function (data) {
+                        //                console.log(data);
+                        //            }
+                        //        }).done(function () {
+                        //            setTimeout(function () {
+                        //                $("#overlay").fadeOut(300);
+                        //            }, 1000);
+                        //        });
+                        //    });
 
-                        $('#DropDownList9').change(function () {
-                            $.ajax({
-                                type: 'GET',
-                                success: function (data) {
-                                    console.log(data);
-                                }
-                            }).done(function () {
-                                setTimeout(function () {
-                                    $("#overlay").fadeOut(300);
-                                }, 1000);
-                            });
-                        });
+                        //    $('#CheckBox4').Check(function () {
+                        //        $.ajax({
+                        //            type: 'GET',
+                        //            success: function (data) {
+                        //                console.log(data);
+                        //            }
+                        //        }).done(function () {
+                        //            setTimeout(function () {
+                        //                $("#overlay").fadeOut(300);
+                        //            }, 1000);
+                        //        });
+                        //    });
 
-                        $('#CheckBox4').Check(function () {
-                            $.ajax({
-                                type: 'GET',
-                                success: function (data) {
-                                    console.log(data);
-                                }
-                            }).done(function () {
-                                setTimeout(function () {
-                                    $("#overlay").fadeOut(300);
-                                }, 1000);
-                            });
-                        });
+                        //$("#CheckBox5").change(function () {
+                        //    $.ajax({
+                        //        type: 'GET',
+                        //        success: function (data) {
+                        //            console.log(data);
+                        //        }
+                        //    }).done(function () {
+                        //        setTimeout(function () {
+                        //            $("#overlay").fadeOut(300);
+                        //        }, 10000000);
+                        //    });
+                        //});
 
-                        $('#CheckBox5').click(function () {
-                            $.ajax({
-                                type: 'GET',
-                                success: function (data) {
-                                    console.log(data);
-                                }
-                            }).done(function () {
-                                setTimeout(function () {
-                                    $("#overlay").fadeOut(300);
-                                }, 1000);
-                            });
-                        });
-
-
-                        $('#form1').attr("Btn10").click(function () {
-                            $.ajax({
-                                type: 'GET',
-                                success: function (data) {
-                                    console.log(data);
-                                }
-                            }).done(function () {
-                                setTimeout(function () {
-                                    $("#overlay").fadeOut(300);
-                                }, 1000);
-                            });
-                        });
 
                     });
                 </script>
@@ -337,7 +335,7 @@
         <table runat="server" id="SubMenu">
             <tr>
                 <td>
-                    <asp:Button ID="BtnKeisan" runat="server" Text="計算" CssClass="Btn10" OnClientClick="Cul(); return false;" />
+                    <asp:Button ID="BtnKeisan" runat="server" Text="計算" CssClass="Btn10" OnClientClick="Cul(); return false;" OnClick="BtnKeisan_Click" />
                 </td>
                 <td>
                     <asp:Button ID="Button5" runat="server" Text="登録" CssClass="Btn10" OnClick="Button5_Click" OnClientClick="return Check(this)" />
@@ -427,8 +425,8 @@
                                 }
                             }
                             else {
-                                Err.innerText = "カテゴリーを選択して下さい";
-                                bool = false;
+                                //    Err.innerText = "カテゴリーを選択して下さい";
+                                //    bool = false;
                             }
                             var dg = document.getElementById('CtrlSyousai');
                             var c = dg.rows.length;
@@ -604,7 +602,6 @@
                 </td>
             </tr>
         </table>
-        <!-- ヘッダー部分---------------------------------------------------------------------------------->
         <asp:Label ID="Err" runat="server" Text="" ForeColor="Red"></asp:Label>
         <asp:Label ID="End" runat="server" Text="" ForeColor="Green"></asp:Label>
 
@@ -621,7 +618,7 @@
                         <p>カテゴリー</p>
                     </td>
                     <td class="waku">
-                        <telerik:RadComboBox ID="RadComboCategory" runat="server" OnItemsRequested="RadComboCategory_ItemsRequested" AllowCustomText="True" EnableLoadOnDemand="True" MarkFirstMatch="True" ShowMoreResultsBox="True" ShowToggleImage="False" EnableVirtualScrolling="True" Width="100px" OnSelectedIndexChanged="RadComboCategory_SelectedIndexChanged" AutoPostBack="true"></telerik:RadComboBox>
+                        <telerik:RadComboBox ID="RadComboCategory" runat="server" OnSelectedIndexChanged="RadComboCategory_SelectedIndexChanged"></telerik:RadComboBox>
                         <input type="hidden" id="CategoryCode" runat="server" />
                     </td>
                     <td class="MiniTitle">
@@ -707,12 +704,11 @@
                         </script>
                     </td>
                     <td colspan="4" class="waku">
-                        <telerik:RadComboBox ID="RadComboBox1" runat="server" Culture="ja-JP" OnItemsRequested="RadComboBox1_ItemsRequested" AllowCustomText="false" EnableLoadOnDemand="True" ShowMoreResultsBox="True" ShowToggleImage="False" EnableVirtualScrolling="True" Width="300px" OnClientSelectedIndexChanged="TokuisakiSelect" AutoPostBack="true" OnSelectedIndexChanged="RadComboBox1_SelectedIndexChanged"></telerik:RadComboBox>
+                        <telerik:RadComboBox ID="RadComboBox1" runat="server" AutoPostBack="true" Culture="ja-JP" OnItemsRequested="RadComboBox1_ItemsRequested" AllowCustomText="false" EnableLoadOnDemand="True" ShowMoreResultsBox="True" ShowToggleImage="False" EnableVirtualScrolling="True" Width="300px" OnClientSelectedIndexChanged="TokuisakiSelect" OnSelectedIndexChanged="RadComboBox1_SelectedIndexChanged"></telerik:RadComboBox>
                         <script type="text/javascript">
                             function TokuisakiSelect(sender, eventArgs) {
                                 var id = sender.get_element().id;
                                 var rcbTokuisaki = $find(id);
-                                debugger;
                                 var selectedvalue = rcbTokuisaki.get_selectedItem().get_value();
                                 var AryValue = selectedvalue.split(',');
                                 var CustomerCode = AryValue[0];
@@ -1101,23 +1097,81 @@
                         <table>
                             <tr>
                                 <td>
-                                    <asp:DropDownList ID="DropDownList9" runat="server" AutoPostBack="True" OnSelectedIndexChanged="DropDownList9_SelectedIndexChanged" Width="120px" CssClass="CategoryChabge">
+                                    <asp:DropDownList ID="DropDownList9" runat="server" Width="120px" CssClass="CategoryChabge">
                                         <asp:ListItem>使用期間を選択</asp:ListItem>
-                                        <asp:ListItem>1日</asp:ListItem>
-                                        <asp:ListItem>2日</asp:ListItem>
-                                        <asp:ListItem>3日</asp:ListItem>
-                                        <asp:ListItem>4日</asp:ListItem>
-                                        <asp:ListItem>5日</asp:ListItem>
-                                        <asp:ListItem>1ヵ月</asp:ListItem>
-                                        <asp:ListItem>2ヵ月</asp:ListItem>
-                                        <asp:ListItem>3ヵ月</asp:ListItem>
-                                        <asp:ListItem>4ヵ月</asp:ListItem>
-                                        <asp:ListItem>5ヵ月</asp:ListItem>
-                                        <asp:ListItem>6ヵ月</asp:ListItem>
-                                        <asp:ListItem>1年</asp:ListItem>
-                                        <asp:ListItem>99年</asp:ListItem>
+                                        <asp:ListItem Text="1日" Value="1d"></asp:ListItem>
+                                        <asp:ListItem Text="2日" Value="2d"></asp:ListItem>
+                                        <asp:ListItem Text="3日" Value="3d"></asp:ListItem>
+                                        <asp:ListItem Text="4日" Value="4d"></asp:ListItem>
+                                        <asp:ListItem Text="5日" Value="5d"></asp:ListItem>
+                                        <asp:ListItem Text="1ヶ月" Value="1m"></asp:ListItem>
+                                        <asp:ListItem Text="2ヵ月" Value="2m"></asp:ListItem>
+                                        <asp:ListItem Text="3ヵ月" Value="3m"></asp:ListItem>
+                                        <asp:ListItem Text="4ヵ月" Value="4m"></asp:ListItem>
+                                        <asp:ListItem Text="5ヶ月" Value="5m"></asp:ListItem>
+                                        <asp:ListItem Text="6ヵ月" Value="6m"></asp:ListItem>
+                                        <asp:ListItem Text="1年" Value="1y"></asp:ListItem>
+                                        <asp:ListItem Text="99年" Value="99y"></asp:ListItem>
                                     </asp:DropDownList>
-
+                                    <script type="text/javascript">
+                                        function KikanChange() {
+                                            var RadDatePicker3 = $find("<%= RadDatePicker3.ClientID%>");
+                                            var RadDatePicker4 = $find("<%= RadDatePicker4.ClientID%>");
+                                            var DropDownList9 = $("#DropDownList9");
+                                            debugger;
+                                            var strKikan = DropDownList9.val();
+                                            var strStart = RadDatePicker3.get_selectedDate();
+                                            switch (strKikan) {
+                                                case "1d":
+                                                    RadDatePicker4.set_selectedDate(strStart);
+                                                    break;
+                                                case "2d":
+                                                    RadDatePicker4.set_selectedDate(new Date(strStart.setDate(strStart.getDate() + 1)));
+                                                    break;
+                                                case "3d":
+                                                    RadDatePicker4.set_selectedDate(new Date(strStart.setDate(strStart.getDate() + 2)));
+                                                    break;
+                                                case "4d":
+                                                    RadDatePicker4.set_selectedDate(new Date(strStart.setDate(strStart.getDate() + 3)));
+                                                    break;
+                                                case "5d":
+                                                    RadDatePicker4.set_selectedDate(new Date(strStart.setDate(strStart.getDate() + 4)));
+                                                    break;
+                                                case "1m":
+                                                    new Date(strStart.setMonth((strStart.getMonth() + 1)));
+                                                    RadDatePicker4.set_selectedDate(new Date(strStart.setDate(strStart.getDate() - 1)));
+                                                    break;
+                                                case "2m":
+                                                    new Date(strStart.setMonth((strStart.getMonth() + 2)));
+                                                    RadDatePicker4.set_selectedDate(new Date(strStart.setDate(strStart.getDate() - 1)));
+                                                    break;
+                                                case "3m":
+                                                    new Date(strStart.setMonth((strStart.getMonth() + 3)));
+                                                    RadDatePicker4.set_selectedDate(new Date(strStart.setDate(strStart.getDate() - 1)));
+                                                    break;
+                                                case "4m":
+                                                    new Date(strStart.setMonth((strStart.getMonth() + 4)));
+                                                    RadDatePicker4.set_selectedDate(new Date(strStart.setDate(strStart.getDate() - 1)));
+                                                    break;
+                                                case "5m":
+                                                    new Date(strStart.setMonth((strStart.getMonth() + 5)));
+                                                    RadDatePicker4.set_selectedDate(new Date(strStart.setDate(strStart.getDate() - 1)));
+                                                    break;
+                                                case "6m":
+                                                    new Date(strStart.setMonth((strStart.getMonth() + 6)));
+                                                    RadDatePicker4.set_selectedDate(new Date(strStart.setDate(strStart.getDate() - 1)));
+                                                    break;
+                                                case "1y":
+                                                    new Date(strStart.setFullYear((strStart.getFullYear() + 1)));
+                                                    RadDatePicker4.set_selectedDate(new Date(strStart.setDate(strStart.getDate() - 1)));
+                                                    break;
+                                                case "99y":
+                                                    new Date(strStart.setFullYear(2099));
+                                                    RadDatePicker4.set_selectedDate(new Date(strStart.setDate(strStart.getDate() - 1)));
+                                                    break;
+                                            }
+                                        }
+                                    </script>
                                 </td>
                             </tr>
                             <tr>
@@ -1156,8 +1210,14 @@
                     <td class="InputTitle" runat="server">
                         <p>備考</p>
                     </td>
-                    <td colspan="9" class="waku">
-                        <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+                    <td colspan="5" class="waku">
+                        <asp:TextBox ID="TextBox2" runat="server" Width="200px"></asp:TextBox>
+                    </td>
+                    <td class="MiniTitle">
+                        <p>希望納期</p>
+                    </td>
+                    <td colspan="3" class="waku">
+                        <asp:TextBox runat="server" ID="TbxKibouNouki" Width="200px"></asp:TextBox>
                     </td>
                     <td class="MiniTitle">
                         <p>売上合計</p>
@@ -1177,7 +1237,6 @@
             </table>
         </div>
 
-        <!-- ヘッダーテーブル -------------------------------------------------------------------------------------->
 
         <div runat="server" style="width: 100%;">
             <table runat="server" style="text-align: center; width: 100%; border-collapse: collapse; background-color: white; border: 2px solid #47ab47" id="head">
@@ -1306,7 +1365,15 @@
                     <td>
                         <asp:Button runat="server" ID="BtnCloseHeader" OnClick="BtnCloseHeader_Click" Text="ヘッダー折りたたむ" />
                     </td>
-
+                    <td>
+                        <br />
+                    </td>
+                    <td>
+                        <asp:FileUpload runat="server" ID="FU" />
+                    </td>
+                    <td>
+                        <asp:Button runat="server" ID="BtnSyouhinUpload" OnClick="BtnSyouhinUpload_Click" Text="商品情報をアップロード" />
+                    </td>
                 </tr>
             </table>
         </div>
@@ -1316,26 +1383,20 @@
             <tr>
                 <td>
                     <div runat="server" id="DivDataGrid">
-                        <asp:DataGrid runat="server" ID="CtrlSyousai" AutoGenerateColumns="False" OnItemDataBound="CtrlSyousai_ItemDataBound" OnItemCommand="CtrlSyousai_ItemCommand" BorderColor="White" on>
+                        <asp:DataGrid runat="server" ID="CtrlSyousai" PageSize="10" AllowPaging="true" AutoGenerateColumns="False" OnItemDataBound="CtrlSyousai_ItemDataBound" OnItemCommand="CtrlSyousai_ItemCommand" BorderColor="White" OnPageIndexChanged="CtrlSyousai_PageIndexChanged">
+                            <PagerStyle Position="TopAndBottom" Mode="NumericPages" CssClass="gv" />
                             <Columns>
-
                                 <asp:TemplateColumn HeaderStyle-BorderStyle="None" ItemStyle-BorderStyle="None" ItemStyle-Width="30px">
                                     <ItemStyle HorizontalAlign="Center" />
-
                                     <ItemTemplate>
-
                                         <asp:Label ID="RowNo" runat="server" Text="" Font-Size="25px"></asp:Label>
-                                        <%--                                        <asp:Button runat="server" ID="BtnEdit" Text="編集" Width="90px" CommandName="Edit" CssClass="Btn10" />--%>
-                                        <%--                                        <asp:Button runat="server" ID="BtnDoneEdit" Text="編集完了" Width="90px" Visible="false" CommandName="EditDone" CssClass="Btn10" />--%>
                                         <asp:Button ID="Button4" runat="server" Text="削除" Width="90px" CssClass="Btn10" CommandName="Del" />
                                         <asp:Button ID="BtnAddRow" runat="server" Text="明細挿入" Width="90px" CssClass="Btn10" CommandName="Add" />
                                         <asp:Button runat="server" ID="BtnCopyAdd" Text="明細複写" Width="90px" CssClass="Btn10" CommandName="Copy" />
                                         <asp:Button runat="server" ID="BtnTool5" ToolTip="「削除」明細を1行削除。「明細挿入」空の明細を1行追加。「明細複写」クリックした明細のデータを複写して追加。" Text="❔" OnClientClick="return false;" />
-
                                         <input type="hidden" runat="server" id="HidAddFLG" /><%--dataT_rowにデータを持っているかいないかのフラグ--%>
                                     </ItemTemplate>
                                 </asp:TemplateColumn>
-
                                 <asp:TemplateColumn HeaderStyle-BorderStyle="None" ItemStyle-BorderStyle="None">
                                     <ItemTemplate>
                                         <uc2:Syosai ID="Syosai" runat="server" />
@@ -1427,7 +1488,6 @@
                         var ShiireKingaku = document.getElementById(CtrlSyousai + "_" + ctl + count + "_" + Syosai + "_" + "ShiireKingaku").value.replace(",", "");
                         var Kazu = document.getElementById(CtrlSyousai + "_" + ctl + count + "_" + Syosai + "_" + "Suryo").value.replace(",", "");
                         var TbxMakerNo = document.getElementById(CtrlSyousai + "_" + ctl + count + "_" + Syosai + "_" + "TbxMakerNo").value.replace(",", "");
-                        debugger;
                         if (TbxMakerNo != "0") {
                             if (Kazu != null) {
                                 Kazu = Kazu;
@@ -1554,7 +1614,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>
+                            <td style="vertical-align:top">
                                 <asp:Table runat="server" ID="TBTokuisaki">
                                     <asp:TableRow>
                                         <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
@@ -1641,6 +1701,11 @@
                                         </asp:TableCell>
                                         <asp:TableCell ColumnSpan="2" CssClass="waku">
                                             <asp:TextBox runat="server" ID="TbxTokuisakiTEL"></asp:TextBox>
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                    <asp:TableRow>
+                                        <asp:TableCell ColumnSpan="3">
+                                            <asp:Button runat="server" ID="BtnCopy1" Text="郵便番号、住所、電話番号をコピーする" OnClick="BtnCopy1_Click" />
                                         </asp:TableCell>
                                     </asp:TableRow>
                                     <asp:TableRow>
@@ -1731,7 +1796,7 @@
                                     </asp:TableRow>
                                 </asp:Table>
                             </td>
-                            <td>
+                            <td style="vertical-align: top">
                                 <table>
                                     <tr>
                                         <td style="vertical-align: top">
@@ -1825,6 +1890,11 @@
                                                     </asp:TableCell>
                                                 </asp:TableRow>
                                                 <asp:TableRow>
+                                                    <asp:TableCell ColumnSpan="3">
+                                                        <asp:Button runat="server" ID="BtnCopy2" Text="郵便番号、住所、電話番号をコピーする" OnClick="BtnCopy2_Click" />
+                                                    </asp:TableCell>
+                                                </asp:TableRow>
+                                                <asp:TableRow>
                                                     <asp:TableCell ColumnSpan="2" CssClass="MiniTitle">
                    <p>FAX</p>
                                                     </asp:TableCell>
@@ -1910,7 +1980,7 @@
                                     </tr>
                                 </table>
                             </td>
-                            <td>
+                            <td style="vertical-align: top">
                                 <table runat="server" id="TBNouhinsaki">
                                     <tr>
                                         <td runat="server" class="MiniTitle">
@@ -2034,6 +2104,11 @@
                                         </td>
                                     </tr>
                                     <tr>
+                                        <td colspan="2">
+                                            <asp:Button runat="server" ID="BtnCopy3" Text="郵便番号、住所、電話番号をコピーする" OnClick="BtnCopy3_Click" />
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <td runat="server" class="MiniTitle">
                                             <p>敬称</p>
                                         </td>
@@ -2052,7 +2127,7 @@
                                 </table>
 
                             </td>
-                            <td>
+                            <td style="vertical-align: top">
                                 <table runat="server" id="TBFacilityDetail">
                                     <tr>
                                         <td class="MiniTitle" style="width: 120px; height: 20px;">
@@ -2162,6 +2237,11 @@
                                         </td>
                                     </tr>
                                     <tr>
+                                        <td colspan="2">
+                                            <asp:Button runat="server" ID="BtnCopy4" Text="郵便番号、住所、電話番号をコピーする" OnClick="BtnCopy4_Click" />
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <td runat="server" class="MiniTitle">
                                             <p>敬称</p>
                                         </td>
@@ -2210,7 +2290,6 @@
                 document.getElementById("DivDataGrid").style.display = "";
             }
         </script>
-        <!-- 商品詳細-------------------------------------------------------------------------------------------------->
         <script src="JavaScript.js"></script>
         <script type="text/javascript">
             function select(sender, eventArgs) {
@@ -2288,7 +2367,7 @@
                 var EndDate = $find(clid[0] + "_" + clid[1] + "_" + clid[2] + "_" + "EndDate");
                 var SyokaiDate = $find('RadDatePicker1');
                 var HidSyokaiDate = document.getElementById("HidSyokaiDate");
-
+                debugger;
                 permisisionstart = new Date(permisisionstart);
                 rightend = new Date(rightend);
                 cpkaishi = new Date(cpkaishi);
@@ -2381,7 +2460,7 @@
                         var shiirekin = shiire * suryo.value * 1.1;
                         shiirekin = Math.trunc(shiirekin);
                         ShiireKingaku.value = String(shiirekin).replace(/(\d)(?=(\d\d\d)+$)/g, "$1,");
-                        //単価＆売上金額（売上金額　＝　掛率計算済「税込」標準単価　×　数量）
+                        //単価＆売上金額（売上金額　＝　掛率計算済「税込」標準単価　×　数量　×　税込なので1.1）
                         var tanka = kakaku * Kakeri.innerText * 1.1 / 100;
                         tanka = Math.trunc(tanka);
                         Tanka.value = String(tanka).replace(/(\d)(?=(\d\d\d)+$)/g, "$1,");
@@ -2443,6 +2522,7 @@
                         }
                     }
                 }
+                combo2.clearItems();
             }
 
         </script>
@@ -2591,7 +2671,17 @@
                 ss2.style.display = "none";
             }
         </script>
-
+        <telerik:RadAjaxManager runat="server" ID="Ram" OnAjaxRequest="Ram_AjaxRequest">
+            <AjaxSettings>
+                <telerik:AjaxSetting AjaxControlID="DivDataGrid">
+                    <UpdatedControls>
+                        <telerik:AjaxUpdatedControl ControlID="DivDataGrid" LoadingPanelID="Lp" UpdatePanelRenderMode="Block" />
+                    </UpdatedControls>
+                </telerik:AjaxSetting>
+            </AjaxSettings>
+        </telerik:RadAjaxManager>
+        <telerik:RadAjaxLoadingPanel runat="server" ID="Lp" Skin="Telerik" Height="500px">
+        </telerik:RadAjaxLoadingPanel>
     </form>
 </body>
 </html>

@@ -187,7 +187,7 @@ namespace DLL
 
                 return true;
             }
-            catch 
+            catch
             {
                 return false;
             }
@@ -283,7 +283,7 @@ namespace DLL
             return dt[0];
         }
 
-        public static void InsertUriageHeader(string jNo, int no, SqlConnection sqlConnection)
+        public static void InsertUriage(string jNo, int no, SqlConnection sqlConnection)
         {
             SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
             da.SelectCommand.CommandText =
@@ -338,13 +338,13 @@ namespace DLL
                 }
                 drh.UriageNo = dt[0].JutyuNo;
                 drh.UriageNo = no;
-                drh.HatyuFlg = false;
+                drh.HatyuFlg = "false";
                 dth.AddT_UriageHeaderRow(drh);
                 daUH.Update(dth);
                 daU.Update(ddt);
                 sql.Commit();
             }
-            catch 
+            catch (Exception ex)
             {
                 sql.Rollback();
             }
@@ -451,7 +451,7 @@ namespace DLL
                 }
                 sql.Commit();
             }
-            catch 
+            catch
             {
                 sql.Rollback();
             }
@@ -477,12 +477,12 @@ namespace DLL
                 for (int i = 0; i < dt.Count; i++)
                 {
                     dt[i].JutyuBi = DateTime.Now;
-                    dt[i].UriageFlg = true;
+                    //dt[i].UriageFlg = true;
                 }
                 da.Update(dt);
                 sql.Commit();
             }
-            catch 
+            catch
             {
                 sql.Rollback();
             }

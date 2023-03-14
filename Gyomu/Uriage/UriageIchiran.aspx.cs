@@ -224,9 +224,9 @@ namespace Gyomu.Uriage
                 {
                     e.Item.Cells[RadG.Columns.FindByUniqueName("ColKingaku").OrderIndex].Text = dr.SoukeiGaku.ToString("0,0");
                 }
-                if (!dr.IsCareateDateNull())
+                if (!dr.IsCreateDateNull())
                 {
-                    e.Item.Cells[RadG.Columns.FindByUniqueName("ColMitumoriDay").OrderIndex].Text = dr.CareateDate.ToLongDateString();
+                    e.Item.Cells[RadG.Columns.FindByUniqueName("ColMitumoriDay").OrderIndex].Text = dr.CreateDate.ToLongDateString();
 
                 }
             }

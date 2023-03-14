@@ -26,7 +26,6 @@
         .column {
             text-align: center;
             color: black;
-            padding: 0.5em;
             font-size: 12px;
             width: 60px;
             background-color: #ffd900;
@@ -245,7 +244,11 @@
         <div id="MainMenu" runat="server">
             <uc:Menu ID="Menu" runat="server" />
         </div>
-        <br />
+        <table>
+            <tr>
+                <td style="height: 5px;"></td>
+            </tr>
+        </table>
         <div id="Kensaku" runat="server">
             <telerik:RadTabStrip ID="RT" runat="server" AutoPostBack="True" SelectedIndex="0" BackColor="#ffef93">
                 <Tabs>
@@ -255,7 +258,11 @@
                     </telerik:RadTab>
                 </Tabs>
             </telerik:RadTabStrip>
-            <br />
+            <table>
+                <tr>
+                    <td style="height: 5px;"></td>
+                </tr>
+            </table>
             <table runat="server" style="width: 100%; border-collapse: collapse; border: 1px solid #9d9d9d">
                 <tr>
                     <td>
@@ -362,9 +369,17 @@
                 </tr>
             </table>
         </div>
-        <br />
+        <table>
+            <tr>
+                <td style="height: 5px;"></td>
+            </tr>
+        </table>
         <asp:Label ID="lblMsg" runat="server" Text=""></asp:Label>
-        <br />
+        <table>
+            <tr>
+                <td style="height: 5px;"></td>
+            </tr>
+        </table>
         <asp:Button ID="BtnDownlod" runat="server" Text="CSVダウンロード" Width="180px" CssClass="Btn10" OnClick="BtnDownlod_Click" />
         &nbsp;
         <asp:Button runat="server" Text="明細CSVダウンロード" Width="180px" CssClass="Btn10" ID="BtnMeisaiCSVdownload" OnClick="BtnMeisaiCSVdownload_Click" />
@@ -387,8 +402,11 @@
             }
         </script>
 
-        <br />
-        <br />
+        <table>
+            <tr>
+                <td style="height: 5px;"></td>
+            </tr>
+        </table>
 
         <%-- <asp:Button ID="BtnBitumori" runat="server" Text="見積書" Width="100px" style="height: 21px" />
         <asp:Button ID="BtnNouhin" runat="server" Text="納品書" Width="100px" style="height: 21px" />
@@ -467,7 +485,7 @@
             <input type="hidden" id="count" runat="server" />
         </div>
         <telerik:RadAjaxManager ID="Ram" runat="server" OnAjaxRequest="Ram_AjaxRequest">
-<%--            <ClientEvents OnResponseEnd="OnResponseEnd" OnRequestStart="OnRequestStart" />--%>
+            <%--            <ClientEvents OnResponseEnd="OnResponseEnd" OnRequestStart="OnRequestStart" />--%>
             <AjaxSettings>
                 <telerik:AjaxSetting AjaxControlID="BtnL">
                     <UpdatedControls>

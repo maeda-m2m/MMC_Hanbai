@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -56,6 +57,25 @@ namespace DLL
             }
             da.SelectCommand.CommandText += " Order by CreateDate desc";
             DataMaster.T_OshiraseDataTable dt = new DataMaster.T_OshiraseDataTable();
+            da.Fill(dt);
+            return dt;
+        }
+
+        public static DataTable GetOrderedList(KensakuParam k, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select distinct(OrderedNo), CategoryName,ShiiresakiCode, ShiireSakiName,(select sum(ShiireKingaku) from T_Ordered as o where o.ShiiresakiCode = oo.ShiiresakiCode) as OrderedPrice,(select sum(JutyuSuryou) from T_Ordered as ooo where ooo.ShiiresakiCode = oo.ShiiresakiCode) as OrderedAmount from T_Ordered as oo";
+            if (k != null)
+            {
+                WhereGenerator w = new WhereGenerator();
+                k.SetWhere(da, w);
+                if (!string.IsNullOrEmpty(w.WhereText))
+                {
+                    da.SelectCommand.CommandText += " Where" + w.WhereText;
+                }
+            }
+            da.SelectCommand.CommandText += "Order by OrderedNo desc";
+            DataTable dt = new DataTable();
             da.Fill(dt);
             return dt;
         }
@@ -347,7 +367,7 @@ namespace DLL
                 }
                 if (oFlg != null)
                 {
-                    w.Add("InsertFlg = @o");
+                    w.Add("HatyuFlg = @o");
                     da.SelectCommand.Parameters.AddWithValue("@o", oFlg);
                 }
                 if (sMitimoriNo != null)
@@ -357,14 +377,16 @@ namespace DLL
                 }
                 if (sTokuisaki != null)
                 {
-                    w.Add("TokuisakiRyakusyo = @TCode");
-                    da.SelectCommand.Parameters.AddWithValue("@TCode", sTokuisaki);
+                    w.Add("TokuisakiCode = @tc");
+                    da.SelectCommand.Parameters.AddWithValue("@tc", sTokuisaki);
                 }
                 if (sSeikyu != null)
                 {
-                    w.Add("SeikyusakiName=@sName");
-                    da.SelectCommand.Parameters.AddWithValue("@sName", sSeikyu);
+                    w.Add("SekyuCustomerCode = @scc and SekyuTokuisakiCode = @stc");
+                    da.SelectCommand.Parameters.AddWithValue("@scc", sSeikyu.Split('/')[0]);
+                    da.SelectCommand.Parameters.AddWithValue("@stc", sSeikyu.Split('/')[1]);
                 }
+
                 if (sTyokuso != null)
                 {
                     w.Add("TyokusosakiName = @TCD");
@@ -613,7 +635,7 @@ namespace DLL
         public static DataSet1.M_Kakaku_2DataTable GetProduct5(string v, string cate, string strSyokaiDate, SqlConnection sqlConn)
         {
             SqlDataAdapter da = new SqlDataAdapter("", sqlConn);
-            da.SelectCommand.CommandText = "SELECT TOP 10 * FROM M_Kakaku_2 WHERE (CategoryCode = @c) and (Makernumber like @e) OR (CategoryCode = @c) AND (SyouhinMei like @e)";
+            da.SelectCommand.CommandText = "SELECT TOP 100 * FROM M_Kakaku_2 WHERE (CategoryCode = @c) and (Makernumber like @e) OR (CategoryCode = @c) AND (SyouhinMei like @e)";
             da.SelectCommand.Parameters.AddWithValue("@c", cate);
             da.SelectCommand.Parameters.AddWithValue("@e", "%" + v + "%");
             DataSet1.M_Kakaku_2DataTable dt = new DataSet1.M_Kakaku_2DataTable();

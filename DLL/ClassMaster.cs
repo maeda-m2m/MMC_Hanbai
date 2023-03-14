@@ -2040,5 +2040,21 @@ namespace DLL
             return dt;
         }
 
+        public static DataMaster.M_Shiire_NewRow GetShiire_New(string shiireName, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select * from M_Shiire_New where Abbreviation = @sn";
+            da.SelectCommand.Parameters.AddWithValue("@sn", shiireName);
+            DataMaster.M_Shiire_NewDataTable dt = new DataMaster.M_Shiire_NewDataTable();
+            da.Fill(dt);
+            if (dt.Count.Equals(1))
+            {
+                return dt[0];
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

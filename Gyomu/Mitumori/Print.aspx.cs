@@ -82,7 +82,7 @@ namespace Gyomu.Mitumori
                 AppCommon acApp = new AppCommon();
 
                 acApp.MitumoriInsatu2(Type, pdf, strMitumoriAry, flg, bDate);
-
+                AppCommon.strShisetumei = "";
                 string sArg = "";
                 if (acApp.theData != null)
                 {

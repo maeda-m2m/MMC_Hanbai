@@ -11,7 +11,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server" id="Head1">
-    <title>見積一覧</title>
+    <title>見積情報</title>
     <link href="../../Style/Grid.ykuri.css" rel="STYLESHEET" />
     <link href="../../Style/ComboBox.ykuri.css" type="text/css" rel="STYLESHEET" />
     <%--    <link href="../../MainStyle.css" type="text/css" rel="Stylesheet" />--%>
@@ -36,9 +36,9 @@
             text-align: center;
             background-color: #53d153;
             color: black;
-            padding: 0.5em;
             font-size: 12px;
             width: 60px;
+            height:20px;
         }
 
         .row {
@@ -284,6 +284,7 @@
                 color: white;
                 font-weight: bold;
                 font-size: 15px;
+                
             }
     </style>
 
@@ -312,7 +313,13 @@
         <div id="MainMenu" runat="server">
             <uc:Menu ID="Menu" runat="server" />
         </div>
-        <br />
+        <table>
+            <tr>
+                <td style="height:5px;">
+
+                </td>
+            </tr>
+        </table>
         <div id="Kensaku" runat="server">
             <telerik:RadTabStrip ID="RT" runat="server" AutoPostBack="True" SelectedIndex="1" BackColor="#8dea8d">
                 <Tabs>
@@ -322,7 +329,13 @@
                     </telerik:RadTab>
                 </Tabs>
             </telerik:RadTabStrip>
-            <br />
+        <table>
+            <tr>
+                <td style="height:5px;">
+
+                </td>
+            </tr>
+        </table>
 
             <%--            <table border="1" runat="server" id="TBKensaku">
                 <tbody>
@@ -412,7 +425,7 @@
                 <td>
                     <table runat="server" id="TBKensaku2" style="width: 100%; border-collapse: collapse">
                         <tr>
-                            <td class="column">
+                            <td class="column" style="height:20px;">
                                 <p>受注</p>
                             </td>
                             <td class="row">
@@ -513,10 +526,22 @@
                 </td>
             </tr>
         </table>
+                <table>
+            <tr>
+                <td style="height:5px;">
 
-        <br />
+                </td>
+            </tr>
+        </table>
+
         <asp:Label ID="lblMsg" runat="server" Text=""></asp:Label>
-        <br />
+        <table>
+            <tr>
+                <td style="height:5px;">
+
+                </td>
+            </tr>
+        </table>
         <asp:Button ID="BtnDownlod" runat="server" Text="CSVダウンロード" Width="180px" CssClass="Btn10" OnClientClick="PostClick('DL')" OnClick="BtnDownlod_Click" />
         &nbsp;
         <asp:Button runat="server" ID="BtnMeisaiDownload" Text="明細CSVダウンロード" Width="200" CssClass="Btn10" OnClick="BtnMeisaiDownload_Click" />

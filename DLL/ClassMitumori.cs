@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -261,19 +262,19 @@ namespace DLL
         public static bool DelMitumori(string vsNo, SqlConnection sqlConnection)
         {
             SqlCommand command = new SqlCommand("", sqlConnection);
-            string sql = string.Format("Delete [T_Mitumori] Where MitumoriNo IN ({0})", vsNo);
+            string sql = string.Format("Delete [T_Mitumori] with (tablockx) Where MitumoriNo IN ({0})", vsNo);
             command.CommandText = sql;
 
-            SqlCommand command2 = new SqlCommand("", sqlConnection);
-            string sql2 = string.Format("Delete [T_MitumoriHeader] Where MitumoriNo IN ({0})", vsNo);
-            command2.CommandText = sql2;
+            //SqlCommand command2 = new SqlCommand("", sqlConnection);
+            //string sql2 = string.Format("Delete [T_MitumoriHeader] Where MitumoriNo IN ({0})", vsNo);
+            //command2.CommandText = sql2;
 
             try
             {
                 sqlConnection.Open();
 
                 command.ExecuteNonQuery();
-                command2.ExecuteNonQuery();
+                //command2.ExecuteNonQuery();
 
                 return true;
             }
@@ -945,13 +946,47 @@ namespace DLL
             return dt;
         }
 
-        public static void InsertMitsumori(DataMitumori.T_MitumoriDataTable dt, SqlConnection sql)
+        public static void InsertMitsumori(DataMitumori.T_MitumoriDataTable dt, string no, string lbl94, SqlConnection sql)
         {
+            if (!string.IsNullOrEmpty(lbl94))
+            {
+                SqlCommand daDelete = new SqlCommand("", sql);
+                daDelete.CommandText =
+                    "DELETE FROM T_MitumoriHeader Where MitumoriNo = @k ";
+                daDelete.Parameters.AddWithValue("@k", lbl94);
+                SqlTransaction sqltraDel = null;
+
+                try
+                {
+                    sql.Open();
+                    sqltraDel = sql.BeginTransaction();
+
+                    daDelete.Transaction = sqltraDel;
+
+                    daDelete.ExecuteNonQuery();
+
+                    sqltraDel.Commit();
+
+                }
+                catch
+                {
+                    if (sqltraDel != null)
+                        sqltraDel.Rollback();
+
+                }
+                finally
+                {
+                    sql.Close();
+                }
+            }
+
             SqlDataAdapter da = new SqlDataAdapter("", sql);
             da.SelectCommand.CommandText =
-                "SELECT * FROM T_Mitumori";
-            da.InsertCommand = (new SqlCommandBuilder(da)).GetInsertCommand();
+                "SELECT * FROM T_Mitumori with (tablockx)";
+            DataMitumori.T_MitumoriDataTable dtN = new DataMitumori.T_MitumoriDataTable();
+            da.Fill(dtN);
 
+            da.InsertCommand = (new SqlCommandBuilder(da)).GetInsertCommand();
             SqlTransaction sqltra = null;
 
             try
@@ -960,6 +995,10 @@ namespace DLL
                 sqltra = sql.BeginTransaction();
 
                 da.SelectCommand.Transaction = da.InsertCommand.Transaction = sqltra;
+                //DataMitumori.T_MitumoriDataTable dtN = new DataMitumori.T_MitumoriDataTable();
+                //DataMitumori.T_MitumoriRow drN = dtN.NewT_MitumoriRow();
+                //drN.ItemArray = dt.ItemArray;
+                //dtN.AddT_MitumoriRow(drN);
 
                 da.Update(dt);
                 sqltra.Commit();
@@ -969,6 +1008,7 @@ namespace DLL
                 if (sqltra != null)
                 {
                     sqltra.Rollback();
+
                 }
                 ClassMail.ErrorMail("maeda@m2m-asp.com", "エラーメール | 見積登録処理",
                     ex.Message +
@@ -989,7 +1029,7 @@ namespace DLL
         {
             SqlDataAdapter da = new SqlDataAdapter("", sql);
             da.SelectCommand.CommandText =
-                "SELECT * FROM T_MitumoriHeader";
+                "SELECT * FROM T_MitumoriHeader with (tablockx)";
             da.InsertCommand = (new SqlCommandBuilder(da)).GetInsertCommand();
 
             SqlTransaction sqltra = null;
@@ -1030,7 +1070,7 @@ namespace DLL
         {
             SqlDataAdapter da = new SqlDataAdapter("", sql);
             da.SelectCommand.CommandText =
-                "SELECT MitumoriNo AS MitumoriNo  FROM T_MitumoriHeader where MitumoriNo like @ki order by MitumoriNo desc";
+                "select SUBSTRING(CONVERT(NVARCHAR(20), MitumoriNo), 2,2) as KessanKI, MitumoriNo from T_MitumoriHeader where KessanKI like @ki order by MitumoriNo desc";
             da.SelectCommand.Parameters.AddWithValue("@ki", "%" + ki.ToString() + "%");
             DataMitumori.T_MitumoriHeaderDataTable dt = new DataMitumori.T_MitumoriHeaderDataTable();
             da.Fill(dt);
@@ -1205,7 +1245,7 @@ namespace DLL
         {
             SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
             da.SelectCommand.CommandText =
-                "Select * From T_MitumoriHeader Where MitumoriNo = @ID";
+                "Select * From T_MitumoriHeader with (tablockx) Where MitumoriNo = @ID";
             da.SelectCommand.Parameters.AddWithValue("@ID", no);
 
             da.UpdateCommand = (new SqlCommandBuilder(da)).GetUpdateCommand();
@@ -1298,40 +1338,131 @@ namespace DLL
             throw new NotImplementedException();
         }
 
-        public static void UpDateMitumori2(DataMitumori.T_MitumoriDataTable dg, SqlConnection sqlConnection)
+        public static void UpDateMitumori2(DataMitumori.T_MitumoriDataTable dg, string mno, string lbl94, SqlConnection sqlConnection)
         {
             string no = dg[0].MitumoriNo;
-            string row = dg[0].RowNo.ToString();
             SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
             da.SelectCommand.CommandText =
-                "select * from T_Mitumori where MitumoriNo = @no and RowNo = @row";
-            da.SelectCommand.Parameters.AddWithValue("@no", no);
-            da.SelectCommand.Parameters.AddWithValue("@row", row);
+                "select * from T_Mitumori where MitumoriNo = @no";
+            da.SelectCommand.Parameters.AddWithValue("@no", lbl94);
             DataMitumori.T_MitumoriDataTable dt = new DataMitumori.T_MitumoriDataTable();
             da.Fill(dt);
             SqlTransaction sqltra = null;
             da.UpdateCommand = (new SqlCommandBuilder(da)).GetUpdateCommand();
-            da.InsertCommand = new SqlCommandBuilder(da).GetInsertCommand();
+            da.InsertCommand = (new SqlCommandBuilder(da)).GetInsertCommand();
+
+            //削除する
+            SqlCommand sc = new SqlCommand("", sqlConnection);
+            sc.CommandText = "Delete from T_Mitumori where MitumoriNo = @mNo";
+            sc.Parameters.AddWithValue("@mNo", lbl94);
+            SqlTransaction sqltraDel = null;
+            try
+            {
+                sqlConnection.Open();
+                sqltraDel = sqlConnection.BeginTransaction();
+                sc.Transaction = sqltraDel;
+                sc.ExecuteNonQuery();
+                sqltraDel.Commit();
+            }
+            catch
+            {
+                if (sqltraDel != null)
+                {
+                    sqltraDel.Rollback();
+                }
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+            try
+            {
+                dt.Clear();
+                for (int i = 0; i < dg.Count; i++)
+                {
+                    if (dt.Count < dg.Count)
+                    {
+                        int iSa = dg.Count - dt.Count;
+                        for (int c = 0; c < iSa; c++)
+                        {
+                            DataMitumori.T_MitumoriRow dr = dt.NewT_MitumoriRow();
+                            dr.MitumoriNo = "0";
+                            dr.JutyuFlg = false;
+                            dr.RowNo = c;
+                            dt.AddT_MitumoriRow(dr);
+                        }
+                    }
+                    dt[i].ItemArray = dg[i].ItemArray;
+                }
+                sqlConnection.Open();
+                sqltra = sqlConnection.BeginTransaction();
+                da.SelectCommand.Transaction = da.UpdateCommand.Transaction = sqltra;
+                da.SelectCommand.Transaction = da.InsertCommand.Transaction = sqltra;
+                da.Update(dt);
+                sqltra.Commit();
+            }
+            catch (Exception ex)
+            {
+                if (sqltra != null)
+                {
+                    sqltra.Rollback();
+                }
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+
+
+            //string no = dg[0].MitumoriNo;
+            //SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            //da.SelectCommand.CommandText =
+            //    "select * from T_Mitumori where MitumoriNo = @no";
+            //da.SelectCommand.Parameters.AddWithValue("@no", lbl94);
+            //DataMitumori.T_MitumoriDataTable dt = new DataMitumori.T_MitumoriDataTable();
+            //da.Fill(dt);
+            //SqlTransaction sqltra = null;
+            //da.UpdateCommand = (new SqlCommandBuilder(da)).GetUpdateCommand();
+            //try
+            //{
+            //    sqlConnection.Open();
+            //    sqltra = sqlConnection.BeginTransaction();
+            //    da.SelectCommand.Transaction = da.UpdateCommand.Transaction = sqltra;
+            //    dt = dg.Copy() as DataMitumori.T_MitumoriDataTable;
+            //    da.Update(dt);
+            //    sqltra.Commit();
+            //}
+            //catch (Exception ex)
+            //{
+            //    if (sqltra != null)
+            //    {
+            //        sqltra.Rollback();
+            //    }
+            //}
+            //finally
+            //{
+            //    sqlConnection.Close();
+            //}
+        }
+
+        public static void UpdateFromPortaltoMitumori(DataMitumori.T_MitumoriHeaderDataTable dp, string strPortalNo, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select * from T_MitumoriHeader with (tablockx) where MitumoriNo = @mn";
+            da.SelectCommand.Parameters.AddWithValue("@mn", strPortalNo);
+            DataMitumori.T_MitumoriHeaderDataTable dt = new DataMitumori.T_MitumoriHeaderDataTable();
+            da.Fill(dt);
+            SqlTransaction sqltra = null;
+            da.UpdateCommand = (new SqlCommandBuilder(da)).GetUpdateCommand();
             try
             {
                 sqlConnection.Open();
                 sqltra = sqlConnection.BeginTransaction();
-                if (dt.Count == 0)
-                {
-                    da.SelectCommand.Transaction = da.InsertCommand.Transaction = sqltra;
-                    DataMitumori.T_MitumoriRow dr = dt.NewT_MitumoriRow();
-                    dr.ItemArray = dg[0].ItemArray;
-                    dt.AddT_MitumoriRow(dr);
-                    da.Update(dt);
-                    sqltra.Commit();
-                }
-                else
-                {
-                    da.SelectCommand.Transaction = da.UpdateCommand.Transaction = sqltra;
-                    dt[0].ItemArray = dg[0].ItemArray;
-                    da.Update(dt);
-                    sqltra.Commit();
-                }
+                da.SelectCommand.Transaction = da.UpdateCommand.Transaction = sqltra;
+                dt[0].ItemArray = dp[0].ItemArray;
+                dt[0].JutyuFlg = "False";
+                da.Update(dt);
+                sqltra.Commit();
             }
             catch
             {
@@ -1344,7 +1475,23 @@ namespace DLL
             {
                 sqlConnection.Close();
             }
+        }
 
+        public static DataMitumori.T_MitumoriHeaderRow GetMitumoriMaxNo(int ki, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select MitumoriNo from T_MitumoriHeader where SUBSTRING(CONVERT(NVARCHAR(20), MitumoriNo), 2,2) like @ki order by MitumoriNo desc";
+            da.SelectCommand.Parameters.AddWithValue("@ki", "%" + ki + "%");
+            DataMitumori.T_MitumoriHeaderDataTable dt = new DataMitumori.T_MitumoriHeaderDataTable();
+            da.Fill(dt);
+            if (dt.Count > 0)
+            {
+                return dt[0];
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

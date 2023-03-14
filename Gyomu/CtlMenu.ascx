@@ -26,6 +26,14 @@
 </style>
 
 <script type="text/javascript">
+
+    window.document.onkeydown = onKeyDown;
+    function onKeyDown(e) {
+        if (event.keyCode == 13) {
+            return false;
+        }
+    }
+
     function showClock1() {
 
         var now = new Date();

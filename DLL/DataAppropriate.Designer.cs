@@ -673,7 +673,7 @@ namespace DLL {
                         string Deployment, 
                         int ShiireAmount, 
                         string TokuisakiName, 
-                        int TokuisakiCode, 
+                        string TokuisakiCode, 
                         string FacilityName, 
                         string TyokusousakiMei, 
                         int TyokusousakiCD, 
@@ -730,9 +730,12 @@ namespace DLL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public T_AppropriateHeaderRow FindByShiireNo(int ShiireNo) {
+            public T_AppropriateHeaderRow FindByShiireNoCategoryTokuisakiCodeShiiresakiCode(int ShiireNo, int Category, string TokuisakiCode, string ShiiresakiCode) {
                 return ((T_AppropriateHeaderRow)(this.Rows.Find(new object[] {
-                            ShiireNo})));
+                            ShiireNo,
+                            Category,
+                            TokuisakiCode,
+                            ShiiresakiCode})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -801,7 +804,7 @@ namespace DLL {
                 base.Columns.Add(this.columnShiireAmount);
                 this.columnTokuisakiName = new global::System.Data.DataColumn("TokuisakiName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTokuisakiName);
-                this.columnTokuisakiCode = new global::System.Data.DataColumn("TokuisakiCode", typeof(int), null, global::System.Data.MappingType.Element);
+                this.columnTokuisakiCode = new global::System.Data.DataColumn("TokuisakiCode", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTokuisakiCode);
                 this.columnFacilityName = new global::System.Data.DataColumn("FacilityName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnFacilityName);
@@ -842,14 +845,19 @@ namespace DLL {
                 this.columnShiiresakiName = new global::System.Data.DataColumn("ShiiresakiName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnShiiresakiName);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnShiireNo}, true));
+                                this.columnShiireNo,
+                                this.columnCategory,
+                                this.columnTokuisakiCode,
+                                this.columnShiiresakiCode}, true));
                 this.columnShiireNo.AllowDBNull = false;
-                this.columnShiireNo.Unique = true;
+                this.columnCategory.AllowDBNull = false;
                 this.columnCategoryName.MaxLength = 10;
                 this.columnStaffName.MaxLength = 10;
                 this.columnDepartment.MaxLength = 10;
                 this.columnDeployment.MaxLength = 10;
                 this.columnTokuisakiName.MaxLength = 50;
+                this.columnTokuisakiCode.AllowDBNull = false;
+                this.columnTokuisakiCode.MaxLength = 50;
                 this.columnFacilityName.MaxLength = 50;
                 this.columnTyokusousakiMei.MaxLength = 50;
                 this.columnRelay.MaxLength = 10;
@@ -858,6 +866,7 @@ namespace DLL {
                 this.columnZeikubun.MaxLength = 10;
                 this.columnKariFLG.MaxLength = 10;
                 this.columnKakeritsu.MaxLength = 10;
+                this.columnShiiresakiCode.AllowDBNull = false;
                 this.columnShiiresakiCode.MaxLength = 10;
                 this.columnShiiresakiName.MaxLength = 10;
             }
@@ -1656,7 +1665,7 @@ namespace DLL {
             public T_AppropriateRow AddT_AppropriateRow(
                         int ShiireNo, 
                         int RowNo, 
-                        int TokuisakiCode, 
+                        string TokuisakiCode, 
                         string TokuisakiMei, 
                         string TokuisakiMei2, 
                         string SeikyusakiMei, 
@@ -1781,10 +1790,12 @@ namespace DLL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public T_AppropriateRow FindByShiireNoRowNo(int ShiireNo, int RowNo) {
+            public T_AppropriateRow FindByShiireNoRowNoTokuisakiCodeCategory(int ShiireNo, int RowNo, string TokuisakiCode, int Category) {
                 return ((T_AppropriateRow)(this.Rows.Find(new object[] {
                             ShiireNo,
-                            RowNo})));
+                            RowNo,
+                            TokuisakiCode,
+                            Category})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1872,7 +1883,7 @@ namespace DLL {
                 base.Columns.Add(this.columnShiireNo);
                 this.columnRowNo = new global::System.Data.DataColumn("RowNo", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnRowNo);
-                this.columnTokuisakiCode = new global::System.Data.DataColumn("TokuisakiCode", typeof(int), null, global::System.Data.MappingType.Element);
+                this.columnTokuisakiCode = new global::System.Data.DataColumn("TokuisakiCode", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTokuisakiCode);
                 this.columnTokuisakiMei = new global::System.Data.DataColumn("TokuisakiMei", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTokuisakiMei);
@@ -1988,12 +1999,17 @@ namespace DLL {
                 base.Columns.Add(this.columnZansu);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnShiireNo,
-                                this.columnRowNo}, true));
+                                this.columnRowNo,
+                                this.columnTokuisakiCode,
+                                this.columnCategory}, true));
                 this.columnShiireNo.AllowDBNull = false;
                 this.columnRowNo.AllowDBNull = false;
+                this.columnTokuisakiCode.AllowDBNull = false;
+                this.columnTokuisakiCode.MaxLength = 50;
                 this.columnTokuisakiMei.MaxLength = 50;
                 this.columnTokuisakiMei2.MaxLength = 50;
                 this.columnSeikyusakiMei.MaxLength = 50;
+                this.columnCategory.AllowDBNull = false;
                 this.columnCategoryName.MaxLength = 50;
                 this.columnTyokusosakiMei.MaxLength = 50;
                 this.columnJusyo1.MaxLength = 50;
@@ -2184,12 +2200,7 @@ namespace DLL {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public int Category {
                 get {
-                    try {
-                        return ((int)(this[this.tableT_AppropriateHeader.CategoryColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("テーブル \'T_AppropriateHeader\' にある列 \'Category\' の値は DBNull です。", e);
-                    }
+                    return ((int)(this[this.tableT_AppropriateHeader.CategoryColumn]));
                 }
                 set {
                     this[this.tableT_AppropriateHeader.CategoryColumn] = value;
@@ -2294,14 +2305,9 @@ namespace DLL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public int TokuisakiCode {
+            public string TokuisakiCode {
                 get {
-                    try {
-                        return ((int)(this[this.tableT_AppropriateHeader.TokuisakiCodeColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("テーブル \'T_AppropriateHeader\' にある列 \'TokuisakiCode\' の値は DBNull です。", e);
-                    }
+                    return ((string)(this[this.tableT_AppropriateHeader.TokuisakiCodeColumn]));
                 }
                 set {
                     this[this.tableT_AppropriateHeader.TokuisakiCodeColumn] = value;
@@ -2584,12 +2590,7 @@ namespace DLL {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public string ShiiresakiCode {
                 get {
-                    try {
-                        return ((string)(this[this.tableT_AppropriateHeader.ShiiresakiCodeColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("テーブル \'T_AppropriateHeader\' にある列 \'ShiiresakiCode\' の値は DBNull です。", e);
-                    }
+                    return ((string)(this[this.tableT_AppropriateHeader.ShiiresakiCodeColumn]));
                 }
                 set {
                     this[this.tableT_AppropriateHeader.ShiiresakiCodeColumn] = value;
@@ -2610,18 +2611,6 @@ namespace DLL {
                 set {
                     this[this.tableT_AppropriateHeader.ShiiresakiNameColumn] = value;
                 }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsCategoryNull() {
-                return this.IsNull(this.tableT_AppropriateHeader.CategoryColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetCategoryNull() {
-                this[this.tableT_AppropriateHeader.CategoryColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2694,18 +2683,6 @@ namespace DLL {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetTokuisakiNameNull() {
                 this[this.tableT_AppropriateHeader.TokuisakiNameColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsTokuisakiCodeNull() {
-                return this.IsNull(this.tableT_AppropriateHeader.TokuisakiCodeColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetTokuisakiCodeNull() {
-                this[this.tableT_AppropriateHeader.TokuisakiCodeColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2914,18 +2891,6 @@ namespace DLL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsShiiresakiCodeNull() {
-                return this.IsNull(this.tableT_AppropriateHeader.ShiiresakiCodeColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetShiiresakiCodeNull() {
-                this[this.tableT_AppropriateHeader.ShiiresakiCodeColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsShiiresakiNameNull() {
                 return this.IsNull(this.tableT_AppropriateHeader.ShiiresakiNameColumn);
             }
@@ -2975,14 +2940,9 @@ namespace DLL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public int TokuisakiCode {
+            public string TokuisakiCode {
                 get {
-                    try {
-                        return ((int)(this[this.tableT_Appropriate.TokuisakiCodeColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("テーブル \'T_Appropriate\' にある列 \'TokuisakiCode\' の値は DBNull です。", e);
-                    }
+                    return ((string)(this[this.tableT_Appropriate.TokuisakiCodeColumn]));
                 }
                 set {
                     this[this.tableT_Appropriate.TokuisakiCodeColumn] = value;
@@ -3041,12 +3001,7 @@ namespace DLL {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public int Category {
                 get {
-                    try {
-                        return ((int)(this[this.tableT_Appropriate.CategoryColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("テーブル \'T_Appropriate\' にある列 \'Category\' の値は DBNull です。", e);
-                    }
+                    return ((int)(this[this.tableT_Appropriate.CategoryColumn]));
                 }
                 set {
                     this[this.tableT_Appropriate.CategoryColumn] = value;
@@ -3887,18 +3842,6 @@ namespace DLL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsTokuisakiCodeNull() {
-                return this.IsNull(this.tableT_Appropriate.TokuisakiCodeColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetTokuisakiCodeNull() {
-                this[this.tableT_Appropriate.TokuisakiCodeColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsTokuisakiMeiNull() {
                 return this.IsNull(this.tableT_Appropriate.TokuisakiMeiColumn);
             }
@@ -3931,18 +3874,6 @@ namespace DLL {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetSeikyusakiMeiNull() {
                 this[this.tableT_Appropriate.SeikyusakiMeiColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsCategoryNull() {
-                return this.IsNull(this.tableT_Appropriate.CategoryColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetCategoryNull() {
-                this[this.tableT_Appropriate.CategoryColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4794,44 +4725,41 @@ namespace DLL.DataAppropriateTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [T_AppropriateHeader] WHERE (([ShiireNo] = @Original_ShiireNo) AND ((" +
-                "@IsNull_Category = 1 AND [Category] IS NULL) OR ([Category] = @Original_Category" +
-                ")) AND ((@IsNull_CategoryName = 1 AND [CategoryName] IS NULL) OR ([CategoryName]" +
-                " = @Original_CategoryName)) AND ((@IsNull_StaffName = 1 AND [StaffName] IS NULL)" +
-                " OR ([StaffName] = @Original_StaffName)) AND ((@IsNull_Department = 1 AND [Depar" +
-                "tment] IS NULL) OR ([Department] = @Original_Department)) AND ((@IsNull_Deployme" +
-                "nt = 1 AND [Deployment] IS NULL) OR ([Deployment] = @Original_Deployment)) AND (" +
-                "(@IsNull_ShiireAmount = 1 AND [ShiireAmount] IS NULL) OR ([ShiireAmount] = @Orig" +
-                "inal_ShiireAmount)) AND ((@IsNull_TokuisakiName = 1 AND [TokuisakiName] IS NULL)" +
-                " OR ([TokuisakiName] = @Original_TokuisakiName)) AND ((@IsNull_TokuisakiCode = 1" +
-                " AND [TokuisakiCode] IS NULL) OR ([TokuisakiCode] = @Original_TokuisakiCode)) AN" +
-                "D ((@IsNull_FacilityName = 1 AND [FacilityName] IS NULL) OR ([FacilityName] = @O" +
-                "riginal_FacilityName)) AND ((@IsNull_TyokusousakiMei = 1 AND [TyokusousakiMei] I" +
-                "S NULL) OR ([TyokusousakiMei] = @Original_TyokusousakiMei)) AND ((@IsNull_Tyokus" +
-                "ousakiCD = 1 AND [TyokusousakiCD] IS NULL) OR ([TyokusousakiCD] = @Original_Tyok" +
-                "usousakiCD)) AND ((@IsNull_NumberOfOrdered = 1 AND [NumberOfOrdered] IS NULL) OR" +
-                " ([NumberOfOrdered] = @Original_NumberOfOrdered)) AND ((@IsNull_Relay = 1 AND [R" +
-                "elay] IS NULL) OR ([Relay] = @Original_Relay)) AND ((@IsNull_SoukeiGaku = 1 AND " +
-                "[SoukeiGaku] IS NULL) OR ([SoukeiGaku] = @Original_SoukeiGaku)) AND ((@IsNull_Sh" +
-                "iireKingaku = 1 AND [ShiireKingaku] IS NULL) OR ([ShiireKingaku] = @Original_Shi" +
-                "ireKingaku)) AND ((@IsNull_Tax = 1 AND [Tax] IS NULL) OR ([Tax] = @Original_Tax)" +
-                ") AND ((@IsNull_Arari = 1 AND [Arari] IS NULL) OR ([Arari] = @Original_Arari)) A" +
-                "ND ((@IsNull_SeikyusakiName = 1 AND [SeikyusakiName] IS NULL) OR ([SeikyusakiNam" +
-                "e] = @Original_SeikyusakiName)) AND ((@IsNull_UriageGoukei = 1 AND [UriageGoukei" +
-                "] IS NULL) OR ([UriageGoukei] = @Original_UriageGoukei)) AND ((@IsNull_ArariGoke" +
-                "igaku = 1 AND [ArariGokeigaku] IS NULL) OR ([ArariGokeigaku] = @Original_ArariGo" +
-                "keigaku)) AND ((@IsNull_Zeikubun = 1 AND [Zeikubun] IS NULL) OR ([Zeikubun] = @O" +
-                "riginal_Zeikubun)) AND ((@IsNull_KariFLG = 1 AND [KariFLG] IS NULL) OR ([KariFLG" +
-                "] = @Original_KariFLG)) AND ((@IsNull_Kakeritsu = 1 AND [Kakeritsu] IS NULL) OR " +
-                "([Kakeritsu] = @Original_Kakeritsu)) AND ((@IsNull_CreateDate = 1 AND [CreateDat" +
-                "e] IS NULL) OR ([CreateDate] = @Original_CreateDate)) AND ((@IsNull_InsertFlg = " +
-                "1 AND [InsertFlg] IS NULL) OR ([InsertFlg] = @Original_InsertFlg)) AND ((@IsNull" +
-                "_ShiiresakiCode = 1 AND [ShiiresakiCode] IS NULL) OR ([ShiiresakiCode] = @Origin" +
-                "al_ShiiresakiCode)) AND ((@IsNull_ShiiresakiName = 1 AND [ShiiresakiName] IS NUL" +
-                "L) OR ([ShiiresakiName] = @Original_ShiiresakiName)))";
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [T_AppropriateHeader] WHERE (([ShiireNo] = @Original_ShiireNo) AND ([" +
+                "Category] = @Original_Category) AND ((@IsNull_CategoryName = 1 AND [CategoryName" +
+                "] IS NULL) OR ([CategoryName] = @Original_CategoryName)) AND ((@IsNull_StaffName" +
+                " = 1 AND [StaffName] IS NULL) OR ([StaffName] = @Original_StaffName)) AND ((@IsN" +
+                "ull_Department = 1 AND [Department] IS NULL) OR ([Department] = @Original_Depart" +
+                "ment)) AND ((@IsNull_Deployment = 1 AND [Deployment] IS NULL) OR ([Deployment] =" +
+                " @Original_Deployment)) AND ((@IsNull_ShiireAmount = 1 AND [ShiireAmount] IS NUL" +
+                "L) OR ([ShiireAmount] = @Original_ShiireAmount)) AND ((@IsNull_TokuisakiName = 1" +
+                " AND [TokuisakiName] IS NULL) OR ([TokuisakiName] = @Original_TokuisakiName)) AN" +
+                "D ([TokuisakiCode] = @Original_TokuisakiCode) AND ((@IsNull_FacilityName = 1 AND" +
+                " [FacilityName] IS NULL) OR ([FacilityName] = @Original_FacilityName)) AND ((@Is" +
+                "Null_TyokusousakiMei = 1 AND [TyokusousakiMei] IS NULL) OR ([TyokusousakiMei] = " +
+                "@Original_TyokusousakiMei)) AND ((@IsNull_TyokusousakiCD = 1 AND [TyokusousakiCD" +
+                "] IS NULL) OR ([TyokusousakiCD] = @Original_TyokusousakiCD)) AND ((@IsNull_Numbe" +
+                "rOfOrdered = 1 AND [NumberOfOrdered] IS NULL) OR ([NumberOfOrdered] = @Original_" +
+                "NumberOfOrdered)) AND ((@IsNull_Relay = 1 AND [Relay] IS NULL) OR ([Relay] = @Or" +
+                "iginal_Relay)) AND ((@IsNull_SoukeiGaku = 1 AND [SoukeiGaku] IS NULL) OR ([Souke" +
+                "iGaku] = @Original_SoukeiGaku)) AND ((@IsNull_ShiireKingaku = 1 AND [ShiireKinga" +
+                "ku] IS NULL) OR ([ShiireKingaku] = @Original_ShiireKingaku)) AND ((@IsNull_Tax =" +
+                " 1 AND [Tax] IS NULL) OR ([Tax] = @Original_Tax)) AND ((@IsNull_Arari = 1 AND [A" +
+                "rari] IS NULL) OR ([Arari] = @Original_Arari)) AND ((@IsNull_SeikyusakiName = 1 " +
+                "AND [SeikyusakiName] IS NULL) OR ([SeikyusakiName] = @Original_SeikyusakiName)) " +
+                "AND ((@IsNull_UriageGoukei = 1 AND [UriageGoukei] IS NULL) OR ([UriageGoukei] = " +
+                "@Original_UriageGoukei)) AND ((@IsNull_ArariGokeigaku = 1 AND [ArariGokeigaku] I" +
+                "S NULL) OR ([ArariGokeigaku] = @Original_ArariGokeigaku)) AND ((@IsNull_Zeikubun" +
+                " = 1 AND [Zeikubun] IS NULL) OR ([Zeikubun] = @Original_Zeikubun)) AND ((@IsNull" +
+                "_KariFLG = 1 AND [KariFLG] IS NULL) OR ([KariFLG] = @Original_KariFLG)) AND ((@I" +
+                "sNull_Kakeritsu = 1 AND [Kakeritsu] IS NULL) OR ([Kakeritsu] = @Original_Kakerit" +
+                "su)) AND ((@IsNull_CreateDate = 1 AND [CreateDate] IS NULL) OR ([CreateDate] = @" +
+                "Original_CreateDate)) AND ((@IsNull_InsertFlg = 1 AND [InsertFlg] IS NULL) OR ([" +
+                "InsertFlg] = @Original_InsertFlg)) AND ([ShiiresakiCode] = @Original_ShiiresakiC" +
+                "ode) AND ((@IsNull_ShiiresakiName = 1 AND [ShiiresakiName] IS NULL) OR ([Shiires" +
+                "akiName] = @Original_ShiiresakiName)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ShiireNo", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiireNo", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Category", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Category", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Category", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Category", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CategoryName", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CategoryName", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CategoryName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CategoryName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -4845,8 +4773,7 @@ namespace DLL.DataAppropriateTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ShiireAmount", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiireAmount", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TokuisakiName", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TokuisakiName", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TokuisakiName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TokuisakiName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TokuisakiCode", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TokuisakiCode", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TokuisakiCode", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TokuisakiCode", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TokuisakiCode", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TokuisakiCode", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_FacilityName", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FacilityName", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FacilityName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FacilityName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TyokusousakiMei", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TyokusousakiMei", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -4881,14 +4808,13 @@ namespace DLL.DataAppropriateTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CreateDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CreateDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_InsertFlg", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "InsertFlg", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_InsertFlg", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "InsertFlg", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ShiiresakiCode", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiiresakiCode", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ShiiresakiCode", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiiresakiCode", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ShiiresakiName", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiiresakiName", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ShiiresakiName", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiiresakiName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
             this._adapter.InsertCommand.CommandText = @"INSERT INTO [T_AppropriateHeader] ([ShiireNo], [Category], [CategoryName], [StaffName], [Department], [Deployment], [ShiireAmount], [TokuisakiName], [TokuisakiCode], [FacilityName], [TyokusousakiMei], [TyokusousakiCD], [NumberOfOrdered], [Relay], [SoukeiGaku], [ShiireKingaku], [Tax], [Arari], [SeikyusakiName], [UriageGoukei], [ArariGokeigaku], [Zeikubun], [KariFLG], [Kakeritsu], [CreateDate], [InsertFlg], [ShiiresakiCode], [ShiiresakiName]) VALUES (@ShiireNo, @Category, @CategoryName, @StaffName, @Department, @Deployment, @ShiireAmount, @TokuisakiName, @TokuisakiCode, @FacilityName, @TyokusousakiMei, @TyokusousakiCD, @NumberOfOrdered, @Relay, @SoukeiGaku, @ShiireKingaku, @Tax, @Arari, @SeikyusakiName, @UriageGoukei, @ArariGokeigaku, @Zeikubun, @KariFLG, @Kakeritsu, @CreateDate, @InsertFlg, @ShiiresakiCode, @ShiiresakiName);
-SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, ShiireAmount, TokuisakiName, TokuisakiCode, FacilityName, TyokusousakiMei, TyokusousakiCD, NumberOfOrdered, Relay, SoukeiGaku, ShiireKingaku, Tax, Arari, SeikyusakiName, UriageGoukei, ArariGokeigaku, Zeikubun, KariFLG, Kakeritsu, CreateDate, InsertFlg, ShiiresakiCode, ShiiresakiName FROM T_AppropriateHeader WHERE (ShiireNo = @ShiireNo)";
+SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, ShiireAmount, TokuisakiName, TokuisakiCode, FacilityName, TyokusousakiMei, TyokusousakiCD, NumberOfOrdered, Relay, SoukeiGaku, ShiireKingaku, Tax, Arari, SeikyusakiName, UriageGoukei, ArariGokeigaku, Zeikubun, KariFLG, Kakeritsu, CreateDate, InsertFlg, ShiiresakiCode, ShiiresakiName FROM T_AppropriateHeader WHERE (Category = @Category) AND (ShiireNo = @ShiireNo) AND (ShiiresakiCode = @ShiiresakiCode) AND (TokuisakiCode = @TokuisakiCode)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ShiireNo", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiireNo", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Category", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Category", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -4898,7 +4824,7 @@ SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, Shii
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Deployment", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Deployment", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ShiireAmount", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiireAmount", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TokuisakiName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TokuisakiName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TokuisakiCode", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TokuisakiCode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TokuisakiCode", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TokuisakiCode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FacilityName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FacilityName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TyokusousakiMei", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TyokusousakiMei", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TyokusousakiCD", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TyokusousakiCD", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -4931,46 +4857,45 @@ SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, Shii
                 "ariGokeigaku, [Zeikubun] = @Zeikubun, [KariFLG] = @KariFLG, [Kakeritsu] = @Kaker" +
                 "itsu, [CreateDate] = @CreateDate, [InsertFlg] = @InsertFlg, [ShiiresakiCode] = @" +
                 "ShiiresakiCode, [ShiiresakiName] = @ShiiresakiName WHERE (([ShiireNo] = @Origina" +
-                "l_ShiireNo) AND ((@IsNull_Category = 1 AND [Category] IS NULL) OR ([Category] = " +
-                "@Original_Category)) AND ((@IsNull_CategoryName = 1 AND [CategoryName] IS NULL) " +
-                "OR ([CategoryName] = @Original_CategoryName)) AND ((@IsNull_StaffName = 1 AND [S" +
-                "taffName] IS NULL) OR ([StaffName] = @Original_StaffName)) AND ((@IsNull_Departm" +
-                "ent = 1 AND [Department] IS NULL) OR ([Department] = @Original_Department)) AND " +
-                "((@IsNull_Deployment = 1 AND [Deployment] IS NULL) OR ([Deployment] = @Original_" +
-                "Deployment)) AND ((@IsNull_ShiireAmount = 1 AND [ShiireAmount] IS NULL) OR ([Shi" +
-                "ireAmount] = @Original_ShiireAmount)) AND ((@IsNull_TokuisakiName = 1 AND [Tokui" +
-                "sakiName] IS NULL) OR ([TokuisakiName] = @Original_TokuisakiName)) AND ((@IsNull" +
-                "_TokuisakiCode = 1 AND [TokuisakiCode] IS NULL) OR ([TokuisakiCode] = @Original_" +
-                "TokuisakiCode)) AND ((@IsNull_FacilityName = 1 AND [FacilityName] IS NULL) OR ([" +
-                "FacilityName] = @Original_FacilityName)) AND ((@IsNull_TyokusousakiMei = 1 AND [" +
-                "TyokusousakiMei] IS NULL) OR ([TyokusousakiMei] = @Original_TyokusousakiMei)) AN" +
-                "D ((@IsNull_TyokusousakiCD = 1 AND [TyokusousakiCD] IS NULL) OR ([TyokusousakiCD" +
-                "] = @Original_TyokusousakiCD)) AND ((@IsNull_NumberOfOrdered = 1 AND [NumberOfOr" +
-                "dered] IS NULL) OR ([NumberOfOrdered] = @Original_NumberOfOrdered)) AND ((@IsNul" +
-                "l_Relay = 1 AND [Relay] IS NULL) OR ([Relay] = @Original_Relay)) AND ((@IsNull_S" +
-                "oukeiGaku = 1 AND [SoukeiGaku] IS NULL) OR ([SoukeiGaku] = @Original_SoukeiGaku)" +
-                ") AND ((@IsNull_ShiireKingaku = 1 AND [ShiireKingaku] IS NULL) OR ([ShiireKingak" +
-                "u] = @Original_ShiireKingaku)) AND ((@IsNull_Tax = 1 AND [Tax] IS NULL) OR ([Tax" +
-                "] = @Original_Tax)) AND ((@IsNull_Arari = 1 AND [Arari] IS NULL) OR ([Arari] = @" +
-                "Original_Arari)) AND ((@IsNull_SeikyusakiName = 1 AND [SeikyusakiName] IS NULL) " +
-                "OR ([SeikyusakiName] = @Original_SeikyusakiName)) AND ((@IsNull_UriageGoukei = 1" +
-                " AND [UriageGoukei] IS NULL) OR ([UriageGoukei] = @Original_UriageGoukei)) AND (" +
-                "(@IsNull_ArariGokeigaku = 1 AND [ArariGokeigaku] IS NULL) OR ([ArariGokeigaku] =" +
-                " @Original_ArariGokeigaku)) AND ((@IsNull_Zeikubun = 1 AND [Zeikubun] IS NULL) O" +
-                "R ([Zeikubun] = @Original_Zeikubun)) AND ((@IsNull_KariFLG = 1 AND [KariFLG] IS " +
-                "NULL) OR ([KariFLG] = @Original_KariFLG)) AND ((@IsNull_Kakeritsu = 1 AND [Kaker" +
-                "itsu] IS NULL) OR ([Kakeritsu] = @Original_Kakeritsu)) AND ((@IsNull_CreateDate " +
-                "= 1 AND [CreateDate] IS NULL) OR ([CreateDate] = @Original_CreateDate)) AND ((@I" +
-                "sNull_InsertFlg = 1 AND [InsertFlg] IS NULL) OR ([InsertFlg] = @Original_InsertF" +
-                "lg)) AND ((@IsNull_ShiiresakiCode = 1 AND [ShiiresakiCode] IS NULL) OR ([Shiires" +
-                "akiCode] = @Original_ShiiresakiCode)) AND ((@IsNull_ShiiresakiName = 1 AND [Shii" +
-                "resakiName] IS NULL) OR ([ShiiresakiName] = @Original_ShiiresakiName)));\r\nSELECT" +
-                " ShiireNo, Category, CategoryName, StaffName, Department, Deployment, ShiireAmou" +
-                "nt, TokuisakiName, TokuisakiCode, FacilityName, TyokusousakiMei, TyokusousakiCD," +
-                " NumberOfOrdered, Relay, SoukeiGaku, ShiireKingaku, Tax, Arari, SeikyusakiName, " +
-                "UriageGoukei, ArariGokeigaku, Zeikubun, KariFLG, Kakeritsu, CreateDate, InsertFl" +
-                "g, ShiiresakiCode, ShiiresakiName FROM T_AppropriateHeader WHERE (ShiireNo = @Sh" +
-                "iireNo)";
+                "l_ShiireNo) AND ([Category] = @Original_Category) AND ((@IsNull_CategoryName = 1" +
+                " AND [CategoryName] IS NULL) OR ([CategoryName] = @Original_CategoryName)) AND (" +
+                "(@IsNull_StaffName = 1 AND [StaffName] IS NULL) OR ([StaffName] = @Original_Staf" +
+                "fName)) AND ((@IsNull_Department = 1 AND [Department] IS NULL) OR ([Department] " +
+                "= @Original_Department)) AND ((@IsNull_Deployment = 1 AND [Deployment] IS NULL) " +
+                "OR ([Deployment] = @Original_Deployment)) AND ((@IsNull_ShiireAmount = 1 AND [Sh" +
+                "iireAmount] IS NULL) OR ([ShiireAmount] = @Original_ShiireAmount)) AND ((@IsNull" +
+                "_TokuisakiName = 1 AND [TokuisakiName] IS NULL) OR ([TokuisakiName] = @Original_" +
+                "TokuisakiName)) AND ([TokuisakiCode] = @Original_TokuisakiCode) AND ((@IsNull_Fa" +
+                "cilityName = 1 AND [FacilityName] IS NULL) OR ([FacilityName] = @Original_Facili" +
+                "tyName)) AND ((@IsNull_TyokusousakiMei = 1 AND [TyokusousakiMei] IS NULL) OR ([T" +
+                "yokusousakiMei] = @Original_TyokusousakiMei)) AND ((@IsNull_TyokusousakiCD = 1 A" +
+                "ND [TyokusousakiCD] IS NULL) OR ([TyokusousakiCD] = @Original_TyokusousakiCD)) A" +
+                "ND ((@IsNull_NumberOfOrdered = 1 AND [NumberOfOrdered] IS NULL) OR ([NumberOfOrd" +
+                "ered] = @Original_NumberOfOrdered)) AND ((@IsNull_Relay = 1 AND [Relay] IS NULL)" +
+                " OR ([Relay] = @Original_Relay)) AND ((@IsNull_SoukeiGaku = 1 AND [SoukeiGaku] I" +
+                "S NULL) OR ([SoukeiGaku] = @Original_SoukeiGaku)) AND ((@IsNull_ShiireKingaku = " +
+                "1 AND [ShiireKingaku] IS NULL) OR ([ShiireKingaku] = @Original_ShiireKingaku)) A" +
+                "ND ((@IsNull_Tax = 1 AND [Tax] IS NULL) OR ([Tax] = @Original_Tax)) AND ((@IsNul" +
+                "l_Arari = 1 AND [Arari] IS NULL) OR ([Arari] = @Original_Arari)) AND ((@IsNull_S" +
+                "eikyusakiName = 1 AND [SeikyusakiName] IS NULL) OR ([SeikyusakiName] = @Original" +
+                "_SeikyusakiName)) AND ((@IsNull_UriageGoukei = 1 AND [UriageGoukei] IS NULL) OR " +
+                "([UriageGoukei] = @Original_UriageGoukei)) AND ((@IsNull_ArariGokeigaku = 1 AND " +
+                "[ArariGokeigaku] IS NULL) OR ([ArariGokeigaku] = @Original_ArariGokeigaku)) AND " +
+                "((@IsNull_Zeikubun = 1 AND [Zeikubun] IS NULL) OR ([Zeikubun] = @Original_Zeikub" +
+                "un)) AND ((@IsNull_KariFLG = 1 AND [KariFLG] IS NULL) OR ([KariFLG] = @Original_" +
+                "KariFLG)) AND ((@IsNull_Kakeritsu = 1 AND [Kakeritsu] IS NULL) OR ([Kakeritsu] =" +
+                " @Original_Kakeritsu)) AND ((@IsNull_CreateDate = 1 AND [CreateDate] IS NULL) OR" +
+                " ([CreateDate] = @Original_CreateDate)) AND ((@IsNull_InsertFlg = 1 AND [InsertF" +
+                "lg] IS NULL) OR ([InsertFlg] = @Original_InsertFlg)) AND ([ShiiresakiCode] = @Or" +
+                "iginal_ShiiresakiCode) AND ((@IsNull_ShiiresakiName = 1 AND [ShiiresakiName] IS " +
+                "NULL) OR ([ShiiresakiName] = @Original_ShiiresakiName)));\r\nSELECT ShiireNo, Cate" +
+                "gory, CategoryName, StaffName, Department, Deployment, ShiireAmount, TokuisakiNa" +
+                "me, TokuisakiCode, FacilityName, TyokusousakiMei, TyokusousakiCD, NumberOfOrdere" +
+                "d, Relay, SoukeiGaku, ShiireKingaku, Tax, Arari, SeikyusakiName, UriageGoukei, A" +
+                "rariGokeigaku, Zeikubun, KariFLG, Kakeritsu, CreateDate, InsertFlg, ShiiresakiCo" +
+                "de, ShiiresakiName FROM T_AppropriateHeader WHERE (Category = @Category) AND (Sh" +
+                "iireNo = @ShiireNo) AND (ShiiresakiCode = @ShiiresakiCode) AND (TokuisakiCode = " +
+                "@TokuisakiCode)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ShiireNo", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiireNo", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Category", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Category", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -4980,7 +4905,7 @@ SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, Shii
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Deployment", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Deployment", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ShiireAmount", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiireAmount", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TokuisakiName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TokuisakiName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TokuisakiCode", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TokuisakiCode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TokuisakiCode", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TokuisakiCode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FacilityName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FacilityName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TyokusousakiMei", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TyokusousakiMei", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TyokusousakiCD", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TyokusousakiCD", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -5001,7 +4926,6 @@ SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, Shii
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ShiiresakiCode", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiiresakiCode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ShiiresakiName", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiiresakiName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ShiireNo", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiireNo", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Category", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Category", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Category", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Category", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CategoryName", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CategoryName", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CategoryName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CategoryName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -5015,8 +4939,7 @@ SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, Shii
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ShiireAmount", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiireAmount", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TokuisakiName", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TokuisakiName", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TokuisakiName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TokuisakiName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TokuisakiCode", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TokuisakiCode", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TokuisakiCode", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TokuisakiCode", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TokuisakiCode", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TokuisakiCode", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_FacilityName", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FacilityName", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FacilityName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FacilityName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TyokusousakiMei", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TyokusousakiMei", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -5051,7 +4974,6 @@ SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, Shii
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CreateDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CreateDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_InsertFlg", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "InsertFlg", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_InsertFlg", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "InsertFlg", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ShiiresakiCode", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiiresakiCode", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ShiiresakiCode", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiiresakiCode", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ShiiresakiName", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiiresakiName", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ShiiresakiName", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiiresakiName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -5134,14 +5056,14 @@ SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, Shii
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
         public virtual int Delete(
                     int Original_ShiireNo, 
-                    global::System.Nullable<int> Original_Category, 
+                    int Original_Category, 
                     string Original_CategoryName, 
                     string Original_StaffName, 
                     string Original_Department, 
                     string Original_Deployment, 
                     global::System.Nullable<int> Original_ShiireAmount, 
                     string Original_TokuisakiName, 
-                    global::System.Nullable<int> Original_TokuisakiCode, 
+                    string Original_TokuisakiCode, 
                     string Original_FacilityName, 
                     string Original_TyokusousakiMei, 
                     global::System.Nullable<int> Original_TyokusousakiCD, 
@@ -5162,221 +5084,210 @@ SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, Shii
                     string Original_ShiiresakiCode, 
                     string Original_ShiiresakiName) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ShiireNo));
-            if ((Original_Category.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_Category.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_Category));
             if ((Original_CategoryName == null)) {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_CategoryName));
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((string)(Original_CategoryName));
             }
             if ((Original_StaffName == null)) {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[5].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_StaffName));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((string)(Original_StaffName));
             }
             if ((Original_Department == null)) {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[7].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((string)(Original_Department));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((string)(Original_Department));
             }
             if ((Original_Deployment == null)) {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[9].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((string)(Original_Deployment));
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((string)(Original_Deployment));
             }
             if ((Original_ShiireAmount.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[12].Value = ((int)(Original_ShiireAmount.Value));
+                this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((int)(Original_ShiireAmount.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[12].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[11].Value = global::System.DBNull.Value;
             }
             if ((Original_TokuisakiName == null)) {
-                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[14].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[13].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[14].Value = ((string)(Original_TokuisakiName));
+                this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[13].Value = ((string)(Original_TokuisakiName));
             }
-            if ((Original_TokuisakiCode.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[16].Value = ((int)(Original_TokuisakiCode.Value));
+            if ((Original_TokuisakiCode == null)) {
+                throw new global::System.ArgumentNullException("Original_TokuisakiCode");
             }
             else {
+                this.Adapter.DeleteCommand.Parameters[14].Value = ((string)(Original_TokuisakiCode));
+            }
+            if ((Original_FacilityName == null)) {
                 this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[16].Value = global::System.DBNull.Value;
             }
-            if ((Original_FacilityName == null)) {
+            else {
+                this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[16].Value = ((string)(Original_FacilityName));
+            }
+            if ((Original_TyokusousakiMei == null)) {
                 this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[18].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[18].Value = ((string)(Original_FacilityName));
+                this.Adapter.DeleteCommand.Parameters[18].Value = ((string)(Original_TyokusousakiMei));
             }
-            if ((Original_TyokusousakiMei == null)) {
+            if ((Original_TyokusousakiCD.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[19].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[20].Value = ((int)(Original_TyokusousakiCD.Value));
+            }
+            else {
                 this.Adapter.DeleteCommand.Parameters[19].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[20].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.DeleteCommand.Parameters[19].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[20].Value = ((string)(Original_TyokusousakiMei));
-            }
-            if ((Original_TyokusousakiCD.HasValue == true)) {
+            if ((Original_NumberOfOrdered.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[21].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[22].Value = ((int)(Original_TyokusousakiCD.Value));
+                this.Adapter.DeleteCommand.Parameters[22].Value = ((int)(Original_NumberOfOrdered.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[21].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[22].Value = global::System.DBNull.Value;
             }
-            if ((Original_NumberOfOrdered.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[23].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[24].Value = ((int)(Original_NumberOfOrdered.Value));
-            }
-            else {
+            if ((Original_Relay == null)) {
                 this.Adapter.DeleteCommand.Parameters[23].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[24].Value = global::System.DBNull.Value;
             }
-            if ((Original_Relay == null)) {
+            else {
+                this.Adapter.DeleteCommand.Parameters[23].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[24].Value = ((string)(Original_Relay));
+            }
+            if ((Original_SoukeiGaku.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[25].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[26].Value = ((int)(Original_SoukeiGaku.Value));
+            }
+            else {
                 this.Adapter.DeleteCommand.Parameters[25].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[26].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.DeleteCommand.Parameters[25].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[26].Value = ((string)(Original_Relay));
-            }
-            if ((Original_SoukeiGaku.HasValue == true)) {
+            if ((Original_ShiireKingaku.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[27].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[28].Value = ((int)(Original_SoukeiGaku.Value));
+                this.Adapter.DeleteCommand.Parameters[28].Value = ((int)(Original_ShiireKingaku.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[27].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[28].Value = global::System.DBNull.Value;
             }
-            if ((Original_ShiireKingaku.HasValue == true)) {
+            if ((Original_Tax.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[29].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[30].Value = ((int)(Original_ShiireKingaku.Value));
+                this.Adapter.DeleteCommand.Parameters[30].Value = ((int)(Original_Tax.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[29].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[30].Value = global::System.DBNull.Value;
             }
-            if ((Original_Tax.HasValue == true)) {
+            if ((Original_Arari.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[31].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[32].Value = ((int)(Original_Tax.Value));
+                this.Adapter.DeleteCommand.Parameters[32].Value = ((int)(Original_Arari.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[31].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[32].Value = global::System.DBNull.Value;
             }
-            if ((Original_Arari.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[33].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[34].Value = ((int)(Original_Arari.Value));
-            }
-            else {
+            if ((Original_SeikyusakiName == null)) {
                 this.Adapter.DeleteCommand.Parameters[33].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[34].Value = global::System.DBNull.Value;
             }
-            if ((Original_SeikyusakiName == null)) {
+            else {
+                this.Adapter.DeleteCommand.Parameters[33].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[34].Value = ((string)(Original_SeikyusakiName));
+            }
+            if ((Original_UriageGoukei.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[35].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[36].Value = ((int)(Original_UriageGoukei.Value));
+            }
+            else {
                 this.Adapter.DeleteCommand.Parameters[35].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[36].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.DeleteCommand.Parameters[35].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[36].Value = ((string)(Original_SeikyusakiName));
-            }
-            if ((Original_UriageGoukei.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[37].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[38].Value = ((int)(Original_UriageGoukei.Value));
-            }
-            else {
+            if ((Original_ArariGokeigaku == null)) {
                 this.Adapter.DeleteCommand.Parameters[37].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[38].Value = global::System.DBNull.Value;
             }
-            if ((Original_ArariGokeigaku == null)) {
+            else {
+                this.Adapter.DeleteCommand.Parameters[37].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[38].Value = ((string)(Original_ArariGokeigaku));
+            }
+            if ((Original_Zeikubun == null)) {
                 this.Adapter.DeleteCommand.Parameters[39].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[40].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[39].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[40].Value = ((string)(Original_ArariGokeigaku));
+                this.Adapter.DeleteCommand.Parameters[40].Value = ((string)(Original_Zeikubun));
             }
-            if ((Original_Zeikubun == null)) {
+            if ((Original_KariFLG == null)) {
                 this.Adapter.DeleteCommand.Parameters[41].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[42].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[41].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[42].Value = ((string)(Original_Zeikubun));
+                this.Adapter.DeleteCommand.Parameters[42].Value = ((string)(Original_KariFLG));
             }
-            if ((Original_KariFLG == null)) {
+            if ((Original_Kakeritsu == null)) {
                 this.Adapter.DeleteCommand.Parameters[43].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[44].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[43].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[44].Value = ((string)(Original_KariFLG));
+                this.Adapter.DeleteCommand.Parameters[44].Value = ((string)(Original_Kakeritsu));
             }
-            if ((Original_Kakeritsu == null)) {
+            if ((Original_CreateDate.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[45].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[46].Value = ((System.DateTime)(Original_CreateDate.Value));
+            }
+            else {
                 this.Adapter.DeleteCommand.Parameters[45].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[46].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.DeleteCommand.Parameters[45].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[46].Value = ((string)(Original_Kakeritsu));
-            }
-            if ((Original_CreateDate.HasValue == true)) {
+            if ((Original_InsertFlg.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[47].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[48].Value = ((System.DateTime)(Original_CreateDate.Value));
+                this.Adapter.DeleteCommand.Parameters[48].Value = ((bool)(Original_InsertFlg.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[47].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[48].Value = global::System.DBNull.Value;
             }
-            if ((Original_InsertFlg.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[49].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[50].Value = ((bool)(Original_InsertFlg.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[49].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[50].Value = global::System.DBNull.Value;
-            }
             if ((Original_ShiiresakiCode == null)) {
-                this.Adapter.DeleteCommand.Parameters[51].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[52].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("Original_ShiiresakiCode");
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[51].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[52].Value = ((string)(Original_ShiiresakiCode));
+                this.Adapter.DeleteCommand.Parameters[49].Value = ((string)(Original_ShiiresakiCode));
             }
             if ((Original_ShiiresakiName == null)) {
-                this.Adapter.DeleteCommand.Parameters[53].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[54].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[50].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[51].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[53].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[54].Value = ((string)(Original_ShiiresakiName));
+                this.Adapter.DeleteCommand.Parameters[50].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[51].Value = ((string)(Original_ShiiresakiName));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -5400,14 +5311,14 @@ SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, Shii
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
         public virtual int Insert(
                     int ShiireNo, 
-                    global::System.Nullable<int> Category, 
+                    int Category, 
                     string CategoryName, 
                     string StaffName, 
                     string Department, 
                     string Deployment, 
                     global::System.Nullable<int> ShiireAmount, 
                     string TokuisakiName, 
-                    global::System.Nullable<int> TokuisakiCode, 
+                    string TokuisakiCode, 
                     string FacilityName, 
                     string TyokusousakiMei, 
                     global::System.Nullable<int> TyokusousakiCD, 
@@ -5428,12 +5339,7 @@ SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, Shii
                     string ShiiresakiCode, 
                     string ShiiresakiName) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((int)(ShiireNo));
-            if ((Category.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((int)(Category.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.InsertCommand.Parameters[1].Value = ((int)(Category));
             if ((CategoryName == null)) {
                 this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
@@ -5470,11 +5376,11 @@ SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, Shii
             else {
                 this.Adapter.InsertCommand.Parameters[7].Value = ((string)(TokuisakiName));
             }
-            if ((TokuisakiCode.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[8].Value = ((int)(TokuisakiCode.Value));
+            if ((TokuisakiCode == null)) {
+                throw new global::System.ArgumentNullException("TokuisakiCode");
             }
             else {
-                this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
+                this.Adapter.InsertCommand.Parameters[8].Value = ((string)(TokuisakiCode));
             }
             if ((FacilityName == null)) {
                 this.Adapter.InsertCommand.Parameters[9].Value = global::System.DBNull.Value;
@@ -5579,7 +5485,7 @@ SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, Shii
                 this.Adapter.InsertCommand.Parameters[25].Value = global::System.DBNull.Value;
             }
             if ((ShiiresakiCode == null)) {
-                this.Adapter.InsertCommand.Parameters[26].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("ShiiresakiCode");
             }
             else {
                 this.Adapter.InsertCommand.Parameters[26].Value = ((string)(ShiiresakiCode));
@@ -5612,14 +5518,14 @@ SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, Shii
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(
                     int ShiireNo, 
-                    global::System.Nullable<int> Category, 
+                    int Category, 
                     string CategoryName, 
                     string StaffName, 
                     string Department, 
                     string Deployment, 
                     global::System.Nullable<int> ShiireAmount, 
                     string TokuisakiName, 
-                    global::System.Nullable<int> TokuisakiCode, 
+                    string TokuisakiCode, 
                     string FacilityName, 
                     string TyokusousakiMei, 
                     global::System.Nullable<int> TyokusousakiCD, 
@@ -5640,14 +5546,14 @@ SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, Shii
                     string ShiiresakiCode, 
                     string ShiiresakiName, 
                     int Original_ShiireNo, 
-                    global::System.Nullable<int> Original_Category, 
+                    int Original_Category, 
                     string Original_CategoryName, 
                     string Original_StaffName, 
                     string Original_Department, 
                     string Original_Deployment, 
                     global::System.Nullable<int> Original_ShiireAmount, 
                     string Original_TokuisakiName, 
-                    global::System.Nullable<int> Original_TokuisakiCode, 
+                    string Original_TokuisakiCode, 
                     string Original_FacilityName, 
                     string Original_TyokusousakiMei, 
                     global::System.Nullable<int> Original_TyokusousakiCD, 
@@ -5668,12 +5574,7 @@ SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, Shii
                     string Original_ShiiresakiCode, 
                     string Original_ShiiresakiName) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(ShiireNo));
-            if ((Category.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(Category.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(Category));
             if ((CategoryName == null)) {
                 this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
@@ -5710,11 +5611,11 @@ SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, Shii
             else {
                 this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(TokuisakiName));
             }
-            if ((TokuisakiCode.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(TokuisakiCode.Value));
+            if ((TokuisakiCode == null)) {
+                throw new global::System.ArgumentNullException("TokuisakiCode");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(TokuisakiCode));
             }
             if ((FacilityName == null)) {
                 this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
@@ -5819,7 +5720,7 @@ SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, Shii
                 this.Adapter.UpdateCommand.Parameters[25].Value = global::System.DBNull.Value;
             }
             if ((ShiiresakiCode == null)) {
-                this.Adapter.UpdateCommand.Parameters[26].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("ShiiresakiCode");
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[26].Value = ((string)(ShiiresakiCode));
@@ -5831,221 +5732,210 @@ SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, Shii
                 this.Adapter.UpdateCommand.Parameters[27].Value = ((string)(ShiiresakiName));
             }
             this.Adapter.UpdateCommand.Parameters[28].Value = ((int)(Original_ShiireNo));
-            if ((Original_Category.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[29].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[30].Value = ((int)(Original_Category.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[29].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[30].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.UpdateCommand.Parameters[29].Value = ((int)(Original_Category));
             if ((Original_CategoryName == null)) {
-                this.Adapter.UpdateCommand.Parameters[31].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[32].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[30].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[31].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[31].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[32].Value = ((string)(Original_CategoryName));
+                this.Adapter.UpdateCommand.Parameters[30].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[31].Value = ((string)(Original_CategoryName));
             }
             if ((Original_StaffName == null)) {
-                this.Adapter.UpdateCommand.Parameters[33].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[34].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[32].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[33].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[33].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[34].Value = ((string)(Original_StaffName));
+                this.Adapter.UpdateCommand.Parameters[32].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[33].Value = ((string)(Original_StaffName));
             }
             if ((Original_Department == null)) {
-                this.Adapter.UpdateCommand.Parameters[35].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[36].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[34].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[35].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[35].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[36].Value = ((string)(Original_Department));
+                this.Adapter.UpdateCommand.Parameters[34].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[35].Value = ((string)(Original_Department));
             }
             if ((Original_Deployment == null)) {
-                this.Adapter.UpdateCommand.Parameters[37].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[38].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[36].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[37].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[37].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[38].Value = ((string)(Original_Deployment));
+                this.Adapter.UpdateCommand.Parameters[36].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[37].Value = ((string)(Original_Deployment));
             }
             if ((Original_ShiireAmount.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[39].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[40].Value = ((int)(Original_ShiireAmount.Value));
+                this.Adapter.UpdateCommand.Parameters[38].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[39].Value = ((int)(Original_ShiireAmount.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[39].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[40].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[38].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[39].Value = global::System.DBNull.Value;
             }
             if ((Original_TokuisakiName == null)) {
-                this.Adapter.UpdateCommand.Parameters[41].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[42].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[40].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[41].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[41].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[42].Value = ((string)(Original_TokuisakiName));
+                this.Adapter.UpdateCommand.Parameters[40].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[41].Value = ((string)(Original_TokuisakiName));
             }
-            if ((Original_TokuisakiCode.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[43].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[44].Value = ((int)(Original_TokuisakiCode.Value));
+            if ((Original_TokuisakiCode == null)) {
+                throw new global::System.ArgumentNullException("Original_TokuisakiCode");
             }
             else {
+                this.Adapter.UpdateCommand.Parameters[42].Value = ((string)(Original_TokuisakiCode));
+            }
+            if ((Original_FacilityName == null)) {
                 this.Adapter.UpdateCommand.Parameters[43].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[44].Value = global::System.DBNull.Value;
             }
-            if ((Original_FacilityName == null)) {
+            else {
+                this.Adapter.UpdateCommand.Parameters[43].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[44].Value = ((string)(Original_FacilityName));
+            }
+            if ((Original_TyokusousakiMei == null)) {
                 this.Adapter.UpdateCommand.Parameters[45].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[46].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[45].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[46].Value = ((string)(Original_FacilityName));
+                this.Adapter.UpdateCommand.Parameters[46].Value = ((string)(Original_TyokusousakiMei));
             }
-            if ((Original_TyokusousakiMei == null)) {
+            if ((Original_TyokusousakiCD.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[47].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[48].Value = ((int)(Original_TyokusousakiCD.Value));
+            }
+            else {
                 this.Adapter.UpdateCommand.Parameters[47].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[48].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.UpdateCommand.Parameters[47].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[48].Value = ((string)(Original_TyokusousakiMei));
-            }
-            if ((Original_TyokusousakiCD.HasValue == true)) {
+            if ((Original_NumberOfOrdered.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[49].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[50].Value = ((int)(Original_TyokusousakiCD.Value));
+                this.Adapter.UpdateCommand.Parameters[50].Value = ((int)(Original_NumberOfOrdered.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[49].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[50].Value = global::System.DBNull.Value;
             }
-            if ((Original_NumberOfOrdered.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[51].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[52].Value = ((int)(Original_NumberOfOrdered.Value));
-            }
-            else {
+            if ((Original_Relay == null)) {
                 this.Adapter.UpdateCommand.Parameters[51].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[52].Value = global::System.DBNull.Value;
             }
-            if ((Original_Relay == null)) {
+            else {
+                this.Adapter.UpdateCommand.Parameters[51].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[52].Value = ((string)(Original_Relay));
+            }
+            if ((Original_SoukeiGaku.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[53].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[54].Value = ((int)(Original_SoukeiGaku.Value));
+            }
+            else {
                 this.Adapter.UpdateCommand.Parameters[53].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[54].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.UpdateCommand.Parameters[53].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[54].Value = ((string)(Original_Relay));
-            }
-            if ((Original_SoukeiGaku.HasValue == true)) {
+            if ((Original_ShiireKingaku.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[55].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[56].Value = ((int)(Original_SoukeiGaku.Value));
+                this.Adapter.UpdateCommand.Parameters[56].Value = ((int)(Original_ShiireKingaku.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[55].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[56].Value = global::System.DBNull.Value;
             }
-            if ((Original_ShiireKingaku.HasValue == true)) {
+            if ((Original_Tax.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[57].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[58].Value = ((int)(Original_ShiireKingaku.Value));
+                this.Adapter.UpdateCommand.Parameters[58].Value = ((int)(Original_Tax.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[57].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[58].Value = global::System.DBNull.Value;
             }
-            if ((Original_Tax.HasValue == true)) {
+            if ((Original_Arari.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[59].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[60].Value = ((int)(Original_Tax.Value));
+                this.Adapter.UpdateCommand.Parameters[60].Value = ((int)(Original_Arari.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[59].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[60].Value = global::System.DBNull.Value;
             }
-            if ((Original_Arari.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[61].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[62].Value = ((int)(Original_Arari.Value));
-            }
-            else {
+            if ((Original_SeikyusakiName == null)) {
                 this.Adapter.UpdateCommand.Parameters[61].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[62].Value = global::System.DBNull.Value;
             }
-            if ((Original_SeikyusakiName == null)) {
+            else {
+                this.Adapter.UpdateCommand.Parameters[61].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[62].Value = ((string)(Original_SeikyusakiName));
+            }
+            if ((Original_UriageGoukei.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[63].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[64].Value = ((int)(Original_UriageGoukei.Value));
+            }
+            else {
                 this.Adapter.UpdateCommand.Parameters[63].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[64].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.UpdateCommand.Parameters[63].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[64].Value = ((string)(Original_SeikyusakiName));
-            }
-            if ((Original_UriageGoukei.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[65].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[66].Value = ((int)(Original_UriageGoukei.Value));
-            }
-            else {
+            if ((Original_ArariGokeigaku == null)) {
                 this.Adapter.UpdateCommand.Parameters[65].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[66].Value = global::System.DBNull.Value;
             }
-            if ((Original_ArariGokeigaku == null)) {
+            else {
+                this.Adapter.UpdateCommand.Parameters[65].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[66].Value = ((string)(Original_ArariGokeigaku));
+            }
+            if ((Original_Zeikubun == null)) {
                 this.Adapter.UpdateCommand.Parameters[67].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[68].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[67].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[68].Value = ((string)(Original_ArariGokeigaku));
+                this.Adapter.UpdateCommand.Parameters[68].Value = ((string)(Original_Zeikubun));
             }
-            if ((Original_Zeikubun == null)) {
+            if ((Original_KariFLG == null)) {
                 this.Adapter.UpdateCommand.Parameters[69].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[70].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[69].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[70].Value = ((string)(Original_Zeikubun));
+                this.Adapter.UpdateCommand.Parameters[70].Value = ((string)(Original_KariFLG));
             }
-            if ((Original_KariFLG == null)) {
+            if ((Original_Kakeritsu == null)) {
                 this.Adapter.UpdateCommand.Parameters[71].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[72].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[71].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[72].Value = ((string)(Original_KariFLG));
+                this.Adapter.UpdateCommand.Parameters[72].Value = ((string)(Original_Kakeritsu));
             }
-            if ((Original_Kakeritsu == null)) {
+            if ((Original_CreateDate.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[73].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[74].Value = ((System.DateTime)(Original_CreateDate.Value));
+            }
+            else {
                 this.Adapter.UpdateCommand.Parameters[73].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[74].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.UpdateCommand.Parameters[73].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[74].Value = ((string)(Original_Kakeritsu));
-            }
-            if ((Original_CreateDate.HasValue == true)) {
+            if ((Original_InsertFlg.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[75].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[76].Value = ((System.DateTime)(Original_CreateDate.Value));
+                this.Adapter.UpdateCommand.Parameters[76].Value = ((bool)(Original_InsertFlg.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[75].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[76].Value = global::System.DBNull.Value;
             }
-            if ((Original_InsertFlg.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[77].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[78].Value = ((bool)(Original_InsertFlg.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[77].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[78].Value = global::System.DBNull.Value;
-            }
             if ((Original_ShiiresakiCode == null)) {
-                this.Adapter.UpdateCommand.Parameters[79].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[80].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("Original_ShiiresakiCode");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[79].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[80].Value = ((string)(Original_ShiiresakiCode));
+                this.Adapter.UpdateCommand.Parameters[77].Value = ((string)(Original_ShiiresakiCode));
             }
             if ((Original_ShiiresakiName == null)) {
-                this.Adapter.UpdateCommand.Parameters[81].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[82].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[78].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[79].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[81].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[82].Value = ((string)(Original_ShiiresakiName));
+                this.Adapter.UpdateCommand.Parameters[78].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[79].Value = ((string)(Original_ShiiresakiName));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -6068,14 +5958,12 @@ SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, Shii
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(
-                    global::System.Nullable<int> Category, 
                     string CategoryName, 
                     string StaffName, 
                     string Department, 
                     string Deployment, 
                     global::System.Nullable<int> ShiireAmount, 
                     string TokuisakiName, 
-                    global::System.Nullable<int> TokuisakiCode, 
                     string FacilityName, 
                     string TyokusousakiMei, 
                     global::System.Nullable<int> TyokusousakiCD, 
@@ -6093,17 +5981,16 @@ SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, Shii
                     string Kakeritsu, 
                     global::System.Nullable<global::System.DateTime> CreateDate, 
                     global::System.Nullable<bool> InsertFlg, 
-                    string ShiiresakiCode, 
                     string ShiiresakiName, 
                     int Original_ShiireNo, 
-                    global::System.Nullable<int> Original_Category, 
+                    int Original_Category, 
                     string Original_CategoryName, 
                     string Original_StaffName, 
                     string Original_Department, 
                     string Original_Deployment, 
                     global::System.Nullable<int> Original_ShiireAmount, 
                     string Original_TokuisakiName, 
-                    global::System.Nullable<int> Original_TokuisakiCode, 
+                    string Original_TokuisakiCode, 
                     string Original_FacilityName, 
                     string Original_TyokusousakiMei, 
                     global::System.Nullable<int> Original_TyokusousakiCD, 
@@ -6123,7 +6010,7 @@ SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, Shii
                     global::System.Nullable<bool> Original_InsertFlg, 
                     string Original_ShiiresakiCode, 
                     string Original_ShiiresakiName) {
-            return this.Update(Original_ShiireNo, Category, CategoryName, StaffName, Department, Deployment, ShiireAmount, TokuisakiName, TokuisakiCode, FacilityName, TyokusousakiMei, TyokusousakiCD, NumberOfOrdered, Relay, SoukeiGaku, ShiireKingaku, Tax, Arari, SeikyusakiName, UriageGoukei, ArariGokeigaku, Zeikubun, KariFLG, Kakeritsu, CreateDate, InsertFlg, ShiiresakiCode, ShiiresakiName, Original_ShiireNo, Original_Category, Original_CategoryName, Original_StaffName, Original_Department, Original_Deployment, Original_ShiireAmount, Original_TokuisakiName, Original_TokuisakiCode, Original_FacilityName, Original_TyokusousakiMei, Original_TyokusousakiCD, Original_NumberOfOrdered, Original_Relay, Original_SoukeiGaku, Original_ShiireKingaku, Original_Tax, Original_Arari, Original_SeikyusakiName, Original_UriageGoukei, Original_ArariGokeigaku, Original_Zeikubun, Original_KariFLG, Original_Kakeritsu, Original_CreateDate, Original_InsertFlg, Original_ShiiresakiCode, Original_ShiiresakiName);
+            return this.Update(Original_ShiireNo, Original_Category, CategoryName, StaffName, Department, Deployment, ShiireAmount, TokuisakiName, Original_TokuisakiCode, FacilityName, TyokusousakiMei, TyokusousakiCD, NumberOfOrdered, Relay, SoukeiGaku, ShiireKingaku, Tax, Arari, SeikyusakiName, UriageGoukei, ArariGokeigaku, Zeikubun, KariFLG, Kakeritsu, CreateDate, InsertFlg, Original_ShiiresakiCode, ShiiresakiName, Original_ShiireNo, Original_Category, Original_CategoryName, Original_StaffName, Original_Department, Original_Deployment, Original_ShiireAmount, Original_TokuisakiName, Original_TokuisakiCode, Original_FacilityName, Original_TyokusousakiMei, Original_TyokusousakiCD, Original_NumberOfOrdered, Original_Relay, Original_SoukeiGaku, Original_ShiireKingaku, Original_Tax, Original_Arari, Original_SeikyusakiName, Original_UriageGoukei, Original_ArariGokeigaku, Original_Zeikubun, Original_KariFLG, Original_Kakeritsu, Original_CreateDate, Original_InsertFlg, Original_ShiiresakiCode, Original_ShiiresakiName);
         }
     }
     
@@ -6311,89 +6198,85 @@ SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, Shii
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
             this._adapter.DeleteCommand.CommandText = "DELETE FROM [T_Appropriate] WHERE (([ShiireNo] = @Original_ShiireNo) AND ([RowNo]" +
-                " = @Original_RowNo) AND ((@IsNull_TokuisakiCode = 1 AND [TokuisakiCode] IS NULL)" +
-                " OR ([TokuisakiCode] = @Original_TokuisakiCode)) AND ((@IsNull_TokuisakiMei = 1 " +
-                "AND [TokuisakiMei] IS NULL) OR ([TokuisakiMei] = @Original_TokuisakiMei)) AND ((" +
-                "@IsNull_TokuisakiMei2 = 1 AND [TokuisakiMei2] IS NULL) OR ([TokuisakiMei2] = @Or" +
-                "iginal_TokuisakiMei2)) AND ((@IsNull_SeikyusakiMei = 1 AND [SeikyusakiMei] IS NU" +
-                "LL) OR ([SeikyusakiMei] = @Original_SeikyusakiMei)) AND ((@IsNull_Category = 1 A" +
-                "ND [Category] IS NULL) OR ([Category] = @Original_Category)) AND ((@IsNull_Categ" +
-                "oryName = 1 AND [CategoryName] IS NULL) OR ([CategoryName] = @Original_CategoryN" +
-                "ame)) AND ((@IsNull_TyokusodsakiCD = 1 AND [TyokusodsakiCD] IS NULL) OR ([Tyokus" +
-                "odsakiCD] = @Original_TyokusodsakiCD)) AND ((@IsNull_TyokusosakiMei = 1 AND [Tyo" +
-                "kusosakiMei] IS NULL) OR ([TyokusosakiMei] = @Original_TyokusosakiMei)) AND ((@I" +
-                "sNull_Jusyo1 = 1 AND [Jusyo1] IS NULL) OR ([Jusyo1] = @Original_Jusyo1)) AND ((@" +
-                "IsNull_Jusyo2 = 1 AND [Jusyo2] IS NULL) OR ([Jusyo2] = @Original_Jusyo2)) AND ((" +
-                "@IsNull_FacilityCode = 1 AND [FacilityCode] IS NULL) OR ([FacilityCode] = @Origi" +
-                "nal_FacilityCode)) AND ((@IsNull_FacilityName = 1 AND [FacilityName] IS NULL) OR" +
-                " ([FacilityName] = @Original_FacilityName)) AND ((@IsNull_FacilityJusyo = 1 AND " +
-                "[FacilityJusyo] IS NULL) OR ([FacilityJusyo] = @Original_FacilityJusyo)) AND ((@" +
-                "IsNull_FacilityJusyo2 = 1 AND [FacilityJusyo2] IS NULL) OR ([FacilityJusyo2] = @" +
-                "Original_FacilityJusyo2)) AND ((@IsNull_FacilityTel = 1 AND [FacilityTel] IS NUL" +
-                "L) OR ([FacilityTel] = @Original_FacilityTel)) AND ((@IsNull_SiyouKaishi = 1 AND" +
-                " [SiyouKaishi] IS NULL) OR ([SiyouKaishi] = @Original_SiyouKaishi)) AND ((@IsNul" +
-                "l_SiyouiOwari = 1 AND [SiyouiOwari] IS NULL) OR ([SiyouiOwari] = @Original_Siyou" +
-                "iOwari)) AND ((@IsNull_HyoujyunKakaku = 1 AND [HyoujyunKakaku] IS NULL) OR ([Hyo" +
-                "ujyunKakaku] = @Original_HyoujyunKakaku)) AND ((@IsNull_NumberOfOrdered = 1 AND " +
-                "[NumberOfOrdered] IS NULL) OR ([NumberOfOrdered] = @Original_NumberOfOrdered)) A" +
-                "ND ((@IsNull_OrderedPrice = 1 AND [OrderedPrice] IS NULL) OR ([OrderedPrice] = @" +
-                "Original_OrderedPrice)) AND ((@IsNull_OrderedAmount = 1 AND [OrderedAmount] IS N" +
-                "ULL) OR ([OrderedAmount] = @Original_OrderedAmount)) AND ((@IsNull_Tax = 1 AND [" +
-                "Tax] IS NULL) OR ([Tax] = @Original_Tax)) AND ((@IsNull_StaffName = 1 AND [Staff" +
-                "Name] IS NULL) OR ([StaffName] = @Original_StaffName)) AND ((@IsNull_Department " +
-                "= 1 AND [Department] IS NULL) OR ([Department] = @Original_Department)) AND ((@I" +
-                "sNull_Deployment = 1 AND [Deployment] IS NULL) OR ([Deployment] = @Original_Depl" +
-                "oyment)) AND ((@IsNull_Capa = 1 AND [Capa] IS NULL) OR ([Capa] = @Original_Capa)" +
-                ") AND ((@IsNull_ToOrderedName = 1 AND [ToOrderedName] IS NULL) OR ([ToOrderedNam" +
-                "e] = @Original_ToOrderedName)) AND ((@IsNull_Tekiyou1 = 1 AND [Tekiyou1] IS NULL" +
-                ") OR ([Tekiyou1] = @Original_Tekiyou1)) AND ((@IsNull_Tekiyou2 = 1 AND [Tekiyou2" +
-                "] IS NULL) OR ([Tekiyou2] = @Original_Tekiyou2)) AND ((@IsNull_TyokusousakiMei =" +
-                " 1 AND [TyokusousakiMei] IS NULL) OR ([TyokusousakiMei] = @Original_Tyokusousaki" +
-                "Mei)) AND ((@IsNull_TyokusousakiCD = 1 AND [TyokusousakiCD] IS NULL) OR ([Tyokus" +
-                "ousakiCD] = @Original_TyokusousakiCD)) AND ((@IsNull_Range = 1 AND [Range] IS NU" +
-                "LL) OR ([Range] = @Original_Range)) AND ((@IsNull_ProductName = 1 AND [ProductNa" +
-                "me] IS NULL) OR ([ProductName] = @Original_ProductName)) AND ((@IsNull_ProductCo" +
-                "de = 1 AND [ProductCode] IS NULL) OR ([ProductCode] = @Original_ProductCode)) AN" +
-                "D ((@IsNull_MekerNo = 1 AND [MekerNo] IS NULL) OR ([MekerNo] = @Original_MekerNo" +
-                ")) AND ((@IsNull_Media = 1 AND [Media] IS NULL) OR ([Media] = @Original_Media)) " +
-                "AND ((@IsNull_PurchasePrice = 1 AND [PurchasePrice] IS NULL) OR ([PurchasePrice]" +
-                " = @Original_PurchasePrice)) AND ((@IsNull_PurchaseAmount = 1 AND [PurchaseAmoun" +
-                "t] IS NULL) OR ([PurchaseAmount] = @Original_PurchaseAmount)) AND ((@IsNull_Uria" +
-                "geFlg = 1 AND [UriageFlg] IS NULL) OR ([UriageFlg] = @Original_UriageFlg)) AND (" +
-                "(@IsNull_HatyuDay = 1 AND [HatyuDay] IS NULL) OR ([HatyuDay] = @Original_HatyuDa" +
-                "y)) AND ((@IsNull_HatyusakiMei = 1 AND [HatyusakiMei] IS NULL) OR ([HatyusakiMei" +
-                "] = @Original_HatyusakiMei)) AND ((@IsNull_JutyuTanka = 1 AND [JutyuTanka] IS NU" +
-                "LL) OR ([JutyuTanka] = @Original_JutyuTanka)) AND ((@IsNull_JutyuSuryou = 1 AND " +
-                "[JutyuSuryou] IS NULL) OR ([JutyuSuryou] = @Original_JutyuSuryou)) AND ((@IsNull" +
-                "_JutyuGokei = 1 AND [JutyuGokei] IS NULL) OR ([JutyuGokei] = @Original_JutyuGoke" +
-                "i)) AND ((@IsNull_ShiireTanka = 1 AND [ShiireTanka] IS NULL) OR ([ShiireTanka] =" +
-                " @Original_ShiireTanka)) AND ((@IsNull_ShiireKingaku = 1 AND [ShiireKingaku] IS " +
-                "NULL) OR ([ShiireKingaku] = @Original_ShiireKingaku)) AND ((@IsNull_WareHouse = " +
-                "1 AND [WareHouse] IS NULL) OR ([WareHouse] = @Original_WareHouse)) AND ((@IsNull" +
-                "_ShiireSakiName = 1 AND [ShiireSakiName] IS NULL) OR ([ShiireSakiName] = @Origin" +
-                "al_ShiireSakiName)) AND ((@IsNull_ShiiresakiCode = 1 AND [ShiiresakiCode] IS NUL" +
-                "L) OR ([ShiiresakiCode] = @Original_ShiiresakiCode)) AND ((@IsNull_Zeikubun = 1 " +
-                "AND [Zeikubun] IS NULL) OR ([Zeikubun] = @Original_Zeikubun)) AND ((@IsNull_Kake" +
-                "ritsu = 1 AND [Kakeritsu] IS NULL) OR ([Kakeritsu] = @Original_Kakeritsu)) AND (" +
-                "(@IsNull_Zasu = 1 AND [Zasu] IS NULL) OR ([Zasu] = @Original_Zasu)) AND ((@IsNul" +
-                "l_Ryoukin = 1 AND [Ryoukin] IS NULL) OR ([Ryoukin] = @Original_Ryoukin)) AND ((@" +
-                "IsNull_Syokaibi = 1 AND [Syokaibi] IS NULL) OR ([Syokaibi] = @Original_Syokaibi)" +
-                ") AND ((@IsNull_FukusuFaci = 1 AND [FukusuFaci] IS NULL) OR ([FukusuFaci] = @Ori" +
-                "ginal_FukusuFaci)) AND ((@IsNull_HatyuFLG = 1 AND [HatyuFLG] IS NULL) OR ([Hatyu" +
-                "FLG] = @Original_HatyuFLG)) AND ((@IsNull_Zansu = 1 AND [Zansu] IS NULL) OR ([Za" +
-                "nsu] = @Original_Zansu)))";
+                " = @Original_RowNo) AND ([TokuisakiCode] = @Original_TokuisakiCode) AND ((@IsNul" +
+                "l_TokuisakiMei = 1 AND [TokuisakiMei] IS NULL) OR ([TokuisakiMei] = @Original_To" +
+                "kuisakiMei)) AND ((@IsNull_TokuisakiMei2 = 1 AND [TokuisakiMei2] IS NULL) OR ([T" +
+                "okuisakiMei2] = @Original_TokuisakiMei2)) AND ((@IsNull_SeikyusakiMei = 1 AND [S" +
+                "eikyusakiMei] IS NULL) OR ([SeikyusakiMei] = @Original_SeikyusakiMei)) AND ([Cat" +
+                "egory] = @Original_Category) AND ((@IsNull_CategoryName = 1 AND [CategoryName] I" +
+                "S NULL) OR ([CategoryName] = @Original_CategoryName)) AND ((@IsNull_Tyokusodsaki" +
+                "CD = 1 AND [TyokusodsakiCD] IS NULL) OR ([TyokusodsakiCD] = @Original_Tyokusodsa" +
+                "kiCD)) AND ((@IsNull_TyokusosakiMei = 1 AND [TyokusosakiMei] IS NULL) OR ([Tyoku" +
+                "sosakiMei] = @Original_TyokusosakiMei)) AND ((@IsNull_Jusyo1 = 1 AND [Jusyo1] IS" +
+                " NULL) OR ([Jusyo1] = @Original_Jusyo1)) AND ((@IsNull_Jusyo2 = 1 AND [Jusyo2] I" +
+                "S NULL) OR ([Jusyo2] = @Original_Jusyo2)) AND ((@IsNull_FacilityCode = 1 AND [Fa" +
+                "cilityCode] IS NULL) OR ([FacilityCode] = @Original_FacilityCode)) AND ((@IsNull" +
+                "_FacilityName = 1 AND [FacilityName] IS NULL) OR ([FacilityName] = @Original_Fac" +
+                "ilityName)) AND ((@IsNull_FacilityJusyo = 1 AND [FacilityJusyo] IS NULL) OR ([Fa" +
+                "cilityJusyo] = @Original_FacilityJusyo)) AND ((@IsNull_FacilityJusyo2 = 1 AND [F" +
+                "acilityJusyo2] IS NULL) OR ([FacilityJusyo2] = @Original_FacilityJusyo2)) AND ((" +
+                "@IsNull_FacilityTel = 1 AND [FacilityTel] IS NULL) OR ([FacilityTel] = @Original" +
+                "_FacilityTel)) AND ((@IsNull_SiyouKaishi = 1 AND [SiyouKaishi] IS NULL) OR ([Siy" +
+                "ouKaishi] = @Original_SiyouKaishi)) AND ((@IsNull_SiyouiOwari = 1 AND [SiyouiOwa" +
+                "ri] IS NULL) OR ([SiyouiOwari] = @Original_SiyouiOwari)) AND ((@IsNull_HyoujyunK" +
+                "akaku = 1 AND [HyoujyunKakaku] IS NULL) OR ([HyoujyunKakaku] = @Original_Hyoujyu" +
+                "nKakaku)) AND ((@IsNull_NumberOfOrdered = 1 AND [NumberOfOrdered] IS NULL) OR ([" +
+                "NumberOfOrdered] = @Original_NumberOfOrdered)) AND ((@IsNull_OrderedPrice = 1 AN" +
+                "D [OrderedPrice] IS NULL) OR ([OrderedPrice] = @Original_OrderedPrice)) AND ((@I" +
+                "sNull_OrderedAmount = 1 AND [OrderedAmount] IS NULL) OR ([OrderedAmount] = @Orig" +
+                "inal_OrderedAmount)) AND ((@IsNull_Tax = 1 AND [Tax] IS NULL) OR ([Tax] = @Origi" +
+                "nal_Tax)) AND ((@IsNull_StaffName = 1 AND [StaffName] IS NULL) OR ([StaffName] =" +
+                " @Original_StaffName)) AND ((@IsNull_Department = 1 AND [Department] IS NULL) OR" +
+                " ([Department] = @Original_Department)) AND ((@IsNull_Deployment = 1 AND [Deploy" +
+                "ment] IS NULL) OR ([Deployment] = @Original_Deployment)) AND ((@IsNull_Capa = 1 " +
+                "AND [Capa] IS NULL) OR ([Capa] = @Original_Capa)) AND ((@IsNull_ToOrderedName = " +
+                "1 AND [ToOrderedName] IS NULL) OR ([ToOrderedName] = @Original_ToOrderedName)) A" +
+                "ND ((@IsNull_Tekiyou1 = 1 AND [Tekiyou1] IS NULL) OR ([Tekiyou1] = @Original_Tek" +
+                "iyou1)) AND ((@IsNull_Tekiyou2 = 1 AND [Tekiyou2] IS NULL) OR ([Tekiyou2] = @Ori" +
+                "ginal_Tekiyou2)) AND ((@IsNull_TyokusousakiMei = 1 AND [TyokusousakiMei] IS NULL" +
+                ") OR ([TyokusousakiMei] = @Original_TyokusousakiMei)) AND ((@IsNull_Tyokusousaki" +
+                "CD = 1 AND [TyokusousakiCD] IS NULL) OR ([TyokusousakiCD] = @Original_Tyokusousa" +
+                "kiCD)) AND ((@IsNull_Range = 1 AND [Range] IS NULL) OR ([Range] = @Original_Rang" +
+                "e)) AND ((@IsNull_ProductName = 1 AND [ProductName] IS NULL) OR ([ProductName] =" +
+                " @Original_ProductName)) AND ((@IsNull_ProductCode = 1 AND [ProductCode] IS NULL" +
+                ") OR ([ProductCode] = @Original_ProductCode)) AND ((@IsNull_MekerNo = 1 AND [Mek" +
+                "erNo] IS NULL) OR ([MekerNo] = @Original_MekerNo)) AND ((@IsNull_Media = 1 AND [" +
+                "Media] IS NULL) OR ([Media] = @Original_Media)) AND ((@IsNull_PurchasePrice = 1 " +
+                "AND [PurchasePrice] IS NULL) OR ([PurchasePrice] = @Original_PurchasePrice)) AND" +
+                " ((@IsNull_PurchaseAmount = 1 AND [PurchaseAmount] IS NULL) OR ([PurchaseAmount]" +
+                " = @Original_PurchaseAmount)) AND ((@IsNull_UriageFlg = 1 AND [UriageFlg] IS NUL" +
+                "L) OR ([UriageFlg] = @Original_UriageFlg)) AND ((@IsNull_HatyuDay = 1 AND [Hatyu" +
+                "Day] IS NULL) OR ([HatyuDay] = @Original_HatyuDay)) AND ((@IsNull_HatyusakiMei =" +
+                " 1 AND [HatyusakiMei] IS NULL) OR ([HatyusakiMei] = @Original_HatyusakiMei)) AND" +
+                " ((@IsNull_JutyuTanka = 1 AND [JutyuTanka] IS NULL) OR ([JutyuTanka] = @Original" +
+                "_JutyuTanka)) AND ((@IsNull_JutyuSuryou = 1 AND [JutyuSuryou] IS NULL) OR ([Juty" +
+                "uSuryou] = @Original_JutyuSuryou)) AND ((@IsNull_JutyuGokei = 1 AND [JutyuGokei]" +
+                " IS NULL) OR ([JutyuGokei] = @Original_JutyuGokei)) AND ((@IsNull_ShiireTanka = " +
+                "1 AND [ShiireTanka] IS NULL) OR ([ShiireTanka] = @Original_ShiireTanka)) AND ((@" +
+                "IsNull_ShiireKingaku = 1 AND [ShiireKingaku] IS NULL) OR ([ShiireKingaku] = @Ori" +
+                "ginal_ShiireKingaku)) AND ((@IsNull_WareHouse = 1 AND [WareHouse] IS NULL) OR ([" +
+                "WareHouse] = @Original_WareHouse)) AND ((@IsNull_ShiireSakiName = 1 AND [ShiireS" +
+                "akiName] IS NULL) OR ([ShiireSakiName] = @Original_ShiireSakiName)) AND ((@IsNul" +
+                "l_ShiiresakiCode = 1 AND [ShiiresakiCode] IS NULL) OR ([ShiiresakiCode] = @Origi" +
+                "nal_ShiiresakiCode)) AND ((@IsNull_Zeikubun = 1 AND [Zeikubun] IS NULL) OR ([Zei" +
+                "kubun] = @Original_Zeikubun)) AND ((@IsNull_Kakeritsu = 1 AND [Kakeritsu] IS NUL" +
+                "L) OR ([Kakeritsu] = @Original_Kakeritsu)) AND ((@IsNull_Zasu = 1 AND [Zasu] IS " +
+                "NULL) OR ([Zasu] = @Original_Zasu)) AND ((@IsNull_Ryoukin = 1 AND [Ryoukin] IS N" +
+                "ULL) OR ([Ryoukin] = @Original_Ryoukin)) AND ((@IsNull_Syokaibi = 1 AND [Syokaib" +
+                "i] IS NULL) OR ([Syokaibi] = @Original_Syokaibi)) AND ((@IsNull_FukusuFaci = 1 A" +
+                "ND [FukusuFaci] IS NULL) OR ([FukusuFaci] = @Original_FukusuFaci)) AND ((@IsNull" +
+                "_HatyuFLG = 1 AND [HatyuFLG] IS NULL) OR ([HatyuFLG] = @Original_HatyuFLG)) AND " +
+                "((@IsNull_Zansu = 1 AND [Zansu] IS NULL) OR ([Zansu] = @Original_Zansu)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ShiireNo", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiireNo", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RowNo", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RowNo", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TokuisakiCode", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TokuisakiCode", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TokuisakiCode", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TokuisakiCode", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TokuisakiCode", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TokuisakiCode", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TokuisakiMei", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TokuisakiMei", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TokuisakiMei", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TokuisakiMei", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TokuisakiMei2", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TokuisakiMei2", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TokuisakiMei2", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TokuisakiMei2", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SeikyusakiMei", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SeikyusakiMei", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SeikyusakiMei", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SeikyusakiMei", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Category", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Category", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Category", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Category", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CategoryName", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CategoryName", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CategoryName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CategoryName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -6531,11 +6414,12 @@ SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, Shii
                 "nt, UriageFlg, HatyuDay, HatyusakiMei, JutyuTanka, JutyuSuryou, JutyuGokei, Shii" +
                 "reTanka, ShiireKingaku, WareHouse, ShiireSakiName, ShiiresakiCode, Zeikubun, Kak" +
                 "eritsu, Zasu, Ryoukin, Syokaibi, FukusuFaci, HatyuFLG, Zansu FROM T_Appropriate " +
-                "WHERE (RowNo = @RowNo) AND (ShiireNo = @ShiireNo)";
+                "WHERE (Category = @Category) AND (RowNo = @RowNo) AND (ShiireNo = @ShiireNo) AND" +
+                " (TokuisakiCode = @TokuisakiCode)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ShiireNo", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiireNo", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RowNo", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RowNo", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TokuisakiCode", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TokuisakiCode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TokuisakiCode", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TokuisakiCode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TokuisakiMei", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TokuisakiMei", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TokuisakiMei2", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TokuisakiMei2", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SeikyusakiMei", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SeikyusakiMei", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -6616,91 +6500,90 @@ SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, Shii
                 "[Zeikubun] = @Zeikubun, [Kakeritsu] = @Kakeritsu, [Zasu] = @Zasu, [Ryoukin] = @R" +
                 "youkin, [Syokaibi] = @Syokaibi, [FukusuFaci] = @FukusuFaci, [HatyuFLG] = @HatyuF" +
                 "LG, [Zansu] = @Zansu WHERE (([ShiireNo] = @Original_ShiireNo) AND ([RowNo] = @Or" +
-                "iginal_RowNo) AND ((@IsNull_TokuisakiCode = 1 AND [TokuisakiCode] IS NULL) OR ([" +
-                "TokuisakiCode] = @Original_TokuisakiCode)) AND ((@IsNull_TokuisakiMei = 1 AND [T" +
-                "okuisakiMei] IS NULL) OR ([TokuisakiMei] = @Original_TokuisakiMei)) AND ((@IsNul" +
-                "l_TokuisakiMei2 = 1 AND [TokuisakiMei2] IS NULL) OR ([TokuisakiMei2] = @Original" +
-                "_TokuisakiMei2)) AND ((@IsNull_SeikyusakiMei = 1 AND [SeikyusakiMei] IS NULL) OR" +
-                " ([SeikyusakiMei] = @Original_SeikyusakiMei)) AND ((@IsNull_Category = 1 AND [Ca" +
-                "tegory] IS NULL) OR ([Category] = @Original_Category)) AND ((@IsNull_CategoryNam" +
-                "e = 1 AND [CategoryName] IS NULL) OR ([CategoryName] = @Original_CategoryName)) " +
-                "AND ((@IsNull_TyokusodsakiCD = 1 AND [TyokusodsakiCD] IS NULL) OR ([Tyokusodsaki" +
-                "CD] = @Original_TyokusodsakiCD)) AND ((@IsNull_TyokusosakiMei = 1 AND [Tyokusosa" +
-                "kiMei] IS NULL) OR ([TyokusosakiMei] = @Original_TyokusosakiMei)) AND ((@IsNull_" +
-                "Jusyo1 = 1 AND [Jusyo1] IS NULL) OR ([Jusyo1] = @Original_Jusyo1)) AND ((@IsNull" +
-                "_Jusyo2 = 1 AND [Jusyo2] IS NULL) OR ([Jusyo2] = @Original_Jusyo2)) AND ((@IsNul" +
-                "l_FacilityCode = 1 AND [FacilityCode] IS NULL) OR ([FacilityCode] = @Original_Fa" +
-                "cilityCode)) AND ((@IsNull_FacilityName = 1 AND [FacilityName] IS NULL) OR ([Fac" +
-                "ilityName] = @Original_FacilityName)) AND ((@IsNull_FacilityJusyo = 1 AND [Facil" +
-                "ityJusyo] IS NULL) OR ([FacilityJusyo] = @Original_FacilityJusyo)) AND ((@IsNull" +
-                "_FacilityJusyo2 = 1 AND [FacilityJusyo2] IS NULL) OR ([FacilityJusyo2] = @Origin" +
-                "al_FacilityJusyo2)) AND ((@IsNull_FacilityTel = 1 AND [FacilityTel] IS NULL) OR " +
-                "([FacilityTel] = @Original_FacilityTel)) AND ((@IsNull_SiyouKaishi = 1 AND [Siyo" +
-                "uKaishi] IS NULL) OR ([SiyouKaishi] = @Original_SiyouKaishi)) AND ((@IsNull_Siyo" +
-                "uiOwari = 1 AND [SiyouiOwari] IS NULL) OR ([SiyouiOwari] = @Original_SiyouiOwari" +
-                ")) AND ((@IsNull_HyoujyunKakaku = 1 AND [HyoujyunKakaku] IS NULL) OR ([HyoujyunK" +
-                "akaku] = @Original_HyoujyunKakaku)) AND ((@IsNull_NumberOfOrdered = 1 AND [Numbe" +
-                "rOfOrdered] IS NULL) OR ([NumberOfOrdered] = @Original_NumberOfOrdered)) AND ((@" +
-                "IsNull_OrderedPrice = 1 AND [OrderedPrice] IS NULL) OR ([OrderedPrice] = @Origin" +
-                "al_OrderedPrice)) AND ((@IsNull_OrderedAmount = 1 AND [OrderedAmount] IS NULL) O" +
-                "R ([OrderedAmount] = @Original_OrderedAmount)) AND ((@IsNull_Tax = 1 AND [Tax] I" +
-                "S NULL) OR ([Tax] = @Original_Tax)) AND ((@IsNull_StaffName = 1 AND [StaffName] " +
-                "IS NULL) OR ([StaffName] = @Original_StaffName)) AND ((@IsNull_Department = 1 AN" +
-                "D [Department] IS NULL) OR ([Department] = @Original_Department)) AND ((@IsNull_" +
-                "Deployment = 1 AND [Deployment] IS NULL) OR ([Deployment] = @Original_Deployment" +
-                ")) AND ((@IsNull_Capa = 1 AND [Capa] IS NULL) OR ([Capa] = @Original_Capa)) AND " +
-                "((@IsNull_ToOrderedName = 1 AND [ToOrderedName] IS NULL) OR ([ToOrderedName] = @" +
-                "Original_ToOrderedName)) AND ((@IsNull_Tekiyou1 = 1 AND [Tekiyou1] IS NULL) OR (" +
-                "[Tekiyou1] = @Original_Tekiyou1)) AND ((@IsNull_Tekiyou2 = 1 AND [Tekiyou2] IS N" +
-                "ULL) OR ([Tekiyou2] = @Original_Tekiyou2)) AND ((@IsNull_TyokusousakiMei = 1 AND" +
-                " [TyokusousakiMei] IS NULL) OR ([TyokusousakiMei] = @Original_TyokusousakiMei)) " +
-                "AND ((@IsNull_TyokusousakiCD = 1 AND [TyokusousakiCD] IS NULL) OR ([Tyokusousaki" +
-                "CD] = @Original_TyokusousakiCD)) AND ((@IsNull_Range = 1 AND [Range] IS NULL) OR" +
-                " ([Range] = @Original_Range)) AND ((@IsNull_ProductName = 1 AND [ProductName] IS" +
-                " NULL) OR ([ProductName] = @Original_ProductName)) AND ((@IsNull_ProductCode = 1" +
-                " AND [ProductCode] IS NULL) OR ([ProductCode] = @Original_ProductCode)) AND ((@I" +
-                "sNull_MekerNo = 1 AND [MekerNo] IS NULL) OR ([MekerNo] = @Original_MekerNo)) AND" +
-                " ((@IsNull_Media = 1 AND [Media] IS NULL) OR ([Media] = @Original_Media)) AND ((" +
-                "@IsNull_PurchasePrice = 1 AND [PurchasePrice] IS NULL) OR ([PurchasePrice] = @Or" +
-                "iginal_PurchasePrice)) AND ((@IsNull_PurchaseAmount = 1 AND [PurchaseAmount] IS " +
-                "NULL) OR ([PurchaseAmount] = @Original_PurchaseAmount)) AND ((@IsNull_UriageFlg " +
-                "= 1 AND [UriageFlg] IS NULL) OR ([UriageFlg] = @Original_UriageFlg)) AND ((@IsNu" +
-                "ll_HatyuDay = 1 AND [HatyuDay] IS NULL) OR ([HatyuDay] = @Original_HatyuDay)) AN" +
-                "D ((@IsNull_HatyusakiMei = 1 AND [HatyusakiMei] IS NULL) OR ([HatyusakiMei] = @O" +
-                "riginal_HatyusakiMei)) AND ((@IsNull_JutyuTanka = 1 AND [JutyuTanka] IS NULL) OR" +
-                " ([JutyuTanka] = @Original_JutyuTanka)) AND ((@IsNull_JutyuSuryou = 1 AND [Jutyu" +
-                "Suryou] IS NULL) OR ([JutyuSuryou] = @Original_JutyuSuryou)) AND ((@IsNull_Jutyu" +
-                "Gokei = 1 AND [JutyuGokei] IS NULL) OR ([JutyuGokei] = @Original_JutyuGokei)) AN" +
-                "D ((@IsNull_ShiireTanka = 1 AND [ShiireTanka] IS NULL) OR ([ShiireTanka] = @Orig" +
-                "inal_ShiireTanka)) AND ((@IsNull_ShiireKingaku = 1 AND [ShiireKingaku] IS NULL) " +
-                "OR ([ShiireKingaku] = @Original_ShiireKingaku)) AND ((@IsNull_WareHouse = 1 AND " +
-                "[WareHouse] IS NULL) OR ([WareHouse] = @Original_WareHouse)) AND ((@IsNull_Shiir" +
-                "eSakiName = 1 AND [ShiireSakiName] IS NULL) OR ([ShiireSakiName] = @Original_Shi" +
-                "ireSakiName)) AND ((@IsNull_ShiiresakiCode = 1 AND [ShiiresakiCode] IS NULL) OR " +
-                "([ShiiresakiCode] = @Original_ShiiresakiCode)) AND ((@IsNull_Zeikubun = 1 AND [Z" +
-                "eikubun] IS NULL) OR ([Zeikubun] = @Original_Zeikubun)) AND ((@IsNull_Kakeritsu " +
-                "= 1 AND [Kakeritsu] IS NULL) OR ([Kakeritsu] = @Original_Kakeritsu)) AND ((@IsNu" +
-                "ll_Zasu = 1 AND [Zasu] IS NULL) OR ([Zasu] = @Original_Zasu)) AND ((@IsNull_Ryou" +
-                "kin = 1 AND [Ryoukin] IS NULL) OR ([Ryoukin] = @Original_Ryoukin)) AND ((@IsNull" +
-                "_Syokaibi = 1 AND [Syokaibi] IS NULL) OR ([Syokaibi] = @Original_Syokaibi)) AND " +
-                "((@IsNull_FukusuFaci = 1 AND [FukusuFaci] IS NULL) OR ([FukusuFaci] = @Original_" +
-                "FukusuFaci)) AND ((@IsNull_HatyuFLG = 1 AND [HatyuFLG] IS NULL) OR ([HatyuFLG] =" +
-                " @Original_HatyuFLG)) AND ((@IsNull_Zansu = 1 AND [Zansu] IS NULL) OR ([Zansu] =" +
-                " @Original_Zansu)));\r\nSELECT ShiireNo, RowNo, TokuisakiCode, TokuisakiMei, Tokui" +
-                "sakiMei2, SeikyusakiMei, Category, CategoryName, TyokusodsakiCD, TyokusosakiMei," +
-                " Jusyo1, Jusyo2, FacilityCode, FacilityName, FacilityJusyo, FacilityJusyo2, Faci" +
-                "lityTel, SiyouKaishi, SiyouiOwari, HyoujyunKakaku, NumberOfOrdered, OrderedPrice" +
-                ", OrderedAmount, Tax, StaffName, Department, Deployment, Capa, ToOrderedName, Te" +
-                "kiyou1, Tekiyou2, TyokusousakiMei, TyokusousakiCD, Range, ProductName, ProductCo" +
-                "de, MekerNo, Media, PurchasePrice, PurchaseAmount, UriageFlg, HatyuDay, Hatyusak" +
-                "iMei, JutyuTanka, JutyuSuryou, JutyuGokei, ShiireTanka, ShiireKingaku, WareHouse" +
-                ", ShiireSakiName, ShiiresakiCode, Zeikubun, Kakeritsu, Zasu, Ryoukin, Syokaibi, " +
-                "FukusuFaci, HatyuFLG, Zansu FROM T_Appropriate WHERE (RowNo = @RowNo) AND (Shiir" +
-                "eNo = @ShiireNo)";
+                "iginal_RowNo) AND ([TokuisakiCode] = @Original_TokuisakiCode) AND ((@IsNull_Toku" +
+                "isakiMei = 1 AND [TokuisakiMei] IS NULL) OR ([TokuisakiMei] = @Original_Tokuisak" +
+                "iMei)) AND ((@IsNull_TokuisakiMei2 = 1 AND [TokuisakiMei2] IS NULL) OR ([Tokuisa" +
+                "kiMei2] = @Original_TokuisakiMei2)) AND ((@IsNull_SeikyusakiMei = 1 AND [Seikyus" +
+                "akiMei] IS NULL) OR ([SeikyusakiMei] = @Original_SeikyusakiMei)) AND ([Category]" +
+                " = @Original_Category) AND ((@IsNull_CategoryName = 1 AND [CategoryName] IS NULL" +
+                ") OR ([CategoryName] = @Original_CategoryName)) AND ((@IsNull_TyokusodsakiCD = 1" +
+                " AND [TyokusodsakiCD] IS NULL) OR ([TyokusodsakiCD] = @Original_TyokusodsakiCD))" +
+                " AND ((@IsNull_TyokusosakiMei = 1 AND [TyokusosakiMei] IS NULL) OR ([Tyokusosaki" +
+                "Mei] = @Original_TyokusosakiMei)) AND ((@IsNull_Jusyo1 = 1 AND [Jusyo1] IS NULL)" +
+                " OR ([Jusyo1] = @Original_Jusyo1)) AND ((@IsNull_Jusyo2 = 1 AND [Jusyo2] IS NULL" +
+                ") OR ([Jusyo2] = @Original_Jusyo2)) AND ((@IsNull_FacilityCode = 1 AND [Facility" +
+                "Code] IS NULL) OR ([FacilityCode] = @Original_FacilityCode)) AND ((@IsNull_Facil" +
+                "ityName = 1 AND [FacilityName] IS NULL) OR ([FacilityName] = @Original_FacilityN" +
+                "ame)) AND ((@IsNull_FacilityJusyo = 1 AND [FacilityJusyo] IS NULL) OR ([Facility" +
+                "Jusyo] = @Original_FacilityJusyo)) AND ((@IsNull_FacilityJusyo2 = 1 AND [Facilit" +
+                "yJusyo2] IS NULL) OR ([FacilityJusyo2] = @Original_FacilityJusyo2)) AND ((@IsNul" +
+                "l_FacilityTel = 1 AND [FacilityTel] IS NULL) OR ([FacilityTel] = @Original_Facil" +
+                "ityTel)) AND ((@IsNull_SiyouKaishi = 1 AND [SiyouKaishi] IS NULL) OR ([SiyouKais" +
+                "hi] = @Original_SiyouKaishi)) AND ((@IsNull_SiyouiOwari = 1 AND [SiyouiOwari] IS" +
+                " NULL) OR ([SiyouiOwari] = @Original_SiyouiOwari)) AND ((@IsNull_HyoujyunKakaku " +
+                "= 1 AND [HyoujyunKakaku] IS NULL) OR ([HyoujyunKakaku] = @Original_HyoujyunKakak" +
+                "u)) AND ((@IsNull_NumberOfOrdered = 1 AND [NumberOfOrdered] IS NULL) OR ([Number" +
+                "OfOrdered] = @Original_NumberOfOrdered)) AND ((@IsNull_OrderedPrice = 1 AND [Ord" +
+                "eredPrice] IS NULL) OR ([OrderedPrice] = @Original_OrderedPrice)) AND ((@IsNull_" +
+                "OrderedAmount = 1 AND [OrderedAmount] IS NULL) OR ([OrderedAmount] = @Original_O" +
+                "rderedAmount)) AND ((@IsNull_Tax = 1 AND [Tax] IS NULL) OR ([Tax] = @Original_Ta" +
+                "x)) AND ((@IsNull_StaffName = 1 AND [StaffName] IS NULL) OR ([StaffName] = @Orig" +
+                "inal_StaffName)) AND ((@IsNull_Department = 1 AND [Department] IS NULL) OR ([Dep" +
+                "artment] = @Original_Department)) AND ((@IsNull_Deployment = 1 AND [Deployment] " +
+                "IS NULL) OR ([Deployment] = @Original_Deployment)) AND ((@IsNull_Capa = 1 AND [C" +
+                "apa] IS NULL) OR ([Capa] = @Original_Capa)) AND ((@IsNull_ToOrderedName = 1 AND " +
+                "[ToOrderedName] IS NULL) OR ([ToOrderedName] = @Original_ToOrderedName)) AND ((@" +
+                "IsNull_Tekiyou1 = 1 AND [Tekiyou1] IS NULL) OR ([Tekiyou1] = @Original_Tekiyou1)" +
+                ") AND ((@IsNull_Tekiyou2 = 1 AND [Tekiyou2] IS NULL) OR ([Tekiyou2] = @Original_" +
+                "Tekiyou2)) AND ((@IsNull_TyokusousakiMei = 1 AND [TyokusousakiMei] IS NULL) OR (" +
+                "[TyokusousakiMei] = @Original_TyokusousakiMei)) AND ((@IsNull_TyokusousakiCD = 1" +
+                " AND [TyokusousakiCD] IS NULL) OR ([TyokusousakiCD] = @Original_TyokusousakiCD))" +
+                " AND ((@IsNull_Range = 1 AND [Range] IS NULL) OR ([Range] = @Original_Range)) AN" +
+                "D ((@IsNull_ProductName = 1 AND [ProductName] IS NULL) OR ([ProductName] = @Orig" +
+                "inal_ProductName)) AND ((@IsNull_ProductCode = 1 AND [ProductCode] IS NULL) OR (" +
+                "[ProductCode] = @Original_ProductCode)) AND ((@IsNull_MekerNo = 1 AND [MekerNo] " +
+                "IS NULL) OR ([MekerNo] = @Original_MekerNo)) AND ((@IsNull_Media = 1 AND [Media]" +
+                " IS NULL) OR ([Media] = @Original_Media)) AND ((@IsNull_PurchasePrice = 1 AND [P" +
+                "urchasePrice] IS NULL) OR ([PurchasePrice] = @Original_PurchasePrice)) AND ((@Is" +
+                "Null_PurchaseAmount = 1 AND [PurchaseAmount] IS NULL) OR ([PurchaseAmount] = @Or" +
+                "iginal_PurchaseAmount)) AND ((@IsNull_UriageFlg = 1 AND [UriageFlg] IS NULL) OR " +
+                "([UriageFlg] = @Original_UriageFlg)) AND ((@IsNull_HatyuDay = 1 AND [HatyuDay] I" +
+                "S NULL) OR ([HatyuDay] = @Original_HatyuDay)) AND ((@IsNull_HatyusakiMei = 1 AND" +
+                " [HatyusakiMei] IS NULL) OR ([HatyusakiMei] = @Original_HatyusakiMei)) AND ((@Is" +
+                "Null_JutyuTanka = 1 AND [JutyuTanka] IS NULL) OR ([JutyuTanka] = @Original_Jutyu" +
+                "Tanka)) AND ((@IsNull_JutyuSuryou = 1 AND [JutyuSuryou] IS NULL) OR ([JutyuSuryo" +
+                "u] = @Original_JutyuSuryou)) AND ((@IsNull_JutyuGokei = 1 AND [JutyuGokei] IS NU" +
+                "LL) OR ([JutyuGokei] = @Original_JutyuGokei)) AND ((@IsNull_ShiireTanka = 1 AND " +
+                "[ShiireTanka] IS NULL) OR ([ShiireTanka] = @Original_ShiireTanka)) AND ((@IsNull" +
+                "_ShiireKingaku = 1 AND [ShiireKingaku] IS NULL) OR ([ShiireKingaku] = @Original_" +
+                "ShiireKingaku)) AND ((@IsNull_WareHouse = 1 AND [WareHouse] IS NULL) OR ([WareHo" +
+                "use] = @Original_WareHouse)) AND ((@IsNull_ShiireSakiName = 1 AND [ShiireSakiNam" +
+                "e] IS NULL) OR ([ShiireSakiName] = @Original_ShiireSakiName)) AND ((@IsNull_Shii" +
+                "resakiCode = 1 AND [ShiiresakiCode] IS NULL) OR ([ShiiresakiCode] = @Original_Sh" +
+                "iiresakiCode)) AND ((@IsNull_Zeikubun = 1 AND [Zeikubun] IS NULL) OR ([Zeikubun]" +
+                " = @Original_Zeikubun)) AND ((@IsNull_Kakeritsu = 1 AND [Kakeritsu] IS NULL) OR " +
+                "([Kakeritsu] = @Original_Kakeritsu)) AND ((@IsNull_Zasu = 1 AND [Zasu] IS NULL) " +
+                "OR ([Zasu] = @Original_Zasu)) AND ((@IsNull_Ryoukin = 1 AND [Ryoukin] IS NULL) O" +
+                "R ([Ryoukin] = @Original_Ryoukin)) AND ((@IsNull_Syokaibi = 1 AND [Syokaibi] IS " +
+                "NULL) OR ([Syokaibi] = @Original_Syokaibi)) AND ((@IsNull_FukusuFaci = 1 AND [Fu" +
+                "kusuFaci] IS NULL) OR ([FukusuFaci] = @Original_FukusuFaci)) AND ((@IsNull_Hatyu" +
+                "FLG = 1 AND [HatyuFLG] IS NULL) OR ([HatyuFLG] = @Original_HatyuFLG)) AND ((@IsN" +
+                "ull_Zansu = 1 AND [Zansu] IS NULL) OR ([Zansu] = @Original_Zansu)));\r\nSELECT Shi" +
+                "ireNo, RowNo, TokuisakiCode, TokuisakiMei, TokuisakiMei2, SeikyusakiMei, Categor" +
+                "y, CategoryName, TyokusodsakiCD, TyokusosakiMei, Jusyo1, Jusyo2, FacilityCode, F" +
+                "acilityName, FacilityJusyo, FacilityJusyo2, FacilityTel, SiyouKaishi, SiyouiOwar" +
+                "i, HyoujyunKakaku, NumberOfOrdered, OrderedPrice, OrderedAmount, Tax, StaffName," +
+                " Department, Deployment, Capa, ToOrderedName, Tekiyou1, Tekiyou2, TyokusousakiMe" +
+                "i, TyokusousakiCD, Range, ProductName, ProductCode, MekerNo, Media, PurchasePric" +
+                "e, PurchaseAmount, UriageFlg, HatyuDay, HatyusakiMei, JutyuTanka, JutyuSuryou, J" +
+                "utyuGokei, ShiireTanka, ShiireKingaku, WareHouse, ShiireSakiName, ShiiresakiCode" +
+                ", Zeikubun, Kakeritsu, Zasu, Ryoukin, Syokaibi, FukusuFaci, HatyuFLG, Zansu FROM" +
+                " T_Appropriate WHERE (Category = @Category) AND (RowNo = @RowNo) AND (ShiireNo =" +
+                " @ShiireNo) AND (TokuisakiCode = @TokuisakiCode)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ShiireNo", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiireNo", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RowNo", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RowNo", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TokuisakiCode", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TokuisakiCode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TokuisakiCode", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TokuisakiCode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TokuisakiMei", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TokuisakiMei", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TokuisakiMei2", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TokuisakiMei2", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SeikyusakiMei", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SeikyusakiMei", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -6759,15 +6642,13 @@ SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, Shii
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Zansu", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Zansu", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ShiireNo", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ShiireNo", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RowNo", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RowNo", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TokuisakiCode", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TokuisakiCode", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TokuisakiCode", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TokuisakiCode", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TokuisakiCode", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TokuisakiCode", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TokuisakiMei", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TokuisakiMei", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TokuisakiMei", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TokuisakiMei", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TokuisakiMei2", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TokuisakiMei2", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TokuisakiMei2", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TokuisakiMei2", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SeikyusakiMei", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SeikyusakiMei", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SeikyusakiMei", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SeikyusakiMei", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Category", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Category", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Category", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Category", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CategoryName", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CategoryName", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CategoryName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CategoryName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -6953,11 +6834,11 @@ SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, Shii
         public virtual int Delete(
                     int Original_ShiireNo, 
                     int Original_RowNo, 
-                    global::System.Nullable<int> Original_TokuisakiCode, 
+                    string Original_TokuisakiCode, 
                     string Original_TokuisakiMei, 
                     string Original_TokuisakiMei2, 
                     string Original_SeikyusakiMei, 
-                    global::System.Nullable<int> Original_Category, 
+                    int Original_Category, 
                     string Original_CategoryName, 
                     global::System.Nullable<int> Original_TyokusodsakiCD, 
                     string Original_TyokusosakiMei, 
@@ -7012,461 +6893,452 @@ SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, Shii
                     string Original_Zansu) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ShiireNo));
             this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_RowNo));
-            if ((Original_TokuisakiCode.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((int)(Original_TokuisakiCode.Value));
+            if ((Original_TokuisakiCode == null)) {
+                throw new global::System.ArgumentNullException("Original_TokuisakiCode");
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[3].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_TokuisakiCode));
             }
             if ((Original_TokuisakiMei == null)) {
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[5].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((string)(Original_TokuisakiMei));
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_TokuisakiMei));
             }
             if ((Original_TokuisakiMei2 == null)) {
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[7].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((string)(Original_TokuisakiMei2));
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_TokuisakiMei2));
             }
             if ((Original_SeikyusakiMei == null)) {
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[9].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((string)(Original_SeikyusakiMei));
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((string)(Original_SeikyusakiMei));
             }
-            if ((Original_Category.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((int)(Original_Category.Value));
-            }
-            else {
+            this.Adapter.DeleteCommand.Parameters[9].Value = ((int)(Original_Category));
+            if ((Original_CategoryName == null)) {
                 this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[11].Value = global::System.DBNull.Value;
             }
-            if ((Original_CategoryName == null)) {
+            else {
+                this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((string)(Original_CategoryName));
+            }
+            if ((Original_TyokusodsakiCD.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[13].Value = ((int)(Original_TyokusodsakiCD.Value));
+            }
+            else {
                 this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[13].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[13].Value = ((string)(Original_CategoryName));
-            }
-            if ((Original_TyokusodsakiCD.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[14].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[15].Value = ((int)(Original_TyokusodsakiCD.Value));
-            }
-            else {
+            if ((Original_TyokusosakiMei == null)) {
                 this.Adapter.DeleteCommand.Parameters[14].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[15].Value = global::System.DBNull.Value;
             }
-            if ((Original_TyokusosakiMei == null)) {
+            else {
+                this.Adapter.DeleteCommand.Parameters[14].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[15].Value = ((string)(Original_TyokusosakiMei));
+            }
+            if ((Original_Jusyo1 == null)) {
                 this.Adapter.DeleteCommand.Parameters[16].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[17].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[16].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[17].Value = ((string)(Original_TyokusosakiMei));
+                this.Adapter.DeleteCommand.Parameters[17].Value = ((string)(Original_Jusyo1));
             }
-            if ((Original_Jusyo1 == null)) {
+            if ((Original_Jusyo2 == null)) {
                 this.Adapter.DeleteCommand.Parameters[18].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[19].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[18].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[19].Value = ((string)(Original_Jusyo1));
+                this.Adapter.DeleteCommand.Parameters[19].Value = ((string)(Original_Jusyo2));
             }
-            if ((Original_Jusyo2 == null)) {
+            if ((Original_FacilityCode.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[20].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[21].Value = ((int)(Original_FacilityCode.Value));
+            }
+            else {
                 this.Adapter.DeleteCommand.Parameters[20].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[21].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.DeleteCommand.Parameters[20].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[21].Value = ((string)(Original_Jusyo2));
-            }
-            if ((Original_FacilityCode.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[22].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[23].Value = ((int)(Original_FacilityCode.Value));
-            }
-            else {
+            if ((Original_FacilityName == null)) {
                 this.Adapter.DeleteCommand.Parameters[22].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[23].Value = global::System.DBNull.Value;
             }
-            if ((Original_FacilityName == null)) {
+            else {
+                this.Adapter.DeleteCommand.Parameters[22].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[23].Value = ((string)(Original_FacilityName));
+            }
+            if ((Original_FacilityJusyo == null)) {
                 this.Adapter.DeleteCommand.Parameters[24].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[25].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[24].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[25].Value = ((string)(Original_FacilityName));
+                this.Adapter.DeleteCommand.Parameters[25].Value = ((string)(Original_FacilityJusyo));
             }
-            if ((Original_FacilityJusyo == null)) {
+            if ((Original_FacilityJusyo2 == null)) {
                 this.Adapter.DeleteCommand.Parameters[26].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[27].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[26].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[27].Value = ((string)(Original_FacilityJusyo));
+                this.Adapter.DeleteCommand.Parameters[27].Value = ((string)(Original_FacilityJusyo2));
             }
-            if ((Original_FacilityJusyo2 == null)) {
+            if ((Original_FacilityTel == null)) {
                 this.Adapter.DeleteCommand.Parameters[28].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[29].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[28].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[29].Value = ((string)(Original_FacilityJusyo2));
+                this.Adapter.DeleteCommand.Parameters[29].Value = ((string)(Original_FacilityTel));
             }
-            if ((Original_FacilityTel == null)) {
+            if ((Original_SiyouKaishi == null)) {
                 this.Adapter.DeleteCommand.Parameters[30].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[31].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[30].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[31].Value = ((string)(Original_FacilityTel));
+                this.Adapter.DeleteCommand.Parameters[31].Value = ((string)(Original_SiyouKaishi));
             }
-            if ((Original_SiyouKaishi == null)) {
+            if ((Original_SiyouiOwari == null)) {
                 this.Adapter.DeleteCommand.Parameters[32].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[33].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[32].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[33].Value = ((string)(Original_SiyouKaishi));
+                this.Adapter.DeleteCommand.Parameters[33].Value = ((string)(Original_SiyouiOwari));
             }
-            if ((Original_SiyouiOwari == null)) {
+            if ((Original_HyoujyunKakaku.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[34].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[35].Value = ((int)(Original_HyoujyunKakaku.Value));
+            }
+            else {
                 this.Adapter.DeleteCommand.Parameters[34].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[35].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.DeleteCommand.Parameters[34].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[35].Value = ((string)(Original_SiyouiOwari));
-            }
-            if ((Original_HyoujyunKakaku.HasValue == true)) {
+            if ((Original_NumberOfOrdered.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[36].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[37].Value = ((int)(Original_HyoujyunKakaku.Value));
+                this.Adapter.DeleteCommand.Parameters[37].Value = ((int)(Original_NumberOfOrdered.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[36].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[37].Value = global::System.DBNull.Value;
             }
-            if ((Original_NumberOfOrdered.HasValue == true)) {
+            if ((Original_OrderedPrice.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[38].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[39].Value = ((int)(Original_NumberOfOrdered.Value));
+                this.Adapter.DeleteCommand.Parameters[39].Value = ((int)(Original_OrderedPrice.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[38].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[39].Value = global::System.DBNull.Value;
             }
-            if ((Original_OrderedPrice.HasValue == true)) {
+            if ((Original_OrderedAmount.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[40].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[41].Value = ((int)(Original_OrderedPrice.Value));
+                this.Adapter.DeleteCommand.Parameters[41].Value = ((int)(Original_OrderedAmount.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[40].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[41].Value = global::System.DBNull.Value;
             }
-            if ((Original_OrderedAmount.HasValue == true)) {
+            if ((Original_Tax.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[42].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[43].Value = ((int)(Original_OrderedAmount.Value));
+                this.Adapter.DeleteCommand.Parameters[43].Value = ((int)(Original_Tax.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[42].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[43].Value = global::System.DBNull.Value;
             }
-            if ((Original_Tax.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[44].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[45].Value = ((int)(Original_Tax.Value));
-            }
-            else {
+            if ((Original_StaffName == null)) {
                 this.Adapter.DeleteCommand.Parameters[44].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[45].Value = global::System.DBNull.Value;
             }
-            if ((Original_StaffName == null)) {
+            else {
+                this.Adapter.DeleteCommand.Parameters[44].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[45].Value = ((string)(Original_StaffName));
+            }
+            if ((Original_Department == null)) {
                 this.Adapter.DeleteCommand.Parameters[46].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[47].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[46].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[47].Value = ((string)(Original_StaffName));
+                this.Adapter.DeleteCommand.Parameters[47].Value = ((string)(Original_Department));
             }
-            if ((Original_Department == null)) {
+            if ((Original_Deployment == null)) {
                 this.Adapter.DeleteCommand.Parameters[48].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[49].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[48].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[49].Value = ((string)(Original_Department));
+                this.Adapter.DeleteCommand.Parameters[49].Value = ((string)(Original_Deployment));
             }
-            if ((Original_Deployment == null)) {
+            if ((Original_Capa == null)) {
                 this.Adapter.DeleteCommand.Parameters[50].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[51].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[50].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[51].Value = ((string)(Original_Deployment));
+                this.Adapter.DeleteCommand.Parameters[51].Value = ((string)(Original_Capa));
             }
-            if ((Original_Capa == null)) {
+            if ((Original_ToOrderedName == null)) {
                 this.Adapter.DeleteCommand.Parameters[52].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[53].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[52].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[53].Value = ((string)(Original_Capa));
+                this.Adapter.DeleteCommand.Parameters[53].Value = ((string)(Original_ToOrderedName));
             }
-            if ((Original_ToOrderedName == null)) {
+            if ((Original_Tekiyou1 == null)) {
                 this.Adapter.DeleteCommand.Parameters[54].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[55].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[54].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[55].Value = ((string)(Original_ToOrderedName));
+                this.Adapter.DeleteCommand.Parameters[55].Value = ((string)(Original_Tekiyou1));
             }
-            if ((Original_Tekiyou1 == null)) {
+            if ((Original_Tekiyou2 == null)) {
                 this.Adapter.DeleteCommand.Parameters[56].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[57].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[56].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[57].Value = ((string)(Original_Tekiyou1));
+                this.Adapter.DeleteCommand.Parameters[57].Value = ((string)(Original_Tekiyou2));
             }
-            if ((Original_Tekiyou2 == null)) {
+            if ((Original_TyokusousakiMei == null)) {
                 this.Adapter.DeleteCommand.Parameters[58].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[59].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[58].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[59].Value = ((string)(Original_Tekiyou2));
+                this.Adapter.DeleteCommand.Parameters[59].Value = ((string)(Original_TyokusousakiMei));
             }
-            if ((Original_TyokusousakiMei == null)) {
+            if ((Original_TyokusousakiCD.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[60].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[61].Value = ((int)(Original_TyokusousakiCD.Value));
+            }
+            else {
                 this.Adapter.DeleteCommand.Parameters[60].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[61].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.DeleteCommand.Parameters[60].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[61].Value = ((string)(Original_TyokusousakiMei));
-            }
-            if ((Original_TyokusousakiCD.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[62].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[63].Value = ((int)(Original_TyokusousakiCD.Value));
-            }
-            else {
+            if ((Original_Range == null)) {
                 this.Adapter.DeleteCommand.Parameters[62].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[63].Value = global::System.DBNull.Value;
             }
-            if ((Original_Range == null)) {
+            else {
+                this.Adapter.DeleteCommand.Parameters[62].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[63].Value = ((string)(Original_Range));
+            }
+            if ((Original_ProductName == null)) {
                 this.Adapter.DeleteCommand.Parameters[64].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[65].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[64].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[65].Value = ((string)(Original_Range));
+                this.Adapter.DeleteCommand.Parameters[65].Value = ((string)(Original_ProductName));
             }
-            if ((Original_ProductName == null)) {
+            if ((Original_ProductCode.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[66].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[67].Value = ((int)(Original_ProductCode.Value));
+            }
+            else {
                 this.Adapter.DeleteCommand.Parameters[66].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[67].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.DeleteCommand.Parameters[66].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[67].Value = ((string)(Original_ProductName));
-            }
-            if ((Original_ProductCode.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[68].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[69].Value = ((int)(Original_ProductCode.Value));
-            }
-            else {
+            if ((Original_MekerNo == null)) {
                 this.Adapter.DeleteCommand.Parameters[68].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[69].Value = global::System.DBNull.Value;
             }
-            if ((Original_MekerNo == null)) {
+            else {
+                this.Adapter.DeleteCommand.Parameters[68].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[69].Value = ((string)(Original_MekerNo));
+            }
+            if ((Original_Media == null)) {
                 this.Adapter.DeleteCommand.Parameters[70].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[71].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[70].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[71].Value = ((string)(Original_MekerNo));
+                this.Adapter.DeleteCommand.Parameters[71].Value = ((string)(Original_Media));
             }
-            if ((Original_Media == null)) {
+            if ((Original_PurchasePrice.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[72].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[73].Value = ((int)(Original_PurchasePrice.Value));
+            }
+            else {
                 this.Adapter.DeleteCommand.Parameters[72].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[73].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.DeleteCommand.Parameters[72].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[73].Value = ((string)(Original_Media));
-            }
-            if ((Original_PurchasePrice.HasValue == true)) {
+            if ((Original_PurchaseAmount.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[74].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[75].Value = ((int)(Original_PurchasePrice.Value));
+                this.Adapter.DeleteCommand.Parameters[75].Value = ((int)(Original_PurchaseAmount.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[74].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[75].Value = global::System.DBNull.Value;
             }
-            if ((Original_PurchaseAmount.HasValue == true)) {
+            if ((Original_UriageFlg.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[76].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[77].Value = ((int)(Original_PurchaseAmount.Value));
+                this.Adapter.DeleteCommand.Parameters[77].Value = ((bool)(Original_UriageFlg.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[76].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[77].Value = global::System.DBNull.Value;
             }
-            if ((Original_UriageFlg.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[78].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[79].Value = ((bool)(Original_UriageFlg.Value));
-            }
-            else {
+            if ((Original_HatyuDay == null)) {
                 this.Adapter.DeleteCommand.Parameters[78].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[79].Value = global::System.DBNull.Value;
             }
-            if ((Original_HatyuDay == null)) {
+            else {
+                this.Adapter.DeleteCommand.Parameters[78].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[79].Value = ((string)(Original_HatyuDay));
+            }
+            if ((Original_HatyusakiMei == null)) {
                 this.Adapter.DeleteCommand.Parameters[80].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[81].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[80].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[81].Value = ((string)(Original_HatyuDay));
+                this.Adapter.DeleteCommand.Parameters[81].Value = ((string)(Original_HatyusakiMei));
             }
-            if ((Original_HatyusakiMei == null)) {
+            if ((Original_JutyuTanka.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[82].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[83].Value = ((int)(Original_JutyuTanka.Value));
+            }
+            else {
                 this.Adapter.DeleteCommand.Parameters[82].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[83].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.DeleteCommand.Parameters[82].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[83].Value = ((string)(Original_HatyusakiMei));
-            }
-            if ((Original_JutyuTanka.HasValue == true)) {
+            if ((Original_JutyuSuryou.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[84].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[85].Value = ((int)(Original_JutyuTanka.Value));
+                this.Adapter.DeleteCommand.Parameters[85].Value = ((int)(Original_JutyuSuryou.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[84].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[85].Value = global::System.DBNull.Value;
             }
-            if ((Original_JutyuSuryou.HasValue == true)) {
+            if ((Original_JutyuGokei.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[86].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[87].Value = ((int)(Original_JutyuSuryou.Value));
+                this.Adapter.DeleteCommand.Parameters[87].Value = ((int)(Original_JutyuGokei.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[86].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[87].Value = global::System.DBNull.Value;
             }
-            if ((Original_JutyuGokei.HasValue == true)) {
+            if ((Original_ShiireTanka.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[88].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[89].Value = ((int)(Original_JutyuGokei.Value));
+                this.Adapter.DeleteCommand.Parameters[89].Value = ((int)(Original_ShiireTanka.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[88].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[89].Value = global::System.DBNull.Value;
             }
-            if ((Original_ShiireTanka.HasValue == true)) {
+            if ((Original_ShiireKingaku.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[90].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[91].Value = ((int)(Original_ShiireTanka.Value));
+                this.Adapter.DeleteCommand.Parameters[91].Value = ((int)(Original_ShiireKingaku.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[90].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[91].Value = global::System.DBNull.Value;
             }
-            if ((Original_ShiireKingaku.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[92].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[93].Value = ((int)(Original_ShiireKingaku.Value));
-            }
-            else {
+            if ((Original_WareHouse == null)) {
                 this.Adapter.DeleteCommand.Parameters[92].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[93].Value = global::System.DBNull.Value;
             }
-            if ((Original_WareHouse == null)) {
+            else {
+                this.Adapter.DeleteCommand.Parameters[92].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[93].Value = ((string)(Original_WareHouse));
+            }
+            if ((Original_ShiireSakiName == null)) {
                 this.Adapter.DeleteCommand.Parameters[94].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[95].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[94].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[95].Value = ((string)(Original_WareHouse));
+                this.Adapter.DeleteCommand.Parameters[95].Value = ((string)(Original_ShiireSakiName));
             }
-            if ((Original_ShiireSakiName == null)) {
+            if ((Original_ShiiresakiCode == null)) {
                 this.Adapter.DeleteCommand.Parameters[96].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[97].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[96].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[97].Value = ((string)(Original_ShiireSakiName));
+                this.Adapter.DeleteCommand.Parameters[97].Value = ((string)(Original_ShiiresakiCode));
             }
-            if ((Original_ShiiresakiCode == null)) {
+            if ((Original_Zeikubun == null)) {
                 this.Adapter.DeleteCommand.Parameters[98].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[99].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[98].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[99].Value = ((string)(Original_ShiiresakiCode));
+                this.Adapter.DeleteCommand.Parameters[99].Value = ((string)(Original_Zeikubun));
             }
-            if ((Original_Zeikubun == null)) {
+            if ((Original_Kakeritsu == null)) {
                 this.Adapter.DeleteCommand.Parameters[100].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[101].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[100].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[101].Value = ((string)(Original_Zeikubun));
+                this.Adapter.DeleteCommand.Parameters[101].Value = ((string)(Original_Kakeritsu));
             }
-            if ((Original_Kakeritsu == null)) {
+            if ((Original_Zasu == null)) {
                 this.Adapter.DeleteCommand.Parameters[102].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[103].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[102].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[103].Value = ((string)(Original_Kakeritsu));
+                this.Adapter.DeleteCommand.Parameters[103].Value = ((string)(Original_Zasu));
             }
-            if ((Original_Zasu == null)) {
+            if ((Original_Ryoukin == null)) {
                 this.Adapter.DeleteCommand.Parameters[104].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[105].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[104].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[105].Value = ((string)(Original_Zasu));
+                this.Adapter.DeleteCommand.Parameters[105].Value = ((string)(Original_Ryoukin));
             }
-            if ((Original_Ryoukin == null)) {
+            if ((Original_Syokaibi == null)) {
                 this.Adapter.DeleteCommand.Parameters[106].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[107].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[106].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[107].Value = ((string)(Original_Ryoukin));
+                this.Adapter.DeleteCommand.Parameters[107].Value = ((string)(Original_Syokaibi));
             }
-            if ((Original_Syokaibi == null)) {
+            if ((Original_FukusuFaci == null)) {
                 this.Adapter.DeleteCommand.Parameters[108].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[109].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[108].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[109].Value = ((string)(Original_Syokaibi));
+                this.Adapter.DeleteCommand.Parameters[109].Value = ((string)(Original_FukusuFaci));
             }
-            if ((Original_FukusuFaci == null)) {
+            if ((Original_HatyuFLG == null)) {
                 this.Adapter.DeleteCommand.Parameters[110].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[111].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[110].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[111].Value = ((string)(Original_FukusuFaci));
+                this.Adapter.DeleteCommand.Parameters[111].Value = ((string)(Original_HatyuFLG));
             }
-            if ((Original_HatyuFLG == null)) {
+            if ((Original_Zansu == null)) {
                 this.Adapter.DeleteCommand.Parameters[112].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[113].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[112].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[113].Value = ((string)(Original_HatyuFLG));
-            }
-            if ((Original_Zansu == null)) {
-                this.Adapter.DeleteCommand.Parameters[114].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[115].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[114].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[115].Value = ((string)(Original_Zansu));
+                this.Adapter.DeleteCommand.Parameters[113].Value = ((string)(Original_Zansu));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -7491,11 +7363,11 @@ SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, Shii
         public virtual int Insert(
                     int ShiireNo, 
                     int RowNo, 
-                    global::System.Nullable<int> TokuisakiCode, 
+                    string TokuisakiCode, 
                     string TokuisakiMei, 
                     string TokuisakiMei2, 
                     string SeikyusakiMei, 
-                    global::System.Nullable<int> Category, 
+                    int Category, 
                     string CategoryName, 
                     global::System.Nullable<int> TyokusodsakiCD, 
                     string TyokusosakiMei, 
@@ -7550,11 +7422,11 @@ SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, Shii
                     string Zansu) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((int)(ShiireNo));
             this.Adapter.InsertCommand.Parameters[1].Value = ((int)(RowNo));
-            if ((TokuisakiCode.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((int)(TokuisakiCode.Value));
+            if ((TokuisakiCode == null)) {
+                throw new global::System.ArgumentNullException("TokuisakiCode");
             }
             else {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(TokuisakiCode));
             }
             if ((TokuisakiMei == null)) {
                 this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
@@ -7574,12 +7446,7 @@ SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, Shii
             else {
                 this.Adapter.InsertCommand.Parameters[5].Value = ((string)(SeikyusakiMei));
             }
-            if ((Category.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[6].Value = ((int)(Category.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.InsertCommand.Parameters[6].Value = ((int)(Category));
             if ((CategoryName == null)) {
                 this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
             }
@@ -7915,11 +7782,11 @@ SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, Shii
         public virtual int Update(
                     int ShiireNo, 
                     int RowNo, 
-                    global::System.Nullable<int> TokuisakiCode, 
+                    string TokuisakiCode, 
                     string TokuisakiMei, 
                     string TokuisakiMei2, 
                     string SeikyusakiMei, 
-                    global::System.Nullable<int> Category, 
+                    int Category, 
                     string CategoryName, 
                     global::System.Nullable<int> TyokusodsakiCD, 
                     string TyokusosakiMei, 
@@ -7974,11 +7841,11 @@ SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, Shii
                     string Zansu, 
                     int Original_ShiireNo, 
                     int Original_RowNo, 
-                    global::System.Nullable<int> Original_TokuisakiCode, 
+                    string Original_TokuisakiCode, 
                     string Original_TokuisakiMei, 
                     string Original_TokuisakiMei2, 
                     string Original_SeikyusakiMei, 
-                    global::System.Nullable<int> Original_Category, 
+                    int Original_Category, 
                     string Original_CategoryName, 
                     global::System.Nullable<int> Original_TyokusodsakiCD, 
                     string Original_TyokusosakiMei, 
@@ -8033,11 +7900,11 @@ SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, Shii
                     string Original_Zansu) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(ShiireNo));
             this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(RowNo));
-            if ((TokuisakiCode.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(TokuisakiCode.Value));
+            if ((TokuisakiCode == null)) {
+                throw new global::System.ArgumentNullException("TokuisakiCode");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(TokuisakiCode));
             }
             if ((TokuisakiMei == null)) {
                 this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
@@ -8057,12 +7924,7 @@ SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, Shii
             else {
                 this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(SeikyusakiMei));
             }
-            if ((Category.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Category.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Category));
             if ((CategoryName == null)) {
                 this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
             }
@@ -8377,461 +8239,452 @@ SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, Shii
             }
             this.Adapter.UpdateCommand.Parameters[59].Value = ((int)(Original_ShiireNo));
             this.Adapter.UpdateCommand.Parameters[60].Value = ((int)(Original_RowNo));
-            if ((Original_TokuisakiCode.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[61].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[62].Value = ((int)(Original_TokuisakiCode.Value));
+            if ((Original_TokuisakiCode == null)) {
+                throw new global::System.ArgumentNullException("Original_TokuisakiCode");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[61].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[62].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[61].Value = ((string)(Original_TokuisakiCode));
             }
             if ((Original_TokuisakiMei == null)) {
-                this.Adapter.UpdateCommand.Parameters[63].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[64].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[62].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[63].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[63].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[64].Value = ((string)(Original_TokuisakiMei));
+                this.Adapter.UpdateCommand.Parameters[62].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[63].Value = ((string)(Original_TokuisakiMei));
             }
             if ((Original_TokuisakiMei2 == null)) {
-                this.Adapter.UpdateCommand.Parameters[65].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[66].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[64].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[65].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[65].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[66].Value = ((string)(Original_TokuisakiMei2));
+                this.Adapter.UpdateCommand.Parameters[64].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[65].Value = ((string)(Original_TokuisakiMei2));
             }
             if ((Original_SeikyusakiMei == null)) {
-                this.Adapter.UpdateCommand.Parameters[67].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[68].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[66].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[67].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[67].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[68].Value = ((string)(Original_SeikyusakiMei));
+                this.Adapter.UpdateCommand.Parameters[66].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[67].Value = ((string)(Original_SeikyusakiMei));
             }
-            if ((Original_Category.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[69].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[70].Value = ((int)(Original_Category.Value));
-            }
-            else {
+            this.Adapter.UpdateCommand.Parameters[68].Value = ((int)(Original_Category));
+            if ((Original_CategoryName == null)) {
                 this.Adapter.UpdateCommand.Parameters[69].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[70].Value = global::System.DBNull.Value;
             }
-            if ((Original_CategoryName == null)) {
+            else {
+                this.Adapter.UpdateCommand.Parameters[69].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[70].Value = ((string)(Original_CategoryName));
+            }
+            if ((Original_TyokusodsakiCD.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[71].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[72].Value = ((int)(Original_TyokusodsakiCD.Value));
+            }
+            else {
                 this.Adapter.UpdateCommand.Parameters[71].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[72].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.UpdateCommand.Parameters[71].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[72].Value = ((string)(Original_CategoryName));
-            }
-            if ((Original_TyokusodsakiCD.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[73].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[74].Value = ((int)(Original_TyokusodsakiCD.Value));
-            }
-            else {
+            if ((Original_TyokusosakiMei == null)) {
                 this.Adapter.UpdateCommand.Parameters[73].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[74].Value = global::System.DBNull.Value;
             }
-            if ((Original_TyokusosakiMei == null)) {
+            else {
+                this.Adapter.UpdateCommand.Parameters[73].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[74].Value = ((string)(Original_TyokusosakiMei));
+            }
+            if ((Original_Jusyo1 == null)) {
                 this.Adapter.UpdateCommand.Parameters[75].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[76].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[75].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[76].Value = ((string)(Original_TyokusosakiMei));
+                this.Adapter.UpdateCommand.Parameters[76].Value = ((string)(Original_Jusyo1));
             }
-            if ((Original_Jusyo1 == null)) {
+            if ((Original_Jusyo2 == null)) {
                 this.Adapter.UpdateCommand.Parameters[77].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[78].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[77].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[78].Value = ((string)(Original_Jusyo1));
+                this.Adapter.UpdateCommand.Parameters[78].Value = ((string)(Original_Jusyo2));
             }
-            if ((Original_Jusyo2 == null)) {
+            if ((Original_FacilityCode.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[79].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[80].Value = ((int)(Original_FacilityCode.Value));
+            }
+            else {
                 this.Adapter.UpdateCommand.Parameters[79].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[80].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.UpdateCommand.Parameters[79].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[80].Value = ((string)(Original_Jusyo2));
-            }
-            if ((Original_FacilityCode.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[81].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[82].Value = ((int)(Original_FacilityCode.Value));
-            }
-            else {
+            if ((Original_FacilityName == null)) {
                 this.Adapter.UpdateCommand.Parameters[81].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[82].Value = global::System.DBNull.Value;
             }
-            if ((Original_FacilityName == null)) {
+            else {
+                this.Adapter.UpdateCommand.Parameters[81].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[82].Value = ((string)(Original_FacilityName));
+            }
+            if ((Original_FacilityJusyo == null)) {
                 this.Adapter.UpdateCommand.Parameters[83].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[84].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[83].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[84].Value = ((string)(Original_FacilityName));
+                this.Adapter.UpdateCommand.Parameters[84].Value = ((string)(Original_FacilityJusyo));
             }
-            if ((Original_FacilityJusyo == null)) {
+            if ((Original_FacilityJusyo2 == null)) {
                 this.Adapter.UpdateCommand.Parameters[85].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[86].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[85].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[86].Value = ((string)(Original_FacilityJusyo));
+                this.Adapter.UpdateCommand.Parameters[86].Value = ((string)(Original_FacilityJusyo2));
             }
-            if ((Original_FacilityJusyo2 == null)) {
+            if ((Original_FacilityTel == null)) {
                 this.Adapter.UpdateCommand.Parameters[87].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[88].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[87].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[88].Value = ((string)(Original_FacilityJusyo2));
+                this.Adapter.UpdateCommand.Parameters[88].Value = ((string)(Original_FacilityTel));
             }
-            if ((Original_FacilityTel == null)) {
+            if ((Original_SiyouKaishi == null)) {
                 this.Adapter.UpdateCommand.Parameters[89].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[90].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[89].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[90].Value = ((string)(Original_FacilityTel));
+                this.Adapter.UpdateCommand.Parameters[90].Value = ((string)(Original_SiyouKaishi));
             }
-            if ((Original_SiyouKaishi == null)) {
+            if ((Original_SiyouiOwari == null)) {
                 this.Adapter.UpdateCommand.Parameters[91].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[92].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[91].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[92].Value = ((string)(Original_SiyouKaishi));
+                this.Adapter.UpdateCommand.Parameters[92].Value = ((string)(Original_SiyouiOwari));
             }
-            if ((Original_SiyouiOwari == null)) {
+            if ((Original_HyoujyunKakaku.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[93].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[94].Value = ((int)(Original_HyoujyunKakaku.Value));
+            }
+            else {
                 this.Adapter.UpdateCommand.Parameters[93].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[94].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.UpdateCommand.Parameters[93].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[94].Value = ((string)(Original_SiyouiOwari));
-            }
-            if ((Original_HyoujyunKakaku.HasValue == true)) {
+            if ((Original_NumberOfOrdered.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[95].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[96].Value = ((int)(Original_HyoujyunKakaku.Value));
+                this.Adapter.UpdateCommand.Parameters[96].Value = ((int)(Original_NumberOfOrdered.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[95].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[96].Value = global::System.DBNull.Value;
             }
-            if ((Original_NumberOfOrdered.HasValue == true)) {
+            if ((Original_OrderedPrice.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[97].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[98].Value = ((int)(Original_NumberOfOrdered.Value));
+                this.Adapter.UpdateCommand.Parameters[98].Value = ((int)(Original_OrderedPrice.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[97].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[98].Value = global::System.DBNull.Value;
             }
-            if ((Original_OrderedPrice.HasValue == true)) {
+            if ((Original_OrderedAmount.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[99].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[100].Value = ((int)(Original_OrderedPrice.Value));
+                this.Adapter.UpdateCommand.Parameters[100].Value = ((int)(Original_OrderedAmount.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[99].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[100].Value = global::System.DBNull.Value;
             }
-            if ((Original_OrderedAmount.HasValue == true)) {
+            if ((Original_Tax.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[101].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[102].Value = ((int)(Original_OrderedAmount.Value));
+                this.Adapter.UpdateCommand.Parameters[102].Value = ((int)(Original_Tax.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[101].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[102].Value = global::System.DBNull.Value;
             }
-            if ((Original_Tax.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[103].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[104].Value = ((int)(Original_Tax.Value));
-            }
-            else {
+            if ((Original_StaffName == null)) {
                 this.Adapter.UpdateCommand.Parameters[103].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[104].Value = global::System.DBNull.Value;
             }
-            if ((Original_StaffName == null)) {
+            else {
+                this.Adapter.UpdateCommand.Parameters[103].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[104].Value = ((string)(Original_StaffName));
+            }
+            if ((Original_Department == null)) {
                 this.Adapter.UpdateCommand.Parameters[105].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[106].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[105].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[106].Value = ((string)(Original_StaffName));
+                this.Adapter.UpdateCommand.Parameters[106].Value = ((string)(Original_Department));
             }
-            if ((Original_Department == null)) {
+            if ((Original_Deployment == null)) {
                 this.Adapter.UpdateCommand.Parameters[107].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[108].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[107].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[108].Value = ((string)(Original_Department));
+                this.Adapter.UpdateCommand.Parameters[108].Value = ((string)(Original_Deployment));
             }
-            if ((Original_Deployment == null)) {
+            if ((Original_Capa == null)) {
                 this.Adapter.UpdateCommand.Parameters[109].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[110].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[109].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[110].Value = ((string)(Original_Deployment));
+                this.Adapter.UpdateCommand.Parameters[110].Value = ((string)(Original_Capa));
             }
-            if ((Original_Capa == null)) {
+            if ((Original_ToOrderedName == null)) {
                 this.Adapter.UpdateCommand.Parameters[111].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[112].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[111].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[112].Value = ((string)(Original_Capa));
+                this.Adapter.UpdateCommand.Parameters[112].Value = ((string)(Original_ToOrderedName));
             }
-            if ((Original_ToOrderedName == null)) {
+            if ((Original_Tekiyou1 == null)) {
                 this.Adapter.UpdateCommand.Parameters[113].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[114].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[113].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[114].Value = ((string)(Original_ToOrderedName));
+                this.Adapter.UpdateCommand.Parameters[114].Value = ((string)(Original_Tekiyou1));
             }
-            if ((Original_Tekiyou1 == null)) {
+            if ((Original_Tekiyou2 == null)) {
                 this.Adapter.UpdateCommand.Parameters[115].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[116].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[115].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[116].Value = ((string)(Original_Tekiyou1));
+                this.Adapter.UpdateCommand.Parameters[116].Value = ((string)(Original_Tekiyou2));
             }
-            if ((Original_Tekiyou2 == null)) {
+            if ((Original_TyokusousakiMei == null)) {
                 this.Adapter.UpdateCommand.Parameters[117].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[118].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[117].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[118].Value = ((string)(Original_Tekiyou2));
+                this.Adapter.UpdateCommand.Parameters[118].Value = ((string)(Original_TyokusousakiMei));
             }
-            if ((Original_TyokusousakiMei == null)) {
+            if ((Original_TyokusousakiCD.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[119].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[120].Value = ((int)(Original_TyokusousakiCD.Value));
+            }
+            else {
                 this.Adapter.UpdateCommand.Parameters[119].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[120].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.UpdateCommand.Parameters[119].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[120].Value = ((string)(Original_TyokusousakiMei));
-            }
-            if ((Original_TyokusousakiCD.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[121].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[122].Value = ((int)(Original_TyokusousakiCD.Value));
-            }
-            else {
+            if ((Original_Range == null)) {
                 this.Adapter.UpdateCommand.Parameters[121].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[122].Value = global::System.DBNull.Value;
             }
-            if ((Original_Range == null)) {
+            else {
+                this.Adapter.UpdateCommand.Parameters[121].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[122].Value = ((string)(Original_Range));
+            }
+            if ((Original_ProductName == null)) {
                 this.Adapter.UpdateCommand.Parameters[123].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[124].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[123].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[124].Value = ((string)(Original_Range));
+                this.Adapter.UpdateCommand.Parameters[124].Value = ((string)(Original_ProductName));
             }
-            if ((Original_ProductName == null)) {
+            if ((Original_ProductCode.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[125].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[126].Value = ((int)(Original_ProductCode.Value));
+            }
+            else {
                 this.Adapter.UpdateCommand.Parameters[125].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[126].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.UpdateCommand.Parameters[125].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[126].Value = ((string)(Original_ProductName));
-            }
-            if ((Original_ProductCode.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[127].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[128].Value = ((int)(Original_ProductCode.Value));
-            }
-            else {
+            if ((Original_MekerNo == null)) {
                 this.Adapter.UpdateCommand.Parameters[127].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[128].Value = global::System.DBNull.Value;
             }
-            if ((Original_MekerNo == null)) {
+            else {
+                this.Adapter.UpdateCommand.Parameters[127].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[128].Value = ((string)(Original_MekerNo));
+            }
+            if ((Original_Media == null)) {
                 this.Adapter.UpdateCommand.Parameters[129].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[130].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[129].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[130].Value = ((string)(Original_MekerNo));
+                this.Adapter.UpdateCommand.Parameters[130].Value = ((string)(Original_Media));
             }
-            if ((Original_Media == null)) {
+            if ((Original_PurchasePrice.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[131].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[132].Value = ((int)(Original_PurchasePrice.Value));
+            }
+            else {
                 this.Adapter.UpdateCommand.Parameters[131].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[132].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.UpdateCommand.Parameters[131].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[132].Value = ((string)(Original_Media));
-            }
-            if ((Original_PurchasePrice.HasValue == true)) {
+            if ((Original_PurchaseAmount.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[133].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[134].Value = ((int)(Original_PurchasePrice.Value));
+                this.Adapter.UpdateCommand.Parameters[134].Value = ((int)(Original_PurchaseAmount.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[133].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[134].Value = global::System.DBNull.Value;
             }
-            if ((Original_PurchaseAmount.HasValue == true)) {
+            if ((Original_UriageFlg.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[135].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[136].Value = ((int)(Original_PurchaseAmount.Value));
+                this.Adapter.UpdateCommand.Parameters[136].Value = ((bool)(Original_UriageFlg.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[135].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[136].Value = global::System.DBNull.Value;
             }
-            if ((Original_UriageFlg.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[137].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[138].Value = ((bool)(Original_UriageFlg.Value));
-            }
-            else {
+            if ((Original_HatyuDay == null)) {
                 this.Adapter.UpdateCommand.Parameters[137].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[138].Value = global::System.DBNull.Value;
             }
-            if ((Original_HatyuDay == null)) {
+            else {
+                this.Adapter.UpdateCommand.Parameters[137].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[138].Value = ((string)(Original_HatyuDay));
+            }
+            if ((Original_HatyusakiMei == null)) {
                 this.Adapter.UpdateCommand.Parameters[139].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[140].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[139].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[140].Value = ((string)(Original_HatyuDay));
+                this.Adapter.UpdateCommand.Parameters[140].Value = ((string)(Original_HatyusakiMei));
             }
-            if ((Original_HatyusakiMei == null)) {
+            if ((Original_JutyuTanka.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[141].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[142].Value = ((int)(Original_JutyuTanka.Value));
+            }
+            else {
                 this.Adapter.UpdateCommand.Parameters[141].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[142].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.UpdateCommand.Parameters[141].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[142].Value = ((string)(Original_HatyusakiMei));
-            }
-            if ((Original_JutyuTanka.HasValue == true)) {
+            if ((Original_JutyuSuryou.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[143].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[144].Value = ((int)(Original_JutyuTanka.Value));
+                this.Adapter.UpdateCommand.Parameters[144].Value = ((int)(Original_JutyuSuryou.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[143].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[144].Value = global::System.DBNull.Value;
             }
-            if ((Original_JutyuSuryou.HasValue == true)) {
+            if ((Original_JutyuGokei.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[145].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[146].Value = ((int)(Original_JutyuSuryou.Value));
+                this.Adapter.UpdateCommand.Parameters[146].Value = ((int)(Original_JutyuGokei.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[145].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[146].Value = global::System.DBNull.Value;
             }
-            if ((Original_JutyuGokei.HasValue == true)) {
+            if ((Original_ShiireTanka.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[147].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[148].Value = ((int)(Original_JutyuGokei.Value));
+                this.Adapter.UpdateCommand.Parameters[148].Value = ((int)(Original_ShiireTanka.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[147].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[148].Value = global::System.DBNull.Value;
             }
-            if ((Original_ShiireTanka.HasValue == true)) {
+            if ((Original_ShiireKingaku.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[149].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[150].Value = ((int)(Original_ShiireTanka.Value));
+                this.Adapter.UpdateCommand.Parameters[150].Value = ((int)(Original_ShiireKingaku.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[149].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[150].Value = global::System.DBNull.Value;
             }
-            if ((Original_ShiireKingaku.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[151].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[152].Value = ((int)(Original_ShiireKingaku.Value));
-            }
-            else {
+            if ((Original_WareHouse == null)) {
                 this.Adapter.UpdateCommand.Parameters[151].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[152].Value = global::System.DBNull.Value;
             }
-            if ((Original_WareHouse == null)) {
+            else {
+                this.Adapter.UpdateCommand.Parameters[151].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[152].Value = ((string)(Original_WareHouse));
+            }
+            if ((Original_ShiireSakiName == null)) {
                 this.Adapter.UpdateCommand.Parameters[153].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[154].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[153].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[154].Value = ((string)(Original_WareHouse));
+                this.Adapter.UpdateCommand.Parameters[154].Value = ((string)(Original_ShiireSakiName));
             }
-            if ((Original_ShiireSakiName == null)) {
+            if ((Original_ShiiresakiCode == null)) {
                 this.Adapter.UpdateCommand.Parameters[155].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[156].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[155].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[156].Value = ((string)(Original_ShiireSakiName));
+                this.Adapter.UpdateCommand.Parameters[156].Value = ((string)(Original_ShiiresakiCode));
             }
-            if ((Original_ShiiresakiCode == null)) {
+            if ((Original_Zeikubun == null)) {
                 this.Adapter.UpdateCommand.Parameters[157].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[158].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[157].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[158].Value = ((string)(Original_ShiiresakiCode));
+                this.Adapter.UpdateCommand.Parameters[158].Value = ((string)(Original_Zeikubun));
             }
-            if ((Original_Zeikubun == null)) {
+            if ((Original_Kakeritsu == null)) {
                 this.Adapter.UpdateCommand.Parameters[159].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[160].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[159].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[160].Value = ((string)(Original_Zeikubun));
+                this.Adapter.UpdateCommand.Parameters[160].Value = ((string)(Original_Kakeritsu));
             }
-            if ((Original_Kakeritsu == null)) {
+            if ((Original_Zasu == null)) {
                 this.Adapter.UpdateCommand.Parameters[161].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[162].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[161].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[162].Value = ((string)(Original_Kakeritsu));
+                this.Adapter.UpdateCommand.Parameters[162].Value = ((string)(Original_Zasu));
             }
-            if ((Original_Zasu == null)) {
+            if ((Original_Ryoukin == null)) {
                 this.Adapter.UpdateCommand.Parameters[163].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[164].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[163].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[164].Value = ((string)(Original_Zasu));
+                this.Adapter.UpdateCommand.Parameters[164].Value = ((string)(Original_Ryoukin));
             }
-            if ((Original_Ryoukin == null)) {
+            if ((Original_Syokaibi == null)) {
                 this.Adapter.UpdateCommand.Parameters[165].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[166].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[165].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[166].Value = ((string)(Original_Ryoukin));
+                this.Adapter.UpdateCommand.Parameters[166].Value = ((string)(Original_Syokaibi));
             }
-            if ((Original_Syokaibi == null)) {
+            if ((Original_FukusuFaci == null)) {
                 this.Adapter.UpdateCommand.Parameters[167].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[168].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[167].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[168].Value = ((string)(Original_Syokaibi));
+                this.Adapter.UpdateCommand.Parameters[168].Value = ((string)(Original_FukusuFaci));
             }
-            if ((Original_FukusuFaci == null)) {
+            if ((Original_HatyuFLG == null)) {
                 this.Adapter.UpdateCommand.Parameters[169].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[170].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[169].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[170].Value = ((string)(Original_FukusuFaci));
+                this.Adapter.UpdateCommand.Parameters[170].Value = ((string)(Original_HatyuFLG));
             }
-            if ((Original_HatyuFLG == null)) {
+            if ((Original_Zansu == null)) {
                 this.Adapter.UpdateCommand.Parameters[171].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[172].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[171].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[172].Value = ((string)(Original_HatyuFLG));
-            }
-            if ((Original_Zansu == null)) {
-                this.Adapter.UpdateCommand.Parameters[173].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[174].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[173].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[174].Value = ((string)(Original_Zansu));
+                this.Adapter.UpdateCommand.Parameters[172].Value = ((string)(Original_Zansu));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -8854,11 +8707,9 @@ SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, Shii
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(
-                    global::System.Nullable<int> TokuisakiCode, 
                     string TokuisakiMei, 
                     string TokuisakiMei2, 
                     string SeikyusakiMei, 
-                    global::System.Nullable<int> Category, 
                     string CategoryName, 
                     global::System.Nullable<int> TyokusodsakiCD, 
                     string TyokusosakiMei, 
@@ -8913,11 +8764,11 @@ SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, Shii
                     string Zansu, 
                     int Original_ShiireNo, 
                     int Original_RowNo, 
-                    global::System.Nullable<int> Original_TokuisakiCode, 
+                    string Original_TokuisakiCode, 
                     string Original_TokuisakiMei, 
                     string Original_TokuisakiMei2, 
                     string Original_SeikyusakiMei, 
-                    global::System.Nullable<int> Original_Category, 
+                    int Original_Category, 
                     string Original_CategoryName, 
                     global::System.Nullable<int> Original_TyokusodsakiCD, 
                     string Original_TyokusosakiMei, 
@@ -8970,7 +8821,7 @@ SELECT ShiireNo, Category, CategoryName, StaffName, Department, Deployment, Shii
                     string Original_FukusuFaci, 
                     string Original_HatyuFLG, 
                     string Original_Zansu) {
-            return this.Update(Original_ShiireNo, Original_RowNo, TokuisakiCode, TokuisakiMei, TokuisakiMei2, SeikyusakiMei, Category, CategoryName, TyokusodsakiCD, TyokusosakiMei, Jusyo1, Jusyo2, FacilityCode, FacilityName, FacilityJusyo, FacilityJusyo2, FacilityTel, SiyouKaishi, SiyouiOwari, HyoujyunKakaku, NumberOfOrdered, OrderedPrice, OrderedAmount, Tax, StaffName, Department, Deployment, Capa, ToOrderedName, Tekiyou1, Tekiyou2, TyokusousakiMei, TyokusousakiCD, Range, ProductName, ProductCode, MekerNo, Media, PurchasePrice, PurchaseAmount, UriageFlg, HatyuDay, HatyusakiMei, JutyuTanka, JutyuSuryou, JutyuGokei, ShiireTanka, ShiireKingaku, WareHouse, ShiireSakiName, ShiiresakiCode, Zeikubun, Kakeritsu, Zasu, Ryoukin, Syokaibi, FukusuFaci, HatyuFLG, Zansu, Original_ShiireNo, Original_RowNo, Original_TokuisakiCode, Original_TokuisakiMei, Original_TokuisakiMei2, Original_SeikyusakiMei, Original_Category, Original_CategoryName, Original_TyokusodsakiCD, Original_TyokusosakiMei, Original_Jusyo1, Original_Jusyo2, Original_FacilityCode, Original_FacilityName, Original_FacilityJusyo, Original_FacilityJusyo2, Original_FacilityTel, Original_SiyouKaishi, Original_SiyouiOwari, Original_HyoujyunKakaku, Original_NumberOfOrdered, Original_OrderedPrice, Original_OrderedAmount, Original_Tax, Original_StaffName, Original_Department, Original_Deployment, Original_Capa, Original_ToOrderedName, Original_Tekiyou1, Original_Tekiyou2, Original_TyokusousakiMei, Original_TyokusousakiCD, Original_Range, Original_ProductName, Original_ProductCode, Original_MekerNo, Original_Media, Original_PurchasePrice, Original_PurchaseAmount, Original_UriageFlg, Original_HatyuDay, Original_HatyusakiMei, Original_JutyuTanka, Original_JutyuSuryou, Original_JutyuGokei, Original_ShiireTanka, Original_ShiireKingaku, Original_WareHouse, Original_ShiireSakiName, Original_ShiiresakiCode, Original_Zeikubun, Original_Kakeritsu, Original_Zasu, Original_Ryoukin, Original_Syokaibi, Original_FukusuFaci, Original_HatyuFLG, Original_Zansu);
+            return this.Update(Original_ShiireNo, Original_RowNo, Original_TokuisakiCode, TokuisakiMei, TokuisakiMei2, SeikyusakiMei, Original_Category, CategoryName, TyokusodsakiCD, TyokusosakiMei, Jusyo1, Jusyo2, FacilityCode, FacilityName, FacilityJusyo, FacilityJusyo2, FacilityTel, SiyouKaishi, SiyouiOwari, HyoujyunKakaku, NumberOfOrdered, OrderedPrice, OrderedAmount, Tax, StaffName, Department, Deployment, Capa, ToOrderedName, Tekiyou1, Tekiyou2, TyokusousakiMei, TyokusousakiCD, Range, ProductName, ProductCode, MekerNo, Media, PurchasePrice, PurchaseAmount, UriageFlg, HatyuDay, HatyusakiMei, JutyuTanka, JutyuSuryou, JutyuGokei, ShiireTanka, ShiireKingaku, WareHouse, ShiireSakiName, ShiiresakiCode, Zeikubun, Kakeritsu, Zasu, Ryoukin, Syokaibi, FukusuFaci, HatyuFLG, Zansu, Original_ShiireNo, Original_RowNo, Original_TokuisakiCode, Original_TokuisakiMei, Original_TokuisakiMei2, Original_SeikyusakiMei, Original_Category, Original_CategoryName, Original_TyokusodsakiCD, Original_TyokusosakiMei, Original_Jusyo1, Original_Jusyo2, Original_FacilityCode, Original_FacilityName, Original_FacilityJusyo, Original_FacilityJusyo2, Original_FacilityTel, Original_SiyouKaishi, Original_SiyouiOwari, Original_HyoujyunKakaku, Original_NumberOfOrdered, Original_OrderedPrice, Original_OrderedAmount, Original_Tax, Original_StaffName, Original_Department, Original_Deployment, Original_Capa, Original_ToOrderedName, Original_Tekiyou1, Original_Tekiyou2, Original_TyokusousakiMei, Original_TyokusousakiCD, Original_Range, Original_ProductName, Original_ProductCode, Original_MekerNo, Original_Media, Original_PurchasePrice, Original_PurchaseAmount, Original_UriageFlg, Original_HatyuDay, Original_HatyusakiMei, Original_JutyuTanka, Original_JutyuSuryou, Original_JutyuGokei, Original_ShiireTanka, Original_ShiireKingaku, Original_WareHouse, Original_ShiireSakiName, Original_ShiiresakiCode, Original_Zeikubun, Original_Kakeritsu, Original_Zasu, Original_Ryoukin, Original_Syokaibi, Original_FukusuFaci, Original_HatyuFLG, Original_Zansu);
         }
     }
     

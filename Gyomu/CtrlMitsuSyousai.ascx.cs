@@ -55,6 +55,10 @@ namespace Gyomu
             SisetuSyousai.Style["display"] = "none";
             RcbHanni.Style["display"] = "none";
 
+            if (!string.IsNullOrEmpty((string)Session["CategoryCode"]))
+            {
+                LblCateCode.Text = (string)Session["CategoryCode"];
+            }
 
             if (RcbCity.Items.Count == 0)
             {
@@ -337,7 +341,6 @@ namespace Gyomu
         {
             StartDate.Visible = true;
             EndDate.Visible = true;
-
         }
 
         protected void Suryo_TextChanged(object sender, EventArgs e)
@@ -1536,38 +1539,35 @@ namespace Gyomu
             {
                 if (!dr.IsCpKakakuNull())
                 {
-                    TbxCpKakaku.Text = int.Parse(dr.CpKakaku).ToString("0,0");
+                    if (int.TryParse(dr.CpKakaku, out int ReCpKakaku))
+                    {
+                        TbxCpKakaku.Text = ReCpKakaku.ToString("0,0");
+                    }
                 }
                 if (!dr.IsCpShiireNull())
                 {
-                    TbxCpShiire.Text = int.Parse(dr.CpShiire).ToString("0,0");
+                    if (int.TryParse(dr.CpShiire, out int ReCpShiire))
+                    {
+                        TbxCpShiire.Text = ReCpShiire.ToString("0,0");
+                    }
                 }
                 if (!dr.IsTekiyou1Null())
                 {
                     Tekiyo.Text = dr.Tekiyou1;
-                    //LblTekiyo.Text = dr.Tekiyou1;
-                    //Tekiyo.Visible = false;
                 }
                 if (!dr.IsSiyouKaishiNull())
                 {
                     StartDate.SelectedDate = dr.SiyouKaishi;
-                    //LblStartDate.Text = dr.SiyouKaishi.ToShortDateString();
-                    //StartDate.Visible = false;
                 }
                 if (!dr.IsSiyouOwariNull())
                 {
                     EndDate.SelectedDate = dr.SiyouOwari;
-                    //LblEndDate.Text = dr.SiyouOwari.ToShortDateString();
-                    //EndDate.Visible = false;
                 }
                 if (!dr.IsSyouhinMeiNull())
                 {
                     TbxProductName.Text = dr.SyouhinMei;
                     SerchProduct.Text = dr.SyouhinMei;
                     SerchProductJouei.Text = dr.SyouhinMei;
-                    //LblSerchProduct.Text = dr.SyouhinMei;
-                    //SerchProduct.Visible = false;
-                    //SerchProductJouei.Visible = false;
                 }
                 else
                 {
@@ -1577,57 +1577,59 @@ namespace Gyomu
                 {
                     TbxProductCode.Text = dr.SyouhinCode;
                 }
+
                 if (!dr.IsHyojunKakakuNull())
                 {
                     if (dr.HyojunKakaku != "OPEN")
                     {
-                        TbxHyoujun.Text = int.Parse(dr.HyojunKakaku).ToString("0,0");
-                        HyoujyunTanka.Text = int.Parse(dr.HyojunKakaku).ToString("0,0");
-                        //LblHyoujunTanka.Text = dr.HyojunKakaku;
-                        //HyoujyunTanka.Visible = false;
+                        if (!dr.HyojunKakaku.Equals("0"))
+                        {
+                            TbxHyoujun.Text = int.Parse(dr.HyojunKakaku).ToString("0,0");
+                            HyoujyunTanka.Text = int.Parse(dr.HyojunKakaku).ToString("0,0");
+                        }
+                        else
+                        {
+                            TbxHyoujun.Text = dr.HyojunKakaku;
+                            HyoujyunTanka.Text = dr.HyojunKakaku;
+                        }
                     }
                     else
                     {
                         TbxHyoujun.Text = dr.HyojunKakaku;
                         HyoujyunTanka.Text = dr.HyojunKakaku;
-                        //LblHyoujunTanka.Text = dr.HyojunKakaku;
-                        //HyoujyunTanka.Visible = false;
                     }
                 }
                 if (!dr.IsRyoukinNull())
                 {
                     if (!dr.Ryoukin.Equals("OPEN"))
                     {
-                        Kingaku.Text = int.Parse(dr.Ryoukin).ToString("0,0");
-                        //LblHyoujunKingaku.Text = dr.Ryoukin;
-                        //Kingaku.Visible = false;
+                        if (!dr.Ryoukin.Equals("0"))
+                        {
+                            Kingaku.Text = int.Parse(dr.Ryoukin).ToString("0,0");
+                        }
+                        else
+                        {
+                            Kingaku.Text = "0";
+                        }
                     }
                     else
                     {
                         Kingaku.Text = dr.Ryoukin;
-                        //LblHyoujunKingaku.Text = dr.Ryoukin;
-                        //Kingaku.Visible = false;
                     }
                 }
                 if (!dr.IsJutyuSuryouNull())
                 {
                     Suryo.Text = dr.JutyuSuryou.ToString();
-                    //LblSuryo.Text = dr.JutyuSuryou.ToString();
-                    //Suryo.Visible = false;
                 }
                 if (!dr.IsJutyuTankaNull())
                 {
                     if (!dr.JutyuTanka.Equals(0))
                     {
                         Tanka.Text = dr.JutyuTanka.ToString("0,0");
-                        //LblTanka.Text = dr.JutyuTanka.ToString("0,0");
-                        //Tanka.Visible = false;
                     }
                     else
                     {
-                        Tanka.Text = "";
-                        //LblTanka.Text = "";
-                        //Tanka.Visible = false;
+                        Tanka.Text = "0";
                     }
                 }
                 if (!dr.IsJutyuGokeiNull())
@@ -1635,14 +1637,10 @@ namespace Gyomu
                     if (!dr.JutyuGokei.Equals(0))
                     {
                         Uriage.Text = dr.JutyuGokei.ToString("0,0");
-                        //LblUriage.Text = dr.JutyuGokei.ToString("0,0");
-                        //Uriage.Visible = false;
                     }
                     else
                     {
-                        Uriage.Text = "";
-                        //LblUriage.Text = "";
-                        //Uriage.Visible = false;
+                        Uriage.Text = "0";
                     }
                 }
                 if (!dr.IsMekarHinbanNull())
@@ -1660,31 +1658,31 @@ namespace Gyomu
                     if (!dr.ShiireKingaku.Equals(0))
                     {
                         ShiireKingaku.Text = dr.ShiireKingaku.ToString("0,0");
-                        //LblShiireKingaku.Text = dr.ShiireKingaku.ToString("0,0");
-                        //ShiireKingaku.Visible = false;
                     }
                     else
                     {
-                        ShiireKingaku.Text = "OPEN";
-                        //LblShiireKingaku.Text = "OPEN";
-                        //ShiireKingaku.Visible = false;
+                        ShiireKingaku.Text = "0";
                     }
                 }
                 if (!dr.IsShiireTankaNull())
                 {
-                    if (!dr.ShiireTanka.Equals(0))
+                    if (!dr.ShiireTanka.Equals("OPEN"))
                     {
-                        ShiireTanka.Text = dr.ShiireTanka.ToString("0,0");
-                        TbxShiirePrice.Text = dr.ShiireTanka.ToString("0,0");
-                        //LblShiireTanka.Text = dr.ShiireTanka.ToString("0,0");
-                        //ShiireTanka.Visible = false;
+                        if (!dr.ShiireTanka.Equals(0))
+                        {
+                            ShiireTanka.Text = dr.ShiireTanka.ToString("0,0");
+                            TbxShiirePrice.Text = dr.ShiireTanka.ToString("0,0");
+                        }
+                        else
+                        {
+                            ShiireTanka.Text = "0";
+                            TbxShiirePrice.Text = "0";
+                        }
                     }
                     else
                     {
                         ShiireTanka.Text = "OPEN";
                         TbxShiirePrice.Text = "OPEN";
-                        //LblShiireTanka.Text = "OPEN";
-                        //ShiireTanka.Visible = false;
                     }
                 }
                 if (!dr.IsWareHouseNull())
@@ -1696,8 +1694,6 @@ namespace Gyomu
                 {
                     RcbShiireName.Text = dr.ShiireName;
                     Hachu.Text = dr.ShiireName;
-                    //LblHachu.Text = dr.ShiireName;
-                    //Hachu.Visible = false;
                 }
                 if (!dr.IsShiiresakiCodeNull())
                 {
@@ -1782,20 +1778,6 @@ namespace Gyomu
                 }
                 if (dr.CategoryName == "上映会")
                 {
-                    //DataMaster.M_JoueiKakaku2DataTable dtJ = ClassMaster.GetJouei(dr.ShiiresakiCode.ToString(), dr.KeitaiMei, dr.Zasu, Global.GetConnection());
-                    //RcbHanni.Items.Clear();
-                    //if (dtJ.Count > 0)
-                    //{
-                    //    for (int items = 0; items < dtJ.Count; items++)
-                    //    {
-                    //        RcbHanni.Items.Add(dtJ[items].Range);
-                    //    }
-                    //    RcbHanni.SelectedItem.Text = dr.Range;
-                    //    TbxHanni.Text = dr.Range;
-                    //    Hachu.SelectedValue = dr.ShiiresakiCode.ToString();
-                    //    LblShiireCode.Text = dr.ShiiresakiCode.ToString();
-                    //    TbxZasu.Text = dr.Zasu;
-                    //}
                     if (!dr.IsShiiresakiCodeNull())
                     {
                         string shiireCode = dr.ShiiresakiCode.ToString();
@@ -1865,6 +1847,244 @@ namespace Gyomu
                 string body = ex.Message + "\r\n" + ex.StackTrace + "\r\n" + ex.Source;
                 ClassMail.ErrorMail(Kaihatsu.mail_to, Kaihatsu.mail_title, body);
             }
+        }
+
+        internal DataJutyu.T_JutyuRow ItemGet4(DataJutyu.T_JutyuRow drN)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Tekiyo.Text))
+                {
+                    drN.JutyuTekiyo = Tekiyo.Text;
+                    //LblTekiyo.Text = Tekiyo.Text;
+                    //Tekiyo.Visible = false;
+                }
+                if (!string.IsNullOrEmpty(TbxFacilityCode.Text))
+                {
+                    drN.SisetuCode = int.Parse(TbxFacilityCode.Text);
+                }
+                if (!string.IsNullOrEmpty(StartDate.SelectedDate.ToString()))
+                {
+                    drN.SiyouKaishi = DateTime.Parse(StartDate.SelectedDate.ToString());
+                    //LblStartDate.Text = StartDate.SelectedDate.ToString();
+                    //StartDate.Visible = false;
+                }
+                if (!string.IsNullOrEmpty(EndDate.SelectedDate.ToString()))
+                {
+                    drN.SiyouOwari = DateTime.Parse(EndDate.SelectedDate.ToString());
+                    //LblEndDate.Text = EndDate.SelectedDate.ToString();
+                    //EndDate.Visible = false;
+                }
+                if (!string.IsNullOrEmpty(TbxProductName.Text))
+                {
+                    drN.SyouhinMei = TbxProductName.Text;
+                    //LblSerchProduct.Text = TbxProductName.Text;
+                    //SerchProduct.Visible = false;
+                }
+                else
+                {
+                    drN.SyouhinMei = "";
+                }
+
+                if (!string.IsNullOrEmpty(TbxCpKakaku.Text))
+                {
+                    drN.CpKakaku = TbxCpKakaku.Text.Replace(",", "");
+                }
+                if (!string.IsNullOrEmpty(TbxCpShiire.Text))
+                {
+                    drN.CpShiire = TbxCpShiire.Text.Replace(",", "");
+                }
+
+                if (!string.IsNullOrEmpty(TbxProductCode.Text))
+                {
+                    drN.SyouhinCode = TbxProductCode.Text;
+                }
+                else
+                {
+                    drN.SyouhinCode = "";
+                }
+                if (!string.IsNullOrEmpty(TbxHyoujun.Text))
+                {
+                    drN.HyojunKakaku = TbxHyoujun.Text.Replace(",", "");
+                    //LblHyoujunTanka.Text = TbxHyoujun.Text;
+                    //HyoujyunTanka.Visible = false;
+                }
+                else if (!string.IsNullOrEmpty(HyoujyunTanka.Text))
+                {
+                    drN.HyojunKakaku = HyoujyunTanka.Text.Replace(",", "");
+                }
+
+                if (!string.IsNullOrEmpty(Kingaku.Text))
+                {
+                    drN.Ryoukin = Kingaku.Text.Replace(",", "");
+                    //LblHyoujunKingaku.Text = Kingaku.Text;
+                    //Kingaku.Visible = false;
+                }
+                if (!string.IsNullOrEmpty(Suryo.Text))
+                {
+                    drN.JutyuSuryou = int.Parse(Suryo.Text);
+                    //LblSuryo.Text = Suryo.Text;
+                    //Suryo.Visible = false;
+                }
+                if (!string.IsNullOrEmpty(Tanka.Text))
+                {
+                    drN.JutyuTanka = int.Parse(Tanka.Text.Replace(",", ""));
+                    //LblTanka.Text = Tanka.Text;
+                    //Tanka.Visible = false;
+                }
+                if (!string.IsNullOrEmpty(Uriage.Text))
+                {
+                    drN.JutyuGokei = int.Parse(Uriage.Text.Replace(",", ""));
+                    //LblUriage.Text = Uriage.Text;
+                    //Uriage.Visible = false;
+                }
+                if (!string.IsNullOrEmpty(TbxZasu.Text))
+                {
+                    drN.Zasu = TbxZasu.Text;
+                    LblZasu.Text = TbxZasu.Text;
+                    //TbxZasu.Visible = false;
+                }
+                if (!string.IsNullOrEmpty(TbxMakerNo.Text))
+                {
+                    drN.MekarHinban = TbxMakerNo.Text;
+                }
+                //LblHanni.Text = HidHanni.Value;
+                LblHanni.Text = TbxHanni.Text;
+                if (!string.IsNullOrEmpty(LblHanni.Text))
+                {
+                    drN.Range = LblHanni.Text;
+                }
+                else
+                {
+                    drN.Range = "";
+                }
+                if (RcbHanni.SelectedItem != null)
+                {
+                    if (!string.IsNullOrEmpty(RcbHanni.SelectedItem.Text))
+                    {
+                        drN.Range = RcbHanni.SelectedItem.Text;
+                        LblHanni.Text = RcbHanni.SelectedItem.Text;
+                        //RcbHanni.Visible = false;
+                    }
+                }
+                Baitai.Text = RcbMedia.Text;
+                if (!string.IsNullOrEmpty(Baitai.Text))
+                {
+                    drN.KeitaiMei = Baitai.Text;
+                }
+                if (!string.IsNullOrEmpty(Baitai.Text))
+                {
+                    drN.KeitaiMei = Baitai.Text;
+                }
+                if (!string.IsNullOrEmpty(ShiireKingaku.Text))
+                {
+                    drN.ShiireKingaku = int.Parse(ShiireKingaku.Text.Replace(",", ""));
+                    //LblShiireKingaku.Text = ShiireKingaku.Text;
+                    //ShiireKingaku.Visible = false;
+                }
+                if (!string.IsNullOrEmpty(ShiireTanka.Text))
+                {
+                    drN.ShiireTanka = int.Parse(ShiireTanka.Text.Replace(",", ""));
+                    //LblShiireTanka.Text = ShiireTanka.Text;
+                    //ShiireTanka.Visible = false;
+                }
+                if (!string.IsNullOrEmpty(TbxWareHouse.Text))
+                {
+                    drN.WareHouse = TbxWareHouse.Text;
+                }
+                if (!string.IsNullOrEmpty(RcbShiireName.Text))
+                {
+                    drN.ShiireName = RcbShiireName.Text;
+                }
+                if (!string.IsNullOrEmpty(HidShiireCode.Value))
+                {
+                    drN.ShiiresakiCode = int.Parse(HidShiireCode.Value);
+                }
+                if (!string.IsNullOrEmpty(LblShiireCode.Text))//HidShiireCodeがなかった時の保険
+                {
+                    drN.ShiiresakiCode = int.Parse(LblShiireCode.Text);
+                }
+                if (!string.IsNullOrEmpty((string)Session["Kakeritsu"]))
+                {
+                    drN.Kakeritsu = (string)Session["Kakeritsu"];
+                }
+                else
+                {
+                    drN.Kakeritsu = Kakeri.Text.Trim();
+                }
+                if (!string.IsNullOrEmpty((string)Session["Zeikubun"]))
+                {
+                    drN.Zeikubun = (string)Session["Zeikubun"];
+                }
+                if (!string.IsNullOrEmpty(Kaihatsu.strCategoryCode))
+                {
+                    drN.CateGory = int.Parse(Kaihatsu.strCategoryCode);
+                }
+                if (!string.IsNullOrEmpty(Kaihatsu.strCategoryName))
+                {
+                    drN.CategoryName = Kaihatsu.strCategoryName;
+                }
+                if (!string.IsNullOrEmpty(TbxFaciAdress.Text))
+                {
+                    drN.SisetuJusyo1 = TbxFaciAdress.Text;
+                }
+                if (!string.IsNullOrEmpty(TbxFacilityResponsible.Text))
+                {
+                    drN.SisetuTanto = TbxFacilityResponsible.Text;
+                }
+                if (!string.IsNullOrEmpty(TbxYubin.Text))
+                {
+                    drN.SisetuPost = TbxYubin.Text;
+                }
+                if (!string.IsNullOrEmpty(RcbCity.SelectedValue))
+                {
+                    drN.SisetuCityCode = RcbCity.SelectedValue;
+                }
+                if (!string.IsNullOrEmpty(TbxFacilityName.Text))
+                {
+                    drN.SisetuMei = TbxFacilityName.Text;
+                }
+                if (!string.IsNullOrEmpty(TbxFacilityName2.Text))
+                {
+                    drN.SisetsuMei2 = TbxFacilityName2.Text;
+                }
+                if (!string.IsNullOrEmpty(TbxFaci.Text))
+                {
+                    drN.SisetsuAbbreviration = TbxFaci.Text;
+                }
+                if (!string.IsNullOrEmpty(TbxTel.Text))
+                {
+                    drN.SisetsuTell = TbxTel.Text;
+                }
+                if (!string.IsNullOrEmpty(TbxFacilityRowCode.Text))
+                {
+                    drN.SisetuRowCode = TbxFacilityRowCode.Text;
+                }
+                if (!string.IsNullOrEmpty(RdpPermissionstart.SelectedDate.ToString()))
+                {
+                    drN.PermissionStart = RdpPermissionstart.SelectedDate.Value;
+                }
+                if (!string.IsNullOrEmpty(RdpRightEnd.SelectedDate.ToString()))
+                {
+                    drN.RightEnd = RdpRightEnd.SelectedDate.Value;
+                }
+                if (!string.IsNullOrEmpty(RdpCpStart.SelectedDate.ToString()))
+                {
+                    drN.CpStart = RdpCpStart.SelectedDate.Value;
+                }
+                if (!string.IsNullOrEmpty(RdpCpEnd.SelectedDate.ToString()))
+                {
+                    drN.CpEnd = RdpCpEnd.SelectedDate.Value;
+                }
+            }
+            catch (Exception ex)
+            {
+                err.Text = ex.Message;
+                string body = ex.Message + "\r\n" + ex.StackTrace + "\r\n" + ex.Source;
+                ClassMail.ErrorMail(Kaihatsu.mail_to, Kaihatsu.mail_title, body);
+            }
+            return drN;
+
         }
 
         internal void ItemSet3(DataJutyu.T_JutyuRow dr)
@@ -1954,9 +2174,9 @@ namespace Gyomu
                 {
                     Hachu.SelectedValue = dr.ShiiresakiCode.ToString();
                 }
-                if (!dr.IsKakeritsuNull())
+                if (Session["Kakeritsu"].Equals(""))
                 {
-                    Kakeri.Text = dr.Kakeritsu;
+                    Kakeri.Text = (string)Session["Kakeritsu"];
                 }
                 if (!dr.IsZeikubunNull())
                 {
@@ -1985,9 +2205,12 @@ namespace Gyomu
                 }
                 if (!dr.IsSisetuCityCodeNull())
                 {
-                    RcbCity.SelectedValue = dr.SisetuCityCode.ToString();
-                    DataMaster.M_CityRow drC = ClassMaster.GetCity(dr.SisetuCityCode.ToString(), Global.GetConnection());
-                    RcbCity.Text = drC.CityName;
+                    if (!string.IsNullOrEmpty(dr.SisetuCityCode))
+                    {
+                        RcbCity.SelectedValue = dr.SisetuCityCode.ToString();
+                        DataMaster.M_CityRow drC = ClassMaster.GetCity(dr.SisetuCityCode.ToString(), Global.GetConnection());
+                        RcbCity.Text = drC.CityName;
+                    }
                 }
                 if (!dr.IsSisetuCodeNull())
                 {
@@ -2031,41 +2254,44 @@ namespace Gyomu
                 {
                     RdpCpEnd.SelectedDate = dr.CpEnd;
                 }
-                if (!dr.IsShiiresakiCodeNull() || dr.CategoryName == "上映会")
-                {
-                    DataMaster.M_JoueiKakaku2DataTable dtJ = ClassMaster.GetJouei4(dr.ShiiresakiCode.ToString(), dr.KeitaiMei, Global.GetConnection());
-                    RcbHanni.Items.Clear();
-                    string added = "";
-                    for (int i = 0; i < dtJ.Count; i++)
-                    {
-                        string check = dtJ[i].Range;
-                        if (!added.Contains(check))
-                        {
-                            added += "/" + check;
-                            RcbHanni.Items.Add(new RadComboBoxItem(check, check));
-                        }
-                    }
-                    SerchProductJouei.Text = dr.SyouhinMei;
-                    RcbHanni.SelectedValue = dr.Range;
-                    TbxHanni.Text = dr.Range;
-                    Hachu.SelectedValue = dr.ShiiresakiCode.ToString();
-                    LblShiireCode.Text = dr.ShiiresakiCode.ToString();
-                    if (!dr.IsZasuNull())
-                    {
-                        TbxZasu.Text = dr.Zasu;
-                    }
-
-                }
-                else
+                if (dr.CategoryName.Equals("上映会"))
                 {
                     if (!dr.IsShiiresakiCodeNull())
                     {
-                        LblShiireCode.Text = dr.ShiiresakiCode.ToString();
-                    }
-                    if (!dr.IsRangeNull())
-                    {
-                        LblHanni.Text = dr.Range;
+                        DataMaster.M_JoueiKakaku2DataTable dtJ = ClassMaster.GetJouei4(dr.ShiiresakiCode.ToString(), dr.KeitaiMei, Global.GetConnection());
+                        RcbHanni.Items.Clear();
+                        string added = "";
+                        for (int i = 0; i < dtJ.Count; i++)
+                        {
+                            string check = dtJ[i].Range;
+                            if (!added.Contains(check))
+                            {
+                                added += "/" + check;
+                                RcbHanni.Items.Add(new RadComboBoxItem(check, check));
+                            }
+                        }
+                        SerchProductJouei.Text = dr.SyouhinMei;
+                        RcbHanni.SelectedValue = dr.Range;
                         TbxHanni.Text = dr.Range;
+                        Hachu.SelectedValue = dr.ShiiresakiCode.ToString();
+                        LblShiireCode.Text = dr.ShiiresakiCode.ToString();
+                        if (!dr.IsZasuNull())
+                        {
+                            TbxZasu.Text = dr.Zasu;
+                        }
+
+                    }
+                    else
+                    {
+                        if (!dr.IsShiiresakiCodeNull())
+                        {
+                            LblShiireCode.Text = dr.ShiiresakiCode.ToString();
+                        }
+                        if (!dr.IsRangeNull())
+                        {
+                            LblHanni.Text = dr.Range;
+                            TbxHanni.Text = dr.Range;
+                        }
                     }
                 }
             }
@@ -2328,17 +2554,29 @@ namespace Gyomu
         {
             try
             {
+                dr.MitumoriNo = "";
+                dr.JutyuFlg = false;
                 if (Tekiyo.Text != "")
                 {
                     dr.Tekiyou1 = Tekiyo.Text;
                 }
-                if (StartDate.SelectedDate.ToString() != "")
+                switch ((string)Session["CategoryCode"])
                 {
-                    dr.SiyouKaishi = StartDate.SelectedDate.Value;
-                }
-                if (EndDate.SelectedDate.ToString() != "")
-                {
-                    dr.SiyouOwari = EndDate.SelectedDate.Value;
+                    case "101":
+                    case "102":
+                    case "103":
+                    case "109":
+                        break;
+                    default:
+                        if (StartDate.SelectedDate.ToString() != "")
+                        {
+                            dr.SiyouKaishi = StartDate.SelectedDate.Value;
+                        }
+                        if (EndDate.SelectedDate.ToString() != "")
+                        {
+                            dr.SiyouOwari = EndDate.SelectedDate.Value;
+                        }
+                        break;
                 }
                 if (TbxProductName.Text != "")
                 {
@@ -2347,6 +2585,10 @@ namespace Gyomu
                 if (TbxProductCode.Text != "")
                 {
                     dr.SyouhinCode = TbxProductCode.Text;
+                }
+                else
+                {
+                    dr.SyouhinCode = "";
                 }
                 if (HyoujyunTanka.Text != "")
                 {
@@ -2379,7 +2621,7 @@ namespace Gyomu
                 }
 
                 dr.Range = TbxHanni.Text.Trim();
-
+                LblHanni.Text = TbxHanni.Text.Trim();
                 if (RcbMedia.Text != "")
                 {
                     dr.KeitaiMei = RcbMedia.Text;
@@ -2422,13 +2664,15 @@ namespace Gyomu
                 {
                     dr.ShiiresakiCode = int.Parse(HidShiireCode.Value);
                 }
-                if (Kakeri.Text != "")
+                if ((string)Session["Kakeritsu"] != "")
                 {
                     dr.Kakeritsu = (string)Session["Kakeritsu"];
+                    Kakeri.Text = (string)Session["Kakeritsu"];
                 }
-                if (zeiku.Text != "")
+                if ((string)Session["Zeikubun"] != "")
                 {
-                    dr.Zeikubun = (string)Session["Kakeritsu"];
+                    dr.Zeikubun = (string)Session["Zeikubun"];
+                    zeiku.Text = (string)Session["Zeikubun"];
                 }
                 if (LblCateCode.Text != "")
                 {
@@ -2472,8 +2716,9 @@ namespace Gyomu
                 }
                 else
                 {
-                    ClassMail.ErrorMail("maeda@m2m-asp.com", "エラーメール | 見積登録時", "TbxFaciに値がセットされていません。");
-                    return null;
+                    dr.SisetsuAbbreviration = "";
+                    //ClassMail.ErrorMail("maeda@m2m-asp.com", "エラーメール | 見積登録時", "TbxFaciに値がセットされていません。");
+                    //return null;
                 }
                 if (TbxTel.Text != "")
                 {

@@ -65,6 +65,16 @@ namespace DLL
             return dt;
         }
 
+        public static DataJutyu.T_JutyuDataTable GetJutyuNoFromHinban(string strHinban, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select * from T_Jutyu where MekarHinban = @mh";
+            da.SelectCommand.Parameters.AddWithValue("@mh", strHinban);
+            DataJutyu.T_JutyuDataTable dt = new DataJutyu.T_JutyuDataTable();
+            da.Fill(dt);
+            return dt;
+        }
+
         public static DataJutyu.T_JutyuHeaderDataTable GetMitumori(SqlConnection sqlConnection)
         {
             SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
@@ -82,6 +92,16 @@ namespace DLL
                 "Select * FROM T_JutyuHeader WHERE JutyuNo = @jNo";
             da.SelectCommand.Parameters.AddWithValue("@jNo", vsNo);
             DataJutyu.T_JutyuHeaderDataTable dt = new DataJutyu.T_JutyuHeaderDataTable();
+            da.Fill(dt);
+            return dt;
+        }
+
+        public static DataJutyu.T_JutyuDataTable GetJutyuNoFromSyouhinMei(string strSyohinMei, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select * from T_Jutyu where SyouhinMei = @sm";
+            da.SelectCommand.Parameters.AddWithValue("@sm", strSyohinMei);
+            DataJutyu.T_JutyuDataTable dt = new DataJutyu.T_JutyuDataTable();
             da.Fill(dt);
             return dt;
         }
@@ -578,7 +598,7 @@ namespace DLL
                 da.Update(Tdt);
                 sql.Commit();
             }
-            catch
+            catch (Exception ex)
             {
                 if (sql != null)
                 {

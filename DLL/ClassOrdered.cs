@@ -29,6 +29,16 @@ namespace DLL
             return (dt);
         }
 
+        public static DataSet1.T_OrderedDataTable GetOrderedMeisai(string strOrderedNo, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select * from T_Ordered where OrderedNo = @on";
+            da.SelectCommand.Parameters.AddWithValue("@on", strOrderedNo);
+            DataSet1.T_OrderedDataTable dt = new DataSet1.T_OrderedDataTable();
+            da.Fill(dt);
+            return dt;
+        }
+
         public static DataMaster.M_HanniRow GetHanni(string v, SqlConnection sqlConnection)
         {
             SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
@@ -351,18 +361,22 @@ namespace DLL
 
         }
 
-        public static DataSet1.T_OrderedHeaderRow GetMaxOrdered(int ki, SqlConnection sqlConnection)
+        public static DataSet1.T_OrderedRow GetMaxOrdered(int ki, SqlConnection sqlConnection)
         {
             SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
             da.SelectCommand.CommandText =
-                "SELECT OrderedNo FROM T_OrderedHeader where OrderedNo like @on order by OrderedNo desc";
+                "SELECT OrderedNo, RowNo, MekerNo, ShiireSakiName FROM T_Ordered where OrderedNo like @on order by OrderedNo desc";
             da.SelectCommand.Parameters.AddWithValue("@on", "%" + ki + "%");
-            DataSet1.T_OrderedHeaderDataTable dt = new DataSet1.T_OrderedHeaderDataTable();
+            DataSet1.T_OrderedDataTable dt = new DataSet1.T_OrderedDataTable();
             da.Fill(dt);
             if (dt.Rows.Count >= 1)
-                return dt[0] as DataSet1.T_OrderedHeaderRow;
+            {
+                return dt[0];
+            }
             else
+            {
                 return null;
+            }
         }
 
         public static void UpdateFlg(string[] strAry, SqlConnection sqlConnection)
@@ -504,9 +518,10 @@ namespace DLL
             //明細のほう
             SqlDataAdapter dda = new SqlDataAdapter("", sqlConnection);
             dda.SelectCommand.CommandText
-                = "SELECT * FROM T_Ordered where Category = @ca and ShiiresakiName = @shi order by RowNo desc";
+                = "SELECT * FROM T_Ordered where Category = @ca and ShiiresakiName = @shi and RowNo = @rn order by RowNo desc";
             dda.SelectCommand.Parameters.AddWithValue("@ca", catecode);
             dda.SelectCommand.Parameters.AddWithValue("@shi", shiname);
+            dda.SelectCommand.Parameters.AddWithValue("@rn", dr.RowNo);
             DataSet1.T_OrderedDataTable ddd = new DataSet1.T_OrderedDataTable();
             dda.InsertCommand = (new SqlCommandBuilder(dda).GetInsertCommand());
             SqlTransaction sqlTran = null;
@@ -515,17 +530,16 @@ namespace DLL
             {
                 sqlConnection.Open();
                 sqlTran = sqlConnection.BeginTransaction();
-                if (dd.Count == 0)
+                if (ddd.Count == 0)
                 {
                     da.SelectCommand.Transaction = da.InsertCommand.Transaction = sqlTran;
                     dda.SelectCommand.Transaction = dda.InsertCommand.Transaction = sqlTran;
-                    dth[0].ShiireKingaku = dr.ShiireKingaku;
-                    dth[0].InsertFlg = false;
-                    da.Update(dth);
+                    //dth[0].ShiireKingaku = dr.ShiireKingaku;
+                    //dth[0].InsertFlg = false;
+                    //da.Update(dth);
                     DataSet1.T_OrderedDataTable dts = new DataSet1.T_OrderedDataTable();
                     DataSet1.T_OrderedRow drr = dts.NewT_OrderedRow();
                     drr.ItemArray = dr.ItemArray;
-                    drr.RowNo = 1;
                     dts.AddT_OrderedRow(drr);
                     dda.Update(dts);
                     sqlTran.Commit();
@@ -538,19 +552,26 @@ namespace DLL
                     da.SelectCommand.Transaction = da.UpdateCommand.Transaction = sqlTran;
                     dda.SelectCommand.Transaction = dda.InsertCommand.Transaction = sqlTran;
 
-                    int kizonsu = dd[0].OrderedAmount;
-                    int kizonshiire = dd[0].ShiireKingaku;
-                    kizonsu += dth[0].OrderedAmount;
-                    kizonshiire += dth[0].ShiireKingaku;
-                    drThis.OrderedAmount = kizonsu;
-                    drThis.ShiireKingaku = kizonshiire;
-                    da.Update(dd);
-                    int no = dd[0].OrderedNo;
+                    //int kizonsu = dd[0].OrderedAmount;
+                    //int kizonshiire = dd[0].ShiireKingaku;
+                    //kizonsu += dth[0].OrderedAmount;
+                    //kizonshiire += dth[0].ShiireKingaku;
+                    //drThis.OrderedAmount = kizonsu;
+                    //drThis.ShiireKingaku = kizonshiire;
+                    //da.Update(dd);
+                    //int no = dd[0].OrderedNo;
                     DataSet1.T_OrderedDataTable dts = new DataSet1.T_OrderedDataTable();
                     DataSet1.T_OrderedRow drr = dts.NewT_OrderedRow();
                     drr.ItemArray = dr.ItemArray;
-                    drr.OrderedNo = no;
-                    drr.RowNo = ddd[0].RowNo + 1;
+                    //drr.OrderedNo = no;
+                    if (ddd.Count > 0)
+                    {
+                        drr.RowNo = ddd[0].RowNo + 1;
+                    }
+                    else
+                    {
+                        drr.RowNo = 1;
+                    }
 
                     dts.AddT_OrderedRow(drr);
                     dda.Update(dts);
@@ -560,7 +581,7 @@ namespace DLL
 
                 }
             }
-            catch
+            catch (Exception ex)
             {
                 if (null != sqlTran)
                 { sqlTran.Rollback(); }
@@ -582,6 +603,107 @@ namespace DLL
             DataSet1.T_OrderedHeaderDataTable dt = new DataSet1.T_OrderedHeaderDataTable();
             da.Fill(dt);
             return (dt);
+        }
+
+        public static void UpdateOrdered(string catecode, string shiname, DataSet1.T_OrderedRow dr, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter daH = new SqlDataAdapter("", sqlConnection);
+            daH.SelectCommand.CommandText =
+                "SELECT * FROM T_OrderedHeader where Category = @ca and ShiiresakiName = @shi and InsertFlg = 'False' ";
+            daH.SelectCommand.Parameters.AddWithValue("@ca", catecode);
+            daH.SelectCommand.Parameters.AddWithValue("@shi", shiname);
+            DataSet1.T_OrderedHeaderDataTable dd = new DataSet1.T_OrderedHeaderDataTable();
+            daH.UpdateCommand = (new SqlCommandBuilder(daH)).GetUpdateCommand();
+            daH.InsertCommand = (new SqlCommandBuilder(daH).GetInsertCommand());
+            daH.Fill(dd);
+
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText
+                = "SELECT * FROM T_Ordered where Category = @ca and ShiiresakiName = @shi order by RowNo desc";
+            da.SelectCommand.Parameters.AddWithValue("@ca", catecode);
+            da.SelectCommand.Parameters.AddWithValue("@shi", shiname);
+            DataSet1.T_OrderedDataTable dt = new DataSet1.T_OrderedDataTable();
+            da.InsertCommand = (new SqlCommandBuilder(da).GetInsertCommand());
+            SqlTransaction sqlTran = null;
+            da.Fill(dt);
+
+            if (dt.Count > 0)
+            {
+                //ヘッダー更新
+                //OrderAmount
+                //ShiireKingaku
+                da.SelectCommand.Transaction = da.InsertCommand.Transaction = sqlTran;
+                DataSet1.T_OrderedDataTable dtO = new DataSet1.T_OrderedDataTable();
+                DataSet1.T_OrderedRow drO = dtO.NewT_OrderedRow();
+                drO.ItemArray = dr.ItemArray;
+                dtO.AddT_OrderedRow(drO);
+                da.Update(dtO);
+                sqlTran.Commit();
+                sqlConnection.Close();
+            }
+            else
+            {
+                //ヘッダー更新
+                //OrderAmount
+                //ShiireKingaku
+                da.SelectCommand.Transaction = da.UpdateCommand.Transaction = sqlTran;
+                da.SelectCommand.Transaction = da.InsertCommand.Transaction = sqlTran;
+                DataSet1.T_OrderedDataTable dtO = new DataSet1.T_OrderedDataTable();
+                DataSet1.T_OrderedRow drO = dtO.NewT_OrderedRow();
+                drO.ItemArray = dr.ItemArray;
+                dtO.AddT_OrderedRow(drO);
+                da.Update(dtO);
+                sqlTran.Commit();
+                sqlConnection.Close();
+            }
+        }
+
+        public static string ChkOrderedData(string categoryCode, int shiiresakiCode, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select * from T_Ordered where Category = @c and ShiiresakiCode = @sc";
+            da.SelectCommand.Parameters.AddWithValue("@c", categoryCode);
+            da.SelectCommand.Parameters.AddWithValue("@sc", shiiresakiCode);
+            DataSet1.T_OrderedDataTable dt = new DataSet1.T_OrderedDataTable();
+            da.Fill(dt);
+            if (dt.Count > 0)
+            {
+                return "1";
+            }
+            else
+            {
+                return "0";
+            }
+        }
+
+        public static string ChkHatyuFlg(string selectedValue, int shiiresakiCode, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select * from T_Ordered where Category = @c and ShiiresakiCode = @sc and HatyuFlg = '0'";
+            da.SelectCommand.Parameters.AddWithValue("@c", selectedValue);
+            da.SelectCommand.Parameters.AddWithValue("@sc", shiiresakiCode);
+            DataSet1.T_OrderedDataTable dt = new DataSet1.T_OrderedDataTable();
+            da.Fill(dt);
+            if (dt.Count > 0)
+            {
+                return "1";
+            }
+            else
+            {
+                return "0";
+            }
+        }
+
+        public static string GetOrderedNo(string selectedValue, int shiiresakiCode, SqlConnection sqlConnection)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("", sqlConnection);
+            da.SelectCommand.CommandText = "select * from T_Ordered where Category = @c and ShiiresakiCode = @sc and HatyuFlg = '0'";
+            da.SelectCommand.Parameters.AddWithValue("@c", selectedValue);
+            da.SelectCommand.Parameters.AddWithValue("@sc", shiiresakiCode);
+            DataSet1.T_OrderedDataTable dt = new DataSet1.T_OrderedDataTable();
+            da.Fill(dt);
+            int row = dt[0].RowNo + 1;
+            return dt[0].OrderedNo.ToString() + "," + row;
         }
     }
 }
